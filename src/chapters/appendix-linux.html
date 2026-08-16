@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Phụ Lục: Linux Survival Kit Cho IT007</title>
+    <link rel="stylesheet" href="../styles/print.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="chapter-header">
+    <div class="chapter-num">Phụ Lục — Kỹ Năng Thực Hành</div>
+    <h1>LINUX SURVIVAL KIT CHO MÔN HỌC IT007 UIT</h1>
+    <div class="chapter-subtitle">Môi trường WSL2 $\rightarrow$ Bảng lệnh Linux bắt buộc $\rightarrow$ Mã nguồn C chuẩn Lab 1 đến Lab 6</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Phụ Lục</h3>
+    <ul>
+        <li>Thiết lập môi trường làm việc Linux Ubuntu trên Windows bằng WSL2 nhanh chóng.</li>
+        <li>Thành thạo các lệnh kiểm tra hệ thống, tiến trình và biên dịch C (`ps`, `top`, `pstree`, `kill`, `gcc`, `gdb`, `strace`).</li>
+        <li>Nắm vững mã nguồn C mẫu chuẩn hóa cho tất cả các bài thực hành Lab IT007 (Labs 1-6).</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. BẢNG CÁC LỆNH LINUX BẮT BUỘC NẮM VỮNG FOR IT007</h2>
+
+    <table>
+        <thead>
+            <tr><th>Lệnh (Command)</th><th>Chức năng chính</th><th>Cú pháp mẫu thông dụng</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>ps</code></td><td>Liệt kê các tiến trình đang chạy trong hệ thống.</td><td><code>ps aux</code> hoặc <code>ps -ef</code> (xem tất cả PID, PPID, CPU, MEM)</td></tr>
+            <tr><td><code>pstree</code></td><td>Hiển thị sơ đồ cây tiến trình (Process Tree) trực quan.</td><td><code>pstree -p</code> (hiển thị kèm PID)</td></tr>
+            <tr><td><code>top</code> / <code>htop</code></td><td>Theo dõi thời gian thực mức tiêu thụ CPU, RAM của các tiến trình.</td><td><code>top</code> (nhấn `q` để thoát)</td></tr>
+            <tr><td><code>kill</code></td><td>Gửi tín hiệu Signal đến tiến trình để dừng/hủy tiến trình.</td><td><code>kill -9 &lt;PID&gt;</code> (gửi SIGKILL ép hủy ngay)</td></tr>
+            <tr><td><code>gcc</code></td><td>Trình biên dịch mã nguồn C trên Linux.</td><td><code>gcc -Wall program.c -o program -lrt -lpthread</code></td></tr>
+            <tr><td><code>strace</code></td><td>Theo dõi tất cả các System Calls mà chương trình thực thi.</td><td><code>strace ./program</code> (cực hay để debug System Call)</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. BỘ SOURCE CODE CHUẨN CÁC BÀI LAB IT007 UIT</h2>
+
+    <h3>Lab 2: Bash Shell Scripting (`check_number.sh`)</h3>
+<pre><code class="language-bash"><span class="code-comment">#!/bin/bash</span>
+<span class="code-comment"># lab2_script.sh - Kiểm tra số nguyên tố và tính tổng</span>
+<span class="code-keyword">read</span> -p <span class="code-string">"Nhập số nguyên N: "</span> N
+
+<span class="code-keyword">if</span> [ <span class="code-string">$N</span> -le 0 ]; <span class="code-keyword">then</span>
+    <span class="code-func">echo</span> <span class="code-string">"Vui lòng nhập số nguyên dương!"</span>
+    <span class="code-keyword">exit</span> 1
+<span class="code-keyword">fi</span>
+
+sum=0
+<span class="code-keyword">for</span> (( i=1; i&lt;=N; i++ )); <span class="code-keyword">do</span>
+    sum=$((sum + i))
+<span class="code-keyword">done</span>
+
+<span class="code-func">echo</span> <span class="code-string">"Tổng từ 1 đến $N là: $sum"</span>
+</code></pre>
+
+    <h3>Lab 3: Tiến Trình & Bộ Nhớ Chia Sẻ (Shared Memory)</h3>
+<pre><code class="language-c"><span class="code-comment">/* lab3_shm.c - Sử dụng POSIX Shared Memory shm_open & mmap có kiểm tra lỗi */</span>
+<span class="code-keyword">#include</span> &lt;stdio.h&gt;
+<span class="code-keyword">#include</span> &lt;stdlib.h&gt;
+<span class="code-keyword">#include</span> &lt;string.h&gt;
+<span class="code-keyword">#include</span> &lt;fcntl.h&gt;
+<span class="code-keyword">#include</span> &lt;sys/mman.h&gt;
+<span class="code-keyword">#include</span> &lt;unistd.h&gt;
+<span class="code-keyword">#include</span> &lt;sys/wait.h&gt;
+
+<span class="code-keyword">int</span> main() {
+    <span class="code-keyword">const int</span> SIZE = <span class="code-string">4096</span>;
+    <span class="code-keyword">const char</span> *name = <span class="code-string">"IT007_Shm"</span>;
+
+    <span class="code-keyword">int</span> fd = shm_open(name, O_CREAT | O_RDWR, <span class="code-string">0666</span>);
+    <span class="code-keyword">if</span> (fd &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"shm_open failed"</span>); exit(<span class="code-string">1</span>); }
+    ftruncate(fd, SIZE);
+
+    <span class="code-keyword">void</span> *ptr = mmap(<span class="code-string">0</span>, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, <span class="code-string">0</span>);
+    <span class="code-keyword">if</span> (ptr == MAP_FAILED) { perror(<span class="code-string">"mmap failed"</span>); exit(<span class="code-string">1</span>); }
+
+    pid_t pid = fork();
+    <span class="code-keyword">if</span> (pid &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"fork failed"</span>); exit(<span class="code-string">1</span>); }
+    
+    <span class="code-keyword">if</span> (pid == <span class="code-string">0</span>) { <span class="code-comment">// Child Writes</span>
+        sprintf((<span class="code-keyword">char</span>*)ptr, <span class="code-string">"Hello from Child Process! PID = %d"</span>, getpid());
+        exit(<span class="code-string">0</span>);
+    } <span class="code-keyword">else</span> { <span class="code-comment">// Parent Reads</span>
+        wait(NULL);
+        printf(<span class="code-string">"Parent read from Shared Memory: %s\n"</span>, (<span class="code-keyword">char</span>*)ptr);
+        munmap(ptr, SIZE);
+        shm_unlink(name);
+    }
+    <span class="code-keyword">return</span> <span class="code-string">0</span>;
+}
+</code></pre>
+
+    <h3>Lab 4: Mô Phỏng Định Thời CPU (FCFS Scheduler Struct)</h3>
+<pre><code class="language-c"><span class="code-comment">/* lab4_fcfs.c - Struct dữ liệu tính WT, TAT định thời */</span>
+<span class="code-keyword">typedef struct</span> {
+    <span class="code-keyword">int</span> id, at, bt, ct, tat, wt;
+} Process;
+
+<span class="code-keyword">void</span> calculate_fcfs(Process p[], <span class="code-keyword">int</span> n) {
+    <span class="code-keyword">int</span> current_time = <span class="code-string">0</span>;
+    <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-string">0</span>; i &lt; n; i++) {
+        <span class="code-keyword">if</span> (current_time &lt; p[i].at) current_time = p[i].at;
+        p[i].ct = current_time + p[i].bt;
+        p[i].tat = p[i].ct - p[i].at;
+        p[i].wt = p[i].tat - p[i].bt;
+        current_time = p[i].ct;
+    }
+}
+</code></pre>
+
+    <h3>Lab 5: Đồng Bộ POSIX Threads Với Semaphore (`pthread_sem.c`)</h3>
+<pre><code class="language-c"><span class="code-comment">/* lab5_pthread.c - Độc quyền truy xuất Mutex bằng POSIX Semaphore */</span>
+<span class="code-keyword">#include</span> &lt;stdio.h&gt;
+<span class="code-keyword">#include</span> &lt;pthread.h&gt;
+<span class="code-keyword">#include</span> &lt;semaphore.h&gt;
+
+sem_t mutex;
+<span class="code-keyword">int</span> counter = <span class="code-string">0</span>;
+
+<span class="code-keyword">void</span>* worker(<span class="code-keyword">void</span>* arg) {
+    sem_wait(&mutex);
+    counter++;
+    printf(<span class="code-string">"Thread %ld incremented counter to %d\n"</span>, (long)arg, counter);
+    sem_post(&mutex);
+    <span class="code-keyword">return</span> NULL;
+}
+
+<span class="code-keyword">int</span> main() {
+    pthread_t threads[<span class="code-string">5</span>];
+    sem_init(&mutex, <span class="code-string">0</span>, <span class="code-string">1</span>);
+    <span class="code-keyword">for</span> (long i = <span class="code-string">0</span>; i &lt; <span class="code-string">5</span>; i++) pthread_create(&threads[i], NULL, worker, (<span class="code-keyword">void</span>*)i);
+    <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-string">0</span>; i &lt; <span class="code-string">5</span>; i++) pthread_join(threads[i], NULL);
+    sem_destroy(&mutex);
+    <span class="code-keyword">return</span> <span class="code-string">0</span>;
+}
+</code></pre>
+
+    <h3>Lab 6: Simple Shell Tích Hợp Pipe (`lab6_pipe.c` - Complete Program)</h3>
+<pre><code class="language-c"><span class="code-comment">/* lab6_pipe.c - Chương trình biên dịch hoàn chỉnh thực thi lệnh: ls -l | grep txt */</span>
+<span class="code-keyword">#include</span> &lt;stdio.h&gt;
+<span class="code-keyword">#include</span> &lt;stdlib.h&gt;
+<span class="code-keyword">#include</span> &lt;unistd.h&gt;
+<span class="code-keyword">#include</span> &lt;sys/wait.h&gt;
+
+<span class="code-keyword">int</span> main() {
+    <span class="code-keyword">char</span> *cmd1[] = {<span class="code-string">"ls"</span>, <span class="code-string">"-l"</span>, NULL};
+    <span class="code-keyword">char</span> *cmd2[] = {<span class="code-string">"grep"</span>, <span class="code-string">"txt"</span>, NULL};
+
+    <span class="code-keyword">int</span> pipefd[<span class="code-string">2</span>];
+    <span class="code-keyword">if</span> (pipe(pipefd) &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"pipe failed"</span>); exit(<span class="code-string">1</span>); }
+
+    pid_t p1 = fork();
+    <span class="code-keyword">if</span> (p1 &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"fork 1 failed"</span>); exit(<span class="code-string">1</span>); }
+
+    <span class="code-keyword">if</span> (p1 == <span class="code-string">0</span>) { <span class="code-comment">// Child 1: Chạy 'ls -l' và ghi vào pipe</span>
+        close(pipefd[<span class="code-string">0</span>]); <span class="code-comment">// Đóng đầu đọc không dùng</span>
+        <span class="code-keyword">if</span> (dup2(pipefd[<span class="code-string">1</span>], STDOUT_FILENO) &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"dup2 failed"</span>); exit(<span class="code-string">1</span>); }
+        close(pipefd[<span class="code-string">1</span>]);
+        execvp(cmd1[<span class="code-string">0</span>], cmd1);
+        perror(<span class="code-string">"execvp cmd1 failed"</span>);
+        exit(<span class="code-string">1</span>);
+    }
+
+    pid_t p2 = fork();
+    <span class="code-keyword">if</span> (p2 &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"fork 2 failed"</span>); exit(<span class="code-string">1</span>); }
+
+    <span class="code-keyword">if</span> (p2 == <span class="code-string">0</span>) { <span class="code-comment">// Child 2: Chạy 'grep txt' và đọc từ pipe</span>
+        close(pipefd[<span class="code-string">1</span>]); <span class="code-comment">// Đóng đầu ghi không dùng</span>
+        <span class="code-keyword">if</span> (dup2(pipefd[<span class="code-string">0</span>], STDIN_FILENO) &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"dup2 failed"</span>); exit(<span class="code-string">1</span>); }
+        close(pipefd[<span class="code-string">0</span>]);
+        execvp(cmd2[<span class="code-string">0</span>], cmd2);
+        perror(<span class="code-string">"execvp cmd2 failed"</span>);
+        exit(<span class="code-string">1</span>);
+    }
+
+    <span class="code-comment">// Tiến trình cha đóng cả 2 đầu pipe và chờ 2 con hoàn thành</span>
+    close(pipefd[<span class="code-string">0</span>]);
+    close(pipefd[<span class="code-string">1</span>]);
+    waitpid(p1, NULL, <span class="code-string">0</span>);
+    waitpid(p2, NULL, <span class="code-string">0</span>);
+    <span class="code-keyword">return</span> <span class="code-string">0</span>;
+}
+</code></pre>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Lời khuyên đạt 10/10 Thực Hành Lab IT007</div>
+    <ul>
+        <li>Luôn kiểm tra mã lỗi trả về của tất cả System Calls (`if (pid < 0)`, `if (fd < 0)`).</li>
+        <li>Dọn dẹp tài nguyên (dùng `wait()`, `munmap()`, `shm_unlink()`, `close()`) để tránh rò rỉ RAM và Zombie process.</li>
+</body>
+</html>

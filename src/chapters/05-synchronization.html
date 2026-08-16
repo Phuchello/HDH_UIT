@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 5: Đồng Bộ Tiến Trình (Process Synchronization)</title>
+    <link rel="stylesheet" href="../styles/print.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="chapter-header">
+    <div class="chapter-num">Chương 05 — Trọng Tâm Thi Cuối Kỳ</div>
+    <h1>ĐỒNG BỘ TIẾN TRÌNH (PROCESS SYNCHRONIZATION)</h1>
+    <div class="chapter-subtitle">Race Condition $\rightarrow$ Vùng tranh chấp (Critical Section) $\rightarrow$ Thuật toán Peterson $\rightarrow$ Semaphore $\rightarrow$ Các bài toán kinh điển</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 5 (Trọng Tâm Cuối Kỳ UIT)</h3>
+    <ul>
+        <li>Hiểu bản chất Race Condition và tại sao truy xuất dữ liệu dùng chung bất đồng bộ lại gây ra sai sót.</li>
+        <li>Nắm vững 3 yêu cầu bắt buộc của giải pháp Vùng tranh chấp (Mutual Exclusion, Progress, Bounded Waiting).</li>
+        <li>Phân tích thuật toán Peterson và các chỉ thị phần cứng (TestAndSet, Swap).</li>
+        <li>Thạo kỹ năng sử dụng Semaphore để giải các bài toán đồng bộ thứ tự thực thi (Dependency DAG) và các bài toán kinh điển (Producer-Consumer, Readers-Writers).</li>
+        <li>Sửa lỗi Race Condition cho các chương trình thực tế chuẩn bài thi UIT.</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. NGUYÊN NHÂN RACE CONDITION VÀ BÀI TOÁN VÙNG TRANH CHẤP</h2>
+
+    <h3>A. Race Condition (Tranh chấp dữ liệu)</h3>
+    <p>Khi nhiều tiến trình/thread truy xuất và thao tác trên <strong>dữ liệu dùng chung (Shared Data)</strong> một cách đồng thời, và kết quả cuối cùng phụ thuộc vào thứ tự thực thi ngẫu nhiên của các tiến trình, tình trạng đó gọi là Race Condition.</p>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🔴 VÍ DỤ NGUYÊN TỬ VỀ RACE CONDITION</span>
+        </div>
+        <p>Giả sử 2 tiến trình $P_1$ và $P_2$ cùng thực hiện lệnh C <code>counter++</code> trên biến toàn cục <code>counter = 5</code>:</p>
+        <p>Lệnh <code>counter++</code> trong mã máy thực chất gồm 3 bước:</p>
+        <ol>
+            <li><code>register1 = counter</code> (Đọc giá trị từ RAM vào thanh ghi)</li>
+            <li><code>register1 = register1 + 1</code> (Tăng giá trị thanh ghi)</li>
+            <li><code>counter = register1</code> (Ghi lại giá trị từ thanh ghi vào RAM)</li>
+        </ol>
+        <p>Nếu $P_1$ đang chạy bước 1 và 2 thì bị ngắt, $P_2$ nhảy vào chạy cả 3 bước, sau đó $P_1$ được cấp CPU chạy nốt bước 3 $\rightarrow$ Giá trị <code>counter</code> cuối cùng sẽ là $6$ thay vì $7$! Dữ liệu bị sai hỏng hoàn toàn.</p>
+    </div>
+
+    <h3>B. Vùng Tranh Chấp (Critical Section - CS)</h3>
+    <p><strong>Critical Section</strong> là đoạn mã nguồn của tiến trình mà trong đó tiến trình truy xuất và thay đổi dữ liệu dùng chung.</p>
+
+    <h3>C. 3 Yêu cầu Bắt buộc cho Giải pháp CS</h3>
+    <ol>
+        <li><strong>Loại trừ tương hỗ (Mutual Exclusion):</strong> Nếu tiến trình $P_i$ đang thực thi trong vùng CS của nó, thì không có tiến trình $P_j$ nào khác được phép thực thi trong vùng CS đó.</li>
+        <li><strong>Tiến triển (Progress):</strong> Nếu không có tiến trình nào đang ở trong vùng CS và có các tiến trình muốn vào CS, thì chỉ những tiến trình không nằm trong Remainder section mới được tham gia quyết định tiến trình tiếp theo được vào CS, và sự lựa chọn này không thể kéo dài vô hạn.</li>
+        <li><strong>Chờ đợi giới hạn (Bounded Waiting):</strong> Có một giới hạn về số lần các tiến trình khác được phép vào vùng CS của chúng sau khi một tiến trình đã đưa ra yêu cầu vào CS và trước khi yêu cầu đó được chấp nhận (Đảm bảo không tiến trình nào bị đói tài nguyên / Starvation).</li>
+    </ol>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. GIẢI PHÁP ĐỒNG BỘ: THUẬT TOÁN PETERSON VÀ SEMAPHORE</h2>
+
+    <h3>A. Thuật toán Peterson cho 2 Tiến trình</h3>
+    <p>Giải pháp phần mềm cổ điển cho 2 tiến trình $P_0$ và $P_1$ chia sẻ 2 biến:</p>
+<pre><code class="language-c"><span class="code-keyword">int</span> turn;
+<span class="code-keyword">boolean</span> flag[<span class="code-string">2</span>]; <span class="code-comment">// ban đầu khởi tạo false</span>
+
+<span class="code-comment">// Cấu trúc tiến trình Pi (i = 0 hoặc 1, j = 1 - i)</span>
+<span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {
+    flag[i] = <span class="code-keyword">true</span>;
+    turn = j;
+    <span class="code-keyword">while</span> (flag[j] && turn == j) ; <span class="code-comment">// Busy waiting</span>
+    
+    <span class="code-comment">/* CRITICAL SECTION */</span>
+    
+    flag[i] = <span class="code-keyword">false</span>;
+    
+    <span class="code-comment">/* REMAINDER SECTION */</span>
+}
+</code></pre>
+    <p><em>Thuật toán Peterson chứng minh thỏa mãn cả 3 điều kiện: Mutual Exclusion, Progress và Bounded Waiting.</em></p>
+
+    <h3>B. Semaphore</h3>
+    <p><strong>Semaphore $S$</strong> là một biến nguyên tử (Atomic integer) chỉ có thể truy xuất thông qua 2 thao tác nguyên tử chuẩn:</p>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>⚙️ ĐỊNH NGHĨA NGUYÊN TỬ CỦA SEMAPHORE</span>
+        </div>
+        <p><strong>Thao tác <code>wait(S)</code> (hoặc <code>P(S)</code> / <code>sem_wait(&S)</code>):</strong></p>
+<pre><code class="language-c"><span class="code-keyword">void</span> wait(Semaphore S) {
+    S.value--;
+    <span class="code-keyword">if</span> (S.value < <span class="code-string">0</span>) {
+        <span class="code-comment">// Thêm tiến trình này vào hàng đợi của Semaphore S</span>
+        block(); <span class="code-comment">// Chuyển tiến trình sang trạng thái Waiting</span>
+    }
+}
+</code></pre>
+
+        <p><strong>Thao tác <code>signal(S)</code> (hoặc <code>V(S)</code> / <code>sem_post(&S)</code>):</strong></p>
+<pre><code class="language-c"><span class="code-keyword">void</span> signal(Semaphore S) {
+    S.value++;
+    <span class="code-keyword">if</span> (S.value <= <span class="code-string">0</span>) {
+        <span class="code-comment">// Lấy một tiến trình P từ hàng đợi của Semaphore S</span>
+        wakeup(P); <span class="code-comment">// Chuyển tiến trình P sang trạng thái Ready</span>
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Counting Semaphore vs Binary Semaphore</div>
+        <ul>
+            <li><strong>Counting Semaphore:</strong> Giá trị có thể dao động không hạn chế. Dùng để quản lý số lượng thực thể của một tài nguyên hữu hạn.</li>
+            <li><strong>Binary Semaphore:</strong> Giá trị chỉ có thể là $0$ hoặc $1$. Hoạt động tương tự Mutex Lock nhưng không có tính sở hữu (Ownership). Dùng làm khóa truy xuất độc quyền hoặc đồng bộ thứ tự.</li>
+        </ul>
+    </div>
+
+    <h3>C. Đồng Bộ Phần Cứng (Hardware Instructions: TestAndSet & Swap)</h3>
+    <p>Các bộ xử lý hiện đại cung cấp các chỉ thị máy nguyên tử (Atomic hardware instructions) executed không thể bị ngắt giữa chừng:</p>
+<pre><code class="language-c"><span class="code-comment">// 1. Chỉ thị TestAndSet nguyên tử</span>
+<span class="code-keyword">boolean</span> TestAndSet(<span class="code-keyword">boolean</span> *target) {
+    <span class="code-keyword">boolean</span> rv = *target;
+    *target = <span class="code-keyword">true</span>;
+    <span class="code-keyword">return</span> rv;
+}
+
+<span class="code-comment">// Giải pháp CS dùng TestAndSet:</span>
+<span class="code-keyword">while</span> (TestAndSet(&lock)) ; <span class="code-comment">// Busy wait</span>
+<span class="code-comment">/* CRITICAL SECTION */</span>
+lock = <span class="code-keyword">false</span>;
+</code></pre>
+
+    <h3>D. Giám Sát Viên (Monitor) & Biến Điều Kiện (Condition Variables)</h3>
+    <p>Semaphore tuy mạnh mẽ nhưng dễ gây ra lỗi lập trình (như quên <code>signal</code> hoặc đảo vị trí <code>wait</code> gây Deadlock). <strong>Monitor (Giám sát viên)</strong> là một cấu trúc ngôn ngữ lập trình bậc cao tự động đảm bảo tính Loại trừ tương hỗ (Mutual Exclusion): tại một thời điểm chỉ có ĐÚNG MỘT tiến trình được thực thi mã bên trong Monitor.</p>
+    <ul>
+        <li><strong>Biến điều kiện (Condition Variable):</strong> Khai báo <code>condition x, y;</code> để cho phép tiến trình tạm dừng bên trong Monitor.</li>
+        <li><code>x.wait()</code>: Tiến trình gọi lệnh này sẽ bị treo và giải phóng Monitor cho tiến trình khác vào.</li>
+        <li><code>x.signal()</code>: Đánh thức ĐÚNG MỘT tiến trình đang chờ trên <code>x.wait()</code>. Nếu không có tiến trình nào chờ, lệnh `signal` bị trôi mất (không có bộ đệm lưu trữ như Semaphore!).</li>
+        <li><strong>Hoare vs Mesa Semantics:</strong> <em>Signal-and-Wait (Hoare)</em> cho tiến trình được đánh thức chạy ngay lập tức; <em>Signal-and-Continue (Mesa)</em> cho tiến trình phát `signal` tiếp tục chạy hết Monitor rồi tiến trình được đánh thức mới chạy.</li>
+    </ul>
+
+    <h3>E. Hàng Rào Bộ Nhớ (Memory Barrier / Memory Fence)</h3>
+    <p>Trên các kiến trúc đa luồng và đa lõi hiện đại, trình biên dịch và phần cứng CPU có thể tự động <strong>đổi thứ tự thực thi lệnh (Instruction Reordering)</strong> nhằm tối ưu hóa hiệu năng đường ống (Instruction Pipeline). Điều này có thể khiến các luồng khác nhìn thấy thứ tự cập nhật dữ liệu bộ nhớ không đúng.</p>
+    <p><strong>Hàng rào bộ nhớ (Memory Barrier / Memory Fence)</strong> là một chỉ thị phần cứng buộc hệ thống phải hoàn tất tất cả các thao tác nạp (Load) và lưu (Store) trước đó vào bộ nhớ trước khi thực thi bất kỳ thao tác bộ nhớ nào sau hàng rào, bảo đảm tính nhất quán dữ liệu trong lập trình đồng thời cấp thấp.</p>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. CÁC BÀI TOÁN ĐỒNG BỘ KINH ĐIỂN VÀ BÀI TẬP CHUẨN THI UIT</h2>
+
+    <h3>A. 3 Bài Toán Đồng Bộ Kinh Điển</h3>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📦 1. BÀI TOÁN NHÀ SẢN XUẤT - NGƯỜI TIÊU THỤ (PRODUCER - CONSUMER)</span>
+        </div>
+        <p>Bộ đệm chia sẻ gồm $N$ phần tử. Producer tạo dữ liệu đưa vào buffer, Consumer lấy dữ liệu ra khỏi buffer.</p>
+<pre><code class="language-c"><span class="code-keyword">semaphore</span> mutex = <span class="code-string">1</span>; <span class="code-comment">// Độc quyền truy xuất Buffer</span>
+<span class="code-keyword">semaphore</span> empty = N; <span class="code-comment">// Đếm số ô trống</span>
+<span class="code-keyword">semaphore</span> full = <span class="code-string">0</span>;  <span class="code-comment">// Đếm số ô có dữ liệu</span>
+
+<span class="code-comment">// Producer</span>
+<span class="code-keyword">do</span> {
+    produce_item();
+    wait(empty); wait(mutex);
+    append_buffer();
+    signal(mutex); signal(full);
+} <span class="code-keyword">while</span> (<span class="code-keyword">true</span>);
+
+<span class="code-comment">// Consumer</span>
+<span class="code-keyword">do</span> {
+    wait(full); wait(mutex);
+    take_buffer();
+    signal(mutex); signal(empty);
+    consume_item();
+} <span class="code-keyword">while</span> (<span class="code-keyword">true</span>);
+</code></pre>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📚 2. BÀI TOÁN BẠN ĐỌC - NGUỜI VIẾT (READERS - WRITERS)</span>
+        </div>
+        <p>Nhiều tiến trình chia sẻ dữ liệu. Nhiều Reader có thể đọc đồng thời; nhưng khi Writer ghi dữ liệu, phải độc quyền hoàn toàn (không ai khác được đọc/ghi).</p>
+<pre><code class="language-c"><span class="code-keyword">semaphore</span> rw_mutex = <span class="code-string">1</span>; <span class="code-comment">// Độc quyền cho Writer</span>
+<span class="code-keyword">semaphore</span> mutex = <span class="code-string">1</span>;    <span class="code-comment">// Bảo vệ biến read_count</span>
+<span class="code-keyword">int</span> read_count = <span class="code-string">0</span>;
+
+<span class="code-comment">// Reader</span>
+wait(mutex);
+read_count++;
+<span class="code-keyword">if</span> (read_count == <span class="code-string">1</span>) wait(rw_mutex); <span class="code-comment">// Reader đầu tiên khóa Writer</span>
+signal(mutex);
+
+<span class="code-comment">/* READING DATABASE */</span>
+
+wait(mutex);
+read_count--;
+<span class="code-keyword">if</span> (read_count == <span class="code-string">0</span>) signal(rw_mutex); <span class="code-comment">// Reader cuối cùng mở khóa Writer</span>
+signal(mutex);
+
+<span class="code-comment">// Writer</span>
+wait(rw_mutex);
+<span class="code-comment">/* WRITING DATABASE */</span>
+signal(rw_mutex);
+</code></pre>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🍜 3. BÀI TOÁN BỮA ĂN CỦA CÁC TRIẾT GIA (DINING PHILOSOPHERS)</span>
+        </div>
+        <p>5 Triết gia ngồi quanh bàn tròn, giữa mỗi cặp triết gia có 1 chiếc đũa (tổng 5 đũa). Để ăn, triết gia cần 2 đũa bên trái và bên phải.</p>
+        <p><em>Nguy cơ Deadlock:</em> Nếu tất cả 5 triết gia cùng nhặt đũa bên trái cùng lúc $\rightarrow$ Không ai nhặt được đũa bên phải $\rightarrow$ Deadlock!</p>
+        <p><em>Giải pháp khắc phục:</em> Cho phép tối đa 4 triết gia ngồi ăn cùng lúc; hoặc triết gia chỉ nhặt đũa khi cả 2 đũa trái/phải đều sẵn sàng (dùng Monitor / Semaphore asymmetric).</p>
+    </div>
+
+    <h3>B. Bài Tập Đồng Bộ Sơ Đồ Phụ Thuộc (DAG) Chuẩn Thi UIT</h3>
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 1: ĐỒNG BỘ SƠ ĐỒ TIẾN TRÌNH BẰNG SEMAPHORE</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Bài toán:</strong> Xét một hệ thống gồm 4 tiến trình $T_1, T_2, T_3, T_4$. Quan hệ phụ thuộc được mô tả: $T_1$ phải kết thúc trước khi $T_2$ và $T_3$ bắt đầu. Cả $T_2$ và $T_3$ phải kết thúc trước khi $T_4$ bắt đầu. Hãy khai báo Semaphore và viết mã đồng bộ cho 4 tiến trình trên.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết từng bước:</div>
+            <ol>
+                <li><strong>Phân tích quan hệ phụ thuộc (DAG):</strong>
+                    <br>- $T_1 \rightarrow T_2$ và $T_1 \rightarrow T_3$ (Cần tín hiệu từ $T_1$).
+                    <br>- $T_2 \rightarrow T_4$ và $T_3 \rightarrow T_4$ ($T_4$ cần chờ cả $T_2$ và $T_3$).
+                </li>
+                <li><strong>Khai báo và Khởi tạo Semaphore:</strong>
+<pre><code class="language-c"><span class="code-keyword">semaphore</span> sem1 = <span class="code-string">0</span>; <span class="code-comment">// Báo hiệu T1 đã hoàn thành</span>
+<span class="code-keyword">semaphore</span> sem2 = <span class="code-string">0</span>; <span class="code-comment">// Báo hiệu T2/T3 đã hoàn thành</span>
+</code></pre>
+                </li>
+                <li><strong>Viết mã nguồn cho các tiến trình:</strong>
+<pre><code class="language-c"><span class="code-keyword">void</span> T1() {
+    <span class="code-comment">// T1 thực thi công việc</span>
+    signal(sem1); <span class="code-comment">// Gửi tín hiệu cho T2</span>
+    signal(sem1); <span class="code-comment">// Gửi tín hiệu cho T3</span>
+}
+
+<span class="code-keyword">void</span> T2() {
+    wait(sem1);   <span class="code-comment">// Chờ T1 xong</span>
+    <span class="code-comment">// T2 thực thi công việc</span>
+    signal(sem2); <span class="code-comment">// Gửi tín hiệu cho T4</span>
+}
+
+<span class="code-keyword">void</span> T3() {
+    wait(sem1);   <span class="code-comment">// Chờ T1 xong</span>
+    <span class="code-comment">// T3 thực thi công việc</span>
+    signal(sem2); <span class="code-comment">// Gửi tín hiệu cho T4</span>
+}
+
+<span class="code-keyword">void</span> T4() {
+    wait(sem2);   <span class="code-comment">// Chờ T2 xong</span>
+    wait(sem2);   <span class="code-comment">// Chờ T3 xong</span>
+    <span class="code-comment">// T4 thực thi công việc</span>
+}
+</code></pre>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 2: SỬA LỖI BIẾN X VƯỢT QUÁ 20</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho đoạn code C chia sẻ biến X giữa 2 tiến trình:</strong>
+<pre><code class="language-c">do {
+    X = X + 1;
+    if (X == 20) X = 0;
+} while (TRUE);
+</code></pre>
+            Hãy giải thích nguyên nhân làm $X > 20$ và dùng Semaphore để sửa lỗi.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải:</div>
+            <p><strong>Nguyên nhân:</strong> Race condition giữa bước tăng $X$ và bước kiểm tra <code>if (X == 20)</code>. Nếu $X = 19$, $P_1$ tăng $X$ thành $20$ nhưng bị ngắt trước <code>if</code>. $P_2$ nhảy vào tăng $X$ thành $21$. Khi $P_1$ chạy tiếp <code>if (X == 20)</code> $\rightarrow$ sai (vì $X = 21$) $\rightarrow X$ không về $0$ và tiếp tục tăng lên $22, 23...$</p>
+            <p><strong>Khắc phục bằng Semaphore:</strong> Bọc toàn bộ đoạn tăng và kiểm tra trong Mutex Semaphore <code>mutex = 1</code>.</p>
+<pre><code class="language-c"><span class="code-keyword">semaphore</span> mutex = <span class="code-string">1</span>;
+<span class="code-keyword">do</span> {
+    wait(mutex);
+    X = X + <span class="code-string">1</span>;
+    <span class="code-keyword">if</span> (X == <span class="code-string">20</span>) X = <span class="code-string">0</span>;
+    signal(mutex);
+} <span class="code-keyword">while</span> (<span class="code-keyword">TRUE</span>);
+</code></pre>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 5</div>
+    <ul>
+        <li>3 Yêu cầu CS: Mutual Exclusion, Progress, Bounded Waiting.</li>
+        <li><code>wait(S)</code> giảm S (kẹt nếu $S \le 0$), <code>signal(S)</code> tăng S (đánh thức tiến trình chờ).</li>
+        <li>Monitor tự động khóa Mutual Exclusion, dùng <code>condition x; x.wait(), x.signal()</code>.</li>
+        <li>Producer-Consumer: <code>empty=N, full=0, mutex=1</code>.</li>
+        <li>Khởi tạo Semaphore $= 0$ cho đồng bộ thứ tự (DAG), $= 1$ cho độc quyền truy xuất (CS).</li>
+    </ul>
+</div>
+
+</body>
+</html>

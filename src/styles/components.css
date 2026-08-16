@@ -1,0 +1,327 @@
+/* ==========================================================================
+   IT007 CẨM NANG HỆ ĐIỀU HÀNH - UI & ACADEMIC COMPONENTS
+   Author: Võ Trọng Phúc
+   ========================================================================== */
+
+/* --- CHAPTER HEADER COVER --- */
+.chapter-header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 20pt;
+    border-radius: 8px;
+    margin-bottom: 15pt;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.chapter-header .chapter-num {
+    font-size: 10pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #38bdf8;
+    margin-bottom: 4pt;
+}
+
+.chapter-header h1 {
+    color: #ffffff;
+    font-size: 22pt;
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chapter-header .chapter-subtitle {
+    font-size: 11pt;
+    color: #94a3b8;
+    margin-top: 6pt;
+    font-weight: 400;
+}
+
+/* --- LEARNING OBJECTIVES & KNOWLEDGE MAP --- */
+.learning-objectives {
+    background-color: var(--primary-light);
+    border-left: 4px solid var(--primary);
+    padding: 10pt 12pt;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 12pt;
+}
+
+.learning-objectives h3 {
+    color: var(--primary);
+    margin-top: 0;
+    font-size: 11pt;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* --- ALERT & CALLOUT BOXES --- */
+.alert-box {
+    padding: 10pt 12pt;
+    border-radius: 6px;
+    margin: 10pt 0;
+    font-size: 9.5pt;
+    border-left: 4px solid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.alert-box .alert-title {
+    font-weight: 700;
+    margin-bottom: 4pt;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    font-size: 8.5pt;
+    letter-spacing: 0.5px;
+}
+
+.alert-note {
+    background-color: var(--alert-note-bg);
+    border-color: var(--alert-note-border);
+    color: #1e40af;
+}
+
+.alert-tip {
+    background-color: var(--alert-tip-bg);
+    border-color: var(--alert-tip-border);
+    color: #065f46;
+}
+
+.alert-warning {
+    background-color: var(--alert-warning-bg);
+    border-color: var(--alert-warning-border);
+    color: #92400e;
+}
+
+.alert-danger {
+    background-color: var(--alert-danger-bg);
+    border-color: var(--alert-danger-border);
+    color: #991b1b;
+}
+
+/* --- "ĐỪNG NHẦM" (DON'T CONFUSE) COMPARISON BOX --- */
+.dont-confuse-box {
+    background-color: #fff1f2;
+    border: 1.5px solid #fecdd3;
+    border-left: 5px solid #e11d48;
+    border-radius: 6px;
+    padding: 12pt;
+    margin: 12pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.dont-confuse-box .box-title {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #be123c;
+    margin-bottom: 6pt;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* --- UIT EXAM TRAP BANNER (BẪY ĐỀ THI UIT) --- */
+.uit-trap-box {
+    background-color: #fefce8;
+    border: 1.5px solid #fef08a;
+    border-left: 5px solid #ca8a04;
+    border-radius: 6px;
+    padding: 10pt 12pt;
+    margin: 10pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.uit-trap-box .trap-title {
+    font-weight: 800;
+    color: #854d0e;
+    font-size: 10pt;
+    margin-bottom: 4pt;
+}
+
+/* --- WORKED EXAMPLES & PROBLEM CARDS --- */
+.worked-example {
+    background-color: #ffffff;
+    border: 1px solid var(--border-strong);
+    border-top: 3px solid var(--secondary);
+    border-radius: 6px;
+    padding: 12pt;
+    margin: 12pt 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.worked-example .example-header {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8pt;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 4pt;
+}
+
+.worked-example .problem-statement {
+    font-weight: 500;
+    margin-bottom: 8pt;
+    color: #1e293b;
+    background-color: #f8fafc;
+    padding: 8pt;
+    border-radius: 4px;
+}
+
+.worked-example .solution-steps {
+    margin-top: 8pt;
+}
+
+.solution-step-title {
+    font-weight: 700;
+    color: var(--secondary);
+    font-size: 9.5pt;
+    margin-top: 6pt;
+    margin-bottom: 3pt;
+}
+
+/* --- TABLES STYLING --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10pt 0;
+    font-size: 9pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+th, td {
+    padding: 6pt 8pt;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+th {
+    background-color: var(--primary);
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 8.5pt;
+    letter-spacing: 0.5px;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* --- CODE BLOCKS --- */
+pre {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 10pt;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 8pt 0;
+    line-height: 1.45;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+code {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    padding: 1.5pt 4pt;
+    border-radius: 3px;
+    border: 1px solid #e2e8f0;
+}
+
+pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: none;
+}
+
+/* Code Comment Accent */
+.code-comment { color: #64748b; font-style: italic; }
+.code-keyword { color: #38bdf8; font-weight: 600; }
+.code-func { color: #f43f5e; font-weight: 600; }
+.code-string { color: #4ade80; }
+
+/* --- GANTT CHART TIMELINE DIAGRAM --- */
+.gantt-container {
+    margin: 10pt 0;
+    padding: 8pt;
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.gantt-chart {
+    display: flex;
+    width: 100%;
+    border: 1px solid #334155;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gantt-block {
+    text-align: center;
+    padding: 6pt 2pt;
+    font-weight: 700;
+    font-size: 9pt;
+    color: #ffffff;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+}
+
+.gantt-timeline {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 8pt;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-top: 4pt;
+    font-family: var(--font-mono);
+}
+
+/* Colors for Gantt Processes */
+.p-bg-1 { background-color: #2563eb; }
+.p-bg-2 { background-color: #059669; }
+.p-bg-3 { background-color: #d97706; }
+.p-bg-4 { background-color: #7c3aed; }
+.p-bg-5 { background-color: #db2777; }
+.p-bg-idle { background-color: #94a3b8; color: #1e293b; }
+
+/* --- QUICK RECALL CHEAT SHEET BOX --- */
+.quick-recall-card {
+    background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+    border: 1.5px solid #bbf7d0;
+    border-radius: 6px;
+    padding: 10pt 12pt;
+    margin: 12pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.quick-recall-card .recall-title {
+    font-weight: 800;
+    font-size: 10.5pt;
+    color: #166534;
+    margin-bottom: 6pt;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}

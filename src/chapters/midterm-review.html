@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>MIDTERM MASTER REVIEW & ĐỀ THI MÔ PHỎNG GIỮA KỲ IT007</title>
+    <link rel="stylesheet" href="../styles/print.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="chapter-header">
+    <div class="chapter-num">Phần Review Đặc Biệt — Giữa Kỳ</div>
+    <h1>MIDTERM MASTER REVIEW & ĐỀ THI THỬ GIỮA KỲ CHUẨN UIT</h1>
+    <div class="chapter-subtitle">Hệ thống hóa Ch1-Ch4 $\rightarrow$ Bẫy trắc nghiệm $\rightarrow$ 01 Đề thi mô phỏng hoàn chỉnh có đáp án</div>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. BẢN ĐỒ KIẾN THỨC BẮT BUỘC THI GIỮA KỲ (CH1 - CH4)</h2>
+    <div class="alert-box alert-note">
+        <div class="alert-title">🧠 SYSTEM CHECKLIST GIỮA KỲ IT007</div>
+        <ul>
+            <li><strong>Chương 1:</strong> Dual Mode (User mode bit 1 vs Kernel mode bit 0), Ngắt (Interrupt vs Trap/Exception), Đa chương (Multiprogramming) vs Chia sẻ thời gian (Time-sharing).</li>
+            <li><strong>Chương 2:</strong> System Call vs Library Call, 3 Cơ chế truyền tham số System Call (Registers, Memory Block, Stack), Monolithic vs Microkernel.</li>
+            <li><strong>Chương 3:</strong> 5 Trạng thái tiến trình, `fork()` return 0 ở Child / PID ở Parent, Công thức $2^N$ tiến trình, Bẫy buffer `printf` không `\n`, `execvp()` ghi đè bộ nhớ tiến trình.</li>
+            <li><strong>Chương 4:</strong> Công thức $TAT = CT - AT$, $WT = TAT - BT$, $RT = \text{Exec\_Start} - AT$. Sơ đồ Gantt FCFS, SJF, SRTF, RR ($q$), Preemptive Priority (Số nhỏ = Ưu tiên cao). Thứ tự xếp hàng Ready Queue trong Round Robin.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- SECTION 2: MOCK MIDTERM EXAM -->
+<section class="page-break">
+    <h2>2. ĐỀ THI MÔ PHỎNG GIỮA KỲ IT007 UIT (THỜI GIAN: 60 PHÚT)</h2>
+    <p><em>Đề thi được biên soạn theo đúng cấu trúc đề giữa kỳ chính thức của Khoa Kỹ thuật Máy tính / Khoa CNPM - UIT.</em></p>
+
+    <h3>PHẦN 1: TRẮC NGHIỆM LÝ THUYẾT (4.0 ĐIỂM)</h3>
+
+    <p><strong>Câu 1:</strong> Sự khác biệt cơ bản nhất giữa hệ thống Đa chương (Multiprogramming) và hệ thống Chia sẻ thời gian (Time-Sharing) là gì?</p>
+    <p>A. Đa chương sử dụng nhiều CPU, Chia sẻ thời gian sử dụng 1 CPU.<br>
+    B. Đa chương tối ưu hiệu suất CPU ($CPU_{util}$), Chia sẻ thời gian tối ưu thời gian đáp ứng ($RT$).<br>
+    C. Đa chương hỗ trợ bộ nhớ ảo, Chia sẻ thời gian thì không.<br>
+    D. Đa chương là khống chế (preemptive), Chia sẻ thời gian là không khống chế (non-preemptive).</p>
+
+    <p><strong>Câu 2:</strong> Lệnh nào sau đây KHÔNG PHẢI là Lệnh đặc quyền (Privileged Instruction)?</p>
+    <p>A. Lệnh tắt/bật hệ thống ngắt phần cứng (`cli`/`sti`).<br>
+    B. Lệnh đọc thời gian hệ thống từ đồng hồ realtime.<br>
+    C. Lệnh thay đổi giá trị thanh ghi Base & Limit của RAM.<br>
+    D. Lệnh chuyển đổi Mode Bit từ User Mode sang Kernel Mode.</p>
+
+    <p><strong>Câu 3:</strong> Cho đoạn mã C: <code>for(int i=0; i&lt;3; i++) fork();</code>. Giả sử tất cả các lời gọi `fork()` đều thành công, tổng số tiến trình CON được sinh ra là:</p>
+    <p>A. 3 tiến trình.<br>
+    B. 7 tiến trình.<br>
+    C. 8 tiến trình.<br>
+    D. 15 tiến trình.</p>
+
+    <p><strong>Câu 4:</strong> Thuật toán định thời CPU nào sau đây đảm bảo KHÔNG BAO GIỜ bị ảnh hưởng bởi hiệu ứng đoàn tàu (Convoy Effect)?</p>
+    <p>A. FCFS.<br>
+    B. Round Robin.<br>
+    C. SJF Non-preemptive.<br>
+    D. Priority Non-preemptive.</p>
+
+    <h3>PHẦN 2: TỰ LUẬN TIẾN TRÌNH & FORK TREE (3.0 ĐIỂM)</h3>
+    <div class="worked-example">
+        <div class="problem-statement">
+            <strong>Câu 5:</strong> Cho đoạn chương trình C sau trên Linux:
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+
+int main() {
+    int val = 5;
+    pid_t pid = fork();
+    if (pid == 0) {
+        val += 15;
+        printf("Child: val = %d, addr = %p\n", val, &val);
+    } else if (pid &gt; 0) {
+        wait(NULL);
+        val -= 5;
+        printf("Parent: val = %d, addr = %p\n", val, &val);
+    }
+    return 0;
+}
+</code></pre>
+            <strong>Yêu cầu:</strong>
+            <br>a) Giả sử địa chỉ ảo của biến `val` trong tiến trình cha là <code>0x7ffe4a21</code>. Hãy xác định chính xác giá trị `val` và địa chỉ `&val` được in ra bởi tiến trình con và tiến trình cha. Giải thích bản chất cơ chế bộ nhớ.
+            <br>b) Tiến trình con đã trải qua những trạng thái nào trong suốt vòng đời của nó? Vẽ sơ đồ chuyển trạng thái.
+        </div>
+    </div>
+
+    <h3>PHẦN 3: TỰ LUẬN ĐỊNH THỜI CPU (3.0 ĐIỂM)</h3>
+    <div class="worked-example">
+        <div class="problem-statement">
+            <strong>Câu 6:</strong> Xét tập tiến trình sau trong một hệ điều hành đơn xử lý:
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>Arrival Time ($AT$)</th><th>CPU Burst Time ($BT$)</th><th>Priority (Số nhỏ = Ưu tiên cao)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P1</td><td>0</td><td>10</td><td>3</td></tr>
+                    <tr><td>P2</td><td>1</td><td>3</td><td>1</td></tr>
+                    <tr><td>P3</td><td>2</td><td>5</td><td>2</td></tr>
+                    <tr><td>P4</td><td>4</td><td>2</td><td>4</td></tr>
+                </tbody>
+            </table>
+            <strong>Yêu cầu:</strong>
+            <br>a) Vẽ sơ đồ Gantt và tính $WT_{avg}$, $TAT_{avg}$ cho thuật toán <strong>Preemptive Priority Scheduling</strong>.
+            <br>b) Vẽ sơ đồ Gantt và tính $WT_{avg}$, $TAT_{avg}$ cho thuật toán <strong>Round Robin ($q = 3$)</strong>.
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3: ANSWER KEY -->
+<section class="page-break">
+    <h2>3. ĐÁP ÁN VÀ LỜI GIẢI CHI TIẾT ĐỀ THI MÔ PHỎNG GIỮA KỲ</h2>
+
+    <h3>PHẦN 1: ĐÁP ÁN TRẮC NGHIỆM</h3>
+    <ul>
+        <li><strong>Câu 1: B</strong> — Đa chương mục đích tối ưu $CPU_{util}$ (chuyển khi I/O), Chia sẻ thời gian dùng Time-slice tối ưu $RT$.</li>
+        <li><strong>Câu 2: B</strong> — Đọc thời gian hệ thống là lệnh không đặc quyền (User mode đọc được). Các lệnh A, C, D là Privileged.</li>
+        <li><strong>Câu 3: B</strong> — Vòng lặp $N=3$ sinh $2^3 = 8$ tiến trình (tính cả cha). Đề hỏi số tiến trình <em>CON</em> $\Rightarrow 8 - 1 = 7$ con.</li>
+        <li><strong>Câu 4: B</strong> — Round Robin dùng Time quantum chia nhỏ thời gian CPU nên các tiến trình ngắn không bị kẹt sau tiến trình dài (tránh Convoy Effect).</li>
+    </ul>
+
+    <h3>PHẦN 2: GIẢI CHI TIẾT CÂU 5 (FORK & MEMORY)</h3>
+    <div class="worked-example">
+        <div class="solution-steps">
+            <ol>
+                <li><strong>Ghi kết quả in ra:</strong>
+                    <br>- Tiến trình con (Child): In ra <code>Child: val = 20, addr = 0x7ffe4a21</code>
+                    <br>- Tiến trình cha (Parent): In ra <code>Parent: val = 0, addr = 0x7ffe4a21</code>
+                </li>
+                <li><strong>Giải thích bản chất bộ nhớ:</strong>
+                    <br>- Khi `fork()` xảy ra, HDH sao chép không gian địa chỉ ảo của tiến trình cha sang tiến trình con (hoặc dùng Copy-on-Write).
+                    <br>- Do không gian địa chỉ ảo giống nhau, địa chỉ ảo <code>&val</code> ở 2 tiến trình là <strong>BẰNG NHAU (0x7ffe4a21)</strong>. Tuy nhiên, chúng được MMU ánh xạ sang 2 khung trang <strong>RAM VẬT LÝ ĐỘC LẬP</strong>.
+                    <br>- Do đó, biến `val` ở Child tăng thành $5+15=20$, còn `val` ở Parent sau khi `wait()` xong giảm thành $5-5=0$, hoàn toàn không ảnh hưởng lẫn nhau.
+                </li>
+                <li><strong>Chuỗi trạng thái của Tiến trình con:</strong>
+                    <br><code>New -> Ready -> Running -> Waiting (khi printf I/O) -> Ready -> Running -> Terminated</code>.
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <h3>PHẦN 3: GIẢI CHI TIẾT CÂU 6 (ĐỊNH THỜI CPU)</h3>
+    <div class="worked-example">
+        <div class="solution-steps">
+            <div class="solution-step-title">a) Preemptive Priority (Số nhỏ = Ưu tiên cao):</div>
+            <ul>
+                <li>$t=0$: P1 (Prio 3) chạy.</li>
+                <li>$t=1$: P2 (Prio 1) đến. Vì Prio 1 > Prio 3 $\rightarrow$ P2 ngắt P1! P2 chạy từ $1 \rightarrow 4$ (P2 HOÀN THÀNH tại $t=4$). Trong lúc này: $t=2$ P3 (Prio 2) đến, $t=4$ P4 (Prio 4) đến.</li>
+                <li>$t=4$: So sánh độ ưu tiên của P1 (Prio 3, còn $BT=9$), P3 (Prio 2, $BT=5$), P4 (Prio 4, $BT=2$). P3 ưu tiên nhất $\rightarrow$ P3 chạy từ $4 \rightarrow 9$ (P3 HOÀN THÀNH tại $t=9$).</li>
+                <li>$t=9$: So sánh P1 (Prio 3) và P4 (Prio 4). P1 ưu tiên hơn $\rightarrow$ P1 chạy từ $9 \rightarrow 18$ (P1 HOÀN THÀNH tại $t=18$).</li>
+                <li>$t=18$: P4 chạy từ $18 \rightarrow 20$ (P4 HOÀN THÀNH tại $t=20$).</li>
+            </ul>
+
+            <div class="gantt-container">
+                <strong>SƠ ĐỒ GANTT (Preemptive Priority):</strong>
+                <div class="gantt-chart">
+                    <div class="gantt-block p-bg-1" style="width: 5%;">P1</div>
+                    <div class="gantt-block p-bg-2" style="width: 15%;">P2</div>
+                    <div class="gantt-block p-bg-3" style="width: 25%;">P3</div>
+                    <div class="gantt-block p-bg-1" style="width: 45%;">P1</div>
+                    <div class="gantt-block p-bg-4" style="width: 10%;">P4</div>
+                </div>
+                <div class="gantt-timeline">
+                    <span>0</span><span>1</span><span>4</span><span>9</span><span>18</span><span>20</span>
+                </div>
+            </div>
+
+            <p><strong>Tính toán:</strong></p>
+            <ul>
+                <li>P1: $CT=18, TAT=18-0=18, WT=18-10=8$</li>
+                <li>P2: $CT=4, TAT=4-1=3, WT=3-3=0$</li>
+                <li>P3: $CT=9, TAT=9-2=7, WT=7-5=2$</li>
+                <li>P4: $CT=20, TAT=20-4=16, WT=16-2=14$</li>
+                <li><strong>$TAT_{avg} = \frac{18+3+7+16}{4} = 11.0$ ms</strong></li>
+                <li><strong>$WT_{avg} = \frac{8+0+2+14}{4} = 6.0$ ms</strong></li>
+            </ul>
+
+            <div class="solution-step-title" style="margin-top: 20px;">b) Round Robin ($q = 3$):</div>
+            <p><strong>Diễn biến Ready Queue từng mốc thời gian:</strong></p>
+            <ul>
+                <li>$t=0$: P1 đến ($BT=10$). Chạy P1 từ $0 \rightarrow 3$ (còn 7). Trong lúc này: $t=1$ P2 đến, $t=2$ P3 đến. Ready Queue trước khi xếp P1 lại: [P2, P3] $\rightarrow$ thêm P1 vào cuối $\rightarrow$ Ready Queue: [P2, P3, P1].</li>
+                <li>$t=3 \rightarrow 6$: Chạy P2 (cần 3 unit $\rightarrow$ P2 HOÀN THÀNH tại $t=6$, $CT_2 = 6$). Trong lúc này: $t=4$ P4 đến. Ready Queue: [P3, P1, P4].</li>
+                <li>$t=6 \rightarrow 9$: Chạy P3 (3 unit, còn 2). Ready Queue: [P1, P4, P3].</li>
+                <li>$t=9 \rightarrow 12$: Chạy P1 (3 unit, còn 4). Ready Queue: [P4, P3, P1].</li>
+                <li>$t=12 \rightarrow 14$: Chạy P4 (cần 2 unit $\le 3 \rightarrow$ P4 HOÀN THÀNH tại $t=14$, $CT_4 = 14$). Ready Queue: [P3, P1].</li>
+                <li>$t=14 \rightarrow 16$: Chạy P3 (cần 2 unit còn lại $\rightarrow$ P3 HOÀN THÀNH tại $t=16$, $CT_3 = 16$). Ready Queue: [P1].</li>
+                <li>$t=16 \rightarrow 19$: Chạy P1 (3 unit, còn 1). Ready Queue: [P1].</li>
+                <li>$t=19 \rightarrow 20$: Chạy P1 (1 unit cuối $\rightarrow$ P1 HOÀN THÀNH tại $t=20$, $CT_1 = 20$).</li>
+            </ul>
+
+            <div class="gantt-container">
+                <strong>SƠ ĐỒ GANTT (Round Robin q = 3):</strong>
+                <div class="gantt-chart">
+                    <div class="gantt-block p-bg-1" style="width: 15%;">P1</div>
+                    <div class="gantt-block p-bg-2" style="width: 15%;">P2</div>
+                    <div class="gantt-block p-bg-3" style="width: 15%;">P3</div>
+                    <div class="gantt-block p-bg-1" style="width: 15%;">P1</div>
+                    <div class="gantt-block p-bg-4" style="width: 10%;">P4</div>
+                    <div class="gantt-block p-bg-3" style="width: 10%;">P3</div>
+                    <div class="gantt-block p-bg-1" style="width: 20%;">P1</div>
+                </div>
+                <div class="gantt-timeline">
+                    <span>0</span><span>3</span><span>6</span><span>9</span><span>12</span><span>14</span><span>16</span><span>20</span>
+                </div>
+            </div>
+
+            <p><strong>Bảng tính chi tiết chỉ số Round Robin (q = 3):</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>$AT$</th><th>$BT$</th><th>$CT$</th><th>$TAT = CT - AT$</th><th>$WT = TAT - BT$</th><th>$RT$ (Exec start - AT)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P1</td><td>0</td><td>10</td><td>20</td><td>20</td><td>10</td><td>0 - 0 = 0</td></tr>
+                    <tr><td>P2</td><td>1</td><td>3</td><td>6</td><td>5</td><td>2</td><td>3 - 1 = 2</td></tr>
+                    <tr><td>P3</td><td>2</td><td>5</td><td>16</td><td>14</td><td>9</td><td>6 - 2 = 4</td></tr>
+                    <tr><td>P4</td><td>4</td><td>2</td><td>14</td><td>10</td><td>8</td><td>12 - 4 = 8</td></tr>
+                    <tr><td><strong>TRUNG BÌNH</strong></td><td>-</td><td>-</td><td>-</td><td><strong>12.25 ms</strong></td><td><strong>7.25 ms</strong></td><td><strong>3.5 ms</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">🎉 Chúc mừng bạn đã hoàn thành Midterm Review!</div>
+    <p>Hãy soát lại các lỗi sai trong đề thi thử và ôn kỹ lại Chương 3 & Chương 4 trước khi bước sang các chương Cuối kỳ!</p>
+</div>
+
+</body>
+</html>

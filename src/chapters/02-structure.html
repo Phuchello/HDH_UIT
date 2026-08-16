@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 2: Cấu Trúc Hệ Điều Hành</title>
+    <link rel="stylesheet" href="../styles/print.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="chapter-header">
+    <div class="chapter-num">Chương 02 — Kiến Trúc Hệ Thống</div>
+    <h1>CẤU TRÚC HỆ ĐIỀU HÀNH</h1>
+    <div class="chapter-subtitle">Thành phần $\rightarrow$ Lời gọi hệ thống (System Call) $\rightarrow$ Kiến trúc Monolithic vs Microkernel $\rightarrow$ Máy ảo</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 2 (Chuẩn UIT IT007)</h3>
+    <ul>
+        <li>Nắm vững 5 thành phần cốt lõi của Hệ điều hành và các dịch vụ HDH cung cấp.</li>
+        <li>Hiểu sâu bản chất Lời gọi hệ thống (System Call), API và 3 cơ chế truyền tham số cho System Call.</li>
+        <li>Phân biệt rạch ròi giữa System Call (Kernel space) và Library Function Call (User space).</li>
+        <li>So sánh ưu nhược điểm các kiến trúc HDH: Đơn khối (Monolithic), Phân lớp (Layered), Vi nhân (Microkernel), Module động (Modules).</li>
+        <li>Hiểu khái niệm Máy ảo (Virtual Machine) và Phân loại Hypervisor (Type 1 vs Type 2).</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. CÁC THÀNH PHẦN VÀ DỊCH VỤ CỦA HỆ ĐIỀU HÀNH</h2>
+
+    <h3>A. 5 Thành phần Cốt lõi của Hệ điều hành</h3>
+    <ol>
+        <li><strong>Quản lý Tiến trình (Process Management):</strong> Tạo, hủy, tạm dừng, tiếp tục tiến trình; Đồng bộ và Giao tiếp IPC.</li>
+        <li><strong>Quản lý Bộ nhớ chính (Memory Management):</strong> Theo dõi các vùng nhớ rảnh/bận, Cấp phát và thu hồi RAM cho các tiến trình, Quản lý bộ nhớ ảo.</li>
+        <li><strong>Quản lý Lưu trữ / Tập tin (Storage & File Management):</strong> Tạo/xóa file và thư mục, Ánh xạ tập tin vào bộ nhớ phụ, Sao lưu dự phòng.</li>
+        <li><strong>Quản lý Hệ thống I/O (I/O System Management):</strong> Bộ đệm (Buffering), Caching, Spooling, Cung cấp giao diện Device Driver thống nhất.</li>
+        <li><strong>Bảo vệ và An ninh (Protection & Security):</strong> Kiểm soát việc truy xuất tài nguyên của tiến trình và người dùng.</li>
+    </ol>
+
+    <h3>B. Các Dịch vụ Hệ điều hành Cung cấp</h3>
+    <p>HDH cung cấp môi trường thực thi thuận tiện thông qua các dịch vụ:</p>
+    <ul>
+        <li><strong>Giao diện người dùng (User Interface):</strong> CLI (Command Line Interface), GUI (Graphical User Interface), Batch.</li>
+        <li><strong>Thực thi chương trình (Program Execution):</strong> Nạp chương trình vào RAM và chạy.</li>
+        <li><strong>Thao tác I/O (I/O Operations):</strong> Đọc/ghi thiết bị an toàn.</li>
+        <li><strong>Thao tác Hệ thống tập tin (File-system Manipulation):</strong> Đọc, ghi, tạo, xóa, tìm kiếm tập tin.</li>
+        <li><strong>Truyền thông (Communications):</strong> Trao đổi thông điệp giữa các tiến trình trên cùng máy hoặc qua mạng.</li>
+        <li><strong>Phát hiện lỗi (Error Detection):</strong> Xử lý lỗi phần cứng (RAM error, power failure) và lỗi phần mềm (overflow, illegal memory access).</li>
+    </ul>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. LỜI GỌI HỆ THỐNG (SYSTEM CALLS) VÀ CƠ CHẾ TRUYỀN THAM SỐ</h2>
+
+    <h3>A. Vì sao cần System Call?</h3>
+    <p>Chương trình ứng dụng ở User mode bị cấm truy xuất trực tiếp phần cứng. Do đó, khi cần thao tác với đĩa, màn hình, bàn phím hoặc tạo tiến trình mới, ứng dụng <em>phải đưa ra lời yêu cầu chính thức đến Kernel</em> thông qua Lời gọi hệ thống (System Call).</p>
+
+    <h3>B. Phân biệt System Call vs Library Function Call</h3>
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: System Call vs Library Call</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tiêu chí</th>
+                    <th>Lời gọi hệ thống (System Call)</th>
+                    <th>Hàm thư viện (Library Call)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Không gian thực thi</strong></td>
+                    <td>Thực thi trong <strong>Kernel Mode</strong> (Mode bit = 0).</td>
+                    <td>Thực thi trong <strong>User Mode</strong> (Mode bit = 1).</td>
+                </tr>
+                <tr>
+                    <td><strong>Ví dụ trong C</strong></td>
+                    <td><code>read()</code>, <code>write()</code>, <code>fork()</code>, <code>open()</code></td>
+                    <td><code>printf()</code>, <code>scanf()</code>, <code>strlen()</code>, <code>strcpy()</code></td>
+                    </tr>
+                <tr>
+                    <td><strong>Chi phí thực thi</strong></td>
+                    <td>Chi phí cao (tốn thời gian Context Switch / Mode switch).</td>
+                    <td>Chi phí thấp (chỉ là lệnh chuyển hướng nhãn hàm <code>CALL</code> trong RAM).</td>
+                </tr>
+                <tr>
+                    <td><strong>Mối quan hệ</strong></td>
+                    <td>Là điểm tựa cuối cùng tiếp xúc với phần cứng.</td>
+                    <td>Thường bọc (wrapper) bên ngoài một hoặc nhiều System Call (ví dụ: <code>printf</code> gọi <code>write</code>).</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>C. 3 Cơ chế Truyền Tham Số cho System Call</h3>
+    <p>Khi ứng dụng gọi System Call, nó cần truyền các tham số (ví dụ: tên file, kích thước bộ đệm) cho Kernel. Có 3 phương pháp chính:</p>
+
+    <ol>
+        <li><strong>Truyền qua Thanh ghi (Registers):</strong> Đưa các giá trị tham số trực tiếp vào các thanh ghi CPU (ví dụ: thanh ghi <code>eax</code>, <code>ebx</code> trên x86).
+            <ul><li><em>Ưu điểm:</em> Rất nhanh.</li><li><em>Nhược điểm:</em> Bị giới hạn bởi số lượng thanh ghi của CPU (thường không đủ nếu tham số quá nhiều).</li></ul>
+        </li>
+        <li><strong>Truyền qua Khối bộ nhớ / Bảng (Block / Table):</strong> Lưu tham số trong một vùng nhớ RAM, sau đó truyền <em>địa chỉ của vùng nhớ đó</em> vào một thanh ghi CPU.
+            <ul><li><em>Ưu điểm:</em> Không bị giới hạn số lượng và kích thước tham số. Đây là phương pháp phổ biến nhất trong Linux/Solaris.</li></ul>
+        </li>
+        <li><strong>Truyền qua Stack (Push/Pop):</strong> Đẩy các tham số vào Stack của chương trình, Kernel sẽ Pop tham số ra từ Stack.
+            <ul><li><em>Ưu điểm:</em> Đơn giản, không giới hạn số tham số.</li></ul>
+        </li>
+    </ol>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. CÁC KIẾN TRÚC HỆ ĐIỀU HÀNH (OS STRUCTURES)</h2>
+
+    <p>Đề thi UIT rất hay yêu cầu so sánh ưu và nhược điểm của các mô hình cấu trúc HDH:</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Monolithic Kernel vs Microkernel</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tiêu chí</th>
+                    <th>Kiến trúc Đơn khối (Monolithic Kernel)</th>
+                    <th>Kiến trúc Vi nhân (Microkernel)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Tổ chức Kernel</strong></td>
+                    <td>Tất cả các dịch vụ (Process Management, Memory, File System, Network, Drivers) nằm chung trong <strong>cùng một không gian địa chỉ Kernel</strong>.</td>
+                    <td>Chỉ giữ lại những dịch vụ tối thiểu trong Kernel (IPC, quản lý bộ nhớ cơ bản, CPU scheduling). Các dịch vụ khác (File System, Drivers) được đẩy ra <strong>User space</strong> dưới dạng các User Services.</td>
+                </tr>
+                <tr>
+                    <td><strong>Hiệu năng (Performance)</strong></td>
+                    <td><strong>Rất nhanh</strong> vì các thành phần gọi nhau qua lời gọi hàm nội bộ, không tốn chi phí Mode switch.</td>
+                    <td><strong>Chậm hơn</strong> vì các dịch vụ phải giao tiếp với nhau thông qua cơ chế truyền thông điệp (IPC) đi qua Kernel.</td>
+                </tr>
+                <tr>
+                    <td><strong>Độ tin cậy & An toàn</strong></td>
+                    <td><strong>Kém hơn</strong>: Nếu một Driver bị crash hay có lỗi bộ nhớ, toàn bộ hệ thống (Kernel Panic) sẽ bị sụp đổ.</td>
+                    <td><strong>Rất cao</strong>: Nếu một Driver ở Userspace bị lỗi crash, chỉ dịch vụ đó bị dừng và có thể khởi động lại mà không ảnh hưởng tới Kernel.</td>
+                </tr>
+                <tr>
+                    <td><strong>Khả năng mở rộng</strong></td>
+                    <td>Khó bảo trì và mở rộng khi codebase quá lớn.</td>
+                    <td>Rất dễ mở rộng và port sang kiến trúc phần cứng mới.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ví dụ thực tế</strong></td>
+                    <td>Linux, MS-DOS, UNIX truyền thống.</td>
+                    <td>Mach, QNX, L4, Symbian OS.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Cấu trúc Module động (Loadable Kernel Modules - LKM)</h3>
+    <p>Các hệ điều hành hiện đại (như Linux) kết hợp ưu điểm của cả hai: Dùng kiến trúc Monolithic để đạt hiệu năng cao, nhưng hỗ trợ <strong>Modules động</strong>. Các driver và tính năng mới có thể được nạp (`insmod`) hoặc gỡ bỏ (`rmmod`) trực tiếp vào Kernel lúc đang chạy mà không cần biên dịch lại toàn bộ Kernel hay khởi động lại máy tính.</p>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. KHÁI NIỆM MÁY ẢO (VIRTUAL MACHINES)</h2>
+
+    <h3>A. Bản chất Máy ảo</h3>
+    <p>Máy ảo (Virtual Machine - VM) là một sự trừu tượng hóa phần cứng vật lý, tạo ra giao diện ảo giống hệt như một máy tính thực thụ. Một phần mềm gọi là <strong>Hypervisor / Virtual Machine Monitor (VMM)</strong> quản lý các máy ảo.</p>
+
+    <h3>B. Phân loại Hypervisor</h3>
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY ĐỀ THI UIT: Hypervisor Type 1 vs Type 2</div>
+        <ul>
+            <li><strong>Type 1 (Bare-metal Hypervisor):</strong> Chạy <em>trực tiếp trên phần cứng vật lý</em> mà không cần HDH chủ (ví dụ: VMware ESXi, Xen, KVM, Microsoft Hyper-V). Cho hiệu năng cực cao, chuyên dùng cho Server/Cloud.</li>
+            <li><strong>Type 2 (Hosted Hypervisor):</strong> Chạy như <em>một ứng dụng trên nền một HDH chủ (Host OS)</em> (ví dụ: VMware Workstation, Oracle VirtualBox). Dễ cài đặt, phù hợp cho người dùng cá nhân.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- SECTION 5 -->
+<section>
+    <h2>5. BÀI TẬP TỰ LUẬN MẪU CHƯƠNG 2</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 BÀI TẬP TỰ LUẬN MẪU (ĐỀ THI IT007 UIT)</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Câu hỏi:</strong> Trình bày khái niệm Microkernel. Phân tích ưu điểm và nhược điểm của kiến trúc Microkernel so với kiến trúc Monolithic. Tại sao hầu hết các HDH thương mại hiện đại (như Linux, Windows) lại áp dụng mô hình Module hóa lai (Hybrid/Modular) thay vì Microkernel thuần túy?
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết từng bước:</div>
+            <ol>
+                <li><strong>Định nghĩa Microkernel:</strong> Lược bỏ tối đa các thành phần khỏi Kernel, chỉ giữ lại chức năng cốt lõi (IPC, CPU scheduling, quản lý bộ nhớ cơ bản). Các thành phần như File System, Device Driver được đưa ra Userspace thành các tiến trình phục vụ độc lập.</li>
+                <li><strong>Ưu điểm của Microkernel:</strong>
+                    <ul>
+                        <li><em>Tính tin cậy & An toàn:</em> Lỗi ở driver không làm sụp đổ toàn bộ Kernel (tránh Kernel Panic).</li>
+                        <li><em>Mở rộng & Dễ bảo trì:</em> Thêm dịch vụ mới chỉ cần tạo một ứng dụng Userspace.</li>
+                    </ul>
+                </li>
+                <li><strong>Nhược điểm của Microkernel:</strong> Hiệu năng giảm do chi phí quá lớn của việc chuyển đổi ngữ cảnh (Context switch) và truyền thông điệp (IPC) giữa các dịch vụ qua lại giữa Userspace và Kernelspace.</li>
+                <li><strong>Lý do áp dụng Hybrid/Modular Kernel:</strong> Để dung hòa giữa <strong>Hiệu năng cực cao</strong> của Monolithic (chạy chung trong Kernel space) và <strong>Tính linh hoạt</strong> của Microkernel (cho phép nạp/gỡ các module động LKM lúc runtime mà không cần khởi động lại máy).</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 2</div>
+    <ul>
+        <li><strong>System Call:</strong> Cổng giao tiếp duy nhất từ Userspace xuống Kernelspace.</li>
+        <li><strong>3 Cơ chế truyền tham số:</strong> Registers (nhanh, ít) $\rightarrow$ Memory Block (phổ biến) $\rightarrow$ Stack.</li>
+        <li><strong>Monolithic:</strong> Nhanh nhưng dễ sụp đổ toàn bộ. <strong>Microkernel:</strong> An toàn nhưng chậm do tốn IPC.</li>
+        <li><strong>Hypervisor:</strong> Type 1 (Bare-metal / Server) vs Type 2 (Hosted / Desktop).</li>
+    </ul>
+</div>
+
+</body>
+</html>

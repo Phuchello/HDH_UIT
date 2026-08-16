@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 7: Quản Lý Bộ Nhớ (Memory Management)</title>
+    <link rel="stylesheet" href="../styles/print.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="chapter-header">
+    <div class="chapter-num">Chương 07 — Trọng Tâm Thi Cuối Kỳ</div>
+    <h1>QUẢN LÝ BỘ NHỚ (MEMORY MANAGEMENT)</h1>
+    <div class="chapter-subtitle">Địa chỉ Logic vs Vật lý $\rightarrow$ Placement Algorithms $\rightarrow$ Kỹ thuật Phân trang (Paging) $\rightarrow$ EAT & TLB</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 7 (Trọng Tâm Cuối Kỳ UIT)</h3>
+    <ul>
+        <li>Phân biệt rạch ròi Địa chỉ Logic (Ảo) và Địa chỉ Vật lý; Nắm các thời điểm ràng buộc địa chỉ (Compile, Load, Execution time).</li>
+        <li>Phân biệt Phân mảnh nội (Internal Fragmentation) và Phân mảnh ngoại (External Fragmentation).</li>
+        <li>Thạo thuật toán cấp phát bộ nhớ liên tục: First-fit, Best-fit, Worst-fit, Next-fit trên phân vùng cố định & động.</li>
+        <li>Hiểu sâu cơ chế Phân trang (Paging), ánh xạ địa chỉ ($p, d \rightarrow f, d$) và cấu trúc Bảng trang nhiều cấp.</li>
+        <li>Tính chính xác 100% Thời gian truy xuất hiệu dụng (EAT) khi có bộ đệm TLB.</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. KHÁI NIỆM ĐỊA CHỈ VÀ PHÂN MẢNH BỘ NHỚ</h2>
+
+    <h3>A. Địa chỉ Logic (Virtual Address) vs Địa chỉ Vật lý (Physical Address)</h3>
+    <ul>
+        <li><strong>Địa chỉ Logic (Ảo):</strong> Địa chỉ được tạo ra bởi CPU khi thực thi chương trình. Tập hợp tất cả các địa chỉ logic tạo thành Không gian địa chỉ logic (Logical Address Space).</li>
+        <li><strong>Địa chỉ Vật lý:</strong> Địa chỉ thực tế trên thanh RAM do bộ nhớ nhận diện. Tập hợp các địa chỉ vật lý tạo thành Không gian địa chỉ vật lý (Physical Address Space).</li>
+        <li><strong>MMU (Memory Management Unit):</strong> Thiết bị phần cứng thực hiện ánh xạ địa chỉ logic thành địa chỉ vật lý tại runtime.</li>
+    </ul>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Phân Mảnh Nội vs Phân Mảnh Ngoại</div>
+        <table>
+            <thead>
+                <tr><th>Loại phân mảnh</th><th>Nguyên nhân xuất hiện</th><th>Định nghĩa</th><th>Giải pháp khắc phục</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Phân mảnh nội (Internal Fragmentation)</strong></td>
+                    <td>Bộ nhớ được cấp phát theo các khối kích thước cố định (ví dụ: Frame 4KB). Tiến trình không dùng hết toàn bộ khối.</td>
+                    <td>Phần bộ nhớ thừa bị lãng phí <em>bên trong</em> vùng nhớ đã được cấp phát cho tiến trình.</td>
+                    <td>Giảm kích thước khối cấp phát (Page size nhỏ hơn).</td>
+                </tr>
+                <tr>
+                    <td><strong>Phân mảnh ngoại (External Fragmentation)</strong></td>
+                    <td>Cấp phát và thu hồi các vùng nhớ động liên tục có kích thước khác nhau.</td>
+                    <td>Tổng bộ nhớ trống đủ cho tiến trình mới nhưng các vùng trống bị <em>chia cắt rời rạc</em>, không liên tục.</td>
+                    <td>Gom cụm bộ nhớ (Compaction) hoặc sử dụng Kỹ thuật Phân trang (Paging).</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>C. Kỹ Thuật Hoán Đổi (Swapping)</h3>
+    <p>Một tiến trình có thể tạm thời bị <strong>hoán đổi ra (Swap-out)</strong> khỏi bộ nhớ chính RAM để lưu vào vùng nhớ thứ cấp (Backing Store / Swap Space trên đĩa) khi hệ thống thiếu RAM, và sau đó được <strong>hoán đổi vào (Swap-in)</strong> lại RAM khi cần tiếp tục thực thi:</p>
+    <ul>
+        <li><strong>Tác dụng:</strong> Cho phép tổng không gian nhớ vật lý của các tiến trình vượt quá dung lượng thực tế của thanh RAM, tăng mức độ đa chương (Degree of Multiprogramming).</li>
+        <li><strong>Chi phí:</strong> Thời gian truyền dữ liệu qua đĩa (Disk Transfer Time) chiếm tỷ trọng lớn trong thời gian chuyển ngữ cảnh. Trong các hệ điều hành hiện đại, Swapping thường kết hợp chặt chẽ với Kỹ thuật Phân trang theo yêu cầu (Paging-based Swapping).</li>
+    </ul>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. CÁC THUẬT TOÁN PLACEMENT (FIRST-FIT, BEST-FIT, WORST-FIT, NEXT-FIT)</h2>
+
+    <p>Khi các phân vùng nhớ rảnh có kích thước khác nhau, thuật toán Placement quyết định chọn phân vùng nào cho tiến trình xin cấp phát $S$ KB:</p>
+
+    <ul>
+        <li><strong>First-fit (Khớp đầu tiên):</strong> Cấp phát phân vùng trống <em>đầu tiên</em> đủ lớn (duyệt từ đầu danh sách).</li>
+        <li><strong>Best-fit (Khớp tốt nhất):</strong> Cấp phát phân vùng trống <em>nhỏ nhất</em> nhưng đủ lớn (tạo ra vùng thừa nhỏ nhất, đòi hỏi tìm toàn bộ danh sách).</li>
+        <li><strong>Worst-fit (Khớp xấu nhất):</strong> Cấp phát phân vùng trống <em>lớn nhất</em> (tạo ra vùng thừa lớn nhất còn lại).</li>
+        <li><strong>Next-fit (Khớp tiếp theo):</strong> Giống First-fit nhưng bắt đầu tìm từ <em>vị trí phân vùng vừa cấp phát cho tiến trình trước đó</em>.</li>
+    </ul>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE: THUẬT TOÁN PLACEMENT (CHUẨN ĐỀ THI UIT)</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho các phân vùng bộ nhớ theo thứ tự:</strong> <code>100KB, 500KB, 200KB, 300KB, 600KB</code>.
+            <br>Xác định phân vùng được cấp phát cho lần lượt các tiến trình có kích thước: <code>P1 (212KB), P2 (417KB), P3 (112KB), P4 (426KB)</code> theo thuật toán First-fit, Best-fit, Worst-fit.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết:</div>
+            <ul>
+                <li><strong>First-fit:</strong>
+                    <br>- P1 (212KB): Cấp vào phân vùng 500KB (còn thừa 288KB).
+                    <br>- P2 (417KB): Cấp vào phân vùng 600KB (còn thừa 183KB).
+                    <br>- P3 (112KB): Cấp vào phân vùng 200KB (còn thừa 88KB).
+                    <br>- P4 (426KB): Duyệt qua 100KB, 288KB, 88KB, 300KB, 183KB $\rightarrow$ <strong>Không có phân vùng nào đủ $\rightarrow$ P4 phải chờ!</strong>
+                </li>
+                <li><strong>Best-fit:</strong>
+                    <br>- P1 (212KB): Cấp vào phân vùng 300KB (thừa 88KB - nhỏ nhất đủ lớn).
+                    <br>- P2 (417KB): Cấp vào phân vùng 500KB (thừa 83KB).
+                    <br>- P3 (112KB): Cấp vào phân vùng 200KB (thừa 88KB).
+                    <br>- P4 (426KB): Cấp vào phân vùng 600KB (thừa 174KB) $\rightarrow$ <strong>Tất cả tiến trình đều được cấp phát!</strong>
+                </li>
+                <li><strong>Worst-fit:</strong>
+                    <br>- P1 (212KB): Cấp vào phân vùng lớn nhất 600KB (thừa 388KB).
+                    <br>- P2 (417KB): Cấp vào phân vùng lớn nhất 500KB (thừa 83KB).
+                    <br>- P3 (112KB): Cấp vào phân vùng lớn nhất 388KB (thừa 276KB).
+                    <br>- P4 (426KB): Không có phân vùng nào đủ $\rightarrow$ <strong>P4 phải chờ!</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. KỸ THUẬT PHÂN TRANG (PAGING) VÀ ÁNH XẠ ĐỊA CHỈ</h2>
+
+    <h3>A. Cơ chế Phân trang</h3>
+    <p>Phân trang cho phép không gian địa chỉ vật lý của tiến trình không cần nằm liên tục nhau trong RAM, giải quyết hoàn toàn Phân mảnh ngoại.</p>
+    <ul>
+        <li>Bộ nhớ vật lý RAM được chia thành các khối cố định gọi là <strong>Khung trang (Frame)</strong>.</li>
+        <li>Bộ nhớ logic được chia thành các khối có cùng kích thước gọi là <strong>Trang (Page)</strong>.</li>
+    </ul>
+
+    <h3>B. Cấu trúc Địa chỉ Logic và Chuyển đổi Địa chỉ</h3>
+    <p>Địa chỉ logic gồm 2 phần: chỉ số trang ($p$) và độ dời ($d$).</p>
+    <p>Giả sử địa chỉ logic có $m$ bit, kích thước trang là $2^n$ bytes $\Rightarrow$ $n$ bit cuối dành cho độ dời $d$, $m-n$ bit đầu dành cho chỉ số trang $p$.</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ QUY TẮC VÀNG CHUYỂN ĐỔI ĐỊA CHỈ PHÂN TRANG</div>
+        <p>Địa chỉ Logic $(p, d) \xrightarrow{\text{Bảng trang}} \text{Địa chỉ Vật lý } (f, d)$</p>
+        <p><strong>ĐỘ DỜI $d$ KHÔNG BAO GIỜ THAY ĐỔI</strong> khi chuyển từ địa chỉ ảo sang địa chỉ vật lý! Chỉ có $p$ (chỉ số trang) được tra cứu trong Bảng trang (Page Table) để thay bằng $f$ (chỉ số khung trang).</p>
+    </div>
+
+    <h3>C. Thời gian Truy xuất Hiệu dụng EAT với TLB</h3>
+    <p>Bộ đệm TLB (Translation Lookaside Buffer) là bộ nhớ cache phần cứng siêu nhanh lưu trữ các cặp $(p, f)$ hay dùng.</p>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📐 CÔNG THỨC EAT VÀ CÁCH THẾ SỐ CHUẨN ĐỀ THI UIT</span>
+        </div>
+        <p>Gọi $\alpha$ là Tỷ lệ tìm thấy trong TLB (Hit ratio), $t_{RAM}$ là thời gian truy xuất RAM, $t_{TLB}$ là thời gian tìm trong TLB.</p>
+
+        <p><strong>Công thức tổng quát:</strong></p>
+        $$EAT = \alpha \cdot (t_{TLB} + t_{RAM}) + (1 - \alpha) \cdot (t_{TLB} + 2 \cdot t_{RAM})$$
+        $$EAT = t_{TLB} + (2 - \alpha) \cdot t_{RAM}$$
+
+        <p><em>Trường hợp đặc biệt:</em> Nếu đề bài ghi "Thời gian tìm trong TLB xem như bằng 0" ($t_{TLB} = 0$), công thức rút gọn là:</p>
+        $$EAT = (2 - \alpha) \cdot t_{RAM}$$
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. BÀI TẬP WORKED EXAMPLES CHUẨN ĐỀ THI UIT</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 1: ÁNH XẠ ĐỊA CHỈ VÀ TÍNH BIT</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Bài toán:</strong> Xét một không gian địa chỉ ảo gồm 32 trang, mỗi trang có kích thước 2KB ($2048$ bytes), ánh xạ vào bộ nhớ vật lý có 64 khung trang.
+            <br>a) Địa chỉ logic gồm bao nhiêu bit? Địa chỉ vật lý gồm bao nhiêu bit?
+            <br>b) Cho địa chỉ logic dạng số nguyên là $D = 4600$. Hãy xác định chỉ số trang $p$, độ dời $d$ và địa chỉ vật lý tương ứng nếu trang $p$ được nạp vào khung trang $f = 9$.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết:</div>
+            <ol>
+                <li><strong>Tính số bit Địa chỉ Logic:</strong>
+                    <br>- Kích thước trang $2KB = 2^{11}$ bytes $\Rightarrow$ Số bit cho Offset $d = 11$ bits.
+                    <br>- Số trang $32 = 2^5$ trang $\Rightarrow$ Số bit cho chỉ số trang $p = 5$ bits.
+                    <br>- Vậy Tổng số bit địa chỉ logic = $5 + 11 = 16$ bits.
+                </li>
+                <li><strong>Tính số bit Địa chỉ Vật lý:</strong>
+                    <br>- Số khung trang $64 = 2^6$ khung $\Rightarrow$ Số bit cho khung trang $f = 6$ bits.
+                    <br>- Offset $d$ không đổi = $11$ bits.
+                    <br>- Vậy Tổng số bit địa chỉ vật lý = $6 + 11 = 17$ bits.
+                </li>
+                <li><strong>Tách địa chỉ logic $D = 4600$:</strong>
+                    <br>- Chỉ số trang $p = \lfloor 4600 / 2048 \rfloor = 2$.
+                    <br>- Độ dời $d = 4600 \pmod{2048} = 4600 - 2 \times 2048 = 504$.
+                </li>
+                <li><strong>Tính Địa chỉ Vật lý:</strong>
+                    <br>Trang $p=2$ được nạp vào Khung trang $f=9$.
+                    <br>Địa chỉ vật lý = $f \times \text{Page\_Size} + d = 9 \times 2048 + 504 = 18432 + 504 = 18936$.
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 2: TÍNH THỜI GIAN TRUY XUẤT HIỆU DỤNG EAT</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Bài toán EAT:</strong>
+            <br>a) Cho $t_{RAM} = 100$ ns, $t_{TLB} = 20$ ns, $\alpha = 80\%$. Tính EAT.
+            <br>b) Cho $t_{RAM} = 200$ ns, thời gian tra TLB xem như bằng $0$, $\alpha = 75\%$. Tính EAT.
+            <br>c) Cho $t_{RAM} = 100$ ns, $t_{TLB} = 20$ ns. Hệ thống yêu cầu $EAT \le 130$ ns. Hỏi tỷ lệ hit ratio $\alpha$ tối thiểu của TLB phải đạt bao nhiêu %?
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết:</div>
+            <ol>
+                <li><strong>a) Thế số công thức đầy đủ:</strong>
+                    <br>$EAT = t_{TLB} + (2 - \alpha) t_{RAM} = 20 + (2 - 0.8) \times 100 = 20 + 1.2 \times 100 = 140$ ns.
+                </li>
+                <li><strong>b) Thế số công thức rút gọn ($t_{TLB} = 0$):</strong>
+                    <br>$EAT = (2 - \alpha) t_{RAM} = (2 - 0.75) \times 200 = 1.25 \times 200 = 250$ ns.
+                </li>
+                <li><strong>c) Bài toán ngược tìm $\alpha$:</strong>
+                    <br>$EAT = 20 + (2 - \alpha) \times 100 \le 130$
+                    <br>$\Leftrightarrow 100(2 - \alpha) \le 110 \Leftrightarrow 2 - \alpha \le 1.1 \Leftrightarrow \alpha \ge 0.9 = 90\%$.
+                    <br>Vậy Tỷ lệ hit ratio của TLB tối thiểu phải đạt <strong>90%</strong>.
+                </li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 7</div>
+    <ul>
+        <li>Internal Fragmentation (trong khối) vs External Fragmentation (ngoài khối rảnh).</li>
+        <li>Placement: Best-fit tạo mảnh thừa nhỏ nhất; Worst-fit chọn khối lớn nhất.</li>
+        <li>Paging: $Logical(p, d) \rightarrow Physical(f, d)$. Độ dời $d$ KHÔNG THAY ĐỔI.</li>
+        <li>$EAT = t_{TLB} + (2 - \alpha) t_{RAM}$.</li>
+    </ul>
+</div>
+
+</body>
+</html>

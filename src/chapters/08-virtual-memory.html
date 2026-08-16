@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 8: Bộ Nhớ Ảo (Virtual Memory)</title>
+    <link rel="stylesheet" href="../styles/print.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="chapter-header">
+    <div class="chapter-num">Chương 08 — Trọng Tâm Thi Cuối Kỳ</div>
+    <h1>BỘ NHỚ ẢO (VIRTUAL MEMORY)</h1>
+    <div class="chapter-subtitle">Demand Paging $\rightarrow$ Page Fault $\rightarrow$ Thuật toán thay thế trang (FIFO, OPT, LRU) $\rightarrow$ Trì trệ Thrashing</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 8 (Trọng Tâm Cuối Kỳ UIT)</h3>
+    <ul>
+        <li>Hiểu bản chất Bộ nhớ ảo và cơ chế Nạp trang theo yêu cầu (Demand Paging).</li>
+        <li>Thuộc lòng quy trình 6 bước xử lý ngắt Lỗi trang (Page Fault).</li>
+        <li>Vẽ chính xác 100% bảng theo dõi thay thế trang cho các thuật toán: FIFO, OPT, LRU.</li>
+        <li>Hiểu Nghịch lý Belady (Belady's Anomaly) và tại sao LRU/OPT không bị ảnh hưởng.</li>
+        <li>Hiểu hiện tượng Trì trệ hệ thống (Thrashing) và mô hình Tập làm việc (Working-Set Model).</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. KHÁI NIỆM BỘ NHỚ ẢO VÀ LỖI TRANG (PAGE FAULT)</h2>
+
+    <h3>A. Bản chất Bộ nhớ ảo và Demand Paging</h3>
+    <p>Bộ nhớ ảo cho phép thực thi một chương trình mà <strong>không cần nạp toàn bộ chương trình đó vào RAM vật lý</strong>. Kỹ thuật phổ biến nhất là Nạp trang theo yêu cầu (Demand Paging): Trang nào được CPU truy xuất tới mới được nạp từ đĩa cứng vào RAM.</p>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🔄 6 BƯỚC XỬ LÝ LỖI TRANG (PAGE FAULT WALKTHROUGH)</span>
+        </div>
+        <ol>
+            <li>CPU truy xuất một địa chỉ logic. Bảng trang kiểm tra bit Valid/Invalid. Nếu bit = Invalid $\rightarrow$ Báo hiệu <strong>Page Fault</strong>.</li>
+            <li>Phần cứng phát ngắt Trap chuyển quyền cho HDH.</li>
+            <li>HDH kiểm tra xem yêu cầu truy xuất có hợp lệ không. Nếu không hợp lệ $\rightarrow$ Hủy tiến trình (Segment fault). Nếu hợp lệ $\rightarrow$ Tìm một khung trang trống (Free frame) trong RAM.</li>
+            <li>HDH định vị trang tương ứng trên đĩa cứng và thực hiện đọc trang vào khung trang trống vừa tìm.</li>
+            <li>Khi đọc đĩa hoàn tất, HDH cập nhật Bảng trang (đổi bit Invalid $\rightarrow$ Valid) và ghi lại số khung trang $f$.</li>
+            <li>HDH khôi phục trạng thái CPU và tái thực thi lại chính câu lệnh vừa gây ra Page Fault.</li>
+        </ol>
+    </div>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. CÁC THUẬT TOÁN THAY THẾ TRANG (PAGE REPLACEMENT)</h2>
+
+    <p>Khi xảy ra Lỗi trang nhưng RAM đã ĐẦY (không còn khung trang trống), HDH phải chọn một trang trong RAM làm <strong>Nạn nhân (Victim page)</strong> để hoán vị ra đĩa (Swap out) nhường chỗ cho trang mới (Swap in).</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: FIFO vs OPT vs LRU</div>
+        <table>
+            <thead>
+                <tr><th>Thuật toán</th><th>Nguyên lý chọn Victim</th><th>Đặc điểm & Hiệu năng</th><th>Nghịch lý Belady?</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>FIFO (First-In, First-Out)</strong></td>
+                    <td>Thay thế trang được nạp vào RAM <em>sớm nhất</em>.</td>
+                    <td>Dễ cài đặt bằng Queue, nhưng hiệu năng kém. Cần lưu thời điểm nạp.</td>
+                    <td><strong style="color:red;">CÓ BỊ</strong> (Tăng số Frame có thể làm tăng số Page Fault!).</td>
+                </tr>
+                <tr>
+                    <td><strong>OPT (Optimal - Tối ưu)</strong></td>
+                    <td>Thay thế trang sẽ <em>không được sử dụng trong thời gian lâu nhất ở TƯƠNG LAI</em>.</td>
+                    <td>Cho số Page Fault nhỏ nhất tuyệt đối. Không cài đặt thực tế được (chỉ dùng làm chuẩn so sánh).</td>
+                    <td><strong>KHÔNG BỊ</strong> (Thuộc lớp Stack Algorithms).</td>
+                </tr>
+                <tr>
+                    <td><strong>LRU (Least Recently Used)</strong></td>
+                    <td>Thay thế trang <em>chưa được sử dụng trong thời gian lâu nhất ở QUÁ KHỨ</em>.</td>
+                    <td>Hiệu năng rất tốt, xấp xỉ OPT. Được ứng dụng thực tế phổ biến. Đòi hỏi phần cứng hỗ trợ (Counter/Stack).</td>
+                    <td><strong>KHÔNG BỊ</strong> (Thuộc lớp Stack Algorithms).</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. BÀI TẬP WORKED EXAMPLE THAY THẾ TRANG CHUẨN THI UIT</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE: THAY THẾ TRANG FIFO, OPT, LRU</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho chuỗi truy xuất trang (Reference String):</strong>
+            <br><code>1, 2, 3, 4, 2, 1, 5, 6, 2, 1, 2, 3, 7, 6, 3, 2, 1, 2, 3, 6</code>
+            <br>Giả sử hệ thống có <strong>4 Khung trang (Frames)</strong>, ban đầu tất cả các khung trang đều trống.
+            <br>Tính tổng số Lỗi trang (Page Faults) xảy ra khi sử dụng các thuật toán: <strong>a) LRU</strong>, <strong>b) FIFO</strong>, <strong>c) OPT</strong>.
+        </div>
+
+        <div class="solution-steps">
+            <div class="solution-step-title">a) Giải Thuật LRU (Least Recently Used - 4 Khung trang):</div>
+            <p><strong>Bảng diễn biến nạp từng bước và chọn Victim:</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Mốc Ref</th><th>Trang gọi</th><th>Khung 1</th><th>Khung 2</th><th>Khung 3</th><th>Khung 4</th><th>Trạng thái (Hit / Fault)</th><th>Giải thích Victim</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>1</td><td><strong>1</strong></td><td>-</td><td>-</td><td>-</td><td>Fault (*) [PF=1]</td><td>Khung trống 1</td></tr>
+                    <tr><td>2</td><td>2</td><td>1</td><td><strong>2</strong></td><td>-</td><td>-</td><td>Fault (*) [PF=2]</td><td>Khung trống 2</td></tr>
+                    <tr><td>3</td><td>3</td><td>1</td><td>2</td><td><strong>3</strong></td><td>-</td><td>Fault (*) [PF=3]</td><td>Khung trống 3</td></tr>
+                    <tr><td>4</td><td>4</td><td>1</td><td>2</td><td>3</td><td><strong>4</strong></td><td>Fault (*) [PF=4]</td><td>Khung trống 4</td></tr>
+                    <tr><td>5</td><td>2</td><td>1</td><td>2</td><td>3</td><td>4</td><td>Hit</td><td>Trang 2 đã có sẵn</td></tr>
+                    <tr><td>6</td><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>Hit</td><td>Trang 1 đã có sẵn</td></tr>
+                    <tr><td>7</td><td>5</td><td>1</td><td>2</td><td><strong>5</strong></td><td>4</td><td>Fault (*) [PF=5]</td><td>Trang 3 ít dùng nhất trong quá khứ $\rightarrow$ Thay 3 bằng 5</td></tr>
+                    <tr><td>8</td><td>6</td><td>1</td><td>2</td><td>5</td><td><strong>6</strong></td><td>Fault (*) [PF=6]</td><td>Trang 4 ít dùng nhất trong quá khứ $\rightarrow$ Thay 4 bằng 6</td></tr>
+                    <tr><td>9</td><td>2</td><td>1</td><td>2</td><td>5</td><td>6</td><td>Hit</td><td>Trang 2 đã có sẵn</td></tr>
+                    <tr><td>10</td><td>1</td><td>1</td><td>2</td><td>5</td><td>6</td><td>Hit</td><td>Trang 1 đã có sẵn</td></tr>
+                    <tr><td>11</td><td>2</td><td>1</td><td>2</td><td>5</td><td>6</td><td>Hit</td><td>Trang 2 đã có sẵn</td></tr>
+                    <tr><td>12</td><td>3</td><td>1</td><td>2</td><td><strong>3</strong></td><td>6</td><td>Fault (*) [PF=7]</td><td>Trang 5 ít dùng nhất trong quá khứ $\rightarrow$ Thay 5 bằng 3</td></tr>
+                    <tr><td>13</td><td>7</td><td>1</td><td>2</td><td>3</td><td><strong>7</strong></td><td>Fault (*) [PF=8]</td><td>Trang 6 ít dùng nhất trong quá khứ $\rightarrow$ Thay 6 bằng 7</td></tr>
+                    <tr><td>14</td><td>6</td><td><strong>6</strong></td><td>2</td><td>3</td><td>7</td><td>Fault (*) [PF=9]</td><td>Trang 1 ít dùng nhất trong quá khứ $\rightarrow$ Thay 1 bằng 6</td></tr>
+                    <tr><td>15</td><td>3</td><td>6</td><td>2</td><td>3</td><td>7</td><td>Hit</td><td>Trang 3 đã có sẵn</td></tr>
+                    <tr><td>16</td><td>2</td><td>6</td><td>2</td><td>3</td><td>7</td><td>Hit</td><td>Trang 2 đã có sẵn</td></tr>
+                    <tr><td>17</td><td>1</td><td>6</td><td>2</td><td>3</td><td><strong>1</strong></td><td>Fault (*) [PF=10]</td><td>Trang 7 ít dùng nhất trong quá khứ $\rightarrow$ Thay 7 bằng 1</td></tr>
+                    <tr><td>18</td><td>2</td><td>6</td><td>2</td><td>3</td><td>1</td><td>Hit</td><td>Trang 2 đã có sẵn</td></tr>
+                    <tr><td>19</td><td>3</td><td>6</td><td>2</td><td>3</td><td>1</td><td>Hit</td><td>Trang 3 đã có sẵn</td></tr>
+                    <tr><td>20</td><td>6</td><td>6</td><td>2</td><td>3</td><td>1</td><td>Hit</td><td>Trang 6 đã có sẵn</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Tổng số Lỗi trang của LRU = 10 lỗi.</strong></p>
+
+            <div class="solution-step-title" style="margin-top: 20px;">b) Giải Thuật FIFO (First-In, First-Out - 4 Khung trang):</div>
+            <p>Thay thế theo thứ tự nạp vào sớm nhất (Queue F1 $\rightarrow$ F2 $\rightarrow$ F3 $\rightarrow$ F4 $\rightarrow$ F1...):</p>
+            <ul>
+                <li>Ref 1,2,3,4: Nạp vào [1,2,3,4] $\rightarrow$ 4 Page Faults (PF=4).</li>
+                <li>Ref 2, 1: Hit.</li>
+                <li>Ref 5: Thay F1 (trang 1) $\rightarrow$ [5,2,3,4] (PF=5).</li>
+                <li>Ref 6: Thay F2 (trang 2) $\rightarrow$ [5,6,3,4] (PF=6).</li>
+                <li>Ref 2: Thay F3 (trang 3) $\rightarrow$ [5,6,2,4] (PF=7).</li>
+                <li>Ref 1: Thay F4 (trang 4) $\rightarrow$ [5,6,2,1] (PF=8).</li>
+                <li>Ref 2: Hit (có sẵn).</li>
+                <li>Ref 3: Thay F1 (trang 5) $\rightarrow$ [3,6,2,1] (PF=9).</li>
+                <li>Ref 7: Thay F2 (trang 6) $\rightarrow$ [3,7,2,1] (PF=10).</li>
+                <li>Ref 6: Thay F3 (trang 2) $\rightarrow$ [3,7,6,1] (PF=11).</li>
+                <li>Ref 3: Hit (có sẵn).</li>
+                <li>Ref 2: Thay F4 (trang 1) $\rightarrow$ [3,7,6,2] (PF=12).</li>
+                <li>Ref 1: Thay F1 (trang 3) $\rightarrow$ [1,7,6,2] (PF=13).</li>
+                <li>Ref 2: Hit.</li>
+                <li>Ref 3: Thay F2 (trang 7) $\rightarrow$ [1,3,6,2] (PF=14).</li>
+                <li>Ref 6: Hit.</li>
+            </ul>
+            <p><strong>Tổng số Lỗi trang của FIFO = 14 lỗi.</strong></p>
+
+            <div class="solution-step-title" style="margin-top: 20px;">c) Giải Thuật OPT (Optimal Page Replacement - 4 Khung trang):</div>
+            <p>Thay thế trang không được dùng trong thời gian lâu nhất ở tương lai:</p>
+            <ul>
+                <li>Ref 1,2,3,4: Nạp vào [1,2,3,4] $\rightarrow$ 4 Page Faults (PF=4).</li>
+                <li>Ref 2, 1: Hit.</li>
+                <li>Ref 5: Trang 4 không còn dùng nữa trong tương lai $\rightarrow$ Thay 4 bằng 5 $\rightarrow$ [1,2,3,5] (PF=5).</li>
+                <li>Ref 6: Trang 5 không dùng nữa $\rightarrow$ Thay 5 bằng 6 $\rightarrow$ [1,2,3,6] (PF=6).</li>
+                <li>Ref 2, 1, 2, 3: Hit (tất cả 1,2,3 đều có sẵn).</li>
+                <li>Ref 7: Nhìn vào tương lai <code>6, 3, 2, 1, 2, 3, 6</code>: trang 1 dùng xa nhất (tại mốc 17) $\rightarrow$ Thay 1 bằng 7 $\rightarrow$ [7,2,3,6] (PF=7).</li>
+                <li>Ref 6, 3, 2: Hit.</li>
+                <li>Ref 1: Trang 7 không dùng nữa $\rightarrow$ Thay 7 bằng 1 $\rightarrow$ [1,2,3,6] (PF=8).</li>
+                <li>Ref 2, 3, 6: Hit.</li>
+            </ul>
+            <p><strong>Tổng số Lỗi trang của OPT = 8 lỗi.</strong></p>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. TRÌ TRỆ HỆ THỐNG (THRASHING) VÀ WORKING-SET MODEL</h2>
+    <p>Khi số lượng tiến trình tăng quá cao, số khung trang rảnh cho mỗi tiến trình quá ít $\rightarrow$ Tiến trình liên tục bị Lỗi trang. HDH dành 99% thời gian để Swap trang ra/vào đĩa cứng thay vì thực thi tính toán. Hiện tượng này gọi là <strong>Thrashing (Trì trệ hệ thống)</strong>.</p>
+    <p><strong>Giải pháp: Mô hình Tập làm việc (Working-Set Model)</strong> dựa trên tính địa phương (Locality of Reference). Cấp phát đủ số khung trang nằm trong cửa sổ Working Set $\Delta$ để ngăn ngừa Thrashing.</p>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 8</div>
+    <ul>
+        <li>Page Fault xảy ra khi bit Valid/Invalid = Invalid.</li>
+        <li>FIFO bị Nghịch lý Belady (tăng Frame tăng Page fault). LRU/OPT không bị.</li>
+        <li>LRU nhìn về QUÁ KHỨ, OPT nhìn vào TƯƠNG LAI.</li>
+        <li>Thrashing: CPU lãng phí thời gian chỉ để hoán vị trang liên tục.</li>
+    </ul>
+</div>
+
+</body>
+</html>

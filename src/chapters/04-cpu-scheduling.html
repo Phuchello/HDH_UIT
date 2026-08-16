@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 4: Định Thời CPU (CPU Scheduling)</title>
+    <link rel="stylesheet" href="../styles/print.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="chapter-header">
+    <div class="chapter-num">Chương 04 — Trọng Tâm Thi Giữa Kỳ</div>
+    <h1>ĐỊNH THỜI CPU (CPU SCHEDULING)</h1>
+    <div class="chapter-subtitle">Tiêu chuẩn định thời $\rightarrow$ Gantt Chart $\rightarrow$ FCFS / SJF / SRTF / RR / Priority $\rightarrow$ Lời giải từng bước điểm 10</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 4 (Trọng Tâm Giữa Kỳ UIT)</h3>
+    <ul>
+        <li>Nắm vững 5 tiêu chuẩn đánh giá thuật toán định thời ($CPU_{util}$, $Throughput$, $TAT$, $WT$, $RT$).</li>
+        <li>Phân biệt chính xác Thuật toán Độc quyền (Non-preemptive) và Khống chế / Trưng dụng (Preemptive).</li>
+        <li>Thạo kỹ năng vẽ <strong>Sơ đồ Gantt (Gantt Chart)</strong> chuẩn xác theo từng mốc sự kiện thời gian.</li>
+        <li>Tính toán chính xác 100% thời gian $CT, TAT, WT, RT$ và thời gian trung bình cho các thuật toán FCFS, SJF, SRTF, Priority, Round Robin.</li>
+        <li>Tránh tuyệt đối các bẫy đề thi UIT liên quan đến thứ tự vào hàng đợi Ready trong Round Robin và ngắt ưu tiên.</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. CÁC TIÊU CHUẨN ĐỊNH THỜI VÀ CÔNG THỨC BẮT BUỘC</h2>
+
+    <p>Định thời CPU là việc chọn lựa tiến trình trong hàng đợi Ready để cấp phát CPU khi CPU rảnh.</p>
+
+    <h3>A. Phân loại Định thời: Preemptive vs Non-Preemptive</h3>
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Non-preemptive vs Preemptive</div>
+        <ul>
+            <li><strong>Độc quyền (Non-preemptive):</strong> Khi tiến trình đã nhận CPU, nó sẽ giữ CPU cho đến khi tự nguyện giải phóng (kết thúc hoặc chuyển sang Waiting chờ I/O). Các thuật toán: FCFS, SJF Non-preemptive, Priority Non-preemptive.</li>
+            <li><strong>Trưng dụng / Khống chế (Preemptive):</strong> HDH có quyền <em>tước CPU của tiến trình đang chạy</em> để cấp cho tiến trình khác có độ ưu tiên cao hơn hoặc hết thời lượng (Time quantum). Các thuật toán: SRTF, Round Robin, Preemptive Priority.</li>
+        </ul>
+    </div>
+
+    <h3>B. 5 Tiêu chuẩn Đánh giá & Bộ Công Thức Chuẩn Bài Thi UIT</h3>
+    <p>Giả sử với tiến trình $P_i$ có các mốc thời gian:</p>
+    <ul>
+        <li>$AT$ (Arrival Time): Thời điểm tiến trình đi vào Ready queue.</li>
+        <li>$BT$ (CPU Burst Time): Thời gian tiến trình cần dùng CPU.</li>
+        <li>$CT$ (Completion Time): Thời điểm tiến trình hoàn tất thực thi hoàn toàn.</li>
+    </ul>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📐 BỘ CÔNG THỨC TÍNH THỜI GIAN (BẮT BUỘC THUỘC LÒNG)</span>
+        </div>
+        <ol>
+            <li><strong>Thời gian lưu lại hệ thống / Hoàn thành (Turnaround Time - $TAT$):</strong>
+                $$TAT = CT - AT$$
+            </li>
+            <li><strong>Thời gian chờ (Waiting Time - $WT$):</strong>
+                $$WT = TAT - BT$$
+            </li>
+            <li><strong>Thời gian đáp ứng (Response Time - $RT$):</strong>
+                $$RT = \text{Thời điểm lần đầu tiên được cấp CPU} - AT$$
+            </li>
+            <li><strong>Thời gian trung bình ($\text{Average}$):</strong>
+                $$WT_{avg} = \frac{\sum WT_i}{N}, \quad TAT_{avg} = \frac{\sum TAT_i}{N}, \quad RT_{avg} = \frac{\sum RT_i}{N}$$
+            </li>
+        </ol>
+    </div>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. NGUYÊN LÝ CÁC THUẬT TOÁN ĐỊNH THỜI THƯỜNG GẶP</h2>
+
+    <h3>1. FCFS (First-Come, First-Served)</h3>
+    <p>Tiến trình nào đến trước (AT nhỏ hơn) được phục vụ trước. Độc quyền. Nhược điểm: Hiệu ứng đoàn tàu (Convoy Effect) nếu tiến trình đến đầu tiên có $BT$ rất lớn làm các tiến trình sau phải chờ lâu.</p>
+
+    <h3>2. SJF (Shortest Job First - Non-preemptive)</h3>
+    <p>Chọn tiến trình có CPU Burst Time ($BT$) ngắn nhất trong số các tiến trình đã đến Ready Queue. Nếu hai tiến trình có $BT$ bằng nhau thì áp dụng FCFS.</p>
+
+    <h3>3. SRTF (Shortest Remaining Time First - Preemptive SJF)</h3>
+    <p>Phiên bản khống chế của SJF. Mỗi khi có tiến trình mới xuất hiện trong Ready queue, so sánh $BT$ còn lại của tiến trình đang chạy với $BT$ của tiến trình mới. Nếu tiến trình mới ngắn hơn, lập tức tước CPU của tiến trình đang chạy.</p>
+
+    <h3>4. Round Robin (RR - Thời gian luân phiên)</h3>
+    <p>Mỗi tiến trình được cấp một khoảng thời gian CPU nhỏ gọi là <strong>Time Quantum ($q$)</strong>. Thực thi theo nguyên tắc FIFO trong Ready queue. Nếu hết quantum $q$ mà tiến trình chưa xong, nó bị đưa về <em>cuối Ready queue</em>.</p>
+
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY THỨ TỰ HÀNG ĐỢI READY TRONG ROUND ROBIN (ĐỀ THI UIT)</div>
+        <p>Tại mốc thời gian $t$, nếu tiến trình $P_A$ <em>vừa hết time quantum $q$</em> VÀ đồng thời có tiến trình mới $P_B$ <em>vừa tới hệ thống ($AT = t$)</em>:</p>
+        <p><strong>QUY TẮC UIT CHUẨN:</strong> Tiến trình mới $P_B$ sẽ được đưa vào Ready Queue <strong>TRƯỚC</strong>, sau đó mới đưa tiến trình $P_A$ (vừa hết quantum) vào <strong>SAU</strong> $P_B$!</p>
+    </div>
+
+    <h3>5. Priority Scheduling (Định thời theo độ ưu tiên)</h3>
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ QUY ƯỚC ĐỘ ƯU TIÊN TRONG ĐỀ THI UIT</div>
+        <p>Đề thi UIT luôn quy ước: <strong>Số ưu tiên NHỎ HƠN đại diện cho độ ưu tiên CAO HƠN</strong> (Ví dụ: Priority 1 cao ưu tiên hơn Priority 2).</p>
+    </div>
+
+    <h3>6. HRRN (Highest Response Ratio Next - Tỷ lệ đáp ứng cao nhất)</h3>
+    <p>Thuật toán độc quyền (Non-preemptive). Mỗi khi CPU rảnh, tính Tỷ lệ đáp ứng (Response Ratio - $R$) của tất cả các tiến trình đã đến Ready queue. Tiến trình có $R$ lớn nhất sẽ được chọn:</p>
+    $$R = \frac{WT + BT}{BT} = 1 + \frac{WT}{BT}$$
+    <p><em>Ưu điểm:</em> Giúp các tiến trình có $BT$ dài không bị đói tài nguyên (Starvation) vì khi $WT$ tăng lên, tỷ lệ $R$ sẽ tự động tăng theo thời gian.</p>
+
+    <h3>7. Multilevel Queue (MQ - Hàng đợi nhiều cấp)</h3>
+    <p>Hàng đợi Ready được chia thành nhiều hàng đợi riêng biệt (ví dụ: Hàng đợi Hệ thống, Hàng đợi Tương tác, Hàng đợi Batch). Mỗi hàng đợi có thuật toán định thời riêng (như RR cho hàng đợi tương tác, FCFS cho batch). Cần có lịch trình giữa các hàng đợi (thường là độ ưu tiên cố định hoặc chia tỷ lệ phần trăm thời gian CPU).</p>
+
+    <h3>8. Multilevel Feedback Queue (MLFQ - Hàng đợi phản hồi nhiều cấp)</h3>
+    <p>Cho phép tiến trình <strong>di chuyển giữa các hàng đợi</strong> tùy thuộc vào hành vi dùng CPU. Nếu tiến trình dùng hết time quantum mà chưa xong, nó bị hạ xuống hàng đợi ưu tiên thấp hơn. Tiến trình I/O-bound hoặc chờ lâu được nâng lên hàng đợi ưu tiên cao hơn. Đây là thuật toán linh hoạt nhất và được sử dụng trong nhiều HDH thực tế.</p>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. BÀI TẬP WORKED EXAMPLE THI GIỮA KỲ CHUẨN DETAILED 100%</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE: ĐỊNH THỜI ROUND ROBIN (q = 5) VÀ SRTF</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho 5 tiến trình với bảng dữ liệu sau:</strong>
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>Arrival Time ($AT$)</th><th>CPU Burst Time ($BT$)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P1</td><td>0</td><td>13</td></tr>
+                    <tr><td>P2</td><td>4</td><td>9</td></tr>
+                    <tr><td>P3</td><td>6</td><td>4</td></tr>
+                    <tr><td>P4</td><td>7</td><td>20</td></tr>
+                    <tr><td>P5</td><td>12</td><td>10</td></tr>
+                </tbody>
+            </table>
+            <strong>Yêu cầu:</strong> Vẽ sơ đồ Gantt và tính $WT_{avg}$, $TAT_{avg}$, $RT_{avg}$ cho các thuật toán:
+            <br>a) Round Robin với $q = 5$.
+            <br>b) SRTF (Shortest Remaining Time First).
+        </div>
+
+        <div class="solution-steps">
+            <div class="solution-step-title">a) Giải Thuật Round Robin (q = 5):</div>
+            <p><strong>Diễn biến Ready Queue từng mốc thời gian:</strong></p>
+            <ul>
+                <li>$t=0$: P1 đến. Chạy P1 từ $0 \rightarrow 5$. ($P1$ còn 8). Trong lúc này: $t=4$ P2 đến.</li>
+                <li>$t=5$: Ready Queue: [P2]. Đưa P1 (vừa xong quantum) vào sau $\rightarrow$ Ready Queue: [P2, P1].</li>
+                <li>$t=5 \rightarrow 10$: Chạy P2 (hết quantum 5, còn 4). Trong lúc này: $t=6$ P3 đến, $t=7$ P4 đến. Ready Queue trước khi xếp P2 lại: [P1, P3, P4] $\rightarrow$ thêm P2 vào cuối $\rightarrow$ Ready Queue: [P1, P3, P4, P2].</li>
+                <li>$t=10 \rightarrow 15$: Chạy P1 (5 unit, còn 3). $t=12$ P5 đến. Ready Queue: [P3, P4, P2, P5, P1].</li>
+                <li>$t=15 \rightarrow 19$: Chạy P3 (cần 4 unit $\le 5$ $\rightarrow$ P3 HOÀN THÀNH tại $t=19$, $CT_3 = 19$). Ready Queue: [P4, P2, P5, P1].</li>
+                <li>$t=19 \rightarrow 24$: Chạy P4 (5 unit, còn 15). Ready Queue: [P2, P5, P1, P4].</li>
+                <li>$t=24 \rightarrow 28$: Chạy P2 (cần 4 unit $\rightarrow$ P2 HOÀN THÀNH tại $t=28$, $CT_2 = 28$). Ready Queue: [P5, P1, P4].</li>
+                <li>$t=28 \rightarrow 33$: Chạy P5 (5 unit, còn 5). Ready Queue: [P1, P4, P5].</li>
+                <li>$t=33 \rightarrow 36$: Chạy P1 (cần 3 unit $\rightarrow$ P1 HOÀN THÀNH tại $t=36$, $CT_1 = 36$). Ready Queue: [P4, P5].</li>
+                <li>$t=36 \rightarrow 41$: Chạy P4 (5 unit, còn 10). Ready Queue: [P5, P4].</li>
+                <li>$t=41 \rightarrow 46$: Chạy P5 (cần 5 unit $\rightarrow$ P5 HOÀN THÀNH tại $t=46$, $CT_5 = 46$). Ready Queue: [P4].</li>
+                <li>$t=46 \rightarrow 56$: Chạy P4 (còn 10 unit $\rightarrow$ P4 HOÀN THÀNH tại $t=56$, $CT_4 = 56$).</li>
+            </ul>
+
+            <div class="gantt-container">
+                <strong>SƠ ĐỒ GANTT (Round Robin q = 5):</strong>
+                <div class="gantt-chart">
+                    <div class="gantt-block p-bg-1" style="width: 8.9%;">P1</div>
+                    <div class="gantt-block p-bg-2" style="width: 8.9%;">P2</div>
+                    <div class="gantt-block p-bg-1" style="width: 8.9%;">P1</div>
+                    <div class="gantt-block p-bg-3" style="width: 7.1%;">P3</div>
+                    <div class="gantt-block p-bg-4" style="width: 8.9%;">P4</div>
+                    <div class="gantt-block p-bg-2" style="width: 7.1%;">P2</div>
+                    <div class="gantt-block p-bg-5" style="width: 8.9%;">P5</div>
+                    <div class="gantt-block p-bg-1" style="width: 5.4%;">P1</div>
+                    <div class="gantt-block p-bg-4" style="width: 8.9%;">P4</div>
+                    <div class="gantt-block p-bg-5" style="width: 8.9%;">P5</div>
+                    <div class="gantt-block p-bg-4" style="width: 17.8%;">P4</div>
+                </div>
+                <div class="gantt-timeline">
+                    <span>0</span><span>5</span><span>10</span><span>15</span><span>19</span><span>24</span><span>28</span><span>33</span><span>36</span><span>41</span><span>46</span><span>56</span>
+                </div>
+            </div>
+
+            <p><strong>Bảng tính chi tiết các chỉ số:</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>$AT$</th><th>$BT$</th><th>$CT$</th><th>$TAT = CT - AT$</th><th>$WT = TAT - BT$</th><th>$RT$ (Lần đầu exec - AT)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P1</td><td>0</td><td>13</td><td>36</td><td>36</td><td>23</td><td>0 - 0 = 0</td></tr>
+                    <tr><td>P2</td><td>4</td><td>9</td><td>28</td><td>24</td><td>15</td><td>5 - 4 = 1</td></tr>
+                    <tr><td>P3</td><td>6</td><td>4</td><td>19</td><td>13</td><td>9</td><td>15 - 6 = 9</td></tr>
+                    <tr><td>P4</td><td>7</td><td>20</td><td>56</td><td>49</td><td>29</td><td>19 - 7 = 12</td></tr>
+                    <tr><td>P5</td><td>12</td><td>10</td><td>46</td><td>34</td><td>24</td><td>28 - 12 = 16</td></tr>
+                    <tr><td><strong>TRUNG BÌNH</strong></td><td>-</td><td>-</td><td>-</td><td><strong>31.2</strong></td><td><strong>20.0</strong></td><td><strong>7.6</strong></td></tr>
+                </tbody>
+            </table>
+
+            <div class="solution-step-title" style="margin-top: 20px;">b) Giải Thuật SRTF (Shortest Remaining Time First):</div>
+            <p><strong>Diễn biến ngắt và so sánh thời gian còn lại (Remaining BT):</strong></p>
+            <ul>
+                <li>$t=0$: P1 đến ($BT=13$). Chạy P1 từ $0 \rightarrow 4$. (Tại $t=4$, $P1$ còn 9).</li>
+                <li>$t=4$: P2 đến ($BT=9$). So sánh $P1$ (còn 9) và $P2$ (mới 9) $\rightarrow$ Hòa nhau, giữ P1 chạy tiếp $4 \rightarrow 6$. (Tại $t=6$, $P1$ còn 7).</li>
+                <li>$t=6$: P3 đến ($BT=4$). So sánh $P3$ ($BT=4$) với $P1$ (còn 7) $\rightarrow P3$ ngắn hơn! $P3$ <strong>tước CPU của P1</strong>! $P3$ chạy từ $6 \rightarrow 10$ ($P3$ HOÀN THÀNH tại $t=10$, $CT_3 = 10$). Trong lúc này: $t=7$ P4 đến ($BT=20$).</li>
+                <li>$t=10$: P3 xong. Các tiến trình sẵn sàng: P1 (còn 7), P2 (còn 9), P4 (còn 20). P1 ngắn nhất $\rightarrow$ Chạy P1 từ $10 \rightarrow 12$. (Tại $t=12$, $P1$ còn 5).</li>
+                <li>$t=12$: P5 đến ($BT=10$). So sánh P1 (còn 5) với P5 (10), P2 (9), P4 (20) $\rightarrow$ P1 vẫn ngắn nhất! P1 chạy tiếp từ $12 \rightarrow 17$ ($P1$ HOÀN THÀNH tại $t=17$, $CT_1 = 17$).</li>
+                <li>$t=17$: So sánh các tiến trình còn lại: P2 (còn 9), P5 (còn 10), P4 (còn 20). P2 ngắn nhất $\rightarrow$ Chạy P2 từ $17 \rightarrow 26$ ($P2$ HOÀN THÀNH tại $t=26$, $CT_2 = 26$).</li>
+                <li>$t=26$: So sánh P5 (còn 10) và P4 (còn 20). P5 ngắn hơn $\rightarrow$ Chạy P5 từ $26 \rightarrow 36$ ($P5$ HOÀN THÀNH tại $t=36$, $CT_5 = 36$).</li>
+                <li>$t=36$: Chạy P4 (20 unit) từ $36 \rightarrow 56$ ($P4$ HOÀN THÀNH tại $t=56$, $CT_4 = 56$).</li>
+            </ul>
+
+            <div class="gantt-container">
+                <strong>SƠ ĐỒ GANTT (SRTF - Shortest Remaining Time First):</strong>
+                <div class="gantt-chart">
+                    <div class="gantt-block p-bg-1" style="width: 10.7%;">P1</div>
+                    <div class="gantt-block p-bg-3" style="width: 7.1%;">P3</div>
+                    <div class="gantt-block p-bg-1" style="width: 12.5%;">P1</div>
+                    <div class="gantt-block p-bg-2" style="width: 16.1%;">P2</div>
+                    <div class="gantt-block p-bg-5" style="width: 17.9%;">P5</div>
+                    <div class="gantt-block p-bg-4" style="width: 35.7%;">P4</div>
+                </div>
+                <div class="gantt-timeline">
+                    <span>0</span><span>6</span><span>10</span><span>17</span><span>26</span><span>36</span><span>56</span>
+                </div>
+            </div>
+
+            <p><strong>Bảng tính chi tiết các chỉ số SRTF:</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>$AT$</th><th>$BT$</th><th>$CT$</th><th>$TAT = CT - AT$</th><th>$WT = TAT - BT$</th><th>$RT$ (Lần đầu exec - AT)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P1</td><td>0</td><td>13</td><td>17</td><td>17</td><td>4</td><td>0 - 0 = 0</td></tr>
+                    <tr><td>P2</td><td>4</td><td>9</td><td>26</td><td>22</td><td>13</td><td>17 - 4 = 13</td></tr>
+                    <tr><td>P3</td><td>6</td><td>4</td><td>10</td><td>4</td><td>0</td><td>6 - 6 = 0</td></tr>
+                    <tr><td>P4</td><td>7</td><td>20</td><td>56</td><td>49</td><td>29</td><td>36 - 7 = 29</td></tr>
+                    <tr><td>P5</td><td>12</td><td>10</td><td>36</td><td>24</td><td>14</td><td>26 - 12 = 14</td></tr>
+                    <tr><td><strong>TRUNG BÌNH</strong></td><td>-</td><td>-</td><td>-</td><td><strong>23.2</strong></td><td><strong>12.0</strong></td><td><strong>11.2</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 4</div>
+    <ul>
+        <li>$TAT = CT - AT$, $WT = TAT - BT$, $RT = \text{Exec\_start} - AT$.</li>
+        <li>SJF tối ưu $WT_{avg}$, SRTF khống chế theo $BT$ còn lại.</li>
+        <li>Round Robin: Tiến trình mới đến được xếp trước tiến trình vừa xong quantum!</li>
+        <li>Độ ưu tiên: Luôn đọc kỹ quy ước của đề bài (trong đa số bài tập UIT thường quy ước số nhỏ hơn = ưu tiên cao hơn).</li>
+    </ul>
+</div>
+
+</body>
+</html>

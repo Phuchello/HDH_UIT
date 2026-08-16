@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 6: Deadlock (Bế Tắc)</title>
+    <link rel="stylesheet" href="../styles/print.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="chapter-header">
+    <div class="chapter-num">Chương 06 — Trọng Tâm Thi Cuối Kỳ</div>
+    <h1>DEADLOCK (BẾ TẮC)</h1>
+    <div class="chapter-subtitle">4 Điều kiện cần $\rightarrow$ Đồ thị RAG $\rightarrow$ Trạng thái an toàn $\rightarrow$ Thuật toán Banker từng bước</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 6 (Trọng Tâm Cuối Kỳ UIT)</h3>
+    <ul>
+        <li>Nắm vững định nghĩa Deadlock và thuộc lòng 4 điều kiện cần để xảy ra bế tắc.</li>
+        <li>Biết cách dựng và đọc Đồ thị Cấp phát Tài nguyên (Resource Allocation Graph - RAG).</li>
+        <li>Phân biệt chính xác giữa Trạng thái An toàn (Safe State), Unsafe State và Deadlock.</li>
+        <li>Tính toán chính xác 100% Thuật toán Banker (Dựng ma trận Need, Kiểm tra Safe Sequence, Xử lý Yêu cầu tài nguyên $Request_i$).</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. BẢN CHẤT DEADLOCK VÀ 4 ĐIỀU KIỆN CẦN</h2>
+
+    <h3>A. Định nghĩa Deadlock</h3>
+    <p><strong>Deadlock (Bế tắc)</strong> là tình trạng một tập hợp các tiến trình bị ngưng trệ vô thời hạn vì mỗi tiến trình đang giữ một tài nguyên và chờ đợi cấp phát một tài nguyên khác đang bị giữ bởi một tiến trình khác trong tập hợp đó.</p>
+
+    <h3>B. 4 Điều kiện Cần để xảy ra Deadlock (Coffman Conditions)</h3>
+    <p>Deadlock CHỈ CÓ THỂ XẢY RA khi đồng thời thỏa mãn cả 4 điều kiện sau:</p>
+    <ol>
+        <li><strong>Loại trừ tương hỗ (Mutual Exclusion):</strong> Ít nhất một tài nguyên được giữ ở chế độ không chia sẻ (chỉ một tiến trình dùng tại một thời điểm).</li>
+        <li><strong>Giữ và Chờ (Hold and Wait):</strong> Tiến trình đang giữ ít nhất một tài nguyên và đang chờ cấp phát thêm tài nguyên mới mà tài nguyên đó đang bị tiến trình khác giữ.</li>
+        <li><strong>Không tước đoạt (No Preemption):</strong> Tài nguyên không thể bị tước đoạt từ tiến trình; tài nguyên chỉ được giải phóng tự nguyện bởi tiến trình sau khi hoàn thành tác vụ.</li>
+        <li><strong>Chờ đợi vòng tròn (Circular Wait):</strong> Tồn tại một tập hợp tiến trình $\{P_0, P_1, ..., P_n\}$ sao cho $P_0$ chờ tài nguyên từ $P_1$, $P_1$ chờ $P_2$, ..., $P_n$ chờ $P_0$.</li>
+    </ol>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. ĐỒ THỊ CẤP PHÁT TÀI NGUYÊN (RAG) VÀ TRẠNG THÁI AN TOÀN</h2>
+
+    <h3>A. Đồ thị Cấp phát Tài nguyên (Resource Allocation Graph - RAG)</h3>
+    <ul>
+        <li><strong>Đỉnh (Nodes):</strong> Gồm tập hợp các Tiến trình $P = \{P_1, P_2, ...\}$ (vẽ bằng hình tròn) và tập hợp các Tài nguyên $R = \{R_1, R_2, ...\}$ (vẽ bằng hình chữ nhật, bên trong chứa các chấm nhỏ biểu diễn số thực thể / instances).</li>
+        <li><strong>Cung Yêu cầu (Request Edge):</strong> Cung hướng từ tiến trình sang tài nguyên $P_i \rightarrow R_j$ (tiến trình $P_i$ đang chờ tài nguyên $R_j$).</li>
+        <li><strong>Cung Cấp phát (Assignment Edge):</strong> Cung hướng từ tài nguyên sang tiến trình $R_j \rightarrow P_i$ (tài nguyên $R_j$ đã được cấp cho $P_i$).</li>
+    </ul>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Chu trình (Cycle) trong RAG vs Deadlock</div>
+        <ul>
+            <li>Nếu mỗi tài nguyên chỉ có <strong>1 thực thể (Single Instance)</strong>: Chu trình trong RAG là điều kiện <strong>CẦN VÀ ĐỦ</strong> để xảy ra Deadlock. Tồn tại Cycle $\Leftrightarrow$ Deadlock.</li>
+            <li>Nếu tài nguyên có <strong>nhiều thực thể (Multiple Instances)</strong>: Chu trình trong RAG chỉ là điều kiện <strong>CẦN</strong> chứ CHƯA ĐỦ. Tồn tại Cycle $\Rightarrow$ Có thể Deadlock hoặc Không Deadlock.</li>
+        </ul>
+    </div>
+
+    <h3>B. Trạng thái An toàn (Safe State)</h3>
+    <p>Một trạng thái được gọi là <strong>An toàn (Safe State)</strong> nếu HDH có thể tìm được ít nhất một <strong>Chuỗi An toàn (Safe Sequence)</strong> $\langle P_1, P_2, ..., P_n \rangle$ sao cho với mỗi $P_i$, tài nguyên $P_i$ yêu cầu có thể được đáp ứng bởi tài nguyên hiện có (Available) cộng với tài nguyên đang được giữ bởi tất cả các $P_j$ trước đó ($j < i$).</p>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. THUẬT TOÁN BANKER (BANKER'S ALGORITHM) CHUẨN BÀI THI UIT</h2>
+
+    <p>Thuật toán Banker được dùng để TRÁNH DEADLOCK (Deadlock Avoidance) trong hệ thống có nhiều thực thể tài nguyên.</p>
+
+    <h3>Các Cấu Trúc Dữ Liệu Cần Khai Báo</h3>
+    <ul>
+        <li><code>Available[m]</code>: Vector độ dài $m$, <code>Available[j] = k</code> nghĩa là tài nguyên $R_j$ còn rảnh $k$ thực thể.</li>
+        <li><code>Max[n][m]</code>: Ma trận $n \times m$, <code>Max[i][j] = k</code> nghĩa là $P_i$ yêu cầu tối đa $k$ thực thể $R_j$.</li>
+        <li><code>Allocation[n][m]</code>: Ma trận $n \times m$, <code>Allocation[i][j] = k</code> nghĩa là $P_i$ đang giữ $k$ thực thể $R_j$.</li>
+        <li><code>Need[n][m]</code>: Ma trận $n \times m$, <code>Need[i][j] = Max[i][j] - Allocation[i][j]</code> nghĩa là $P_i$ cần thêm $k$ thực thể $R_j$.</li>
+    </ul>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE: THUẬT TOÁN BANKER VÀ XỬ LÝ REQUEST</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Xét hệ thống tại $t_0$ có 5 tiến trình ($P_0 \rightarrow P_4$) và 4 tài nguyên ($A, B, C, D$):</strong>
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>Allocation (A B C D)</th><th>Max (A B C D)</th><th>Available (A B C D)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P0</td><td>0 0 1 2</td><td>0 0 1 2</td><td><strong>1 5 2 0</strong></td></tr>
+                    <tr><td>P1</td><td>1 0 0 0</td><td>1 7 5 0</td><td>-</td></tr>
+                    <tr><td>P2</td><td>1 3 5 4</td><td>2 3 5 6</td><td>-</td></tr>
+                    <tr><td>P3</td><td>0 6 3 2</td><td>0 6 5 2</td><td>-</td></tr>
+                    <tr><td>P4</td><td>0 0 1 4</td><td>0 6 5 6</td><td>-</td></tr>
+                </tbody>
+            </table>
+            <strong>Yêu cầu:</strong>
+            <br>a) Dựng ma trận $Need$. Hệ thống có ở trạng thái an toàn không? Tìm chuỗi an toàn.
+            <br>b) Nếu $P_1$ yêu cầu thêm $Request_1 = (0, 4, 2, 0)$, hệ thống có thể đáp ứng ngay được không?
+        </div>
+
+        <div class="solution-steps">
+            <div class="solution-step-title">a) Dựng ma trận Need và Thuật toán An toàn:</div>
+            <p><strong>Ma trận $Need = Max - Allocation$:</strong></p>
+            <ul>
+                <li>$Need_0 = (0,0,1,2) - (0,0,1,2) = (0, 0, 0, 0)$</li>
+                <li>$Need_1 = (1,7,5,0) - (1,0,0,0) = (0, 7, 5, 0)$</li>
+                <li>$Need_2 = (2,3,5,6) - (1,3,5,4) = (1, 0, 0, 2)$</li>
+                <li>$Need_3 = (0,6,5,2) - (0,6,3,2) = (0, 0, 2, 0)$</li>
+                <li>$Need_4 = (0,6,5,6) - (0,0,1,4) = (0, 6, 4, 2)$</li>
+            </ul>
+
+            <p><strong>Chạy Thuật toán An toàn: Khởi tạo $Work = Available = (1, 5, 2, 0)$</strong></p>
+            <ol>
+                <li><strong>Duyệt $P_0$:</strong> $Need_0 (0,0,0,0) \le Work (1,5,2,0) \Rightarrow P_0$ chạy xong!
+                    <br>$Work = Work + Allocation_0 = (1,5,2,0) + (0,0,1,2) = (1, 5, 3, 2)$. $Finish[0] = true$.
+                </li>
+                <li><strong>Duyệt $P_2$:</strong> $Need_2 (1,0,0,2) \le Work (1,5,3,2) \Rightarrow P_2$ chạy xong!
+                    <br>$Work = Work + Allocation_2 = (1,5,3,2) + (1,3,5,4) = (2, 8, 8, 6)$. $Finish[2] = true$.
+                </li>
+                <li><strong>Duyệt $P_3$:</strong> $Need_3 (0,0,2,0) \le Work (2,8,8,6) \Rightarrow P_3$ chạy xong!
+                    <br>$Work = Work + Allocation_3 = (2,8,8,6) + (0,6,3,2) = (2, 14, 11, 8)$. $Finish[3] = true$.
+                </li>
+                <li><strong>Duyệt $P_4$:</strong> $Need_4 (0,6,4,2) \le Work (2,14,11,8) \Rightarrow P_4$ chạy xong!
+                    <br>$Work = Work + Allocation_4 = (2,14,11,8) + (0,0,1,4) = (2, 14, 12, 12)$. $Finish[4] = true$.
+                </li>
+                <li><strong>Duyệt $P_1$:</strong> $Need_1 (0,7,5,0) \le Work (2,14,12,12) \Rightarrow P_1$ chạy xong!
+                    <br>$Work = Work + Allocation_1 = (2,14,12,12) + (1,0,0,0) = (3, 14, 12, 12)$. $Finish[1] = true$.
+                </li>
+            </ol>
+            <p><strong>KẾT LUẬN:</strong> Tất cả tiến trình đều hoàn tất. Hệ thống ở <strong>Trạng thái AN TOÀN</strong>. Chuỗi an toàn tìm được là: <code>&lt;P0, P2, P3, P4, P1&gt;</code>.</p>
+
+            <div class="solution-step-title">b) Xử lý Yêu cầu $Request_1 = (0, 4, 2, 0)$ của $P_1$:</div>
+            <ol>
+                <li>Kiểm tra Bước 1: $Request_1 (0,4,2,0) \le Need_1 (0,7,5,0)$ $\rightarrow$ <strong>THỎA MÃN</strong>.</li>
+                <li>Kiểm tra Bước 2: $Request_1 (0,4,2,0) \le Available (1,5,2,0)$ $\rightarrow$ <strong>THỎA MÃN</strong>.</li>
+                <li>Giả lập cấp phát và cập nhật trạng thái mới:
+                    <br>- $Available_{new} = Available - Request_1 = (1,5,2,0) - (0,4,2,0) = (1, 1, 0, 0)$
+                    <br>- $Allocation_{1,new} = Allocation_1 + Request_1 = (1,0,0,0) + (0,4,2,0) = (1, 4, 2, 0)$
+                    <br>- $Need_{1,new} = Need_1 - Request_1 = (0,7,5,0) - (0,4,2,0) = (0, 3, 3, 0)$
+                </li>
+                <li><strong>Chạy lại Thuật toán An toàn trên trạng thái mới ($Work = 1, 1, 0, 0$):</strong>
+                    <ul>
+                        <li><strong>Duyệt $P_0$:</strong> $Need_0 (0,0,0,0) \le Work (1,1,0,0) \Rightarrow P_0$ xong!
+                            <br>$Work = Work + Allocation_0 = (1,1,0,0) + (0,0,1,2) = (1, 1, 1, 2)$. $Finish[0] = true$.
+                        </li>
+                        <li><strong>Duyệt $P_2$:</strong> $Need_2 (1,0,0,2) \le Work (1,1,1,2) \Rightarrow P_2$ xong!
+                            <br>$Work = Work + Allocation_2 = (1,1,1,2) + (1,3,5,4) = (2, 4, 6, 6)$. $Finish[2] = true$.
+                        </li>
+                        <li><strong>Duyệt $P_3$:</strong> $Need_3 (0,0,2,0) \le Work (2,4,6,6) \Rightarrow P_3$ xong!
+                            <br>$Work = Work + Allocation_3 = (2,4,6,6) + (0,6,3,2) = (2, 10, 9, 8)$. $Finish[3] = true$.
+                        </li>
+                        <li><strong>Duyệt $P_4$:</strong> $Need_4 (0,6,4,2) \le Work (2,10,9,8) \Rightarrow P_4$ xong!
+                            <br>$Work = Work + Allocation_4 = (2,10,9,8) + (0,0,1,4) = (2, 10, 10, 12)$. $Finish[4] = true$.
+                        </li>
+                        <li><strong>Duyệt $P_1$:</strong> $Need_1 (0,3,3,0) \le Work (2,10,10,12) \Rightarrow P_1$ xong!
+                            <br>$Work = Work + Allocation_1 = (2,10,10,12) + (1,4,2,0) = (3, 14, 12, 12)$. $Finish[1] = true$.
+                        </li>
+                    </ul>
+                    <p><strong>KẾT LUẬN:</strong> Tìm được chuỗi an toàn <code>&lt;P0, P2, P3, P4, P1&gt;</code>. Hệ thống CÓ THỂ đáp ứng ngay yêu cầu của $P_1$.</p>
+                </li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. PHÒNG NGỪA (PREVENTION), PHÁT HIỆN (DETECTION) VÀ KHÔI PHỤC DEADLOCK</h2>
+
+    <h3>A. Phòng Ngừa Deadlock (Deadlock Prevention)</h3>
+    <p>Phòng ngừa Deadlock bằng cách triệt tiêu <strong>ít nhất 1 trong 4 điều kiện cần Coffman</strong>:</p>
+    <ol>
+        <li><strong>Triệt tiêu Mutual Exclusion:</strong> Biến các tài nguyên thành chia sẻ được (như Spooling đĩa). Tuy nhiên, nhiều tài nguyên (như máy in, ổ đĩa đang ghi) bản chất không thể chia sẻ.</li>
+        <li><strong>Triệt tiêu Hold and Wait:</strong> Đảm bảo tiến trình chỉ xin tài nguyên khi chưa giữ bất kỳ tài nguyên nào; hoặc phải xin tất cả tài nguyên ngay từ đầu. <em>Nhược điểm:</em> Lãng phí tài nguyên, dễ gây đói tài nguyên (Starvation).</li>
+        <li><strong>Triệt tiêu No Preemption:</strong> Nếu tiến trình đang giữ tài nguyên xin cấp thêm tài nguyên $R$ mà bị từ chối, toàn bộ tài nguyên tiến trình đang giữ sẽ <em>bị tước đoạt tự động (Preempted)</em>. Tiến trình bị tạm dừng và chỉ chạy lại khi có đủ cả tài nguyên cũ và mới.</li>
+        <li><strong>Triệt tiêu Circular Wait (Chiến lược hiệu quả nhất):</strong> Đánh số thứ tự toàn bộ tài nguyên $F: R \rightarrow \mathbb{N}$. Bắt buộc tiến trình phải xin tài nguyên theo thứ tự tăng dần của mã số. Nếu đang giữ $R_i$, chỉ được xin $R_j$ với $F(R_j) > F(R_i)$.</li>
+    </ol>
+
+    <h3>B. Phát Hiện Deadlock (Deadlock Detection)</h3>
+    <p>Khi hệ thống không dùng Banker hay Prevention, HDH cho phép Deadlock xảy ra nhưng chạy thuật toán kiểm tra định kỳ:</p>
+    <ul>
+        <li><strong>Tài nguyên 1 thực thể (Single Instance):</strong> Dùng Đồ thị chờ Wait-For Graph (bỏ các node tài nguyên khỏi RAG). Phát hiện chu trình (Cycle) $\Rightarrow$ Có Deadlock!</li>
+        <li><strong>Tài nguyên nhiều thực thể (Multiple Instances):</strong> Dùng Thuật toán Phát hiện (tương tự Banker nhưng dùng vector <code>Request[n][m]</code> trực tiếp thay cho <code>Need</code>). Tiến trình nào không thể hoàn thành trong lượt duyệt sẽ thuộc tập bế tắc!</li>
+    </ul>
+
+    <h3>C. Khôi Phục Sau Deadlock (Deadlock Recovery)</h3>
+    <p>Khi đã phát hiện Deadlock, HDH thực hiện 1 trong 2 phương án khôi phục:</p>
+    <ol>
+        <li><strong>Hủy Tiến Trình (Process Termination):</strong>
+            <ul>
+                <li>Hủy tất cả các tiến trình bị Deadlock (chi phí đắt red).</li>
+                <li>Hủy lần lượt từng tiến trình theo thứ tự ưu tiên cho đến khi hết chu trình bế tắc.</li>
+            </ul>
+        </li>
+        <li><strong>Tước Đoạt Tài Nguyên (Resource Preemption):</strong>
+            <ul>
+                <li><strong>Chọn nạn nhân (Selecting a victim):</strong> Chọn tiến trình có chi phí tước đoạt nhỏ nhất.</li>
+                <li><strong>Khôi phục (Rollback):</strong> Trả tiến trình nạn nhân về trạng thái an toàn trước đó (Safe state / Checkpoint) và khởi động lại.</li>
+                <li><strong>Tránh đói tài nguyên (Starvation):</strong> Giới hạn số lần 1 tiến trình bị chọn làm nạn nhân.</li>
+            </ul>
+        </li>
+    </ol>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 6</div>
+    <ul>
+        <li>4 Điều kiện Deadlock: Mutual Exclusion, Hold & Wait, No Preemption, Circular Wait.</li>
+        <li>Triệt tiêu Circular Wait: Đánh số thứ tự tài nguyên, xin tăng dần.</li>
+        <li>Banker: $Need = Max - Allocation$. Cấp phát $Request$ khi $Request \le Need$ VÀ $Request \le Available$.</li>
+        <li>Khôi phục Deadlock: Hủy tiến trình hoặc Tước đoạt tài nguyên + Rollback.</li>
+    </ul>
+</div>
+
+</body>
+</html>
