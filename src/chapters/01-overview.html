@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 1: Tổng Quan Về Hệ Điều Hành</title>
+    <link rel="stylesheet" href="../styles/print.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="chapter-header">
+    <div class="chapter-num">Chương 01 — Kiến Thức Nền Tảng</div>
+    <h1>TỔNG QUAN VỀ HỆ ĐIỀU HÀNH</h1>
+    <div class="chapter-subtitle">Trực giác $\rightarrow$ Bản chất $\rightarrow$ Cấu trúc Phần cứng $\rightarrow$ Ngắt & Chế độ kép (Dual Mode)</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 1 (Chuẩn UIT IT007)</h3>
+    <ul>
+        <li>Hiểu rõ định nghĩa, vai trò và 2 góc nhìn chính của Hệ điều hành (User View vs System View).</li>
+        <li>Nắm vững cơ chế Ngắt (Interrupt), Phân biệt Hardware Interrupt vs Trap/Software Interrupt.</li>
+        <li>Phân biệt chính xác các hệ điều hành: Đơn chương, Đa chương (Multiprogramming), Chia sẻ thời gian (Time-sharing), Thời gian thực (Real-time).</li>
+        <li>Bản chất của chế độ hoạt động kép Dual-mode (User Mode vs Kernel Mode) và bảo vệ tài nguyên phần cứng.</li>
+        <li>Giải thành thạo các câu hỏi trắc nghiệm và tự luận lý thuyết thuộc đề thi UIT.</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. BẢN CHẤT VÀ VAI TRÒ CỦA HỆ ĐIỀU HÀNH</h2>
+
+    <h3>A. Vì sao cần Hệ điều hành?</h3>
+    <p>Hãy hình dung bạn có một phần cứng máy tính gồm CPU, các thanh RAM, ổ cứng SSD và card màn hình. Nếu không có Hệ điều hành, mỗi lập trình viên khi viết phần mềm (ví dụ: ứng dụng gõ văn bản) sẽ phải tự viết mã điều khiển vi mạch để đọc/ghi từng sector trên ổ cứng, tự quản lý từng byte RAM và tự phát tín hiệu điện điều khiển màn hình. Điều này vừa nguy hiểm, vừa dễ gây xung đột và lãng phí công sức tái tạo lại bánh xe đạp.</p>
+
+    <h3>B. Trực giác</h3>
+    <p>Hệ điều hành giống như <strong>Ban Quản Lý của một tòa nhà văn phòng cao tầng</strong>:</p>
+    <ul>
+        <li>Các công ty thuê văn phòng chính là các <strong>Ứng dụng (Applications)</strong>.</li>
+        <li>Điện, nước, thang máy, bãi đỗ xe là các <strong>Tài nguyên phần cứng (CPU, RAM, Disk, I/O)</strong>.</li>
+        <li>Ban quản lý không trực tiếp tạo ra sản phẩm cho công ty, nhưng họ đứng ra phân chia phòng làm việc (RAM), điều phối thời gian dùng thang máy (CPU) và đảm bảo công ty này không tự ý xâm nhập vào văn phòng của công ty khác (Memory Protection).</li>
+    </ul>
+
+    <h3>C. Định nghĩa chuẩn (UIT / OS Concepts)</h3>
+    <div class="alert-box alert-note">
+        <div class="alert-title">📌 ĐỊNH NGHĨA HỆ ĐIỀU HÀNH</div>
+        <strong>Hệ điều hành (Operating System - OS)</strong> là một chương trình phần mềm chạy trên máy tính, đóng vai trò trung gian giữa người dùng/ứng dụng và phần cứng máy tính.
+    </div>
+
+    <p>Hệ điều hành được quan sát dưới 2 góc nhìn chính:</p>
+    <ol>
+        <li><strong>Góc nhìn người dùng (User View):</strong> Tối ưu hóa tính dễ sử dụng (Ease of use), sự thuận tiện (Convenience) và hiệu năng cá nhân.</li>
+        <li><strong>Góc nhìn hệ thống (System View):</strong>
+            <ul>
+                <li><strong>Bộ quản lý tài nguyên (Resource Allocator):</strong> Quản lý và phân phối CPU, bộ nhớ, không gian đĩa, thiết bị I/O cho các tiến trình một cách công bằng và hiệu quả.</li>
+                <li><strong>Chương trình kiểm soát (Control Program):</strong> Kiểm soát việc thực thi các chương trình ứng dụng để ngăn ngừa lỗi và việc sử dụng máy tính bất hợp pháp.</li>
+            </ul>
+        </li>
+    </ol>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. PHÂN LOẠI HỆ ĐIỀU HÀNH VÀ CÁC THÁI CỰC XỬ LÝ</h2>
+
+    <p>Trong lịch sử phát triển và các dạng đề thi UIT, HDH được phân loại dựa trên góc độ hình thức xử lý:</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: ĐA CHƯƠNG vs CHIA SẺ THỜI GIAN vs ĐA XỬ LÝ</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tiêu chí</th>
+                    <th>Đa chương (Multiprogramming)</th>
+                    <th>Chia sẻ thời gian (Time-Sharing)</th>
+                    <th>Đa xử lý (Multiprocessing)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Mục tiêu chính</strong></td>
+                    <td>Tối đa hóa hiệu suất CPU (CPU Utilization). Tận dụng thời gian CPU rảnh khi I/O.</td>
+                    <td>Tối thiểu hóa thời gian đáp ứng (Response Time). Tạo cảm giác tương tác tức thì.</td>
+                    <td>Tối đa hóa năng lực tính toán thông qua nhiều CPU/Core vật lý.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cơ chế chuyển đổi</strong></td>
+                    <td>Chuyển sang tiến trình khác <em>chỉ khi tiến trình hiện tại phải chờ I/O</em>.</td>
+                    <td>Chuyển đổi tiến trình liên tục dựa trên <em>ngắt định kỳ thời gian (Time slice / Quantum)</em>.</td>
+                    <td>Thực thi song song (Parallelism) thực sự trên nhiều bộ xử lý độc lập.</td>
+                </tr>
+                <tr>
+                    <td><strong>Tương tác người dùng</strong></td>
+                    <td>Không tương tác trực tiếp (Batch processing).</td>
+                    <td>Tương tác trực tiếp (Interactive). người dùng nhận phản hồi dưới vài giây.</td>
+                    <td>Tùy thuộc vào HDH chạy trên hệ đa xử lý.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY ĐỀ THI UIT: Hệ thống Thời gian thực (Real-Time Systems)</div>
+        <p>Đề thi UIT rất hay hỏi về <strong>Hard Real-time</strong> vs <strong>Soft Real-time</strong>:</p>
+        <ul>
+            <li><strong>Hard Real-time:</strong> Bắt buộc mọi tác vụ phải hoàn thành <em>chính xác trong hạn định (Deadline)</em>. Nếu trễ deadline cho dù chỉ 1ms, toàn bộ hệ thống bị coi là thất bại thảm hại (ví dụ: Hệ thống phanh ABS, điều khiển tên lửa, thiết bị y tế y khoa). Không sử dụng bộ nhớ ảo (Virtual Memory) hay đĩa từ phụ.</li>
+            <li><strong>Soft Real-time:</strong> Ưu tiên các tác vụ quan trọng hoàn thành trước, chấp nhận sự trễ hạn định nhỏ mà không gây sụp đổ hệ thống (ví dụ: Xem video streaming, chơi game online).</li>
+        </ul>
+    </div>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. CẤU TRÚC HỆ THỐNG MÁY TÍNH & CƠ CHẾ NGẮT (INTERRUPT)</h2>
+
+    <h3>A. Vì sao cần Ngắt (Interrupt)?</h3>
+    <p>CPU có tốc độ tính toán cực nhanh (hàng tỷ phép tính/giây), trong khi các thiết bị I/O (bàn phím, ổ đĩa, card mạng) có tốc độ rất chậm. Nếu CPU phải liên tục vòng lặp kiểm tra xem bàn phím có được nhấn hay chưa (Polling), CPU sẽ bị lãng phí 99.99% năng lực. Ngắt ra đời để thiết bị chủ động thông báo cho CPU khi có dữ liệu.</p>
+
+    <h3>B. Trực giác</h3>
+    <p>Ngắt giống như việc bạn đang đọc sách (CPU đang chạy chương trình) thì <strong>chuông điện thoại reo (Interrupt)</strong>:</p>
+    <ol>
+        <li>Bạn ghi nhớ số trang sách đang đọc dở (Lưu Trạng thái CPU / Program Counter).</li>
+        <li>Bạn nhấc máy trả lời điện thoại (Chạy chương trình phục vụ ngắt - ISR).</li>
+        <li>Trả lời xong, bạn mở đúng trang sách cũ ra đọc tiếp (Khôi phục trạng thái và tiếp tục thực thi).</li>
+    </ol>
+
+    <h3>C. Hình dung Luồng xử lý Ngắt trong Máy tính</h3>
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🔄 QUY TRÌNH XỬ LÝ NGẮT (INTERRUPT PROCESS FLOW)</span>
+        </div>
+        <ol>
+            <li>Thiết bị I/O phát tín hiệu ngắt đến CPU qua dòng ngắt phần cứng (Interrupt Line).</li>
+            <li>CPU hoãn tác vụ hiện tại, lưu lại địa chỉ của lệnh tiếp theo ($PC$) và trạng thái thanh ghi vào Stack.</li>
+            <li>CPU dựa vào chỉ số ngắt tra cứu trong <strong>Bảng vectơ ngắt (Interrupt Vector Table)</strong> để lấy địa chỉ của <strong>Trình phục vụ ngắt (Interrupt Service Routine - ISR)</strong> tương ứng.</li>
+            <li>CPU thực thi đoạn mã ISR để xử lý sự kiện I/O.</li>
+            <li>Sau khi ISR hoàn thành, CPU nạp lại trạng thái cũ từ Stack và tiếp tục chạy chương trình bị ngắt.</li>
+        </ol>
+    </div>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Hardware Interrupt vs Trap / Exception</div>
+        <ul>
+            <li><strong>Hardware Interrupt (Ngắt phần cứng):</strong> Do thiết bị ngoại vi bất đồng bộ phát ra (ví dụ: gõ bàn phím, di chuột, đĩa hoàn tất đọc/ghi, ngắt đồng hồ Timer). Không dự đoán trước được thời điểm xảy ra.</li>
+            <li><strong>Trap / Exception (Ngắt phần mềm):</strong> Do chính CPU phát ra một cách đồng bộ khi thực thi lệnh gặp lỗi (ví dụ: chia cho 0, truy xuất bộ nhớ trái phép, Page Fault) hoặc do chương trình chủ động phát lời gọi hệ thống (System Call / `int 0x80`).</li>
+        </ul>
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. CHẾ ĐỘ HOẠT ĐỘNG KÉP (DUAL-MODE OPERATION) & BẢO VỆ TÀI NGUYÊN</h2>
+
+    <h3>A. Bản chất Dual-Mode</h3>
+    <p>Để đảm bảo một ứng dụng bị lỗi hoặc cố tình phá hoại không thể làm sụp đổ toàn bộ hệ thống hoặc can thiệp vào dữ liệu của ứng dụng khác, phần cứng CPU cung cấp ít nhất 2 chế độ hoạt động được đánh dấu bởi <strong>Mode Bit</strong> trong thanh ghi trạng thái phần cứng:</p>
+
+    <ul>
+        <li><strong>User Mode (Mode bit = 1):</strong> Chế độ người dùng. Chỉ thực thi được các lệnh thông thường. Không thể truy xuất trực tiếp phần cứng hoặc toàn bộ RAM.</li>
+        <li><strong>Kernel Mode / Supervisor Mode (Mode bit = 0):</strong> Chế độ đặc quyền. Thực thi được tất cả mọi lệnh phần cứng (Privileged Instructions), truy xuất toàn bộ bộ nhớ và thiết bị.</li>
+    </ul>
+
+    <h3>B. Chuyển đổi Mode qua Lời gọi Hệ thống (System Call)</h3>
+    <p>Khi ứng dụng ở User mode muốn đọc file từ đĩa:</p>
+    <ol>
+        <li>Ứng dụng phát lệnh <strong>System Call</strong> (bản chất là một lệnh Trap/Interrupt).</li>
+        <li>Phần cứng lập tức đổi <strong>Mode bit từ 1 sang 0</strong> (chuyển sang Kernel mode).</li>
+        <li>Kernel kiểm tra quyền hạn, thực thi thao tác đọc đĩa an toàn.</li>
+        <li>Kernel hoàn tất, đổi <strong>Mode bit từ 0 về 1</strong> và trả kết quả cho ứng dụng Userspace.</li>
+    </ol>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Chuyển Đổi Chế Độ (Mode Switch) vs Chuyển Ngữ Cảnh Tiến Trình (Context Switch)</div>
+        <ul>
+            <li><strong>Chuyển đổi chế độ (Mode Switch):</strong> Xảy ra khi tiến trình gọi System Call hoặc gặp ngắt. CPU đổi Mode bit giữa User Mode (1) và Kernel Mode (0) nhưng <em>vẫn đang thực thi trong ngữ cảnh của chính tiến trình đó</em> (không thay đổi tiến trình, không nạp lại PCB, chi phí xử lý rất nhẹ).</li>
+            <li><strong>Chuyển ngữ cảnh tiến trình (Context Switch):</strong> Xảy ra khi bộ định thời quyết định dừng tiến trình $P_1$ để nhường CPU cho tiến trình $P_2$. HDH phải lưu toàn bộ thanh ghi và PCB của $P_1$, nạp PCB của $P_2$, đồng thời cập nhật lại bảng trang bộ nhớ và cache (chi phí nặng hơn rất nhiều).</li>
+        </ul>
+    </div>
+
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY ĐỀ THI UIT: Lệnh đặc quyền (Privileged Instructions)</div>
+        <p>Đề thi UIT rất hay bắt phân loại lệnh nào là <em>Lệnh đặc quyền (chỉ chạy ở Kernel Mode)</em> và lệnh nào là <em>Lệnh không đặc quyền (chạy ở User Mode)</em>:</p>
+        <p><strong>Lệnh đặc quyền (Privileged):</strong> Tắt/Bật ngắt (`cli`/`sti`), Đọc/Ghi thanh ghi Base & Limit bộ nhớ, Thao tác trực tiếp với cổng I/O (`in`/`out`), Chuyển đổi Mode bit, Xóa bộ nhớ RAM, Lệnh tắt máy (`halt`). Giả sử ứng dụng User cố tình chạy lệnh đặc quyền $\rightarrow$ CPU phát ra <strong>Trap/Exception (Illegal Instruction)</strong> và Kernel dẹp bỏ tiến trình đó ngay lập tức!</p>
+    </div>
+</section>
+
+<!-- SECTION 5 -->
+<section>
+    <h2>5. BÀI TẬP ÔN LUYỆN CHUẨN ĐỀ THI UIT CHƯƠNG 1</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 BÀI TẬP TỰ LUẬN MẪU (ĐỀ THI IT007 UIT)</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Câu hỏi:</strong> Trình bày luồng chuyển đổi chế độ (Mode Switching) khi một chương trình người dùng thực hiện đọc dữ liệu từ bàn phím bằng lời gọi hệ thống `read()`. Vẽ sơ đồ chuyển đổi giữa User Mode và Kernel Mode.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết từng bước:</div>
+            <ol>
+                <li><strong>Ban đầu:</strong> Tiến trình ứng dụng đang thực thi trong <code>User Mode</code> (Mode bit = 1).</li>
+                <li><strong>Phát System Call:</strong> Chương trình gọi hàm <code>read()</code>. Hàm thư viện phát lệnh ngắt phần mềm (Trap / <code>int 0x80</code> hoặc <code>syscall</code>).</li>
+                <li><strong>Chuyển sang Kernel Mode:</strong> Phần cứng tự động lưu trạng thái CPU và đổi <code>Mode bit = 0</code> (Kernel Mode). Tra cứu Interrupt Vector để chuyển quyền điều khiển cho System Call Handler của Kernel.</li>
+                <li><strong>Xử lý trong Kernel:</strong> Kernel thực thi lệnh I/O đặc quyền để đọc dữ liệu từ driver bàn phím vào bộ đệm Kernel.</li>
+                <li><strong>Khôi phục User Mode:</strong> Sau khi hoàn tất đọc dữ liệu, Kernel chép dữ liệu vào bộ đệm của ứng dụng, đổi <code>Mode bit = 1</code> (User Mode) và trả quyền điều khiển cho lệnh tiếp theo của chương trình người dùng.</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 1</div>
+    <ul>
+        <li><strong>Dual-mode:</strong> User mode (bit 1 - lệnh thường) $\leftrightarrow$ Kernel mode (bit 0 - lệnh đặc quyền).</li>
+        <li><strong>Ngắt (Interrupt):</strong> Bất đồng bộ (Phần cứng I/O) vs Đồng bộ (Trap/Exception/System Call).</li>
+        <li><strong>Đa chương:</strong> Tối ưu CPU (chuyển khi chờ I/O) vs <strong>Chia sẻ thời gian:</strong> Tối ưu Response time (chuyển theo Time slice).</li>
+        <li><strong>Real-time:</strong> Hard (nghiêm ngặt deadline) vs Soft (ưu tiên tác vụ).</li>
+    </ul>
+</div>
+
+</body>
+</html>

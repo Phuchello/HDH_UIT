@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Phần 0: Cách Học IT007 & Nền Tảng Cần Biết</title>
+    <link rel="stylesheet" href="../styles/print.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="chapter-header">
+    <div class="chapter-num">Phần 00 — Định Hướng & Nền Tảng</div>
+    <h1>CÁCH HỌC IT007 VÀ NỀN TẢNG CẦN BIẾT BẮT BUỘC</h1>
+    <div class="chapter-subtitle">Biên soạn: Võ Trọng Phúc — Dành cho sinh viên UIT chinh phục điểm A/A+</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Lộ Trình Phần 0</h3>
+    <ul>
+        <li>Nắm vững tư duy học Hệ điều hành từ Trực giác $\rightarrow$ Bản chất $\rightarrow$ Thuật toán $\rightarrow$ Bài tập $\rightarrow$ Lab Linux $\rightarrow$ Bẫy đề thi UIT.</li>
+        <li>Trang bị nền tảng C/POSIX nâng cao: Con trỏ, Bộ nhớ động, System Call, Standard I/O vs System I/O.</li>
+        <li>Kỹ năng đọc đề thi, phân bổ thời gian và chiến thuật trình bày bài tự luận điểm tuyệt đối.</li>
+    </ul>
+</div>
+
+<section>
+    <h2>1. TRIẾT LÝ SƯ PHẠM 11 BƯỚC – HỌC HIỂU BẢN CHẤT</h2>
+    <p>Môn Hệ điều hành (IT007) tại UIT nổi tiếng là một môn học vừa mang tính lý thuyết hệ thống vừa có lượng bài tập tính toán và thực hành Linux tương đối lớn. Rất nhiều sinh viên gặp thất bại vì phương pháp "học vẹt" slide hoặc học thuộc đáp án đề cũ mà không hiểu nguyên lý hoạt động của Kernel.</p>
+
+    <div class="alert-box alert-note">
+        <div class="alert-title">💡 PHƯƠNG PHÁP CHINH PHỤC A/A+ IT007</div>
+        Mỗi khái niệm trong cuốn cẩm nang này sẽ được dẫn dắt theo đúng 11 bước sư phạm:
+        <ol style="margin-left: 20px; margin-top: 5px;">
+            <li><strong>Vì sao cần nó?</strong> — Đặt ra bài toán thực tế máy tính gặp phải.</li>
+            <li><strong>Trực giác</strong> — Giải thích bằng hình ảnh đời thường gần gũi.</li>
+            <li><strong>Định nghĩa chuẩn</strong> — Thuật ngữ khoa học máy tính & chuẩn UIT.</li>
+            <li><strong>Nó hoạt động như thế nào?</strong> — Từng bước chi tiết (Step-by-step).</li>
+            <li><strong>Hình dung trong máy tính</strong> — Vị trí CPU, RAM, Kernel, PCB, Queue.</li>
+            <li><strong>Ví dụ nhỏ</strong> — Bài toán cơ bản minh họa nguyên lý.</li>
+            <li><strong>Ví dụ chuẩn bài thi</strong> — Bài tập theo đúng cấu trúc đề thi UIT.</li>
+            <li><strong>Sai lầm thường gặp</strong> — Các lỗi tư duy khiến sinh viên mất điểm.</li>
+            <li><strong>Bẫy UIT</strong> — Chiêu trò đổi wording hoặc cài bẫy của giảng viên.</li>
+            <li><strong>Liên hệ Lab/Linux</strong> — Ánh xạ sang mã C, POSIX System Call và Linux Shell.</li>
+            <li><strong>Quick Recall</strong> — Tóm tắt 3–5 dòng chốt hạ kiến thức ôn nhanh trước giờ thi.</li>
+        </ol>
+    </div>
+</section>
+
+<section>
+    <h2>2. NỀN TẢNG C & POSIX CẦN THIẾT CHO MÔN HỌC</h2>
+    <p>IT007 sử dụng ngôn ngữ C để minh họa các khái niệm tiến trình, đồng bộ và các bài Lab Linux. Dưới đây là các khái niệm bắt buộc bạn phải vững:</p>
+
+    <h3>2.1. Con trỏ và Quản lý bộ nhớ (Pointers & Memory Allocation)</h3>
+    <p>Trong C, biến con trỏ chứa địa chỉ ô nhớ. Khi lập trình tiến trình hoặc bộ nhớ chia sẻ (Shared Memory), việc hiểu đúng địa chỉ ảo (Virtual Address) và con trỏ là chìa khóa để giải quyết bài tập.</p>
+
+<pre><code class="language-c"><span class="code-comment">// Ví dụ về địa chỉ biến và con trỏ</span>
+<span class="code-keyword">int</span> a = <span class="code-string">10</span>;
+<span class="code-keyword">int</span> *p = &a; <span class="code-comment">// p lưu địa chỉ ảo của biến a</span>
+<span class="code-func">printf</span>(<span class="code-string">"Giá trị a = %d, Địa chỉ &a = %p\n"</span>, a, (<span class="code-keyword">void</span>*)&a);
+</code></pre>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Standard I/O (printf) vs System I/O (write)</div>
+        <p><strong>Standard I/O (`printf`)</strong> sử dụng bộ đệm (Buffer) ở Userspace. Dữ liệu chưa được ghi ngay ra màn hình cho đến khi có dấu xuống dòng `\n` hoặc gọi `fflush(stdout)`.</p>
+        <p><strong>System Call I/O (`write`)</strong> gửi trực tiếp dữ liệu xuống Kernel space mà không đi qua bộ đệm Userspace.</p>
+        <p><em>Hệ quả trong bài thi UIT:</em> Nếu gọi `fork()` ngay sau `printf("Hello")` (không có `\n`), bộ đệm Userspace bị sao chép sang tiến trình con, dẫn tới chữ "Hello" bị in 2 lần!</p>
+    </div>
+</section>
+
+<section>
+    <h2>3. CHIẾN THUẬT LÀM BÀI THI IT007 LẤY ĐIỂM TỐI ĐA</h2>
+    <div class="uit-trap-box">
+        <div class="trap-title">🎯 NGUYÊN TẮC TRÌNH BÀY BÀI TỰ LUẬN UIT</div>
+        <ul>
+            <li><strong>Bài tập CPU Scheduling:</strong> Luôn vẽ sơ đồ Gantt rõ ràng các mốc thời gian ($0, 2, 4, 7...$). Viết rõ công thức $TAT = CT - AT$, $WT = TAT - BT$ trước khi điền số.</li>
+            <li><strong>Bài tập Process Tree (`fork`):</strong> Không chỉ ghi đáp án số lượng process! Phải vẽ cây tiến trình từ root (Parent PID) phân nhánh sang các Child PID.</li>
+            <li><strong>Bài tập Banker (Deadlock):</strong> Phải lập đủ các bảng $Allocation$, $Max$, $Need$, $Available$. Trình bày từng bước duyệt $Work = Work + Allocation_i$.</li>
+            <li><strong>Bài tập Thay thế trang (Page Replacement):</strong> Kẻ bảng đánh dấu `*` hoặc `H/F` (Hit/Fault) tại từng bước truy xuất reference.</li>
+        </ul>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Phần 0</div>
+    <ul>
+        <li>Luôn đặt câu hỏi "Kernel làm gì ở background?" khi đọc bất kỳ đoạn code C nào trong môn học.</li>
+        <li>Phân biệt rạch ròi giữa Userspace (ứng dụng) và Kernel space (Hệ điều hành).</li>
+        <li>Trình bày bài tập tự luận cẩn thận từng bước để đạt điểm tối đa A/A+.</li>
+    </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương 3: Quản Lý Tiến Trình (Process Management)</title>
+    <link rel="stylesheet" href="../styles/print.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']]
+          }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<div class="chapter-header">
+    <div class="chapter-num">Chương 03 — Trọng Tâm Thi Giữa Kỳ</div>
+    <h1>QUẢN LÝ TIẾN TRÌNH (PROCESS MANAGEMENT)</h1>
+    <div class="chapter-subtitle">Trạng thái tiến trình $\rightarrow$ Cây tiến trình (Process Tree) $\rightarrow$ Cú pháp fork/exec/wait $\rightarrow$ Lập trình C trên Linux</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 3 (Trọng Tâm Giữa Kỳ UIT)</h3>
+    <ul>
+        <li>Phân biệt rạch ròi Chương trình (Program) và Tiến trình (Process); Nắm vững cấu trúc bộ nhớ của tiến trình (Text, Data, Heap, Stack).</li>
+        <li>Thuộc lòng sơ đồ 5 trạng thái tiến trình và giải chính xác dạng bài xác định chuỗi chuyển trạng thái.</li>
+        <li>Vẽ thành thạo Cây tiến trình (Process Tree) và tính số lượng tiến trình sinh ra bởi vòng lặp <code>fork()</code>.</li>
+        <li>Dự đoán chính xác kết quả in ra của các chương trình C phức tạp kết hợp <code>fork()</code>, <code>execvp()</code>, <code>wait()</code> và <code>printf()</code>.</li>
+        <li>Hiểu bản chất Copy-on-Write, biến dùng chung và bộ đệm <code>printf</code>.</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. KHÁI NIỆM TIẾN TRÌNH VÀ CẤU TRÚC BỘ NHỚ</h2>
+
+    <h3>A. Vì sao cần Tiến trình?</h3>
+    <p>Một file thực thi nằm trên ổ cứng (như <code>chrome.exe</code>) chỉ là một tập hợp các byte dữ liệu thụ động. Để chạy được nó, HDH phải nạp nó vào RAM, cấp phát CPU, tạo các vùng nhớ làm việc. Thực thể đang chạy đó được gọi là Tiến trình (Process).</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Program vs Process</div>
+        <ul>
+            <li><strong>Chương trình (Program):</strong> Thực thể thụ động (Passive entity), lưu trên ổ đĩa (file thực thi/ELF/EXE), chưa tốn tài nguyên CPU/RAM.</li>
+            <li><strong>Tiến trình (Process):</strong> Thực thể chủ động (Active entity), đang thực thi trong RAM, có con trỏ lệnh ($PC$), thanh ghi CPU và tài nguyên hệ thống.</li>
+        </ul>
+    </div>
+
+    <h3>B. Cấu trúc Không gian Bộ nhớ của Tiến trình (Memory Layout)</h3>
+    <p>Một tiến trình trong RAM được chia làm 4 vùng chính (từ địa chỉ thấp đến địa chỉ cao):</p>
+    <ul>
+        <li><strong>Text Segment (Mã lệnh):</strong> Chứa mã máy thực thi của chương trình. Thường là Read-only để tránh bị sửa đổi.</li>
+        <li><strong>Data Segment (Dữ liệu):</strong> Chứa các biến toàn cục (Global) và biến tĩnh (Static) đã hoặc chưa khởi tạo.</li>
+        <li><strong>Heap Segment (Bộ nhớ động):</strong> Vùng nhớ cấp phát động lúc runtime (thông qua <code>malloc()</code>, <code>calloc()</code> trong C hoặc <code>new</code> trong C++). Tăng trưởng theo hướng địa chỉ từ thấp lên cao.</li>
+        <li><strong>Stack Segment (Nguồn/Ngăn xếp):</strong> Chứa biến cục bộ (Local variables), tham số hàm, địa chỉ trả về của hàm. Tăng trưởng theo hướng địa chỉ từ cao xuống thấp.</li>
+    </ul>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. SƠ ĐỒ TRẠNG THÁI TIẾN TRÌNH (PROCESS STATE TRANSITION)</h2>
+
+    <p>Một tiến trình trong suốt đời sống của mình sẽ chuyển qua 5 trạng thái cơ bản:</p>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🔄 5 TRẠNG THÁI TIẾN TRÌNH VÀ NGUYÊN NHÂN CHUYỂN TRẠNG THÁI</span>
+        </div>
+        <ol>
+            <li><strong>New (Mới tạo):</strong> Tiến trình đang được tạo lập (chưa nạp xong vào RAM).</li>
+            <li><strong>Ready (Sẵn sàng):</strong> Tiến trình đã ở trong RAM, đầy đủ tài nguyên, chỉ chờ được cấp CPU.</li>
+            <li><strong>Running (Đang chạy):</strong> Các lệnh của tiến trình đang được CPU thực thi.</li>
+            <li><strong>Waiting / Blocked (Chờ):</strong> Tiến trình tạm dừng chờ một sự kiện xảy ra (ví dụ: chờ I/O hoàn tất, chờ tín hiệu signal, chờ tiến trình con).</li>
+            <li><strong>Terminated (Kết thúc):</strong> Tiến trình đã thực thi xong hoặc bị hủy, đang chờ HDH thu hồi tài nguyên.</li>
+        </ol>
+    </div>
+
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY ĐỀ THI UIT: Xác định Chuỗi Chuyển Trạng Thái Tiến Trình</div>
+        <p>Đề thi UIT rất hay cho một đoạn code C chứa vòng lặp có lệnh <code>printf()</code> hoặc thao tác I/O và hỏi: <em>"Tiến trình đã trải qua những trạng thái nào? Vẽ sơ đồ chuyển trạng thái."</em></p>
+        <p><strong>QUY TẮC VÀNG ĐỂ ĐẠT ĐIỂM TỐI ĐA:</strong></p>
+        <ul>
+            <li>Bắt đầu luôn là <strong>New $\rightarrow$ Ready $\rightarrow$ Running</strong>.</li>
+            <li>Mỗi khi gặp lệnh <code>printf()</code> hay đọc/ghi file: Theo mô hình bài tập giảng dạy đơn giản hóa IT007, lệnh <code>printf</code> được quy ước là một thao tác I/O $\rightarrow$ Tiến trình chuyển từ <strong>Running $\rightarrow$ Waiting</strong> (chờ thiết bị xuất xong) $\rightarrow$ <strong>Ready</strong> $\rightarrow$ <strong>Running</strong> để chạy lệnh tiếp theo. <em>(Trong Linux thực tế, dữ liệu ghi vào user-space buffer trước khi gọi <code>write()</code> system call)</em>.</li>
+            <li>Khi gặp lệnh <code>exit(0)</code> hoặc kết thúc hàm <code>main</code>: Chuyển thẳng từ <strong>Running $\rightarrow$ Terminated</strong> (KHÔNG đi qua trạng thái Waiting vì không có thao tác I/O wait).</li>
+        </ul>
+    </div>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. KHỐI QUẢN LÝ TIẾN TRÌNH (PCB), CONTEXT SWITCH VÀ TIỂU TRÌNH (THREAD)</h2>
+
+    <h3>A. Khối quản lý tiến trình (Process Control Block - PCB)</h3>
+    <p>Mỗi tiến trình được đại diện trong HDH bởi một cấu trúc dữ liệu C gọi là PCB. PCB chứa toàn bộ thông tin về tiến trình:</p>
+    <ul>
+        <li><strong>Process ID (PID):</strong> Định danh duy nhất của tiến trình.</li>
+        <li><strong>Process State:</strong> Trạng thái hiện tại (Ready, Running, Waiting...).</li>
+        <li><strong>Program Counter ($PC$):</strong> Địa chỉ lệnh tiếp theo sẽ thực thi.</li>
+        <li><strong>CPU Registers:</strong> Giá trị các thanh ghi CPU (Accumulators, Index registers, Stack pointer).</li>
+        <li><strong>CPU Scheduling Info:</strong> Độ ưu tiên, con trỏ đến hàng đợi scheduler.</li>
+        <li><strong>Memory-management Info:</strong> Bảng trang (Page table), Base/Limit registers.</li>
+        <li><strong>I/O Status Info:</strong> Danh sách các file đang mở (File descriptors).</li>
+    </ul>
+
+    <h3>B. Chuyển ngữ cảnh (Context Switch)</h3>
+    <p>Khi CPU chuyển từ thực thi tiến trình $P_0$ sang tiến trình $P_1$:</p>
+    <ol>
+        <li>HDH lưu toàn bộ trạng thái của $P_0$ vào $PCB_0$.</li>
+        <li>HDH nạp lại trạng thái đã lưu của $P_1$ từ $PCB_1$.</li>
+        <li>CPU bắt đầu thực thi lệnh của $P_1$ tại vị trí $PC$ mới nạp.</li>
+    </ol>
+    <p><em>Phí tổn Context Switch:</em> Thời gian chuyển ngữ cảnh hoàn toàn là Pure Overhead (phí tổn vô ích) vì CPU không thực thi được công việc có ích nào của người dùng trong lúc switch.</p>
+
+    <h3>C. Khái niệm Tiểu Trình (Thread) & So sánh Tiến trình vs Tiểu trình</h3>
+    <p><strong>Tiểu trình (Thread)</strong> là đơn vị sử dụng CPU cơ bản nhất bên trong một tiến trình (còn gọi là Tiến trình nhẹ - Lightweight Process).</p>
+    <p>Một tiến trình có thể chứa một hoặc nhiều luồng tiểu trình chạy song song với nhau. Tất cả các Thread trong cùng một tiến trình <strong>DÙNG CHUNG</strong> không gian bộ nhớ địa chỉ (Code Text, Global Data, Heap) và các tài nguyên HDH (File Descriptors, Signals). Tuy nhiên, mỗi Thread có <strong>VÙNG NHỚ TƯ RIÊNG</strong> gồm: Thanh ghi CPU, Con trỏ lệnh ($PC$) và Ngăn xếp riêng (Private Stack).</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Tiến Trình (Process) vs Tiểu Trình (Thread)</div>
+        <table>
+            <thead>
+                <tr><th>Tiêu chí</th><th>Tiến trình (Process)</th><th>Tiểu trình (Thread)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Không gian bộ nhớ</strong></td><td>Mỗi tiến trình có không gian bộ nhớ <em>độc lập hoàn toàn</em>.</td><td>Các thread trong cùng tiến trình <em>dùng chung</em> Code, Data, Heap.</td></tr>
+                <tr><td><strong>Tạo lập & Chuyển ngữ cảnh</strong></td><td>Nặng nề, chi phí cao (tốn thời gian tạo PCB, cấp Page table).</td><td>Nhanh chóng, chi phí cực thấp (chỉ cần tạo Stack và Registers).</td></tr>
+                <tr><td><strong>Giao tiếp (IPC)</strong></td><td>Phải qua các cơ chế IPC (Shared Memory, Pipe, Message Queue).</td><td>Giao tiếp trực tiếp bằng cách đọc/ghi các biến toàn cục (Shared Data).</td></tr>
+                <tr><td><strong>Mức độ ảnh hưởng lỗi</strong></td><td>Một tiến trình bị crash không làm ảnh hưởng tiến trình khác.</td><td>Một thread bị lỗi (Segment Fault) có thể làm sụp đổ toàn bộ tiến trình.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. QUẢN LÝ TIẾN TRÌNH TRÊN LINUX: CÁC SYSTEM CALL `fork()`, `exec()`, `wait()`</h2>
+
+    <p>Đây là phần kiến thức quan trọng nhất của Chương 3 trong các đề thi và bài thực hành Lab UIT.</p>
+
+    <h3>A. System call `fork()`</h3>
+    <p><code>pid_t fork(void);</code> tạo một tiến trình con hoàn toàn mới bằng cách sao chép tiến trình cha.</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Giá trị trả về của `fork()`</div>
+        <ul>
+            <li>Trong <strong>Tiến trình Cha (Parent):</strong> <code>fork()</code> trả về <strong>PID của tiến trình con mới sinh ($> 0$)</strong>.</li>
+            <li>Trong <strong>Tiến trình Con (Child):</strong> <code>fork()</code> trả về <strong>giá trị $0$</strong>.</li>
+            <li>Nếu thất bại (không đủ bộ nhớ): <code>fork()</code> trả về <strong>$-1$</strong>.</li>
+        </ul>
+    </div>
+
+    <h3>B. Thuật toán tính số Tiến trình sinh ra từ `fork()`</h3>
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🌳 QUY TẮC VẼ CÂY TIẾN TRÌNH VÀ TÍNH SỐ PROCESS</span>
+        </div>
+        <p><strong>Trường hợp 1: $N$ lệnh `fork()` liên tiếp:</strong></p>
+        <pre><code class="language-c">fork(); fork(); fork(); // N = 3
+</code></pre>
+        <p>Tổng số tiến trình sinh ra (tính cả cha) = $2^N = 2^3 = 8$ tiến trình (gồm 1 cha và 7 con).</p>
+
+        <p><strong>Trường hợp 2: `fork()` trong vòng lặp `for`:</strong></p>
+        <pre><code class="language-c">for (int i = 0; i &lt; 4; i++) {
+    fork();
+}
+</code></pre>
+        <p>Số tiến trình sinh ra = $2^4 = 16$ tiến trình (gồm 1 cha và 15 con).</p>
+
+        <div class="uit-trap-box">
+            <div class="trap-title">⚡ BẪY CÔNG THỨC $2^N$ (CỰC KỲ QUAN TRỌNG)</div>
+            <p>Công thức $2^N$ <strong>CHỈ ÁP DỤNG KHÔNG ĐIỀU KIỆN</strong> khi tất cả $N$ lệnh <code>fork()</code> đều được thực thi bởi MỌI tiến trình (tức không nằm trong nhánh phân chia <code>if (pid == 0)</code> hay <code>if (pid > 0)</code>).</p>
+            <p>Nếu <code>fork()</code> nằm trong nhánh điều kiện rẽ nhánh, <strong>BẮT BUỘC PHẢI VẼ CÂY TIẾN TRÌNH</strong> từng bước chứ KHÔNG ĐƯỢC áp dụng trực tiếp công thức $2^N$!</p>
+        </div>
+    </div>
+
+    <h3>C. Bẫy Bộ đệm `printf` và `execvp()` trong Đề thi</h3>
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY 1: `printf` không có `\n` trước `fork()`</div>
+        <pre><code class="language-c">printf("Hello"); // Không có \n => Chuỗi nằm lại trong buffer
+fork();
+</code></pre>
+        <p>Vì `printf` chưa flush, khi `fork()` xảy ra, bộ đệm Userspace bị chép sang tiến trình con. Khi cả 2 tiến trình kết thúc, chuỗi "Hello" sẽ bị in ra <strong>2 LẦN</strong>!</p>
+    </div>
+
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY 2: Các lệnh đằng sau `execvp()`</div>
+        <pre><code class="language-c">if (fork() == 0) {
+    printf("Child executing ls\n");
+    execlp("/bin/ls", "ls", NULL);
+    printf("This line will NEVER print!\n"); // Lệnh này KHÔNG BAO GIỜ CHẠY
+}
+</code></pre>
+        <p>Nếu `execvp` nạp chương trình thành công, nó GHI ĐÈ toàn bộ bộ nhớ tiến trình con. Các dòng lệnh nằm sau `execvp` sẽ bị xóa sổ và không bao giờ chạy!</p>
+    </div>
+</section>
+
+<!-- SECTION 5 -->
+<section>
+    <h2>5. BÀI TẬP WORKED EXAMPLE CHUẨN ĐỀ THI UIT</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 1: VẼ CÂY TIẾN TRÌNH VÀ DỰ ĐOÁN OUTPUT</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho đoạn mã C sau:</strong>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+
+int main() {
+    pid_t pid;
+    printf("Start\n");
+    pid = fork();
+    if (pid &gt; 0) {
+        fork();
+        printf("Parent\n");
+    } else if (pid == 0) {
+        printf("Child\n");
+    }
+    return 0;
+}
+</code></pre>
+            <strong>Hỏi:</strong> Khi chạy chương trình trên, có bao nhiêu tiến trình được tạo ra? Vẽ cây tiến trình và liệt kê tất cả các chuỗi chữ có thể được in ra màn hình?
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết từng bước:</div>
+            <ol>
+                <li><strong>Phân tích dòng 1: <code>printf("Start\n");</code></strong>
+                    <br>Do có `\n`, chữ "Start" được in ra ngay 1 lần bởi Tiến trình gốc $P_0$.
+                </li>
+                <li><strong>Lần `fork()` thứ nhất (dòng 8):</strong>
+                    <br>Tiến trình $P_0$ sinh ra con $P_1$.
+                    <ul>
+                        <li>Ở $P_0$ (Cha): <code>pid &gt; 0</code> $\rightarrow$ Nhảy vào nhánh <code>if (pid &gt; 0)</code>.</li>
+                        <li>Ở $P_1$ (Con): <code>pid == 0</code> $\rightarrow$ Nhảy vào nhánh <code>else if (pid == 0)</code>. $P_1$ in ra "Child" và kết thúc.</li>
+                    </ul>
+                </li>
+                <li><strong>Lần `fork()` thứ hai (dòng 10 trong nhánh Cha):</strong>
+                    <br>Tiến trình cha $P_0$ thực thi `fork()` thứ hai $\rightarrow$ sinh thêm tiến trình con $P_2$.
+                    <br>Cả $P_0$ và $P_2$ đều tiếp tục chạy lệnh <code>printf("Parent\n");</code>.
+                </li>
+                <li><strong>Kết luận Số lượng Tiến trình:</strong> Tổng cộng có <strong>3 tiến trình</strong> ($P_0$ gốc, $P_1$ con từ fork 1, $P_2$ con từ fork 2).</li>
+                <li><strong>Cây Tiến trình (Process Tree):</strong>
+<pre>
+          P0 (Parent gốc)
+         /  \
+        /    \
+  P1 (Con 1)  P2 (Con 2 từ fork 2)
+</pre>
+                </li>
+                <li><strong>Kết quả in ra màn hình:</strong>
+                    <br>- "Start": 1 lần (in ra trước khi fork).
+                    <br>- "Child": 1 lần (từ $P_1$).
+                    <br>- "Parent": 2 lần (từ $P_0$ và $P_2$).
+                </li>
+            </ol>
+            <div class="uit-trap-box">
+                <div class="trap-title">⚡ LƯU Ý VỀ THỨ TỰ IN (NONDETERMINISTIC OUTPUT)</div>
+                <p>Do tiến trình cha và các tiến trình con được định thời chạy độc lập (nondeterministic execution order), thứ tự xuất hiện giữa các dòng "Child" và "Parent" trên màn hình là <strong>KHÔNG CÓ THỨ TỰ CỐ ĐỊNH DUY NHẤT</strong>.</p>
+                <p>Các chuỗi output đều hợp lệ:</p>
+                <ul>
+                    <li><code>Start -> Child -> Parent -> Parent</code></li>
+                    <li><code>Start -> Parent -> Child -> Parent</code></li>
+                    <li><code>Start -> Parent -> Parent -> Child</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 2: TÍNH SỐ NGUYÊN VÀ IN VÒNG LẶP FORK</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho chương trình C:</strong>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main() {
+    for (int i = 0; i &lt; 3; i++) {
+        fork();
+        printf("hello\n");
+    }
+    return 0;
+}
+</code></pre>
+            <strong>Hỏi:</strong> Chuỗi <code>"hello"</code> được in ra tổng cộng bao nhiêu lần? Giải thích chi tiết bằng cây tiến trình.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết từng bước:</div>
+            <ol>
+                <li>Tại $i = 0$: $1$ tiến trình gốc $P_0$ gọi `fork()` $\rightarrow$ tạo $P_1$. Cả $P_0, P_1$ cùng in "hello\n" ($2$ lần in).</li>
+                <li>Tại $i = 1$: $2$ tiến trình ($P_0, P_1$) cùng gọi `fork()` $\rightarrow$ tạo $P_2, P_3$ ($4$ tiến trình). Cả $4$ tiến trình cùng in "hello\n" ($4$ lần in).</li>
+                <li>Tại $i = 2$: $4$ tiến trình ($P_0, P_1, P_2, P_3$) cùng gọi `fork()` $\rightarrow$ tạo $P_4, P_5, P_6, P_7$ ($8$ tiến trình). Cả $8$ tiến trình cùng in "hello\n" ($8$ lần in).</li>
+                <li><strong>Tổng số lần in = $2 + 4 + 8 = 14$ lần in chữ "hello".</strong> (Tổng số tiến trình sinh ra là $2^3 = 8$ tiến trình).</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 3: ĐỊA CHỈ VẢI BIẾN VÀ COPY-ON-WRITE</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho chương trình C:</strong>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+
+int a = 10;
+int main() {
+    pid_t pid = fork();
+    if (pid == 0) {
+        a += 5;
+        printf("Child: a = %d, &a = %p\n", a, &a);
+    } else {
+        wait(NULL);
+        a -= 2;
+        printf("Parent: a = %d, &a = %p\n", a, &a);
+    }
+    return 0;
+}
+</code></pre>
+            <strong>Hỏi:</strong> Cho biết giá trị <code>a</code> và <code>&a</code> in ra ở tiến trình cha và tiến trình con. So sánh hai địa chỉ ảo <code>&a</code>.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết:</div>
+            <ul>
+                <li>Tiến trình con (Child): In ra <code>Child: a = 15, &a = 0x601040</code> (ví dụ địa chỉ).</li>
+                <li>Tiến trình cha (Parent): In ra <code>Parent: a = 8, &a = 0x601040</code>.</li>
+                <li><strong>Giải thích bản chất:</strong> Địa chỉ ảo <code>&a</code> của hai tiến trình là <strong>BẰNG NHAU (GIỐNG NHAU)</strong> vì không gian địa chỉ ảo của con được nhân bản từ cha. Tuy nhiên, MMU ánh xạ <code>&a</code> của cha và con sang 2 khung trang <strong>RAM VẬT LÝ KHÁC NHAU</strong> (nhờ cơ chế Copy-on-Write). Do đó giá trị biến <code>a</code> hoàn toàn độc lập!</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 3</div>
+    <ul>
+        <li><code>fork()</code> trả về 0 trong Child, PID con trong Parent.</li>
+        <li>$N$ lệnh `fork()` liên tiếp sinh $2^N$ tiến trình (CHỈ đúng khi fork vô điều kiện).</li>
+        <li><code>execvp()</code> nạp lại bộ nhớ, lệnh sau `execvp` không chạy nếu thành công.</li>
+        <li><code>printf</code> không `\n` bị chép buffer qua tiến trình con khi `fork()`.</li>
+        <li>Thread chung Code/Data/Heap, riêng Stack/$PC$/Registers.</li>
+        <li>Thứ tự in giữa các tiến trình là nondeterministic.</li>
+        <li><code>exit(0)</code> chuyển thẳng Running $\rightarrow$ Terminated (không qua Waiting).</li>
+    </ul>
+</div>
+
+</body>
+</html>
