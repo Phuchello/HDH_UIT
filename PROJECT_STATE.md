@@ -4,7 +4,7 @@
 **HDH_UIT — UIT IT007 Operating Systems Handbook**
 
 ## Current Phase
-`FINAL_RELEASE_HARDENING`
+`READY_FOR_V1_RELEASE`
 
 ## Completed
 - [x] Khảo sát và đối chiếu các bản nguồn Antigravity/Codex liên quan.
@@ -42,10 +42,10 @@
 - Unresolved MAJOR: 0
 
 ## Last Safe Checkpoint
-`main` at `8068d637505d1ba973820aadd3fd03acc61fec47`, the published hardening checkpoint; final remaining fixes are in progress.
+`main` at `b4f290406ab3fd518c56281c408fdfb5726ad722`; GitHub Actions `Validate Handbook Repository` passed after the clean-clone diagnostics fix.
 
 ## Exact Next Action
-Rebuild after the remaining source correction, validate the committed artifacts in a clean-clone-compatible mode, then publish and confirm GitHub Actions before any v1.0.0 tag.
+Independent remote audit, then tag/release `v1.0.0` if that audit accepts the published artifacts.
 
 ## Git Status
 - Default branch: `main`
