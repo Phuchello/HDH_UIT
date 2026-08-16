@@ -74,8 +74,9 @@ def main(require_render_diagnostics=False):
         if result[key]: failures.append(key)
     if result["a4Pages"] != result["pageCount"]: failures.append("pageSize")
     if result["searchablePages"] != result["pageCount"]: failures.append("searchableText")
-    if require_render_diagnostics and render_diagnostics is None:
-        failures.append("missingRenderDiagnostics")
+    if render_diagnostics is None:
+        if require_render_diagnostics:
+            failures.append("missingRenderDiagnostics")
     elif any(render_diagnostics.get(key) for key in ("mathErrors", "unresolvedVisibleMath", "remoteRequests", "iframeCount")):
         failures.append("renderDiagnostics")
     result["renderWarnings"] = render_diagnostics.get("overflow", []) if render_diagnostics else []

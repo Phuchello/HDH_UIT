@@ -11,7 +11,7 @@
 
 [![Tải PDF Bản Gốc](https://img.shields.io/badge/T%E1%BA%A3i_PDF-B%E1%BA%A3n_Chu%E1%BA%A9n_57_Trang-0077b6?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf)
 [![Đọc Trực Tuyến HTML](https://img.shields.io/badge/%C4%90%E1%BB%8Dc_HTML-B%E1%BA%A3n_Offline_Kh%C3%B4ng_Iframe-0096c7?style=for-the-badge&logo=html5&logoColor=white)](dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.html)
-[![Kiểm Thử CI](https://img.shields.io/badge/CI_Validation-Passing-38b000?style=for-the-badge&logo=githubactions&logoColor=white)](#)
+[![Validate Handbook Repository](https://github.com/Phuchello/HDH_UIT/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/Phuchello/HDH_UIT/actions/workflows/validate.yml)
 
 </div>
 
