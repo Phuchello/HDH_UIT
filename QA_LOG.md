@@ -34,9 +34,9 @@ Nhật ký kiểm tra chất lượng và bảng chấm điểm các chương c�
 
 - **Iframe count trong master HTML:** **0**
 - **Remote requests (mạng bên ngoài):** **0** (Hoàn toàn độc lập, offline 100%)
-- **Số công thức MathJax đã render:** **771**
+- **Số công thức MathJax đã render:** **775**
 - **Lỗi hiển thị LaTeX:** **0**
-- **Số trang A4 PDF:** **56 trang**
+- **Số trang A4 PDF:** **57 trang**
 - **TOC navigation:** **12/12 mục liên kết chính xác tuyệt đối với số trang PDF**
 - **Lỗi đánh dấu chỗ trống (TODO/FIXME/PLACEHOLDER):** **0**
-- **Mã băm SHA-256 PDF:** `65EA20944B4596A77C20B2E0CFBC3A9817297B16201D2A3B0976EBEBEFB4E70C`
+- **Mã băm SHA-256 PDF:** thay đổi theo bản dựng; không dùng làm điều kiện xác thực cố định.

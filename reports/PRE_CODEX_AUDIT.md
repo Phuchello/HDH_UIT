@@ -16,10 +16,10 @@
 | **Antigravity & Codex Reconciled** | **PASS** | Đã hợp nhất toàn bộ sửa đổi học thuật và chế bản in ấn A4. |
 | **UTF-8 / Mojibake** | **PASS** | 100% tiếng Việt chuẩn Unicode, không có ký tự lỗi ``. |
 | **Critical Content Regression** | **PASS** | 0 lỗi hồi quy; SRTF, Banker, LRU, EAT, POSIX C code đã qua kiểm chứng độc lập. |
-| **MathJax Offline Rendering** | **PASS** | 771 công thức toán học hiển thị hoàn hảo từ bản MathJax 3.2.2 đóng gói sẵn. |
+| **MathJax Offline Rendering** | **PASS** | 775 biểu thức toán học được render từ MathJax 3.2.2 đóng gói sẵn trong bản dựng hiện hành. |
 | **Broken Assets / Links** | **PASS** | 0 liên kết hỏng; 12/12 mục TOC chuyển hướng đúng anchor. |
 | **Final HTML Deliverable** | **PASS** | 0 `<iframe>`, DOM liên tục, hoàn toàn tự chứa (self-contained). |
-| **Final PDF Deliverable** | **PASS** | 56/56 trang chuẩn A4, văn bản tìm kiếm được trên 100% các trang, SHA-256 xác thực. |
+| **Final PDF Deliverable** | **PASS** | 57/57 trang chuẩn A4, văn bản tìm kiếm được trên 100% các trang; không hash-lock bản dựng. |
 | **README Landing Page** | **PASS** | Trực quan, chuyên nghiệp, có đầy đủ lộ trình, mục lục, hướng dẫn và ảnh xem trước. |
 | **Gitignore & Public Safety** | **PASS** | 0 đường dẫn cá nhân, 0 tokens, 0 file log/transcript rác. |
 | **Unresolved Critical Issues** | **0** | Đã giải quyết triệt để 6/6 Critical findings. |

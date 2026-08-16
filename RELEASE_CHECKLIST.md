@@ -28,7 +28,7 @@ Bảng kiểm soát các tiêu chuẩn phát hành công khai cho kho lưu trữ
 - [x] **Canonical Source Identified:** Nguồn chuẩn tại `src/chapters/`, `src/styles/`, `src/vendor/`.
 - [x] **Antigravity & Codex Output Reconciled:** Đã đồng bộ toàn bộ sửa đổi học thuật và chế bản in ấn A4.
 - [x] **Unicode / Mojibake:** 100% tiếng Việt UTF-8 chuẩn xác, không có ký tự lỗi ``.
-- [x] **MathJax Offline Rendering:** 771 công thức toán học hiển thị hoàn hảo từ thư viện vendored MathJax 3.2.2.
+- [x] **MathJax Offline Rendering:** 775 biểu thức toán học hiển thị từ thư viện vendored MathJax 3.2.2 trong bản dựng hiện hành.
 - [x] **Broken Assets / Links:** 0 liên kết hỏng, 12/12 mục TOC khớp trang chính xác.
 - [x] **No Iframes:** Tệp HTML phân phối là DOM liên tục, không dùng thẻ `<iframe>`.
 - [x] **No Remote Dependencies:** Hoàn toàn độc lập ngoại tuyến, không gọi font hay JS từ CDN bên ngoài.
@@ -36,6 +36,6 @@ Bảng kiểm soát các tiêu chuẩn phát hành công khai cho kho lưu trữ
 - [x] **No Machine Junk:** Loại trừ toàn bộ `.env`, `node_modules`, cache, file log và transcript nháp.
 - [x] **Deliverables Present:**
   - `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.html` (~207 KB)
-  - `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf` (~7.66 MB, 56 trang A4)
+  - `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf` (57 trang A4; kích thước thay đổi theo bản dựng)
 - [x] **High-Res Preview Assets:** Đã trích xuất các ảnh xem trước từ PDF phục vụ README.
 - [x] **README Excellence:** Landing page tiếng Việt đầy đủ lộ trình, mục lục, hướng dẫn build, disclaimer và credit tác giả.

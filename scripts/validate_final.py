@@ -1,3 +1,4 @@
+import argparse
 import json
 import re
 from pathlib import Path
@@ -10,7 +11,7 @@ PDF = ROOT / "dist" / "IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf"
 RENDER_DIAGNOSTICS = ROOT / "scripts" / "render-final.json"
 
 
-def main():
+def main(require_render_diagnostics=False):
     if not HTML.exists() or not PDF.exists():
         raise SystemExit("Final HTML/PDF deliverables are missing; run scripts/build.ps1 first.")
     source = HTML.read_text(encoding="utf-8")
@@ -73,7 +74,7 @@ def main():
         if result[key]: failures.append(key)
     if result["a4Pages"] != result["pageCount"]: failures.append("pageSize")
     if result["searchablePages"] != result["pageCount"]: failures.append("searchableText")
-    if render_diagnostics is None:
+    if require_render_diagnostics and render_diagnostics is None:
         failures.append("missingRenderDiagnostics")
     elif any(render_diagnostics.get(key) for key in ("mathErrors", "unresolvedVisibleMath", "remoteRequests", "iframeCount")):
         failures.append("renderDiagnostics")
@@ -89,4 +90,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Validate committed final HTML/PDF artifacts.")
+    parser.add_argument("--require-render-diagnostics", action="store_true",
+                        help="Require scripts/render-final.json (use only after an actual render build).")
+    args = parser.parse_args()
+    main(require_render_diagnostics=args.require_render_diagnostics)

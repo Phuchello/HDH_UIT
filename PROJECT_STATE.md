@@ -14,7 +14,7 @@
 - [x] Hoàn tất các precision fix đã ghi nhận: Priority convention, Memory Barrier, Swapping, Mode vs Context switch, printf/I/O convention.
 - [x] Xuất bản deliverables cuối:
   - `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.html`
-  - `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf` — 56 trang A4.
+  - `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf` — 57 trang A4.
 - [x] README, preview assets, build docs, methodology, changelog, notice và QA reports đã có trên repository.
 - [x] Nhánh `release/it007-handbook-v1` đã được hợp nhất lịch sử an toàn với `main` bằng merge commit giữ nguyên canonical release tree.
 - [x] `main` đã được publish thành công lên GitHub.
@@ -42,10 +42,10 @@
 - Unresolved MAJOR: 0
 
 ## Last Safe Checkpoint
-`main` at `46a19aebe3573f8066a8452ea5fe48c41102900f`, fetched from `origin/main` and clean before release-hardening changes.
+`main` at `8068d637505d1ba973820aadd3fd03acc61fec47`, the published hardening checkpoint; final remaining fixes are in progress.
 
 ## Exact Next Action
-Obtain explicit approval to publish the verified release-hardening checkpoint to `main`, then confirm the GitHub Actions validation run before any v1.0.0 tag.
+Rebuild after the remaining source correction, validate the committed artifacts in a clean-clone-compatible mode, then publish and confirm GitHub Actions before any v1.0.0 tag.
 
 ## Git Status
 - Default branch: `main`

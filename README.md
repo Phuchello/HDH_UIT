@@ -3,13 +3,13 @@
 
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Môn học:** IT007 – Hệ điều hành (Khoa Kỹ thuật Máy tính, Trường ĐH Công nghệ Thông tin – ĐHQG-HCM)  
-**Ấn bản:** v1.0 • 56 trang A4 • Chuẩn PDF In ấn & Bản HTML Tự chứa Ngoại tuyến  
+**Ấn bản:** v1.0 • 57 trang A4 • Chuẩn PDF In ấn & Bản HTML Tự chứa Ngoại tuyến  
 
 ---
 
 <div align="center">
 
-[![Tải PDF Bản Gốc](https://img.shields.io/badge/T%E1%BA%A3i_PDF-B%E1%BA%A3n_Chu%E1%BA%A9n_56_Trang-0077b6?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf)
+[![Tải PDF Bản Gốc](https://img.shields.io/badge/T%E1%BA%A3i_PDF-B%E1%BA%A3n_Chu%E1%BA%A9n_57_Trang-0077b6?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf)
 [![Đọc Trực Tuyến HTML](https://img.shields.io/badge/%C4%90%E1%BB%8Dc_HTML-B%E1%BA%A3n_Offline_Kh%C3%B4ng_Iframe-0096c7?style=for-the-badge&logo=html5&logoColor=white)](dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.html)
 [![Kiểm Thử CI](https://img.shields.io/badge/CI_Validation-Passing-38b000?style=for-the-badge&logo=githubactions&logoColor=white)](#)
 
@@ -43,7 +43,7 @@ Tài liệu được xây dựng theo phương pháp sư phạm 11 bước: đi 
 - **Phân tích bẫy đề thi (Exam Traps)**: Hơn 25 hộp cảnh báo các lỗi kinh điển sinh viên hay mất điểm trong đề thi trắc nghiệm và tự luận UIT.
 - **Hệ thống ôn thi Master Review**: Bao gồm 01 đề thi giữa kỳ và 02 đề thi mô phỏng cuối kỳ chuẩn định dạng thi UIT kèm đáp án chi tiết 100%.
 - **Phụ lục thực hành Linux (Survival Kit)**: Hướng dẫn lệnh cốt lõi và các mẫu mã chọn lọc cho chủ đề POSIX Threads, `fork()`, `pipe()`, shared memory và signal. Đây không phải bộ mã nguồn hoàn chỉnh cho toàn bộ Lab 1–6.
-- **Độc lập ngoại tuyến 100%**: Sử dụng thư viện MathJax 3.2.2 đóng gói sẵn để hiển thị 771 công thức toán học sắc nét mà không cần kết nối mạng.
+- **Độc lập ngoại tuyến 100%**: Sử dụng thư viện MathJax 3.2.2 đóng gói sẵn để hiển thị 775 biểu thức toán học sắc nét mà không cần kết nối mạng.
 
 ---
 
@@ -55,24 +55,24 @@ Tài liệu được xây dựng theo phương pháp sư phạm 11 bước: đi 
 
 | Phần / Chương | Tên chuyên đề | Nội dung trọng tâm | Trang |
 | :--- | :--- | :--- | :---: |
-| **Phần 0** | Cách học IT007 & Nền tảng | Bản đồ môn học, kỹ năng C (con trỏ, struct), POSIX API và cấu trúc đề thi | 3–4 |
-| **Chương 1** | Tổng quan về Hệ điều hành | Khái niệm HDH, Dual-mode (User vs Kernel), ngắt phần cứng, Trap/Exception | 5–8 |
-| **Chương 2** | Cấu trúc Hệ điều hành | Lời gọi hệ thống (System Call), truyền tham số, cấu trúc Monolithic vs Microkernel | 9–12 |
-| **Chương 3** | Quản lý tiến trình | PCB, 5 trạng thái tiến trình, cây `fork()`, luồng (Threads vs Process) | 13–19 |
-| **Chương 4** | Định thời CPU | Các chỉ số $TAT, WT, RT$, thuật toán FCFS, SJF, SRTF, Priority, RR, HRRN, MLFQ | 20–24 |
-| **Giữa kỳ** | Midterm Master Review | Đề thi mẫu giữa kỳ kèm lời giải chi tiết và biểu đồ Gantt Round Robin $q=3$ | 25–28 |
-| **Chương 5** | Đồng bộ tiến trình | Race Condition, Critical Section, Peterson, Semaphore, Mutex, Monitor, 3 bài toán kinh điển | 29–34 |
-| **Chương 6** | Deadlock (Bế tắc) | 4 điều kiện Coffman, đồ thị RAG, thuật toán Banker (Need, Work, Safe State), Phòng tránh & Phục hồi | 35–38 |
-| **Chương 7** | Quản lý bộ nhớ | Dynamic Relocation, Phân mảnh nội/ngoại, First/Best/Worst fit, Phân trang, TLB, EAT | 39–42 |
-| **Chương 8** | Bộ nhớ ảo | Demand Paging, Page Fault step-by-step, thuật toán FIFO, OPT, LRU, Belady, Thrashing | 43–46 |
-| **Cuối kỳ** | Final Master Review | 02 Đề thi mô phỏng cuối kỳ chuẩn format UIT kèm đáp án chi tiết 100% | 47–52 |
-| **Phụ lục** | Linux Survival Kit | Lệnh Linux cơ bản, hướng dẫn Shell/Bash và mẫu mã thực hành chọn lọc | 53–56 |
+| **Phần 0** | Cách học IT007 & Nền tảng | Bản đồ môn học, kỹ năng C (con trỏ, struct), POSIX API và cấu trúc đề thi | 3 |
+| **Chương 1** | Tổng quan về Hệ điều hành | Khái niệm HDH, Dual-mode (User vs Kernel), ngắt phần cứng, Trap/Exception | 5 |
+| **Chương 2** | Cấu trúc Hệ điều hành | Lời gọi hệ thống (System Call), truyền tham số, cấu trúc Monolithic vs Microkernel | 10 |
+| **Chương 3** | Quản lý tiến trình | PCB, 5 trạng thái tiến trình, cây `fork()`, luồng (Threads vs Process) | 14 |
+| **Chương 4** | Định thời CPU | Các chỉ số $TAT, WT, RT$, thuật toán FCFS, SJF, SRTF, Priority, RR, HRRN, MLFQ | 21 |
+| **Giữa kỳ** | Midterm Master Review | Đề thi mẫu giữa kỳ kèm lời giải chi tiết và biểu đồ Gantt Round Robin $q=3$ | 26 |
+| **Chương 5** | Đồng bộ tiến trình | Race Condition, Critical Section, Peterson, Semaphore, Mutex, Monitor, 3 bài toán kinh điển | 30 |
+| **Chương 6** | Deadlock (Bế tắc) | 4 điều kiện Coffman, đồ thị RAG, thuật toán Banker (Need, Work, Safe State), Phòng tránh & Phục hồi | 36 |
+| **Chương 7** | Quản lý bộ nhớ | Dynamic Relocation, Phân mảnh nội/ngoại, First/Best/Worst fit, Phân trang, TLB, EAT | 40 |
+| **Chương 8** | Bộ nhớ ảo | Demand Paging, Page Fault step-by-step, thuật toán FIFO, OPT, LRU, Belady, Thrashing | 44 |
+| **Cuối kỳ** | Final Master Review | 02 Đề thi mô phỏng cuối kỳ chuẩn format UIT kèm đáp án chi tiết 100% | 48 |
+| **Phụ lục** | Linux Survival Kit | Lệnh Linux cơ bản, hướng dẫn Shell/Bash và mẫu mã thực hành chọn lọc | 54 |
 
 ---
 
 ## Đọc tài liệu
 
-- **Bản PDF in ấn chính thức:** [`dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf`](dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf) (56 trang A4, định dạng đẹp nhất).
+- **Bản PDF in ấn chính thức:** [`dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf`](dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf) (57 trang A4, định dạng đẹp nhất).
 - **Bản HTML đơn nhất ngoại tuyến:** [`dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.html`](dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.html) (Mở trực tiếp trên mọi trình duyệt web không cần Internet).
 
 ---

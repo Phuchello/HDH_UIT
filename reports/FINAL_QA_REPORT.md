@@ -20,10 +20,7 @@
 - `build/build.ps1`, `build/build.js`, `build/pdf_tools.py`
 - `build/validate_final.py`, `build/technical_checks.py`
 
-SHA-256:
-
-- PDF: `65EA20944B4596A77C20B2E0CFBC3A9817297B16201D2A3B0976EBEBEFB4E70C`
-- HTML: `6C19AADC2293D8C7B08A4EF0F5F77AE58A8B6A7F2B93F6075983286FE4E3117D`
+Hashes are intentionally not asserted: a deterministic clean rebuild may change PDF serialization while the structural and visual validation remains authoritative.
 
 ## 2. Deterministic build
 
@@ -86,9 +83,9 @@ The supplied ZIP did not contain the referenced `OPUS_FINAL_REVIEW.md`. The avai
 
 ## 4. Final PDF and TOC verification
 
-- Final page count: **56 pages**
-- Page size: **56/56 A4** (approximately 595.276 × 841.89 points)
-- Searchable/selectable text: **56/56 pages**
+- Final page count: **57 pages**
+- Page size: **57/57 A4** (approximately 595.276 × 841.89 points)
+- Searchable/selectable text: **57/57 pages**
 - Cover: no running header/footer
 - Interior: current-chapter header and centered page number; no observed collisions
 - `printBackground`: enabled
@@ -99,22 +96,22 @@ Final chapter starts, extracted from pass 1 and reverified against pass 2:
 |---|---:|
 | Phần 0 | 3 |
 | Chương 1 | 5 |
-| Chương 2 | 9 |
-| Chương 3 | 13 |
-| Chương 4 | 20 |
-| Midterm Review | 25 |
-| Chương 5 | 29 |
-| Chương 6 | 35 |
-| Chương 7 | 39 |
-| Chương 8 | 43 |
-| Final Review | 47 |
-| Phụ lục Linux | 53 |
+| Chương 2 | 10 |
+| Chương 3 | 14 |
+| Chương 4 | 21 |
+| Midterm Review | 26 |
+| Chương 5 | 30 |
+| Chương 6 | 36 |
+| Chương 7 | 40 |
+| Chương 8 | 44 |
+| Final Review | 48 |
+| Phụ lục Linux | 54 |
 
 **TOC result:** PASS. Expected and actual chapter-start maps are identical after the final render.
 
 ## 5. Formula verification
 
-- Math containers rendered: **771**
+- Math containers rendered: **775**
 - MathJax render errors: **0**
 - Visible unresolved `$`, `$$`, `\(`, `\)`, `\[`, `\]` after typesetting: **0**
 - Cover arrows use literal Unicode `→` and do not invoke MathJax.
@@ -149,7 +146,7 @@ Standalone-incomplete snippets and pedagogical semaphore pseudocode were explici
 
 ## 7. Automated and visual PDF QA
 
-Every final PDF page was rendered to PNG. Three contact sheets covering all 56 pages were manually inspected. Programmatic checks evaluated page dimensions, word count, text span, vector/image counts, and density.
+Every final PDF page was rendered to PNG. Three contact sheets covering all 57 pages were manually inspected. Programmatic checks evaluated page dimensions, word count, text span, vector/image counts, and density.
 
 Final suspect-page list:
 
@@ -166,7 +163,7 @@ Mandatory manual samples inspected:
 - paging/TLB and EAT: pages 40–42
 - page replacement tables: pages 44–45
 - answer keys and final mock examinations: pages 27–28 and 48–52
-- Linux appendix and final page: pages 53–56
+- Linux appendix and final page: pages 54–57
 
 Defects found and corrected during iteration:
 
