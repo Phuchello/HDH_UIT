@@ -238,7 +238,8 @@ def compile_checks(run_gcc=False):
                         raise RuntimeError("--compile requested but gcc is not available on PATH")
                     binary = outdir / f"{file.stem}-{index}"
                     completed = subprocess.run(
-                        [gcc, "-Wall", "-Wextra", "-pedantic", "-std=c11", str(cfile), "-o", str(binary), "-pthread", "-lrt"],
+                        [gcc, "-Wall", "-Wextra", "-pedantic", "-std=c11", "-D_POSIX_C_SOURCE=200809L",
+                         str(cfile), "-o", str(binary), "-pthread", "-lrt"],
                         text=True, capture_output=True, check=False,
                     )
                     row.update({"compiler": gcc, "returncode": completed.returncode,
