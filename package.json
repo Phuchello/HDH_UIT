@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "description": "Local build dependency for the offline IT007 handbook renderer.",
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

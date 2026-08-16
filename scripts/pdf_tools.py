@@ -55,7 +55,9 @@ def page_map(pdf_path: Path):
 
 def cmd_map(args):
     mapping = page_map(Path(args.pdf))
-    Path(args.out).write_text(json.dumps(mapping, ensure_ascii=False, indent=2), encoding="utf-8")
+    output = Path(args.out)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(mapping, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(mapping, ensure_ascii=False, indent=2))
 
 

@@ -20,7 +20,7 @@
 <div class="chapter-header">
     <div class="chapter-num">Phụ Lục — Kỹ Năng Thực Hành</div>
     <h1>LINUX SURVIVAL KIT CHO MÔN HỌC IT007 UIT</h1>
-    <div class="chapter-subtitle">Môi trường WSL2 $\rightarrow$ Bảng lệnh Linux bắt buộc $\rightarrow$ Mã nguồn C chuẩn Lab 1 đến Lab 6</div>
+    <div class="chapter-subtitle">Môi trường WSL2 $\rightarrow$ Bảng lệnh Linux cốt lõi $\rightarrow$ Mẫu mã thực hành chọn lọc</div>
 </div>
 
 <div class="learning-objectives">
@@ -28,7 +28,7 @@
     <ul>
         <li>Thiết lập môi trường làm việc Linux Ubuntu trên Windows bằng WSL2 nhanh chóng.</li>
         <li>Thành thạo các lệnh kiểm tra hệ thống, tiến trình và biên dịch C (`ps`, `top`, `pstree`, `kill`, `gcc`, `gdb`, `strace`).</li>
-        <li>Nắm vững mã nguồn C mẫu chuẩn hóa cho tất cả các bài thực hành Lab IT007 (Labs 1-6).</li>
+        <li>Đọc, chạy và điều chỉnh các mẫu mã minh họa cho những chủ đề Lab IT007 tiêu biểu; đối chiếu đề bài, yêu cầu nộp bài và môi trường lớp trước khi dùng.</li>
     </ul>
 </div>
 
@@ -53,9 +53,10 @@
 
 <!-- SECTION 2 -->
 <section>
-    <h2>2. BỘ SOURCE CODE CHUẨN CÁC BÀI LAB IT007 UIT</h2>
+    <h2>2. MẪU MÃ MINH HỌA CHO MỘT SỐ CHỦ ĐỀ LAB IT007</h2>
+    <p>Các đoạn dưới đây là tài liệu học tập chọn lọc, không phải bộ mã nguồn hoàn chỉnh hoặc đề nộp bài cho toàn bộ Lab 1–6. Chỉ những đoạn được ghi rõ là chương trình hoàn chỉnh mới nên được biên dịch trực tiếp.</p>
 
-    <h3>Lab 2: Bash Shell Scripting (`check_number.sh`)</h3>
+    <h3>Ví dụ Bash: kiểm tra số và tính tổng (`check_number.sh`)</h3>
 <pre><code class="language-bash"><span class="code-comment">#!/bin/bash</span>
 <span class="code-comment"># lab2_script.sh - Kiểm tra số nguyên tố và tính tổng</span>
 <span class="code-keyword">read</span> -p <span class="code-string">"Nhập số nguyên N: "</span> N
@@ -73,7 +74,7 @@ sum=0
 <span class="code-func">echo</span> <span class="code-string">"Tổng từ 1 đến $N là: $sum"</span>
 </code></pre>
 
-    <h3>Lab 3: Tiến Trình & Bộ Nhớ Chia Sẻ (Shared Memory)</h3>
+    <h3>Ví dụ POSIX: tiến trình và bộ nhớ chia sẻ (Shared Memory)</h3>
 <pre><code class="language-c"><span class="code-comment">/* lab3_shm.c - Sử dụng POSIX Shared Memory shm_open & mmap có kiểm tra lỗi */</span>
 <span class="code-keyword">#include</span> &lt;stdio.h&gt;
 <span class="code-keyword">#include</span> &lt;stdlib.h&gt;
@@ -110,7 +111,7 @@ sum=0
 }
 </code></pre>
 
-    <h3>Lab 4: Mô Phỏng Định Thời CPU (FCFS Scheduler Struct)</h3>
+    <h3>Ví dụ cấu trúc dữ liệu: mô phỏng định thời FCFS</h3>
 <pre><code class="language-c"><span class="code-comment">/* lab4_fcfs.c - Struct dữ liệu tính WT, TAT định thời */</span>
 <span class="code-keyword">typedef struct</span> {
     <span class="code-keyword">int</span> id, at, bt, ct, tat, wt;
@@ -128,7 +129,7 @@ sum=0
 }
 </code></pre>
 
-    <h3>Lab 5: Đồng Bộ POSIX Threads Với Semaphore (`pthread_sem.c`)</h3>
+    <h3>Ví dụ POSIX Threads với semaphore (`pthread_sem.c`)</h3>
 <pre><code class="language-c"><span class="code-comment">/* lab5_pthread.c - Độc quyền truy xuất Mutex bằng POSIX Semaphore */</span>
 <span class="code-keyword">#include</span> &lt;stdio.h&gt;
 <span class="code-keyword">#include</span> &lt;pthread.h&gt;
@@ -155,7 +156,7 @@ sem_t mutex;
 }
 </code></pre>
 
-    <h3>Lab 6: Simple Shell Tích Hợp Pipe (`lab6_pipe.c` - Complete Program)</h3>
+    <h3>Ví dụ chương trình hoàn chỉnh: pipe với `fork()` và `execvp()` (`lab6_pipe.c`)</h3>
 <pre><code class="language-c"><span class="code-comment">/* lab6_pipe.c - Chương trình biên dịch hoàn chỉnh thực thi lệnh: ls -l | grep txt */</span>
 <span class="code-keyword">#include</span> &lt;stdio.h&gt;
 <span class="code-keyword">#include</span> &lt;stdlib.h&gt;

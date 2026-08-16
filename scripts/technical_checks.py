@@ -1,11 +1,26 @@
 import html
 import json
 import re
+import shutil
+import subprocess
+import sys
 from collections import deque
 from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+CANONICAL_CHAPTER_DIR = ROOT / "src" / "chapters"
+
+
+def chapter_dir():
+    """Use canonical sources; legacy layout is only an explicit compatibility fallback."""
+    if CANONICAL_CHAPTER_DIR.is_dir():
+        return CANONICAL_CHAPTER_DIR
+    legacy = ROOT / "chapters"
+    if legacy.is_dir():
+        print("WARNING: using legacy chapters/ layout; migrate content to src/chapters/.", file=sys.stderr)
+        return legacy
+    raise RuntimeError("Missing canonical source directory: src/chapters/")
 
 
 def scheduling():
@@ -202,21 +217,36 @@ class CodeParser(HTMLParser):
         if self.in_code: self.parts.append(data)
 
 
-def compile_checks():
+def compile_checks(run_gcc=False):
     outdir = ROOT / "build" / "c-spotchecks"
     outdir.mkdir(parents=True, exist_ok=True)
     rows = []
-    for file in sorted((ROOT / "chapters").glob("*.html")):
+    for file in sorted(chapter_dir().glob("*.html")):
         parser = CodeParser(); parser.feed(file.read_text(encoding="utf-8"))
         for index, (classes, code) in enumerate(parser.blocks, start=1):
             if "language-c" not in classes: continue
             complete = bool(re.search(r"\b(?:int|void)\s+main\s*\(", code)) and "..." not in code
-            pseudo = bool(re.search(r"\b(semaphore|wait\s*\(|signal\s*\(|TRUE)\b", code)) or not complete
+            pseudo = not complete
             row = {"source":file.name,"block":index,"completeProgram":complete,"pseudocode":pseudo}
             if complete and not pseudo:
                 cfile = outdir / f"{file.stem}-{index}.c"
                 cfile.write_text(code.strip()+"\n", encoding="utf-8")
                 row.update({"stagedFile":str(cfile),"requiredFlags":"-Wall -Wextra -pedantic -std=c11"})
+                if run_gcc and not sys.platform.startswith("win"):
+                    gcc = shutil.which("gcc")
+                    if not gcc:
+                        raise RuntimeError("--compile requested but gcc is not available on PATH")
+                    binary = outdir / f"{file.stem}-{index}"
+                    completed = subprocess.run(
+                        [gcc, "-Wall", "-Wextra", "-pedantic", "-std=c11", str(cfile), "-o", str(binary), "-pthread", "-lrt"],
+                        text=True, capture_output=True, check=False,
+                    )
+                    row.update({"compiler": gcc, "returncode": completed.returncode,
+                                "stdout": completed.stdout, "stderr": completed.stderr})
+                    if completed.returncode:
+                        raise RuntimeError(f"gcc failed for {cfile.name}: {completed.stderr}")
+                elif run_gcc:
+                    row["compiler"] = "skipped locally: POSIX examples require Linux/CI GCC"
             rows.append(row)
     staged = [r for r in rows if "stagedFile" in r]
     if not staged:
@@ -225,12 +255,13 @@ def compile_checks():
 
 
 def main():
+    run_gcc = "--compile" in sys.argv
     report = {
         "scheduling": scheduling(),
         "banker": banker(),
         "pageReplacement": replacement(),
         "other": other_numeric(),
-        "codeCompilation": compile_checks(),
+        "codeCompilation": compile_checks(run_gcc=run_gcc),
     }
     out = ROOT / "build" / "technical-checks.json"
     out.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")

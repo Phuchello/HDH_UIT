@@ -42,7 +42,7 @@ Tài liệu được xây dựng theo phương pháp sư phạm 11 bước: đi 
   - **Phân trang & Bộ nhớ ảo**: Tính địa chỉ vật lý, bảng trang, tính thời gian truy xuất hiệu dụng (EAT) với TLB, và bảng nạp 20 bước cho FIFO, OPT, LRU (kèm giải thích hiện tượng Belady & Thrashing).
 - **Phân tích bẫy đề thi (Exam Traps)**: Hơn 25 hộp cảnh báo các lỗi kinh điển sinh viên hay mất điểm trong đề thi trắc nghiệm và tự luận UIT.
 - **Hệ thống ôn thi Master Review**: Bao gồm 01 đề thi giữa kỳ và 02 đề thi mô phỏng cuối kỳ chuẩn định dạng thi UIT kèm đáp án chi tiết 100%.
-- **Phụ lục thực hành Linux (Survival Kit)**: Hướng dẫn lệnh cốt lõi và mã nguồn C chuẩn (có kiểm tra lỗi hệ thống) cho các bài Lab 1–6 (POSIX Threads, `fork()`, `pipe()`, `shared memory`, `signal`).
+- **Phụ lục thực hành Linux (Survival Kit)**: Hướng dẫn lệnh cốt lõi và các mẫu mã chọn lọc cho chủ đề POSIX Threads, `fork()`, `pipe()`, shared memory và signal. Đây không phải bộ mã nguồn hoàn chỉnh cho toàn bộ Lab 1–6.
 - **Độc lập ngoại tuyến 100%**: Sử dụng thư viện MathJax 3.2.2 đóng gói sẵn để hiển thị 771 công thức toán học sắc nét mà không cần kết nối mạng.
 
 ---
@@ -66,7 +66,7 @@ Tài liệu được xây dựng theo phương pháp sư phạm 11 bước: đi 
 | **Chương 7** | Quản lý bộ nhớ | Dynamic Relocation, Phân mảnh nội/ngoại, First/Best/Worst fit, Phân trang, TLB, EAT | 39–42 |
 | **Chương 8** | Bộ nhớ ảo | Demand Paging, Page Fault step-by-step, thuật toán FIFO, OPT, LRU, Belady, Thrashing | 43–46 |
 | **Cuối kỳ** | Final Master Review | 02 Đề thi mô phỏng cuối kỳ chuẩn format UIT kèm đáp án chi tiết 100% | 47–52 |
-| **Phụ lục** | Linux Survival Kit | Lệnh Linux cơ bản, hướng dẫn Shell/Bash, mã nguồn C các bài Lab IT007 (Lab 1–6) | 53–56 |
+| **Phụ lục** | Linux Survival Kit | Lệnh Linux cơ bản, hướng dẫn Shell/Bash và mẫu mã thực hành chọn lọc | 53–56 |
 
 ---
 
@@ -127,7 +127,8 @@ HDH_UIT/
 ## Hướng dẫn kiểm thử và biên dịch từ nguồn
 
 ### 1. Yêu cầu cài đặt
-- Python 3.10 trở lên, Node.js 18 trở lên.
+- Python 3.10 trở lên, Node.js 18 trở lên và Chrome hoặc Edge cài cục bộ.
+- Cài Node dependency một lần: `npm ci` (hoặc `npm install` khi phát triển).
 - Cài đặt thư viện Python:
   ```bash
   pip install pypdf pdfplumber reportlab pillow pypdfium2

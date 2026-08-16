@@ -4,7 +4,7 @@
 **Target Repository:** https://github.com/Phuchello/HDH_UIT  
 **Branch:** `release/it007-handbook-v1`  
 **Author / Compiler:** Võ Trọng Phúc  
-**Deliverable:** `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf` (56 pages, A4)  
+**Deliverable:** `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf` (superseded by the 2026-08-16 hardening rebuild; see `FINAL_QA_REPORT.md`)
 
 ---
 

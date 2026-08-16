@@ -18,6 +18,13 @@ Bảng kiểm soát các tiêu chuẩn phát hành công khai cho kho lưu trữ
 
 ## 2. Tiêu Chuẩn Kiểm Thử Trước Khi Bàn Giao (Pre-Handoff Checks)
 
+### Release hardening checkpoint — 2026-08-16
+
+- [x] Final HTML rebuilt from canonical sources with local MathJax path and no iframe/remote dependency.
+- [x] TOC, anchors, assets, IDs, formulas and A4/searchable PDF validated after a clean rebuild (57 pages).
+- [x] CI workflow runs repository, final-deliverable and canonical technical checks; complete staged C programs compile with GCC on Linux.
+- [ ] Push checkpoint and confirm the resulting GitHub Actions run before creating any v1.0.0 tag.
+
 - [x] **Canonical Source Identified:** Nguồn chuẩn tại `src/chapters/`, `src/styles/`, `src/vendor/`.
 - [x] **Antigravity & Codex Output Reconciled:** Đã đồng bộ toàn bộ sửa đổi học thuật và chế bản in ấn A4.
 - [x] **Unicode / Mojibake:** 100% tiếng Việt UTF-8 chuẩn xác, không có ký tự lỗi ``.

@@ -25,6 +25,13 @@ Nhật ký kiểm tra chất lượng và bảng chấm điểm các chương c�
 
 ## 2. Kiểm Toán Tính Toàn Vẹn & Kỹ Thuật (Technical Integrity Checks)
 
+## Release hardening update — 2026-08-16
+
+- Clean two-pass rebuild completed from `src/chapters/`; final deliverables have **57** A4 pages.
+- Final HTML now references `../src/vendor/mathjax/es5/tex-mml-chtml.js`; iframe, remote dependency, missing asset, duplicate-ID, broken-anchor and placeholder counts are all 0.
+- Render diagnostics: 775 MathJax containers, 0 MathJax errors, 0 visible unresolved delimiters, 0 remote requests, 12 chapters and 12 clickable TOC links.
+- Five nested-list width warnings were visually sampled in the rendered PDF; no clipping was observed.
+
 - **Iframe count trong master HTML:** **0**
 - **Remote requests (mạng bên ngoài):** **0** (Hoàn toàn độc lập, offline 100%)
 - **Số công thức MathJax đã render:** **771**

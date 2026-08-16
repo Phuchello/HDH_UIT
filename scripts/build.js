@@ -15,7 +15,7 @@ const CHAPTERS = [
   ['07-memory-management', 'Chương 7', 'Quản lý bộ nhớ', 'chapter'],
   ['08-virtual-memory', 'Chương 8', 'Bộ nhớ ảo', 'chapter'],
   ['final-review', 'Cuối kỳ', 'Master Review và 02 đề thi mô phỏng', 'review'],
-  ['appendix-linux', 'Phụ lục', 'Linux Survival Kit và mã nguồn Lab 1-6', 'appendix'],
+  ['appendix-linux', 'Phụ lục', 'Linux Survival Kit và mẫu mã thực hành chọn lọc', 'appendix'],
 ];
 
 function arg(name, fallback = null) {
@@ -164,6 +164,7 @@ ${body}
     remoteDependencyCount: (document.match(/(?:src|href)\s*=\s*["']https?:\/\//gi) || []).length,
   };
   const auditPath = path.join(ROOT, 'build', 'merge-audit.json');
+  fs.mkdirSync(path.dirname(auditPath), {recursive: true});
   fs.writeFileSync(auditPath, JSON.stringify(audit, null, 2), 'utf8');
   console.log(JSON.stringify({out, auditPath, iframeCount:audit.iframeCount, remoteDependencyCount:audit.remoteDependencyCount, merged: mergedStats}, null, 2));
 }
@@ -195,9 +196,11 @@ async function render() {
         const t = node.nodeValue || '';
         if (/\$\$|(^|[^\\])\$[^$]+\$|\\\(|\\\)|\\\[|\\\]/.test(t)) unresolved.push(t.trim().slice(0,180));
       }
+      // Ignore sub-pixel/scrollbar variance and MathJax's intentionally wide internal
+      // measurement nodes; report only material layout overflow in printable content.
       const overflow = [...document.querySelectorAll('body *')].filter(el => {
         const r = el.getBoundingClientRect();
-        return r.width > 0 && (el.scrollWidth - el.clientWidth > 2) && !el.closest('pre');
+        return r.width > 0 && (el.scrollWidth - el.clientWidth > 12) && !el.closest('pre,mjx-container');
       }).slice(0,50).map(el => ({tag:el.tagName, cls:el.className, id:el.id, client:el.clientWidth, scroll:el.scrollWidth}));
       return {
         title: document.title,

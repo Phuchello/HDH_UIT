@@ -7,9 +7,12 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parent.parent
 HTML = ROOT / "dist" / "IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.html"
 PDF = ROOT / "dist" / "IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf"
+RENDER_DIAGNOSTICS = ROOT / "scripts" / "render-final.json"
 
 
 def main():
+    if not HTML.exists() or not PDF.exists():
+        raise SystemExit("Final HTML/PDF deliverables are missing; run scripts/build.ps1 first.")
     source = HTML.read_text(encoding="utf-8")
     ids = re.findall(r'\bid\s*=\s*["\']([^"\']+)["\']', source, flags=re.I)
     hrefs = re.findall(r'\bhref\s*=\s*["\']([^"\']+)["\']', source, flags=re.I)
@@ -42,6 +45,7 @@ def main():
             if annotation.get("/Subtype") == "/Link":
                 link_annotations += 1
 
+    render_diagnostics = json.loads(RENDER_DIAGNOSTICS.read_text(encoding="utf-8")) if RENDER_DIAGNOSTICS.exists() else None
     result = {
         "finalHtml": str(HTML),
         "finalPdf": str(PDF),
@@ -60,6 +64,7 @@ def main():
         "searchablePages": searchable_pages,
         "pdfLinkAnnotations": link_annotations,
         "metadata": {str(k):str(v) for k,v in (reader.metadata or {}).items()},
+        "renderDiagnostics": render_diagnostics,
     }
     failures = []
     for key in ("iframeCount", "remoteDependencyCount"):
@@ -68,9 +73,15 @@ def main():
         if result[key]: failures.append(key)
     if result["a4Pages"] != result["pageCount"]: failures.append("pageSize")
     if result["searchablePages"] != result["pageCount"]: failures.append("searchableText")
+    if render_diagnostics is None:
+        failures.append("missingRenderDiagnostics")
+    elif any(render_diagnostics.get(key) for key in ("mathErrors", "unresolvedVisibleMath", "remoteRequests", "iframeCount")):
+        failures.append("renderDiagnostics")
+    result["renderWarnings"] = render_diagnostics.get("overflow", []) if render_diagnostics else []
     result["result"] = "PASS" if not failures else "FAIL"
     result["failures"] = failures
     out = ROOT / "build" / "final-validation.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(result, ensure_ascii=True, indent=2))
     if failures:

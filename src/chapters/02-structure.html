@@ -101,6 +101,7 @@
             </tbody>
         </table>
     </div>
+    <p><strong>Ghi nhớ về chi phí:</strong> một system call thường có chuyển đặc quyền từ user mode sang kernel mode và quay lại. Điều này <em>không tự động đồng nghĩa</em> với context switch; context switch chỉ xảy ra khi kernel chuyển CPU từ luồng/tiến trình đang chạy sang một luồng/tiến trình khác, chẳng hạn khi bị chặn, hết quantum hoặc bị trưng dụng.</p>
 
     <h3>C. 3 Cơ chế Truyền Tham Số cho System Call</h3>
     <p>Khi ứng dụng gọi System Call, nó cần truyền các tham số (ví dụ: tên file, kích thước bộ đệm) cho Kernel. Có 3 phương pháp chính:</p>

@@ -4,7 +4,7 @@
 **HDH_UIT — UIT IT007 Operating Systems Handbook**
 
 ## Current Phase
-`PUBLISHED_TO_MAIN_READY_FOR_OPTIONAL_CODEX_FINAL_AUDIT`
+`FINAL_RELEASE_HARDENING`
 
 ## Completed
 - [x] Khảo sát và đối chiếu các bản nguồn Antigravity/Codex liên quan.
@@ -42,10 +42,10 @@
 - Unresolved MAJOR: 0
 
 ## Last Safe Checkpoint
-Canonical IT007 handbook repository has been published to `main`; GitHub Actions validation passed.
+`main` at `46a19aebe3573f8066a8452ea5fe48c41102900f`, fetched from `origin/main` and clean before release-hardening changes.
 
 ## Exact Next Action
-Optional: run one final Codex repository audit, then create the Git tag / GitHub Release `v1.0.0` if desired. The current connected GitHub tool does not expose tag/release creation, so no tag has been fabricated.
+Obtain explicit approval to publish the verified release-hardening checkpoint to `main`, then confirm the GitHub Actions validation run before any v1.0.0 tag.
 
 ## Git Status
 - Default branch: `main`

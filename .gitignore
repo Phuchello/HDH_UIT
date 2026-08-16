@@ -56,3 +56,21 @@ scripts/*.json
 *.log
 *.tmp
 node_modules/
+
+# Local configuration, agent state, credentials and disposable output
+.env
+.env.*
+!.env.example
+.gemini/
+.codex/
+.antigravity/
+Antigravity/
+credentials/
+secrets/
+tmp/
+temp/
+scripts/qa-pages/
+scripts/master-*.pdf
+scripts/render-*.json
+scripts/toc-pages.json
+scripts/pdf-analysis.json

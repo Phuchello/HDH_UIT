@@ -7,6 +7,7 @@ Tài liệu này hướng dẫn chi tiết cách tái lập (reproduce), biên d
 ## 1. Yêu Cầu Môi Trường (Prerequisites)
 
 - **Node.js**: Phiên bản 18 trở lên (khuyên dùng Node 20+ hoặc 24 LTS).
+- **Node dependency**: cài đặt một lần từ thư mục gốc bằng `npm ci` (hoặc `npm install` nếu đang phát triển); Playwright được khóa trong `package-lock.json`.
 - **Python**: Phiên bản 3.10 trở lên.
 - **Thư viện Python phụ trợ**:
   ```bash
@@ -33,7 +34,7 @@ Pipeline sẽ thực hiện tuần tự:
 3. **Trích xuất số trang (TOC Mapping)**: Phân tích `master-pass1.pdf` bằng Python để định vị chính xác trang bắt đầu của từng chương.
 4. **Pass 2 (Chèn TOC chuẩn)**: Cập nhật số trang vào Mục lục và xuất ra bản HTML hoàn chỉnh `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.html`.
 5. **Pass 2 Render**: Render bản PDF thô `scripts/master-final-raw.pdf`.
-6. **Hoàn thiện PDF (Finalize)**: Phủ Header (tên chương hiện tại) và Footer (số trang dạng Trang X / 56), chèn metadata XMP/Info và xuất bản deliverable chính thức tại `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf`.
+6. **Hoàn thiện PDF (Finalize)**: Phủ Header (tên chương hiện tại) và Footer (số trang), chèn metadata XMP/Info và xuất bản deliverable chính thức tại `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf`.
 
 ---
 
@@ -52,7 +53,7 @@ python scripts/validate.py
 Bộ kiểm thử sẽ xác nhận 6 tiêu chuẩn:
 - Đủ 12 tệp chương nguồn và 3 tệp CSS.
 - Bản HTML phân phối đạt chuẩn (0 iframe, 0 remote request, 0 TODO markers).
-- Bản PDF đạt chuẩn 56 trang A4, SHA-256 xác thực và toàn bộ trang có thể tìm kiếm văn bản (searchable text).
-- Độ chính xác của các bài tập mẫu định thời CPU, Banker, thay thế trang LRU/FIFO/OPT.
+- Bản PDF đạt chuẩn A4, toàn bộ trang có thể tìm kiếm văn bản (searchable text) và số trang thực tế không bị hash-lock.
+- Độ chính xác của các bài tập mẫu định thời CPU, Banker, thay thế trang LRU/FIFO/OPT được `technical_checks.py` tính lại từ nguồn canonical.
 - Mục lục 12 chương liên kết chính xác.
 - Kho lưu trữ an toàn, không chứa thông tin nhạy cảm.

@@ -42,3 +42,4 @@
 - [x] Commit các tệp tin an toàn với thông điệp rõ ràng.
 - [x] Đẩy nhánh `release/it007-handbook-v1` lên `https://github.com/Phuchello/HDH_UIT`.
 - [x] Cập nhật `PROJECT_STATE.md` sang trạng thái `READY_FOR_CODEX_FINAL_GITHUB_AUDIT` và dừng lại bàn giao.
+- [x] Release hardening: canonical build paths, public claims, clean rebuild and validation have been refreshed; pending action is CI confirmation after publish.

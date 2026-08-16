@@ -1,5 +1,7 @@
 param(
-    [string]$ChromePath = 'C:\Program Files\Google\Chrome\Application\chrome.exe'
+    [string]$ChromePath,
+    [string]$NodePath,
+    [string]$PythonPath
 )
 
 $ErrorActionPreference = 'Stop'
@@ -12,17 +14,18 @@ function Find-Tool($name, $candidates) {
     foreach ($c in $candidates) {
         if (Test-Path $c) { return $c }
     }
-    return $name
+    throw "Required tool '$name' was not found on PATH or in the supplied candidates."
 }
 
-$RuntimeRoot = Join-Path $env:USERPROFILE '.cache\codex-runtimes\codex-primary-runtime\dependencies'
-$NodeExe = Find-Tool "node" @(Join-Path $RuntimeRoot 'node\bin\node.exe', Join-Path $RuntimeRoot 'node\node.exe')
-$PythonExe = Find-Tool "python" @(Join-Path $RuntimeRoot 'python\python.exe', "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe")
-$NodeModules = Join-Path $RuntimeRoot 'node\node_modules'
+$NodeExe = if ($NodePath) { $NodePath } else { Find-Tool "node" @() }
+$PythonExe = if ($PythonPath) { $PythonPath } elseif (Get-Command python -ErrorAction SilentlyContinue) { (Get-Command python).Source } elseif (Get-Command py -ErrorAction SilentlyContinue) { (Get-Command py).Source } else { throw "Required Python interpreter was not found on PATH." }
+$NodeModules = Join-Path $ProjectRoot 'node_modules'
+if (-not (Test-Path -LiteralPath $NodeModules)) { throw "Missing Node dependencies. Run 'npm ci' (or 'npm install') from the repository root first." }
 
 if (-not (Test-Path -LiteralPath $ChromePath)) {
     $ChromePath = 'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
 }
+if (-not (Test-Path -LiteralPath $ChromePath)) { throw "Chrome/Edge was not found. Supply -ChromePath with a local Chromium executable." }
 if (-not (Test-Path -LiteralPath $ChromePath)) {
     $ChromePath = 'C:\Program Files\Microsoft\Edge\Application\msedge.exe'
 }
@@ -37,7 +40,7 @@ $env:NODE_PATH = $NodeModules
 $Dist = Join-Path $ProjectRoot 'dist'
 $Scripts = Join-Path $ProjectRoot 'scripts'
 $Qa = Join-Path $Scripts 'qa-pages'
-New-Item -ItemType Directory -Path $Dist -Force | Out-Null
+New-Item -ItemType Directory -Path $Dist, $Scripts, $Qa -Force | Out-Null
 
 $Pass1Html = Join-Path $Dist 'master-pass1.html'
 $Pass1Pdf = Join-Path $Scripts 'master-pass1.pdf'

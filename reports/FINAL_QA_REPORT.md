@@ -3,7 +3,15 @@
 **Publication status:** PASS  
 **Final score:** **96/100**  
 **Acceptance threshold:** 95/100  
-**QA date:** 2026-08-13
+**QA date:** 2026-08-16
+
+## Release-hardening addendum (2026-08-16)
+
+- Clean rebuild result: **57 A4 pages**, searchable text on 57/57 pages.
+- Final HTML uses the canonical local MathJax path `../src/vendor/mathjax/es5/tex-mml-chtml.js`; validation found 0 iframe, remote dependency, missing asset, duplicate ID, broken anchor and placeholder matches.
+- Rendered result: 775 MathJax containers, 0 MathJax errors, 0 unresolved visible delimiters, 0 remote requests, 12 chapters and 12 TOC links.
+- Canonical-source technical checks recomputed scheduling, Banker, TLB/EAT, fork and replacement examples; staged complete C programs are compiled in CI with GCC flags.
+- Five nested-list width warnings were reviewed in PDF images; no clipping was observed. This is retained as a minor monitoring limitation, not a release blocker.
 
 ## 1. Final deliverables
 
