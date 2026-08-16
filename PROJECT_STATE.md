@@ -4,7 +4,7 @@
 **HDH_UIT — UIT IT007 Operating Systems Handbook**
 
 ## Current Phase
-`CANONICAL_INTEGRATION_AND_PRECISION_ALIGNMENT`
+`READY_FOR_CODEX_FINAL_GITHUB_AUDIT`
 
 ## Completed
 - [x] Đã khảo sát và phát hiện toàn bộ các bản sao dự án (`IT007_CAM_NANG_FINAL`, `IT007_CAM_NANG`, `extracted_text`).
@@ -14,6 +14,8 @@
 - [x] Đã hoàn thành các tinh chỉnh chính xác nội dung (Priority convention, Memory Barrier, Swapping, Mode vs Context switch, printf I/O convention).
 - [x] Đã trích xuất toàn bộ ảnh xem trước chất lượng cao từ PDF (`docs/preview/`).
 - [x] Đã hoàn thành tài liệu xuất bản: `README.md`, `NOTICE.md`, `CHANGELOG.md`, `docs/BUILD.md`, `docs/METHODOLOGY.md`, `docs/PROJECT_HISTORY.md`, `reports/PRE_CODEX_AUDIT.md`.
+- [x] Đã chạy toàn bộ bộ kiểm thử tự động `validate.py` (6/6 PASS).
+- [x] Đã tạo 6 commit có cấu trúc và đẩy thành công nhánh `release/it007-handbook-v1` lên GitHub Remote `https://github.com/Phuchello/HDH_UIT`.
 
 ## Current Working Tree
 `HDH_UIT`
@@ -29,10 +31,10 @@
 `https://github.com/Phuchello/HDH_UIT`
 
 ## Last Safe Checkpoint
-All core files reconciled, precision content updated, preview images generated, and validation suite prepared.
+Gemini canonical repository integration completed and pushed.
 
 ## Exact Next Action
-Run full validation test suite, commit canonical repository files to branch `release/it007-handbook-v1`, push to remote, and prepare for Codex final audit.
+Open the repository/worktree in Codex and run final engineering, publication, Git audit, then merge/push the release to main.
 
 ## Git Status
-Branch: `release/it007-handbook-v1`
+Branch: `release/it007-handbook-v1` (Pushed to origin/release/it007-handbook-v1)
