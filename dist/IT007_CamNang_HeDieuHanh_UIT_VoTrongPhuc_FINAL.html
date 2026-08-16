@@ -1,0 +1,3324 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cẩm nang Hệ điều hành IT007 - Võ Trọng Phúc</title>
+<meta name="author" content="Võ Trọng Phúc">
+<style>/* components.css */
+/* ==========================================================================
+   IT007 CẨM NANG HỆ ĐIỀU HÀNH - UI & ACADEMIC COMPONENTS
+   Author: Võ Trọng Phúc
+   ========================================================================== */
+
+/* --- CHAPTER HEADER COVER --- */
+.chapter-header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+    color: #ffffff;
+    padding: 20pt;
+    border-radius: 8px;
+    margin-bottom: 15pt;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.chapter-header .chapter-num {
+    font-size: 10pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #38bdf8;
+    margin-bottom: 4pt;
+}
+
+.chapter-header h1 {
+    color: #ffffff;
+    font-size: 22pt;
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chapter-header .chapter-subtitle {
+    font-size: 11pt;
+    color: #94a3b8;
+    margin-top: 6pt;
+    font-weight: 400;
+}
+
+/* --- LEARNING OBJECTIVES & KNOWLEDGE MAP --- */
+.learning-objectives {
+    background-color: var(--primary-light);
+    border-left: 4px solid var(--primary);
+    padding: 10pt 12pt;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 12pt;
+}
+
+.learning-objectives h3 {
+    color: var(--primary);
+    margin-top: 0;
+    font-size: 11pt;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* --- ALERT & CALLOUT BOXES --- */
+.alert-box {
+    padding: 10pt 12pt;
+    border-radius: 6px;
+    margin: 10pt 0;
+    font-size: 9.5pt;
+    border-left: 4px solid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.alert-box .alert-title {
+    font-weight: 700;
+    margin-bottom: 4pt;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+    font-size: 8.5pt;
+    letter-spacing: 0.5px;
+}
+
+.alert-note {
+    background-color: var(--alert-note-bg);
+    border-color: var(--alert-note-border);
+    color: #1e40af;
+}
+
+.alert-tip {
+    background-color: var(--alert-tip-bg);
+    border-color: var(--alert-tip-border);
+    color: #065f46;
+}
+
+.alert-warning {
+    background-color: var(--alert-warning-bg);
+    border-color: var(--alert-warning-border);
+    color: #92400e;
+}
+
+.alert-danger {
+    background-color: var(--alert-danger-bg);
+    border-color: var(--alert-danger-border);
+    color: #991b1b;
+}
+
+/* --- "ĐỪNG NHẦM" (DON'T CONFUSE) COMPARISON BOX --- */
+.dont-confuse-box {
+    background-color: #fff1f2;
+    border: 1.5px solid #fecdd3;
+    border-left: 5px solid #e11d48;
+    border-radius: 6px;
+    padding: 12pt;
+    margin: 12pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.dont-confuse-box .box-title {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #be123c;
+    margin-bottom: 6pt;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* --- UIT EXAM TRAP BANNER (BẪY ĐỀ THI UIT) --- */
+.uit-trap-box {
+    background-color: #fefce8;
+    border: 1.5px solid #fef08a;
+    border-left: 5px solid #ca8a04;
+    border-radius: 6px;
+    padding: 10pt 12pt;
+    margin: 10pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.uit-trap-box .trap-title {
+    font-weight: 800;
+    color: #854d0e;
+    font-size: 10pt;
+    margin-bottom: 4pt;
+}
+
+/* --- WORKED EXAMPLES & PROBLEM CARDS --- */
+.worked-example {
+    background-color: #ffffff;
+    border: 1px solid var(--border-strong);
+    border-top: 3px solid var(--secondary);
+    border-radius: 6px;
+    padding: 12pt;
+    margin: 12pt 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.worked-example .example-header {
+    font-size: 11pt;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8pt;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 4pt;
+}
+
+.worked-example .problem-statement {
+    font-weight: 500;
+    margin-bottom: 8pt;
+    color: #1e293b;
+    background-color: #f8fafc;
+    padding: 8pt;
+    border-radius: 4px;
+}
+
+.worked-example .solution-steps {
+    margin-top: 8pt;
+}
+
+.solution-step-title {
+    font-weight: 700;
+    color: var(--secondary);
+    font-size: 9.5pt;
+    margin-top: 6pt;
+    margin-bottom: 3pt;
+}
+
+/* --- TABLES STYLING --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10pt 0;
+    font-size: 9pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+th, td {
+    padding: 6pt 8pt;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+th {
+    background-color: var(--primary);
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 8.5pt;
+    letter-spacing: 0.5px;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* --- CODE BLOCKS --- */
+pre {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 10pt;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 8pt 0;
+    line-height: 1.45;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+code {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    background-color: #f1f5f9;
+    color: #0f172a;
+    padding: 1.5pt 4pt;
+    border-radius: 3px;
+    border: 1px solid #e2e8f0;
+}
+
+pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: none;
+}
+
+/* Code Comment Accent */
+.code-comment { color: #64748b; font-style: italic; }
+.code-keyword { color: #38bdf8; font-weight: 600; }
+.code-func { color: #f43f5e; font-weight: 600; }
+.code-string { color: #4ade80; }
+
+/* --- GANTT CHART TIMELINE DIAGRAM --- */
+.gantt-container {
+    margin: 10pt 0;
+    padding: 8pt;
+    background: #f8fafc;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.gantt-chart {
+    display: flex;
+    width: 100%;
+    border: 1px solid #334155;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gantt-block {
+    text-align: center;
+    padding: 6pt 2pt;
+    font-weight: 700;
+    font-size: 9pt;
+    color: #ffffff;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+}
+
+.gantt-timeline {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 8pt;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-top: 4pt;
+    font-family: var(--font-mono);
+}
+
+/* Colors for Gantt Processes */
+.p-bg-1 { background-color: #2563eb; }
+.p-bg-2 { background-color: #059669; }
+.p-bg-3 { background-color: #d97706; }
+.p-bg-4 { background-color: #7c3aed; }
+.p-bg-5 { background-color: #db2777; }
+.p-bg-idle { background-color: #94a3b8; color: #1e293b; }
+
+/* --- QUICK RECALL CHEAT SHEET BOX --- */
+.quick-recall-card {
+    background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+    border: 1.5px solid #bbf7d0;
+    border-radius: 6px;
+    padding: 10pt 12pt;
+    margin: 12pt 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.quick-recall-card .recall-title {
+    font-weight: 800;
+    font-size: 10.5pt;
+    color: #166534;
+    margin-bottom: 6pt;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+
+/* publication.css */
+/* Final publication overrides: compact academic A4 layout, offline-safe fonts. */
+
+@page {
+    size: A4 portrait;
+    margin: 16mm 15mm 17mm 15mm;
+}
+
+@page cover {
+    size: A4 portrait;
+    margin: 0;
+}
+
+:root {
+    --primary: #153e75;
+    --primary-light: #edf4fb;
+    --secondary: #176b87;
+    --accent: #276749;
+    --text-main: #172033;
+    --text-muted: #4d5b70;
+    --bg-main: #ffffff;
+    --bg-alt: #f6f8fb;
+    --border-color: #d5dce6;
+    --border-strong: #aeb9c8;
+    --font-sans: "Segoe UI", "Noto Sans", Arial, sans-serif;
+    --font-mono: "Cascadia Mono", "Consolas", "Liberation Mono", monospace;
+}
+
+html,
+body {
+    width: auto;
+    max-width: none;
+    font-family: var(--font-sans);
+    font-size: 10pt;
+    line-height: 1.46;
+    color: var(--text-main);
+    background: #fff;
+    text-rendering: optimizeLegibility;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; }
+strong { font-weight: 700; color: #111827; }
+em { color: var(--text-muted); }
+a { color: var(--secondary); text-decoration: none; }
+
+.book-cover {
+    page: cover;
+    width: 210mm;
+    height: 297mm;
+    padding: 24mm 22mm 20mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    color: #fff;
+    background:
+        linear-gradient(120deg, rgba(255,255,255,.06) 1px, transparent 1px) 0 0 / 18mm 18mm,
+        linear-gradient(30deg, #0d274b 0%, #124b71 62%, #1a6b78 100%);
+    break-after: page;
+}
+
+.cover-kicker {
+    padding-bottom: 7mm;
+    border-bottom: .7mm solid #72d1dc;
+    color: #d7eef4;
+    font-size: 10.5pt;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+}
+
+.cover-course { margin-top: 3mm; color: #91e1e7; font-size: 12pt; font-weight: 800; }
+.cover-main { max-width: 160mm; }
+.cover-title { margin: 0; color: #fff; font-size: 29pt; line-height: 1.08; letter-spacing: -.02em; text-transform: uppercase; }
+.cover-it007 { margin-top: 5mm; color: #8ee5e8; font-size: 18pt; font-weight: 800; letter-spacing: .08em; }
+.cover-subtitle { margin-top: 12mm; padding-left: 5mm; border-left: 1.2mm solid #72d1dc; color: #edf8fa; font-size: 13pt; line-height: 1.55; }
+.cover-meta { display: flex; justify-content: space-between; align-items: end; padding-top: 7mm; border-top: .25mm solid rgba(255,255,255,.35); }
+.cover-author { font-size: 12pt; font-weight: 700; }
+.cover-edition { padding: 2.5mm 4mm; border: .25mm solid #8ee5e8; border-radius: 1.5mm; color: #dffafd; font-size: 9pt; font-weight: 700; }
+
+.toc-container {
+    break-after: page;
+    min-height: 250mm;
+    padding-top: 4mm;
+}
+
+.toc-title { margin: 0 0 5mm; font-size: 21pt; letter-spacing: -.02em; }
+.toc-note { margin-bottom: 6mm; color: var(--text-muted); font-size: 9pt; }
+.toc-list { margin: 0; padding: 0; list-style: none; }
+.toc-item { display: grid; grid-template-columns: auto 1fr 16mm; gap: 2mm; align-items: end; margin: 0; padding: 2.25mm 0; border: 0; font-size: 10pt; }
+.toc-item.toc-review { margin-top: 1.5mm; }
+.toc-item a { color: var(--text-main); font-weight: 600; }
+.toc-item .toc-kind { color: var(--primary); font-weight: 800; }
+.toc-item .toc-leader { min-width: 8mm; border-bottom: .35mm dotted #9ca9ba; transform: translateY(-1.2mm); }
+.toc-page { text-align: right; color: var(--primary); font-variant-numeric: tabular-nums; font-weight: 800; }
+
+.chapter {
+    break-before: page;
+}
+
+.page-marker {
+    display: block;
+    height: 1pt;
+    overflow: visible;
+    color: #ffffff;
+    font-size: 1pt;
+    line-height: 1;
+}
+
+.chapter-header {
+    position: relative;
+    margin: 0 0 5mm;
+    padding: 7mm 8mm 6mm;
+    border: 0;
+    border-left: 1.4mm solid #49a6b4;
+    border-radius: 1.5mm;
+    box-shadow: none;
+    background: linear-gradient(110deg, #153e75 0%, #1f536f 100%);
+}
+
+.chapter-header .chapter-num { margin-bottom: 1.5mm; color: #a7edf0; font-size: 8.5pt; letter-spacing: .09em; }
+.chapter-header h1 { margin: 0; padding: 0; border: 0; color: #fff; font-size: 19pt; line-height: 1.16; letter-spacing: -.02em; }
+.chapter-header .chapter-subtitle { margin-top: 2mm; color: #e0edf5; font-size: 9.5pt; line-height: 1.4; }
+
+.learning-objectives {
+    margin: 0 0 5mm;
+    padding: 3.5mm 4.5mm;
+    border: .25mm solid #c8d8eb;
+    border-left: 1mm solid var(--primary);
+    border-radius: 0 1.2mm 1.2mm 0;
+    background: var(--primary-light);
+}
+
+.learning-objectives h3 { margin: 0 0 1.5mm; font-size: 10.5pt; }
+.learning-objectives ul { margin-bottom: 0; }
+
+h1, h2, h3, h4 { page-break-after: avoid; break-after: avoid-page; }
+h1 { font-size: 19pt; }
+h2 { margin: 5mm 0 2.5mm; padding-bottom: 1.5mm; border-bottom: .45mm solid #4b91a8; font-size: 14pt; }
+h3 { margin: 3.5mm 0 1.5mm; font-size: 11.5pt; }
+h4 { margin: 3mm 0 1mm; font-size: 10.5pt; }
+p { margin: 0 0 2.4mm; text-align: justify; orphans: 3; widows: 3; }
+ul, ol { margin: 0 0 2.5mm 5.2mm; }
+li { margin-bottom: 1mm; orphans: 2; widows: 2; }
+
+section { break-inside: auto; }
+.worked-example { break-inside: auto !important; box-shadow: none; }
+.worked-example .example-header,
+.worked-example .problem-statement,
+.solution-step-title { break-after: avoid-page; }
+.alert-box,
+.dont-confuse-box,
+.uit-trap-box,
+.quick-recall-card,
+.learning-objectives,
+.gantt-container { box-shadow: none; break-inside: avoid-page; }
+
+.chapter-review {
+    font-size: 9.7pt;
+    line-height: 1.42;
+}
+
+.chapter-review p { margin-bottom: 2mm; }
+.chapter-review h2 { margin-top: 4mm; }
+.chapter-review .worked-example,
+.chapter-review .alert-box { margin-top: 2.2mm; margin-bottom: 2.2mm; padding-top: 2.8mm; padding-bottom: 2.8mm; }
+
+.chapter > .quick-recall-card:last-child {
+    margin-top: 2.5mm;
+    padding: 2mm 3.2mm;
+    font-size: 8.3pt;
+    line-height: 1.25;
+    page-break-inside: avoid !important;
+    break-inside: avoid-page !important;
+}
+.chapter > .quick-recall-card:last-child ul {
+    display: block;
+    margin-bottom: 0;
+}
+.chapter > .quick-recall-card:last-child li { margin-bottom: .45mm; }
+.quick-recall-card .recall-title { break-after: avoid-page; }
+
+.alert-box,
+.dont-confuse-box,
+.uit-trap-box,
+.quick-recall-card,
+.worked-example { border-radius: 1.2mm; }
+
+table {
+    width: 100%;
+    margin: 3mm 0;
+    table-layout: auto;
+    border-collapse: collapse;
+    break-inside: auto !important;
+    font-size: 8.7pt;
+}
+thead { display: table-header-group; }
+tfoot { display: table-footer-group; }
+tr { break-inside: avoid-page; }
+th, td { padding: 1.7mm 2mm; vertical-align: top; overflow-wrap: anywhere; }
+th { background: #173f69; font-size: 8pt; letter-spacing: .03em; }
+
+pre {
+    margin: 2.5mm 0;
+    padding: 3.2mm;
+    border: .25mm solid #35465d;
+    border-radius: 1.2mm;
+    background: #111b2b;
+    font-size: 8.2pt;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: normal;
+    break-inside: auto !important;
+}
+
+code { font-size: 8.7pt; }
+.gantt-chart { min-height: 10mm; }
+.gantt-block { min-width: 6mm; padding: 2.2mm .5mm; font-size: 8pt; }
+.gantt-timeline { font-size: 7.5pt; }
+
+mjx-container { max-width: 100%; overflow: visible; }
+mjx-container[display="true"] { margin: 2.4mm 0 !important; }
+
+@media screen {
+    body { max-width: 210mm; margin: 0 auto; padding: 10mm 15mm; background: #e9eef4; }
+    .book-cover { margin-left: -15mm; }
+    .toc-container, .chapter { padding: 8mm 10mm; background: #fff; }
+}
+
+@media print {
+    html, body { background: #fff; }
+    a { color: inherit; text-decoration: none; }
+}
+</style>
+<script>window.MathJax={loader:{load:['input/tex','output/chtml']},tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],processEscapes:true},options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']},startup:{typeset:true}};</script>
+<script defer src="../vendor/mathjax/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<section class="book-cover" id="cover">
+  <div>
+    <div class="cover-kicker">Trường Đại học Công nghệ Thông tin - ĐHQG-HCM</div>
+    <div class="cover-course">KHOA KỸ THUẬT MÁY TÍNH - MÔN IT007</div>
+  </div>
+  <div class="cover-main">
+    <h1 class="cover-title">CẨM NANG HỆ ĐIỀU HÀNH</h1>
+    <div class="cover-it007">IT007 - UIT</div>
+    <div class="cover-subtitle">Từ trực giác → bản chất → thuật toán → bài tập → Lab Linux → luyện thi</div>
+  </div>
+  <div class="cover-meta">
+    <div class="cover-author">Biên soạn: Võ Trọng Phúc</div>
+    <div class="cover-edition">Bản biên soạn 2026</div>
+  </div>
+</section>
+<nav class="toc-container" id="table-of-contents" aria-label="Mục lục">
+  <span class="page-marker" aria-hidden="true">PAGE_MARKER_TOC</span>
+  <h1 class="toc-title">MỤC LỤC</h1>
+  <p class="toc-note">Số trang được tạo tự động từ bản PDF hai lượt. Nhấn vào mục để chuyển đến chương tương ứng trong HTML.</p>
+  <ol class="toc-list"><li class="toc-item toc-chapter"><a href="#chapter-00-intro"><span class="toc-kind">Phần 0:</span> Cách học IT007 và nền tảng C/Linux</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="00-intro">3</span></li>
+<li class="toc-item toc-chapter"><a href="#chapter-01-overview"><span class="toc-kind">Chương 1:</span> Tổng quan về Hệ điều hành</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="01-overview">5</span></li>
+<li class="toc-item toc-chapter"><a href="#chapter-02-structure"><span class="toc-kind">Chương 2:</span> Cấu trúc Hệ điều hành</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="02-structure">9</span></li>
+<li class="toc-item toc-chapter"><a href="#chapter-03-process"><span class="toc-kind">Chương 3:</span> Quản lý tiến trình</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="03-process">13</span></li>
+<li class="toc-item toc-chapter"><a href="#chapter-04-cpu-scheduling"><span class="toc-kind">Chương 4:</span> Định thời CPU</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="04-cpu-scheduling">20</span></li>
+<li class="toc-item toc-review"><a href="#chapter-midterm-review"><span class="toc-kind">Giữa kỳ:</span> Master Review và đề thi thử</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="midterm-review">25</span></li>
+<li class="toc-item toc-chapter"><a href="#chapter-05-synchronization"><span class="toc-kind">Chương 5:</span> Đồng bộ tiến trình</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="05-synchronization">29</span></li>
+<li class="toc-item toc-chapter"><a href="#chapter-06-deadlock"><span class="toc-kind">Chương 6:</span> Deadlock (Bế tắc)</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="06-deadlock">35</span></li>
+<li class="toc-item toc-chapter"><a href="#chapter-07-memory-management"><span class="toc-kind">Chương 7:</span> Quản lý bộ nhớ</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="07-memory-management">39</span></li>
+<li class="toc-item toc-chapter"><a href="#chapter-08-virtual-memory"><span class="toc-kind">Chương 8:</span> Bộ nhớ ảo</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="08-virtual-memory">43</span></li>
+<li class="toc-item toc-review"><a href="#chapter-final-review"><span class="toc-kind">Cuối kỳ:</span> Master Review và 02 đề thi mô phỏng</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="final-review">47</span></li>
+<li class="toc-item toc-appendix"><a href="#chapter-appendix-linux"><span class="toc-kind">Phụ lục:</span> Linux Survival Kit và mã nguồn Lab 1-6</a><span class="toc-leader"></span><span class="toc-page" data-toc-for="appendix-linux">53</span></li></ol>
+</nav>
+<main><article class="chapter chapter-chapter" id="chapter-00-intro" data-chapter="00-intro">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_00_INTRO</span>
+<div class="chapter-header">
+    <div class="chapter-num">Phần 00 — Định Hướng & Nền Tảng</div>
+    <h1>CÁCH HỌC IT007 VÀ NỀN TẢNG CẦN BIẾT BẮT BUỘC</h1>
+    <div class="chapter-subtitle">Biên soạn: Võ Trọng Phúc — Dành cho sinh viên UIT chinh phục điểm A/A+</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Lộ Trình Phần 0</h3>
+    <ul>
+        <li>Nắm vững tư duy học Hệ điều hành từ Trực giác $\rightarrow$ Bản chất $\rightarrow$ Thuật toán $\rightarrow$ Bài tập $\rightarrow$ Lab Linux $\rightarrow$ Bẫy đề thi UIT.</li>
+        <li>Trang bị nền tảng C/POSIX nâng cao: Con trỏ, Bộ nhớ động, System Call, Standard I/O vs System I/O.</li>
+        <li>Kỹ năng đọc đề thi, phân bổ thời gian và chiến thuật trình bày bài tự luận điểm tuyệt đối.</li>
+    </ul>
+</div>
+
+<section>
+    <h2>1. TRIẾT LÝ SƯ PHẠM 11 BƯỚC – HỌC HIỂU BẢN CHẤT</h2>
+    <p>Môn Hệ điều hành (IT007) tại UIT nổi tiếng là một môn học vừa mang tính lý thuyết hệ thống vừa có lượng bài tập tính toán và thực hành Linux tương đối lớn. Rất nhiều sinh viên gặp thất bại vì phương pháp "học vẹt" slide hoặc học thuộc đáp án đề cũ mà không hiểu nguyên lý hoạt động của Kernel.</p>
+
+    <div class="alert-box alert-note">
+        <div class="alert-title">💡 PHƯƠNG PHÁP CHINH PHỤC A/A+ IT007</div>
+        Mỗi khái niệm trong cuốn cẩm nang này sẽ được dẫn dắt theo đúng 11 bước sư phạm:
+        <ol style="margin-left: 20px; margin-top: 5px;">
+            <li><strong>Vì sao cần nó?</strong> — Đặt ra bài toán thực tế máy tính gặp phải.</li>
+            <li><strong>Trực giác</strong> — Giải thích bằng hình ảnh đời thường gần gũi.</li>
+            <li><strong>Định nghĩa chuẩn</strong> — Thuật ngữ khoa học máy tính & chuẩn UIT.</li>
+            <li><strong>Nó hoạt động như thế nào?</strong> — Từng bước chi tiết (Step-by-step).</li>
+            <li><strong>Hình dung trong máy tính</strong> — Vị trí CPU, RAM, Kernel, PCB, Queue.</li>
+            <li><strong>Ví dụ nhỏ</strong> — Bài toán cơ bản minh họa nguyên lý.</li>
+            <li><strong>Ví dụ chuẩn bài thi</strong> — Bài tập theo đúng cấu trúc đề thi UIT.</li>
+            <li><strong>Sai lầm thường gặp</strong> — Các lỗi tư duy khiến sinh viên mất điểm.</li>
+            <li><strong>Bẫy UIT</strong> — Chiêu trò đổi wording hoặc cài bẫy của giảng viên.</li>
+            <li><strong>Liên hệ Lab/Linux</strong> — Ánh xạ sang mã C, POSIX System Call và Linux Shell.</li>
+            <li><strong>Quick Recall</strong> — Tóm tắt 3–5 dòng chốt hạ kiến thức ôn nhanh trước giờ thi.</li>
+        </ol>
+    </div>
+</section>
+
+<section>
+    <h2>2. NỀN TẢNG C & POSIX CẦN THIẾT CHO MÔN HỌC</h2>
+    <p>IT007 sử dụng ngôn ngữ C để minh họa các khái niệm tiến trình, đồng bộ và các bài Lab Linux. Dưới đây là các khái niệm bắt buộc bạn phải vững:</p>
+
+    <h3>2.1. Con trỏ và Quản lý bộ nhớ (Pointers & Memory Allocation)</h3>
+    <p>Trong C, biến con trỏ chứa địa chỉ ô nhớ. Khi lập trình tiến trình hoặc bộ nhớ chia sẻ (Shared Memory), việc hiểu đúng địa chỉ ảo (Virtual Address) và con trỏ là chìa khóa để giải quyết bài tập.</p>
+
+<pre><code class="language-c"><span class="code-comment">// Ví dụ về địa chỉ biến và con trỏ</span>
+<span class="code-keyword">int</span> a = <span class="code-string">10</span>;
+<span class="code-keyword">int</span> *p = &a; <span class="code-comment">// p lưu địa chỉ ảo của biến a</span>
+<span class="code-func">printf</span>(<span class="code-string">"Giá trị a = %d, Địa chỉ &a = %p\n"</span>, a, (<span class="code-keyword">void</span>*)&a);
+</code></pre>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Standard I/O (printf) vs System I/O (write)</div>
+        <p><strong>Standard I/O (`printf`)</strong> sử dụng bộ đệm (Buffer) ở Userspace. Dữ liệu chưa được ghi ngay ra màn hình cho đến khi có dấu xuống dòng `\n` hoặc gọi `fflush(stdout)`.</p>
+        <p><strong>System Call I/O (`write`)</strong> gửi trực tiếp dữ liệu xuống Kernel space mà không đi qua bộ đệm Userspace.</p>
+        <p><em>Hệ quả trong bài thi UIT:</em> Nếu gọi `fork()` ngay sau `printf("Hello")` (không có `\n`), bộ đệm Userspace bị sao chép sang tiến trình con, dẫn tới chữ "Hello" bị in 2 lần!</p>
+    </div>
+</section>
+
+<section>
+    <h2>3. CHIẾN THUẬT LÀM BÀI THI IT007 LẤY ĐIỂM TỐI ĐA</h2>
+    <div class="uit-trap-box">
+        <div class="trap-title">🎯 NGUYÊN TẮC TRÌNH BÀY BÀI TỰ LUẬN UIT</div>
+        <ul>
+            <li><strong>Bài tập CPU Scheduling:</strong> Luôn vẽ sơ đồ Gantt rõ ràng các mốc thời gian ($0, 2, 4, 7...$). Viết rõ công thức $TAT = CT - AT$, $WT = TAT - BT$ trước khi điền số.</li>
+            <li><strong>Bài tập Process Tree (`fork`):</strong> Không chỉ ghi đáp án số lượng process! Phải vẽ cây tiến trình từ root (Parent PID) phân nhánh sang các Child PID.</li>
+            <li><strong>Bài tập Banker (Deadlock):</strong> Phải lập đủ các bảng $Allocation$, $Max$, $Need$, $Available$. Trình bày từng bước duyệt $Work = Work + Allocation_i$.</li>
+            <li><strong>Bài tập Thay thế trang (Page Replacement):</strong> Kẻ bảng đánh dấu `*` hoặc `H/F` (Hit/Fault) tại từng bước truy xuất reference.</li>
+        </ul>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Phần 0</div>
+    <ul>
+        <li>Luôn đặt câu hỏi "Kernel làm gì ở background?" khi đọc bất kỳ đoạn code C nào trong môn học.</li>
+        <li>Phân biệt rạch ròi giữa Userspace (ứng dụng) và Kernel space (Hệ điều hành).</li>
+        <li>Trình bày bài tập tự luận cẩn thận từng bước để đạt điểm tối đa A/A+.</li>
+    </ul>
+</div>
+</article>
+
+<article class="chapter chapter-chapter" id="chapter-01-overview" data-chapter="01-overview">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_01_OVERVIEW</span>
+<div class="chapter-header">
+    <div class="chapter-num">Chương 01 — Kiến Thức Nền Tảng</div>
+    <h1>TỔNG QUAN VỀ HỆ ĐIỀU HÀNH</h1>
+    <div class="chapter-subtitle">Trực giác $\rightarrow$ Bản chất $\rightarrow$ Cấu trúc Phần cứng $\rightarrow$ Ngắt & Chế độ kép (Dual Mode)</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 1 (Chuẩn UIT IT007)</h3>
+    <ul>
+        <li>Hiểu rõ định nghĩa, vai trò và 2 góc nhìn chính của Hệ điều hành (User View vs System View).</li>
+        <li>Nắm vững cơ chế Ngắt (Interrupt), Phân biệt Hardware Interrupt vs Trap/Software Interrupt.</li>
+        <li>Phân biệt chính xác các hệ điều hành: Đơn chương, Đa chương (Multiprogramming), Chia sẻ thời gian (Time-sharing), Thời gian thực (Real-time).</li>
+        <li>Bản chất của chế độ hoạt động kép Dual-mode (User Mode vs Kernel Mode) và bảo vệ tài nguyên phần cứng.</li>
+        <li>Giải thành thạo các câu hỏi trắc nghiệm và tự luận lý thuyết thuộc đề thi UIT.</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. BẢN CHẤT VÀ VAI TRÒ CỦA HỆ ĐIỀU HÀNH</h2>
+
+    <h3>A. Vì sao cần Hệ điều hành?</h3>
+    <p>Hãy hình dung bạn có một phần cứng máy tính gồm CPU, các thanh RAM, ổ cứng SSD và card màn hình. Nếu không có Hệ điều hành, mỗi lập trình viên khi viết phần mềm (ví dụ: ứng dụng gõ văn bản) sẽ phải tự viết mã điều khiển vi mạch để đọc/ghi từng sector trên ổ cứng, tự quản lý từng byte RAM và tự phát tín hiệu điện điều khiển màn hình. Điều này vừa nguy hiểm, vừa dễ gây xung đột và lãng phí công sức tái tạo lại bánh xe đạp.</p>
+
+    <h3>B. Trực giác</h3>
+    <p>Hệ điều hành giống như <strong>Ban Quản Lý của một tòa nhà văn phòng cao tầng</strong>:</p>
+    <ul>
+        <li>Các công ty thuê văn phòng chính là các <strong>Ứng dụng (Applications)</strong>.</li>
+        <li>Điện, nước, thang máy, bãi đỗ xe là các <strong>Tài nguyên phần cứng (CPU, RAM, Disk, I/O)</strong>.</li>
+        <li>Ban quản lý không trực tiếp tạo ra sản phẩm cho công ty, nhưng họ đứng ra phân chia phòng làm việc (RAM), điều phối thời gian dùng thang máy (CPU) và đảm bảo công ty này không tự ý xâm nhập vào văn phòng của công ty khác (Memory Protection).</li>
+    </ul>
+
+    <h3>C. Định nghĩa chuẩn (UIT / OS Concepts)</h3>
+    <div class="alert-box alert-note">
+        <div class="alert-title">📌 ĐỊNH NGHĨA HỆ ĐIỀU HÀNH</div>
+        <strong>Hệ điều hành (Operating System - OS)</strong> là một chương trình phần mềm chạy trên máy tính, đóng vai trò trung gian giữa người dùng/ứng dụng và phần cứng máy tính.
+    </div>
+
+    <p>Hệ điều hành được quan sát dưới 2 góc nhìn chính:</p>
+    <ol>
+        <li><strong>Góc nhìn người dùng (User View):</strong> Tối ưu hóa tính dễ sử dụng (Ease of use), sự thuận tiện (Convenience) và hiệu năng cá nhân.</li>
+        <li><strong>Góc nhìn hệ thống (System View):</strong>
+            <ul>
+                <li><strong>Bộ quản lý tài nguyên (Resource Allocator):</strong> Quản lý và phân phối CPU, bộ nhớ, không gian đĩa, thiết bị I/O cho các tiến trình một cách công bằng và hiệu quả.</li>
+                <li><strong>Chương trình kiểm soát (Control Program):</strong> Kiểm soát việc thực thi các chương trình ứng dụng để ngăn ngừa lỗi và việc sử dụng máy tính bất hợp pháp.</li>
+            </ul>
+        </li>
+    </ol>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. PHÂN LOẠI HỆ ĐIỀU HÀNH VÀ CÁC THÁI CỰC XỬ LÝ</h2>
+
+    <p>Trong lịch sử phát triển và các dạng đề thi UIT, HDH được phân loại dựa trên góc độ hình thức xử lý:</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: ĐA CHƯƠNG vs CHIA SẺ THỜI GIAN vs ĐA XỬ LÝ</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tiêu chí</th>
+                    <th>Đa chương (Multiprogramming)</th>
+                    <th>Chia sẻ thời gian (Time-Sharing)</th>
+                    <th>Đa xử lý (Multiprocessing)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Mục tiêu chính</strong></td>
+                    <td>Tối đa hóa hiệu suất CPU (CPU Utilization). Tận dụng thời gian CPU rảnh khi I/O.</td>
+                    <td>Tối thiểu hóa thời gian đáp ứng (Response Time). Tạo cảm giác tương tác tức thì.</td>
+                    <td>Tối đa hóa năng lực tính toán thông qua nhiều CPU/Core vật lý.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cơ chế chuyển đổi</strong></td>
+                    <td>Chuyển sang tiến trình khác <em>chỉ khi tiến trình hiện tại phải chờ I/O</em>.</td>
+                    <td>Chuyển đổi tiến trình liên tục dựa trên <em>ngắt định kỳ thời gian (Time slice / Quantum)</em>.</td>
+                    <td>Thực thi song song (Parallelism) thực sự trên nhiều bộ xử lý độc lập.</td>
+                </tr>
+                <tr>
+                    <td><strong>Tương tác người dùng</strong></td>
+                    <td>Không tương tác trực tiếp (Batch processing).</td>
+                    <td>Tương tác trực tiếp (Interactive). người dùng nhận phản hồi dưới vài giây.</td>
+                    <td>Tùy thuộc vào HDH chạy trên hệ đa xử lý.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY ĐỀ THI UIT: Hệ thống Thời gian thực (Real-Time Systems)</div>
+        <p>Đề thi UIT rất hay hỏi về <strong>Hard Real-time</strong> vs <strong>Soft Real-time</strong>:</p>
+        <ul>
+            <li><strong>Hard Real-time:</strong> Bắt buộc mọi tác vụ phải hoàn thành <em>chính xác trong hạn định (Deadline)</em>. Nếu trễ deadline cho dù chỉ 1ms, toàn bộ hệ thống bị coi là thất bại thảm hại (ví dụ: Hệ thống phanh ABS, điều khiển tên lửa, thiết bị y tế y khoa). Không sử dụng bộ nhớ ảo (Virtual Memory) hay đĩa từ phụ.</li>
+            <li><strong>Soft Real-time:</strong> Ưu tiên các tác vụ quan trọng hoàn thành trước, chấp nhận sự trễ hạn định nhỏ mà không gây sụp đổ hệ thống (ví dụ: Xem video streaming, chơi game online).</li>
+        </ul>
+    </div>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. CẤU TRÚC HỆ THỐNG MÁY TÍNH & CƠ CHẾ NGẮT (INTERRUPT)</h2>
+
+    <h3>A. Vì sao cần Ngắt (Interrupt)?</h3>
+    <p>CPU có tốc độ tính toán cực nhanh (hàng tỷ phép tính/giây), trong khi các thiết bị I/O (bàn phím, ổ đĩa, card mạng) có tốc độ rất chậm. Nếu CPU phải liên tục vòng lặp kiểm tra xem bàn phím có được nhấn hay chưa (Polling), CPU sẽ bị lãng phí 99.99% năng lực. Ngắt ra đời để thiết bị chủ động thông báo cho CPU khi có dữ liệu.</p>
+
+    <h3>B. Trực giác</h3>
+    <p>Ngắt giống như việc bạn đang đọc sách (CPU đang chạy chương trình) thì <strong>chuông điện thoại reo (Interrupt)</strong>:</p>
+    <ol>
+        <li>Bạn ghi nhớ số trang sách đang đọc dở (Lưu Trạng thái CPU / Program Counter).</li>
+        <li>Bạn nhấc máy trả lời điện thoại (Chạy chương trình phục vụ ngắt - ISR).</li>
+        <li>Trả lời xong, bạn mở đúng trang sách cũ ra đọc tiếp (Khôi phục trạng thái và tiếp tục thực thi).</li>
+    </ol>
+
+    <h3>C. Hình dung Luồng xử lý Ngắt trong Máy tính</h3>
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🔄 QUY TRÌNH XỬ LÝ NGẮT (INTERRUPT PROCESS FLOW)</span>
+        </div>
+        <ol>
+            <li>Thiết bị I/O phát tín hiệu ngắt đến CPU qua dòng ngắt phần cứng (Interrupt Line).</li>
+            <li>CPU hoãn tác vụ hiện tại, lưu lại địa chỉ của lệnh tiếp theo ($PC$) và trạng thái thanh ghi vào Stack.</li>
+            <li>CPU dựa vào chỉ số ngắt tra cứu trong <strong>Bảng vectơ ngắt (Interrupt Vector Table)</strong> để lấy địa chỉ của <strong>Trình phục vụ ngắt (Interrupt Service Routine - ISR)</strong> tương ứng.</li>
+            <li>CPU thực thi đoạn mã ISR để xử lý sự kiện I/O.</li>
+            <li>Sau khi ISR hoàn thành, CPU nạp lại trạng thái cũ từ Stack và tiếp tục chạy chương trình bị ngắt.</li>
+        </ol>
+    </div>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Hardware Interrupt vs Trap / Exception</div>
+        <ul>
+            <li><strong>Hardware Interrupt (Ngắt phần cứng):</strong> Do thiết bị ngoại vi bất đồng bộ phát ra (ví dụ: gõ bàn phím, di chuột, đĩa hoàn tất đọc/ghi, ngắt đồng hồ Timer). Không dự đoán trước được thời điểm xảy ra.</li>
+            <li><strong>Trap / Exception (Ngắt phần mềm):</strong> Do chính CPU phát ra một cách đồng bộ khi thực thi lệnh gặp lỗi (ví dụ: chia cho 0, truy xuất bộ nhớ trái phép, Page Fault) hoặc do chương trình chủ động phát lời gọi hệ thống (System Call / `int 0x80`).</li>
+        </ul>
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. CHẾ ĐỘ HOẠT ĐỘNG KÉP (DUAL-MODE OPERATION) & BẢO VỆ TÀI NGUYÊN</h2>
+
+    <h3>A. Bản chất Dual-Mode</h3>
+    <p>Để đảm bảo một ứng dụng bị lỗi hoặc cố tình phá hoại không thể làm sụp đổ toàn bộ hệ thống hoặc can thiệp vào dữ liệu của ứng dụng khác, phần cứng CPU cung cấp ít nhất 2 chế độ hoạt động được đánh dấu bởi <strong>Mode Bit</strong> trong thanh ghi trạng thái phần cứng:</p>
+
+    <ul>
+        <li><strong>User Mode (Mode bit = 1):</strong> Chế độ người dùng. Chỉ thực thi được các lệnh thông thường. Không thể truy xuất trực tiếp phần cứng hoặc toàn bộ RAM.</li>
+        <li><strong>Kernel Mode / Supervisor Mode (Mode bit = 0):</strong> Chế độ đặc quyền. Thực thi được tất cả mọi lệnh phần cứng (Privileged Instructions), truy xuất toàn bộ bộ nhớ và thiết bị.</li>
+    </ul>
+
+    <h3>B. Chuyển đổi Mode qua Lời gọi Hệ thống (System Call)</h3>
+    <p>Khi ứng dụng ở User mode muốn đọc file từ đĩa:</p>
+    <ol>
+        <li>Ứng dụng phát lệnh <strong>System Call</strong> (bản chất là một lệnh Trap/Interrupt).</li>
+        <li>Phần cứng lập tức đổi <strong>Mode bit từ 1 sang 0</strong> (chuyển sang Kernel mode).</li>
+        <li>Kernel kiểm tra quyền hạn, thực thi thao tác đọc đĩa an toàn.</li>
+        <li>Kernel hoàn tất, đổi <strong>Mode bit từ 0 về 1</strong> và trả kết quả cho ứng dụng Userspace.</li>
+    </ol>
+
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY ĐỀ THI UIT: Lệnh đặc quyền (Privileged Instructions)</div>
+        <p>Đề thi UIT rất hay bắt phân loại lệnh nào là <em>Lệnh đặc quyền (chỉ chạy ở Kernel Mode)</em> và lệnh nào là <em>Lệnh không đặc quyền (chạy ở User Mode)</em>:</p>
+        <p><strong>Lệnh đặc quyền (Privileged):</strong> Tắt/Bật ngắt (`cli`/`sti`), Đọc/Ghi thanh ghi Base & Limit bộ nhớ, Thao tác trực tiếp với cổng I/O (`in`/`out`), Chuyển đổi Mode bit, Xóa bộ nhớ RAM, Lệnh tắt máy (`halt`). Giả sử ứng dụng User cố tình chạy lệnh đặc quyền $\rightarrow$ CPU phát ra <strong>Trap/Exception (Illegal Instruction)</strong> và Kernel dẹp bỏ tiến trình đó ngay lập tức!</p>
+    </div>
+</section>
+
+<!-- SECTION 5 -->
+<section>
+    <h2>5. BÀI TẬP ÔN LUYỆN CHUẨN ĐỀ THI UIT CHƯƠNG 1</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 BÀI TẬP TỰ LUẬN MẪU (ĐỀ THI IT007 UIT)</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Câu hỏi:</strong> Trình bày luồng chuyển đổi chế độ (Mode Switching) khi một chương trình người dùng thực hiện đọc dữ liệu từ bàn phím bằng lời gọi hệ thống `read()`. Vẽ sơ đồ chuyển đổi giữa User Mode và Kernel Mode.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết từng bước:</div>
+            <ol>
+                <li><strong>Ban đầu:</strong> Tiến trình ứng dụng đang thực thi trong <code>User Mode</code> (Mode bit = 1).</li>
+                <li><strong>Phát System Call:</strong> Chương trình gọi hàm <code>read()</code>. Hàm thư viện phát lệnh ngắt phần mềm (Trap / <code>int 0x80</code> hoặc <code>syscall</code>).</li>
+                <li><strong>Chuyển sang Kernel Mode:</strong> Phần cứng tự động lưu trạng thái CPU và đổi <code>Mode bit = 0</code> (Kernel Mode). Tra cứu Interrupt Vector để chuyển quyền điều khiển cho System Call Handler của Kernel.</li>
+                <li><strong>Xử lý trong Kernel:</strong> Kernel thực thi lệnh I/O đặc quyền để đọc dữ liệu từ driver bàn phím vào bộ đệm Kernel.</li>
+                <li><strong>Khôi phục User Mode:</strong> Sau khi hoàn tất đọc dữ liệu, Kernel chép dữ liệu vào bộ đệm của ứng dụng, đổi <code>Mode bit = 1</code> (User Mode) và trả quyền điều khiển cho lệnh tiếp theo của chương trình người dùng.</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 1</div>
+    <ul>
+        <li><strong>Dual-mode:</strong> User mode (bit 1 - lệnh thường) $\leftrightarrow$ Kernel mode (bit 0 - lệnh đặc quyền).</li>
+        <li><strong>Ngắt (Interrupt):</strong> Bất đồng bộ (Phần cứng I/O) vs Đồng bộ (Trap/Exception/System Call).</li>
+        <li><strong>Đa chương:</strong> Tối ưu CPU (chuyển khi chờ I/O) vs <strong>Chia sẻ thời gian:</strong> Tối ưu Response time (chuyển theo Time slice).</li>
+        <li><strong>Real-time:</strong> Hard (nghiêm ngặt deadline) vs Soft (ưu tiên tác vụ).</li>
+    </ul>
+</div>
+</article>
+
+<article class="chapter chapter-chapter" id="chapter-02-structure" data-chapter="02-structure">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_02_STRUCTURE</span>
+<div class="chapter-header">
+    <div class="chapter-num">Chương 02 — Kiến Trúc Hệ Thống</div>
+    <h1>CẤU TRÚC HỆ ĐIỀU HÀNH</h1>
+    <div class="chapter-subtitle">Thành phần $\rightarrow$ Lời gọi hệ thống (System Call) $\rightarrow$ Kiến trúc Monolithic vs Microkernel $\rightarrow$ Máy ảo</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 2 (Chuẩn UIT IT007)</h3>
+    <ul>
+        <li>Nắm vững 5 thành phần cốt lõi của Hệ điều hành và các dịch vụ HDH cung cấp.</li>
+        <li>Hiểu sâu bản chất Lời gọi hệ thống (System Call), API và 3 cơ chế truyền tham số cho System Call.</li>
+        <li>Phân biệt rạch ròi giữa System Call (Kernel space) và Library Function Call (User space).</li>
+        <li>So sánh ưu nhược điểm các kiến trúc HDH: Đơn khối (Monolithic), Phân lớp (Layered), Vi nhân (Microkernel), Module động (Modules).</li>
+        <li>Hiểu khái niệm Máy ảo (Virtual Machine) và Phân loại Hypervisor (Type 1 vs Type 2).</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. CÁC THÀNH PHẦN VÀ DỊCH VỤ CỦA HỆ ĐIỀU HÀNH</h2>
+
+    <h3>A. 5 Thành phần Cốt lõi của Hệ điều hành</h3>
+    <ol>
+        <li><strong>Quản lý Tiến trình (Process Management):</strong> Tạo, hủy, tạm dừng, tiếp tục tiến trình; Đồng bộ và Giao tiếp IPC.</li>
+        <li><strong>Quản lý Bộ nhớ chính (Memory Management):</strong> Theo dõi các vùng nhớ rảnh/bận, Cấp phát và thu hồi RAM cho các tiến trình, Quản lý bộ nhớ ảo.</li>
+        <li><strong>Quản lý Lưu trữ / Tập tin (Storage & File Management):</strong> Tạo/xóa file và thư mục, Ánh xạ tập tin vào bộ nhớ phụ, Sao lưu dự phòng.</li>
+        <li><strong>Quản lý Hệ thống I/O (I/O System Management):</strong> Bộ đệm (Buffering), Caching, Spooling, Cung cấp giao diện Device Driver thống nhất.</li>
+        <li><strong>Bảo vệ và An ninh (Protection & Security):</strong> Kiểm soát việc truy xuất tài nguyên của tiến trình và người dùng.</li>
+    </ol>
+
+    <h3>B. Các Dịch vụ Hệ điều hành Cung cấp</h3>
+    <p>HDH cung cấp môi trường thực thi thuận tiện thông qua các dịch vụ:</p>
+    <ul>
+        <li><strong>Giao diện người dùng (User Interface):</strong> CLI (Command Line Interface), GUI (Graphical User Interface), Batch.</li>
+        <li><strong>Thực thi chương trình (Program Execution):</strong> Nạp chương trình vào RAM và chạy.</li>
+        <li><strong>Thao tác I/O (I/O Operations):</strong> Đọc/ghi thiết bị an toàn.</li>
+        <li><strong>Thao tác Hệ thống tập tin (File-system Manipulation):</strong> Đọc, ghi, tạo, xóa, tìm kiếm tập tin.</li>
+        <li><strong>Truyền thông (Communications):</strong> Trao đổi thông điệp giữa các tiến trình trên cùng máy hoặc qua mạng.</li>
+        <li><strong>Phát hiện lỗi (Error Detection):</strong> Xử lý lỗi phần cứng (RAM error, power failure) và lỗi phần mềm (overflow, illegal memory access).</li>
+    </ul>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. LỜI GỌI HỆ THỐNG (SYSTEM CALLS) VÀ CƠ CHẾ TRUYỀN THAM SỐ</h2>
+
+    <h3>A. Vì sao cần System Call?</h3>
+    <p>Chương trình ứng dụng ở User mode bị cấm truy xuất trực tiếp phần cứng. Do đó, khi cần thao tác với đĩa, màn hình, bàn phím hoặc tạo tiến trình mới, ứng dụng <em>phải đưa ra lời yêu cầu chính thức đến Kernel</em> thông qua Lời gọi hệ thống (System Call).</p>
+
+    <h3>B. Phân biệt System Call vs Library Function Call</h3>
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: System Call vs Library Call</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tiêu chí</th>
+                    <th>Lời gọi hệ thống (System Call)</th>
+                    <th>Hàm thư viện (Library Call)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Không gian thực thi</strong></td>
+                    <td>Thực thi trong <strong>Kernel Mode</strong> (Mode bit = 0).</td>
+                    <td>Thực thi trong <strong>User Mode</strong> (Mode bit = 1).</td>
+                </tr>
+                <tr>
+                    <td><strong>Ví dụ trong C</strong></td>
+                    <td><code>read()</code>, <code>write()</code>, <code>fork()</code>, <code>open()</code></td>
+                    <td><code>printf()</code>, <code>scanf()</code>, <code>strlen()</code>, <code>strcpy()</code></td>
+                    </tr>
+                <tr>
+                    <td><strong>Chi phí thực thi</strong></td>
+                    <td>Chi phí cao (tốn thời gian Context Switch / Mode switch).</td>
+                    <td>Chi phí thấp (chỉ là lệnh chuyển hướng nhãn hàm <code>CALL</code> trong RAM).</td>
+                </tr>
+                <tr>
+                    <td><strong>Mối quan hệ</strong></td>
+                    <td>Là điểm tựa cuối cùng tiếp xúc với phần cứng.</td>
+                    <td>Thường bọc (wrapper) bên ngoài một hoặc nhiều System Call (ví dụ: <code>printf</code> gọi <code>write</code>).</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>C. 3 Cơ chế Truyền Tham Số cho System Call</h3>
+    <p>Khi ứng dụng gọi System Call, nó cần truyền các tham số (ví dụ: tên file, kích thước bộ đệm) cho Kernel. Có 3 phương pháp chính:</p>
+
+    <ol>
+        <li><strong>Truyền qua Thanh ghi (Registers):</strong> Đưa các giá trị tham số trực tiếp vào các thanh ghi CPU (ví dụ: thanh ghi <code>eax</code>, <code>ebx</code> trên x86).
+            <ul><li><em>Ưu điểm:</em> Rất nhanh.</li><li><em>Nhược điểm:</em> Bị giới hạn bởi số lượng thanh ghi của CPU (thường không đủ nếu tham số quá nhiều).</li></ul>
+        </li>
+        <li><strong>Truyền qua Khối bộ nhớ / Bảng (Block / Table):</strong> Lưu tham số trong một vùng nhớ RAM, sau đó truyền <em>địa chỉ của vùng nhớ đó</em> vào một thanh ghi CPU.
+            <ul><li><em>Ưu điểm:</em> Không bị giới hạn số lượng và kích thước tham số. Đây là phương pháp phổ biến nhất trong Linux/Solaris.</li></ul>
+        </li>
+        <li><strong>Truyền qua Stack (Push/Pop):</strong> Đẩy các tham số vào Stack của chương trình, Kernel sẽ Pop tham số ra từ Stack.
+            <ul><li><em>Ưu điểm:</em> Đơn giản, không giới hạn số tham số.</li></ul>
+        </li>
+    </ol>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. CÁC KIẾN TRÚC HỆ ĐIỀU HÀNH (OS STRUCTURES)</h2>
+
+    <p>Đề thi UIT rất hay yêu cầu so sánh ưu và nhược điểm của các mô hình cấu trúc HDH:</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Monolithic Kernel vs Microkernel</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tiêu chí</th>
+                    <th>Kiến trúc Đơn khối (Monolithic Kernel)</th>
+                    <th>Kiến trúc Vi nhân (Microkernel)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Tổ chức Kernel</strong></td>
+                    <td>Tất cả các dịch vụ (Process Management, Memory, File System, Network, Drivers) nằm chung trong <strong>cùng một không gian địa chỉ Kernel</strong>.</td>
+                    <td>Chỉ giữ lại những dịch vụ tối thiểu trong Kernel (IPC, quản lý bộ nhớ cơ bản, CPU scheduling). Các dịch vụ khác (File System, Drivers) được đẩy ra <strong>User space</strong> dưới dạng các User Services.</td>
+                </tr>
+                <tr>
+                    <td><strong>Hiệu năng (Performance)</strong></td>
+                    <td><strong>Rất nhanh</strong> vì các thành phần gọi nhau qua lời gọi hàm nội bộ, không tốn chi phí Mode switch.</td>
+                    <td><strong>Chậm hơn</strong> vì các dịch vụ phải giao tiếp với nhau thông qua cơ chế truyền thông điệp (IPC) đi qua Kernel.</td>
+                </tr>
+                <tr>
+                    <td><strong>Độ tin cậy & An toàn</strong></td>
+                    <td><strong>Kém hơn</strong>: Nếu một Driver bị crash hay có lỗi bộ nhớ, toàn bộ hệ thống (Kernel Panic) sẽ bị sụp đổ.</td>
+                    <td><strong>Rất cao</strong>: Nếu một Driver ở Userspace bị lỗi crash, chỉ dịch vụ đó bị dừng và có thể khởi động lại mà không ảnh hưởng tới Kernel.</td>
+                </tr>
+                <tr>
+                    <td><strong>Khả năng mở rộng</strong></td>
+                    <td>Khó bảo trì và mở rộng khi codebase quá lớn.</td>
+                    <td>Rất dễ mở rộng và port sang kiến trúc phần cứng mới.</td>
+                </tr>
+                <tr>
+                    <td><strong>Ví dụ thực tế</strong></td>
+                    <td>Linux, MS-DOS, UNIX truyền thống.</td>
+                    <td>Mach, QNX, L4, Symbian OS.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Cấu trúc Module động (Loadable Kernel Modules - LKM)</h3>
+    <p>Các hệ điều hành hiện đại (như Linux) kết hợp ưu điểm của cả hai: Dùng kiến trúc Monolithic để đạt hiệu năng cao, nhưng hỗ trợ <strong>Modules động</strong>. Các driver và tính năng mới có thể được nạp (`insmod`) hoặc gỡ bỏ (`rmmod`) trực tiếp vào Kernel lúc đang chạy mà không cần biên dịch lại toàn bộ Kernel hay khởi động lại máy tính.</p>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. KHÁI NIỆM MÁY ẢO (VIRTUAL MACHINES)</h2>
+
+    <h3>A. Bản chất Máy ảo</h3>
+    <p>Máy ảo (Virtual Machine - VM) là một sự trừu tượng hóa phần cứng vật lý, tạo ra giao diện ảo giống hệt như một máy tính thực thụ. Một phần mềm gọi là <strong>Hypervisor / Virtual Machine Monitor (VMM)</strong> quản lý các máy ảo.</p>
+
+    <h3>B. Phân loại Hypervisor</h3>
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY ĐỀ THI UIT: Hypervisor Type 1 vs Type 2</div>
+        <ul>
+            <li><strong>Type 1 (Bare-metal Hypervisor):</strong> Chạy <em>trực tiếp trên phần cứng vật lý</em> mà không cần HDH chủ (ví dụ: VMware ESXi, Xen, KVM, Microsoft Hyper-V). Cho hiệu năng cực cao, chuyên dùng cho Server/Cloud.</li>
+            <li><strong>Type 2 (Hosted Hypervisor):</strong> Chạy như <em>một ứng dụng trên nền một HDH chủ (Host OS)</em> (ví dụ: VMware Workstation, Oracle VirtualBox). Dễ cài đặt, phù hợp cho người dùng cá nhân.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- SECTION 5 -->
+<section>
+    <h2>5. BÀI TẬP TỰ LUẬN MẪU CHƯƠNG 2</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 BÀI TẬP TỰ LUẬN MẪU (ĐỀ THI IT007 UIT)</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Câu hỏi:</strong> Trình bày khái niệm Microkernel. Phân tích ưu điểm và nhược điểm của kiến trúc Microkernel so với kiến trúc Monolithic. Tại sao hầu hết các HDH thương mại hiện đại (như Linux, Windows) lại áp dụng mô hình Module hóa lai (Hybrid/Modular) thay vì Microkernel thuần túy?
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết từng bước:</div>
+            <ol>
+                <li><strong>Định nghĩa Microkernel:</strong> Lược bỏ tối đa các thành phần khỏi Kernel, chỉ giữ lại chức năng cốt lõi (IPC, CPU scheduling, quản lý bộ nhớ cơ bản). Các thành phần như File System, Device Driver được đưa ra Userspace thành các tiến trình phục vụ độc lập.</li>
+                <li><strong>Ưu điểm của Microkernel:</strong>
+                    <ul>
+                        <li><em>Tính tin cậy & An toàn:</em> Lỗi ở driver không làm sụp đổ toàn bộ Kernel (tránh Kernel Panic).</li>
+                        <li><em>Mở rộng & Dễ bảo trì:</em> Thêm dịch vụ mới chỉ cần tạo một ứng dụng Userspace.</li>
+                    </ul>
+                </li>
+                <li><strong>Nhược điểm của Microkernel:</strong> Hiệu năng giảm do chi phí quá lớn của việc chuyển đổi ngữ cảnh (Context switch) và truyền thông điệp (IPC) giữa các dịch vụ qua lại giữa Userspace và Kernelspace.</li>
+                <li><strong>Lý do áp dụng Hybrid/Modular Kernel:</strong> Để dung hòa giữa <strong>Hiệu năng cực cao</strong> của Monolithic (chạy chung trong Kernel space) và <strong>Tính linh hoạt</strong> của Microkernel (cho phép nạp/gỡ các module động LKM lúc runtime mà không cần khởi động lại máy).</li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 2</div>
+    <ul>
+        <li><strong>System Call:</strong> Cổng giao tiếp duy nhất từ Userspace xuống Kernelspace.</li>
+        <li><strong>3 Cơ chế truyền tham số:</strong> Registers (nhanh, ít) $\rightarrow$ Memory Block (phổ biến) $\rightarrow$ Stack.</li>
+        <li><strong>Monolithic:</strong> Nhanh nhưng dễ sụp đổ toàn bộ. <strong>Microkernel:</strong> An toàn nhưng chậm do tốn IPC.</li>
+        <li><strong>Hypervisor:</strong> Type 1 (Bare-metal / Server) vs Type 2 (Hosted / Desktop).</li>
+    </ul>
+</div>
+</article>
+
+<article class="chapter chapter-chapter" id="chapter-03-process" data-chapter="03-process">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_03_PROCESS</span>
+<div class="chapter-header">
+    <div class="chapter-num">Chương 03 — Trọng Tâm Thi Giữa Kỳ</div>
+    <h1>QUẢN LÝ TIẾN TRÌNH (PROCESS MANAGEMENT)</h1>
+    <div class="chapter-subtitle">Trạng thái tiến trình $\rightarrow$ Cây tiến trình (Process Tree) $\rightarrow$ Cú pháp fork/exec/wait $\rightarrow$ Lập trình C trên Linux</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 3 (Trọng Tâm Giữa Kỳ UIT)</h3>
+    <ul>
+        <li>Phân biệt rạch ròi Chương trình (Program) và Tiến trình (Process); Nắm vững cấu trúc bộ nhớ của tiến trình (Text, Data, Heap, Stack).</li>
+        <li>Thuộc lòng sơ đồ 5 trạng thái tiến trình và giải chính xác dạng bài xác định chuỗi chuyển trạng thái.</li>
+        <li>Vẽ thành thạo Cây tiến trình (Process Tree) và tính số lượng tiến trình sinh ra bởi vòng lặp <code>fork()</code>.</li>
+        <li>Dự đoán chính xác kết quả in ra của các chương trình C phức tạp kết hợp <code>fork()</code>, <code>execvp()</code>, <code>wait()</code> và <code>printf()</code>.</li>
+        <li>Hiểu bản chất Copy-on-Write, biến dùng chung và bộ đệm <code>printf</code>.</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. KHÁI NIỆM TIẾN TRÌNH VÀ CẤU TRÚC BỘ NHỚ</h2>
+
+    <h3>A. Vì sao cần Tiến trình?</h3>
+    <p>Một file thực thi nằm trên ổ cứng (như <code>chrome.exe</code>) chỉ là một tập hợp các byte dữ liệu thụ động. Để chạy được nó, HDH phải nạp nó vào RAM, cấp phát CPU, tạo các vùng nhớ làm việc. Thực thể đang chạy đó được gọi là Tiến trình (Process).</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Program vs Process</div>
+        <ul>
+            <li><strong>Chương trình (Program):</strong> Thực thể thụ động (Passive entity), lưu trên ổ đĩa (file thực thi/ELF/EXE), chưa tốn tài nguyên CPU/RAM.</li>
+            <li><strong>Tiến trình (Process):</strong> Thực thể chủ động (Active entity), đang thực thi trong RAM, có con trỏ lệnh ($PC$), thanh ghi CPU và tài nguyên hệ thống.</li>
+        </ul>
+    </div>
+
+    <h3>B. Cấu trúc Không gian Bộ nhớ của Tiến trình (Memory Layout)</h3>
+    <p>Một tiến trình trong RAM được chia làm 4 vùng chính (từ địa chỉ thấp đến địa chỉ cao):</p>
+    <ul>
+        <li><strong>Text Segment (Mã lệnh):</strong> Chứa mã máy thực thi của chương trình. Thường là Read-only để tránh bị sửa đổi.</li>
+        <li><strong>Data Segment (Dữ liệu):</strong> Chứa các biến toàn cục (Global) và biến tĩnh (Static) đã hoặc chưa khởi tạo.</li>
+        <li><strong>Heap Segment (Bộ nhớ động):</strong> Vùng nhớ cấp phát động lúc runtime (thông qua <code>malloc()</code>, <code>calloc()</code> trong C hoặc <code>new</code> trong C++). Tăng trưởng theo hướng địa chỉ từ thấp lên cao.</li>
+        <li><strong>Stack Segment (Nguồn/Ngăn xếp):</strong> Chứa biến cục bộ (Local variables), tham số hàm, địa chỉ trả về của hàm. Tăng trưởng theo hướng địa chỉ từ cao xuống thấp.</li>
+    </ul>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. SƠ ĐỒ TRẠNG THÁI TIẾN TRÌNH (PROCESS STATE TRANSITION)</h2>
+
+    <p>Một tiến trình trong suốt đời sống của mình sẽ chuyển qua 5 trạng thái cơ bản:</p>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🔄 5 TRẠNG THÁI TIẾN TRÌNH VÀ NGUYÊN NHÂN CHUYỂN TRẠNG THÁI</span>
+        </div>
+        <ol>
+            <li><strong>New (Mới tạo):</strong> Tiến trình đang được tạo lập (chưa nạp xong vào RAM).</li>
+            <li><strong>Ready (Sẵn sàng):</strong> Tiến trình đã ở trong RAM, đầy đủ tài nguyên, chỉ chờ được cấp CPU.</li>
+            <li><strong>Running (Đang chạy):</strong> Các lệnh của tiến trình đang được CPU thực thi.</li>
+            <li><strong>Waiting / Blocked (Chờ):</strong> Tiến trình tạm dừng chờ một sự kiện xảy ra (ví dụ: chờ I/O hoàn tất, chờ tín hiệu signal, chờ tiến trình con).</li>
+            <li><strong>Terminated (Kết thúc):</strong> Tiến trình đã thực thi xong hoặc bị hủy, đang chờ HDH thu hồi tài nguyên.</li>
+        </ol>
+    </div>
+
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY ĐỀ THI UIT: Xác định Chuỗi Chuyển Trạng Thái Tiến Trình</div>
+        <p>Đề thi UIT rất hay cho một đoạn code C chứa vòng lặp có lệnh <code>printf()</code> hoặc thao tác I/O và hỏi: <em>"Tiến trình đã trải qua những trạng thái nào? Vẽ sơ đồ chuyển trạng thái."</em></p>
+        <p><strong>QUY TẮC VÀNG ĐỂ ĐẠT ĐIỂM TỐI ĐA:</strong></p>
+        <ul>
+            <li>Bắt đầu luôn là <strong>New $\rightarrow$ Ready $\rightarrow$ Running</strong>.</li>
+            <li>Mỗi khi gặp lệnh <code>printf()</code> hay đọc/ghi file: Lệnh <code>printf</code> là thao tác I/O $\rightarrow$ Tiến trình chuyển từ <strong>Running $\rightarrow$ Waiting</strong> (chờ I/O xong) $\rightarrow$ <strong>Ready</strong> $\rightarrow$ <strong>Running</strong> để chạy lệnh tiếp theo.</li>
+            <li>Khi gặp lệnh <code>exit(0)</code> hoặc kết thúc hàm <code>main</code>: Chuyển thẳng từ <strong>Running $\rightarrow$ Terminated</strong> (KHÔNG đi qua trạng thái Waiting vì không có thao tác I/O wait).</li>
+        </ul>
+    </div>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. KHỐI QUẢN LÝ TIẾN TRÌNH (PCB), CONTEXT SWITCH VÀ TIỂU TRÌNH (THREAD)</h2>
+
+    <h3>A. Khối quản lý tiến trình (Process Control Block - PCB)</h3>
+    <p>Mỗi tiến trình được đại diện trong HDH bởi một cấu trúc dữ liệu C gọi là PCB. PCB chứa toàn bộ thông tin về tiến trình:</p>
+    <ul>
+        <li><strong>Process ID (PID):</strong> Định danh duy nhất của tiến trình.</li>
+        <li><strong>Process State:</strong> Trạng thái hiện tại (Ready, Running, Waiting...).</li>
+        <li><strong>Program Counter ($PC$):</strong> Địa chỉ lệnh tiếp theo sẽ thực thi.</li>
+        <li><strong>CPU Registers:</strong> Giá trị các thanh ghi CPU (Accumulators, Index registers, Stack pointer).</li>
+        <li><strong>CPU Scheduling Info:</strong> Độ ưu tiên, con trỏ đến hàng đợi scheduler.</li>
+        <li><strong>Memory-management Info:</strong> Bảng trang (Page table), Base/Limit registers.</li>
+        <li><strong>I/O Status Info:</strong> Danh sách các file đang mở (File descriptors).</li>
+    </ul>
+
+    <h3>B. Chuyển ngữ cảnh (Context Switch)</h3>
+    <p>Khi CPU chuyển từ thực thi tiến trình $P_0$ sang tiến trình $P_1$:</p>
+    <ol>
+        <li>HDH lưu toàn bộ trạng thái của $P_0$ vào $PCB_0$.</li>
+        <li>HDH nạp lại trạng thái đã lưu của $P_1$ từ $PCB_1$.</li>
+        <li>CPU bắt đầu thực thi lệnh của $P_1$ tại vị trí $PC$ mới nạp.</li>
+    </ol>
+    <p><em>Phí tổn Context Switch:</em> Thời gian chuyển ngữ cảnh hoàn toàn là Pure Overhead (phí tổn vô ích) vì CPU không thực thi được công việc có ích nào của người dùng trong lúc switch.</p>
+
+    <h3>C. Khái niệm Tiểu Trình (Thread) & So sánh Tiến trình vs Tiểu trình</h3>
+    <p><strong>Tiểu trình (Thread)</strong> là đơn vị sử dụng CPU cơ bản nhất bên trong một tiến trình (còn gọi là Tiến trình nhẹ - Lightweight Process).</p>
+    <p>Một tiến trình có thể chứa một hoặc nhiều luồng tiểu trình chạy song song với nhau. Tất cả các Thread trong cùng một tiến trình <strong>DÙNG CHUNG</strong> không gian bộ nhớ địa chỉ (Code Text, Global Data, Heap) và các tài nguyên HDH (File Descriptors, Signals). Tuy nhiên, mỗi Thread có <strong>VÙNG NHỚ TƯ RIÊNG</strong> gồm: Thanh ghi CPU, Con trỏ lệnh ($PC$) và Ngăn xếp riêng (Private Stack).</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Tiến Trình (Process) vs Tiểu Trình (Thread)</div>
+        <table>
+            <thead>
+                <tr><th>Tiêu chí</th><th>Tiến trình (Process)</th><th>Tiểu trình (Thread)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Không gian bộ nhớ</strong></td><td>Mỗi tiến trình có không gian bộ nhớ <em>độc lập hoàn toàn</em>.</td><td>Các thread trong cùng tiến trình <em>dùng chung</em> Code, Data, Heap.</td></tr>
+                <tr><td><strong>Tạo lập & Chuyển ngữ cảnh</strong></td><td>Nặng nề, chi phí cao (tốn thời gian tạo PCB, cấp Page table).</td><td>Nhanh chóng, chi phí cực thấp (chỉ cần tạo Stack và Registers).</td></tr>
+                <tr><td><strong>Giao tiếp (IPC)</strong></td><td>Phải qua các cơ chế IPC (Shared Memory, Pipe, Message Queue).</td><td>Giao tiếp trực tiếp bằng cách đọc/ghi các biến toàn cục (Shared Data).</td></tr>
+                <tr><td><strong>Mức độ ảnh hưởng lỗi</strong></td><td>Một tiến trình bị crash không làm ảnh hưởng tiến trình khác.</td><td>Một thread bị lỗi (Segment Fault) có thể làm sụp đổ toàn bộ tiến trình.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. QUẢN LÝ TIẾN TRÌNH TRÊN LINUX: CÁC SYSTEM CALL `fork()`, `exec()`, `wait()`</h2>
+
+    <p>Đây là phần kiến thức quan trọng nhất của Chương 3 trong các đề thi và bài thực hành Lab UIT.</p>
+
+    <h3>A. System call `fork()`</h3>
+    <p><code>pid_t fork(void);</code> tạo một tiến trình con hoàn toàn mới bằng cách sao chép tiến trình cha.</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Giá trị trả về của `fork()`</div>
+        <ul>
+            <li>Trong <strong>Tiến trình Cha (Parent):</strong> <code>fork()</code> trả về <strong>PID của tiến trình con mới sinh ($> 0$)</strong>.</li>
+            <li>Trong <strong>Tiến trình Con (Child):</strong> <code>fork()</code> trả về <strong>giá trị $0$</strong>.</li>
+            <li>Nếu thất bại (không đủ bộ nhớ): <code>fork()</code> trả về <strong>$-1$</strong>.</li>
+        </ul>
+    </div>
+
+    <h3>B. Thuật toán tính số Tiến trình sinh ra từ `fork()`</h3>
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🌳 QUY TẮC VẼ CÂY TIẾN TRÌNH VÀ TÍNH SỐ PROCESS</span>
+        </div>
+        <p><strong>Trường hợp 1: $N$ lệnh `fork()` liên tiếp:</strong></p>
+        <pre><code class="language-c">fork(); fork(); fork(); // N = 3
+</code></pre>
+        <p>Tổng số tiến trình sinh ra (tính cả cha) = $2^N = 2^3 = 8$ tiến trình (gồm 1 cha và 7 con).</p>
+
+        <p><strong>Trường hợp 2: `fork()` trong vòng lặp `for`:</strong></p>
+        <pre><code class="language-c">for (int i = 0; i &lt; 4; i++) {
+    fork();
+}
+</code></pre>
+        <p>Số tiến trình sinh ra = $2^4 = 16$ tiến trình (gồm 1 cha và 15 con).</p>
+
+        <div class="uit-trap-box">
+            <div class="trap-title">⚡ BẪY CÔNG THỨC $2^N$ (CỰC KỲ QUAN TRỌNG)</div>
+            <p>Công thức $2^N$ <strong>CHỈ ÁP DỤNG KHÔNG ĐIỀU KIỆN</strong> khi tất cả $N$ lệnh <code>fork()</code> đều được thực thi bởi MỌI tiến trình (tức không nằm trong nhánh phân chia <code>if (pid == 0)</code> hay <code>if (pid > 0)</code>).</p>
+            <p>Nếu <code>fork()</code> nằm trong nhánh điều kiện rẽ nhánh, <strong>BẮT BUỘC PHẢI VẼ CÂY TIẾN TRÌNH</strong> từng bước chứ KHÔNG ĐƯỢC áp dụng trực tiếp công thức $2^N$!</p>
+        </div>
+    </div>
+
+    <h3>C. Bẫy Bộ đệm `printf` và `execvp()` trong Đề thi</h3>
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY 1: `printf` không có `\n` trước `fork()`</div>
+        <pre><code class="language-c">printf("Hello"); // Không có \n => Chuỗi nằm lại trong buffer
+fork();
+</code></pre>
+        <p>Vì `printf` chưa flush, khi `fork()` xảy ra, bộ đệm Userspace bị chép sang tiến trình con. Khi cả 2 tiến trình kết thúc, chuỗi "Hello" sẽ bị in ra <strong>2 LẦN</strong>!</p>
+    </div>
+
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY 2: Các lệnh đằng sau `execvp()`</div>
+        <pre><code class="language-c">if (fork() == 0) {
+    printf("Child executing ls\n");
+    execlp("/bin/ls", "ls", NULL);
+    printf("This line will NEVER print!\n"); // Lệnh này KHÔNG BAO GIỜ CHẠY
+}
+</code></pre>
+        <p>Nếu `execvp` nạp chương trình thành công, nó GHI ĐÈ toàn bộ bộ nhớ tiến trình con. Các dòng lệnh nằm sau `execvp` sẽ bị xóa sổ và không bao giờ chạy!</p>
+    </div>
+</section>
+
+<!-- SECTION 5 -->
+<section>
+    <h2>5. BÀI TẬP WORKED EXAMPLE CHUẨN ĐỀ THI UIT</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 1: VẼ CÂY TIẾN TRÌNH VÀ DỰ ĐOÁN OUTPUT</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho đoạn mã C sau:</strong>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+
+int main() {
+    pid_t pid;
+    printf("Start\n");
+    pid = fork();
+    if (pid &gt; 0) {
+        fork();
+        printf("Parent\n");
+    } else if (pid == 0) {
+        printf("Child\n");
+    }
+    return 0;
+}
+</code></pre>
+            <strong>Hỏi:</strong> Khi chạy chương trình trên, có bao nhiêu tiến trình được tạo ra? Vẽ cây tiến trình và liệt kê tất cả các chuỗi chữ có thể được in ra màn hình?
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết từng bước:</div>
+            <ol>
+                <li><strong>Phân tích dòng 1: <code>printf("Start\n");</code></strong>
+                    <br>Do có `\n`, chữ "Start" được in ra ngay 1 lần bởi Tiến trình gốc $P_0$.
+                </li>
+                <li><strong>Lần `fork()` thứ nhất (dòng 8):</strong>
+                    <br>Tiến trình $P_0$ sinh ra con $P_1$.
+                    <ul>
+                        <li>Ở $P_0$ (Cha): <code>pid &gt; 0</code> $\rightarrow$ Nhảy vào nhánh <code>if (pid &gt; 0)</code>.</li>
+                        <li>Ở $P_1$ (Con): <code>pid == 0</code> $\rightarrow$ Nhảy vào nhánh <code>else if (pid == 0)</code>. $P_1$ in ra "Child" và kết thúc.</li>
+                    </ul>
+                </li>
+                <li><strong>Lần `fork()` thứ hai (dòng 10 trong nhánh Cha):</strong>
+                    <br>Tiến trình cha $P_0$ thực thi `fork()` thứ hai $\rightarrow$ sinh thêm tiến trình con $P_2$.
+                    <br>Cả $P_0$ và $P_2$ đều tiếp tục chạy lệnh <code>printf("Parent\n");</code>.
+                </li>
+                <li><strong>Kết luận Số lượng Tiến trình:</strong> Tổng cộng có <strong>3 tiến trình</strong> ($P_0$ gốc, $P_1$ con từ fork 1, $P_2$ con từ fork 2).</li>
+                <li><strong>Cây Tiến trình (Process Tree):</strong>
+<pre>
+          P0 (Parent gốc)
+         /  \
+        /    \
+  P1 (Con 1)  P2 (Con 2 từ fork 2)
+</pre>
+                </li>
+                <li><strong>Kết quả in ra màn hình:</strong>
+                    <br>- "Start": 1 lần (in ra trước khi fork).
+                    <br>- "Child": 1 lần (từ $P_1$).
+                    <br>- "Parent": 2 lần (từ $P_0$ và $P_2$).
+                </li>
+            </ol>
+            <div class="uit-trap-box">
+                <div class="trap-title">⚡ LƯU Ý VỀ THỨ TỰ IN (NONDETERMINISTIC OUTPUT)</div>
+                <p>Do tiến trình cha và các tiến trình con được định thời chạy độc lập (nondeterministic execution order), thứ tự xuất hiện giữa các dòng "Child" và "Parent" trên màn hình là <strong>KHÔNG CÓ THỨ TỰ CỐ ĐỊNH DUY NHẤT</strong>.</p>
+                <p>Các chuỗi output đều hợp lệ:</p>
+                <ul>
+                    <li><code>Start -> Child -> Parent -> Parent</code></li>
+                    <li><code>Start -> Parent -> Child -> Parent</code></li>
+                    <li><code>Start -> Parent -> Parent -> Child</code></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 2: TÍNH SỐ NGUYÊN VÀ IN VÒNG LẶP FORK</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho chương trình C:</strong>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main() {
+    for (int i = 0; i &lt; 3; i++) {
+        fork();
+        printf("hello\n");
+    }
+    return 0;
+}
+</code></pre>
+            <strong>Hỏi:</strong> Chuỗi <code>"hello"</code> được in ra tổng cộng bao nhiêu lần? Giải thích chi tiết bằng cây tiến trình.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết từng bước:</div>
+            <ol>
+                <li>Tại $i = 0$: $1$ tiến trình gốc $P_0$ gọi `fork()` $\rightarrow$ tạo $P_1$. Cả $P_0, P_1$ cùng in "hello\n" ($2$ lần in).</li>
+                <li>Tại $i = 1$: $2$ tiến trình ($P_0, P_1$) cùng gọi `fork()` $\rightarrow$ tạo $P_2, P_3$ ($4$ tiến trình). Cả $4$ tiến trình cùng in "hello\n" ($4$ lần in).</li>
+                <li>Tại $i = 2$: $4$ tiến trình ($P_0, P_1, P_2, P_3$) cùng gọi `fork()` $\rightarrow$ tạo $P_4, P_5, P_6, P_7$ ($8$ tiến trình). Cả $8$ tiến trình cùng in "hello\n" ($8$ lần in).</li>
+                <li><strong>Tổng số lần in = $2 + 4 + 8 = 14$ lần in chữ "hello".</strong> (Tổng số tiến trình sinh ra là $2^3 = 8$ tiến trình).</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 3: ĐỊA CHỈ VẢI BIẾN VÀ COPY-ON-WRITE</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho chương trình C:</strong>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+
+int a = 10;
+int main() {
+    pid_t pid = fork();
+    if (pid == 0) {
+        a += 5;
+        printf("Child: a = %d, &a = %p\n", a, &a);
+    } else {
+        wait(NULL);
+        a -= 2;
+        printf("Parent: a = %d, &a = %p\n", a, &a);
+    }
+    return 0;
+}
+</code></pre>
+            <strong>Hỏi:</strong> Cho biết giá trị <code>a</code> và <code>&a</code> in ra ở tiến trình cha và tiến trình con. So sánh hai địa chỉ ảo <code>&a</code>.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết:</div>
+            <ul>
+                <li>Tiến trình con (Child): In ra <code>Child: a = 15, &a = 0x601040</code> (ví dụ địa chỉ).</li>
+                <li>Tiến trình cha (Parent): In ra <code>Parent: a = 8, &a = 0x601040</code>.</li>
+                <li><strong>Giải thích bản chất:</strong> Địa chỉ ảo <code>&a</code> của hai tiến trình là <strong>BẰNG NHAU (GIỐNG NHAU)</strong> vì không gian địa chỉ ảo của con được nhân bản từ cha. Tuy nhiên, MMU ánh xạ <code>&a</code> của cha và con sang 2 khung trang <strong>RAM VẬT LÝ KHÁC NHAU</strong> (nhờ cơ chế Copy-on-Write). Do đó giá trị biến <code>a</code> hoàn toàn độc lập!</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 3</div>
+    <ul>
+        <li><code>fork()</code> trả về 0 trong Child, PID con trong Parent.</li>
+        <li>$N$ lệnh `fork()` liên tiếp sinh $2^N$ tiến trình (CHỈ đúng khi fork vô điều kiện).</li>
+        <li><code>execvp()</code> nạp lại bộ nhớ, lệnh sau `execvp` không chạy nếu thành công.</li>
+        <li><code>printf</code> không `\n` bị chép buffer qua tiến trình con khi `fork()`.</li>
+        <li>Thread chung Code/Data/Heap, riêng Stack/$PC$/Registers.</li>
+        <li>Thứ tự in giữa các tiến trình là nondeterministic.</li>
+        <li><code>exit(0)</code> chuyển thẳng Running $\rightarrow$ Terminated (không qua Waiting).</li>
+    </ul>
+</div>
+</article>
+
+<article class="chapter chapter-chapter" id="chapter-04-cpu-scheduling" data-chapter="04-cpu-scheduling">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_04_CPU_SCHEDULING</span>
+<div class="chapter-header">
+    <div class="chapter-num">Chương 04 — Trọng Tâm Thi Giữa Kỳ</div>
+    <h1>ĐỊNH THỜI CPU (CPU SCHEDULING)</h1>
+    <div class="chapter-subtitle">Tiêu chuẩn định thời $\rightarrow$ Gantt Chart $\rightarrow$ FCFS / SJF / SRTF / RR / Priority $\rightarrow$ Lời giải từng bước điểm 10</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 4 (Trọng Tâm Giữa Kỳ UIT)</h3>
+    <ul>
+        <li>Nắm vững 5 tiêu chuẩn đánh giá thuật toán định thời ($CPU_{util}$, $Throughput$, $TAT$, $WT$, $RT$).</li>
+        <li>Phân biệt chính xác Thuật toán Độc quyền (Non-preemptive) và Khống chế / Trưng dụng (Preemptive).</li>
+        <li>Thạo kỹ năng vẽ <strong>Sơ đồ Gantt (Gantt Chart)</strong> chuẩn xác theo từng mốc sự kiện thời gian.</li>
+        <li>Tính toán chính xác 100% thời gian $CT, TAT, WT, RT$ và thời gian trung bình cho các thuật toán FCFS, SJF, SRTF, Priority, Round Robin.</li>
+        <li>Tránh tuyệt đối các bẫy đề thi UIT liên quan đến thứ tự vào hàng đợi Ready trong Round Robin và ngắt ưu tiên.</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. CÁC TIÊU CHUẨN ĐỊNH THỜI VÀ CÔNG THỨC BẮT BUỘC</h2>
+
+    <p>Định thời CPU là việc chọn lựa tiến trình trong hàng đợi Ready để cấp phát CPU khi CPU rảnh.</p>
+
+    <h3>A. Phân loại Định thời: Preemptive vs Non-Preemptive</h3>
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Non-preemptive vs Preemptive</div>
+        <ul>
+            <li><strong>Độc quyền (Non-preemptive):</strong> Khi tiến trình đã nhận CPU, nó sẽ giữ CPU cho đến khi tự nguyện giải phóng (kết thúc hoặc chuyển sang Waiting chờ I/O). Các thuật toán: FCFS, SJF Non-preemptive, Priority Non-preemptive.</li>
+            <li><strong>Trưng dụng / Khống chế (Preemptive):</strong> HDH có quyền <em>tước CPU của tiến trình đang chạy</em> để cấp cho tiến trình khác có độ ưu tiên cao hơn hoặc hết thời lượng (Time quantum). Các thuật toán: SRTF, Round Robin, Preemptive Priority.</li>
+        </ul>
+    </div>
+
+    <h3>B. 5 Tiêu chuẩn Đánh giá & Bộ Công Thức Chuẩn Bài Thi UIT</h3>
+    <p>Giả sử với tiến trình $P_i$ có các mốc thời gian:</p>
+    <ul>
+        <li>$AT$ (Arrival Time): Thời điểm tiến trình đi vào Ready queue.</li>
+        <li>$BT$ (CPU Burst Time): Thời gian tiến trình cần dùng CPU.</li>
+        <li>$CT$ (Completion Time): Thời điểm tiến trình hoàn tất thực thi hoàn toàn.</li>
+    </ul>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📐 BỘ CÔNG THỨC TÍNH THỜI GIAN (BẮT BUỘC THUỘC LÒNG)</span>
+        </div>
+        <ol>
+            <li><strong>Thời gian lưu lại hệ thống / Hoàn thành (Turnaround Time - $TAT$):</strong>
+                $$TAT = CT - AT$$
+            </li>
+            <li><strong>Thời gian chờ (Waiting Time - $WT$):</strong>
+                $$WT = TAT - BT$$
+            </li>
+            <li><strong>Thời gian đáp ứng (Response Time - $RT$):</strong>
+                $$RT = \text{Thời điểm lần đầu tiên được cấp CPU} - AT$$
+            </li>
+            <li><strong>Thời gian trung bình ($\text{Average}$):</strong>
+                $$WT_{avg} = \frac{\sum WT_i}{N}, \quad TAT_{avg} = \frac{\sum TAT_i}{N}, \quad RT_{avg} = \frac{\sum RT_i}{N}$$
+            </li>
+        </ol>
+    </div>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. NGUYÊN LÝ CÁC THUẬT TOÁN ĐỊNH THỜI THƯỜNG GẶP</h2>
+
+    <h3>1. FCFS (First-Come, First-Served)</h3>
+    <p>Tiến trình nào đến trước (AT nhỏ hơn) được phục vụ trước. Độc quyền. Nhược điểm: Hiệu ứng đoàn tàu (Convoy Effect) nếu tiến trình đến đầu tiên có $BT$ rất lớn làm các tiến trình sau phải chờ lâu.</p>
+
+    <h3>2. SJF (Shortest Job First - Non-preemptive)</h3>
+    <p>Chọn tiến trình có CPU Burst Time ($BT$) ngắn nhất trong số các tiến trình đã đến Ready Queue. Nếu hai tiến trình có $BT$ bằng nhau thì áp dụng FCFS.</p>
+
+    <h3>3. SRTF (Shortest Remaining Time First - Preemptive SJF)</h3>
+    <p>Phiên bản khống chế của SJF. Mỗi khi có tiến trình mới xuất hiện trong Ready queue, so sánh $BT$ còn lại của tiến trình đang chạy với $BT$ của tiến trình mới. Nếu tiến trình mới ngắn hơn, lập tức tước CPU của tiến trình đang chạy.</p>
+
+    <h3>4. Round Robin (RR - Thời gian luân phiên)</h3>
+    <p>Mỗi tiến trình được cấp một khoảng thời gian CPU nhỏ gọi là <strong>Time Quantum ($q$)</strong>. Thực thi theo nguyên tắc FIFO trong Ready queue. Nếu hết quantum $q$ mà tiến trình chưa xong, nó bị đưa về <em>cuối Ready queue</em>.</p>
+
+    <div class="uit-trap-box">
+        <div class="trap-title">⚡ BẪY THỨ TỰ HÀNG ĐỢI READY TRONG ROUND ROBIN (ĐỀ THI UIT)</div>
+        <p>Tại mốc thời gian $t$, nếu tiến trình $P_A$ <em>vừa hết time quantum $q$</em> VÀ đồng thời có tiến trình mới $P_B$ <em>vừa tới hệ thống ($AT = t$)</em>:</p>
+        <p><strong>QUY TẮC UIT CHUẨN:</strong> Tiến trình mới $P_B$ sẽ được đưa vào Ready Queue <strong>TRƯỚC</strong>, sau đó mới đưa tiến trình $P_A$ (vừa hết quantum) vào <strong>SAU</strong> $P_B$!</p>
+    </div>
+
+    <h3>5. Priority Scheduling (Định thời theo độ ưu tiên)</h3>
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ QUY ƯỚC ĐỘ ƯU TIÊN TRONG ĐỀ THI UIT</div>
+        <p>Đề thi UIT luôn quy ước: <strong>Số ưu tiên NHỎ HƠN đại diện cho độ ưu tiên CAO HƠN</strong> (Ví dụ: Priority 1 cao ưu tiên hơn Priority 2).</p>
+    </div>
+
+    <h3>6. HRRN (Highest Response Ratio Next - Tỷ lệ đáp ứng cao nhất)</h3>
+    <p>Thuật toán độc quyền (Non-preemptive). Mỗi khi CPU rảnh, tính Tỷ lệ đáp ứng (Response Ratio - $R$) của tất cả các tiến trình đã đến Ready queue. Tiến trình có $R$ lớn nhất sẽ được chọn:</p>
+    $$R = \frac{WT + BT}{BT} = 1 + \frac{WT}{BT}$$
+    <p><em>Ưu điểm:</em> Giúp các tiến trình có $BT$ dài không bị đói tài nguyên (Starvation) vì khi $WT$ tăng lên, tỷ lệ $R$ sẽ tự động tăng theo thời gian.</p>
+
+    <h3>7. Multilevel Queue (MQ - Hàng đợi nhiều cấp)</h3>
+    <p>Hàng đợi Ready được chia thành nhiều hàng đợi riêng biệt (ví dụ: Hàng đợi Hệ thống, Hàng đợi Tương tác, Hàng đợi Batch). Mỗi hàng đợi có thuật toán định thời riêng (như RR cho hàng đợi tương tác, FCFS cho batch). Cần có lịch trình giữa các hàng đợi (thường là độ ưu tiên cố định hoặc chia tỷ lệ phần trăm thời gian CPU).</p>
+
+    <h3>8. Multilevel Feedback Queue (MLFQ - Hàng đợi phản hồi nhiều cấp)</h3>
+    <p>Cho phép tiến trình <strong>di chuyển giữa các hàng đợi</strong> tùy thuộc vào hành vi dùng CPU. Nếu tiến trình dùng hết time quantum mà chưa xong, nó bị hạ xuống hàng đợi ưu tiên thấp hơn. Tiến trình I/O-bound hoặc chờ lâu được nâng lên hàng đợi ưu tiên cao hơn. Đây là thuật toán linh hoạt nhất và được sử dụng trong nhiều HDH thực tế.</p>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. BÀI TẬP WORKED EXAMPLE THI GIỮA KỲ CHUẨN DETAILED 100%</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE: ĐỊNH THỜI ROUND ROBIN (q = 5) VÀ SRTF</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho 5 tiến trình với bảng dữ liệu sau:</strong>
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>Arrival Time ($AT$)</th><th>CPU Burst Time ($BT$)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P1</td><td>0</td><td>13</td></tr>
+                    <tr><td>P2</td><td>4</td><td>9</td></tr>
+                    <tr><td>P3</td><td>6</td><td>4</td></tr>
+                    <tr><td>P4</td><td>7</td><td>20</td></tr>
+                    <tr><td>P5</td><td>12</td><td>10</td></tr>
+                </tbody>
+            </table>
+            <strong>Yêu cầu:</strong> Vẽ sơ đồ Gantt và tính $WT_{avg}$, $TAT_{avg}$, $RT_{avg}$ cho các thuật toán:
+            <br>a) Round Robin với $q = 5$.
+            <br>b) SRTF (Shortest Remaining Time First).
+        </div>
+
+        <div class="solution-steps">
+            <div class="solution-step-title">a) Giải Thuật Round Robin (q = 5):</div>
+            <p><strong>Diễn biến Ready Queue từng mốc thời gian:</strong></p>
+            <ul>
+                <li>$t=0$: P1 đến. Chạy P1 từ $0 \rightarrow 5$. ($P1$ còn 8). Trong lúc này: $t=4$ P2 đến.</li>
+                <li>$t=5$: Ready Queue: [P2]. Đưa P1 (vừa xong quantum) vào sau $\rightarrow$ Ready Queue: [P2, P1].</li>
+                <li>$t=5 \rightarrow 10$: Chạy P2 (hết quantum 5, còn 4). Trong lúc này: $t=6$ P3 đến, $t=7$ P4 đến. Ready Queue trước khi xếp P2 lại: [P1, P3, P4] $\rightarrow$ thêm P2 vào cuối $\rightarrow$ Ready Queue: [P1, P3, P4, P2].</li>
+                <li>$t=10 \rightarrow 15$: Chạy P1 (5 unit, còn 3). $t=12$ P5 đến. Ready Queue: [P3, P4, P2, P5, P1].</li>
+                <li>$t=15 \rightarrow 19$: Chạy P3 (cần 4 unit $\le 5$ $\rightarrow$ P3 HOÀN THÀNH tại $t=19$, $CT_3 = 19$). Ready Queue: [P4, P2, P5, P1].</li>
+                <li>$t=19 \rightarrow 24$: Chạy P4 (5 unit, còn 15). Ready Queue: [P2, P5, P1, P4].</li>
+                <li>$t=24 \rightarrow 28$: Chạy P2 (cần 4 unit $\rightarrow$ P2 HOÀN THÀNH tại $t=28$, $CT_2 = 28$). Ready Queue: [P5, P1, P4].</li>
+                <li>$t=28 \rightarrow 33$: Chạy P5 (5 unit, còn 5). Ready Queue: [P1, P4, P5].</li>
+                <li>$t=33 \rightarrow 36$: Chạy P1 (cần 3 unit $\rightarrow$ P1 HOÀN THÀNH tại $t=36$, $CT_1 = 36$). Ready Queue: [P4, P5].</li>
+                <li>$t=36 \rightarrow 41$: Chạy P4 (5 unit, còn 10). Ready Queue: [P5, P4].</li>
+                <li>$t=41 \rightarrow 46$: Chạy P5 (cần 5 unit $\rightarrow$ P5 HOÀN THÀNH tại $t=46$, $CT_5 = 46$). Ready Queue: [P4].</li>
+                <li>$t=46 \rightarrow 56$: Chạy P4 (còn 10 unit $\rightarrow$ P4 HOÀN THÀNH tại $t=56$, $CT_4 = 56$).</li>
+            </ul>
+
+            <div class="gantt-container">
+                <strong>SƠ ĐỒ GANTT (Round Robin q = 5):</strong>
+                <div class="gantt-chart">
+                    <div class="gantt-block p-bg-1" style="width: 8.9%;">P1</div>
+                    <div class="gantt-block p-bg-2" style="width: 8.9%;">P2</div>
+                    <div class="gantt-block p-bg-1" style="width: 8.9%;">P1</div>
+                    <div class="gantt-block p-bg-3" style="width: 7.1%;">P3</div>
+                    <div class="gantt-block p-bg-4" style="width: 8.9%;">P4</div>
+                    <div class="gantt-block p-bg-2" style="width: 7.1%;">P2</div>
+                    <div class="gantt-block p-bg-5" style="width: 8.9%;">P5</div>
+                    <div class="gantt-block p-bg-1" style="width: 5.4%;">P1</div>
+                    <div class="gantt-block p-bg-4" style="width: 8.9%;">P4</div>
+                    <div class="gantt-block p-bg-5" style="width: 8.9%;">P5</div>
+                    <div class="gantt-block p-bg-4" style="width: 17.8%;">P4</div>
+                </div>
+                <div class="gantt-timeline">
+                    <span>0</span><span>5</span><span>10</span><span>15</span><span>19</span><span>24</span><span>28</span><span>33</span><span>36</span><span>41</span><span>46</span><span>56</span>
+                </div>
+            </div>
+
+            <p><strong>Bảng tính chi tiết các chỉ số:</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>$AT$</th><th>$BT$</th><th>$CT$</th><th>$TAT = CT - AT$</th><th>$WT = TAT - BT$</th><th>$RT$ (Lần đầu exec - AT)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P1</td><td>0</td><td>13</td><td>36</td><td>36</td><td>23</td><td>0 - 0 = 0</td></tr>
+                    <tr><td>P2</td><td>4</td><td>9</td><td>28</td><td>24</td><td>15</td><td>5 - 4 = 1</td></tr>
+                    <tr><td>P3</td><td>6</td><td>4</td><td>19</td><td>13</td><td>9</td><td>15 - 6 = 9</td></tr>
+                    <tr><td>P4</td><td>7</td><td>20</td><td>56</td><td>49</td><td>29</td><td>19 - 7 = 12</td></tr>
+                    <tr><td>P5</td><td>12</td><td>10</td><td>46</td><td>34</td><td>24</td><td>28 - 12 = 16</td></tr>
+                    <tr><td><strong>TRUNG BÌNH</strong></td><td>-</td><td>-</td><td>-</td><td><strong>31.2</strong></td><td><strong>20.0</strong></td><td><strong>7.6</strong></td></tr>
+                </tbody>
+            </table>
+
+            <div class="solution-step-title" style="margin-top: 20px;">b) Giải Thuật SRTF (Shortest Remaining Time First):</div>
+            <p><strong>Diễn biến ngắt và so sánh thời gian còn lại (Remaining BT):</strong></p>
+            <ul>
+                <li>$t=0$: P1 đến ($BT=13$). Chạy P1 từ $0 \rightarrow 4$. (Tại $t=4$, $P1$ còn 9).</li>
+                <li>$t=4$: P2 đến ($BT=9$). So sánh $P1$ (còn 9) và $P2$ (mới 9) $\rightarrow$ Hòa nhau, giữ P1 chạy tiếp $4 \rightarrow 6$. (Tại $t=6$, $P1$ còn 7).</li>
+                <li>$t=6$: P3 đến ($BT=4$). So sánh $P3$ ($BT=4$) với $P1$ (còn 7) $\rightarrow P3$ ngắn hơn! $P3$ <strong>tước CPU của P1</strong>! $P3$ chạy từ $6 \rightarrow 10$ ($P3$ HOÀN THÀNH tại $t=10$, $CT_3 = 10$). Trong lúc này: $t=7$ P4 đến ($BT=20$).</li>
+                <li>$t=10$: P3 xong. Các tiến trình sẵn sàng: P1 (còn 7), P2 (còn 9), P4 (còn 20). P1 ngắn nhất $\rightarrow$ Chạy P1 từ $10 \rightarrow 12$. (Tại $t=12$, $P1$ còn 5).</li>
+                <li>$t=12$: P5 đến ($BT=10$). So sánh P1 (còn 5) với P5 (10), P2 (9), P4 (20) $\rightarrow$ P1 vẫn ngắn nhất! P1 chạy tiếp từ $12 \rightarrow 17$ ($P1$ HOÀN THÀNH tại $t=17$, $CT_1 = 17$).</li>
+                <li>$t=17$: So sánh các tiến trình còn lại: P2 (còn 9), P5 (còn 10), P4 (còn 20). P2 ngắn nhất $\rightarrow$ Chạy P2 từ $17 \rightarrow 26$ ($P2$ HOÀN THÀNH tại $t=26$, $CT_2 = 26$).</li>
+                <li>$t=26$: So sánh P5 (còn 10) và P4 (còn 20). P5 ngắn hơn $\rightarrow$ Chạy P5 từ $26 \rightarrow 36$ ($P5$ HOÀN THÀNH tại $t=36$, $CT_5 = 36$).</li>
+                <li>$t=36$: Chạy P4 (20 unit) từ $36 \rightarrow 56$ ($P4$ HOÀN THÀNH tại $t=56$, $CT_4 = 56$).</li>
+            </ul>
+
+            <div class="gantt-container">
+                <strong>SƠ ĐỒ GANTT (SRTF - Shortest Remaining Time First):</strong>
+                <div class="gantt-chart">
+                    <div class="gantt-block p-bg-1" style="width: 10.7%;">P1</div>
+                    <div class="gantt-block p-bg-3" style="width: 7.1%;">P3</div>
+                    <div class="gantt-block p-bg-1" style="width: 12.5%;">P1</div>
+                    <div class="gantt-block p-bg-2" style="width: 16.1%;">P2</div>
+                    <div class="gantt-block p-bg-5" style="width: 17.9%;">P5</div>
+                    <div class="gantt-block p-bg-4" style="width: 35.7%;">P4</div>
+                </div>
+                <div class="gantt-timeline">
+                    <span>0</span><span>6</span><span>10</span><span>17</span><span>26</span><span>36</span><span>56</span>
+                </div>
+            </div>
+
+            <p><strong>Bảng tính chi tiết các chỉ số SRTF:</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>$AT$</th><th>$BT$</th><th>$CT$</th><th>$TAT = CT - AT$</th><th>$WT = TAT - BT$</th><th>$RT$ (Lần đầu exec - AT)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P1</td><td>0</td><td>13</td><td>17</td><td>17</td><td>4</td><td>0 - 0 = 0</td></tr>
+                    <tr><td>P2</td><td>4</td><td>9</td><td>26</td><td>22</td><td>13</td><td>17 - 4 = 13</td></tr>
+                    <tr><td>P3</td><td>6</td><td>4</td><td>10</td><td>4</td><td>0</td><td>6 - 6 = 0</td></tr>
+                    <tr><td>P4</td><td>7</td><td>20</td><td>56</td><td>49</td><td>29</td><td>36 - 7 = 29</td></tr>
+                    <tr><td>P5</td><td>12</td><td>10</td><td>36</td><td>24</td><td>14</td><td>26 - 12 = 14</td></tr>
+                    <tr><td><strong>TRUNG BÌNH</strong></td><td>-</td><td>-</td><td>-</td><td><strong>23.2</strong></td><td><strong>12.0</strong></td><td><strong>11.2</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 4</div>
+    <ul>
+        <li>$TAT = CT - AT$, $WT = TAT - BT$, $RT = \text{Exec\_start} - AT$.</li>
+        <li>SJF tối ưu $WT_{avg}$, SRTF khống chế theo $BT$ còn lại.</li>
+        <li>Round Robin: Tiến trình mới đến được xếp trước tiến trình vừa xong quantum!</li>
+        <li>Độ ưu tiên UIT: Số nhỏ hơn = Ưu tiên cao hơn.</li>
+    </ul>
+</div>
+</article>
+
+<article class="chapter chapter-review" id="chapter-midterm-review" data-chapter="midterm-review">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_MIDTERM_REVIEW</span>
+<div class="chapter-header">
+    <div class="chapter-num">Phần Review Đặc Biệt — Giữa Kỳ</div>
+    <h1>MIDTERM MASTER REVIEW & ĐỀ THI THỬ GIỮA KỲ CHUẨN UIT</h1>
+    <div class="chapter-subtitle">Hệ thống hóa Ch1-Ch4 $\rightarrow$ Bẫy trắc nghiệm $\rightarrow$ 01 Đề thi mô phỏng hoàn chỉnh có đáp án</div>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. BẢN ĐỒ KIẾN THỨC BẮT BUỘC THI GIỮA KỲ (CH1 - CH4)</h2>
+    <div class="alert-box alert-note">
+        <div class="alert-title">🧠 SYSTEM CHECKLIST GIỮA KỲ IT007</div>
+        <ul>
+            <li><strong>Chương 1:</strong> Dual Mode (User mode bit 1 vs Kernel mode bit 0), Ngắt (Interrupt vs Trap/Exception), Đa chương (Multiprogramming) vs Chia sẻ thời gian (Time-sharing).</li>
+            <li><strong>Chương 2:</strong> System Call vs Library Call, 3 Cơ chế truyền tham số System Call (Registers, Memory Block, Stack), Monolithic vs Microkernel.</li>
+            <li><strong>Chương 3:</strong> 5 Trạng thái tiến trình, `fork()` return 0 ở Child / PID ở Parent, Công thức $2^N$ tiến trình, Bẫy buffer `printf` không `\n`, `execvp()` ghi đè bộ nhớ tiến trình.</li>
+            <li><strong>Chương 4:</strong> Công thức $TAT = CT - AT$, $WT = TAT - BT$, $RT = \text{Exec\_Start} - AT$. Sơ đồ Gantt FCFS, SJF, SRTF, RR ($q$), Preemptive Priority (Số nhỏ = Ưu tiên cao). Thứ tự xếp hàng Ready Queue trong Round Robin.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- SECTION 2: MOCK MIDTERM EXAM -->
+<section class="page-break">
+    <h2>2. ĐỀ THI MÔ PHỎNG GIỮA KỲ IT007 UIT (THỜI GIAN: 60 PHÚT)</h2>
+    <p><em>Đề thi được biên soạn theo đúng cấu trúc đề giữa kỳ chính thức của Khoa Kỹ thuật Máy tính / Khoa CNPM - UIT.</em></p>
+
+    <h3>PHẦN 1: TRẮC NGHIỆM LÝ THUYẾT (4.0 ĐIỂM)</h3>
+
+    <p><strong>Câu 1:</strong> Sự khác biệt cơ bản nhất giữa hệ thống Đa chương (Multiprogramming) và hệ thống Chia sẻ thời gian (Time-Sharing) là gì?</p>
+    <p>A. Đa chương sử dụng nhiều CPU, Chia sẻ thời gian sử dụng 1 CPU.<br>
+    B. Đa chương tối ưu hiệu suất CPU ($CPU_{util}$), Chia sẻ thời gian tối ưu thời gian đáp ứng ($RT$).<br>
+    C. Đa chương hỗ trợ bộ nhớ ảo, Chia sẻ thời gian thì không.<br>
+    D. Đa chương là khống chế (preemptive), Chia sẻ thời gian là không khống chế (non-preemptive).</p>
+
+    <p><strong>Câu 2:</strong> Lệnh nào sau đây KHÔNG PHẢI là Lệnh đặc quyền (Privileged Instruction)?</p>
+    <p>A. Lệnh tắt/bật hệ thống ngắt phần cứng (`cli`/`sti`).<br>
+    B. Lệnh đọc thời gian hệ thống từ đồng hồ realtime.<br>
+    C. Lệnh thay đổi giá trị thanh ghi Base & Limit của RAM.<br>
+    D. Lệnh chuyển đổi Mode Bit từ User Mode sang Kernel Mode.</p>
+
+    <p><strong>Câu 3:</strong> Cho đoạn mã C: <code>for(int i=0; i&lt;3; i++) fork();</code>. Giả sử tất cả các lời gọi `fork()` đều thành công, tổng số tiến trình CON được sinh ra là:</p>
+    <p>A. 3 tiến trình.<br>
+    B. 7 tiến trình.<br>
+    C. 8 tiến trình.<br>
+    D. 15 tiến trình.</p>
+
+    <p><strong>Câu 4:</strong> Thuật toán định thời CPU nào sau đây đảm bảo KHÔNG BAO GIỜ bị ảnh hưởng bởi hiệu ứng đoàn tàu (Convoy Effect)?</p>
+    <p>A. FCFS.<br>
+    B. Round Robin.<br>
+    C. SJF Non-preemptive.<br>
+    D. Priority Non-preemptive.</p>
+
+    <h3>PHẦN 2: TỰ LUẬN TIẾN TRÌNH & FORK TREE (3.0 ĐIỂM)</h3>
+    <div class="worked-example">
+        <div class="problem-statement">
+            <strong>Câu 5:</strong> Cho đoạn chương trình C sau trên Linux:
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/wait.h&gt;
+
+int main() {
+    int val = 5;
+    pid_t pid = fork();
+    if (pid == 0) {
+        val += 15;
+        printf("Child: val = %d, addr = %p\n", val, &val);
+    } else if (pid &gt; 0) {
+        wait(NULL);
+        val -= 5;
+        printf("Parent: val = %d, addr = %p\n", val, &val);
+    }
+    return 0;
+}
+</code></pre>
+            <strong>Yêu cầu:</strong>
+            <br>a) Giả sử địa chỉ ảo của biến `val` trong tiến trình cha là <code>0x7ffe4a21</code>. Hãy xác định chính xác giá trị `val` và địa chỉ `&val` được in ra bởi tiến trình con và tiến trình cha. Giải thích bản chất cơ chế bộ nhớ.
+            <br>b) Tiến trình con đã trải qua những trạng thái nào trong suốt vòng đời của nó? Vẽ sơ đồ chuyển trạng thái.
+        </div>
+    </div>
+
+    <h3>PHẦN 3: TỰ LUẬN ĐỊNH THỜI CPU (3.0 ĐIỂM)</h3>
+    <div class="worked-example">
+        <div class="problem-statement">
+            <strong>Câu 6:</strong> Xét tập tiến trình sau trong một hệ điều hành đơn xử lý:
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>Arrival Time ($AT$)</th><th>CPU Burst Time ($BT$)</th><th>Priority (Số nhỏ = Ưu tiên cao)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P1</td><td>0</td><td>10</td><td>3</td></tr>
+                    <tr><td>P2</td><td>1</td><td>3</td><td>1</td></tr>
+                    <tr><td>P3</td><td>2</td><td>5</td><td>2</td></tr>
+                    <tr><td>P4</td><td>4</td><td>2</td><td>4</td></tr>
+                </tbody>
+            </table>
+            <strong>Yêu cầu:</strong>
+            <br>a) Vẽ sơ đồ Gantt và tính $WT_{avg}$, $TAT_{avg}$ cho thuật toán <strong>Preemptive Priority Scheduling</strong>.
+            <br>b) Vẽ sơ đồ Gantt và tính $WT_{avg}$, $TAT_{avg}$ cho thuật toán <strong>Round Robin ($q = 3$)</strong>.
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3: ANSWER KEY -->
+<section class="page-break">
+    <h2>3. ĐÁP ÁN VÀ LỜI GIẢI CHI TIẾT ĐỀ THI MÔ PHỎNG GIỮA KỲ</h2>
+
+    <h3>PHẦN 1: ĐÁP ÁN TRẮC NGHIỆM</h3>
+    <ul>
+        <li><strong>Câu 1: B</strong> — Đa chương mục đích tối ưu $CPU_{util}$ (chuyển khi I/O), Chia sẻ thời gian dùng Time-slice tối ưu $RT$.</li>
+        <li><strong>Câu 2: B</strong> — Đọc thời gian hệ thống là lệnh không đặc quyền (User mode đọc được). Các lệnh A, C, D là Privileged.</li>
+        <li><strong>Câu 3: B</strong> — Vòng lặp $N=3$ sinh $2^3 = 8$ tiến trình (tính cả cha). Đề hỏi số tiến trình <em>CON</em> $\Rightarrow 8 - 1 = 7$ con.</li>
+        <li><strong>Câu 4: B</strong> — Round Robin dùng Time quantum chia nhỏ thời gian CPU nên các tiến trình ngắn không bị kẹt sau tiến trình dài (tránh Convoy Effect).</li>
+    </ul>
+
+    <h3>PHẦN 2: GIẢI CHI TIẾT CÂU 5 (FORK & MEMORY)</h3>
+    <div class="worked-example">
+        <div class="solution-steps">
+            <ol>
+                <li><strong>Ghi kết quả in ra:</strong>
+                    <br>- Tiến trình con (Child): In ra <code>Child: val = 20, addr = 0x7ffe4a21</code>
+                    <br>- Tiến trình cha (Parent): In ra <code>Parent: val = 0, addr = 0x7ffe4a21</code>
+                </li>
+                <li><strong>Giải thích bản chất bộ nhớ:</strong>
+                    <br>- Khi `fork()` xảy ra, HDH sao chép không gian địa chỉ ảo của tiến trình cha sang tiến trình con (hoặc dùng Copy-on-Write).
+                    <br>- Do không gian địa chỉ ảo giống nhau, địa chỉ ảo <code>&val</code> ở 2 tiến trình là <strong>BẰNG NHAU (0x7ffe4a21)</strong>. Tuy nhiên, chúng được MMU ánh xạ sang 2 khung trang <strong>RAM VẬT LÝ ĐỘC LẬP</strong>.
+                    <br>- Do đó, biến `val` ở Child tăng thành $5+15=20$, còn `val` ở Parent sau khi `wait()` xong giảm thành $5-5=0$, hoàn toàn không ảnh hưởng lẫn nhau.
+                </li>
+                <li><strong>Chuỗi trạng thái của Tiến trình con:</strong>
+                    <br><code>New -> Ready -> Running -> Waiting (khi printf I/O) -> Ready -> Running -> Terminated</code>.
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <h3>PHẦN 3: GIẢI CHI TIẾT CÂU 6 (ĐỊNH THỜI CPU)</h3>
+    <div class="worked-example">
+        <div class="solution-steps">
+            <div class="solution-step-title">a) Preemptive Priority (Số nhỏ = Ưu tiên cao):</div>
+            <ul>
+                <li>$t=0$: P1 (Prio 3) chạy.</li>
+                <li>$t=1$: P2 (Prio 1) đến. Vì Prio 1 > Prio 3 $\rightarrow$ P2 ngắt P1! P2 chạy từ $1 \rightarrow 4$ (P2 HOÀN THÀNH tại $t=4$). Trong lúc này: $t=2$ P3 (Prio 2) đến, $t=4$ P4 (Prio 4) đến.</li>
+                <li>$t=4$: So sánh độ ưu tiên của P1 (Prio 3, còn $BT=9$), P3 (Prio 2, $BT=5$), P4 (Prio 4, $BT=2$). P3 ưu tiên nhất $\rightarrow$ P3 chạy từ $4 \rightarrow 9$ (P3 HOÀN THÀNH tại $t=9$).</li>
+                <li>$t=9$: So sánh P1 (Prio 3) và P4 (Prio 4). P1 ưu tiên hơn $\rightarrow$ P1 chạy từ $9 \rightarrow 18$ (P1 HOÀN THÀNH tại $t=18$).</li>
+                <li>$t=18$: P4 chạy từ $18 \rightarrow 20$ (P4 HOÀN THÀNH tại $t=20$).</li>
+            </ul>
+
+            <div class="gantt-container">
+                <strong>SƠ ĐỒ GANTT (Preemptive Priority):</strong>
+                <div class="gantt-chart">
+                    <div class="gantt-block p-bg-1" style="width: 5%;">P1</div>
+                    <div class="gantt-block p-bg-2" style="width: 15%;">P2</div>
+                    <div class="gantt-block p-bg-3" style="width: 25%;">P3</div>
+                    <div class="gantt-block p-bg-1" style="width: 45%;">P1</div>
+                    <div class="gantt-block p-bg-4" style="width: 10%;">P4</div>
+                </div>
+                <div class="gantt-timeline">
+                    <span>0</span><span>1</span><span>4</span><span>9</span><span>18</span><span>20</span>
+                </div>
+            </div>
+
+            <p><strong>Tính toán:</strong></p>
+            <ul>
+                <li>P1: $CT=18, TAT=18-0=18, WT=18-10=8$</li>
+                <li>P2: $CT=4, TAT=4-1=3, WT=3-3=0$</li>
+                <li>P3: $CT=9, TAT=9-2=7, WT=7-5=2$</li>
+                <li>P4: $CT=20, TAT=20-4=16, WT=16-2=14$</li>
+                <li><strong>$TAT_{avg} = \frac{18+3+7+16}{4} = 11.0$ ms</strong></li>
+                <li><strong>$WT_{avg} = \frac{8+0+2+14}{4} = 6.0$ ms</strong></li>
+            </ul>
+
+            <div class="solution-step-title" style="margin-top: 20px;">b) Round Robin ($q = 3$):</div>
+            <p><strong>Diễn biến Ready Queue từng mốc thời gian:</strong></p>
+            <ul>
+                <li>$t=0$: P1 đến ($BT=10$). Chạy P1 từ $0 \rightarrow 3$ (còn 7). Trong lúc này: $t=1$ P2 đến, $t=2$ P3 đến. Ready Queue trước khi xếp P1 lại: [P2, P3] $\rightarrow$ thêm P1 vào cuối $\rightarrow$ Ready Queue: [P2, P3, P1].</li>
+                <li>$t=3 \rightarrow 6$: Chạy P2 (cần 3 unit $\rightarrow$ P2 HOÀN THÀNH tại $t=6$, $CT_2 = 6$). Trong lúc này: $t=4$ P4 đến. Ready Queue: [P3, P1, P4].</li>
+                <li>$t=6 \rightarrow 9$: Chạy P3 (3 unit, còn 2). Ready Queue: [P1, P4, P3].</li>
+                <li>$t=9 \rightarrow 12$: Chạy P1 (3 unit, còn 4). Ready Queue: [P4, P3, P1].</li>
+                <li>$t=12 \rightarrow 14$: Chạy P4 (cần 2 unit $\le 3 \rightarrow$ P4 HOÀN THÀNH tại $t=14$, $CT_4 = 14$). Ready Queue: [P3, P1].</li>
+                <li>$t=14 \rightarrow 16$: Chạy P3 (cần 2 unit còn lại $\rightarrow$ P3 HOÀN THÀNH tại $t=16$, $CT_3 = 16$). Ready Queue: [P1].</li>
+                <li>$t=16 \rightarrow 19$: Chạy P1 (3 unit, còn 1). Ready Queue: [P1].</li>
+                <li>$t=19 \rightarrow 20$: Chạy P1 (1 unit cuối $\rightarrow$ P1 HOÀN THÀNH tại $t=20$, $CT_1 = 20$).</li>
+            </ul>
+
+            <div class="gantt-container">
+                <strong>SƠ ĐỒ GANTT (Round Robin q = 3):</strong>
+                <div class="gantt-chart">
+                    <div class="gantt-block p-bg-1" style="width: 15%;">P1</div>
+                    <div class="gantt-block p-bg-2" style="width: 15%;">P2</div>
+                    <div class="gantt-block p-bg-3" style="width: 15%;">P3</div>
+                    <div class="gantt-block p-bg-1" style="width: 15%;">P1</div>
+                    <div class="gantt-block p-bg-4" style="width: 10%;">P4</div>
+                    <div class="gantt-block p-bg-3" style="width: 10%;">P3</div>
+                    <div class="gantt-block p-bg-1" style="width: 20%;">P1</div>
+                </div>
+                <div class="gantt-timeline">
+                    <span>0</span><span>3</span><span>6</span><span>9</span><span>12</span><span>14</span><span>16</span><span>20</span>
+                </div>
+            </div>
+
+            <p><strong>Bảng tính chi tiết chỉ số Round Robin (q = 3):</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>$AT$</th><th>$BT$</th><th>$CT$</th><th>$TAT = CT - AT$</th><th>$WT = TAT - BT$</th><th>$RT$ (Exec start - AT)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P1</td><td>0</td><td>10</td><td>20</td><td>20</td><td>10</td><td>0 - 0 = 0</td></tr>
+                    <tr><td>P2</td><td>1</td><td>3</td><td>6</td><td>5</td><td>2</td><td>3 - 1 = 2</td></tr>
+                    <tr><td>P3</td><td>2</td><td>5</td><td>16</td><td>14</td><td>9</td><td>6 - 2 = 4</td></tr>
+                    <tr><td>P4</td><td>4</td><td>2</td><td>14</td><td>10</td><td>8</td><td>12 - 4 = 8</td></tr>
+                    <tr><td><strong>TRUNG BÌNH</strong></td><td>-</td><td>-</td><td>-</td><td><strong>12.25 ms</strong></td><td><strong>7.25 ms</strong></td><td><strong>3.5 ms</strong></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">🎉 Chúc mừng bạn đã hoàn thành Midterm Review!</div>
+    <p>Hãy soát lại các lỗi sai trong đề thi thử và ôn kỹ lại Chương 3 & Chương 4 trước khi bước sang các chương Cuối kỳ!</p>
+</div>
+</article>
+
+<article class="chapter chapter-chapter" id="chapter-05-synchronization" data-chapter="05-synchronization">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_05_SYNCHRONIZATION</span>
+<div class="chapter-header">
+    <div class="chapter-num">Chương 05 — Trọng Tâm Thi Cuối Kỳ</div>
+    <h1>ĐỒNG BỘ TIẾN TRÌNH (PROCESS SYNCHRONIZATION)</h1>
+    <div class="chapter-subtitle">Race Condition $\rightarrow$ Vùng tranh chấp (Critical Section) $\rightarrow$ Thuật toán Peterson $\rightarrow$ Semaphore $\rightarrow$ Các bài toán kinh điển</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 5 (Trọng Tâm Cuối Kỳ UIT)</h3>
+    <ul>
+        <li>Hiểu bản chất Race Condition và tại sao truy xuất dữ liệu dùng chung bất đồng bộ lại gây ra sai sót.</li>
+        <li>Nắm vững 3 yêu cầu bắt buộc của giải pháp Vùng tranh chấp (Mutual Exclusion, Progress, Bounded Waiting).</li>
+        <li>Phân tích thuật toán Peterson và các chỉ thị phần cứng (TestAndSet, Swap).</li>
+        <li>Thạo kỹ năng sử dụng Semaphore để giải các bài toán đồng bộ thứ tự thực thi (Dependency DAG) và các bài toán kinh điển (Producer-Consumer, Readers-Writers).</li>
+        <li>Sửa lỗi Race Condition cho các chương trình thực tế chuẩn bài thi UIT.</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. NGUYÊN NHÂN RACE CONDITION VÀ BÀI TOÁN VÙNG TRANH CHẤP</h2>
+
+    <h3>A. Race Condition (Tranh chấp dữ liệu)</h3>
+    <p>Khi nhiều tiến trình/thread truy xuất và thao tác trên <strong>dữ liệu dùng chung (Shared Data)</strong> một cách đồng thời, và kết quả cuối cùng phụ thuộc vào thứ tự thực thi ngẫu nhiên của các tiến trình, tình trạng đó gọi là Race Condition.</p>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🔴 VÍ DỤ NGUYÊN TỬ VỀ RACE CONDITION</span>
+        </div>
+        <p>Giả sử 2 tiến trình $P_1$ và $P_2$ cùng thực hiện lệnh C <code>counter++</code> trên biến toàn cục <code>counter = 5</code>:</p>
+        <p>Lệnh <code>counter++</code> trong mã máy thực chất gồm 3 bước:</p>
+        <ol>
+            <li><code>register1 = counter</code> (Đọc giá trị từ RAM vào thanh ghi)</li>
+            <li><code>register1 = register1 + 1</code> (Tăng giá trị thanh ghi)</li>
+            <li><code>counter = register1</code> (Ghi lại giá trị từ thanh ghi vào RAM)</li>
+        </ol>
+        <p>Nếu $P_1$ đang chạy bước 1 và 2 thì bị ngắt, $P_2$ nhảy vào chạy cả 3 bước, sau đó $P_1$ được cấp CPU chạy nốt bước 3 $\rightarrow$ Giá trị <code>counter</code> cuối cùng sẽ là $6$ thay vì $7$! Dữ liệu bị sai hỏng hoàn toàn.</p>
+    </div>
+
+    <h3>B. Vùng Tranh Chấp (Critical Section - CS)</h3>
+    <p><strong>Critical Section</strong> là đoạn mã nguồn của tiến trình mà trong đó tiến trình truy xuất và thay đổi dữ liệu dùng chung.</p>
+
+    <h3>C. 3 Yêu cầu Bắt buộc cho Giải pháp CS</h3>
+    <ol>
+        <li><strong>Loại trừ tương hỗ (Mutual Exclusion):</strong> Nếu tiến trình $P_i$ đang thực thi trong vùng CS của nó, thì không có tiến trình $P_j$ nào khác được phép thực thi trong vùng CS đó.</li>
+        <li><strong>Tiến triển (Progress):</strong> Nếu không có tiến trình nào đang ở trong vùng CS và có các tiến trình muốn vào CS, thì chỉ những tiến trình không nằm trong Remainder section mới được tham gia quyết định tiến trình tiếp theo được vào CS, và sự lựa chọn này không thể kéo dài vô hạn.</li>
+        <li><strong>Chờ đợi giới hạn (Bounded Waiting):</strong> Có một giới hạn về số lần các tiến trình khác được phép vào vùng CS của chúng sau khi một tiến trình đã đưa ra yêu cầu vào CS và trước khi yêu cầu đó được chấp nhận (Đảm bảo không tiến trình nào bị đói tài nguyên / Starvation).</li>
+    </ol>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. GIẢI PHÁP ĐỒNG BỘ: THUẬT TOÁN PETERSON VÀ SEMAPHORE</h2>
+
+    <h3>A. Thuật toán Peterson cho 2 Tiến trình</h3>
+    <p>Giải pháp phần mềm cổ điển cho 2 tiến trình $P_0$ và $P_1$ chia sẻ 2 biến:</p>
+<pre><code class="language-c"><span class="code-keyword">int</span> turn;
+<span class="code-keyword">boolean</span> flag[<span class="code-string">2</span>]; <span class="code-comment">// ban đầu khởi tạo false</span>
+
+<span class="code-comment">// Cấu trúc tiến trình Pi (i = 0 hoặc 1, j = 1 - i)</span>
+<span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {
+    flag[i] = <span class="code-keyword">true</span>;
+    turn = j;
+    <span class="code-keyword">while</span> (flag[j] && turn == j) ; <span class="code-comment">// Busy waiting</span>
+    
+    <span class="code-comment">/* CRITICAL SECTION */</span>
+    
+    flag[i] = <span class="code-keyword">false</span>;
+    
+    <span class="code-comment">/* REMAINDER SECTION */</span>
+}
+</code></pre>
+    <p><em>Thuật toán Peterson chứng minh thỏa mãn cả 3 điều kiện: Mutual Exclusion, Progress và Bounded Waiting.</em></p>
+
+    <h3>B. Semaphore</h3>
+    <p><strong>Semaphore $S$</strong> là một biến nguyên tử (Atomic integer) chỉ có thể truy xuất thông qua 2 thao tác nguyên tử chuẩn:</p>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>⚙️ ĐỊNH NGHĨA NGUYÊN TỬ CỦA SEMAPHORE</span>
+        </div>
+        <p><strong>Thao tác <code>wait(S)</code> (hoặc <code>P(S)</code> / <code>sem_wait(&S)</code>):</strong></p>
+<pre><code class="language-c"><span class="code-keyword">void</span> wait(Semaphore S) {
+    S.value--;
+    <span class="code-keyword">if</span> (S.value < <span class="code-string">0</span>) {
+        <span class="code-comment">// Thêm tiến trình này vào hàng đợi của Semaphore S</span>
+        block(); <span class="code-comment">// Chuyển tiến trình sang trạng thái Waiting</span>
+    }
+}
+</code></pre>
+
+        <p><strong>Thao tác <code>signal(S)</code> (hoặc <code>V(S)</code> / <code>sem_post(&S)</code>):</strong></p>
+<pre><code class="language-c"><span class="code-keyword">void</span> signal(Semaphore S) {
+    S.value++;
+    <span class="code-keyword">if</span> (S.value <= <span class="code-string">0</span>) {
+        <span class="code-comment">// Lấy một tiến trình P từ hàng đợi của Semaphore S</span>
+        wakeup(P); <span class="code-comment">// Chuyển tiến trình P sang trạng thái Ready</span>
+    }
+}
+</code></pre>
+    </div>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Counting Semaphore vs Binary Semaphore</div>
+        <ul>
+            <li><strong>Counting Semaphore:</strong> Giá trị có thể dao động không hạn chế. Dùng để quản lý số lượng thực thể của một tài nguyên hữu hạn.</li>
+            <li><strong>Binary Semaphore:</strong> Giá trị chỉ có thể là $0$ hoặc $1$. Hoạt động tương tự Mutex Lock nhưng không có tính sở hữu (Ownership). Dùng làm khóa truy xuất độc quyền hoặc đồng bộ thứ tự.</li>
+        </ul>
+    </div>
+
+    <h3>C. Đồng Bộ Phần Cứng (Hardware Instructions: TestAndSet & Swap)</h3>
+    <p>Các bộ xử lý hiện đại cung cấp các chỉ thị máy nguyên tử (Atomic hardware instructions) executed không thể bị ngắt giữa chừng:</p>
+<pre><code class="language-c"><span class="code-comment">// 1. Chỉ thị TestAndSet nguyên tử</span>
+<span class="code-keyword">boolean</span> TestAndSet(<span class="code-keyword">boolean</span> *target) {
+    <span class="code-keyword">boolean</span> rv = *target;
+    *target = <span class="code-keyword">true</span>;
+    <span class="code-keyword">return</span> rv;
+}
+
+<span class="code-comment">// Giải pháp CS dùng TestAndSet:</span>
+<span class="code-keyword">while</span> (TestAndSet(&lock)) ; <span class="code-comment">// Busy wait</span>
+<span class="code-comment">/* CRITICAL SECTION */</span>
+lock = <span class="code-keyword">false</span>;
+</code></pre>
+
+    <h3>D. Giám Sát Viên (Monitor) & Biến Điều Kiện (Condition Variables)</h3>
+    <p>Semaphore tuy mạnh mẽ nhưng dễ gây ra lỗi lập trình (như quên <code>signal</code> hoặc đảo vị trí <code>wait</code> gây Deadlock). <strong>Monitor (Giám sát viên)</strong> là một cấu trúc ngôn ngữ lập trình bậc cao tự động đảm bảo tính Loại trừ tương hỗ (Mutual Exclusion): tại một thời điểm chỉ có ĐÚNG MỘT tiến trình được thực thi mã bên trong Monitor.</p>
+    <ul>
+        <li><strong>Biến điều kiện (Condition Variable):</strong> Khai báo <code>condition x, y;</code> để cho phép tiến trình tạm dừng bên trong Monitor.</li>
+        <li><code>x.wait()</code>: Tiến trình gọi lệnh này sẽ bị treo và giải phóng Monitor cho tiến trình khác vào.</li>
+        <li><code>x.signal()</code>: Đánh thức ĐÚNG MỘT tiến trình đang chờ trên <code>x.wait()</code>. Nếu không có tiến trình nào chờ, lệnh `signal` bị trôi mất (không có bộ đệm lưu trữ như Semaphore!).</li>
+        <li><strong>Hoare vs Mesa Semantics:</strong> <em>Signal-and-Wait (Hoare)</em> cho tiến trình được đánh thức chạy ngay lập tức; <em>Signal-and-Continue (Mesa)</em> cho tiến trình phát `signal` tiếp tục chạy hết Monitor rồi tiến trình được đánh thức mới chạy.</li>
+    </ul>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. CÁC BÀI TOÁN ĐỒNG BỘ KINH ĐIỂN VÀ BÀI TẬP CHUẨN THI UIT</h2>
+
+    <h3>A. 3 Bài Toán Đồng Bộ Kinh Điển</h3>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📦 1. BÀI TOÁN NHÀ SẢN XUẤT - NGƯỜI TIÊU THỤ (PRODUCER - CONSUMER)</span>
+        </div>
+        <p>Bộ đệm chia sẻ gồm $N$ phần tử. Producer tạo dữ liệu đưa vào buffer, Consumer lấy dữ liệu ra khỏi buffer.</p>
+<pre><code class="language-c"><span class="code-keyword">semaphore</span> mutex = <span class="code-string">1</span>; <span class="code-comment">// Độc quyền truy xuất Buffer</span>
+<span class="code-keyword">semaphore</span> empty = N; <span class="code-comment">// Đếm số ô trống</span>
+<span class="code-keyword">semaphore</span> full = <span class="code-string">0</span>;  <span class="code-comment">// Đếm số ô có dữ liệu</span>
+
+<span class="code-comment">// Producer</span>
+<span class="code-keyword">do</span> {
+    produce_item();
+    wait(empty); wait(mutex);
+    append_buffer();
+    signal(mutex); signal(full);
+} <span class="code-keyword">while</span> (<span class="code-keyword">true</span>);
+
+<span class="code-comment">// Consumer</span>
+<span class="code-keyword">do</span> {
+    wait(full); wait(mutex);
+    take_buffer();
+    signal(mutex); signal(empty);
+    consume_item();
+} <span class="code-keyword">while</span> (<span class="code-keyword">true</span>);
+</code></pre>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📚 2. BÀI TOÁN BẠN ĐỌC - NGUỜI VIẾT (READERS - WRITERS)</span>
+        </div>
+        <p>Nhiều tiến trình chia sẻ dữ liệu. Nhiều Reader có thể đọc đồng thời; nhưng khi Writer ghi dữ liệu, phải độc quyền hoàn toàn (không ai khác được đọc/ghi).</p>
+<pre><code class="language-c"><span class="code-keyword">semaphore</span> rw_mutex = <span class="code-string">1</span>; <span class="code-comment">// Độc quyền cho Writer</span>
+<span class="code-keyword">semaphore</span> mutex = <span class="code-string">1</span>;    <span class="code-comment">// Bảo vệ biến read_count</span>
+<span class="code-keyword">int</span> read_count = <span class="code-string">0</span>;
+
+<span class="code-comment">// Reader</span>
+wait(mutex);
+read_count++;
+<span class="code-keyword">if</span> (read_count == <span class="code-string">1</span>) wait(rw_mutex); <span class="code-comment">// Reader đầu tiên khóa Writer</span>
+signal(mutex);
+
+<span class="code-comment">/* READING DATABASE */</span>
+
+wait(mutex);
+read_count--;
+<span class="code-keyword">if</span> (read_count == <span class="code-string">0</span>) signal(rw_mutex); <span class="code-comment">// Reader cuối cùng mở khóa Writer</span>
+signal(mutex);
+
+<span class="code-comment">// Writer</span>
+wait(rw_mutex);
+<span class="code-comment">/* WRITING DATABASE */</span>
+signal(rw_mutex);
+</code></pre>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🍜 3. BÀI TOÁN BỮA ĂN CỦA CÁC TRIẾT GIA (DINING PHILOSOPHERS)</span>
+        </div>
+        <p>5 Triết gia ngồi quanh bàn tròn, giữa mỗi cặp triết gia có 1 chiếc đũa (tổng 5 đũa). Để ăn, triết gia cần 2 đũa bên trái và bên phải.</p>
+        <p><em>Nguy cơ Deadlock:</em> Nếu tất cả 5 triết gia cùng nhặt đũa bên trái cùng lúc $\rightarrow$ Không ai nhặt được đũa bên phải $\rightarrow$ Deadlock!</p>
+        <p><em>Giải pháp khắc phục:</em> Cho phép tối đa 4 triết gia ngồi ăn cùng lúc; hoặc triết gia chỉ nhặt đũa khi cả 2 đũa trái/phải đều sẵn sàng (dùng Monitor / Semaphore asymmetric).</p>
+    </div>
+
+    <h3>B. Bài Tập Đồng Bộ Sơ Đồ Phụ Thuộc (DAG) Chuẩn Thi UIT</h3>
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 1: ĐỒNG BỘ SƠ ĐỒ TIẾN TRÌNH BẰNG SEMAPHORE</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Bài toán:</strong> Xét một hệ thống gồm 4 tiến trình $T_1, T_2, T_3, T_4$. Quan hệ phụ thuộc được mô tả: $T_1$ phải kết thúc trước khi $T_2$ và $T_3$ bắt đầu. Cả $T_2$ và $T_3$ phải kết thúc trước khi $T_4$ bắt đầu. Hãy khai báo Semaphore và viết mã đồng bộ cho 4 tiến trình trên.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết từng bước:</div>
+            <ol>
+                <li><strong>Phân tích quan hệ phụ thuộc (DAG):</strong>
+                    <br>- $T_1 \rightarrow T_2$ và $T_1 \rightarrow T_3$ (Cần tín hiệu từ $T_1$).
+                    <br>- $T_2 \rightarrow T_4$ và $T_3 \rightarrow T_4$ ($T_4$ cần chờ cả $T_2$ và $T_3$).
+                </li>
+                <li><strong>Khai báo và Khởi tạo Semaphore:</strong>
+<pre><code class="language-c"><span class="code-keyword">semaphore</span> sem1 = <span class="code-string">0</span>; <span class="code-comment">// Báo hiệu T1 đã hoàn thành</span>
+<span class="code-keyword">semaphore</span> sem2 = <span class="code-string">0</span>; <span class="code-comment">// Báo hiệu T2/T3 đã hoàn thành</span>
+</code></pre>
+                </li>
+                <li><strong>Viết mã nguồn cho các tiến trình:</strong>
+<pre><code class="language-c"><span class="code-keyword">void</span> T1() {
+    <span class="code-comment">// T1 thực thi công việc</span>
+    signal(sem1); <span class="code-comment">// Gửi tín hiệu cho T2</span>
+    signal(sem1); <span class="code-comment">// Gửi tín hiệu cho T3</span>
+}
+
+<span class="code-keyword">void</span> T2() {
+    wait(sem1);   <span class="code-comment">// Chờ T1 xong</span>
+    <span class="code-comment">// T2 thực thi công việc</span>
+    signal(sem2); <span class="code-comment">// Gửi tín hiệu cho T4</span>
+}
+
+<span class="code-keyword">void</span> T3() {
+    wait(sem1);   <span class="code-comment">// Chờ T1 xong</span>
+    <span class="code-comment">// T3 thực thi công việc</span>
+    signal(sem2); <span class="code-comment">// Gửi tín hiệu cho T4</span>
+}
+
+<span class="code-keyword">void</span> T4() {
+    wait(sem2);   <span class="code-comment">// Chờ T2 xong</span>
+    wait(sem2);   <span class="code-comment">// Chờ T3 xong</span>
+    <span class="code-comment">// T4 thực thi công việc</span>
+}
+</code></pre>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 2: SỬA LỖI BIẾN X VƯỢT QUÁ 20</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho đoạn code C chia sẻ biến X giữa 2 tiến trình:</strong>
+<pre><code class="language-c">do {
+    X = X + 1;
+    if (X == 20) X = 0;
+} while (TRUE);
+</code></pre>
+            Hãy giải thích nguyên nhân làm $X > 20$ và dùng Semaphore để sửa lỗi.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải:</div>
+            <p><strong>Nguyên nhân:</strong> Race condition giữa bước tăng $X$ và bước kiểm tra <code>if (X == 20)</code>. Nếu $X = 19$, $P_1$ tăng $X$ thành $20$ nhưng bị ngắt trước <code>if</code>. $P_2$ nhảy vào tăng $X$ thành $21$. Khi $P_1$ chạy tiếp <code>if (X == 20)</code> $\rightarrow$ sai (vì $X = 21$) $\rightarrow X$ không về $0$ và tiếp tục tăng lên $22, 23...$</p>
+            <p><strong>Khắc phục bằng Semaphore:</strong> Bọc toàn bộ đoạn tăng và kiểm tra trong Mutex Semaphore <code>mutex = 1</code>.</p>
+<pre><code class="language-c"><span class="code-keyword">semaphore</span> mutex = <span class="code-string">1</span>;
+<span class="code-keyword">do</span> {
+    wait(mutex);
+    X = X + <span class="code-string">1</span>;
+    <span class="code-keyword">if</span> (X == <span class="code-string">20</span>) X = <span class="code-string">0</span>;
+    signal(mutex);
+} <span class="code-keyword">while</span> (<span class="code-keyword">TRUE</span>);
+</code></pre>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 5</div>
+    <ul>
+        <li>3 Yêu cầu CS: Mutual Exclusion, Progress, Bounded Waiting.</li>
+        <li><code>wait(S)</code> giảm S (kẹt nếu $S \le 0$), <code>signal(S)</code> tăng S (đánh thức tiến trình chờ).</li>
+        <li>Monitor tự động khóa Mutual Exclusion, dùng <code>condition x; x.wait(), x.signal()</code>.</li>
+        <li>Producer-Consumer: <code>empty=N, full=0, mutex=1</code>.</li>
+        <li>Khởi tạo Semaphore $= 0$ cho đồng bộ thứ tự (DAG), $= 1$ cho độc quyền truy xuất (CS).</li>
+    </ul>
+</div>
+</article>
+
+<article class="chapter chapter-chapter" id="chapter-06-deadlock" data-chapter="06-deadlock">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_06_DEADLOCK</span>
+<div class="chapter-header">
+    <div class="chapter-num">Chương 06 — Trọng Tâm Thi Cuối Kỳ</div>
+    <h1>DEADLOCK (BẾ TẮC)</h1>
+    <div class="chapter-subtitle">4 Điều kiện cần $\rightarrow$ Đồ thị RAG $\rightarrow$ Trạng thái an toàn $\rightarrow$ Thuật toán Banker từng bước</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 6 (Trọng Tâm Cuối Kỳ UIT)</h3>
+    <ul>
+        <li>Nắm vững định nghĩa Deadlock và thuộc lòng 4 điều kiện cần để xảy ra bế tắc.</li>
+        <li>Biết cách dựng và đọc Đồ thị Cấp phát Tài nguyên (Resource Allocation Graph - RAG).</li>
+        <li>Phân biệt chính xác giữa Trạng thái An toàn (Safe State), Unsafe State và Deadlock.</li>
+        <li>Tính toán chính xác 100% Thuật toán Banker (Dựng ma trận Need, Kiểm tra Safe Sequence, Xử lý Yêu cầu tài nguyên $Request_i$).</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. BẢN CHẤT DEADLOCK VÀ 4 ĐIỀU KIỆN CẦN</h2>
+
+    <h3>A. Định nghĩa Deadlock</h3>
+    <p><strong>Deadlock (Bế tắc)</strong> là tình trạng một tập hợp các tiến trình bị ngưng trệ vô thời hạn vì mỗi tiến trình đang giữ một tài nguyên và chờ đợi cấp phát một tài nguyên khác đang bị giữ bởi một tiến trình khác trong tập hợp đó.</p>
+
+    <h3>B. 4 Điều kiện Cần để xảy ra Deadlock (Coffman Conditions)</h3>
+    <p>Deadlock CHỈ CÓ THỂ XẢY RA khi đồng thời thỏa mãn cả 4 điều kiện sau:</p>
+    <ol>
+        <li><strong>Loại trừ tương hỗ (Mutual Exclusion):</strong> Ít nhất một tài nguyên được giữ ở chế độ không chia sẻ (chỉ một tiến trình dùng tại một thời điểm).</li>
+        <li><strong>Giữ và Chờ (Hold and Wait):</strong> Tiến trình đang giữ ít nhất một tài nguyên và đang chờ cấp phát thêm tài nguyên mới mà tài nguyên đó đang bị tiến trình khác giữ.</li>
+        <li><strong>Không tước đoạt (No Preemption):</strong> Tài nguyên không thể bị tước đoạt từ tiến trình; tài nguyên chỉ được giải phóng tự nguyện bởi tiến trình sau khi hoàn thành tác vụ.</li>
+        <li><strong>Chờ đợi vòng tròn (Circular Wait):</strong> Tồn tại một tập hợp tiến trình $\{P_0, P_1, ..., P_n\}$ sao cho $P_0$ chờ tài nguyên từ $P_1$, $P_1$ chờ $P_2$, ..., $P_n$ chờ $P_0$.</li>
+    </ol>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. ĐỒ THỊ CẤP PHÁT TÀI NGUYÊN (RAG) VÀ TRẠNG THÁI AN TOÀN</h2>
+
+    <h3>A. Đồ thị Cấp phát Tài nguyên (Resource Allocation Graph - RAG)</h3>
+    <ul>
+        <li><strong>Đỉnh (Nodes):</strong> Gồm tập hợp các Tiến trình $P = \{P_1, P_2, ...\}$ (vẽ bằng hình tròn) và tập hợp các Tài nguyên $R = \{R_1, R_2, ...\}$ (vẽ bằng hình chữ nhật, bên trong chứa các chấm nhỏ biểu diễn số thực thể / instances).</li>
+        <li><strong>Cung Yêu cầu (Request Edge):</strong> Cung hướng từ tiến trình sang tài nguyên $P_i \rightarrow R_j$ (tiến trình $P_i$ đang chờ tài nguyên $R_j$).</li>
+        <li><strong>Cung Cấp phát (Assignment Edge):</strong> Cung hướng từ tài nguyên sang tiến trình $R_j \rightarrow P_i$ (tài nguyên $R_j$ đã được cấp cho $P_i$).</li>
+    </ul>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Chu trình (Cycle) trong RAG vs Deadlock</div>
+        <ul>
+            <li>Nếu mỗi tài nguyên chỉ có <strong>1 thực thể (Single Instance)</strong>: Chu trình trong RAG là điều kiện <strong>CẦN VÀ ĐỦ</strong> để xảy ra Deadlock. Tồn tại Cycle $\Leftrightarrow$ Deadlock.</li>
+            <li>Nếu tài nguyên có <strong>nhiều thực thể (Multiple Instances)</strong>: Chu trình trong RAG chỉ là điều kiện <strong>CẦN</strong> chứ CHƯA ĐỦ. Tồn tại Cycle $\Rightarrow$ Có thể Deadlock hoặc Không Deadlock.</li>
+        </ul>
+    </div>
+
+    <h3>B. Trạng thái An toàn (Safe State)</h3>
+    <p>Một trạng thái được gọi là <strong>An toàn (Safe State)</strong> nếu HDH có thể tìm được ít nhất một <strong>Chuỗi An toàn (Safe Sequence)</strong> $\langle P_1, P_2, ..., P_n \rangle$ sao cho với mỗi $P_i$, tài nguyên $P_i$ yêu cầu có thể được đáp ứng bởi tài nguyên hiện có (Available) cộng với tài nguyên đang được giữ bởi tất cả các $P_j$ trước đó ($j < i$).</p>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. THUẬT TOÁN BANKER (BANKER'S ALGORITHM) CHUẨN BÀI THI UIT</h2>
+
+    <p>Thuật toán Banker được dùng để TRÁNH DEADLOCK (Deadlock Avoidance) trong hệ thống có nhiều thực thể tài nguyên.</p>
+
+    <h3>Các Cấu Trúc Dữ Liệu Cần Khai Báo</h3>
+    <ul>
+        <li><code>Available[m]</code>: Vector độ dài $m$, <code>Available[j] = k</code> nghĩa là tài nguyên $R_j$ còn rảnh $k$ thực thể.</li>
+        <li><code>Max[n][m]</code>: Ma trận $n \times m$, <code>Max[i][j] = k</code> nghĩa là $P_i$ yêu cầu tối đa $k$ thực thể $R_j$.</li>
+        <li><code>Allocation[n][m]</code>: Ma trận $n \times m$, <code>Allocation[i][j] = k</code> nghĩa là $P_i$ đang giữ $k$ thực thể $R_j$.</li>
+        <li><code>Need[n][m]</code>: Ma trận $n \times m$, <code>Need[i][j] = Max[i][j] - Allocation[i][j]</code> nghĩa là $P_i$ cần thêm $k$ thực thể $R_j$.</li>
+    </ul>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE: THUẬT TOÁN BANKER VÀ XỬ LÝ REQUEST</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Xét hệ thống tại $t_0$ có 5 tiến trình ($P_0 \rightarrow P_4$) và 4 tài nguyên ($A, B, C, D$):</strong>
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>Allocation (A B C D)</th><th>Max (A B C D)</th><th>Available (A B C D)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P0</td><td>0 0 1 2</td><td>0 0 1 2</td><td><strong>1 5 2 0</strong></td></tr>
+                    <tr><td>P1</td><td>1 0 0 0</td><td>1 7 5 0</td><td>-</td></tr>
+                    <tr><td>P2</td><td>1 3 5 4</td><td>2 3 5 6</td><td>-</td></tr>
+                    <tr><td>P3</td><td>0 6 3 2</td><td>0 6 5 2</td><td>-</td></tr>
+                    <tr><td>P4</td><td>0 0 1 4</td><td>0 6 5 6</td><td>-</td></tr>
+                </tbody>
+            </table>
+            <strong>Yêu cầu:</strong>
+            <br>a) Dựng ma trận $Need$. Hệ thống có ở trạng thái an toàn không? Tìm chuỗi an toàn.
+            <br>b) Nếu $P_1$ yêu cầu thêm $Request_1 = (0, 4, 2, 0)$, hệ thống có thể đáp ứng ngay được không?
+        </div>
+
+        <div class="solution-steps">
+            <div class="solution-step-title">a) Dựng ma trận Need và Thuật toán An toàn:</div>
+            <p><strong>Ma trận $Need = Max - Allocation$:</strong></p>
+            <ul>
+                <li>$Need_0 = (0,0,1,2) - (0,0,1,2) = (0, 0, 0, 0)$</li>
+                <li>$Need_1 = (1,7,5,0) - (1,0,0,0) = (0, 7, 5, 0)$</li>
+                <li>$Need_2 = (2,3,5,6) - (1,3,5,4) = (1, 0, 0, 2)$</li>
+                <li>$Need_3 = (0,6,5,2) - (0,6,3,2) = (0, 0, 2, 0)$</li>
+                <li>$Need_4 = (0,6,5,6) - (0,0,1,4) = (0, 6, 4, 2)$</li>
+            </ul>
+
+            <p><strong>Chạy Thuật toán An toàn: Khởi tạo $Work = Available = (1, 5, 2, 0)$</strong></p>
+            <ol>
+                <li><strong>Duyệt $P_0$:</strong> $Need_0 (0,0,0,0) \le Work (1,5,2,0) \Rightarrow P_0$ chạy xong!
+                    <br>$Work = Work + Allocation_0 = (1,5,2,0) + (0,0,1,2) = (1, 5, 3, 2)$. $Finish[0] = true$.
+                </li>
+                <li><strong>Duyệt $P_2$:</strong> $Need_2 (1,0,0,2) \le Work (1,5,3,2) \Rightarrow P_2$ chạy xong!
+                    <br>$Work = Work + Allocation_2 = (1,5,3,2) + (1,3,5,4) = (2, 8, 8, 6)$. $Finish[2] = true$.
+                </li>
+                <li><strong>Duyệt $P_3$:</strong> $Need_3 (0,0,2,0) \le Work (2,8,8,6) \Rightarrow P_3$ chạy xong!
+                    <br>$Work = Work + Allocation_3 = (2,8,8,6) + (0,6,3,2) = (2, 14, 11, 8)$. $Finish[3] = true$.
+                </li>
+                <li><strong>Duyệt $P_4$:</strong> $Need_4 (0,6,4,2) \le Work (2,14,11,8) \Rightarrow P_4$ chạy xong!
+                    <br>$Work = Work + Allocation_4 = (2,14,11,8) + (0,0,1,4) = (2, 14, 12, 12)$. $Finish[4] = true$.
+                </li>
+                <li><strong>Duyệt $P_1$:</strong> $Need_1 (0,7,5,0) \le Work (2,14,12,12) \Rightarrow P_1$ chạy xong!
+                    <br>$Work = Work + Allocation_1 = (2,14,12,12) + (1,0,0,0) = (3, 14, 12, 12)$. $Finish[1] = true$.
+                </li>
+            </ol>
+            <p><strong>KẾT LUẬN:</strong> Tất cả tiến trình đều hoàn tất. Hệ thống ở <strong>Trạng thái AN TOÀN</strong>. Chuỗi an toàn tìm được là: <code>&lt;P0, P2, P3, P4, P1&gt;</code>.</p>
+
+            <div class="solution-step-title">b) Xử lý Yêu cầu $Request_1 = (0, 4, 2, 0)$ của $P_1$:</div>
+            <ol>
+                <li>Kiểm tra Bước 1: $Request_1 (0,4,2,0) \le Need_1 (0,7,5,0)$ $\rightarrow$ <strong>THỎA MÃN</strong>.</li>
+                <li>Kiểm tra Bước 2: $Request_1 (0,4,2,0) \le Available (1,5,2,0)$ $\rightarrow$ <strong>THỎA MÃN</strong>.</li>
+                <li>Giả lập cấp phát và cập nhật trạng thái mới:
+                    <br>- $Available_{new} = Available - Request_1 = (1,5,2,0) - (0,4,2,0) = (1, 1, 0, 0)$
+                    <br>- $Allocation_{1,new} = Allocation_1 + Request_1 = (1,0,0,0) + (0,4,2,0) = (1, 4, 2, 0)$
+                    <br>- $Need_{1,new} = Need_1 - Request_1 = (0,7,5,0) - (0,4,2,0) = (0, 3, 3, 0)$
+                </li>
+                <li><strong>Chạy lại Thuật toán An toàn trên trạng thái mới ($Work = 1, 1, 0, 0$):</strong>
+                    <ul>
+                        <li><strong>Duyệt $P_0$:</strong> $Need_0 (0,0,0,0) \le Work (1,1,0,0) \Rightarrow P_0$ xong!
+                            <br>$Work = Work + Allocation_0 = (1,1,0,0) + (0,0,1,2) = (1, 1, 1, 2)$. $Finish[0] = true$.
+                        </li>
+                        <li><strong>Duyệt $P_2$:</strong> $Need_2 (1,0,0,2) \le Work (1,1,1,2) \Rightarrow P_2$ xong!
+                            <br>$Work = Work + Allocation_2 = (1,1,1,2) + (1,3,5,4) = (2, 4, 6, 6)$. $Finish[2] = true$.
+                        </li>
+                        <li><strong>Duyệt $P_3$:</strong> $Need_3 (0,0,2,0) \le Work (2,4,6,6) \Rightarrow P_3$ xong!
+                            <br>$Work = Work + Allocation_3 = (2,4,6,6) + (0,6,3,2) = (2, 10, 9, 8)$. $Finish[3] = true$.
+                        </li>
+                        <li><strong>Duyệt $P_4$:</strong> $Need_4 (0,6,4,2) \le Work (2,10,9,8) \Rightarrow P_4$ xong!
+                            <br>$Work = Work + Allocation_4 = (2,10,9,8) + (0,0,1,4) = (2, 10, 10, 12)$. $Finish[4] = true$.
+                        </li>
+                        <li><strong>Duyệt $P_1$:</strong> $Need_1 (0,3,3,0) \le Work (2,10,10,12) \Rightarrow P_1$ xong!
+                            <br>$Work = Work + Allocation_1 = (2,10,10,12) + (1,4,2,0) = (3, 14, 12, 12)$. $Finish[1] = true$.
+                        </li>
+                    </ul>
+                    <p><strong>KẾT LUẬN:</strong> Tìm được chuỗi an toàn <code>&lt;P0, P2, P3, P4, P1&gt;</code>. Hệ thống CÓ THỂ đáp ứng ngay yêu cầu của $P_1$.</p>
+                </li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. PHÒNG NGỪA (PREVENTION), PHÁT HIỆN (DETECTION) VÀ KHÔI PHỤC DEADLOCK</h2>
+
+    <h3>A. Phòng Ngừa Deadlock (Deadlock Prevention)</h3>
+    <p>Phòng ngừa Deadlock bằng cách triệt tiêu <strong>ít nhất 1 trong 4 điều kiện cần Coffman</strong>:</p>
+    <ol>
+        <li><strong>Triệt tiêu Mutual Exclusion:</strong> Biến các tài nguyên thành chia sẻ được (như Spooling đĩa). Tuy nhiên, nhiều tài nguyên (như máy in, ổ đĩa đang ghi) bản chất không thể chia sẻ.</li>
+        <li><strong>Triệt tiêu Hold and Wait:</strong> Đảm bảo tiến trình chỉ xin tài nguyên khi chưa giữ bất kỳ tài nguyên nào; hoặc phải xin tất cả tài nguyên ngay từ đầu. <em>Nhược điểm:</em> Lãng phí tài nguyên, dễ gây đói tài nguyên (Starvation).</li>
+        <li><strong>Triệt tiêu No Preemption:</strong> Nếu tiến trình đang giữ tài nguyên xin cấp thêm tài nguyên $R$ mà bị từ chối, toàn bộ tài nguyên tiến trình đang giữ sẽ <em>bị tước đoạt tự động (Preempted)</em>. Tiến trình bị tạm dừng và chỉ chạy lại khi có đủ cả tài nguyên cũ và mới.</li>
+        <li><strong>Triệt tiêu Circular Wait (Chiến lược hiệu quả nhất):</strong> Đánh số thứ tự toàn bộ tài nguyên $F: R \rightarrow \mathbb{N}$. Bắt buộc tiến trình phải xin tài nguyên theo thứ tự tăng dần của mã số. Nếu đang giữ $R_i$, chỉ được xin $R_j$ với $F(R_j) > F(R_i)$.</li>
+    </ol>
+
+    <h3>B. Phát Hiện Deadlock (Deadlock Detection)</h3>
+    <p>Khi hệ thống không dùng Banker hay Prevention, HDH cho phép Deadlock xảy ra nhưng chạy thuật toán kiểm tra định kỳ:</p>
+    <ul>
+        <li><strong>Tài nguyên 1 thực thể (Single Instance):</strong> Dùng Đồ thị chờ Wait-For Graph (bỏ các node tài nguyên khỏi RAG). Phát hiện chu trình (Cycle) $\Rightarrow$ Có Deadlock!</li>
+        <li><strong>Tài nguyên nhiều thực thể (Multiple Instances):</strong> Dùng Thuật toán Phát hiện (tương tự Banker nhưng dùng vector <code>Request[n][m]</code> trực tiếp thay cho <code>Need</code>). Tiến trình nào không thể hoàn thành trong lượt duyệt sẽ thuộc tập bế tắc!</li>
+    </ul>
+
+    <h3>C. Khôi Phục Sau Deadlock (Deadlock Recovery)</h3>
+    <p>Khi đã phát hiện Deadlock, HDH thực hiện 1 trong 2 phương án khôi phục:</p>
+    <ol>
+        <li><strong>Hủy Tiến Trình (Process Termination):</strong>
+            <ul>
+                <li>Hủy tất cả các tiến trình bị Deadlock (chi phí đắt red).</li>
+                <li>Hủy lần lượt từng tiến trình theo thứ tự ưu tiên cho đến khi hết chu trình bế tắc.</li>
+            </ul>
+        </li>
+        <li><strong>Tước Đoạt Tài Nguyên (Resource Preemption):</strong>
+            <ul>
+                <li><strong>Chọn nạn nhân (Selecting a victim):</strong> Chọn tiến trình có chi phí tước đoạt nhỏ nhất.</li>
+                <li><strong>Khôi phục (Rollback):</strong> Trả tiến trình nạn nhân về trạng thái an toàn trước đó (Safe state / Checkpoint) và khởi động lại.</li>
+                <li><strong>Tránh đói tài nguyên (Starvation):</strong> Giới hạn số lần 1 tiến trình bị chọn làm nạn nhân.</li>
+            </ul>
+        </li>
+    </ol>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 6</div>
+    <ul>
+        <li>4 Điều kiện Deadlock: Mutual Exclusion, Hold & Wait, No Preemption, Circular Wait.</li>
+        <li>Triệt tiêu Circular Wait: Đánh số thứ tự tài nguyên, xin tăng dần.</li>
+        <li>Banker: $Need = Max - Allocation$. Cấp phát $Request$ khi $Request \le Need$ VÀ $Request \le Available$.</li>
+        <li>Khôi phục Deadlock: Hủy tiến trình hoặc Tước đoạt tài nguyên + Rollback.</li>
+    </ul>
+</div>
+</article>
+
+<article class="chapter chapter-chapter" id="chapter-07-memory-management" data-chapter="07-memory-management">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_07_MEMORY_MANAGEMENT</span>
+<div class="chapter-header">
+    <div class="chapter-num">Chương 07 — Trọng Tâm Thi Cuối Kỳ</div>
+    <h1>QUẢN LÝ BỘ NHỚ (MEMORY MANAGEMENT)</h1>
+    <div class="chapter-subtitle">Địa chỉ Logic vs Vật lý $\rightarrow$ Placement Algorithms $\rightarrow$ Kỹ thuật Phân trang (Paging) $\rightarrow$ EAT & TLB</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 7 (Trọng Tâm Cuối Kỳ UIT)</h3>
+    <ul>
+        <li>Phân biệt rạch ròi Địa chỉ Logic (Ảo) và Địa chỉ Vật lý; Nắm các thời điểm ràng buộc địa chỉ (Compile, Load, Execution time).</li>
+        <li>Phân biệt Phân mảnh nội (Internal Fragmentation) và Phân mảnh ngoại (External Fragmentation).</li>
+        <li>Thạo thuật toán cấp phát bộ nhớ liên tục: First-fit, Best-fit, Worst-fit, Next-fit trên phân vùng cố định & động.</li>
+        <li>Hiểu sâu cơ chế Phân trang (Paging), ánh xạ địa chỉ ($p, d \rightarrow f, d$) và cấu trúc Bảng trang nhiều cấp.</li>
+        <li>Tính chính xác 100% Thời gian truy xuất hiệu dụng (EAT) khi có bộ đệm TLB.</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. KHÁI NIỆM ĐỊA CHỈ VÀ PHÂN MẢNH BỘ NHỚ</h2>
+
+    <h3>A. Địa chỉ Logic (Virtual Address) vs Địa chỉ Vật lý (Physical Address)</h3>
+    <ul>
+        <li><strong>Địa chỉ Logic (Ảo):</strong> Địa chỉ được tạo ra bởi CPU khi thực thi chương trình. Tập hợp tất cả các địa chỉ logic tạo thành Không gian địa chỉ logic (Logical Address Space).</li>
+        <li><strong>Địa chỉ Vật lý:</strong> Địa chỉ thực tế trên thanh RAM do bộ nhớ nhận diện. Tập hợp các địa chỉ vật lý tạo thành Không gian địa chỉ vật lý (Physical Address Space).</li>
+        <li><strong>MMU (Memory Management Unit):</strong> Thiết bị phần cứng thực hiện ánh xạ địa chỉ logic thành địa chỉ vật lý tại runtime.</li>
+    </ul>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: Phân Mảnh Nội vs Phân Mảnh Ngoại</div>
+        <table>
+            <thead>
+                <tr><th>Loại phân mảnh</th><th>Nguyên nhân xuất hiện</th><th>Định nghĩa</th><th>Giải pháp khắc phục</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Phân mảnh nội (Internal Fragmentation)</strong></td>
+                    <td>Bộ nhớ được cấp phát theo các khối kích thước cố định (ví dụ: Frame 4KB). Tiến trình không dùng hết toàn bộ khối.</td>
+                    <td>Phần bộ nhớ thừa bị lãng phí <em>bên trong</em> vùng nhớ đã được cấp phát cho tiến trình.</td>
+                    <td>Giảm kích thước khối cấp phát (Page size nhỏ hơn).</td>
+                </tr>
+                <tr>
+                    <td><strong>Phân mảnh ngoại (External Fragmentation)</strong></td>
+                    <td>Cấp phát và thu hồi các vùng nhớ động liên tục có kích thước khác nhau.</td>
+                    <td>Tổng bộ nhớ trống đủ cho tiến trình mới nhưng các vùng trống bị <em>chia cắt rời rạc</em>, không liên tục.</td>
+                    <td>Gom cụm bộ nhớ (Compaction) hoặc sử dụng Kỹ thuật Phân trang (Paging).</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. CÁC THUẬT TOÁN PLACEMENT (FIRST-FIT, BEST-FIT, WORST-FIT, NEXT-FIT)</h2>
+
+    <p>Khi các phân vùng nhớ rảnh có kích thước khác nhau, thuật toán Placement quyết định chọn phân vùng nào cho tiến trình xin cấp phát $S$ KB:</p>
+
+    <ul>
+        <li><strong>First-fit (Khớp đầu tiên):</strong> Cấp phát phân vùng trống <em>đầu tiên</em> đủ lớn (duyệt từ đầu danh sách).</li>
+        <li><strong>Best-fit (Khớp tốt nhất):</strong> Cấp phát phân vùng trống <em>nhỏ nhất</em> nhưng đủ lớn (tạo ra vùng thừa nhỏ nhất, đòi hỏi tìm toàn bộ danh sách).</li>
+        <li><strong>Worst-fit (Khớp xấu nhất):</strong> Cấp phát phân vùng trống <em>lớn nhất</em> (tạo ra vùng thừa lớn nhất còn lại).</li>
+        <li><strong>Next-fit (Khớp tiếp theo):</strong> Giống First-fit nhưng bắt đầu tìm từ <em>vị trí phân vùng vừa cấp phát cho tiến trình trước đó</em>.</li>
+    </ul>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE: THUẬT TOÁN PLACEMENT (CHUẨN ĐỀ THI UIT)</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho các phân vùng bộ nhớ theo thứ tự:</strong> <code>100KB, 500KB, 200KB, 300KB, 600KB</code>.
+            <br>Xác định phân vùng được cấp phát cho lần lượt các tiến trình có kích thước: <code>P1 (212KB), P2 (417KB), P3 (112KB), P4 (426KB)</code> theo thuật toán First-fit, Best-fit, Worst-fit.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết:</div>
+            <ul>
+                <li><strong>First-fit:</strong>
+                    <br>- P1 (212KB): Cấp vào phân vùng 500KB (còn thừa 288KB).
+                    <br>- P2 (417KB): Cấp vào phân vùng 600KB (còn thừa 183KB).
+                    <br>- P3 (112KB): Cấp vào phân vùng 200KB (còn thừa 88KB).
+                    <br>- P4 (426KB): Duyệt qua 100KB, 288KB, 88KB, 300KB, 183KB $\rightarrow$ <strong>Không có phân vùng nào đủ $\rightarrow$ P4 phải chờ!</strong>
+                </li>
+                <li><strong>Best-fit:</strong>
+                    <br>- P1 (212KB): Cấp vào phân vùng 300KB (thừa 88KB - nhỏ nhất đủ lớn).
+                    <br>- P2 (417KB): Cấp vào phân vùng 500KB (thừa 83KB).
+                    <br>- P3 (112KB): Cấp vào phân vùng 200KB (thừa 88KB).
+                    <br>- P4 (426KB): Cấp vào phân vùng 600KB (thừa 174KB) $\rightarrow$ <strong>Tất cả tiến trình đều được cấp phát!</strong>
+                </li>
+                <li><strong>Worst-fit:</strong>
+                    <br>- P1 (212KB): Cấp vào phân vùng lớn nhất 600KB (thừa 388KB).
+                    <br>- P2 (417KB): Cấp vào phân vùng lớn nhất 500KB (thừa 83KB).
+                    <br>- P3 (112KB): Cấp vào phân vùng lớn nhất 388KB (thừa 276KB).
+                    <br>- P4 (426KB): Không có phân vùng nào đủ $\rightarrow$ <strong>P4 phải chờ!</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. KỸ THUẬT PHÂN TRANG (PAGING) VÀ ÁNH XẠ ĐỊA CHỈ</h2>
+
+    <h3>A. Cơ chế Phân trang</h3>
+    <p>Phân trang cho phép không gian địa chỉ vật lý của tiến trình không cần nằm liên tục nhau trong RAM, giải quyết hoàn toàn Phân mảnh ngoại.</p>
+    <ul>
+        <li>Bộ nhớ vật lý RAM được chia thành các khối cố định gọi là <strong>Khung trang (Frame)</strong>.</li>
+        <li>Bộ nhớ logic được chia thành các khối có cùng kích thước gọi là <strong>Trang (Page)</strong>.</li>
+    </ul>
+
+    <h3>B. Cấu trúc Địa chỉ Logic và Chuyển đổi Địa chỉ</h3>
+    <p>Địa chỉ logic gồm 2 phần: chỉ số trang ($p$) và độ dời ($d$).</p>
+    <p>Giả sử địa chỉ logic có $m$ bit, kích thước trang là $2^n$ bytes $\Rightarrow$ $n$ bit cuối dành cho độ dời $d$, $m-n$ bit đầu dành cho chỉ số trang $p$.</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ QUY TẮC VÀNG CHUYỂN ĐỔI ĐỊA CHỈ PHÂN TRANG</div>
+        <p>Địa chỉ Logic $(p, d) \xrightarrow{\text{Bảng trang}} \text{Địa chỉ Vật lý } (f, d)$</p>
+        <p><strong>ĐỘ DỜI $d$ KHÔNG BAO GIỜ THAY ĐỔI</strong> khi chuyển từ địa chỉ ảo sang địa chỉ vật lý! Chỉ có $p$ (chỉ số trang) được tra cứu trong Bảng trang (Page Table) để thay bằng $f$ (chỉ số khung trang).</p>
+    </div>
+
+    <h3>C. Thời gian Truy xuất Hiệu dụng EAT với TLB</h3>
+    <p>Bộ đệm TLB (Translation Lookaside Buffer) là bộ nhớ cache phần cứng siêu nhanh lưu trữ các cặp $(p, f)$ hay dùng.</p>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📐 CÔNG THỨC EAT VÀ CÁCH THẾ SỐ CHUẨN ĐỀ THI UIT</span>
+        </div>
+        <p>Gọi $\alpha$ là Tỷ lệ tìm thấy trong TLB (Hit ratio), $t_{RAM}$ là thời gian truy xuất RAM, $t_{TLB}$ là thời gian tìm trong TLB.</p>
+
+        <p><strong>Công thức tổng quát:</strong></p>
+        $$EAT = \alpha \cdot (t_{TLB} + t_{RAM}) + (1 - \alpha) \cdot (t_{TLB} + 2 \cdot t_{RAM})$$
+        $$EAT = t_{TLB} + (2 - \alpha) \cdot t_{RAM}$$
+
+        <p><em>Trường hợp đặc biệt:</em> Nếu đề bài ghi "Thời gian tìm trong TLB xem như bằng 0" ($t_{TLB} = 0$), công thức rút gọn là:</p>
+        $$EAT = (2 - \alpha) \cdot t_{RAM}$$
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. BÀI TẬP WORKED EXAMPLES CHUẨN ĐỀ THI UIT</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 1: ÁNH XẠ ĐỊA CHỈ VÀ TÍNH BIT</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Bài toán:</strong> Xét một không gian địa chỉ ảo gồm 32 trang, mỗi trang có kích thước 2KB ($2048$ bytes), ánh xạ vào bộ nhớ vật lý có 64 khung trang.
+            <br>a) Địa chỉ logic gồm bao nhiêu bit? Địa chỉ vật lý gồm bao nhiêu bit?
+            <br>b) Cho địa chỉ logic dạng số nguyên là $D = 4600$. Hãy xác định chỉ số trang $p$, độ dời $d$ và địa chỉ vật lý tương ứng nếu trang $p$ được nạp vào khung trang $f = 9$.
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết:</div>
+            <ol>
+                <li><strong>Tính số bit Địa chỉ Logic:</strong>
+                    <br>- Kích thước trang $2KB = 2^{11}$ bytes $\Rightarrow$ Số bit cho Offset $d = 11$ bits.
+                    <br>- Số trang $32 = 2^5$ trang $\Rightarrow$ Số bit cho chỉ số trang $p = 5$ bits.
+                    <br>- Vậy Tổng số bit địa chỉ logic = $5 + 11 = 16$ bits.
+                </li>
+                <li><strong>Tính số bit Địa chỉ Vật lý:</strong>
+                    <br>- Số khung trang $64 = 2^6$ khung $\Rightarrow$ Số bit cho khung trang $f = 6$ bits.
+                    <br>- Offset $d$ không đổi = $11$ bits.
+                    <br>- Vậy Tổng số bit địa chỉ vật lý = $6 + 11 = 17$ bits.
+                </li>
+                <li><strong>Tách địa chỉ logic $D = 4600$:</strong>
+                    <br>- Chỉ số trang $p = \lfloor 4600 / 2048 \rfloor = 2$.
+                    <br>- Độ dời $d = 4600 \pmod{2048} = 4600 - 2 \times 2048 = 504$.
+                </li>
+                <li><strong>Tính Địa chỉ Vật lý:</strong>
+                    <br>Trang $p=2$ được nạp vào Khung trang $f=9$.
+                    <br>Địa chỉ vật lý = $f \times \text{Page\_Size} + d = 9 \times 2048 + 504 = 18432 + 504 = 18936$.
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE 2: TÍNH THỜI GIAN TRUY XUẤT HIỆU DỤNG EAT</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Bài toán EAT:</strong>
+            <br>a) Cho $t_{RAM} = 100$ ns, $t_{TLB} = 20$ ns, $\alpha = 80\%$. Tính EAT.
+            <br>b) Cho $t_{RAM} = 200$ ns, thời gian tra TLB xem như bằng $0$, $\alpha = 75\%$. Tính EAT.
+            <br>c) Cho $t_{RAM} = 100$ ns, $t_{TLB} = 20$ ns. Hệ thống yêu cầu $EAT \le 130$ ns. Hỏi tỷ lệ hit ratio $\alpha$ tối thiểu của TLB phải đạt bao nhiêu %?
+        </div>
+        <div class="solution-steps">
+            <div class="solution-step-title">Lời giải chi tiết:</div>
+            <ol>
+                <li><strong>a) Thế số công thức đầy đủ:</strong>
+                    <br>$EAT = t_{TLB} + (2 - \alpha) t_{RAM} = 20 + (2 - 0.8) \times 100 = 20 + 1.2 \times 100 = 140$ ns.
+                </li>
+                <li><strong>b) Thế số công thức rút gọn ($t_{TLB} = 0$):</strong>
+                    <br>$EAT = (2 - \alpha) t_{RAM} = (2 - 0.75) \times 200 = 1.25 \times 200 = 250$ ns.
+                </li>
+                <li><strong>c) Bài toán ngược tìm $\alpha$:</strong>
+                    <br>$EAT = 20 + (2 - \alpha) \times 100 \le 130$
+                    <br>$\Leftrightarrow 100(2 - \alpha) \le 110 \Leftrightarrow 2 - \alpha \le 1.1 \Leftrightarrow \alpha \ge 0.9 = 90\%$.
+                    <br>Vậy Tỷ lệ hit ratio của TLB tối thiểu phải đạt <strong>90%</strong>.
+                </li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 7</div>
+    <ul>
+        <li>Internal Fragmentation (trong khối) vs External Fragmentation (ngoài khối rảnh).</li>
+        <li>Placement: Best-fit tạo mảnh thừa nhỏ nhất; Worst-fit chọn khối lớn nhất.</li>
+        <li>Paging: $Logical(p, d) \rightarrow Physical(f, d)$. Độ dời $d$ KHÔNG THAY ĐỔI.</li>
+        <li>$EAT = t_{TLB} + (2 - \alpha) t_{RAM}$.</li>
+    </ul>
+</div>
+</article>
+
+<article class="chapter chapter-chapter" id="chapter-08-virtual-memory" data-chapter="08-virtual-memory">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_08_VIRTUAL_MEMORY</span>
+<div class="chapter-header">
+    <div class="chapter-num">Chương 08 — Trọng Tâm Thi Cuối Kỳ</div>
+    <h1>BỘ NHỚ ẢO (VIRTUAL MEMORY)</h1>
+    <div class="chapter-subtitle">Demand Paging $\rightarrow$ Page Fault $\rightarrow$ Thuật toán thay thế trang (FIFO, OPT, LRU) $\rightarrow$ Trì trệ Thrashing</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Chương 8 (Trọng Tâm Cuối Kỳ UIT)</h3>
+    <ul>
+        <li>Hiểu bản chất Bộ nhớ ảo và cơ chế Nạp trang theo yêu cầu (Demand Paging).</li>
+        <li>Thuộc lòng quy trình 6 bước xử lý ngắt Lỗi trang (Page Fault).</li>
+        <li>Vẽ chính xác 100% bảng theo dõi thay thế trang cho các thuật toán: FIFO, OPT, LRU.</li>
+        <li>Hiểu Nghịch lý Belady (Belady's Anomaly) và tại sao LRU/OPT không bị ảnh hưởng.</li>
+        <li>Hiểu hiện tượng Trì trệ hệ thống (Thrashing) và mô hình Tập làm việc (Working-Set Model).</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. KHÁI NIỆM BỘ NHỚ ẢO VÀ LỖI TRANG (PAGE FAULT)</h2>
+
+    <h3>A. Bản chất Bộ nhớ ảo và Demand Paging</h3>
+    <p>Bộ nhớ ảo cho phép thực thi một chương trình mà <strong>không cần nạp toàn bộ chương trình đó vào RAM vật lý</strong>. Kỹ thuật phổ biến nhất là Nạp trang theo yêu cầu (Demand Paging): Trang nào được CPU truy xuất tới mới được nạp từ đĩa cứng vào RAM.</p>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>🔄 6 BƯỚC XỬ LÝ LỖI TRANG (PAGE FAULT WALKTHROUGH)</span>
+        </div>
+        <ol>
+            <li>CPU truy xuất một địa chỉ logic. Bảng trang kiểm tra bit Valid/Invalid. Nếu bit = Invalid $\rightarrow$ Báo hiệu <strong>Page Fault</strong>.</li>
+            <li>Phần cứng phát ngắt Trap chuyển quyền cho HDH.</li>
+            <li>HDH kiểm tra xem yêu cầu truy xuất có hợp lệ không. Nếu không hợp lệ $\rightarrow$ Hủy tiến trình (Segment fault). Nếu hợp lệ $\rightarrow$ Tìm một khung trang trống (Free frame) trong RAM.</li>
+            <li>HDH định vị trang tương ứng trên đĩa cứng và thực hiện đọc trang vào khung trang trống vừa tìm.</li>
+            <li>Khi đọc đĩa hoàn tất, HDH cập nhật Bảng trang (đổi bit Invalid $\rightarrow$ Valid) và ghi lại số khung trang $f$.</li>
+            <li>HDH khôi phục trạng thái CPU và tái thực thi lại chính câu lệnh vừa gây ra Page Fault.</li>
+        </ol>
+    </div>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. CÁC THUẬT TOÁN THAY THẾ TRANG (PAGE REPLACEMENT)</h2>
+
+    <p>Khi xảy ra Lỗi trang nhưng RAM đã ĐẦY (không còn khung trang trống), HDH phải chọn một trang trong RAM làm <strong>Nạn nhân (Victim page)</strong> để hoán vị ra đĩa (Swap out) nhường chỗ cho trang mới (Swap in).</p>
+
+    <div class="dont-confuse-box">
+        <div class="box-title">⚠️ ĐỪNG NHẦM: FIFO vs OPT vs LRU</div>
+        <table>
+            <thead>
+                <tr><th>Thuật toán</th><th>Nguyên lý chọn Victim</th><th>Đặc điểm & Hiệu năng</th><th>Nghịch lý Belady?</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>FIFO (First-In, First-Out)</strong></td>
+                    <td>Thay thế trang được nạp vào RAM <em>sớm nhất</em>.</td>
+                    <td>Dễ cài đặt bằng Queue, nhưng hiệu năng kém. Cần lưu thời điểm nạp.</td>
+                    <td><strong style="color:red;">CÓ BỊ</strong> (Tăng số Frame có thể làm tăng số Page Fault!).</td>
+                </tr>
+                <tr>
+                    <td><strong>OPT (Optimal - Tối ưu)</strong></td>
+                    <td>Thay thế trang sẽ <em>không được sử dụng trong thời gian lâu nhất ở TƯƠNG LAI</em>.</td>
+                    <td>Cho số Page Fault nhỏ nhất tuyệt đối. Không cài đặt thực tế được (chỉ dùng làm chuẩn so sánh).</td>
+                    <td><strong>KHÔNG BỊ</strong> (Thuộc lớp Stack Algorithms).</td>
+                </tr>
+                <tr>
+                    <td><strong>LRU (Least Recently Used)</strong></td>
+                    <td>Thay thế trang <em>chưa được sử dụng trong thời gian lâu nhất ở QUÁ KHỨ</em>.</td>
+                    <td>Hiệu năng rất tốt, xấp xỉ OPT. Được ứng dụng thực tế phổ biến. Đòi hỏi phần cứng hỗ trợ (Counter/Stack).</td>
+                    <td><strong>KHÔNG BỊ</strong> (Thuộc lớp Stack Algorithms).</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- SECTION 3 -->
+<section>
+    <h2>3. BÀI TẬP WORKED EXAMPLE THAY THẾ TRANG CHUẨN THI UIT</h2>
+
+    <div class="worked-example">
+        <div class="example-header">
+            <span>📝 WORKED EXAMPLE: THAY THẾ TRANG FIFO, OPT, LRU</span>
+        </div>
+        <div class="problem-statement">
+            <strong>Cho chuỗi truy xuất trang (Reference String):</strong>
+            <br><code>1, 2, 3, 4, 2, 1, 5, 6, 2, 1, 2, 3, 7, 6, 3, 2, 1, 2, 3, 6</code>
+            <br>Giả sử hệ thống có <strong>4 Khung trang (Frames)</strong>, ban đầu tất cả các khung trang đều trống.
+            <br>Tính tổng số Lỗi trang (Page Faults) xảy ra khi sử dụng các thuật toán: <strong>a) LRU</strong>, <strong>b) FIFO</strong>, <strong>c) OPT</strong>.
+        </div>
+
+        <div class="solution-steps">
+            <div class="solution-step-title">a) Giải Thuật LRU (Least Recently Used - 4 Khung trang):</div>
+            <p><strong>Bảng diễn biến nạp từng bước và chọn Victim:</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Mốc Ref</th><th>Trang gọi</th><th>Khung 1</th><th>Khung 2</th><th>Khung 3</th><th>Khung 4</th><th>Trạng thái (Hit / Fault)</th><th>Giải thích Victim</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>1</td><td><strong>1</strong></td><td>-</td><td>-</td><td>-</td><td>Fault (*) [PF=1]</td><td>Khung trống 1</td></tr>
+                    <tr><td>2</td><td>2</td><td>1</td><td><strong>2</strong></td><td>-</td><td>-</td><td>Fault (*) [PF=2]</td><td>Khung trống 2</td></tr>
+                    <tr><td>3</td><td>3</td><td>1</td><td>2</td><td><strong>3</strong></td><td>-</td><td>Fault (*) [PF=3]</td><td>Khung trống 3</td></tr>
+                    <tr><td>4</td><td>4</td><td>1</td><td>2</td><td>3</td><td><strong>4</strong></td><td>Fault (*) [PF=4]</td><td>Khung trống 4</td></tr>
+                    <tr><td>5</td><td>2</td><td>1</td><td>2</td><td>3</td><td>4</td><td>Hit</td><td>Trang 2 đã có sẵn</td></tr>
+                    <tr><td>6</td><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>Hit</td><td>Trang 1 đã có sẵn</td></tr>
+                    <tr><td>7</td><td>5</td><td>1</td><td>2</td><td><strong>5</strong></td><td>4</td><td>Fault (*) [PF=5]</td><td>Trang 3 ít dùng nhất trong quá khứ $\rightarrow$ Thay 3 bằng 5</td></tr>
+                    <tr><td>8</td><td>6</td><td>1</td><td>2</td><td>5</td><td><strong>6</strong></td><td>Fault (*) [PF=6]</td><td>Trang 4 ít dùng nhất trong quá khứ $\rightarrow$ Thay 4 bằng 6</td></tr>
+                    <tr><td>9</td><td>2</td><td>1</td><td>2</td><td>5</td><td>6</td><td>Hit</td><td>Trang 2 đã có sẵn</td></tr>
+                    <tr><td>10</td><td>1</td><td>1</td><td>2</td><td>5</td><td>6</td><td>Hit</td><td>Trang 1 đã có sẵn</td></tr>
+                    <tr><td>11</td><td>2</td><td>1</td><td>2</td><td>5</td><td>6</td><td>Hit</td><td>Trang 2 đã có sẵn</td></tr>
+                    <tr><td>12</td><td>3</td><td>1</td><td>2</td><td><strong>3</strong></td><td>6</td><td>Fault (*) [PF=7]</td><td>Trang 5 ít dùng nhất trong quá khứ $\rightarrow$ Thay 5 bằng 3</td></tr>
+                    <tr><td>13</td><td>7</td><td>1</td><td>2</td><td>3</td><td><strong>7</strong></td><td>Fault (*) [PF=8]</td><td>Trang 6 ít dùng nhất trong quá khứ $\rightarrow$ Thay 6 bằng 7</td></tr>
+                    <tr><td>14</td><td>6</td><td><strong>6</strong></td><td>2</td><td>3</td><td>7</td><td>Fault (*) [PF=9]</td><td>Trang 1 ít dùng nhất trong quá khứ $\rightarrow$ Thay 1 bằng 6</td></tr>
+                    <tr><td>15</td><td>3</td><td>6</td><td>2</td><td>3</td><td>7</td><td>Hit</td><td>Trang 3 đã có sẵn</td></tr>
+                    <tr><td>16</td><td>2</td><td>6</td><td>2</td><td>3</td><td>7</td><td>Hit</td><td>Trang 2 đã có sẵn</td></tr>
+                    <tr><td>17</td><td>1</td><td>6</td><td>2</td><td>3</td><td><strong>1</strong></td><td>Fault (*) [PF=10]</td><td>Trang 7 ít dùng nhất trong quá khứ $\rightarrow$ Thay 7 bằng 1</td></tr>
+                    <tr><td>18</td><td>2</td><td>6</td><td>2</td><td>3</td><td>1</td><td>Hit</td><td>Trang 2 đã có sẵn</td></tr>
+                    <tr><td>19</td><td>3</td><td>6</td><td>2</td><td>3</td><td>1</td><td>Hit</td><td>Trang 3 đã có sẵn</td></tr>
+                    <tr><td>20</td><td>6</td><td>6</td><td>2</td><td>3</td><td>1</td><td>Hit</td><td>Trang 6 đã có sẵn</td></tr>
+                </tbody>
+            </table>
+            <p><strong>Tổng số Lỗi trang của LRU = 10 lỗi.</strong></p>
+
+            <div class="solution-step-title" style="margin-top: 20px;">b) Giải Thuật FIFO (First-In, First-Out - 4 Khung trang):</div>
+            <p>Thay thế theo thứ tự nạp vào sớm nhất (Queue F1 $\rightarrow$ F2 $\rightarrow$ F3 $\rightarrow$ F4 $\rightarrow$ F1...):</p>
+            <ul>
+                <li>Ref 1,2,3,4: Nạp vào [1,2,3,4] $\rightarrow$ 4 Page Faults (PF=4).</li>
+                <li>Ref 2, 1: Hit.</li>
+                <li>Ref 5: Thay F1 (trang 1) $\rightarrow$ [5,2,3,4] (PF=5).</li>
+                <li>Ref 6: Thay F2 (trang 2) $\rightarrow$ [5,6,3,4] (PF=6).</li>
+                <li>Ref 2: Thay F3 (trang 3) $\rightarrow$ [5,6,2,4] (PF=7).</li>
+                <li>Ref 1: Thay F4 (trang 4) $\rightarrow$ [5,6,2,1] (PF=8).</li>
+                <li>Ref 2: Hit (có sẵn).</li>
+                <li>Ref 3: Thay F1 (trang 5) $\rightarrow$ [3,6,2,1] (PF=9).</li>
+                <li>Ref 7: Thay F2 (trang 6) $\rightarrow$ [3,7,2,1] (PF=10).</li>
+                <li>Ref 6: Thay F3 (trang 2) $\rightarrow$ [3,7,6,1] (PF=11).</li>
+                <li>Ref 3: Hit (có sẵn).</li>
+                <li>Ref 2: Thay F4 (trang 1) $\rightarrow$ [3,7,6,2] (PF=12).</li>
+                <li>Ref 1: Thay F1 (trang 3) $\rightarrow$ [1,7,6,2] (PF=13).</li>
+                <li>Ref 2: Hit.</li>
+                <li>Ref 3: Thay F2 (trang 7) $\rightarrow$ [1,3,6,2] (PF=14).</li>
+                <li>Ref 6: Hit.</li>
+            </ul>
+            <p><strong>Tổng số Lỗi trang của FIFO = 14 lỗi.</strong></p>
+
+            <div class="solution-step-title" style="margin-top: 20px;">c) Giải Thuật OPT (Optimal Page Replacement - 4 Khung trang):</div>
+            <p>Thay thế trang không được dùng trong thời gian lâu nhất ở tương lai:</p>
+            <ul>
+                <li>Ref 1,2,3,4: Nạp vào [1,2,3,4] $\rightarrow$ 4 Page Faults (PF=4).</li>
+                <li>Ref 2, 1: Hit.</li>
+                <li>Ref 5: Trang 4 không còn dùng nữa trong tương lai $\rightarrow$ Thay 4 bằng 5 $\rightarrow$ [1,2,3,5] (PF=5).</li>
+                <li>Ref 6: Trang 5 không dùng nữa $\rightarrow$ Thay 5 bằng 6 $\rightarrow$ [1,2,3,6] (PF=6).</li>
+                <li>Ref 2, 1, 2, 3: Hit (tất cả 1,2,3 đều có sẵn).</li>
+                <li>Ref 7: Nhìn vào tương lai <code>6, 3, 2, 1, 2, 3, 6</code>: trang 1 dùng xa nhất (tại mốc 17) $\rightarrow$ Thay 1 bằng 7 $\rightarrow$ [7,2,3,6] (PF=7).</li>
+                <li>Ref 6, 3, 2: Hit.</li>
+                <li>Ref 1: Trang 7 không dùng nữa $\rightarrow$ Thay 7 bằng 1 $\rightarrow$ [1,2,3,6] (PF=8).</li>
+                <li>Ref 2, 3, 6: Hit.</li>
+            </ul>
+            <p><strong>Tổng số Lỗi trang của OPT = 8 lỗi.</strong></p>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section>
+    <h2>4. TRÌ TRỆ HỆ THỐNG (THRASHING) VÀ WORKING-SET MODEL</h2>
+    <p>Khi số lượng tiến trình tăng quá cao, số khung trang rảnh cho mỗi tiến trình quá ít $\rightarrow$ Tiến trình liên tục bị Lỗi trang. HDH dành 99% thời gian để Swap trang ra/vào đĩa cứng thay vì thực thi tính toán. Hiện tượng này gọi là <strong>Thrashing (Trì trệ hệ thống)</strong>.</p>
+    <p><strong>Giải pháp: Mô hình Tập làm việc (Working-Set Model)</strong> dựa trên tính địa phương (Locality of Reference). Cấp phát đủ số khung trang nằm trong cửa sổ Working Set $\Delta$ để ngăn ngừa Thrashing.</p>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Quick Recall Chương 8</div>
+    <ul>
+        <li>Page Fault xảy ra khi bit Valid/Invalid = Invalid.</li>
+        <li>FIFO bị Nghịch lý Belady (tăng Frame tăng Page fault). LRU/OPT không bị.</li>
+        <li>LRU nhìn về QUÁ KHỨ, OPT nhìn vào TƯƠNG LAI.</li>
+        <li>Thrashing: CPU lãng phí thời gian chỉ để hoán vị trang liên tục.</li>
+    </ul>
+</div>
+</article>
+
+<article class="chapter chapter-review" id="chapter-final-review" data-chapter="final-review">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_FINAL_REVIEW</span>
+<div class="chapter-header">
+    <div class="chapter-num">Phần Review Đặc Biệt — Cuối Kỳ</div>
+    <h1>FINAL MASTER REVIEW & 02 ĐỀ THI MÔ PHỎNG CUỐI KỲ CHUẨN UIT</h1>
+    <div class="chapter-subtitle">Hệ thống hóa Ch5-Ch8 $\rightarrow$ Bẫy trắc nghiệm $\rightarrow$ 02 Đề thi thử Cuối kỳ hoàn chỉnh có đáp án</div>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. BẢN ĐỒ KIẾN THỨC BẮT BUỘC THI CUỐI KỲ (CH5 - CH8)</h2>
+    <div class="alert-box alert-note">
+        <div class="alert-title">🧠 SYSTEM CHECKLIST CUỐI KỲ IT007</div>
+        <ul>
+            <li><strong>Chương 5 (Đồng bộ):</strong> 3 Điều kiện CS (Mutual Exclusion, Progress, Bounded Waiting), Peterson, Semaphore `wait()` ($P$) và `signal()` ($V$). Viết code Semaphore cho sơ đồ phụ thuộc DAG và bài toán biến $X \le 20$.</li>
+            <li><strong>Chương 6 (Deadlock):</strong> 4 Điều kiện cần Coffman, Đồ thị RAG (Single instance: Cycle $\Leftrightarrow$ Deadlock vs Multiple instances: Cycle $\Rightarrow$ Chưa chắc Deadlock), Thuật toán Banker ($Need = Max - Allocation$, Kiểm tra Safe State, Xử lý $Request \le Need \land Request \le Available$).</li>
+            <li><strong>Chương 7 (Bộ nhớ):</strong> Phân mảnh nội vs Phân mảnh ngoại, Placement (First-fit, Best-fit, Worst-fit, Next-fit), Phân trang $Logical(p, d) \rightarrow Physical(f, d)$ ($d$ không đổi!), $EAT = t_{TLB} + (2 - \alpha) t_{RAM}$.</li>
+            <li><strong>Chương 8 (Bộ nhớ ảo):</strong> Demand Paging, 6 Bước xử lý Page Fault, Thay thế trang (FIFO, OPT, LRU), Nghịch lý Belady trên FIFO, Hiện tượng Trì trệ Thrashing.</li>
+        </ul>
+    </div>
+</section>
+
+<!-- SECTION 2: MOCK FINAL EXAM 1 -->
+<section class="page-break">
+    <h2>2. ĐỀ THI MÔ PHỎNG CUỐI KỲ SỐ 01 (THỜI GIAN: 90 PHÚT)</h2>
+
+    <h3>PHẦN 1: TRẮC NGHIỆM LÝ THUYẾT (3.0 ĐIỂM)</h3>
+    <p><strong>Câu 1:</strong> Điều kiện nào sau đây KHÔNG PHẢI là một trong 4 điều kiện cần để xảy ra Deadlock?</p>
+    <p>A. Loại trừ tương hỗ (Mutual Exclusion).<br>
+    B. Giữ và Chờ (Hold and Wait).<br>
+    C. Tước đoạt tài nguyên (Preemption).<br>
+    D. Chờ đợi vòng tròn (Circular Wait).</p>
+
+    <p><strong>Câu 2:</strong> Trong cơ chế phân trang (Paging), địa chỉ logic 16-bit với kích thước trang 4KB ($4096$ bytes) sẽ có số bit dành cho chỉ số trang $p$ và độ dời $d$ lần lượt là:</p>
+    <p>A. $p = 4$ bits, $d = 12$ bits.<br>
+    B. $p = 8$ bits, $d = 8$ bits.<br>
+    C. $p = 12$ bits, $d = 4$ bits.<br>
+    D. $p = 6$ bits, $d = 10$ bits.</p>
+
+    <p><strong>Câu 3:</strong> Thuật toán thay thế trang nào sau đây có khả năng mắc phải Nghịch lý Belady (Belady's Anomaly)?</p>
+    <p>A. LRU (Least Recently Used).<br>
+    B. OPT (Optimal).<br>
+    C. FIFO (First-In, First-Out).<br>
+    D. Cả LRU và FIFO.</p>
+
+    <h3>PHẦN 2: TỰ LUẬN ĐỒNG BỘ TIẾN TRÌNH (2.5 ĐIỂM)</h3>
+    <div class="worked-example">
+        <div class="problem-statement">
+            <strong>Câu 4:</strong> Cho biến nguyên $X$ được chia sẻ bởi 2 tiến trình $P_1$ và $P_2$ cùng thực hiện đoạn code sau:
+<pre><code class="language-c">do {
+    X = X + 1;
+    if (X == 20) X = 0;
+} while (TRUE);
+</code></pre>
+            Giả sử $X$ ban đầu có giá trị $0$.
+            <br>a) Chứng minh rằng giá trị của $X$ có thể vượt quá $20$ nếu không có đồng bộ.
+            <br>b) Hãy sử dụng Semaphore để sửa chữa đoạn chương trình trên, đảm bảo giá trị của $X$ không bao giờ vượt quá $20$.
+        </div>
+    </div>
+
+    <h3>PHẦN 3: TỰ LUẬN DEADLOCK & BANKER (2.5 ĐIỂM)</h3>
+    <div class="worked-example">
+        <div class="problem-statement">
+            <strong>Câu 5:</strong> Xét một hệ thống tại thời điểm $t_0$ có 5 tiến trình ($P_0 \rightarrow P_4$) và 3 loại tài nguyên ($A, B, C$ với số lượng thực thể tương ứng là $10, 5, 7$):
+            <table>
+                <thead>
+                    <tr><th>Process</th><th>Allocation (A B C)</th><th>Max (A B C)</th><th>Available (A B C)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>P0</td><td>0 1 0</td><td>7 5 3</td><td><strong>3 3 2</strong></td></tr>
+                    <tr><td>P1</td><td>2 0 0</td><td>3 2 2</td><td>-</td></tr>
+                    <tr><td>P2</td><td>3 0 2</td><td>9 0 2</td><td>-</td></tr>
+                    <tr><td>P3</td><td>2 1 1</td><td>2 2 2</td><td>-</td></tr>
+                    <tr><td>P4</td><td>0 0 2</td><td>4 3 3</td><td>-</td></tr>
+                </tbody>
+            </table>
+            <strong>Yêu cầu:</strong>
+            <br>a) Tìm ma trận $Need$. Kiểm tra xem hệ thống có ở trạng thái an toàn không? Viết ra chuỗi an toàn.
+            <br>b) Nếu tiến trình $P_1$ đưa ra yêu cầu $Request_1 = (1, 0, 2)$, hệ thống có chấp nhận cấp phát ngay không? Tại sao?
+        </div>
+    </div>
+
+    <h3>PHẦN 4: TỰ LUẬN THAY THẾ TRANG & BỘ NHỚ (2.0 ĐIỂM)</h3>
+    <div class="worked-example">
+        <div class="problem-statement">
+            <strong>Câu 6:</strong> Xét chuỗi truy xuất trang: <code>7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1</code>.
+            <br>Giả sử hệ thống có <strong>3 Khung trang (Frames)</strong> ban đầu trống. Tính số Lỗi trang (Page Fault) xảy ra khi dùng thuật toán <strong>LRU</strong> và <strong>OPT</strong>.
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 3: ANSWERS MOCK 1 -->
+<section class="page-break">
+    <h2>3. ĐÁP ÁN CHI TIẾT ĐỀ THI MÔ PHỎNG CUỐI KỲ SỐ 01</h2>
+
+    <h3>PHẦN 1: TRẮC NGHIỆM</h3>
+    <ul>
+        <li><strong>Câu 1: C</strong> — Điều kiện đúng là "No Preemption" (Không tước đoạt). "Tước đoạt" là biện pháp triệt tiêu Deadlock.</li>
+        <li><strong>Câu 2: A</strong> — Page size $4KB = 2^{12} \Rightarrow d = 12$ bits. Tổng 16 bits $\Rightarrow p = 16 - 12 = 4$ bits.</li>
+        <li><strong>Câu 3: C</strong> — Chỉ có FIFO mắc Nghịch lý Belady. LRU và OPT là Stack Algorithms nên không bao giờ bị.</li>
+    </ul>
+
+    <h3>PHẦN 2: LỜI GIẢI CÂU 4 (ĐỒNG BỘ SEMAPHORE)</h3>
+    <div class="worked-example">
+        <div class="solution-steps">
+            <ol>
+                <li><strong>a) Chứng minh $X$ có thể vượt quá 20:</strong>
+                    <br>Giả sử $X = 19$. $P_1$ chạy `X = X + 1` (đã tính xong $X=20$ trong thanh ghi nhưng chưa kiểm tra `if`). $P_2$ nhảy vào chạy `X = X + 1` làm $X$ thành $21$. Sau đó $P_1$ mới kiểm tra `if (X == 20)` $\rightarrow$ sai vì $X$ đã là $21$ $\rightarrow X$ không được gán lại về $0$ và tiếp tục tăng vượt quá $20$.
+                </li>
+                <li><strong>b) Sửa bằng Semaphore:</strong>
+                    <br>Khai báo Mutex Semaphore `mutex = 1` để đảm bảo độc quyền truy xuất đoạn code kiểm tra và tăng $X$:
+<pre><code class="language-c"><span class="code-keyword">semaphore</span> mutex = <span class="code-string">1</span>;
+
+<span class="code-comment">// Trong mỗi tiến trình:</span>
+<span class="code-keyword">do</span> {
+    wait(mutex);
+    X = X + <span class="code-string">1</span>;
+    <span class="code-keyword">if</span> (X == <span class="code-string">20</span>) X = <span class="code-string">0</span>;
+    signal(mutex);
+} <span class="code-keyword">while</span> (<span class="code-keyword">TRUE</span>);
+</code></pre>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <h3>PHẦN 3: LỜI GIẢI CÂU 5 (BANKER'S ALGORITHM)</h3>
+    <div class="worked-example">
+        <div class="solution-steps">
+            <ol>
+                <li><strong>a) Ma trận $Need = Max - Allocation$:</strong>
+                    <br>$Need_0 = (7,4,3)$, $Need_1 = (1,2,2)$, $Need_2 = (6,0,0)$, $Need_3 = (0,1,1)$, $Need_4 = (4,3,1)$.
+                </li>
+                <li><strong>Chạy Thuật toán An toàn ($Work = 3, 3, 2$):</strong>
+                    <br>- $Need_1 (1,2,2) \le Work (3,3,2) \Rightarrow P_1$ xong! $Work = Work + Alloc_1 = (3,3,2) + (2,0,0) = (5,3,2)$.
+                    <br>- $Need_3 (0,1,1) \le Work (5,3,2) \Rightarrow P_3$ xong! $Work = Work + Alloc_3 = (5,3,2) + (2,1,1) = (7,4,3)$.
+                    <br>- $Need_4 (4,3,1) \le Work (7,4,3) \Rightarrow P_4$ xong! $Work = Work + Alloc_4 = (7,4,3) + (0,0,2) = (7,4,5)$.
+                    <br>- $Need_0 (7,4,3) \le Work (7,4,5) \Rightarrow P_0$ xong! $Work = Work + Alloc_0 = (7,4,5) + (0,1,0) = (7,5,5)$.
+                    <br>- $Need_2 (6,0,0) \le Work (7,5,5) \Rightarrow P_2$ xong! $Work = Work + Alloc_2 = (7,5,5) + (3,0,2) = (10,5,7)$.
+                    <br><strong>Chuỗi an toàn: <code>&lt;P1, P3, P4, P0, P2&gt;</code> $\Rightarrow$ Hệ thống AN TOÀN.</strong>
+                </li>
+                <li><strong>b) Xử lý $Request_1 = (1, 0, 2)$:</strong>
+                    <br>1. $Request_1 (1,0,2) \le Need_1 (1,2,2)$ (Thỏa mãn).
+                    <br>2. $Request_1 (1,0,2) \le Available (3,3,2)$ (Thỏa mãn).
+                    <br>3. Giả lập cấp phát: $Available_{new} = (2,3,0)$, $Alloc_{1,new} = (3,0,2)$, $Need_{1,new} = (0,2,0)$.
+                    <br>4. Chạy thuật toán an toàn trên trạng thái mới $\rightarrow$ Tìm được chuỗi an toàn <code>&lt;P1, P3, P4, P0, P2&gt;</code>.
+                    <br><strong>KẾT LUẬN: CÓ THỂ đáp ứng ngay yêu cầu của $P_1$.</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <h3>PHẦN 4: LỜI GIẢI CÂU 6 (THAY THẾ TRANG LRU & OPT - 3 KHUNG TRANG)</h3>
+    <div class="worked-example">
+        <div class="solution-steps">
+            <p><strong>Chuỗi truy xuất (20 refs):</strong> <code>7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1</code> (3 Khung trang ban đầu trống)</p>
+
+            <p><strong>1. Thuật toán LRU (Least Recently Used):</strong></p>
+            <ul>
+                <li>Ref 7, 0, 1: Nạp vào [7, 0, 1] $\rightarrow$ 3 Faults (PF=3).</li>
+                <li>Ref 2: Trang 7 ít dùng nhất $\rightarrow$ Thay 7 bằng 2 $\rightarrow$ [2, 0, 1] (PF=4).</li>
+                <li>Ref 0: Hit.</li>
+                <li>Ref 3: Trang 1 ít dùng nhất $\rightarrow$ Thay 1 bằng 3 $\rightarrow$ [2, 0, 3] (PF=5).</li>
+                <li>Ref 0: Hit.</li>
+                <li>Ref 4: Trang 2 ít dùng nhất $\rightarrow$ Thay 2 bằng 4 $\rightarrow$ [4, 0, 3] (PF=6).</li>
+                <li>Ref 2: Trang 3 ít dùng nhất $\rightarrow$ Thay 3 bằng 2 $\rightarrow$ [4, 0, 2] (PF=7).</li>
+                <li>Ref 3: Trang 0 ít dùng nhất $\rightarrow$ Thay 0 bằng 3 $\rightarrow$ [4, 3, 2] (PF=8).</li>
+                <li>Ref 0: Trang 4 ít dùng nhất $\rightarrow$ Thay 4 bằng 0 $\rightarrow$ [0, 3, 2] (PF=9).</li>
+                <li>Ref 3, 2: Hit.</li>
+                <li>Ref 1: Trang 0 ít dùng nhất $\rightarrow$ Thay 0 bằng 1 $\rightarrow$ [1, 3, 2] (PF=10).</li>
+                <li>Ref 2: Hit.</li>
+                <li>Ref 0: Trang 3 ít dùng nhất $\rightarrow$ Thay 3 bằng 0 $\rightarrow$ [1, 0, 2] (PF=11).</li>
+                <li>Ref 1: Hit.</li>
+                <li>Ref 7: Trang 2 ít dùng nhất $\rightarrow$ Thay 2 bằng 7 $\rightarrow$ [1, 0, 7] (PF=12).</li>
+                <li>Ref 0, 1: Hit.</li>
+            </ul>
+            <p><strong>Tổng số Lỗi trang của LRU (3 frames) = 12 lỗi.</strong></p>
+
+            <p><strong>2. Thuật toán OPT (Optimal Page Replacement):</strong></p>
+            <ul>
+                <li>Ref 7, 0, 1: Nạp vào [7, 0, 1] $\rightarrow$ 3 Faults (PF=3).</li>
+                <li>Ref 2: Trang 7 dùng xa nhất ở tương lai (mốc 18) $\rightarrow$ Thay 7 bằng 2 $\rightarrow$ [2, 0, 1] (PF=4).</li>
+                <li>Ref 0: Hit.</li>
+                <li>Ref 3: Trang 1 dùng xa nhất ở tương lai (mốc 14) $\rightarrow$ Thay 1 bằng 3 $\rightarrow$ [2, 0, 3] (PF=5).</li>
+                <li>Ref 0: Hit.</li>
+                <li>Ref 4: Trang 0 dùng xa nhất ở tương lai (mốc 11) $\rightarrow$ Thay 0 bằng 4 $\rightarrow$ [2, 4, 3] (PF=6).</li>
+                <li>Ref 2, 3: Hit.</li>
+                <li>Ref 0: Trang 4 không dùng nữa $\rightarrow$ Thay 4 bằng 0 $\rightarrow$ [2, 0, 3] (PF=7).</li>
+                <li>Ref 3, 2: Hit.</li>
+                <li>Ref 1: Trang 3 không dùng nữa $\rightarrow$ Thay 3 bằng 1 $\rightarrow$ [2, 0, 1] (PF=8).</li>
+                <li>Ref 2, 0, 1: Hit.</li>
+                <li>Ref 7: Trang 2 không dùng nữa $\rightarrow$ Thay 2 bằng 7 $\rightarrow$ [7, 0, 1] (PF=9).</li>
+                <li>Ref 0, 1: Hit.</li>
+            </ul>
+            <p><strong>Tổng số Lỗi trang của OPT (3 frames) = 9 lỗi.</strong></p>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 4: MOCK FINAL EXAM 2 -->
+<section class="page-break">
+    <h2>4. ĐỀ THI MÔ PHỎNG CUỐI KỲ SỐ 02 (THỜI GIAN: 90 PHÚT)</h2>
+
+    <h3>PHẦN 1: TRẮC NGHIỆM LÝ THUYẾT (3.0 ĐIỂM)</h3>
+    <p><strong>Câu 1:</strong> Cho $t_{RAM} = 100$ ns, $t_{TLB} = 20$ ns và tỷ lệ tìm thấy TLB $\alpha = 80\%$. Thời gian truy xuất hiệu dụng EAT bằng:</p>
+    <p>A. 120 ns.<br>B. 140 ns.<br>C. 200 ns.<br>D. 180 ns.</p>
+
+    <p><strong>Câu 2:</strong> Giải pháp Vùng tranh chấp (Critical Section) đòi hỏi điều kiện Tiến triển (Progress). Khái niệm Tiến triển có nghĩa là:</p>
+    <p>A. Không tiến trình nào bị kẹt vô hạn.<br>B. Chỉ những tiến trình muốn vào CS và không nằm trong Remainder section mới được tham gia chọn tiến trình tiếp theo vào CS.<br>C. Chỉ 1 tiến trình được ở trong CS tại 1 thời điểm.<br>D. Tốc độ CPU không làm ảnh hưởng thuật toán.</p>
+
+    <p><strong>Câu 3:</strong> Trạng thái An toàn (Safe State) trong Thuật toán Banker đảm bảo:</p>
+    <p>A. Chắc chắn không bao giờ xảy ra Deadlock.<br>B. Hệ thống đang bị Deadlock.<br>C. Không có tiến trình nào xin thêm tài nguyên.<br>D. Tất cả tài nguyên đều đã cấp hết.</p>
+
+    <h3>PHẦN 2: TỰ LUẬN ĐỒNG BỘ PRODUCER-CONSUMER (3.5 ĐIỂM)</h3>
+    <div class="worked-example">
+        <div class="problem-statement">
+            <strong>Câu 4:</strong> Xét bài toán Nhà sản xuất - Người tiêu thụ (Producer - Consumer) chia sẻ một bộ đệm vòng tròn gồm $N = 5$ phần tử.
+            <br>a) Trình bày các nguy cơ Race Condition nếu không đồng bộ.
+            <br>b) Khai báo các Semaphore và viết mã C đồng bộ hoàn chỉnh cho Producer và Consumer bằng POSIX Semaphores.
+        </div>
+    </div>
+
+    <h3>PHẦN 3: TỰ LUẬN BỘ NHỚ VÀ ÁNH XẠ ĐỊA CHỈ (3.5 ĐIỂM)</h3>
+    <div class="worked-example">
+        <div class="problem-statement">
+            <strong>Câu 5:</strong> Một hệ thống phân trang có kích thước trang $4KB = 2^{12}$ bytes, địa chỉ ảo 32-bit.
+            <br>a) Tính số bit cho chỉ số trang $p$ và độ dời $d$. Bảng trang có tối đa bao nhiêu mục (entries)?
+            <br>b) Cho địa chỉ ảo dạng thập phân $V = 16390$. Xác định chỉ số trang $p$ và offset $d$. Nếu trang $p$ được ánh xạ vào khung trang (frame) $f = 5$, hãy tính địa chỉ vật lý tương ứng.
+        </div>
+    </div>
+</section>
+
+<!-- SECTION 5: ANSWERS MOCK 2 -->
+<section class="page-break">
+    <h2>5. ĐÁP ÁN CHI TIẾT ĐỀ THI MÔ PHỎNG CUỐI KỲ SỐ 02</h2>
+
+    <h3>PHẦN 1: ĐÁP ÁN TRẮC NGHIỆM</h3>
+    <ul>
+        <li><strong>Câu 1: B</strong> — $EAT = t_{TLB} + (2 - \alpha) t_{RAM} = 20 + (2 - 0.8) \times 100 = 20 + 120 = 140$ ns.</li>
+        <li><strong>Câu 2: B</strong> — Đúng định nghĩa điều kiện Progress theo Silberschatz/UIT.</li>
+        <li><strong>Câu 3: A</strong> — Safe State đảm bảo tồn tại ít nhất 1 Safe Sequence $\Rightarrow$ chắc chắn KHÔNG bị Deadlock.</li>
+    </ul>
+
+    <h3>PHẦN 2: LỜI GIẢI CÂU 4 (PRODUCER - CONSUMER SEMAPHORES)</h3>
+    <div class="worked-example">
+        <div class="solution-steps">
+            <ol>
+                <li><strong>Khai báo & Khởi tạo Semaphore:</strong>
+<pre><code class="language-c"><span class="code-keyword">semaphore</span> mutex = <span class="code-string">1</span>; <span class="code-comment">// Độc quyền truy xuất Buffer</span>
+<span class="code-keyword">semaphore</span> empty = N; <span class="code-comment">// Đếm số ô trống (ban đầu N = 5)</span>
+<span class="code-keyword">semaphore</span> full = <span class="code-string">0</span>;  <span class="code-comment">// Đếm số ô có dữ liệu (ban đầu 0)</span>
+</code></pre>
+                </li>
+                <li><strong>Mã nguồn Tiến trình Producer:</strong>
+<pre><code class="language-c"><span class="code-keyword">void</span> producer() {
+    <span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {
+        item = produce_item();
+        wait(empty); <span class="code-comment">// Chờ có ô trống (empty > 0)</span>
+        wait(mutex); <span class="code-comment">// Khóa Critical Section</span>
+        
+        insert_item(item); <span class="code-comment">// Đưa item vào Buffer</span>
+        
+        signal(mutex); <span class="code-comment">// Mở khóa CS</span>
+        signal(full);  <span class="code-comment">// Tăng số ô có dữ liệu</span>
+    }
+}
+</code></pre>
+                </li>
+                <li><strong>Mã nguồn Tiến trình Consumer:</strong>
+<pre><code class="language-c"><span class="code-keyword">void</span> consumer() {
+    <span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {
+        wait(full);  <span class="code-comment">// Chờ có dữ liệu (full > 0)</span>
+        wait(mutex); <span class="code-comment">// Khóa Critical Section</span>
+        
+        item = remove_item(); <span class="code-comment">// Lấy item ra khỏi Buffer</span>
+        
+        signal(mutex); <span class="code-comment">// Mở khóa CS</span>
+        signal(empty); <span class="code-comment">// Tăng số ô trống</span>
+        consume_item(item);
+    }
+}
+</code></pre>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <h3>PHẦN 3: LỜI GIẢI CÂU 5 (BỘ NHỚ & ÁNH XẠ ĐỊA CHỈ)</h3>
+    <div class="worked-example">
+        <div class="solution-steps">
+            <ol>
+                <li><strong>a) Tính số bit và số mục Bảng trang:</strong>
+                    <br>- Page size $4KB = 2^{12}$ bytes $\Rightarrow$ Số bit offset $d = 12$ bits.
+                    <br>- Tổng số bit địa chỉ ảo = 32 bits $\Rightarrow$ Số bit chỉ số trang $p = 32 - 12 = 20$ bits.
+                    <br>- Số mục trong Bảng trang = $2^{20} = 1,048,576$ trang ($\approx 1$ triệu mục).
+                </li>
+                <li><strong>b) Tách địa chỉ ảo $V = 16390$ và tính Địa chỉ vật lý:</strong>
+                    <br>- Chỉ số trang $p = \lfloor 16390 / 4096 \rfloor = 4$.
+                    <br>- Offset $d = 16390 \pmod{4096} = 16390 - 4 \times 4096 = 16390 - 16384 = 6$.
+                    <br>- Địa chỉ vật lý khi $f = 5$: $\text{Physical} = f \times \text{Page\_Size} + d = 5 \times 4096 + 6 = 20480 + 6 = 20486$.
+                </li>
+            </ol>
+        </div>
+    </div>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">🎓 HOÀN THÀNH CẨM NANG IT007 UIT!</div>
+    <p>Chúc bạn ôn tập tốt, làm chủ toàn bộ kiến thức và đạt điểm <strong>A/A+ môn Hệ điều hành IT007</strong>!</p>
+</div>
+</article>
+
+<article class="chapter chapter-appendix" id="chapter-appendix-linux" data-chapter="appendix-linux">
+<span class="page-marker" aria-hidden="true">PAGE_MARKER_APPENDIX_LINUX</span>
+<div class="chapter-header">
+    <div class="chapter-num">Phụ Lục — Kỹ Năng Thực Hành</div>
+    <h1>LINUX SURVIVAL KIT CHO MÔN HỌC IT007 UIT</h1>
+    <div class="chapter-subtitle">Môi trường WSL2 $\rightarrow$ Bảng lệnh Linux bắt buộc $\rightarrow$ Mã nguồn C chuẩn Lab 1 đến Lab 6</div>
+</div>
+
+<div class="learning-objectives">
+    <h3>🎯 Mục Tiêu Phụ Lục</h3>
+    <ul>
+        <li>Thiết lập môi trường làm việc Linux Ubuntu trên Windows bằng WSL2 nhanh chóng.</li>
+        <li>Thành thạo các lệnh kiểm tra hệ thống, tiến trình và biên dịch C (`ps`, `top`, `pstree`, `kill`, `gcc`, `gdb`, `strace`).</li>
+        <li>Nắm vững mã nguồn C mẫu chuẩn hóa cho tất cả các bài thực hành Lab IT007 (Labs 1-6).</li>
+    </ul>
+</div>
+
+<!-- SECTION 1 -->
+<section>
+    <h2>1. BẢNG CÁC LỆNH LINUX BẮT BUỘC NẮM VỮNG FOR IT007</h2>
+
+    <table>
+        <thead>
+            <tr><th>Lệnh (Command)</th><th>Chức năng chính</th><th>Cú pháp mẫu thông dụng</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><code>ps</code></td><td>Liệt kê các tiến trình đang chạy trong hệ thống.</td><td><code>ps aux</code> hoặc <code>ps -ef</code> (xem tất cả PID, PPID, CPU, MEM)</td></tr>
+            <tr><td><code>pstree</code></td><td>Hiển thị sơ đồ cây tiến trình (Process Tree) trực quan.</td><td><code>pstree -p</code> (hiển thị kèm PID)</td></tr>
+            <tr><td><code>top</code> / <code>htop</code></td><td>Theo dõi thời gian thực mức tiêu thụ CPU, RAM của các tiến trình.</td><td><code>top</code> (nhấn `q` để thoát)</td></tr>
+            <tr><td><code>kill</code></td><td>Gửi tín hiệu Signal đến tiến trình để dừng/hủy tiến trình.</td><td><code>kill -9 &lt;PID&gt;</code> (gửi SIGKILL ép hủy ngay)</td></tr>
+            <tr><td><code>gcc</code></td><td>Trình biên dịch mã nguồn C trên Linux.</td><td><code>gcc -Wall program.c -o program -lrt -lpthread</code></td></tr>
+            <tr><td><code>strace</code></td><td>Theo dõi tất cả các System Calls mà chương trình thực thi.</td><td><code>strace ./program</code> (cực hay để debug System Call)</td></tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- SECTION 2 -->
+<section>
+    <h2>2. BỘ SOURCE CODE CHUẨN CÁC BÀI LAB IT007 UIT</h2>
+
+    <h3>Lab 2: Bash Shell Scripting (`check_number.sh`)</h3>
+<pre><code class="language-bash"><span class="code-comment">#!/bin/bash</span>
+<span class="code-comment"># lab2_script.sh - Kiểm tra số nguyên tố và tính tổng</span>
+<span class="code-keyword">read</span> -p <span class="code-string">"Nhập số nguyên N: "</span> N
+
+<span class="code-keyword">if</span> [ <span class="code-string">$N</span> -le 0 ]; <span class="code-keyword">then</span>
+    <span class="code-func">echo</span> <span class="code-string">"Vui lòng nhập số nguyên dương!"</span>
+    <span class="code-keyword">exit</span> 1
+<span class="code-keyword">fi</span>
+
+sum=0
+<span class="code-keyword">for</span> (( i=1; i&lt;=N; i++ )); <span class="code-keyword">do</span>
+    sum=$((sum + i))
+<span class="code-keyword">done</span>
+
+<span class="code-func">echo</span> <span class="code-string">"Tổng từ 1 đến $N là: $sum"</span>
+</code></pre>
+
+    <h3>Lab 3: Tiến Trình & Bộ Nhớ Chia Sẻ (Shared Memory)</h3>
+<pre><code class="language-c"><span class="code-comment">/* lab3_shm.c - Sử dụng POSIX Shared Memory shm_open & mmap có kiểm tra lỗi */</span>
+<span class="code-keyword">#include</span> &lt;stdio.h&gt;
+<span class="code-keyword">#include</span> &lt;stdlib.h&gt;
+<span class="code-keyword">#include</span> &lt;string.h&gt;
+<span class="code-keyword">#include</span> &lt;fcntl.h&gt;
+<span class="code-keyword">#include</span> &lt;sys/mman.h&gt;
+<span class="code-keyword">#include</span> &lt;unistd.h&gt;
+<span class="code-keyword">#include</span> &lt;sys/wait.h&gt;
+
+<span class="code-keyword">int</span> main() {
+    <span class="code-keyword">const int</span> SIZE = <span class="code-string">4096</span>;
+    <span class="code-keyword">const char</span> *name = <span class="code-string">"IT007_Shm"</span>;
+
+    <span class="code-keyword">int</span> fd = shm_open(name, O_CREAT | O_RDWR, <span class="code-string">0666</span>);
+    <span class="code-keyword">if</span> (fd &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"shm_open failed"</span>); exit(<span class="code-string">1</span>); }
+    ftruncate(fd, SIZE);
+
+    <span class="code-keyword">void</span> *ptr = mmap(<span class="code-string">0</span>, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, <span class="code-string">0</span>);
+    <span class="code-keyword">if</span> (ptr == MAP_FAILED) { perror(<span class="code-string">"mmap failed"</span>); exit(<span class="code-string">1</span>); }
+
+    pid_t pid = fork();
+    <span class="code-keyword">if</span> (pid &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"fork failed"</span>); exit(<span class="code-string">1</span>); }
+    
+    <span class="code-keyword">if</span> (pid == <span class="code-string">0</span>) { <span class="code-comment">// Child Writes</span>
+        sprintf((<span class="code-keyword">char</span>*)ptr, <span class="code-string">"Hello from Child Process! PID = %d"</span>, getpid());
+        exit(<span class="code-string">0</span>);
+    } <span class="code-keyword">else</span> { <span class="code-comment">// Parent Reads</span>
+        wait(NULL);
+        printf(<span class="code-string">"Parent read from Shared Memory: %s\n"</span>, (<span class="code-keyword">char</span>*)ptr);
+        munmap(ptr, SIZE);
+        shm_unlink(name);
+    }
+    <span class="code-keyword">return</span> <span class="code-string">0</span>;
+}
+</code></pre>
+
+    <h3>Lab 4: Mô Phỏng Định Thời CPU (FCFS Scheduler Struct)</h3>
+<pre><code class="language-c"><span class="code-comment">/* lab4_fcfs.c - Struct dữ liệu tính WT, TAT định thời */</span>
+<span class="code-keyword">typedef struct</span> {
+    <span class="code-keyword">int</span> id, at, bt, ct, tat, wt;
+} Process;
+
+<span class="code-keyword">void</span> calculate_fcfs(Process p[], <span class="code-keyword">int</span> n) {
+    <span class="code-keyword">int</span> current_time = <span class="code-string">0</span>;
+    <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-string">0</span>; i &lt; n; i++) {
+        <span class="code-keyword">if</span> (current_time &lt; p[i].at) current_time = p[i].at;
+        p[i].ct = current_time + p[i].bt;
+        p[i].tat = p[i].ct - p[i].at;
+        p[i].wt = p[i].tat - p[i].bt;
+        current_time = p[i].ct;
+    }
+}
+</code></pre>
+
+    <h3>Lab 5: Đồng Bộ POSIX Threads Với Semaphore (`pthread_sem.c`)</h3>
+<pre><code class="language-c"><span class="code-comment">/* lab5_pthread.c - Độc quyền truy xuất Mutex bằng POSIX Semaphore */</span>
+<span class="code-keyword">#include</span> &lt;stdio.h&gt;
+<span class="code-keyword">#include</span> &lt;pthread.h&gt;
+<span class="code-keyword">#include</span> &lt;semaphore.h&gt;
+
+sem_t mutex;
+<span class="code-keyword">int</span> counter = <span class="code-string">0</span>;
+
+<span class="code-keyword">void</span>* worker(<span class="code-keyword">void</span>* arg) {
+    sem_wait(&mutex);
+    counter++;
+    printf(<span class="code-string">"Thread %ld incremented counter to %d\n"</span>, (long)arg, counter);
+    sem_post(&mutex);
+    <span class="code-keyword">return</span> NULL;
+}
+
+<span class="code-keyword">int</span> main() {
+    pthread_t threads[<span class="code-string">5</span>];
+    sem_init(&mutex, <span class="code-string">0</span>, <span class="code-string">1</span>);
+    <span class="code-keyword">for</span> (long i = <span class="code-string">0</span>; i &lt; <span class="code-string">5</span>; i++) pthread_create(&threads[i], NULL, worker, (<span class="code-keyword">void</span>*)i);
+    <span class="code-keyword">for</span> (<span class="code-keyword">int</span> i = <span class="code-string">0</span>; i &lt; <span class="code-string">5</span>; i++) pthread_join(threads[i], NULL);
+    sem_destroy(&mutex);
+    <span class="code-keyword">return</span> <span class="code-string">0</span>;
+}
+</code></pre>
+
+    <h3>Lab 6: Simple Shell Tích Hợp Pipe (`lab6_pipe.c` - Complete Program)</h3>
+<pre><code class="language-c"><span class="code-comment">/* lab6_pipe.c - Chương trình biên dịch hoàn chỉnh thực thi lệnh: ls -l | grep txt */</span>
+<span class="code-keyword">#include</span> &lt;stdio.h&gt;
+<span class="code-keyword">#include</span> &lt;stdlib.h&gt;
+<span class="code-keyword">#include</span> &lt;unistd.h&gt;
+<span class="code-keyword">#include</span> &lt;sys/wait.h&gt;
+
+<span class="code-keyword">int</span> main() {
+    <span class="code-keyword">char</span> *cmd1[] = {<span class="code-string">"ls"</span>, <span class="code-string">"-l"</span>, NULL};
+    <span class="code-keyword">char</span> *cmd2[] = {<span class="code-string">"grep"</span>, <span class="code-string">"txt"</span>, NULL};
+
+    <span class="code-keyword">int</span> pipefd[<span class="code-string">2</span>];
+    <span class="code-keyword">if</span> (pipe(pipefd) &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"pipe failed"</span>); exit(<span class="code-string">1</span>); }
+
+    pid_t p1 = fork();
+    <span class="code-keyword">if</span> (p1 &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"fork 1 failed"</span>); exit(<span class="code-string">1</span>); }
+
+    <span class="code-keyword">if</span> (p1 == <span class="code-string">0</span>) { <span class="code-comment">// Child 1: Chạy 'ls -l' và ghi vào pipe</span>
+        close(pipefd[<span class="code-string">0</span>]); <span class="code-comment">// Đóng đầu đọc không dùng</span>
+        <span class="code-keyword">if</span> (dup2(pipefd[<span class="code-string">1</span>], STDOUT_FILENO) &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"dup2 failed"</span>); exit(<span class="code-string">1</span>); }
+        close(pipefd[<span class="code-string">1</span>]);
+        execvp(cmd1[<span class="code-string">0</span>], cmd1);
+        perror(<span class="code-string">"execvp cmd1 failed"</span>);
+        exit(<span class="code-string">1</span>);
+    }
+
+    pid_t p2 = fork();
+    <span class="code-keyword">if</span> (p2 &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"fork 2 failed"</span>); exit(<span class="code-string">1</span>); }
+
+    <span class="code-keyword">if</span> (p2 == <span class="code-string">0</span>) { <span class="code-comment">// Child 2: Chạy 'grep txt' và đọc từ pipe</span>
+        close(pipefd[<span class="code-string">1</span>]); <span class="code-comment">// Đóng đầu ghi không dùng</span>
+        <span class="code-keyword">if</span> (dup2(pipefd[<span class="code-string">0</span>], STDIN_FILENO) &lt; <span class="code-string">0</span>) { perror(<span class="code-string">"dup2 failed"</span>); exit(<span class="code-string">1</span>); }
+        close(pipefd[<span class="code-string">0</span>]);
+        execvp(cmd2[<span class="code-string">0</span>], cmd2);
+        perror(<span class="code-string">"execvp cmd2 failed"</span>);
+        exit(<span class="code-string">1</span>);
+    }
+
+    <span class="code-comment">// Tiến trình cha đóng cả 2 đầu pipe và chờ 2 con hoàn thành</span>
+    close(pipefd[<span class="code-string">0</span>]);
+    close(pipefd[<span class="code-string">1</span>]);
+    waitpid(p1, NULL, <span class="code-string">0</span>);
+    waitpid(p2, NULL, <span class="code-string">0</span>);
+    <span class="code-keyword">return</span> <span class="code-string">0</span>;
+}
+</code></pre>
+</section>
+
+<div class="quick-recall-card">
+    <div class="recall-title">📌 Lời khuyên đạt 10/10 Thực Hành Lab IT007</div>
+    <ul>
+        <li>Luôn kiểm tra mã lỗi trả về của tất cả System Calls (`if (pid < 0)`, `if (fd < 0)`).</li>
+        <li>Dọn dẹp tài nguyên (dùng `wait()`, `munmap()`, `shm_unlink()`, `close()`) để tránh rò rỉ RAM và Zombie process.</li>
+</article></main>
+</body>
+</html>
