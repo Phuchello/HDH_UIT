@@ -1,53 +1,41 @@
-# PROJECT STATE — HDH_UIT
+# PROJECT STATE — HDH_UIT V2 RECONSTRUCTION
 
 ## Project
-**HDH_UIT — UIT IT007 Operating Systems Handbook**
+**HDH_UIT V2 — Comprehensive Operating Systems Theory & Practical Handbooks (IT007 UIT)**
 
 ## Current Phase
-`READY_FOR_V1_RELEASE`
+`V2_RESEARCH_AND_GAP_ANALYSIS`
 
-## Completed
-- [x] Khảo sát và đối chiếu các bản nguồn Antigravity/Codex liên quan.
-- [x] Xác định canonical source tại `src/chapters/`, `src/styles/`, `src/vendor/mathjax/`.
-- [x] Hoàn thiện cấu trúc repository công khai: `src/`, `dist/`, `docs/`, `scripts/`, `reports/`, `.github/`.
-- [x] Tích hợp 12 chương, CSS chế bản, MathJax 3.2.2 offline và bộ build/validation.
-- [x] Hoàn tất các precision fix đã ghi nhận: Priority convention, Memory Barrier, Swapping, Mode vs Context switch, printf/I/O convention.
-- [x] Xuất bản deliverables cuối:
-  - `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.html`
-  - `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf` — 57 trang A4.
-- [x] README, preview assets, build docs, methodology, changelog, notice và QA reports đã có trên repository.
-- [x] Nhánh `release/it007-handbook-v1` đã được hợp nhất lịch sử an toàn với `main` bằng merge commit giữ nguyên canonical release tree.
-- [x] `main` đã được publish thành công lên GitHub.
-- [x] `release/it007-handbook-v1` đã được đồng bộ cùng commit với `main` tại thời điểm publish.
-- [x] GitHub Actions `Validate Handbook Repository` trên `main` đã chạy thành công sau lần publish.
+## Project Mission & Target Output
+The project is being fundamentally restructured into **TWO independent, complete, publication-grade volumes**:
 
-## Canonical Source
-- `src/chapters/`
-- `src/styles/`
-- `src/vendor/mathjax/`
-- `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.html`
-- `dist/IT007_CamNang_HeDieuHanh_UIT_VoTrongPhuc_FINAL.pdf`
+1. **BOOK A — THEORY**:
+   - *Title*: `HỆ ĐIỀU HÀNH — IT007 (Lý thuyết · Bài tập · Ôn thi)`
+   - *Author*: Võ Trọng Phúc
+   - *Scope*: 100% exhaustive coverage of official UIT course outline, all 14 lecture slide decks (Week 1–14), official chapter question sets (Ch1–Ch9), Midterm Review slide, and actual exam patterns.
+   - *Pedagogy*: Official theory → Explanation & Intuition → Hardware mechanisms → Characteristics tables → Comparative analysis → Worked examples → Exam evidence & Common pitfalls.
+
+2. **BOOK B — LAB (PRACTICAL)**:
+   - *Title*: `THỰC HÀNH HỆ ĐIỀU HÀNH — IT007 (Linux · Process · Thread · IPC · Synchronization · Shell)`
+   - *Author*: Võ Trọng Phúc
+   - *Scope*: Standalone practical handbook for Linux programming, Lab 1 to Lab 6, complete 7-stage architectural case study of `it007sh` shell (fork, execvp, waitpid, dup2, pipe, signals, semicolons), POSIX API references, and debug techniques.
+
+## Completed in V2 Phase
+- [x] Switched from `main` to dedicated workstream branch `v2/complete-theory-labs`.
+- [x] Identified and inventoried all Tier A official local course materials (14 slide decks, 9 question docx files, 6 lab manuals, 20 BHT exams).
+- [x] Initialized exhaustive research ledger and coverage matrices in `research/`.
+
+## Current Working Tree
+`HDH_UIT` (Branch: `v2/complete-theory-labs`)
 
 ## Git Remote
 `https://github.com/Phuchello/HDH_UIT`
 
-## Published Main Merge Commit
-`772e674cf3541d45b34f7b21441ec000b1381908`
-
-## Validation
-- PRE-CODEX audit: PASS — 99.5/100
-- Existing FINAL publication QA: PASS — 96/100
-- GitHub Actions validation on published main: PASS
-- Unresolved CRITICAL: 0
-- Unresolved MAJOR: 0
-
 ## Last Safe Checkpoint
-`main` at `b4f290406ab3fd518c56281c408fdfb5726ad722`; GitHub Actions `Validate Handbook Repository` passed after the clean-clone diagnostics fix.
+Branch `v2/complete-theory-labs` established; all Tier A official materials located and audited; baseline research deliverables in progress.
 
 ## Exact Next Action
-Independent remote audit, then tag/release `v1.0.0` if that audit accepts the published artifacts.
+Build and lock all 9 foundational research deliverables (`SOURCE_LEDGER.md`, `SLIDE_COVERAGE_MATRIX.md`, `THEORY_COVERAGE_MATRIX.md`, `OFFICIAL_REVIEW_QUESTION_MAP.md`, `EXAM_EVIDENCE_MATRIX.md`, `EXAM_PATTERN_ANALYSIS.md`, `LAB_VARIANT_MAP.md`, `LAB_SOURCE_LEDGER.md`, `CONTENT_GAP_REPORT.md`).
 
 ## Git Status
-- Default branch: `main`
-- Release branch: `release/it007-handbook-v1`
-- Public repository published and validated.
+Branch: `v2/complete-theory-labs`

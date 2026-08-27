@@ -1,0 +1,175 @@
+/* ==========================================================================
+   IT007 CẨM NANG HỆ ĐIỀU HÀNH - A4 PRINT & ACADEMIC DESIGN SYSTEM
+   Author: Võ Trọng Phúc
+   Target: HTML to PDF / A4 High Quality Printing & Desktop Reading
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600;700&display=swap');
+
+/* --- PAGE SETUP & MEDIA PRINT RULES --- */
+@page {
+    size: A4 portrait;
+    margin: 20mm 15mm 20mm 15mm;
+    @top-right {
+        content: "IT007 - Cẩm Nang Hệ Điều Hành UIT";
+        font-family: 'Inter', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        font-weight: 500;
+    }
+    @bottom-center {
+        content: "Trang " counter(page);
+        font-family: 'Inter', sans-serif;
+        font-size: 8pt;
+        color: #64748b;
+        font-weight: 500;
+    }
+}
+
+/* --- ROOT DESIGN TOKENS --- */
+:root {
+    /* Color Palette */
+    --primary: #1e3a8a;          /* Deep Academic Navy */
+    --primary-light: #eff6ff;    /* Soft Blue Tint */
+    --secondary: #0284c7;        /* Tech Slate Blue */
+    --accent: #0f766e;           /* Deep Teal Accent */
+    --text-main: #0f172a;        /* High Contrast Slate */
+    --text-muted: #475569;       /* Muted Text */
+    --bg-main: #ffffff;          /* White Paper Background */
+    --bg-alt: #f8fafc;           /* Light Gray Surface */
+    --border-color: #e2e8f0;     /* Clean Neutral Border */
+    --border-strong: #cbd5e1;
+
+    /* Callout & Alert Tokens */
+    --alert-note-bg: #eff6ff;
+    --alert-note-border: #3b82f6;
+    --alert-tip-bg: #ecfdf5;
+    --alert-tip-border: #10b981;
+    --alert-warning-bg: #fffbeb;
+    --alert-warning-border: #f59e0b;
+    --alert-danger-bg: #fef2f2;
+    --alert-danger-border: #ef4444;
+
+    /* Typography */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'Fira Code', Consolas, Monaco, monospace;
+}
+
+/* --- BASE & TYPOGRAPHY --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    font-size: 10pt;
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+body {
+    padding: 0;
+    margin: 0 auto;
+    max-width: 210mm;
+}
+
+/* Headings Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary);
+    font-weight: 700;
+    line-height: 1.3;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+h1 {
+    font-size: 20pt;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-top: 15pt;
+    margin-bottom: 12pt;
+    padding-bottom: 6pt;
+    border-bottom: 2.5px solid var(--primary);
+}
+
+h2 {
+    font-size: 15pt;
+    margin-top: 14pt;
+    margin-bottom: 8pt;
+    padding-bottom: 4pt;
+    border-bottom: 1.5px solid var(--secondary);
+    color: var(--primary);
+}
+
+h3 {
+    font-size: 12pt;
+    margin-top: 10pt;
+    margin-bottom: 6pt;
+    color: var(--secondary);
+}
+
+h4 {
+    font-size: 10.5pt;
+    margin-top: 8pt;
+    margin-bottom: 4pt;
+    color: var(--text-main);
+}
+
+p {
+    margin-bottom: 8pt;
+    text-align: justify;
+}
+
+strong {
+    font-weight: 700;
+    color: #020617;
+}
+
+em {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+/* Lists */
+ul, ol {
+    margin-left: 18pt;
+    margin-bottom: 8pt;
+}
+
+li {
+    margin-bottom: 3pt;
+}
+
+/* Links */
+a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Page Break Controls */
+.page-break {
+    page-break-before: always;
+    break-before: always;
+}
+
+.no-break, .card, .alert-box, .worked-example, .cheat-sheet, table, .code-block-wrapper {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* Prevent Orphans and Widows */
+p, h1, h2, h3, li {
+    orphans: 3;
+    widows: 3;
+}
