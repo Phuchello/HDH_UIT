@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT007 — Cẩm Nang & Vườn Tri Thức Hệ Điều Hành UIT</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <a class="brand-container" href="index.html">
+      <span class="brand-badge">IT007</span>
+      <span class="brand-title">Hệ Điều Hành UIT · Web Companion</span>
+    </a>
+    <div class="header-actions">
+      <button class="search-trigger-btn" id="search-trigger-btn">
+        <span>🔍 Tìm kiếm nhanh...</span>
+        <kbd class="kbd-shortcut">Ctrl+K</kbd>
+      </button>
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng / Tối">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3-Column Workspace Layout -->
+  <div class="workspace-layout">
+
+    <!-- Left Sidebar (Explorer) -->
+    <aside class="sidebar-left">
+      <div class="nav-section-title">LÝ THUYẾT (THEORY)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="theory/ch01-overview.html">Chương 1: Tổng quan HDH</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 2: Cấu trúc HDH</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 3: Quản lý Tiến trình</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 4: Định thời CPU</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 5: Đồng bộ Tiến trình</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 6: Bế tắc (Deadlock)</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 7: Quản lý Bộ nhớ</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 8: Bộ nhớ ảo</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 9: Linux & Windows</a></li>
+      </ul>
+
+      <div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="questions/ch01-subjective.html">Tự luận & Barem Ch1</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Trắc nghiệm & Đúng/Sai</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Bài tập Tính toán</a></li>
+      </ul>
+
+      <div class="nav-section-title">THỰC HÀNH (LAB)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="labs/lab01-linux-basics.html">Lab 1: Lệnh Linux Cơ bản</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Lab 2: Bash Shell Scripting</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Lab 3: Tiến trình & Signal</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Lab 4: Luồng & Shared Memory</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Lab 5: Đồng bộ Semaphore</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Lab 6: Shell it007sh (7 Stages)</a></li>
+      </ul>
+
+      <div class="nav-section-title">ĐỀ THI & TRA CỨU</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="exams/midterm-2023-2024-hk1.html">Đề thi Giữa kỳ 23-24</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="glossary/index.html">Từ điển Thuật ngữ</a></li>
+      </ul>
+    </aside>
+
+    <!-- Center Column (Reading Canvas) -->
+    <main class="content-center">
+      <div class="breadcrumbs">
+        <a href="index.html">Trang chủ</a> <span>/</span> <span>Tổng quan Vườn tri thức</span>
+      </div>
+
+      <article class="article-body">
+        <h1>Vườn Tri Thức Hệ Điều Hành (IT007) UIT</h1>
+
+        <div class="article-meta-bar">
+          <span class="meta-item">👤 Tác giả: <strong>Võ Trọng Phúc</strong></span>
+          <span class="meta-item">🏛️ Khoa Kỹ thuật Máy tính · UIT</span>
+          <span class="badge-source">V2 Canonical Source</span>
+        </div>
+
+        <p>
+          Chào mừng bạn đến với <strong>Web Companion & Digital Garden</strong> học phần <strong>Hệ điều hành (IT007)</strong> tại Trường Đại học Công nghệ Thông tin (UIT). Đây là không gian tri thức tương tác số được xây dựng theo kiến trúc <em>Single Source of Truth</em> đồng bộ với bộ sách <em>Lý thuyết · Bài tập · Ôn thi</em> và <em>Thực hành Linux</em>.
+        </p>
+
+        <h2>Ba Trụ Cột Tri Thức Chính</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Sản Phẩm</th>
+              <th>Định Dạng</th>
+              <th>Mục Tiêu Học Thuật</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Book A: Sách Lý Thuyết</strong></td>
+              <td>A4 Print PDF / HTML</td>
+              <td>Tự học từ số 0, hiểu sâu bản chất, bao phủ 100% slide và ngân hàng đề thi Giữa kỳ / Cuối kỳ.</td>
+            </tr>
+            <tr>
+              <td><strong>Book B: Sách Thực Hành</strong></td>
+              <td>A4 Print PDF / HTML</td>
+              <td>Cẩm nang thực hành cầm tay chỉ việc Lab 1–6, chuẩn POSIX C API và Case study shell <code>it007sh</code> 7 giai đoạn.</td>
+            </tr>
+            <tr>
+              <td><strong>Product C: Web Companion</strong></td>
+              <td>Static Interactive Garden</td>
+              <td>Tra cứu toàn văn, đồ thị tri thức ngữ nghĩa, thẻ nhớ Active Recall và luyện thi tự luận tự chấm.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Bắt Đầu Khám Phá</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+          <a href="theory/ch01-overview.html" style="display: block; padding: 1.2rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit;">
+            <h3 style="margin-top: 0; color: var(--accent-text);">📖 Đọc Lý Thuyết Chương 1</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0;">Khám phá bản chất HDH, cơ chế ngắt, phân cấp lưu trữ và Dual-mode.</p>
+          </a>
+          <a href="questions/ch01-subjective.html" style="display: block; padding: 1.2rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit;">
+            <h3 style="margin-top: 0; color: var(--accent-text);">✍️ Luyện Tự Luận & Barem Điểm</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0;">Thử thách bản thân với câu hỏi thi thật và tự chấm điểm theo barem chính thức.</p>
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <!-- Right Sidebar (Local Graph & Related) -->
+    <aside class="sidebar-right">
+      <div class="graph-container">
+        <div class="graph-header">🌐 Đồ Thị Tri Thức Ngữ Nghĩa</div>
+        <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
+      </div>
+
+      <div class="toc-container">
+        <div class="toc-title">CHUYÊN ĐỀ ĐỀ XUẤT</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a class="toc-link" href="theory/ch01-overview.html">Chương 1: Tổng quan HDH</a></li>
+          <li class="toc-item"><a class="toc-link" href="labs/lab01-linux-basics.html">Lab 1: Thực hành Linux</a></li>
+          <li class="toc-item"><a class="toc-link" href="exams/midterm-2023-2024-hk1.html">Đề thi HK1 2023–2024</a></li>
+          <li class="toc-item"><a class="toc-link" href="glossary/index.html">Từ điển Thuật ngữ</a></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Full-Text Search Modal -->
+  <div class="search-modal-overlay" id="search-modal-overlay">
+    <div class="search-modal">
+      <div class="search-input-wrapper">
+        <span>🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm khái niệm, câu hỏi, bài lab...">
+        <kbd class="kbd-shortcut">ESC</kbd>
+      </div>
+      <ul class="search-results-list" id="search-results-list"></ul>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

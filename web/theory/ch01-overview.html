@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chương 1: Tổng quan về Hệ điều hành — IT007 Web Companion</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <a class="brand-container" href="../index.html">
+      <span class="brand-badge">IT007</span>
+      <span class="brand-title">Hệ Điều Hành UIT · Web Companion</span>
+    </a>
+    <div class="header-actions">
+      <button class="search-trigger-btn" id="search-trigger-btn">
+        <span>🔍 Tìm kiếm nhanh...</span>
+        <kbd class="kbd-shortcut">Ctrl+K</kbd>
+      </button>
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng / Tối">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3-Column Workspace Layout -->
+  <div class="workspace-layout">
+
+    <!-- Left Sidebar (Explorer) -->
+    <aside class="sidebar-left">
+      <div class="nav-section-title">LÝ THUYẾT (THEORY)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link active" href="ch01-overview.html">Chương 1: Tổng quan HDH</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 2: Cấu trúc HDH</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 3: Quản lý Tiến trình</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 4: Định thời CPU</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 5: Đồng bộ Tiến trình</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 6: Bế tắc (Deadlock)</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 7: Quản lý Bộ nhớ</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 8: Bộ nhớ ảo</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 9: Linux & Windows</a></li>
+      </ul>
+
+      <div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../questions/ch01-subjective.html">Tự luận & Barem Ch1</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Trắc nghiệm & Đúng/Sai</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Bài tập Tính toán</a></li>
+      </ul>
+
+      <div class="nav-section-title">THỰC HÀNH (LAB)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../labs/lab01-linux-basics.html">Lab 1: Lệnh Linux Cơ bản</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Lab 2: Bash Shell Scripting</a></li>
+      </ul>
+
+      <div class="nav-section-title">ĐỀ THI & TRA CỨU</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../exams/midterm-2023-2024-hk1.html">Đề thi Giữa kỳ 23-24</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="../glossary/index.html">Từ điển Thuật ngữ</a></li>
+      </ul>
+    </aside>
+
+    <!-- Center Column (Reading Canvas) -->
+    <main class="content-center">
+      <div class="breadcrumbs">
+        <a href="../index.html">Trang chủ</a> <span>/</span> <a href="#">Lý thuyết</a> <span>/</span> <span>Chương 1</span>
+      </div>
+
+      <article class="article-body">
+        <h1>Chương 1: Tổng quan về Hệ điều hành & Kiến trúc Máy tính</h1>
+
+        <div class="article-meta-bar">
+          <span class="meta-item">⏱️ Thời lượng ôn tập: <strong>45 phút</strong></span>
+          <span class="meta-item">🎯 Tỷ trọng đề thi: <strong>20% Giữa kỳ</strong></span>
+          <span class="badge-source">Nguồn: Week01 Slide & Silberschatz Ch1</span>
+        </div>
+
+        <h2 id="os-role">1. Bản chất & Vai trò của Hệ điều hành</h2>
+        <p>
+          Hệ điều hành (Operating System - OS) là chương trình đóng vai trò trung gian giữa người sử dụng máy tính và phần cứng máy tính, cung cấp một môi trường thuận tiện để người dùng chạy ứng dụng và tối ưu hóa việc phân bổ tài nguyên.
+        </p>
+
+        <div class="callout characteristics">
+          <div class="callout-title">📋 Bảng Đặc Tính: Hệ Điều Hành</div>
+          <p><strong>Mục đích:</strong> Phân bổ tài nguyên công bằng, bảo vệ hệ thống khỏi lỗi phần mềm và cung cấp giao diện trừu tượng hóa phần cứng.</p>
+          <p><strong>Cơ chế cốt lõi:</strong> Nhân hệ điều hành (<a class="wikilink" href="../glossary/index.html">Kernel</a>) luôn thường trực trong RAM từ khi máy khởi động đến khi tắt máy.</p>
+          <p><strong>Góc nhìn hệ thống:</strong> Đóng vai trò là <em>Bộ phân phối tài nguyên</em> (Resource Allocator) và <em>Chương trình kiểm soát</em> (Control Program).</p>
+        </div>
+
+        <h2 id="interrupt">2. Cơ chế Ngắt (Interrupts) & Chu trình Xử lý</h2>
+        <p>
+          Hệ điều hành hiện đại là một hệ thống <strong>hoạt động theo sự kiện ngắt (Interrupt-driven)</strong>. Khi một thiết bị ngoại vi hoặc tiến trình cần phục vụ, một tín hiệu ngắt sẽ được gửi tới CPU.
+        </p>
+        <ul>
+          <li><strong>Ngắt phần cứng (Hardware Interrupt):</strong> Do thiết bị ngoại vi (bàn phím, đĩa cứng, card mạng) phát tín hiệu bất đồng bộ qua bus hệ thống.</li>
+          <li><strong>Bẫy ngắt / Ngoại lệ (Trap / Exception):</strong> Do chính CPU sinh ra một cách đồng bộ khi gặp lỗi chia cho 0, truy xuất bộ nhớ không hợp lệ hoặc khi ứng dụng gọi <a class="wikilink" href="../glossary/index.html">System Call</a>.</li>
+        </ul>
+
+        <h2 id="storage">3. Phân Cấp Hệ Thống Lưu Trữ (Storage Hierarchy)</h2>
+        <p>
+          Hệ thống lưu trữ trong máy tính được thiết kế dựa trên 3 tiêu chí: <em>Tốc độ truy xuất</em>, <em>Dung lượng</em>, và <em>Giá thành trên bit</em>.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Tầng Lưu Trữ</th>
+              <th>Thời Gian Truy Xuất</th>
+              <th>Dung Lượng Điển Hình</th>
+              <th>Nguyên Lý Quản Lý</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Thanh ghi CPU (Registers)</strong></td>
+              <td>&lt; 1 nanosecond</td>
+              <td>Vài KB</td>
+              <td>Trình biên dịch (Compiler) điều phối</td>
+            </tr>
+            <tr>
+              <td><strong>Bộ đệm Cache (L1, L2, L3)</strong></td>
+              <td>1 – 10 nanoseconds</td>
+              <td>Vài MB</td>
+              <td>Phần cứng CPU điều phối tự động</td>
+            </tr>
+            <tr>
+              <td><strong>Bộ nhớ chính (RAM)</strong></td>
+              <td>50 – 100 nanoseconds</td>
+              <td>8 – 64 GB</td>
+              <td>Hệ điều hành quản lý không gian</td>
+            </tr>
+            <tr>
+              <td><strong>Ổ đĩa thể rắn (SSD / NVM)</strong></td>
+              <td>10 – 100 microseconds</td>
+              <td>256 GB – 2 TB</td>
+              <td>Hệ thống tệp (File System) quản lý</td>
+            </tr>
+            <tr>
+              <td><strong>Ổ đĩa cứng từ tính (HDD)</strong></td>
+              <td>5 – 10 milliseconds</td>
+              <td>1 – 16 TB</td>
+              <td>Hệ thống tệp (File System) quản lý</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="dual-mode">4. Chế Độ Hoạt Động Kép (Dual-Mode Operation)</h2>
+        <p>
+          Để bảo vệ phần cứng và các tiến trình khác khỏi các chương trình lỗi hoặc phá hoại, phần cứng CPU cung cấp bit trạng thái gọi là <code>Mode bit</code>:
+        </p>
+        <ul>
+          <li><strong>User Mode (Mode bit = 1):</strong> Mã ứng dụng thực thi trong môi trường bị giới hạn, không được chạy lệnh đặc quyền.</li>
+          <li><strong>Kernel Mode (Mode bit = 0):</strong> Nhân hệ điều hành thực thi với toàn quyền kiểm soát phần cứng.</li>
+        </ul>
+
+        <div class="callout important">
+          <div class="callout-title">⚠️ Lệnh Đặc Quyền (Privileged Instructions)</div>
+          <p>
+            Các lệnh như tắt/bật ngắt (<code>cli</code>/<code>sti</code>), đổi Mode bit, thao tác trực tiếp cổng I/O, hay ghi vào thanh ghi phân trang chỉ được chạy ở Kernel Mode. Nếu chương trình User Mode cố tình gọi lệnh đặc quyền, CPU sẽ kích hoạt một <strong>Trap Exception</strong> để hủy tiến trình vi phạm.
+          </p>
+        </div>
+
+        <h2 id="environments">5. Các Môi Trường Tính Toán</h2>
+        <p>
+          So sánh 4 môi trường tính toán theo cơ chế điều phối và khả năng tương tác:
+        </p>
+        <ul>
+          <li><strong>Đơn chương (Uniprogramming):</strong> Mỗi thời điểm chỉ nạp 1 chương trình; CPU bị lãng phí khi chương trình chờ I/O.</li>
+          <li><strong>Đa chương (Multiprogramming):</strong> Nạp nhiều tiến trình vào RAM, khi tiến trình hiện tại chờ I/O thì chuyển CPU cho tiến trình khác nhằm <em>tối đa hóa hiệu suất CPU</em>.</li>
+          <li><strong>Chia sẻ thời gian (Time-Sharing / Multitasking):</strong> Phân chia CPU theo lượng tử thời gian (Time Quantum) cực nhỏ nhằm <em>tối thiểu hóa thời gian đáp ứng</em> cho người dùng.</li>
+          <li><strong>Thời gian thực (Real-Time):</strong> Ràng buộc nghiêm ngặt về thời hạn xử lý (Hard Real-Time vs Soft Real-Time).</li>
+        </ul>
+
+        <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+          <a href="../index.html" class="wikilink">← Quay lại Trang Chủ</a>
+          <a href="../questions/ch01-subjective.html" class="wikilink">Luyện tập Tự luận Chương 1 →</a>
+        </div>
+      </article>
+    </main>
+
+    <!-- Right Sidebar (Local Graph, TOC & Backlinks) -->
+    <aside class="sidebar-right">
+      <div class="graph-container">
+        <div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div>
+        <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
+      </div>
+
+      <div class="toc-container">
+        <div class="toc-title">MỤC LỤC TRANG</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a class="toc-link" href="#os-role">1. Bản chất & Vai trò HDH</a></li>
+          <li class="toc-item"><a class="toc-link" href="#interrupt">2. Cơ chế Ngắt (Interrupt)</a></li>
+          <li class="toc-item"><a class="toc-link" href="#storage">3. Phân cấp lưu trữ</a></li>
+          <li class="toc-item"><a class="toc-link" href="#dual-mode">4. Chế độ kép (Dual-Mode)</a></li>
+          <li class="toc-item"><a class="toc-link" href="#environments">5. Các môi trường tính toán</a></li>
+        </ul>
+      </div>
+
+      <div class="backlinks-container">
+        <div class="toc-title">LIÊN KẾT LIÊN QUAN</div>
+        <ul class="backlinks-list">
+          <li class="backlinks-item"><a class="backlinks-link" href="../questions/ch01-subjective.html">📝 Tự luận & Barem Ch1</a></li>
+          <li class="backlinks-item"><a class="backlinks-link" href="../labs/lab01-linux-basics.html">💻 Lab 1: Linux Basics</a></li>
+          <li class="backlinks-item"><a class="backlinks-link" href="../glossary/index.html">📖 Thuật ngữ: Dual-Mode</a></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Full-Text Search Modal -->
+  <div class="search-modal-overlay" id="search-modal-overlay">
+    <div class="search-modal">
+      <div class="search-input-wrapper">
+        <span>🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm khái niệm, câu hỏi, bài lab...">
+        <kbd class="kbd-shortcut">ESC</kbd>
+      </div>
+      <ul class="search-results-list" id="search-results-list"></ul>
+    </div>
+  </div>
+
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

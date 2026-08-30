@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 1: Giới thiệu Linux & Quản trị Hệ thống tệp — IT007 Web Companion</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <a class="brand-container" href="../index.html">
+      <span class="brand-badge">IT007</span>
+      <span class="brand-title">Hệ Điều Hành UIT · Web Companion</span>
+    </a>
+    <div class="header-actions">
+      <button class="search-trigger-btn" id="search-trigger-btn">
+        <span>🔍 Tìm kiếm nhanh...</span>
+        <kbd class="kbd-shortcut">Ctrl+K</kbd>
+      </button>
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng / Tối">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3-Column Workspace Layout -->
+  <div class="workspace-layout">
+
+    <!-- Left Sidebar (Explorer) -->
+    <aside class="sidebar-left">
+      <div class="nav-section-title">LÝ THUYẾT (THEORY)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../theory/ch01-overview.html">Chương 1: Tổng quan HDH</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 2: Cấu trúc HDH</a></li>
+      </ul>
+
+      <div class="nav-section-title">THỰC HÀNH (LAB)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link active" href="lab01-linux-basics.html">Lab 1: Lệnh Linux Cơ bản</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Lab 2: Bash Shell Scripting</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Lab 3: Tiến trình & Signal</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Lab 4: Luồng & Shared Memory</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Lab 5: Đồng bộ Semaphore</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Lab 6: Shell it007sh (7 Stages)</a></li>
+      </ul>
+
+      <div class="nav-section-title">ĐỀ THI & TRA CỨU</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../exams/midterm-2023-2024-hk1.html">Đề thi Giữa kỳ 23-24</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="../glossary/index.html">Từ điển Thuật ngữ</a></li>
+      </ul>
+    </aside>
+
+    <!-- Center Column (Reading Canvas) -->
+    <main class="content-center">
+      <div class="breadcrumbs">
+        <a href="../index.html">Trang chủ</a> <span>/</span> <a href="#">Thực hành</a> <span>/</span> <span>Lab 1</span>
+      </div>
+
+      <article class="article-body">
+        <h1>Lab 1: Giới thiệu Linux & Quản trị Hệ Thống Tệp</h1>
+
+        <div class="article-meta-bar">
+          <span class="meta-item">💻 Môi trường: <strong>Ubuntu 22.04 LTS / WSL2</strong></span>
+          <span class="meta-item">⏱️ Thời lượng thực hành: <strong>120 phút</strong></span>
+          <span class="badge-source">Nguồn: Lab 1 v2023.pdf</span>
+        </div>
+
+        <div class="callout important">
+          <div class="callout-title">📌 Yêu Cầu Chính Thức Của Bộ Môn (Official Requirements)</div>
+          <p>
+            Sinh viên thực hiện trực tiếp các thao tác trên Terminal, lưu lại ảnh chụp màn hình có kèm prompt hiển thị rõ Họ tên và MSSV để đưa vào Báo cáo thực hành.
+          </p>
+        </div>
+
+        <h2>1. Cây Thư Mục Phân Cấp (Linux Filesystem FHS)</h2>
+        <p>
+          Toàn bộ hệ thống Linux bắt đầu từ thư mục gốc <code>/</code>. Các thư mục quan trọng gồm có:
+        </p>
+        <ul>
+          <li><code>/bin</code> và <code>/usr/bin</code>: Chứa các lệnh cơ bản của hệ thống (<code>ls</code>, <code>cp</code>, <code>gcc</code>).</li>
+          <li><code>/etc</code>: Chứa toàn bộ các tệp cấu hình hệ thống.</li>
+          <li><code>/home/username</code>: Thư mục làm việc cá nhân của người dùng.</li>
+          <li><code>/proc</code>: Hệ thống tệp ảo chứa thông tin thời gian thực của nhân Linux và các tiến trình đang chạy.</li>
+        </ul>
+
+        <h2>2. Cơ Chế Phân Quyền Tệp Tin (File Permissions)</h2>
+        <p>
+          Linux quản lý quyền truy cập tệp qua 3 nhóm đối tượng: <strong>Chủ sở hữu (User)</strong>, <strong>Nhóm (Group)</strong>, và <strong>Người khác (Others)</strong>.
+        </p>
+
+        <pre><code># Gán quyền: Owner=rwx (7), Group=r-x (5), Others=r-- (4)
+chmod 754 script.sh
+
+# Thêm quyền thực thi cho User:
+chmod u+x script.sh</code></pre>
+
+        <!-- Viva Question Card -->
+        <h2>3. Câu Hỏi Vấn Đáp Thực Hành (Viva Question)</h2>
+        <div class="study-card" data-card-id="viva-lab01-links">
+          <div class="card-header">
+            <span class="card-tag">Vấn đáp Lab 1</span>
+            <span class="card-stats">Mức độ: Hay hỏi ⭐⭐⭐</span>
+          </div>
+          <div class="card-question">
+            Phân biệt Hard Link và Symbolic Link (Soft Link) trong Linux. Điều gì xảy ra khi ta xóa tệp gốc?
+          </div>
+          <div class="card-section card-keypoints">
+            <strong>🔑 Các ý bắt buộc (Key Points):</strong>
+            <ul>
+              <li>Hard Link trỏ chung tới cùng số hiệu Inode; xóa file gốc dữ liệu vẫn còn.</li>
+              <li>Soft Link là file chứa đường dẫn; xóa file gốc soft link trở thành liên kết chết (Broken link).</li>
+            </ul>
+          </div>
+          <div class="card-section card-answer">
+            Hard Link trỏ trực tiếp đến chỉ số Inode và khối dữ liệu vật lý trên đĩa. Do đó, kích thước và nội dung của hard link hoàn toàn đồng nhất với file gốc, khi xóa file gốc thì dữ liệu chỉ thực sự bị thu hồi khi xóa nốt hard link cuối cùng. Ngược lại, Symbolic Link là một tệp con trỏ chứa đường dẫn của tệp gốc. Nếu tệp gốc bị xóa hoặc đổi tên, Symbolic Link sẽ bị hỏng.
+          </div>
+          <div class="card-actions">
+            <button class="btn-card btn-keypoints">🔑 Xem Từ Khóa</button>
+            <button class="btn-card primary btn-answer">📖 Hiện Lời Giải</button>
+          </div>
+        </div>
+
+        <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+          <a href="../theory/ch01-overview.html" class="wikilink">← Lý thuyết Chương 1</a>
+          <a href="../exams/midterm-2023-2024-hk1.html" class="wikilink">Xem Đề thi Giữa kỳ mẫu →</a>
+        </div>
+      </article>
+    </main>
+
+    <!-- Right Sidebar (Local Graph & TOC) -->
+    <aside class="sidebar-right">
+      <div class="graph-container">
+        <div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div>
+        <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
+      </div>
+
+      <div class="toc-container">
+        <div class="toc-title">MỤC LỤC BÀI LAB</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a class="toc-link" href="#">1. Cây thư mục FHS</a></li>
+          <li class="toc-item"><a class="toc-link" href="#">2. Phân quyền tệp tin</a></li>
+          <li class="toc-item"><a class="toc-link" href="#">3. Vấn đáp Hard vs Soft link</a></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Full-Text Search Modal -->
+  <div class="search-modal-overlay" id="search-modal-overlay">
+    <div class="search-modal">
+      <div class="search-input-wrapper">
+        <span>🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm khái niệm, câu hỏi, bài lab...">
+        <kbd class="kbd-shortcut">ESC</kbd>
+      </div>
+      <ul class="search-results-list" id="search-results-list"></ul>
+    </div>
+  </div>
+
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

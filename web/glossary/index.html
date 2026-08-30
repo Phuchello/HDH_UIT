@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ — IT007 Web Companion</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <a class="brand-container" href="../index.html">
+      <span class="brand-badge">IT007</span>
+      <span class="brand-title">Hệ Điều Hành UIT · Web Companion</span>
+    </a>
+    <div class="header-actions">
+      <button class="search-trigger-btn" id="search-trigger-btn">
+        <span>🔍 Tìm kiếm nhanh...</span>
+        <kbd class="kbd-shortcut">Ctrl+K</kbd>
+      </button>
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng / Tối">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3-Column Workspace Layout -->
+  <div class="workspace-layout">
+
+    <!-- Left Sidebar (Explorer) -->
+    <aside class="sidebar-left">
+      <div class="nav-section-title">LÝ THUYẾT (THEORY)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../theory/ch01-overview.html">Chương 1: Tổng quan HDH</a></li>
+      </ul>
+
+      <div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../questions/ch01-subjective.html">Tự luận & Barem Ch1</a></li>
+      </ul>
+
+      <div class="nav-section-title">THỰC HÀNH (LAB)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../labs/lab01-linux-basics.html">Lab 1: Lệnh Linux Cơ bản</a></li>
+      </ul>
+
+      <div class="nav-section-title">ĐỀ THI & TRA CỨU</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../exams/midterm-2023-2024-hk1.html">Đề thi Giữa kỳ 23-24</a></li>
+        <li class="nav-tree-item"><a class="nav-link active" href="index.html">Từ điển Thuật ngữ</a></li>
+      </ul>
+    </aside>
+
+    <!-- Center Column (Reading Canvas) -->
+    <main class="content-center">
+      <div class="breadcrumbs">
+        <a href="../index.html">Trang chủ</a> <span>/</span> <a href="#">Tra cứu</a> <span>/</span> <span>Từ điển thuật ngữ</span>
+      </div>
+
+      <article class="article-body">
+        <h1>Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</h1>
+
+        <div class="article-meta-bar">
+          <span class="meta-item">📖 Chuẩn: <strong>Silberschatz 10th Ed. & POSIX.1-2017</strong></span>
+          <span class="badge-source">Nguồn Chuẩn Quốc Tế</span>
+        </div>
+
+        <p>
+          Bảng tra cứu nhanh các thuật ngữ tiếng Anh chuyên ngành thường xuất hiện trong đề thi trắc nghiệm và câu hỏi điền từ ngắn tại UIT:
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Thuật Ngữ Tiếng Anh</th>
+              <th>Tiếng Việt</th>
+              <th>Định Nghĩa Bản Chất Kỹ Thuật</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Belady's Anomaly</strong></td>
+              <td>Hiện tượng bất thường Belady</td>
+              <td>Hiện tượng nghịch lý trong thuật toán FIFO: tăng số frame lại làm tăng số lỗi trang.</td>
+            </tr>
+            <tr>
+              <td><strong>Context Switch</strong></td>
+              <td>Chuyển ngữ cảnh</td>
+              <td>Lưu trạng thái tiến trình cũ vào PCB và nạp trạng thái tiến trình mới cho CPU chạy.</td>
+            </tr>
+            <tr>
+              <td><strong>Critical Section</strong></td>
+              <td>Vùng tranh chấp / Miền găng</td>
+              <td>Đoạn mã truy xuất dữ liệu chia sẻ mà tại một thời điểm chỉ tối đa 1 tiến trình được vào.</td>
+            </tr>
+            <tr>
+              <td><strong>Deadlock</strong></td>
+              <td>Bế tắc</td>
+              <td>Trạng thái nhiều tiến trình bị treo vô hạn định do chờ tài nguyên do nhau nắm giữ.</td>
+            </tr>
+            <tr>
+              <td><strong>Demand Paging</strong></td>
+              <td>Phân trang theo yêu cầu</td>
+              <td>Chỉ nạp trang nhớ từ đĩa vào RAM khi có lệnh thực sự truy xuất đến trang đó.</td>
+            </tr>
+            <tr>
+              <td><strong>Dispatch Latency</strong></td>
+              <td>Độ trễ phân phối</td>
+              <td>Thời gian từ khi dừng tiến trình cũ đến khi nạp và chạy tiến trình mới.</td>
+            </tr>
+            <tr>
+              <td><strong>Dual-Mode Operation</strong></td>
+              <td>Chế độ hoạt động kép</td>
+              <td>Phân chia quyền lực CPU qua Mode bit (0: Kernel Mode, 1: User Mode).</td>
+            </tr>
+            <tr>
+              <td><strong>Mutual Exclusion</strong></td>
+              <td>Loại trừ tương hỗ</td>
+              <td>Điều kiện bắt buộc: Chỉ 1 tiến trình được thực thi trong Critical Section.</td>
+            </tr>
+            <tr>
+              <td><strong>Page Fault</strong></td>
+              <td>Lỗi trang</td>
+              <td>Bẫy ngắt (Trap) phát sinh khi CPU truy xuất ô nhớ thuộc trang chưa nạp vào RAM.</td>
+            </tr>
+            <tr>
+              <td><strong>Privileged Instruction</strong></td>
+              <td>Lệnh đặc quyền</td>
+              <td>Chỉ thị phần cứng chỉ được phép chạy trong Kernel Mode (như tắt ngắt, thao tác I/O).</td>
+            </tr>
+            <tr>
+              <td><strong>Race Condition</strong></td>
+              <td>Tình trạng chạy đua</td>
+              <td>Kết quả cuối cùng phụ thuộc vào thứ tự thực thi của các tiến trình thao tác chung dữ liệu.</td>
+            </tr>
+            <tr>
+              <td><strong>Safe State</strong></td>
+              <td>Trạng thái an toàn</td>
+              <td>Tồn tại chuỗi an toàn đảm bảo mọi tiến trình đều có thể hoàn thành không bị Deadlock.</td>
+            </tr>
+            <tr>
+              <td><strong>Thrashing</strong></td>
+              <td>Nghẽn bộ nhớ</td>
+              <td>Hệ thống dành phần lớn thời gian swap trang thay vì chạy lệnh, hiệu suất CPU sụp đổ.</td>
+            </tr>
+            <tr>
+              <td><strong>Zombie Process</strong></td>
+              <td>Tiến trình thây ma</td>
+              <td>Tiến trình con đã kết thúc nhưng tiến trình cha chưa gọi <code>wait()</code> để thu hồi PCB.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+          <a href="../theory/ch01-overview.html" class="wikilink">← Xem Lý thuyết Chương 1</a>
+          <a href="../questions/ch01-subjective.html" class="wikilink">Xem Ngân hàng Tự luận →</a>
+        </div>
+      </article>
+    </main>
+
+    <!-- Right Sidebar (Local Graph & TOC) -->
+    <aside class="sidebar-right">
+      <div class="graph-container">
+        <div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div>
+        <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
+      </div>
+
+      <div class="toc-container">
+        <div class="toc-title">DANH MỤC THUẬT NGỮ</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a class="toc-link" href="#">A - D</a></li>
+          <li class="toc-item"><a class="toc-link" href="#">M - P</a></li>
+          <li class="toc-item"><a class="toc-link" href="#">R - Z</a></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Full-Text Search Modal -->
+  <div class="search-modal-overlay" id="search-modal-overlay">
+    <div class="search-modal">
+      <div class="search-input-wrapper">
+        <span>🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm khái niệm, câu hỏi, bài lab...">
+        <kbd class="kbd-shortcut">ESC</kbd>
+      </div>
+      <ul class="search-results-list" id="search-results-list"></ul>
+    </div>
+  </div>
+
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

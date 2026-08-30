@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đề Thi Giữa Kỳ IT007 HK1 2023–2024 — IT007 Web Companion</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <a class="brand-container" href="../index.html">
+      <span class="brand-badge">IT007</span>
+      <span class="brand-title">Hệ Điều Hành UIT · Web Companion</span>
+    </a>
+    <div class="header-actions">
+      <button class="search-trigger-btn" id="search-trigger-btn">
+        <span>🔍 Tìm kiếm nhanh...</span>
+        <kbd class="kbd-shortcut">Ctrl+K</kbd>
+      </button>
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng / Tối">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3-Column Workspace Layout -->
+  <div class="workspace-layout">
+
+    <!-- Left Sidebar (Explorer) -->
+    <aside class="sidebar-left">
+      <div class="nav-section-title">LÝ THUYẾT (THEORY)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../theory/ch01-overview.html">Chương 1: Tổng quan HDH</a></li>
+      </ul>
+
+      <div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../questions/ch01-subjective.html">Tự luận & Barem Ch1</a></li>
+      </ul>
+
+      <div class="nav-section-title">THỰC HÀNH (LAB)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../labs/lab01-linux-basics.html">Lab 1: Lệnh Linux Cơ bản</a></li>
+      </ul>
+
+      <div class="nav-section-title">ĐỀ THI & TRA CỨU</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link active" href="midterm-2023-2024-hk1.html">Đề thi Giữa kỳ 23-24</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="../glossary/index.html">Từ điển Thuật ngữ</a></li>
+      </ul>
+    </aside>
+
+    <!-- Center Column (Reading Canvas) -->
+    <main class="content-center">
+      <div class="breadcrumbs">
+        <a href="../index.html">Trang chủ</a> <span>/</span> <a href="#">Lưu trữ đề thi</a> <span>/</span> <span>Giữa kỳ HK1 23-24</span>
+      </div>
+
+      <article class="article-body">
+        <h1>Đề Thi Giữa Kỳ IT007 — HK1 Năm Học 2023–2024</h1>
+
+        <div class="article-meta-bar">
+          <span class="meta-item">⏱️ Thời gian: <strong>60 phút</strong></span>
+          <span class="meta-item">📑 Cấu trúc: <strong>Trắc nghiệm + Lần vết Fork + Định thời CPU</strong></span>
+          <span class="badge-source">Nguồn: Ban Hỗ Trợ Học Tập CNPM</span>
+        </div>
+
+        <h2>PHẦN 1: CÂU HỎI TRẮC NGHIỆM & ĐIỀN TỪ (4.0 ĐIỂM)</h2>
+        <ul>
+          <li><em>Tiểu trình trong cùng một tiến trình chia sẻ chung Stack.</em> &rarr; <strong>SAI</strong> (Mỗi thread có Stack riêng).</li>
+          <li><em>Lệnh nạp lại thanh ghi Base/Limit là lệnh đặc quyền.</em> &rarr; <strong>ĐÚNG</strong> (Chỉ Kernel mode mới được thực thi).</li>
+          <li>Thao tác hoán đổi tiến trình đang chạy trên CPU sang tiến trình khác gọi là gì? &rarr; <code>Context Switch</code></li>
+          <li>Độ trễ từ khi dừng tiến trình cũ đến khi nạp tiến trình mới gọi là gì? &rarr; <code>Dispatch Latency</code></li>
+        </ul>
+
+        <h2>PHẦN 2: BÀI TOÁN ĐỊNH THỜI CPU (4.0 ĐIỂM)</h2>
+        <p>
+          Cho bảng 4 tiến trình: $P_1(AT=0, BT=7)$, $P_2(AT=2, BT=4)$, $P_3(AT=4, BT=1)$, $P_4(AT=5, BT=4)$.
+        </p>
+
+        <h3>1. Sơ đồ Gantt giải thuật SRTF (Preemptive SJF):</h3>
+        <pre><code>|  P1  |  P2  | P3 |  P2  |  P4  |   P1   |
+0      2      4    5      7      11       16</code></pre>
+
+        <h3>2. Kết quả tính toán:</h3>
+        <ul>
+          <li>Thời gian lưu lại trung bình: $$TAT_{avg} = \frac{16 + 5 + 1 + 6}{4} = 7.0\text{ ms}$$</li>
+          <li>Thời gian chờ trung bình: $$WT_{avg} = \frac{9 + 1 + 0 + 2}{4} = 3.0\text{ ms}$$</li>
+        </ul>
+
+        <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+          <a href="../questions/ch01-subjective.html" class="wikilink">← Luyện tập Tự luận</a>
+          <a href="../glossary/index.html" class="wikilink">Tra cứu Thuật ngữ →</a>
+        </div>
+      </article>
+    </main>
+
+    <!-- Right Sidebar (Local Graph & TOC) -->
+    <aside class="sidebar-right">
+      <div class="graph-container">
+        <div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div>
+        <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
+      </div>
+
+      <div class="toc-container">
+        <div class="toc-title">CẤU TRÚC ĐỀ THI</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a class="toc-link" href="#">Phần 1: Trắc nghiệm & Điền từ</a></li>
+          <li class="toc-item"><a class="toc-link" href="#">Phần 2: Định thời CPU</a></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Full-Text Search Modal -->
+  <div class="search-modal-overlay" id="search-modal-overlay">
+    <div class="search-modal">
+      <div class="search-input-wrapper">
+        <span>🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm khái niệm, câu hỏi, bài lab...">
+        <kbd class="kbd-shortcut">ESC</kbd>
+      </div>
+      <ul class="search-results-list" id="search-results-list"></ul>
+    </div>
+  </div>
+
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

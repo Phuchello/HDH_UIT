@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngân Hàng Câu Hỏi Tự Luận & Barem Điểm Chương 1 — IT007 Web Companion</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <a class="brand-container" href="../index.html">
+      <span class="brand-badge">IT007</span>
+      <span class="brand-title">Hệ Điều Hành UIT · Web Companion</span>
+    </a>
+    <div class="header-actions">
+      <button class="search-trigger-btn" id="search-trigger-btn">
+        <span>🔍 Tìm kiếm nhanh...</span>
+        <kbd class="kbd-shortcut">Ctrl+K</kbd>
+      </button>
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng / Tối">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3-Column Workspace Layout -->
+  <div class="workspace-layout">
+
+    <!-- Left Sidebar (Explorer) -->
+    <aside class="sidebar-left">
+      <div class="nav-section-title">LÝ THUYẾT (THEORY)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../theory/ch01-overview.html">Chương 1: Tổng quan HDH</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 2: Cấu trúc HDH</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 3: Quản lý Tiến trình</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Chương 4: Định thời CPU</a></li>
+      </ul>
+
+      <div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link active" href="ch01-subjective.html">Tự luận & Barem Ch1</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Trắc nghiệm & Đúng/Sai</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="#">Bài tập Tính toán</a></li>
+      </ul>
+
+      <div class="nav-section-title">THỰC HÀNH (LAB)</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../labs/lab01-linux-basics.html">Lab 1: Lệnh Linux Cơ bản</a></li>
+      </ul>
+
+      <div class="nav-section-title">ĐỀ THI & TRA CỨU</div>
+      <ul class="nav-tree">
+        <li class="nav-tree-item"><a class="nav-link" href="../exams/midterm-2023-2024-hk1.html">Đề thi Giữa kỳ 23-24</a></li>
+        <li class="nav-tree-item"><a class="nav-link" href="../glossary/index.html">Từ điển Thuật ngữ</a></li>
+      </ul>
+    </aside>
+
+    <!-- Center Column (Reading Canvas) -->
+    <main class="content-center">
+      <div class="breadcrumbs">
+        <a href="../index.html">Trang chủ</a> <span>/</span> <a href="#">Ngân hàng câu hỏi</a> <span>/</span> <span>Tự luận Chương 1</span>
+      </div>
+
+      <article class="article-body">
+        <h1>Ngân Hàng Câu Hỏi Tự Luận & Barem Điểm: Chương 1</h1>
+
+        <div class="article-meta-bar">
+          <span class="meta-item">🎯 Mục tiêu: <strong>Rèn luyện kỹ năng trả lời tự luận chuẩn barem chấm UIT</strong></span>
+          <span class="badge-source">Nguồn: Đề thi Giữa kỳ 2018–2025</span>
+        </div>
+
+        <p>
+          Học phần tự luận đòi hỏi sinh viên trả lời đúng và đủ các <strong>từ khóa bắt buộc (Key Points)</strong> theo barem chấm điểm của giảng viên. Hãy thử sức với các bài tập tự luyện tương tác dưới đây:
+        </p>
+
+        <!-- Interactive Study Card 1 -->
+        <h2>1. Thẻ Ghi Nhớ Tự Học (Active Recall)</h2>
+        <div class="study-card" data-card-id="card-q01-dualmode">
+          <div class="card-header">
+            <span class="card-tag">Chương 1 · Lệnh đặc quyền</span>
+            <span class="card-stats">Mức độ: Quan trọng ⭐⭐⭐</span>
+          </div>
+          <div class="card-question">
+            Tại sao hệ điều hành cần Chế độ hoạt động kép (Dual-Mode)? Phân biệt User Mode và Kernel Mode qua Mode bit. Nêu 4 ví dụ về lệnh đặc quyền.
+          </div>
+          
+          <div class="card-section card-hint">
+            <strong>💡 Gợi ý:</strong> Hãy nghĩ về việc điều gì sẽ xảy ra nếu một chương trình người dùng thực thi lệnh tắt ngắt CPU (<code>cli</code>) hoặc ghi đè bảng vector ngắt.
+          </div>
+
+          <div class="card-section card-keypoints">
+            <strong>🔑 Các ý bắt buộc (Key Points):</strong>
+            <ul>
+              <li>Mục đích: Bảo vệ tài nguyên phần cứng, cách ly lỗi chương trình.</li>
+              <li>Mode bit: <code>0</code> (Kernel Mode), <code>1</code> (User Mode).</li>
+              <li>Lệnh đặc quyền (Privileged): Tắt/bật ngắt, đổi Mode bit, lệnh I/O trực tiếp, nạp thanh ghi base/limit.</li>
+            </ul>
+          </div>
+
+          <div class="card-section card-answer">
+            <strong>📖 Lời giải hoàn chỉnh:</strong>
+            <p>
+              Hệ điều hành cần Dual-Mode để bảo vệ CPU, bộ nhớ và các thiết bị khỏi sự phá hoại hoặc lỗi từ ứng dụng người dùng. Phần cứng CPU cung cấp bit trạng thái gọi là <code>Mode bit</code> (0: Kernel Mode, 1: User Mode). Chương trình User Mode bị cấm thực thi trực tiếp các lệnh đặc quyền (như tắt ngắt <code>cli</code>, đổi mode bit, thao tác I/O). Muốn dùng tài nguyên, ứng dụng phải gọi System Call để chuyển quyền sang Kernel xử lý.
+            </p>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-card btn-hint">💡 Gợi ý</button>
+            <button class="btn-card btn-keypoints">🔑 Xem Từ Khóa</button>
+            <button class="btn-card primary btn-answer">📖 Hiện Lời Giải</button>
+            <button class="btn-card success btn-remember">✅ Đã Thuộc</button>
+            <button class="btn-card danger btn-forgot">❌ Chưa Nhớ</button>
+          </div>
+        </div>
+
+        <!-- Interactive Subjective Practice Component -->
+        <h2>2. Khung Tự Luyện & Tự Chấm Điểm (Subjective Practice)</h2>
+        <div class="subjective-practice" data-practice-id="prac-q01-environments" data-max-score="1.5">
+          <div class="practice-header">
+            <h3>Bài Tập Tự Luyện: So Sánh Đa Chương và Chia Sẻ Thời Gian (1.5 điểm)</h3>
+            <span class="card-tag">Tự luận · Giữa kỳ</span>
+          </div>
+          <p style="font-size: 0.92rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+            <strong>Đề bài:</strong> So sánh Hệ thống Đa chương (Multiprogramming) và Hệ thống Chia sẻ thời gian (Time-Sharing / Multitasking) theo 3 tiêu chí: Mục tiêu thiết kế chính, Cơ chế điều phối CPU, và Khả năng tương tác với người dùng.
+          </p>
+
+          <textarea class="practice-textarea" placeholder="Nhập câu trả lời tự luận của bạn vào đây trước khi nhấn xem barem chấm..."></textarea>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <button class="btn-card primary btn-compare">So Sánh Với Barem Điểm</button>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Tự chấm trung thực để củng cố kiến thức</span>
+          </div>
+
+          <div class="rubric-container">
+            <h4 style="margin-bottom: 0.75rem;">📋 Barem Chấm Điểm Chính Thức (Tự Đánh Dấu):</h4>
+            
+            <div class="rubric-item">
+              <input type="checkbox" class="rubric-check" data-weight="0.5">
+              <div>
+                <strong>[0.5 điểm] Mục tiêu thiết kế:</strong>
+                <p>Nêu đúng: Đa chương nhằm <em>tối đa hóa hiệu suất CPU</em> (Maximize CPU utilization); Chia sẻ thời gian nhằm <em>tối thiểu hóa thời gian đáp ứng</em> (Minimize Response Time).</p>
+              </div>
+            </div>
+
+            <div class="rubric-item">
+              <input type="checkbox" class="rubric-check" data-weight="0.5">
+              <div>
+                <strong>[0.5 điểm] Cơ chế điều phối CPU:</strong>
+                <p>Nêu đúng: Đa chương chuyển CPU khi tiến trình hiện tại chờ I/O hoặc kết thúc; Chia sẻ thời gian luân chuyển CPU theo <em>lượng tử thời gian (Time Quantum)</em> cực nhỏ nhờ ngắt đồng hồ (Timer).</p>
+              </div>
+            </div>
+
+            <div class="rubric-item">
+              <input type="checkbox" class="rubric-check" data-weight="0.5">
+              <div>
+                <strong>[0.5 điểm] Khả năng tương tác người dùng:</strong>
+                <p>Nêu đúng: Đa chương khả năng tương tác rất thấp (hệ thống theo lô Batch); Chia sẻ thời gian khả năng tương tác trực tiếp rất cao theo thời gian thực.</p>
+              </div>
+            </div>
+
+            <div class="rubric-score-box">
+              <span>Điểm số tự đánh giá của bạn:</span>
+              <span style="font-size: 1.1rem; color: var(--accent-text);"><span class="current-score">0.00</span> / 1.50 điểm</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between;">
+          <a href="../theory/ch01-overview.html" class="wikilink">← Trở về Lý thuyết Chương 1</a>
+          <a href="../labs/lab01-linux-basics.html" class="wikilink">Chuyển sang Thực hành Lab 1 →</a>
+        </div>
+      </article>
+    </main>
+
+    <!-- Right Sidebar (Local Graph, TOC & Backlinks) -->
+    <aside class="sidebar-right">
+      <div class="graph-container">
+        <div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div>
+        <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
+      </div>
+
+      <div class="toc-container">
+        <div class="toc-title">DANH MỤC CÂU HỎI</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a class="toc-link" href="#">1. Thẻ ghi nhớ Dual-Mode</a></li>
+          <li class="toc-item"><a class="toc-link" href="#">2. Bài tập Tự luyện Đa chương</a></li>
+        </ul>
+      </div>
+
+      <div class="backlinks-container">
+        <div class="toc-title">TÀI LIỆU LIÊN QUAN</div>
+        <ul class="backlinks-list">
+          <li class="backlinks-item"><a class="backlinks-link" href="../theory/ch01-overview.html">📖 Lý thuyết Chương 1</a></li>
+          <li class="backlinks-item"><a class="backlinks-link" href="../exams/midterm-2023-2024-hk1.html">📝 Đề thi Giữa kỳ HK1 23-24</a></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Full-Text Search Modal -->
+  <div class="search-modal-overlay" id="search-modal-overlay">
+    <div class="search-modal">
+      <div class="search-input-wrapper">
+        <span>🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm khái niệm, câu hỏi, bài lab...">
+        <kbd class="kbd-shortcut">ESC</kbd>
+      </div>
+      <ul class="search-results-list" id="search-results-list"></ul>
+    </div>
+  </div>
+
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>
