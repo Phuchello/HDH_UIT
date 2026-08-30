@@ -30,6 +30,10 @@ def main():
         run("verify_research_gates", [py, "scripts/verify_research_gates.py"]),
     ]
     passed = all(step["ok"] for step in steps)
+    for step in steps:
+        print(f"  {step['name']}: {'PASS' if step['ok'] else 'FAIL'}")
+        if not step["ok"] and step["output"]:
+            print(step["output"][-2000:])
     generator = "CUSTOM_STATIC_GENERATOR"
     quartz = "IMPLEMENTED" if (ROOT / "node_modules/@jackyzha0/quartz").exists() else "NOT_IMPLEMENTED / INFO"
     rows = []
