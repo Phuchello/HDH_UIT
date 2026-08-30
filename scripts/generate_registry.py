@@ -3,9 +3,10 @@ from pypdf import PdfReader
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-slides_dir = r'C:\Users\lyle3\Downloads\drive-download-20260802T090312Z-1-001'
-q_dir = r'C:\Users\lyle3\Downloads\drive-download-20260802T090317Z-1-001'
-dl_dir = r'C:\Users\lyle3\Downloads'
+source_root = os.environ.get('HDH_SOURCE_ROOT', '')
+slides_dir = os.path.join(source_root, 'slides')
+q_dir = os.path.join(source_root, 'questions')
+dl_dir = source_root
 
 def get_file_info(p):
     if not os.path.exists(p):
@@ -848,7 +849,7 @@ for s in sources:
     out_lines.append(f"    notes: \"{s['notes']}\"")
     out_lines.append("")
 
-reg_path = r'C:\Users\lyle3\.gemini\antigravity\scratch\HDH_UIT\content\sources\registry.yaml'
+reg_path = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', 'content', 'sources', 'registry.yaml'))
 os.makedirs(os.path.dirname(reg_path), exist_ok=True)
 with open(reg_path, 'w', encoding='utf-8') as f:
     f.write('\n'.join(out_lines))
