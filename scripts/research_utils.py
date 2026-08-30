@@ -104,7 +104,8 @@ def parse_slide_coverage(path: Path):
             section[key.strip()] = scalar(value)
         elif section is None and indent >= 4 and ":" in stripped and not stripped.startswith("-"):
             key, value = stripped.split(":", 1)
-            deck[key.strip()] = scalar(value)
+            if key.strip() != "sections":
+                deck[key.strip()] = scalar(value)
     if deck is not None:
         decks.append(deck)
     return decks

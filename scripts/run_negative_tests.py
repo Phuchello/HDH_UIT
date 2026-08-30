@@ -35,6 +35,12 @@ def replace(path, old, new):
     return [(path, original)]
 
 
+def append_text(path, text):
+    original = path.read_text(encoding="utf-8")
+    path.write_text(original + text, encoding="utf-8")
+    return [(path, original)]
+
+
 def main():
     py = sys.executable
     registry = ROOT / "content/sources/registry.yaml"
@@ -46,11 +52,11 @@ def main():
     cases.append(run_case("NEG-02 unknown source reference", lambda: replace(ch01, '  - "UIT-SLIDE-CH01-2024"', '  - "NO-SUCH-SOURCE"'), [py, "scripts/validate_sources.py"], "Unknown source ID"))
     cases.append(run_case("NEG-03 malformed source hash", lambda: replace(registry, 'sha256: "4fc70c3a35d9632d678be2dbc5df1082388064a782b20a6bb7795c9a5d5adc62"', 'sha256: "not-a-sha256"'), [py, "scripts/validate_sources.py"], "invalid sha256"))
     cases.append(run_case("NEG-04 unmapped slide page", lambda: replace(slides, 'topic: "Định nghĩa & Vai trò HDH (User view vs System view)"\n        mapping_status: "MAPPED"', 'topic: "Định nghĩa & Vai trò HDH (User view vs System view)"\n        mapping_status: "UNMAPPED"'), [py, "scripts/verify_research_gates.py"], "status: FAIL"))
-    cases.append(run_case("NEG-05 forbidden workstation path", lambda: [(ch01, ch01.read_text(encoding="utf-8"))] + (ch01.write_text(ch01.read_text(encoding="utf-8") + "\n<!-- C:\\Users\\injected -->\n", encoding="utf-8") or []), [py, "scripts/check_public_hygiene.py"], "PUBLIC HYGIENE AUDIT FAILED"))
-    cases.append(run_case("NEG-06 broken wikilink", lambda: [(ch01, ch01.read_text(encoding="utf-8"))] + (ch01.write_text(ch01.read_text(encoding="utf-8") + "\n[[missing-document]]\n", encoding="utf-8") or []), [py, "scripts/validate_v2_content.py"], "Broken wikilink"))
+    cases.append(run_case("NEG-05 forbidden workstation path", lambda: append_text(ch01, "\n<!-- C:\\Users\\injected -->\n"), [py, "scripts/check_public_hygiene.py"], "PUBLIC HYGIENE AUDIT FAILED"))
+    cases.append(run_case("NEG-06 broken wikilink", lambda: append_text(ch01, "\n[[missing-document]]\n"), [py, "scripts/validate_v2_content.py"], "Broken wikilink"))
 
     rubric_path = ROOT / "content/questions/subjective/ch01.md"
-    cases.append(run_case("NEG-07 unsupported OFFICIAL_RUBRIC", lambda: [(rubric_path, rubric_path.read_text(encoding="utf-8"))] + (rubric_path.write_text(rubric_path.read_text(encoding="utf-8") + "\nBarem Chấm Điểm Chính Thức\n", encoding="utf-8") or []), [py, "scripts/validate_v2_content.py"], "SELF_CHECK_RUBRIC"))
+    cases.append(run_case("NEG-07 unsupported OFFICIAL_RUBRIC", lambda: append_text(rubric_path, "\nBarem Chấm Điểm Chính Thức\n"), [py, "scripts/validate_v2_content.py"], "SELF_CHECK_RUBRIC"))
 
     duplicate = ROOT / "content/fixtures/duplicate-id.md"
     def add_duplicate():
