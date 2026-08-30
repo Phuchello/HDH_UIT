@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Câu Hỏi Tự Luận & Barem Điểm — Chương 1: Tổng Quan HDH — IT007 UIT</title>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <script src="../../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <a class="brand-container" href="../../index.html">
+      <span class="brand-badge">IT007</span>
+      <span class="brand-title">Hệ Điều Hành · IT007 UIT</span>
+    </a>
+    <div class="header-actions">
+      <button class="search-trigger-btn" id="search-trigger-btn">
+        <span>🔍 Tìm kiếm nhanh...</span>
+        <kbd class="kbd-shortcut">Ctrl+K</kbd>
+      </button>
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng / Tối">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3-Column Workspace Layout -->
+  <div class="workspace-layout">
+
+    <!-- Left Sidebar (Explorer) -->
+    <aside class="sidebar-left">
+      <div class="nav-section-title">LÝ THUYẾT (THEORY)</div>
+<ul class="nav-tree">
+  <li class="nav-tree-item"><a class="nav-link" href="../../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành & Kiến trúc Máy tính</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div>
+<ul class="nav-tree">
+  <li class="nav-tree-item"><a class="nav-link active" href="../../questions/subjective/ch01.html">Câu Hỏi Tự Luận & Barem Điểm — Chương 1: Tổng Quan HDH</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div>
+<ul class="nav-tree">
+  <li class="nav-tree-item"><a class="nav-link" href="../../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin & Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div>
+<ul class="nav-tree">
+  <li class="nav-tree-item"><a class="nav-link" href="../../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+  <li class="nav-tree-item"><a class="nav-link" href="../../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+  <li class="nav-tree-item"><a class="nav-link" href="../../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+</ul>
+
+    </aside>
+
+    <!-- Center Column (Reading Canvas) -->
+    <main class="content-center">
+      <div class="breadcrumbs">
+        <a href="../../index.html">Trang chủ</a> <span>/</span> <span>Câu Hỏi Tự Luận & Barem Điểm — Chương 1: Tổng Quan HDH</span>
+      </div>
+
+      <article class="article-body">
+        <h1 id="ngn-hng-cu-hi-t-lun-chng-1">Ngân Hàng Câu Hỏi Tự Luận: Chương 1</h1>
+
+<p>Tài liệu này tổng hợp các câu hỏi tự luận theo cấu trúc ôn tập môn Hệ điều hành IT007. Mỗi câu hỏi đi kèm danh mục từ khóa gợi ý, phân tích lỗi sai thường gặp và barem tự đánh giá.</p>
+
+<div class="callout note"><div class="callout-title">LƯU Ý QUAN TRỌNG</div><p>> Các rubric điểm trong tài liệu này do ban biên soạn cẩm nang xây dựng nhằm hỗ trợ sinh viên tự lượng giá kiến thức khi ôn luyện, không phải là văn bản barem chính thức được công bố từ giảng viên hay bộ môn.</p></div>
+---
+
+<h2 id="1-th-ghi-nh-t-hc-study-cards">1. Thẻ Ghi Nhớ Tự Học (Study Cards)</h2>
+
+<div class="study-card" data-card-id="card-q01-dual-mode">
+  <div class="card-header">
+    <span class="card-tag">Active Recall</span>
+    <span class="card-stats">Tự học tương tác</span>
+  </div>
+  <div class="card-question">> <strong>Câu hỏi:</strong> Tại sao hệ điều hành cần cơ chế Chế độ hoạt động kép (Dual-Mode)? Phân biệt User Mode và Kernel Mode qua Mode bit.
+<blockquote></div
+</blockquote><div class="card-section card-hint"><strong>💡 Gợi ý:</strong> > Gợi ý: Hãy nghĩ về việc điều gì sẽ xảy ra nếu một chương trình người dùng thực thi lệnh tắt ngắt CPU (<code>cli</code>) hoặc can thiệp trực tiếp vào thanh ghi điều khiển bộ nhớ.
+<blockquote></div
+</blockquote><div class="card-section card-keypoints"><strong>🔑 Từ khóa bắt buộc:</strong><ul></ul></div>
+<div class="card-section card-answer"><strong>📖 Lời giải hoàn chỉnh:</strong><p>> Hệ điều hành cần Dual-Mode để bảo vệ CPU, bộ nhớ và các tiến trình khác khỏi các chương trình lỗi hoặc mã độc. Phần cứng CPU cung cấp một bit trạng thái gọi là <code>Mode bit</code> (0: Kernel Mode, 1: User Mode). Khi chạy ở User Mode, CPU cấm thực thi các lệnh đặc quyền (như thao tác I/O trực tiếp, quản lý bảng trang). Muốn dùng tài nguyên phần cứng, ứng dụng phải kích hoạt ngắt phần mềm (System Call) để chuyển sang Kernel Mode xử lý.</p></div>
+
+<div class="card-actions">
+    <button class="btn-card btn-hint">💡 Gợi ý</button>
+    <button class="btn-card btn-keypoints">🔑 Xem Từ Khóa</button>
+    <button class="btn-card primary btn-answer">📖 Hiện Lời Giải</button>
+    <button class="btn-card success btn-remember">✅ Đã Thuộc</button>
+    <button class="btn-card danger btn-forgot">❌ Chưa Nhớ</button>
+  </div>
+</div>
+
+<p>---</p>
+
+<h2 id="2-khung-t-luyn--t-chm-im-subjective-practice">2. Khung Tự Luyện & Tự Chấm Điểm (Subjective Practice)</h2>
+
+<div class="subjective-practice" data-practice-id="prac-q01-environments" data-max-score="1.5">
+  <div class="practice-header">
+    <h3>Luyện Tập Viết Tự Luận</h3>
+    <span class="card-tag">Tự đánh giá</span>
+  </div>
+  <div style="font-size: 0.92rem; margin-bottom: 0.75rem;">> <strong>Đề bài (Gợi ý 1.5 điểm):</strong>
+<blockquote>So sánh Hệ thống Đa chương (Multiprogramming) và Hệ thống Chia sẻ thời gian (Time-Sharing / Multitasking) theo 3 tiêu chí:
+1. Mục tiêu thiết kế chính (Primary Objective)
+2. Cơ chế điều phối CPU (Scheduling Mechanism)
+3. Khả năng tương tác với người dùng (User Interaction)
+
+<p></div
+</blockquote>  <textarea class="practice-textarea" placeholder="Nhập câu trả lời tự luận của bạn vào đây trước khi nhấn xem barem điểm..."></textarea>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+    <button class="btn-card primary btn-compare">So Sánh Với Barem Điểm</button>
+    <span style="font-size: 0.82rem; color: var(--text-muted);">Gợi ý tự chấm hỗ trợ tự học</span>
+  </div>
+  <div class="rubric-container">
+    <h4 style="margin-bottom: 0.75rem;">📋 Rubric Tự Kiểm Tra Gợi Ý (Self-Check Rubric):</h4>
+    
+    <div class="rubric-score-box">
+      <span>Điểm số tự đánh giá:</span>
+      <span style="font-size: 1.1rem; color: var(--accent-text);"><span class="current-score">0.00</span> / 1.5 điểm</span>
+    </div>
+  </div>
+</div></p>
+
+<p>---</p>
+
+<h2 id="3-danh-mc-cu-hi-t-lun-chi-tit">3. Danh Mục Câu Hỏi Tự Luận Chi Tiết</h2>
+
+<h3 id="cu-1-c-ch-ngt-v-chu-trnh-x-l-ngt-15-im">Câu 1: Cơ chế Ngắt và Chu trình Xử lý Ngắt (1.5 điểm)</h3>
+
+<h4 id="-bi">Đề bài:</h4>
+Trình bày các đặc điểm cơ bản của cơ chế Ngắt (Interrupt)? Phân biệt Ngắt phần cứng (Hardware Interrupt) và Bẫy ngắt/Ngoại lệ (Trap/Exception). Mô tả các bước xử lý của CPU khi nhận được một tín hiệu ngắt.
+
+<h4 id="cc-t-kha-bt-buc-key-points">Các từ khóa bắt buộc (Key Points):</h4>
+- [ ] Định nghĩa: Ngắt là tín hiệu làm thay đổi luồng thực thi bình thường của CPU để xử lý một sự kiện khẩn cấp.
+- [ ] Phân biệt: Hardware Interrupt bất đồng bộ (từ thiết bị I/O); Trap/Exception đồng bộ (từ chính CPU do lỗi lệnh hoặc System Call).
+- [ ] 5 bước xử lý:
+  1. Tạm dừng lệnh hiện tại.
+  2. Lưu ngữ cảnh (Program Counter, Registers) vào Stack.
+  3. Tra cứu Bảng véc-tơ ngắt (Interrupt Vector Table - IVT) dựa trên Interrupt Vector Number.
+  4. Nhảy đến nạp và thực thi Chương trình phục vụ ngắt (Interrupt Service Routine - ISR).
+  5. Khôi phục lại trạng thái cũ từ Stack và quay về thực thi lệnh tiếp theo.
+
+<h4 id="gi--t-chm-im">Gợi ý tự chấm điểm:</h4>
+- **0.5đ:** Phân biệt chính xác Hardware Interrupt và Trap/Exception (nêu rõ tính đồng bộ/bất đồng bộ và nguồn phát tín hiệu).
+- **1.0đ:** Nêu đầy đủ 5 bước trong chu trình xử lý ngắt của phần cứng và hệ điều hành.
+
+<p>---</p>
+
+<h3 id="cu-2-lnh-c-quyn-v-qun-l-bo-v-10-im">Câu 2: Lệnh Đặc Quyền và Quản Lý Bảo Vệ (1.0 điểm)</h3>
+
+<h4 id="-bi">Đề bài:</h4>
+Thế nào là Lệnh đặc quyền (Privileged Instructions)? Nêu 4 ví dụ về lệnh đặc quyền. Điều gì sẽ xảy ra nếu một tiến trình chạy ở User Mode cố tình thực thi một lệnh đặc quyền?
+
+<h4 id="cc-t-kha-bt-buc-key-points">Các từ khóa bắt buộc (Key Points):</h4>
+- [ ] Định nghĩa: Lệnh đặc quyền là lệnh chỉ được phép thực thi trong Kernel Mode (Mode bit = 0) do có khả năng làm mất an toàn hoặc thay đổi cấu hình phần cứng.
+- [ ] 4 ví dụ:
+  1. Bật/tắt ngắt CPU (<code>cli</code>, <code>sti</code>).
+  2. Thay đổi giá trị <code>Mode bit</code>.
+  3. Lệnh truy xuất cổng phần cứng trực tiếp (<code>in</code>, <code>out</code>).
+  4. Ghi dữ liệu vào thanh ghi Base/Limit hoặc thanh ghi <code>CR3</code> của bảng trang.
+- [ ] Hậu quả khi vi phạm: Phần cứng CPU phát hiện vi phạm, không thực thi lệnh đó và kích hoạt một Trap (Exception / Illegal Instruction) chuyển quyền điều khiển về cho Kernel để xử lý (thường là hủy tiến trình vi phạm).
+
+<h4 id="gi--t-chm-im">Gợi ý tự chấm điểm:</h4>
+- **0.25đ:** Định nghĩa đúng lệnh đặc quyền và điều kiện Kernel mode.
+- **0.50đ:** Nêu đúng ít nhất 4 lệnh đặc quyền cụ thể (mỗi lệnh 0.125đ).
+- **0.25đ:** Giải thích phản ứng của CPU (phát sinh Trap Exception, hủy tiến trình).
+        
+        <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.82rem; color: var(--text-muted); text-align: center;">
+          Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.
+        </div>
+      </article>
+    </main>
+
+    <!-- Right Sidebar (Local Graph & TOC) -->
+    <aside class="sidebar-right">
+      <div class="graph-container">
+        <div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div>
+        <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
+      </div>
+
+      <div class="toc-container">
+        <div class="toc-title">MỤC LỤC TRANG</div>
+        <ul class="toc-list">
+          <li class="toc-item"><a class="toc-link" href="#1-th-ghi-nh-t-hc-study-cards">1. Thẻ Ghi Nhớ Tự Học (Study Cards)</a></li>
+<li class="toc-item"><a class="toc-link" href="#2-khung-t-luyn--t-chm-im-subjective-practice">2. Khung Tự Luyện & Tự Chấm Điểm (Subjective Practice)</a></li>
+<li class="toc-item"><a class="toc-link" href="#3-danh-mc-cu-hi-t-lun-chi-tit">3. Danh Mục Câu Hỏi Tự Luận Chi Tiết</a></li>
+<li class="toc-item"><a class="toc-link" href="#cu-1-c-ch-ngt-v-chu-trnh-x-l-ngt-15-im">Câu 1: Cơ chế Ngắt và Chu trình Xử lý Ngắt (1.5 điểm)</a></li>
+<li class="toc-item"><a class="toc-link" href="#cu-2-lnh-c-quyn-v-qun-l-bo-v-10-im">Câu 2: Lệnh Đặc Quyền và Quản Lý Bảo Vệ (1.0 điểm)</a></li>
+
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Full-Text Search Modal -->
+  <div class="search-modal-overlay" id="search-modal-overlay">
+    <div class="search-modal">
+      <div class="search-input-wrapper">
+        <span>🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm khái niệm, câu hỏi, bài lab...">
+        <kbd class="kbd-shortcut">ESC</kbd>
+      </div>
+      <ul class="search-results-list" id="search-results-list"></ul>
+    </div>
+  </div>
+
+  <script src="../../assets/js/app.js"></script>
+</body>
+</html>

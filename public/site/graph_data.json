@@ -1,0 +1,59 @@
+{
+  "nodes": [
+    {
+      "id": "flashcards-ch01",
+      "label": "Thẻ Nhớ Flashcards — Chương 1",
+      "x": 140,
+      "y": 90,
+      "r": 7,
+      "color": "#9a6700",
+      "link": "flashcards/ch01-cards.html"
+    },
+    {
+      "id": "glossary-terms",
+      "label": "Từ Điển Thuật Ngữ Hệ",
+      "x": 95,
+      "y": 60,
+      "r": 7,
+      "color": "#9a6700",
+      "link": "glossary/terms.html"
+    },
+    {
+      "id": "lab01-linux-basics",
+      "label": "Lab 1",
+      "x": 90,
+      "y": 180,
+      "r": 7,
+      "color": "#0e7490",
+      "link": "labs/lab01-linux-basics.html"
+    },
+    {
+      "id": "theory-ch01-overview",
+      "label": "Chương 1",
+      "x": 245,
+      "y": 50,
+      "r": 7,
+      "color": "#0969da",
+      "link": "theory/ch01-overview.html"
+    },
+    {
+      "id": "exams/midterm/2023-2024-hk1",
+      "label": "Bài Tập Thực Luyện D",
+      "x": 280,
+      "y": 150,
+      "r": 7,
+      "color": "#9a6700",
+      "link": "exams/midterm/2023-2024-hk1.html"
+    },
+    {
+      "id": "sub-ch01",
+      "label": "Câu Hỏi Tự Luận & Barem Điểm — Chương 1",
+      "x": 215,
+      "y": 200,
+      "r": 7,
+      "color": "#9a6700",
+      "link": "questions/subjective/ch01.html"
+    }
+  ],
+  "edges": []
+}

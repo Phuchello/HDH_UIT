@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary) — IT007 UIT</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+  <!-- Top App Header -->
+  <header class="app-header">
+    <a class="brand-container" href="../index.html">
+      <span class="brand-badge">IT007</span>
+      <span class="brand-title">Hệ Điều Hành · IT007 UIT</span>
+    </a>
+    <div class="header-actions">
+      <button class="search-trigger-btn" id="search-trigger-btn">
+        <span>🔍 Tìm kiếm nhanh...</span>
+        <kbd class="kbd-shortcut">Ctrl+K</kbd>
+      </button>
+      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng / Tối">
+        <span id="theme-icon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 3-Column Workspace Layout -->
+  <div class="workspace-layout">
+
+    <!-- Left Sidebar (Explorer) -->
+    <aside class="sidebar-left">
+      <div class="nav-section-title">LÝ THUYẾT (THEORY)</div>
+<ul class="nav-tree">
+  <li class="nav-tree-item"><a class="nav-link" href="../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành & Kiến trúc Máy tính</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div>
+<ul class="nav-tree">
+  <li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch01.html">Câu Hỏi Tự Luận & Barem Điểm — Chương 1: Tổng Quan HDH</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div>
+<ul class="nav-tree">
+  <li class="nav-tree-item"><a class="nav-link" href="../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin & Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div>
+<ul class="nav-tree">
+  <li class="nav-tree-item"><a class="nav-link" href="../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+  <li class="nav-tree-item"><a class="nav-link active" href="../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+  <li class="nav-tree-item"><a class="nav-link" href="../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+</ul>
+
+    </aside>
+
+    <!-- Center Column (Reading Canvas) -->
+    <main class="content-center">
+      <div class="breadcrumbs">
+        <a href="../index.html">Trang chủ</a> <span>/</span> <span>Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</span>
+      </div>
+
+      <article class="article-body">
+        <h1 id="t-in-thut-ng-h-iu-hnh-it007-glossary">Từ Điển Thuật Ngữ Hệ Điều Hành (IT007 Glossary)</h1>
+
+<table>
+  <thead><tr><th>Thuật ngữ Tiếng Anh</th><th>Thuật ngữ Tiếng Việt</th><th>Định nghĩa Bản chất Kỹ thuật</th><th>Phân loại</th></tr></thead>
+  <tbody><tr><td>**Asymmetric Multiprocessing (AMP)**</td><td>Xử lý đa bất đối xứng</td><td>Mô hình đa bộ xử lý trong đó một CPU chủ (Master) đảm nhiệm điều phối và chạy mã Kernel, các CPU tớ (Slave) chỉ chạy tiến trình người dùng.</td><td>Kiến trúc HDH</td></tr><tr><td>**Belady's Anomaly**</td><td>Hiện tượng bất thường Belady</td><td>Hiện tượng nghịch lý trong thuật toán thay thế trang FIFO, khi tăng số khung trang cấp phát cho tiến trình lại làm tăng số lần xảy ra Lỗi trang (Page Fault).</td><td>Bộ nhớ ảo</td></tr><tr><td>**Bounded Buffer**</td><td>Bộ đệm hữu hạn</td><td>Bài toán đồng bộ kinh điển giữa tiến trình Producer và Consumer chia sẻ một bộ đệm có sức chứa cố định $N$ phần tử.</td><td>Đồng bộ hóa</td></tr><tr><td>**Context Switch**</td><td>Chuyển ngữ cảnh</td><td>Thao tác phần cứng và hệ điều hành lưu trạng thái của tiến trình hiện tại (vào PCB) và khôi phục trạng thái của tiến trình khác để CPU thực thi.</td><td>Quản lý tiến trình</td></tr><tr><td>**Critical Section (CS)**</td><td>Vùng tranh chấp / Miền găng</td><td>Đoạn mã trong tiến trình truy xuất và thao tác trên tài nguyên bộ nhớ chia sẻ mà tại một thời điểm chỉ được phép có tối đa một tiến trình thực thi.</td><td>Đồng bộ hóa</td></tr><tr><td>**Deadlock**</td><td>Bế tắc</td><td>Tình trạng hai hoặc nhiều tiến trình bị chặn vô hạn định do mỗi tiến trình đều đang giữ một tài nguyên và chờ tài nguyên khác do tiến trình kia nắm giữ.</td><td>Bế tắc tài nguyên</td></tr><tr><td>**Demand Paging**</td><td>Phân trang theo yêu cầu</td><td>Kỹ thuật quản lý bộ nhớ ảo trong đó một trang nhớ chỉ được nạp từ đĩa vào RAM khi có lệnh thực sự truy xuất đến nó.</td><td>Bộ nhớ ảo</td></tr><tr><td>**Dispatch Latency**</td><td>Độ trễ phân phối</td><td>Khoảng thời gian từ khi bộ định thời quyết định dừng tiến trình hiện tại đến khi bộ phân phối (Dispatcher) nạp và bắt đầu chạy tiến trình mới.</td><td>Định thời CPU</td></tr><tr><td>**Dual-Mode Operation**</td><td>Chế độ hoạt động kép</td><td>Cơ chế bảo vệ phần cứng chia hoạt động CPU thành User Mode và Kernel Mode.</td><td><a class="wikilink" href="#theory-ch01-overview">theory-ch01-overview</a></td></tr><tr><td>**Effective Access Time (EAT)**</td><td>Thời gian truy xuất hiệu dụng</td><td>Giá trị thời gian trung bình có trọng số để CPU truy xuất một ô nhớ khi xét đến tỉ lệ trúng/trượt của bộ đệm TLB hoặc tỷ lệ lỗi trang.</td><td>Quản lý bộ nhớ</td></tr><tr><td>**Hard Real-Time**</td><td>Thời gian thực cứng</td><td>Hệ thống bắt buộc các tác vụ phải hoàn thành chính xác trước thời hạn deadline; nếu trễ hạn sẽ dẫn đến sự sụp đổ nghiêm trọng của hệ thống.</td><td><a class="wikilink" href="#theory-ch01-overview">theory-ch01-overview</a></td></tr><tr><td>**Interrupt Vector Table (IVT)**</td><td>Bảng véc-tơ ngắt</td><td>Mảng con trỏ trong bộ nhớ chứa địa chỉ bắt đầu của các chương trình phục vụ ngắt (ISR) tương ứng với từng số hiệu ngắt.</td><td><a class="wikilink" href="#theory-ch01-overview">theory-ch01-overview</a></td></tr><tr><td>**Mutual Exclusion**</td><td>Loại trừ tương hỗ</td><td>Điều kiện bắt buộc trong đồng bộ hóa: Nếu tiến trình $P_i$ đang thực thi trong Critical Section thì không có tiến trình nào khác được vào CS.</td><td>Đồng bộ hóa</td></tr><tr><td>**Page Fault**</td><td>Lỗi trang</td><td>Bẫy ngắt (Trap) phát sinh khi CPU truy xuất một trang nhớ có bit trạng thái hợp lệ/bất hợp lệ mang giá trị $i$ (Invalid - chưa nạp vào RAM).</td><td>Bộ nhớ ảo</td></tr><tr><td>**Privileged Instruction**</td><td>Lệnh đặc quyền</td><td>Chỉ thị máy chỉ được phép thực thi trong Kernel Mode (như lệnh tắt ngắt, đổi mode bit, thao tác I/O).</td><td><a class="wikilink" href="#theory-ch01-overview">theory-ch01-overview</a></td></tr><tr><td>**Race Condition**</td><td>Tình trạng chạy đua</td><td>Hiện tượng nhiều tiến trình cùng truy xuất và thao tác đồng thời trên dữ liệu chia sẻ, kết quả cuối cùng phụ thuộc vào thứ tự thực thi của các lệnh.</td><td>Đồng bộ hóa</td></tr><tr><td>**Safe State**</td><td>Trạng thái an toàn</td><td>Trạng thái hệ thống tồn tại ít nhất một chuỗi an toàn $\langle P_1, P_2, \dots, P_n \rangle$ đảm bảo mọi tiến trình đều có thể hoàn thành mà không bị Deadlock.</td><td>Bế tắc tài nguyên</td></tr><tr><td>**Semaphore**</td><td>Biến đồng bộ Semaphore</td><td>Biến nguyên tử nguyên dương được khởi tạo để điều phối đồng bộ tiến trình thông qua 2 thao tác không thể phân chia <code>wait()</code> ($P$) và <code>signal()</code> ($V$).</td><td>Đồng bộ hóa</td></tr><tr><td>**Symmetric Multiprocessing (SMP)**</td><td>Xử lý đa đối xứng</td><td>Kiến trúc đa xử lý trong đó mọi CPU đều bình đẳng, cùng chạy chung một bản sao của nhân hệ điều hành và chia sẻ bộ nhớ chính.</td><td><a class="wikilink" href="#theory-ch01-overview">theory-ch01-overview</a></td></tr><tr><td>**System Call**</td><td>Lời gọi hệ thống</td><td>Giao diện lập trình cung cấp cách thức để chương trình người dùng yêu cầu các dịch vụ từ nhân hệ điều hành.</td><td>Cấu trúc HDH</td></tr><tr><td>**Thrashing**</td><td>Hiện tượng nghẽn bộ nhớ</td><td>Trạng thái hệ thống trong đó CPU dành phần lớn thời gian để nạp và hoán đổi trang nhớ thay vì thực thi lệnh của tiến trình, làm sụp đổ hiệu suất.</td><td>Bộ nhớ ảo</td></tr><tr><td>**Translation Lookaside Buffer (TLB)**</td><td>Bộ đệm chuyển đổi địa chỉ</td><td>Bộ nhớ kết hợp (Associative Memory) tốc độ cao dùng để lưu tạm các mục chuyển đổi từ số trang logic sang số khung trang vật lý.</td><td>Quản lý bộ nhớ</td></tr><tr><td>**Working-Set Model**</td><td>Mô hình tập làm việc</td><td>Mô hình kiểm soát hiện tượng Thrashing dựa trên nguyên lý cục bộ, xác định tập các trang nhớ được tiến trình truy xuất trong cửa sổ thời gian $\Delta$.</td><td>Bộ nhớ ảo</td></tr><tr><td>**Zombie Process**</td><td>Tiến trình thây ma</td><td>Tiến trình con đã kết thúc thực thi (<code>exit()</code>) nhưng tiến trình cha chưa gọi <code>wait()</code> để thu hồi mã trạng thái thoát trong PCB.</td><td>Quản lý tiến trình</td></tr></tbody>
+</table>
+        
+        <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.82rem; color: var(--text-muted); text-align: center;">
+          Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.
+        </div>
+      </article>
+    </main>
+
+    <!-- Right Sidebar (Local Graph & TOC) -->
+    <aside class="sidebar-right">
+      <div class="graph-container">
+        <div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div>
+        <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
+      </div>
+
+      <div class="toc-container">
+        <div class="toc-title">MỤC LỤC TRANG</div>
+        <ul class="toc-list">
+          <li class="toc-item"><span style="color: var(--text-muted);">Trang không có tiểu mục</span></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Full-Text Search Modal -->
+  <div class="search-modal-overlay" id="search-modal-overlay">
+    <div class="search-modal">
+      <div class="search-input-wrapper">
+        <span>🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm khái niệm, câu hỏi, bài lab...">
+        <kbd class="kbd-shortcut">ESC</kbd>
+      </div>
+      <ul class="search-results-list" id="search-results-list"></ul>
+    </div>
+  </div>
+
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>

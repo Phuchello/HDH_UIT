@@ -1,0 +1,38 @@
+[
+  {
+    "id": "flashcards-ch01",
+    "title": "Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH",
+    "url": "flashcards/ch01-cards.html",
+    "snippet": "Bộ thẻ nhớ Active Recall ôn luyện định nghĩa, lệnh đặc quyền, cơ chế ngắt và các thông số kỹ thuật của Chương 1."
+  },
+  {
+    "id": "glossary-terms",
+    "title": "Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)",
+    "url": "glossary/terms.html",
+    "snippet": "Tra cứu nhanh định nghĩa chuẩn xác các thuật ngữ khoa học máy tính và hệ điều hành song ngữ Anh - Việt có ví dụ thực tế và liên kết tri thức."
+  },
+  {
+    "id": "lab01-linux-basics",
+    "title": "Lab 1: Giới thiệu Linux, Quản trị Tệp tin & Lệnh Cơ Bản",
+    "url": "labs/lab01-linux-basics.html",
+    "snippet": "Làm quen với môi trường Linux Ubuntu, cấu trúc cây thư mục FHS, hệ thống phân quyền tệp tin (chmod/chown), quản lý tiến trình cơ bản (ps/top/kill) và các thao tác dòng lệnh thiết yếu."
+  },
+  {
+    "id": "theory-ch01-overview",
+    "title": "Chương 1: Tổng quan về Hệ điều hành & Kiến trúc Máy tính",
+    "url": "theory/ch01-overview.html",
+    "snippet": "Định nghĩa hệ điều hành, kiến trúc phân tầng 4 lớp, cơ chế ngắt phần cứng và ngoại lệ, phân cấp bộ nhớ lưu trữ, kiến trúc đa bộ xử lý và gom cụm, chế độ hoạt động kép Dual-Mode, lệnh đặc quyền và 4 môi trường tính toán."
+  },
+  {
+    "id": "exams/midterm/2023-2024-hk1",
+    "title": "Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)",
+    "url": "exams/midterm/2023-2024-hk1.html",
+    "snippet": "Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)"
+  },
+  {
+    "id": "sub-ch01",
+    "title": "Câu Hỏi Tự Luận & Barem Điểm — Chương 1: Tổng Quan HDH",
+    "url": "questions/subjective/ch01.html",
+    "snippet": "Ngân hàng câu hỏi tự luận có barem chấm chi tiết, danh sách từ khóa bắt buộc, câu hỏi tự kiểm tra SubjectivePractice và StudyCards phục vụ ôn tập Giữa kỳ IT007."
+  }
+]
