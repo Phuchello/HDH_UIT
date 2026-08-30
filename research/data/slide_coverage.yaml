@@ -1,0 +1,575 @@
+# ==============================================================================
+# BẢNG DỮ LIỆU ĐỐI CHIẾU ĐỘ PHỦ SLIDE BÀI GIẢNG CHÍNH THỨC (SLIDE COVERAGE DATA)
+# Dữ liệu có cấu trúc định lượng phục vụ tính toán tự động
+# ==============================================================================
+
+summary:
+  total_slide_decks: 14
+  physical_pages_total: 721
+  content_pages_total: 665
+  non_content_pages_total: 56
+  mapped_content_pages: 665
+  unmapped_content_pages: 0
+  drafted_content_pages: 51  # Chapter 1
+  not_written_content_pages: 614 # Chapters 2-9
+
+decks:
+  - source_id: "UIT-SLIDE-CH01-2024"
+    exact_filename: "Week01-Chapter1 2024.pdf"
+    title: "Chương 1: Tổng quan về Hệ điều hành"
+    physical_pages: 57
+    sections:
+      - page_range: "1-3"
+        page_count: 3
+        classification: "NON_CONTENT"
+        topic: "Trang bìa, mục tiêu bài học & nội dung chính"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "VERIFIED"
+      - page_range: "4-8"
+        page_count: 5
+        classification: "CONTENT"
+        topic: "Định nghĩa & Vai trò HDH (User view vs System view)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch01-overview.md#1-ban-chat--vai-tro-cua-he-dieu-hanh"
+        content_status: "DRAFTED"
+      - page_range: "9-13"
+        page_count: 5
+        classification: "CONTENT"
+        topic: "Cấu trúc 4 thành phần hệ thống máy tính"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch01-overview.md#1-ban-chat--vai-tro-cua-he-dieu-hanh"
+        content_status: "DRAFTED"
+      - page_range: "14-22"
+        page_count: 9
+        classification: "CONTENT"
+        topic: "Hoạt động phần cứng, Bootstrap & Cơ chế Ngắt (IVT, ISR)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch01-overview.md#2-hoat-dong-khoi-dong--co-che-ngat-interrupts"
+        content_status: "DRAFTED"
+      - page_range: "23-27"
+        page_count: 5
+        classification: "CONTENT"
+        topic: "Phân cấp hệ thống lưu trữ (Storage Hierarchy) & Caching"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch01-overview.md#3-phan-cap-he-thong-luu-tru-storage-hierarchy"
+        content_status: "DRAFTED"
+      - page_range: "28-37"
+        page_count: 10
+        classification: "CONTENT"
+        topic: "Kiến trúc bộ xử lý (Single, Multiprocessor SMP/AMP, Clustered)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch01-overview.md#4-che-do-hoat-dong-kep-dual-mode-operation"
+        content_status: "DRAFTED"
+      - page_range: "38-46"
+        page_count: 9
+        classification: "CONTENT"
+        topic: "Chế độ hoạt động kép Dual-Mode, Lệnh đặc quyền & Timer"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch01-overview.md#4-che-do-hoat-dong-kep-dual-mode-operation"
+        content_status: "DRAFTED"
+      - page_range: "47-53"
+        page_count: 7
+        classification: "CONTENT"
+        topic: "Môi trường tính toán (Đơn chương, Đa chương, Chia sẻ thời gian, Real-time)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch01-overview.md#5-cac-moi-truong-tinh-toan-computing-environments"
+        content_status: "DRAFTED"
+      - page_range: "54-56"
+        page_count: 3
+        classification: "CONTENT"
+        topic: "Câu hỏi ôn tập & củng cố kiến thức Chương 1"
+        mapping_status: "MAPPED"
+        v2_destination: "content/questions/subjective/ch01.md"
+        content_status: "DRAFTED"
+      - page_range: "57"
+        page_count: 1
+        classification: "NON_CONTENT"
+        topic: "Trang kết thúc & Q&A"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "VERIFIED"
+
+  - source_id: "UIT-SLIDE-CH02-2024"
+    exact_filename: "Week02-Chapter2 2024.pdf"
+    title: "Chương 2: Cấu trúc Hệ điều hành"
+    physical_pages: 57
+    sections:
+      - page_range: "1-3"
+        page_count: 3
+        classification: "NON_CONTENT"
+        topic: "Trang bìa & mục tiêu Chương 2"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "4-15"
+        page_count: 12
+        classification: "CONTENT"
+        topic: "8 thành phần cốt lõi của Hệ điều hành"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch02-structure.md#1-cac-thanh-phan-hdh"
+        content_status: "NOT_WRITTEN"
+      - page_range: "16-22"
+        page_count: 7
+        classification: "CONTENT"
+        topic: "Dịch vụ Hệ điều hành (User-facing vs System efficiency)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch02-structure.md#2-dich-vu-hdh"
+        content_status: "NOT_WRITTEN"
+      - page_range: "23-35"
+        page_count: 13
+        classification: "CONTENT"
+        topic: "Lời gọi hệ thống (System Calls), API & 3 phương pháp truyền tham số"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch02-structure.md#3-system-calls"
+        content_status: "NOT_WRITTEN"
+      - page_range: "36-42"
+        page_count: 7
+        classification: "CONTENT"
+        topic: "6 nhóm Chương trình hệ thống (System Programs)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch02-structure.md#4-system-programs"
+        content_status: "NOT_WRITTEN"
+      - page_range: "43-52"
+        page_count: 10
+        classification: "CONTENT"
+        topic: "5 cấu trúc thiết kế HDH (Monolithic, Layered, Microkernel, Modules, Hybrid)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch02-structure.md#5-cau-truc-thiet-ke"
+        content_status: "NOT_WRITTEN"
+      - page_range: "53-56"
+        page_count: 4
+        classification: "CONTENT"
+        topic: "Câu hỏi ôn tập Chương 2"
+        mapping_status: "MAPPED"
+        v2_destination: "content/questions/subjective/ch02.md"
+        content_status: "NOT_WRITTEN"
+      - page_range: "57"
+        page_count: 1
+        classification: "NON_CONTENT"
+        topic: "Trang kết thúc & Q&A"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-CH03-2024"
+    exact_filename: "Week03-Chapter3 2024.pdf"
+    title: "Chương 3: Quản lý Tiến trình"
+    physical_pages: 64
+    sections:
+      - page_range: "1-3"
+        page_count: 3
+        classification: "NON_CONTENT"
+        topic: "Trang bìa & mục tiêu Chương 3"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "4-18"
+        page_count: 15
+        classification: "CONTENT"
+        topic: "Khái niệm Process, Memory Layout, 5 trạng thái & PCB"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch03-process.md#1-khai-niem--pcb"
+        content_status: "NOT_WRITTEN"
+      - page_range: "19-27"
+        page_count: 9
+        classification: "CONTENT"
+        topic: "Định thời tiến trình, 3 loại Scheduler & Chi phí Context Switch"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch03-process.md#2-dinh-thoi-tien-trinh"
+        content_status: "NOT_WRITTEN"
+      - page_range: "28-38"
+        page_count: 11
+        classification: "CONTENT"
+        topic: "Tạo lập tiến trình (fork/exec/wait/exit), Cây tiến trình, Zombie & Orphan"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch03-process.md#3-tao-lap--cay-fork"
+        content_status: "NOT_WRITTEN"
+      - page_range: "39-48"
+        page_count: 10
+        classification: "CONTENT"
+        topic: "Giao tiếp liên tiến trình (IPC): Shared Memory vs Message Passing"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch03-process.md#4-ipc"
+        content_status: "NOT_WRITTEN"
+      - page_range: "49-59"
+        page_count: 11
+        classification: "CONTENT"
+        topic: "Tiểu trình (Threads), Ưu điểm đa luồng & 3 mô hình luồng"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch03-process.md#5-tieu-trinh-threads"
+        content_status: "NOT_WRITTEN"
+      - page_range: "60-63"
+        page_count: 4
+        classification: "CONTENT"
+        topic: "Bài tập ôn tập Chương 3"
+        mapping_status: "MAPPED"
+        v2_destination: "content/questions/subjective/ch03.md"
+        content_status: "NOT_WRITTEN"
+      - page_range: "64"
+        page_count: 1
+        classification: "NON_CONTENT"
+        topic: "Trang kết thúc"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-CH04-1-2024"
+    exact_filename: "Week04-Chapter4-1 2024.pdf"
+    title: "Chương 4: Định thời CPU (Phần 1)"
+    physical_pages: 56
+    sections:
+      - page_range: "1-3"
+        page_count: 3
+        classification: "NON_CONTENT"
+        topic: "Trang bìa & mục tiêu"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "4-15"
+        page_count: 12
+        classification: "CONTENT"
+        topic: "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-cpu-scheduling.md#1-co-ban"
+        content_status: "NOT_WRITTEN"
+      - page_range: "16-54"
+        page_count: 39
+        classification: "CONTENT"
+        topic: "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-cpu-scheduling.md#2-thuat-toan"
+        content_status: "NOT_WRITTEN"
+      - page_range: "55-56"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Tổng kết phần 1"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-CH04-2-2024"
+    exact_filename: "Week05-Chapter4-2 2024.pdf"
+    title: "Chương 4: Định thời CPU (Phần 2)"
+    physical_pages: 34
+    sections:
+      - page_range: "1-2"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Trang bìa"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "3-32"
+        page_count: 30
+        classification: "CONTENT"
+        topic: "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-cpu-scheduling.md#3-mlfq"
+        content_status: "NOT_WRITTEN"
+      - page_range: "33-34"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Tổng kết phần 2"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-CH04-3-2024"
+    exact_filename: "Week06-Chapter4-3 2024.pdf"
+    title: "Chương 4: Định thời Đa xử lý & Real-Time (Phần 3)"
+    physical_pages: 46
+    sections:
+      - page_range: "1-2"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Trang bìa"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "3-44"
+        page_count: 42
+        classification: "CONTENT"
+        topic: "Định thời Thread (PCS/SCS), Đa xử lý (SMP/Affinity/Load balancing), Real-Time (RMS/EDF) & Linux CFS"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-cpu-scheduling.md#4-multiprocessor-realtime"
+        content_status: "NOT_WRITTEN"
+      - page_range: "45-46"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Tổng kết Chương 4"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-CH05-1-2024"
+    exact_filename: "Week07-Chapter5-1 2024.pdf"
+    title: "Chương 5: Đồng bộ Tiến trình (Phần 1)"
+    physical_pages: 58
+    sections:
+      - page_range: "1-3"
+        page_count: 3
+        classification: "NON_CONTENT"
+        topic: "Trang bìa & mục tiêu"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "4-25"
+        page_count: 22
+        classification: "CONTENT"
+        topic: "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#1-critical-section"
+        content_status: "NOT_WRITTEN"
+      - page_range: "26-56"
+        page_count: 31
+        classification: "CONTENT"
+        topic: "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#2-hardware-mutex"
+        content_status: "NOT_WRITTEN"
+      - page_range: "57-58"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Tổng kết phần 1"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-MIDTERM-REVIEW-2024"
+    exact_filename: "Week08-Midterm Review.pdf"
+    title: "Slide Ôn tập Giữa kỳ IT007 Tuần 8"
+    physical_pages: 16
+    sections:
+      - page_range: "1-2"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Trang bìa"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "3-15"
+        page_count: 13
+        classification: "CONTENT"
+        topic: "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/midterm-review.md"
+        content_status: "NOT_WRITTEN"
+      - page_range: "16"
+        page_count: 1
+        classification: "NON_CONTENT"
+        topic: "Trang kết thúc"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-CH05-2-2024"
+    exact_filename: "Week09-Chapter5-2 2024.pdf"
+    title: "Chương 5: Đồng bộ Tiến trình (Phần 2)"
+    physical_pages: 55
+    sections:
+      - page_range: "1-2"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Trang bìa"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "3-53"
+        page_count: 51
+        classification: "CONTENT"
+        topic: "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#3-semaphore"
+        content_status: "NOT_WRITTEN"
+      - page_range: "54-55"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Tổng kết phần 2"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-CH05-3-2024"
+    exact_filename: "Week10-Chapter5-3 2024.pdf"
+    title: "Chương 5: Bài toán đồng bộ kinh điển (Phần 3)"
+    physical_pages: 32
+    sections:
+      - page_range: "1-2"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Trang bìa"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "3-30"
+        page_count: 28
+        classification: "CONTENT"
+        topic: "3 bài toán kinh điển (Bounded Buffer, Readers-Writers, Dining Philosophers) & Monitors"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#4-classic-problems"
+        content_status: "NOT_WRITTEN"
+      - page_range: "31-32"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Tổng kết phần 3"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-CH06-2024"
+    exact_filename: "Week11-Chapter6 2024.pdf"
+    title: "Chương 6: Bế tắc (Deadlock)"
+    physical_pages: 67
+    sections:
+      - page_range: "1-3"
+        page_count: 3
+        classification: "NON_CONTENT"
+        topic: "Trang bìa & mục tiêu"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "4-25"
+        page_count: 22
+        classification: "CONTENT"
+        topic: "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch06-deadlock.md#1-coffman-rag"
+        content_status: "NOT_WRITTEN"
+      - page_range: "26-55"
+        page_count: 30
+        classification: "CONTENT"
+        topic: "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch06-deadlock.md#2-banker"
+        content_status: "NOT_WRITTEN"
+      - page_range: "56-65"
+        page_count: 10
+        classification: "CONTENT"
+        topic: "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch06-deadlock.md#3-detection-recovery"
+        content_status: "NOT_WRITTEN"
+      - page_range: "66-67"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Tổng kết Chương 6"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-CH07-2024"
+    exact_filename: "Week12-Chapter7 2024.pdf"
+    title: "Chương 7: Quản lý Bộ nhớ"
+    physical_pages: 72
+    sections:
+      - page_range: "1-3"
+        page_count: 3
+        classification: "NON_CONTENT"
+        topic: "Trang bìa & mục tiêu"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "4-30"
+        page_count: 27
+        classification: "CONTENT"
+        topic: "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch07-memory-management.md#1-contiguous-swapping"
+        content_status: "NOT_WRITTEN"
+      - page_range: "31-60"
+        page_count: 30
+        classification: "CONTENT"
+        topic: "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch07-memory-management.md#2-paging-tlb"
+        content_status: "NOT_WRITTEN"
+      - page_range: "61-70"
+        page_count: 10
+        classification: "CONTENT"
+        topic: "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch07-memory-management.md#3-page-structures"
+        content_status: "NOT_WRITTEN"
+      - page_range: "71-72"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Tổng kết Chương 7"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-CH08-2024"
+    exact_filename: "Week13-Chapter8 2024.pdf"
+    title: "Chương 8: Bộ nhớ ảo"
+    physical_pages: 50
+    sections:
+      - page_range: "1-3"
+        page_count: 3
+        classification: "NON_CONTENT"
+        topic: "Trang bìa & mục tiêu"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "4-20"
+        page_count: 17
+        classification: "CONTENT"
+        topic: "Động cơ Bộ nhớ ảo, Copy-on-Write, Phân trang theo yêu cầu (Demand Paging) & 6 bước xử lý Page Fault"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch08-virtual-memory.md#1-demand-paging"
+        content_status: "NOT_WRITTEN"
+      - page_range: "21-42"
+        page_count: 22
+        classification: "CONTENT"
+        topic: "Các thuật toán thay thế trang (FIFO, Belady Anomaly, OPT, LRU, Second-chance) & Cấp phát khung trang"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch08-virtual-memory.md#2-page-replacement"
+        content_status: "NOT_WRITTEN"
+      - page_range: "43-48"
+        page_count: 6
+        classification: "CONTENT"
+        topic: "Hiện tượng Thrashing, Working-Set Model & Page-Fault Frequency (PFF)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch08-virtual-memory.md#3-thrashing"
+        content_status: "NOT_WRITTEN"
+      - page_range: "49-50"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Tổng kết Chương 8"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+
+  - source_id: "UIT-SLIDE-CH09-2024"
+    exact_filename: "Week14-Chapter9 2024.pdf"
+    title: "Chương 9: Nghiên cứu Linux & Windows"
+    physical_pages: 57
+    sections:
+      - page_range: "1-3"
+        page_count: 3
+        classification: "NON_CONTENT"
+        topic: "Trang bìa & mục tiêu"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
+      - page_range: "4-30"
+        page_count: 27
+        classification: "CONTENT"
+        topic: "Nghiên cứu Kiến trúc Nhân Linux (task_struct, clone, CFS, Buddy/Slab, VFS, IPC)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch09-linux-windows.md#1-linux-internals"
+        content_status: "NOT_WRITTEN"
+      - page_range: "31-55"
+        page_count: 25
+        classification: "CONTENT"
+        topic: "Nghiên cứu Kiến trúc Nhân Windows (HAL/Executive, EPROCESS, 32 Priority, Working Set, ALPC)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch09-linux-windows.md#2-windows-internals"
+        content_status: "NOT_WRITTEN"
+      - page_range: "56-57"
+        page_count: 2
+        classification: "NON_CONTENT"
+        topic: "Tổng kết môn học"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"

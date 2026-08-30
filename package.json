@@ -9,8 +9,10 @@
     "validate:sources": "python scripts/validate_sources.py",
     "validate:hygiene": "python scripts/check_public_hygiene.py",
     "validate:content": "python scripts/validate_v2_content.py",
-    "validate": "npm run validate:sources && npm run validate:hygiene && npm run validate:content",
-    "test": "npm run validate && npm run web:build"
+    "validate:research": "python scripts/verify_research_gates.py",
+    "validate:v2": "python scripts/generate_foundation_gate.py",
+    "validate": "npm run validate:v2",
+    "test": "npm run validate:v2"
   },
   "devDependencies": {
     "playwright": "1.62.1"

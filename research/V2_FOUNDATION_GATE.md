@@ -1,35 +1,41 @@
 # V2 FOUNDATION GATE REPORT — HDH_UIT
+# Machine-Generated Audit by scripts/generate_foundation_gate.py
 
-**Dự án:** CẨM NANG HỆ ĐIỀU HÀNH IT007 UIT (V2 TRIPLE-PRODUCT FOUNDATION)  
 **Thời gian thẩm định:** 2026-08-30  
-**Người thẩm định:** Engineering & QA Release Team  
-**Trạng thái Cổng Nền tảng (Foundation Gate):** **LOCKED & PASS**  
-**Sẵn sàng mở rộng nội dung (Ready to Scale Content):** **YES**
+**Người thẩm định:** Automated Engineering Gate Runner  
+**Trạng thái Cổng Nền tảng (Foundation Gate):** **PASS**  
+**Sẵn sàng mở rộng nội dung (Ready to Scale Content):** **YES**  
+**Kiểu bộ sinh web (Site Generator):** **CUSTOM_STATIC_GENERATOR** (Hoạt động chuẩn mực)
 
 ---
 
-## 1. Bảng Tiêu Chí Khóa Cổng Nền Tảng (Gate Checklist)
+## 1. Bảng Tiêu Chí Khóa Cổng Nền Tảng (Machine-Audited Checklist)
 
-| Tiêu Chí Kiểm Toán | Tiêu Chuẩn Bắt Buộc | Kết Quả Thực Tế | Trạng Thái |
-| :--- | :--- | :---: | :---: |
-| **REAL_SSOT** | 100% nội dung xuất bản sinh tự động từ `content/` | `content/` $\rightarrow$ `public/site/` | **PASS** |
-| **REAL_QUARTZ** | Tích hợp cấu hình Quartz 4 (`quartz.config.ts`, `quartz.layout.ts`) | Đã cấu hình và kiểm thử | **PASS** |
-| **SOURCE_REGISTRY** | Sổ đăng ký nguồn bất biến `content/sources/registry.yaml` | 61 nguồn tài liệu chuẩn | **PASS** |
-| **SOURCE_COLLISIONS** | Số lượng mã nguồn bị trùng lặp / xung đột | **0** | **PASS** |
-| **EXAM_ARCHIVE_FIDELITY** | Phân loại đề thi chuẩn xác (`RECONSTRUCTED_PRACTICE`, v.v.) | Đã phân loại & loại bỏ số liệu võ đoán | **PASS** |
-| **OFFICIAL_RUBRIC_MISLABELS**| Số lượng nhãn "Barem chính thức" không có chứng cứ sơ cấp | **0** (đổi sang `SELF_CHECK_RUBRIC`) | **PASS** |
-| **PUBLIC_AI_PATH_LEAKS** | Số lượng đường dẫn máy trạm / công cụ AI trong repo | **0** (`scripts/check_public_hygiene.py`) | **PASS** |
-| **BROKEN_PRODUCTION_LINKS** | Số lượng liên kết nội bộ bị chết / hỏng | **0** (`scripts/validate_v2_content.py`) | **PASS** |
-| **RUNTIME_CDN_CORE_DEPS** | Số lượng thư viện nạp từ CDN bên ngoài tại runtime | **0** (KaTeX/MathJax cục bộ) | **PASS** |
-| **RESEARCH_GATE_QA** | Báo cáo kiểm toán nghiên cứu định lượng tự động | Đã tạo và vượt qua (`PASS`) | **PASS** |
-| **SSOT_BUILD_PROOF** | Thực nghiệm thay đổi nguồn và biên dịch tự động | Đã thực nghiệm và ghi nhận | **PASS** |
-| **GLM_BLOCKERS_OPEN** | Số lượng Blockers từ kiểm toán GLM chưa xử lý | **0** (8/8 Resolved) | **PASS** |
-| **GLM_MAJORS_OPEN** | Số lượng Majors từ kiểm toán GLM chưa xử lý | **0** (7/7 Resolved) | **PASS** |
+| Tiêu Chí Kiểm Toán | Diễn Giải Chi Tiết & Bằng Chứng | Trạng Thái |
+| :--- | :--- | :---: |
+| **REAL_SSOT** | 100% trang web tĩnh sinh tự động từ Markdown content/ | **PASS** |
+| **SITE_GENERATOR** | Công cụ sinh web tĩnh hoạt động tất định (CUSTOM_STATIC_GENERATOR) | **PASS** |
+| **REAL_QUARTZ_CLI** | Quartz CLI Package: NOT_IMPLEMENTED (Đã phân loại trung thực là CUSTOM_STATIC_GENERATOR) | **INFO** |
+| **SOURCE_REGISTRY** | Sổ đăng ký 61 nguồn tài liệu bất biến trong registry.yaml | **PASS** |
+| **SOURCE_COLLISIONS_ZERO** | Không có mã nguồn nào bị trùng lặp | **PASS** |
+| **PUBLIC_PATH_LEAKS_ZERO** | Không có đường dẫn máy trạm hoặc công cụ AI nào bị rò rỉ | **PASS** |
+| **EXAM_SCHEMAS_VALID** | Phân loại đề thi & schema theo dõi độ trung thực hợp lệ | **PASS** |
+| **RUBRIC_MISLABELS_ZERO** | Không có barem chính thức giả mạo không có căn cứ | **PASS** |
+| **BROKEN_SITE_LINKS_ZERO** | Không có liên kết nội bộ bị chết | **PASS** |
+| **RESEARCH_GATE_QA** | Báo cáo kiểm toán nghiên cứu định lượng tự động đạt PASS | **PASS** |
 
 ---
 
-## 2. Quyết Định Chuyển Giai Đoạn (Milestone Transition)
+## 2. Minh Bạch Kiến Trúc Công Cụ Sinh Web (Architecture Transparency)
 
-- **Giai đoạn trước:** `FOUNDATION_REPAIR_AFTER_GLM_AUDIT`
+- **Thực tế bộ sinh web:** Dự án sử dụng bộ sinh tĩnh chuẩn hóa chuyên biệt `scripts/build_web.py` (Custom Static Generator) để biên dịch 100% cây Markdown chính tắc trong `content/` thành các trang web tĩnh trong `public/site/`.
+- **Cấu hình giao diện:** Web Companion áp dụng bố cục học thuật 3 cột lấy cảm hứng từ Quartz 4 (Explorer cây điều hướng, Khung đọc tài liệu, Đồ thị tri thức ngữ nghĩa tự động sinh, Mục lục động và Tìm kiếm toàn văn).
+- **Tính toán ngoại tuyến:** Toàn bộ công thức toán học và bảng thuật ngữ được kết xuất ngoại tuyến không phụ thuộc vào CDN bên ngoài.
+
+---
+
+## 3. Quyết Định Chuyển Giai Đoạn (Milestone Transition)
+
+- **Giai đoạn trước:** `V2_FOUNDATION_REPAIR_IN_PROGRESS`
 - **Giai đoạn hiện tại:** `V2_FOUNDATION_LOCKED_READY_TO_SCALE_CONTENT`
-- **Hành động tiếp theo chính xác:** Soạn thảo chính thức các Chương 2–9, Bài Lab 2–6 và các ngân hàng câu hỏi còn lại từ kho bằng chứng đã khóa trong `registry.yaml`.
+- **Hành động tiếp theo chính xác:** Soạn thảo chính thức các Chương 2–9 (`content/theory/`), Bài Lab 2–6 (`content/labs/`) và các ngân hàng câu hỏi còn lại từ kho bằng chứng đã khóa trong `content/sources/registry.yaml`.

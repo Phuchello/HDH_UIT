@@ -1,0 +1,313 @@
+# ==============================================================================
+# BẢNG DỮ LIỆU BẰNG CHỨNG ĐỀ THI LƯU TRỮ (EXAM EVIDENCE DATA)
+# Dữ liệu có cấu trúc định lượng phục vụ tính toán tự động
+# ==============================================================================
+
+summary:
+  total_exam_records: 20
+  verified_source_files: 19 # 19 files physically hashed in registry
+  verified_archive_fidelity_exams: 0 # Zero exams currently meet full verbatim archiving criteria
+  reconstructed_practice_exams: 1 # content/exams/midterm/2023-2024-hk1.md
+  mock_exams: 0
+  unverified_reference_exams: 19
+
+exams:
+  - exam_id: "EXAM-GK-2018-2019-HK1"
+    source_id: "BHT-EXAM-GK-2018-2019-HK1"
+    title: "Đề thi Giữa kỳ IT007 HK1 2018–2019 kèm đáp án"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2018-2019"
+    semester: "HK1"
+    exam_type: "midterm"
+    source_file_present: true
+    hash_verified: true
+    page_count: 6
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "BHT_CNPM_REFERENCE_KEY"
+
+  - exam_id: "EXAM-GK-2020-2021-HK1"
+    source_id: "BHT-EXAM-GK-2020-2021-HK1"
+    title: "Đề thi Giữa kỳ IT007 HK1 2020–2021"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2020-2021"
+    semester: "HK1"
+    exam_type: "midterm"
+    source_file_present: true
+    hash_verified: true
+    page_count: 5
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-GK-2020-2021-HK2"
+    source_id: "BHT-EXAM-GK-2020-2021-HK2"
+    title: "Đề thi Giữa kỳ IT007 HK2 2020–2021"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2020-2021"
+    semester: "HK2"
+    exam_type: "midterm"
+    source_file_present: true
+    hash_verified: true
+    page_count: 3
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-GK-2022-2023-HK1"
+    source_id: "BHT-EXAM-GK-2022-2023-HK1"
+    title: "Đề thi Giữa kỳ IT007 HK1 2022–2023"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2022-2023"
+    semester: "HK1"
+    exam_type: "midterm"
+    source_file_present: true
+    hash_verified: true
+    page_count: 4
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-GK-2022-2023-HK2"
+    source_id: "BHT-EXAM-GK-2022-2023-HK2"
+    title: "Đề thi Giữa kỳ IT007 HK2 2022–2023"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2022-2023"
+    semester: "HK2"
+    exam_type: "midterm"
+    source_file_present: true
+    hash_verified: true
+    page_count: 4
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-GK-2023-2024-HK1-PRACTICE"
+    source_id: "BHT-EXAM-GK-2023-2024-HK1"
+    title: "Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)"
+    classification: "RECONSTRUCTED_PRACTICE"
+    year: "2023-2024"
+    semester: "HK1"
+    exam_type: "midterm"
+    source_file_present: true
+    hash_verified: true
+    page_count: 4
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RECONSTRUCTED_SAMPLE"
+    answer_provenance: "INDEPENDENT_VERIFICATION_WITH_BHT_REFERENCE"
+
+  - exam_id: "EXAM-GK-2023-2024-HK2"
+    source_id: "BHT-EXAM-GK-2023-2024-HK2"
+    title: "Đề thi Giữa kỳ IT007 HK2 2023–2024"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2023-2024"
+    semester: "HK2"
+    exam_type: "midterm"
+    source_file_present: true
+    hash_verified: true
+    page_count: 4
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-GK-2024-2025-HK1"
+    source_id: "BHT-EXAM-GK-2024-2025-HK1"
+    title: "Đề thi Giữa kỳ IT007 HK1 2024–2025"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2024-2025"
+    semester: "HK1"
+    exam_type: "midterm"
+    source_file_present: true
+    hash_verified: true
+    page_count: 8
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-CK-2017-2018-HK2"
+    source_id: "BHT-EXAM-CK-2017-2018-HK2"
+    title: "Đề thi Cuối kỳ IT007 HK2 2017–2018"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2017-2018"
+    semester: "HK2"
+    exam_type: "final"
+    source_file_present: true
+    hash_verified: true
+    page_count: 4
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-CK-2018-2019-HK2"
+    source_id: "BHT-EXAM-CK-2018-2019-HK2"
+    title: "Đề thi Cuối kỳ IT007 HK2 2018–2019"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2018-2019"
+    semester: "HK2"
+    exam_type: "final"
+    source_file_present: true
+    hash_verified: true
+    page_count: 7
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-CK-2019-2020-HK1-DE1"
+    source_id: "BHT-EXAM-CK-2019-2020-HK1-DE1"
+    title: "Đề thi Cuối kỳ IT007 HK1 2019–2020 Đề 1"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2019-2020"
+    semester: "HK1"
+    exam_type: "final"
+    source_file_present: true
+    hash_verified: true
+    page_count: 5
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-CK-2019-2020-HK1-DE2"
+    source_id: "BHT-EXAM-CK-2019-2020-HK1-DE2"
+    title: "Đề thi Cuối kỳ IT007 HK1 2019–2020 Đề 2"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2019-2020"
+    semester: "HK1"
+    exam_type: "final"
+    source_file_present: true
+    hash_verified: true
+    page_count: 5
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-CK-2019-2020-HK1-DE3"
+    source_id: "BHT-EXAM-CK-2019-2020-HK1-DE3"
+    title: "Đề thi Cuối kỳ IT007 HK1 2019–2020 Đề 3"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2019-2020"
+    semester: "HK1"
+    exam_type: "final"
+    source_file_present: true
+    hash_verified: true
+    page_count: 5
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-CK-2020-2021-HK1"
+    source_id: "BHT-EXAM-CK-2020-2021-HK1"
+    title: "Đề thi Cuối kỳ IT007 HK1 2020–2021 có đáp án"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2020-2021"
+    semester: "HK1"
+    exam_type: "final"
+    source_file_present: true
+    hash_verified: true
+    page_count: 4
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "BHT_CNPM_REFERENCE_KEY"
+
+  - exam_id: "EXAM-CK-2022-2023-HK1"
+    source_id: "BHT-EXAM-CK-2022-2023-HK1"
+    title: "Đề thi Cuối kỳ IT007 HK1 2022–2023"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2022-2023"
+    semester: "HK1"
+    exam_type: "final"
+    source_file_present: true
+    hash_verified: true
+    page_count: 6
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-CK-2022-2023-HK2"
+    source_id: "BHT-EXAM-CK-2022-2023-HK2"
+    title: "Đề thi Cuối kỳ IT007 HK2 2022–2023"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2022-2023"
+    semester: "HK2"
+    exam_type: "final"
+    source_file_present: true
+    hash_verified: true
+    page_count: 5
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-CK-2023-2024-HK1"
+    source_id: "BHT-EXAM-CK-2023-2024-HK1"
+    title: "Đề thi Cuối kỳ IT007 HK1 2023–2024"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2023-2024"
+    semester: "HK1"
+    exam_type: "final"
+    source_file_present: true
+    hash_verified: true
+    page_count: 6
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-CK-2023-2024-HK2"
+    source_id: "BHT-EXAM-CK-2023-2024-HK2"
+    title: "Đề thi Cuối kỳ IT007 HK2 2023–2024"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2023-2024"
+    semester: "HK2"
+    exam_type: "final"
+    source_file_present: true
+    hash_verified: true
+    page_count: 6
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-CK-2024-2025-HK1"
+    source_id: "BHT-EXAM-CK-2024-2025-HK1"
+    title: "Đề thi Cuối kỳ IT007 HK1 2024–2025"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2024-2025"
+    semester: "HK1"
+    exam_type: "final"
+    source_file_present: true
+    hash_verified: true
+    page_count: 5
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "UNSOLVED_SOURCE"
+
+  - exam_id: "EXAM-GK-2023-2024-HK1-RAW"
+    source_id: "BHT-EXAM-GK-2023-2024-HK1"
+    title: "Đề thi Giữa kỳ IT007 HK1 2023–2024 gốc (BHT CNPM)"
+    classification: "UNVERIFIED_REFERENCE"
+    year: "2023-2024"
+    semester: "HK1"
+    exam_type: "midterm"
+    source_file_present: true
+    hash_verified: true
+    page_count: 4
+    duration_minutes: null
+    duration_source: "UNSPECIFIED_IN_SOURCE"
+    faithfulness: "RAW_REFERENCE_PDF"
+    answer_provenance: "BHT_CNPM_REFERENCE_KEY"
