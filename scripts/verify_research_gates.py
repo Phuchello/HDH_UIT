@@ -218,7 +218,7 @@ Mọi chỉ số nghiên cứu được xác thực độc lập và định lư
 """
 
     OUTPUT_MD.write_text(report_content, encoding="utf-8")
-    print(f"Generated {OUTPUT_MD} with status: {gate_status}")
+    print(f"Generated research/RESEARCH_GATE_QA.md with status: {gate_status}")
     return all_pass
 
 if __name__ == "__main__":

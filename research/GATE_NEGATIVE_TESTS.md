@@ -18,9 +18,9 @@ Chứng minh rằng hệ thống kiểm tra không bị "dương tính giả" (F
 | :--- | :--- | :--- | :---: |
 | **NEG-01: Duplicate Source ID Injection** | Exit Code 1 (Failed as expected) | >>> Validating Global Source Registry... FAIL: Duplicate source ID in registry: UIT-SLIDE-CH01-2024... | **PASS (Caught)** |
 | **NEG-02: Unknown Source Reference Injection** | Exit Code 1 (Failed as expected) | >>> Validating Global Source Registry... Found 61 registered source IDs. Verified 11 source references across content fi... | **PASS (Caught)** |
-| **NEG-03: Invalid Source SHA-256 Hash Injection** | Exit Code 1 (Failed as expected) | >>> Executing Evidence-Driven Research Gate Verification... Generated C:\Users\lyle3\.gemini\antigravity\scratch\HDH_UIT... | **PASS (Caught)** |
-| **NEG-04: Unmapped Slide Page Injection** | Exit Code 1 (Failed as expected) | >>> Executing Evidence-Driven Research Gate Verification... Generated C:\Users\lyle3\.gemini\antigravity\scratch\HDH_UIT... | **PASS (Caught)** |
-| **NEG-05: Forbidden Local Workstation Path Injection** | Exit Code 1 (Failed as expected) | >>> Running Public Hygiene & Path Leak Audit... Scanned 89 tracked files.  =============================================... | **PASS (Caught)** |
+| **NEG-03: Invalid Source SHA-256 Hash Injection** | Exit Code 1 (Failed as expected) | >>> Executing Evidence-Driven Research Gate Verification... Generated research/RESEARCH_GATE_QA.md with status: FAIL... | **PASS (Caught)** |
+| **NEG-04: Unmapped Slide Page Injection** | Exit Code 1 (Failed as expected) | >>> Executing Evidence-Driven Research Gate Verification... Generated research/RESEARCH_GATE_QA.md with status: FAIL... | **PASS (Caught)** |
+| **NEG-05: Forbidden Local Workstation Path Injection** | Exit Code 1 (Failed as expected) | >>> Running Public Hygiene & Path Leak Audit... Scanned 93 tracked files.  =============================================... | **PASS (Caught)** |
 | **NEG-06: Broken Internal Wikilink Injection** | Exit Code 1 (Failed as expected) | >>> Validating Canonical Content & Exam Models... Discovered 6 unique canonical document IDs.  =========================... | **PASS (Caught)** |
 
 ---

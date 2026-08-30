@@ -30,6 +30,8 @@ IGNORE_FILES = {
     "scripts/check_public_hygiene.py",
     ".gitignore",
     "scripts/generate_registry.py",
+    "scripts/run_negative_tests.py",
+    "research/GATE_NEGATIVE_TESTS.md",
     "reports/GLM_PRE_RELEASE_AUDIT.md"
 }
 
