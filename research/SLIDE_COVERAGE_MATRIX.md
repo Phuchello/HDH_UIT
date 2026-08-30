@@ -4,12 +4,16 @@ Tài liệu này kiểm kê và ánh xạ 100% các tiêu đề, chủ đề con
 
 ---
 
-## 1. Nguyên Tắc Kiểm Toán Khóa Nội Dung (Coverage Gates)
-- **Mục tiêu V2:** Tỷ lệ phủ kín kiến thức chính thức = **100%** (`MISSING = 0`, `PARTIAL = 0`).
-- **Phân loại trạng thái trong bản V1:**
-  - `COMPLETE`: Đã có trong V1 và đạt độ sâu học thuật.
-  - `PARTIAL`: Đã có trong V1 nhưng bị nén quá mức hoặc thiếu bảng đặc tính/so sánh lý thuyết.
-  - `MISSING`: Chưa xuất hiện trong V1 (như Chương 9 Linux/Windows, Thread Scheduling, Đa xử lý, Cân bằng tải, CFS, System Programs phân loại).
+## 1. Nguyên Tắc & Trạng Thái Kiểm Toán Nội Dung (Content Semantics)
+- **Quy định về trạng thái nội dung:**
+  - `SOURCE_VERIFIED`: Tài liệu slide gốc đã được xác minh tệp vật lý, mã băm SHA-256 và số trang trong `registry.yaml`.
+  - `TOPIC_MAPPED`: Toàn bộ các chủ đề trong slide đã được định tuyến vào đề cương chi tiết của V2.
+  - `CONTENT_DRAFTED`: Nội dung Markdown chính tắc đã được soạn thảo (hiện tại: Chương 1).
+  - `CONTENT_NOT_WRITTEN`: Nội dung đã được định tuyến nhưng chưa bước vào giai đoạn mở rộng soạn thảo (Chương 2–9).
+  - `CONTENT_VERIFIED`: Nội dung đã qua kiểm toán học thuật và đối soát toàn diện.
+- **Tiến độ hiện tại:**
+  - Ánh xạ chủ đề Slide Tuần 1–14: **TOPIC_MAPPED** (14/14 slide decks)
+  - Trạng thái nội dung chính tắc: **Chương 1 (CONTENT_DRAFTED)**, **Chương 2–9 (CONTENT_NOT_WRITTEN - Chờ giai đoạn Scale)**.
 
 ---
 

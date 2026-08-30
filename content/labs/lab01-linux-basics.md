@@ -6,14 +6,12 @@ lab_number: 1
 order: 1
 slug: "lab01-linux-basics"
 summary: "Làm quen với môi trường Linux Ubuntu, cấu trúc cây thư mục FHS, hệ thống phân quyền tệp tin (chmod/chown), quản lý tiến trình cơ bản (ps/top/kill) và các thao tác dòng lệnh thiết yếu."
-prerequisites:
-  - "00-environment"
+prerequisites: []
 related:
-  - "lab02-shell-scripting"
-  - "lab03-process-management"
+  - "theory-ch01-overview"
 sources:
-  - "SRC-A11 (Lab 1 v2023.pdf)"
-  - "SRC-B03 (Linux Man-Pages)"
+  - "UIT-LAB01-MANUAL-2023"
+  - "LINUX-MAN-PAGES"
 last_updated: "2026-08-30"
 ---
 
@@ -30,16 +28,16 @@ last_updated: "2026-08-30"
 ## 2. Phân Định Yêu Cầu Chính Thức vs Khuyến Nghị Cẩm Nang
 
 > [!IMPORTANT]
-> **YÊU CẦU CHÍNH THỨC CỦA BỘ MÔN (OFFICIAL UIT REQUIREMENTS):**
+> **YÊU CẦU THỰC HÀNH CỦA BỘ MÔN (THEO TÀI LIỆU LAB 1):**
 > 1. Thực hiện đầy đủ các bài tập điều hướng và thao tác tệp theo hướng dẫn trong `Lab 1 v2023.pdf`.
 > 2. Thiết lập đúng quyền truy xuất cho tệp tin theo mã bát phân (Octal notation) hoặc ký hiệu (Symbolic notation).
-> 3. Nộp báo cáo thực hành (PDF) chứa ảnh chụp màn hình terminal có kèm dấu nhắc lệnh hiển thị Họ tên và MSSV.
+> 3. Chuẩn bị báo cáo thực hành chứa kết quả thực thi các lệnh được yêu cầu.
 
 > [!TIP]
-> **KHUYẾN NGHỊ CỦA CẨM NANG (HANDBOOK BEST PRACTICES):**
+> **KHUYẾN NGHỊ KỸ THUẬT CỦA CẨM NANG:**
 > - Sử dụng phím `Tab` để tự động hoàn thành đường dẫn (Tab-completion), hạn chế tối đa việc gõ nhầm.
 > - Luôn kiểm tra kết quả thao tác bằng `ls -la` hoặc `echo $?` để xác nhận lệnh đã thực thi thành công.
-> - Tuyệt đối không dùng lệnh `sudo rm -rf /` hoặc xóa nhầm thư mục gốc `/etc`, `/bin`.
+> - Cẩn trọng với các lệnh xóa tệp đệ quy `rm -rf`.
 
 ---
 
@@ -52,7 +50,7 @@ Khác với Windows sử dụng các ổ đĩa riêng biệt (`C:\`, `D:\`), h�
 ├── bin/      -> Chứa các tệp thực thi nhị phân cơ bản (ls, cp, rm, bash)
 ├── sbin/     -> Chứa các lệnh quản trị hệ thống dành cho Superuser (reboot, fdisk)
 ├── etc/      -> Chứa toàn bộ tệp cấu hình hệ thống (passwd, fstab, network)
-├── home/     -> Thư mục người dùng cá nhân (/home/sinhvien/)
+├── home/     -> Thư mục người dùng cá nhân (/home/username/)
 ├── root/     -> Thư mục cá nhân của quản trị viên root
 ├── var/      -> Dữ liệu biến đổi trong quá trình chạy (log files, mail spool)
 ├── tmp/      -> Thư mục chứa tệp tạm thời (tự động dọn dẹp khi khởi động lại)
@@ -67,7 +65,7 @@ Khác với Windows sử dụng các ổ đĩa riêng biệt (`C:\`, `D:\`), h�
 Khi gõ lệnh `ls -l`, mỗi dòng xuất ra sẽ có định dạng:
 
 ```
--rwxr-xr-- 1 lyle3 students 4096 Aug 30 20:00 script.sh
+-rwxr-xr-- 1 user students 4096 Aug 30 20:00 script.sh
 ^ ^^^ ^^^ ^^^
 |  |   |   |
 |  |   |   +--> Quyền của Người khác (Others): r-- (chỉ đọc)
