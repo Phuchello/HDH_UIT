@@ -101,70 +101,50 @@ Severity definitions:
 | Field | Evidence |
 |---|---|
 | Paths | `content/exams/midterm/2023-2024-hk1.md`; `web/exams/midterm-2023-2024-hk1.html` |
-| Problem | The canonical exam source and the published exam HTML differ in structure, ordering, and instructional content. |
-| Evidence | The Markdown has Part 1 True/False, Part 2 Short Answer, Part 3 Fork Tree, Part 4 CPU Scheduling. The web version has Part 1 True/False + Short Answer combined, Part 2 Scheduling, and omits the fork-trace question. |
-| Why this matters | Violates the single-source principle and publishes conflicting learning material under the same title. |
-| Required fix | Generate the exam page from the canonical source without manual alteration. |
+| Problem | The public exam page is another hand-authored interpretation rather than a faithful rendering of the claimed canonical exam Markdown. |
+| Evidence | The page’s visible part sequence and allocation differ from the Markdown’s fork and scheduling sections, consistent with the wider missing content-to-web build. |
+| Why this matters | Even an honestly labelled practice exam would have two conflicting versions. |
+| Required fix | Resolve the canonical version, generate the web rendition, and use a structural diff/content hash check in the build. |
 
-### V2-G01 — BLOCKER — unverified rubric authority
-
-| Field | Evidence |
-|---|---|
-| Paths | `content/questions/subjective/ch01.md:27,51`; `web/questions/ch01-subjective.html:56,120` |
-| Problem | Educational rubrics are labelled “Barem Chấm Điểm Chính Thức” without evidence that UIT released an official marking scheme for the items. |
-| Evidence | The subjective bank labels rubrics as official, but cites question-only source documents (`Cau hoi chuong 1 HDH.docx`) that contain no points, criteria, or official solutions. |
-| Why this matters | Students can be misled into believing these are faculty-mandated criteria rather than editorial suggestions. |
-| Required fix | Label all self-assessment rubrics as `SELF_CHECK_RUBRIC` or `SUGGESTED_CRITERIA` unless an exact official rubric document is retained and cited. Add an explicit disclaimer. |
-
-### V2-G02 — MAJOR — unsourced numerical claims
+### V2-G01 — BLOCKER — unsupported “official” grading rubrics
 
 | Field | Evidence |
 |---|---|
-| Paths | `content/theory/ch01-overview.md:79,84,103`; `web/theory/ch01-overview.html` |
-| Problem | Theoretical text contains specific numbers (CPU utilization percentages, exam weights, latency thresholds) without citations or qualification. |
-| Evidence | Claims that Uniprogramming CPU utilization is $\le 20\%$, Multiprogramming achieves $80-95\%$, Midterm weight is $20\%$, Final weight is $5\%$. |
-| Why this matters | Unreferenced numbers present dated or hypothetical textbook examples as absolute engineering facts. |
-| Required fix | Either cite exact sources with page locators, label numbers as illustrative dated textbook examples, or remove unnecessary numeric claims. |
+| Paths | `content/questions/subjective/ch01.md`; `web/questions/ch01-subjective.html`; `web/index.html` |
+| Problem | Detailed scoring breakdowns are presented as official marking guidance without a traceable original rubric. |
+| Evidence | The question page calls the material “Barem Chấm Điểm Chính Thức”; the index markets “tự chấm điểm theo barem chính thức.” The Markdown supplies point-level allocations but provides no source-page rubric locator, and the source-ID registry is already ambiguous. No original rubric artefact is tracked. |
+| Why this matters | Unsupported officialness changes how students assess answers and can misrepresent institutional assessment practice. |
+| Required fix | For every official rubric claim, provide exact primary-source locator and a faithful transcription. Otherwise rename it `SELF_CHECK_RUBRIC` (or equivalent editorial guidance), state that it is non-official, and remove “official” marketing. |
 
-### V2-H01 — MAJOR — technical overstatements and generalizations
+### V2-H01 — MAJOR — untraceable numeric and assessment claims
 
 | Field | Evidence |
 |---|---|
 | Paths | `content/theory/ch01-overview.md` |
-| Problem | Explanatory text makes absolute statements that are textbook generalizations rather than universal OS truths. |
-| Evidence | Asserts Kernel is always resident in RAM (ignoring dynamically loadable modules/swappable non-core components); asserts user execution of privileged instructions always terminates the process (which depends on OS exception handling policy); treats mode bit values as universal hardware facts. |
-| Why this matters | Reduces academic precision for students preparing for in-depth questions. |
-| Required fix | Qualify textbook conventions with appropriate scope (“Trong mô hình quy ước của môn học...”). |
+| Problem | The theory chapter makes numerical performance and assessment claims without dependable source locators or an explicit illustrative status. |
+| Evidence | Examples include memory/storage timings (`<1 ns`, `1–10 ns`, `50–100 ns`, `10–100 us`, `5–10 ms`), CPU-utilisation figures (`<=20%`, `80–95%`), response target (`<1 s`), and front-matter assessment weights (`20%`, `5%`). Citation labels depend on the inconsistent `SRC-Axx` namespace and do not identify page/slide/table locations. |
+| Why this matters | Values vary by hardware, workload, course offering, and definition. Unsourced figures look like course facts rather than examples. |
+| Required fix | Attach a unique source ID plus precise locator to each nontrivial claim, or label it clearly as a dated illustrative/example range with assumptions. Do not present course weighting without a current official course source. |
 
-### V2-H02 — MAJOR — lack of public hygiene enforcement
-
-| Field | Evidence |
-|---|---|
-| Paths | `PROJECT_STATE.md`; `QA_LOG.md`; tracked documents |
-| Problem | Absolute workstation paths and AI tool directory names appear in tracked project files. |
-| Evidence | Machine paths leaked into Markdown links and state logs. |
-| Why this matters | Breaks portability, exposes local directory structures, and looks unprofessional in a public repository. |
-| Required fix | Purge machine paths, convert all links to repository-relative format, and enforce zero-leak hygiene in CI. |
-
-### V2-I01 — MAJOR — ungrounded lock assertions
+### V2-I01 — MAJOR — technical overstatement needing qualification
 
 | Field | Evidence |
 |---|---|
-| Paths | `PROJECT_STATE.md`; `research/THEORY_COVERAGE_MATRIX.md` |
-| Problem | Project state reports 100% locked research and curriculum coverage when Chapters 2–9 and Labs 2–6 have not yet been written. |
-| Evidence | Tables declare complete coverage and locked gates for chapters that are only planned. |
-| Why this matters | Creates false confidence and confuses planning status with completed drafting. |
-| Required fix | Use precise semantic states (`TOPIC_MAPPED`, `CONTENT_DRAFTED`, `CONTENT_NOT_WRITTEN`) and reserve `LOCKED` for verified artifacts. |
+| Paths | `content/theory/ch01-overview.md`; `content/questions/subjective/ch01.md` |
+| Problem | Several statements use universal language where the result is architecture-, OS-, or scheduling-policy-dependent. |
+| Evidence | Examples include: the kernel is described as always resident in RAM from boot until shutdown; a privileged instruction in user mode is said to trigger a trap that terminates the process; trap/software interrupt/exception concepts are collapsed; time sharing is treated as direct real-time interaction with `<1s` response; and the subjective answer guidance says multiprogramming is chiefly non-preemptive. |
+| Why this matters | Students are taught rules without their conditions, leading to incorrect transfer to real OS/architecture questions. |
+| Required fix | Preserve pedagogical simplification but add scope/caveats: textbook model vs modern systems, architecture-specific exception handling, hard vs soft real time, and policy-dependent pre-emption. Cite the selected course definition where one exists. |
 
-### V2-J01 — BLOCKER — absence of automated verification suite
+### V2-J01 — BLOCKER — `PUBLIC_AI_LOCAL_PATH_LEAK`
 
 | Field | Evidence |
 |---|---|
-| Paths | `scripts/` |
-| Problem | No automated validation suite exists to prevent source collisions, broken routes, schema violations, or unverified claims from entering the repository. |
-| Evidence | `scripts/` contains only build scripts without validators for source references, exam schemas, or public hygiene. |
-| Why this matters | Regressions cannot be detected automatically before merging or publishing. |
-| Required fix | Implement validator scripts (`validate_sources.py`, `check_public_hygiene.py`, `validate_v2_content.py`) and wire them into `npm test`. |
+| Paths | `PROJECT_STATE.md:39-50` |
+| Problem | A tracked public-facing project document contains local `file:///C:/Users/.../.gemini/antigravity/scratch/...` links. |
+| Evidence | The listed “locked” research documents point to local Gemini/Antigravity paths rather than repository-relative public evidence. |
+| Why this matters | This leaks local/AI-tool provenance, fails for every external reader, and undermines the claim that the repository is a reproducible public release. |
+| Required fix | Remove all local/AI-tool paths from tracked public documentation. Replace them with repository-relative evidence links or stable, permission-appropriate URLs; add a release lint that rejects `file:///`, user-profile paths, `.gemini`, `.codex`, and similar tool-local references outside intentional ignore files. |
 
 ### V2-K01 — BLOCKER — research gate evidence unavailable
 
@@ -224,28 +204,3 @@ SOURCE_IDS_CONSISTENT: **NO**
 PUBLIC_AI_LEAKAGE: **YES**
 
 READY_TO_SCALE_CONTENT: **NO**
-
----
-
-## Remediation Tracking Table
-
-| ID | Original Severity | Resolution | Files Changed | Verification | Status |
-| :--- | :---: | :--- | :--- | :--- | :---: |
-| **V2-A01** | BLOCKER | Created deterministic compiler `scripts/build_web.py` generating 100% of public site from canonical Markdown in `content/`. Moved handwritten HTML to `archive/web-prototype-v2/`. | `scripts/build_web.py`, `archive/web-prototype-v2/`, `public/site/` | `research/SSOT_BUILD_PROOF.md` verified | **RESOLVED** |
-| **V2-A02** | MAJOR | Navigation generated dynamically from content manifest; omitted unavailable links; added validator that fails build on broken internal links. | `scripts/build_web.py`, `scripts/validate_v2_content.py` | `python scripts/validate_v2_content.py` PASS | **RESOLVED** |
-| **V2-B01** | BLOCKER | Configured real Quartz 4 architecture with `quartz.config.ts`, `quartz.layout.ts`, package tooling, and documented `npm run web:build`. | `quartz.config.ts`, `quartz.layout.ts`, `package.json`, `scripts/build_web.py` | `npm run web:build` exits code 0 | **RESOLVED** |
-| **V2-C01** | BLOCKER | Dynamic search index (`search_index.json`) and semantic knowledge graph (`graph_data.json`) generated from 100% of published canonical content. | `scripts/build_web.py`, `public/site/` | Route-aware search & graph verified | **RESOLVED** |
-| **V2-C02** | MAJOR | Knowledge graph and navigation generated strictly from existing canonical routes; removed dead `#` and unwritten chapter links. | `scripts/build_web.py`, `content/` | Zero dead navigation links in public site | **RESOLVED** |
-| **V2-D01** | MAJOR | Eliminated runtime jsDelivr MathJax CDN; vendored and bundled local MathJax for 100% offline rendering. | `src/shared/vendor/`, `scripts/build_web.py`, `public/site/` | Zero remote network requests during page load | **RESOLVED** |
-| **V2-E01** | BLOCKER | Established immutable global source registry `content/sources/registry.yaml` with 61 unique IDs. Migrated all citations and added `scripts/validate_sources.py`. | `content/sources/registry.yaml`, `scripts/validate_sources.py`, `content/` | `python scripts/validate_sources.py` PASS (0 collisions, 0 unresolved) | **RESOLVED** |
-| **V2-F01** | BLOCKER | Reclassified exam from unverified archive to `RECONSTRUCTED_PRACTICE`; removed unsupported 60-min claim; added provenance schema. | `content/exams/midterm/2023-2024-hk1.md` | `python scripts/validate_v2_content.py` PASS | **RESOLVED** |
-| **V2-F02** | MAJOR | Generated exam web page directly from canonical Markdown source, eliminating structural divergence. | `content/exams/midterm/2023-2024-hk1.md`, `scripts/build_web.py` | Markdown and HTML match 1:1 | **RESOLVED** |
-| **V2-G01** | BLOCKER | Replaced "Barem Chấm Điểm Chính Thức" with `SELF_CHECK_RUBRIC` ("Rubric tự kiểm tra gợi ý") and added explicit disclaimer. | `content/questions/subjective/ch01.md` | Zero unverified official rubric claims | **RESOLVED** |
-| **V2-G02** | MAJOR | Removed unreferenced numeric claims (Uniprogramming percentages, arbitrary exam weights) and qualified textbook conventions. | `content/theory/ch01-overview.md` | Content review clean | **RESOLVED** |
-| **V2-H01** | MAJOR | Added precise technical qualifications for kernel residency, privileged instruction traps, mode bit conventions, and multiprogramming scheduling. | `content/theory/ch01-overview.md` | Academic review PASS | **RESOLVED** |
-| **V2-H02** | MAJOR | Purged all absolute workstation machine paths and AI tool directories from tracked files; added `scripts/check_public_hygiene.py`. | All tracked `.md`, `.html`, `.js`, `.py` | `python scripts/check_public_hygiene.py` PASS (0 leaks) | **RESOLVED** |
-| **V2-I01** | MAJOR | Refactored coverage matrices with strict semantic states (`SOURCE_VERIFIED`, `TOPIC_MAPPED`, `CONTENT_DRAFTED`, `CONTENT_NOT_WRITTEN`). | `research/SLIDE_COVERAGE_MATRIX.md`, `PROJECT_STATE.md` | Explicit status semantics verified | **RESOLVED** |
-| **V2-J01** | BLOCKER | Built and wired automated validation suite into `package.json` (`validate_sources.py`, `check_public_hygiene.py`, `validate_v2_content.py`). | `scripts/`, `package.json` | `npm test` runs 100% of checks | **RESOLVED** |
-| **V2-K01** | BLOCKER | Created script-generated quantitative report `research/RESEARCH_GATE_QA.md` with verifiable counts and pass criteria. | `research/RESEARCH_GATE_QA.md`, `scripts/verify_research_gates.py` | Automated research gate QA report generated | **RESOLVED** |
-| **V2-K02** | MAJOR | Updated `SLIDE_COVERAGE_MATRIX.md` to distinguish mapped topics from verified content; linked all sources to registry IDs. | `research/SLIDE_COVERAGE_MATRIX.md` | Matrix semantics aligned with evidence | **RESOLVED** |
-| **V2-L01** | MINOR | Cleaned reader-facing UI of internal jargon ("Product A/B/C", "Triple Product", "SSOT", "V2 Canonical Source"); standardized minimal branding and disclaimer. | `scripts/build_web.py`, `public/site/`, `content/` | Academic UI inspection PASS | **RESOLVED** |
