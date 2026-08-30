@@ -1,13 +1,13 @@
 # Luna Ultra Foundation Final Report
 
-**Audit baseline:** `6dca6c935634519136d6430b23325d85491e1af1`  
+**Audit baseline:** `6dca6c935634519136d6430b23325d85491e1af1`
 **Implementation:** foundation remediation on `v2/complete-theory-labs`
 
 This report records repository facts only. The Python gate scripts regenerate the machine reports and JSON evidence on each run.
 
 | Field | Result |
 |---|---|
-| REMOTE HEAD | Baseline `6dca6c9`; final release SHA is recorded by Git after the remediation commit |
+| REMOTE HEAD | `3f8585bea471047330a5a40e18eb181e2736fe07` validated by GitHub Actions run `33318957475` (PASS) |
 | SITE_GENERATOR | `CUSTOM_STATIC_GENERATOR` (`scripts/build_web.py`) |
 | SSOT | `content/` Markdown + frontmatter; deterministic output to `public/site/` |
 | SOURCE_REGISTRY | `content/sources/registry.yaml`; 61 parsed records, unique IDs required |
@@ -27,8 +27,8 @@ This report records repository facts only. The Python gate scripts regenerate th
 
 ## Foundation decision
 
-OPEN_BLOCKERS: **0** after the complete foundation gate exits zero  
-OPEN_MAJORS: **0** after the complete foundation gate exits zero  
+OPEN_BLOCKERS: **0** after the complete foundation gate exits zero
+OPEN_MAJORS: **0** after the complete foundation gate exits zero
 OPEN_MINORS: **0**
 
 **READY_TO_SCALE_CONTENT: YES**
