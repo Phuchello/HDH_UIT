@@ -7,7 +7,7 @@
 - [x] Lập danh mục toàn bộ nguồn tài liệu chính thức (`research/SOURCE_LEDGER.md`).
 - [x] Xây dựng ma trận phủ 100% Slide bài giảng Week 1–14 (`research/SLIDE_COVERAGE_MATRIX.md`).
 - [x] Xây dựng bản đồ cấu trúc Sách Lý Thuyết V2 (`research/THEORY_COVERAGE_MATRIX.md`).
-- [x] Ánh xạ 100% câu hỏi ôn tập chính thức (`research/OFFICIAL_REVIEW_QUESTION_MAP.md`).
+- [x] Ánh xạ câu hỏi ôn tập chính thức (`research/OFFICIAL_REVIEW_QUESTION_MAP.md`).
 - [x] Xây dựng ma trận khảo sát 20 đề thi thật UIT 2017–2025 (`research/EXAM_EVIDENCE_MATRIX.md`).
 - [x] Phân tích quy luật và xu hướng đề thi (`research/EXAM_PATTERN_ANALYSIS.md`).
 - [x] Phân loại các biến thể thực hành Lab 1–6 (`research/LAB_VARIANT_MAP.md`).
@@ -16,29 +16,26 @@
 
 ---
 
-## Giai Đoạn 2: Mở Rộng Kiến Trúc Ba Sản Phẩm & Ngân Hàng Tự Luận
-- [x] Thiết lập kiến trúc nguồn đơn nhất SSOT (`research/CONTENT_ARCHITECTURE_V2.md`).
-- [x] Lập sổ tay nguồn khảo sát câu hỏi tự luận (`research/SUBJECTIVE_SOURCE_LEDGER.md`).
-- [x] Xây dựng ma trận 60+ câu hỏi tự luận có barem chấm chi tiết (`research/SUBJECTIVE_QUESTION_MATRIX.md`).
-- [x] Khởi tạo cây thư mục nguồn chuẩn hóa `content/` (theory, labs, questions, exams, flashcards, glossary).
-- [x] Soạn thảo các tệp nội dung mẫu chuẩn hóa:
-  - [x] `content/theory/ch01-overview.md`
-  - [x] `content/questions/subjective/ch01.md`
-  - [x] `content/labs/lab01-linux-basics.md`
-  - [x] `content/exams/midterm/2023-2024-hk1.md`
-  - [x] `content/flashcards/ch01-cards.md`
-  - [x] `content/glossary/terms.md`
-- [x] Xây dựng nguyên mẫu Web Companion tương tác (`web/`):
-  - [x] Layout 3 cột phong cách Digital Garden (Explorer, Reading Canvas, Graph/TOC/Backlinks).
-  - [x] Thành phần `StudyCard` (Active Recall có Hint, Keypoints, Solution, LocalStorage tracking).
-  - [x] Thành phần `SubjectivePractice` (Lưu bản nháp, đối chiếu barem chấm, tự tính điểm).
-  - [x] Canvas Đồ thị Tri thức Ngữ nghĩa cục bộ.
-  - [x] Tìm kiếm nhanh toàn văn (Ctrl+K).
-  - [x] Chế độ Sáng / Tối (Theme Switcher).
+## Giai Đoạn 2: Xử Lý Kiểm Toán GLM & Hoàn Thiện Nền Tảng SSOT
+- [x] **AUD-V2-01:** Xây dựng Sổ đăng ký nguồn bất biến toàn cầu `content/sources/registry.yaml` và `scripts/validate_sources.py`.
+- [x] **AUD-V2-02:** Chuyển toàn bộ nguyên mẫu HTML viết tay sang `archive/web-prototype-v2/`; xác lập `content/` là nguồn duy nhất.
+- [x] **AUD-V2-03:** Thiết lập cấu hình Quartz 4 (`quartz.config.ts`, `quartz.layout.ts`, `package.json`) và kịch bản `scripts/build_web.py`.
+- [x] **AUD-V2-04:** Tự động sinh `search_index.json` và `graph_data.json` từ toàn bộ Markdown trong `content/`; loại bỏ liên kết chết.
+- [x] **AUD-V2-05:** Loại bỏ toàn bộ nạp CDN bên ngoài tại runtime; đóng gói KaTeX/MathJax cục bộ.
+- [x] **AUD-V2-06 & AUD-V2-07:** Phân loại đề thi chuẩn xác (`RECONSTRUCTED_PRACTICE`), xây dựng schema kiểm tra siêu dữ liệu đề thi.
+- [x] **AUD-V2-08:** Thay thế toàn bộ cụm từ "Barem chính thức" thành `SELF_CHECK_RUBRIC` ("Rubric tự kiểm tra gợi ý") kèm lưu ý rõ ràng.
+- [x] **AUD-V2-09:** Xóa bỏ 100% đường dẫn máy trạm và công cụ AI; bổ sung công cụ kiểm tra `scripts/check_public_hygiene.py`.
+- [x] **AUD-V2-10:** Xây dựng báo cáo kiểm toán nghiên cứu định lượng tự động `research/RESEARCH_GATE_QA.md` (`scripts/verify_research_gates.py`).
+- [x] **AUD-V2-11:** Chuẩn hóa ngữ nghĩa các ma trận phủ kiến thức (`SOURCE_VERIFIED`, `TOPIC_MAPPED`, `CONTENT_DRAFTED`, `CONTENT_NOT_WRITTEN`).
+- [x] **AUD-V2-12 & AUD-V2-13:** Rà soát và loại bỏ các số liệu suy diễn/võ đoán, bổ sung ngữ cảnh kỹ thuật chính xác cho Chương 1.
+- [x] **AUD-V2-14 & AUD-V2-15:** Tinh chỉnh giao diện người đọc trang nhã, nghiêm túc; bổ sung câu từ chối trách nhiệm độc lập.
+- [x] **AUD-V2-16:** Cập nhật tài liệu kiến trúc `research/CONTENT_ARCHITECTURE_V2.md`.
+- [x] **SSOT Build Demonstration:** Thực nghiệm kiểm chứng cơ chế SSOT và ghi nhận báo cáo `research/SSOT_BUILD_PROOF.md`.
+- [x] **Khóa Cổng Nền Tảng:** Thiết lập báo cáo `research/V2_FOUNDATION_GATE.md` đạt chuẩn **PASS** toàn diện.
 
 ---
 
-## Giai Đoạn 3: Triển Khai Soạn Thảo Toàn Bộ Nội Dung Chuẩn Hóa
+## Giai Đoạn 3: Mở Rộng Soạn Thảo Toàn Diện (Scale Content)
 - [ ] Soạn thảo đầy đủ các chương lý thuyết còn lại trong `content/theory/` (Chương 2 -> Chương 9, Midterm Review, Final Review).
 - [ ] Soạn thảo đầy đủ các bài thực hành trong `content/labs/` (Lab 2 -> Lab 6 Case Study `it007sh`).
 - [ ] Hoàn thiện toàn bộ ngân hàng câu hỏi tự luận `content/questions/subjective/` (Ch2 -> Ch9).
@@ -46,7 +43,7 @@
 
 ---
 
-## Giai Đoạn 4: Đóng Gói Xuất Bản & Đồng Bộ Ba Sản Phẩm
+## Giai Đoạn 4: Đóng Gói Xuất Bản & Phát Hành
 - [ ] Hoàn thiện bộ công cụ biên dịch tự động Sách Lý Thuyết A4 PDF và Sách Thực Hành A4 PDF từ `content/`.
 - [ ] Đóng gói phiên bản phát hành tĩnh cho Web Companion.
-- [ ] Bàn giao cho đợt kiểm toán xuất bản cuối cùng trước khi hợp nhất vào `main`.
+- [ ] Kiểm toán xuất bản cuối cùng trước khi hợp nhất vào `main`.
