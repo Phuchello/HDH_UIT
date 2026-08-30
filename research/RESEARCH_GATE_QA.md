@@ -10,7 +10,7 @@
 
 | Hạng mục Kiểm toán | Chỉ số Đo lường | Giá trị Thực tế | Tiêu chuẩn Đạt (Target) | Đánh giá |
 | :--- | :--- | :---: | :---: | :---: |
-| **Global Source IDs** | Tổng số mã nguồn đăng ký (`registry.yaml`) | **61** | $\ge 50$ | **PASS** |
+| **Global Source IDs** | Tổng số mã nguồn đăng ký (`registry.yaml`) | **61** | >= 50 | **PASS** |
 | | Số mã nguồn duy nhất (Unique IDs) | **61** | = Tổng số | **PASS** |
 | | Số mã trùng lặp (Duplicate IDs) | **0** | 0 | **PASS** |
 | | Số mã chưa phân giải (Unresolved IDs) | **0** | 0 | **PASS** |
@@ -24,7 +24,7 @@
 | | Trạng thái soạn thảo nội dung (Drafted) | **Chương 1 (1 deck)** | Khóa nền tảng mẫu | **FOUNDATION_LOCKED** |
 | **Official Questions** | Số tập câu hỏi/bài tập chính thức (Tier A) | **9** | 9 chương | **PASS** |
 | | Trạng thái ánh xạ chuyên đề | **100%** | 100% | **SOURCE_VERIFIED** |
-| **Exam Evidence** | Số đề thi thật UIT đã lưu trữ (Tier C) | **19** | $\ge 15$ | **PASS** |
+| **Exam Evidence** | Số đề thi thật UIT đã lưu trữ (Tier C) | **19** | >= 15 | **PASS** |
 | | Đề thi có tệp PDF & SHA-256 đầy đủ | **19** | 19 (100%) | **PASS** |
 | **Lab Manuals** | Số tài liệu thực hành chính thức (Lab 1–6) | **6** | 6 | **PASS** |
 | | Đặc tả it007sh Shell (Lab 6) | **1** | Xác minh chính thức | **PASS** |

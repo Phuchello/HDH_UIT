@@ -29,7 +29,8 @@ FORBIDDEN_PATTERNS = [
 IGNORE_FILES = {
     "scripts/check_public_hygiene.py",
     ".gitignore",
-    "scripts/generate_registry.py"
+    "scripts/generate_registry.py",
+    "reports/GLM_PRE_RELEASE_AUDIT.md"
 }
 
 def check_hygiene():

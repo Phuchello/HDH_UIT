@@ -141,7 +141,7 @@ Severity definitions:
 | Field | Evidence |
 |---|---|
 | Paths | `PROJECT_STATE.md`; `QA_LOG.md`; tracked documents |
-| Problem | Absolute workstation paths (`file:///C:/Users/...`) and AI tool directory names appear in tracked project files. |
+| Problem | Absolute workstation paths and AI tool directory names appear in tracked project files. |
 | Evidence | Machine paths leaked into Markdown links and state logs. |
 | Why this matters | Breaks portability, exposes local directory structures, and looks unprofessional in a public repository. |
 | Required fix | Purge machine paths, convert all links to repository-relative format, and enforce zero-leak hygiene in CI. |
@@ -243,7 +243,7 @@ READY_TO_SCALE_CONTENT: **NO**
 | **V2-G01** | BLOCKER | Replaced "Barem Chấm Điểm Chính Thức" with `SELF_CHECK_RUBRIC` ("Rubric tự kiểm tra gợi ý") and added explicit disclaimer. | `content/questions/subjective/ch01.md` | Zero unverified official rubric claims | **RESOLVED** |
 | **V2-G02** | MAJOR | Removed unreferenced numeric claims (Uniprogramming percentages, arbitrary exam weights) and qualified textbook conventions. | `content/theory/ch01-overview.md` | Content review clean | **RESOLVED** |
 | **V2-H01** | MAJOR | Added precise technical qualifications for kernel residency, privileged instruction traps, mode bit conventions, and multiprogramming scheduling. | `content/theory/ch01-overview.md` | Academic review PASS | **RESOLVED** |
-| **V2-H02** | MAJOR | Purged all `file:///`, `C:/Users/`, `.gemini`, `antigravity` machine paths from tracked files; added `scripts/check_public_hygiene.py`. | All tracked `.md`, `.html`, `.js`, `.py` | `python scripts/check_public_hygiene.py` PASS (0 leaks) | **RESOLVED** |
+| **V2-H02** | MAJOR | Purged all absolute workstation machine paths and AI tool directories from tracked files; added `scripts/check_public_hygiene.py`. | All tracked `.md`, `.html`, `.js`, `.py` | `python scripts/check_public_hygiene.py` PASS (0 leaks) | **RESOLVED** |
 | **V2-I01** | MAJOR | Refactored coverage matrices with strict semantic states (`SOURCE_VERIFIED`, `TOPIC_MAPPED`, `CONTENT_DRAFTED`, `CONTENT_NOT_WRITTEN`). | `research/SLIDE_COVERAGE_MATRIX.md`, `PROJECT_STATE.md` | Explicit status semantics verified | **RESOLVED** |
 | **V2-J01** | BLOCKER | Built and wired automated validation suite into `package.json` (`validate_sources.py`, `check_public_hygiene.py`, `validate_v2_content.py`). | `scripts/`, `package.json` | `npm test` runs 100% of checks | **RESOLVED** |
 | **V2-K01** | BLOCKER | Created script-generated quantitative report `research/RESEARCH_GATE_QA.md` with verifiable counts and pass criteria. | `research/RESEARCH_GATE_QA.md`, `scripts/verify_research_gates.py` | Automated research gate QA report generated | **RESOLVED** |
