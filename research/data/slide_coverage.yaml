@@ -4,6 +4,7 @@
 # ==============================================================================
 
 summary:
+  # Informational snapshot only; the verifier computes these from deck records.
   total_slide_decks: 14
   physical_pages_total: 721
   content_pages_total: 665

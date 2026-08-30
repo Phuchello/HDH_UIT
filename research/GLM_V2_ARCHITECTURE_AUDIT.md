@@ -141,10 +141,10 @@ Severity definitions:
 | Field | Evidence |
 |---|---|
 | Paths | `PROJECT_STATE.md:39-50` |
-| Problem | A tracked public-facing project document contains local `file:///C:/Users/.../.gemini/antigravity/scratch/...` links. |
-| Evidence | The listed “locked” research documents point to local Gemini/Antigravity paths rather than repository-relative public evidence. |
+| Problem | A tracked public-facing project document contains local workstation file-URL links into an AI-tool scratch directory. |
+| Evidence | The listed “locked” research documents point to a workstation-only AI-tool scratch location rather than repository-relative public evidence. |
 | Why this matters | This leaks local/AI-tool provenance, fails for every external reader, and undermines the claim that the repository is a reproducible public release. |
-| Required fix | Remove all local/AI-tool paths from tracked public documentation. Replace them with repository-relative evidence links or stable, permission-appropriate URLs; add a release lint that rejects `file:///`, user-profile paths, `.gemini`, `.codex`, and similar tool-local references outside intentional ignore files. |
+| Required fix | Remove all local/AI-tool paths from tracked public documentation. Replace them with repository-relative evidence links or stable, permission-appropriate URLs; add a release lint that rejects file URLs, user-profile paths, and similar tool-local markers outside intentional ignore files. |
 
 ### V2-K01 — BLOCKER — research gate evidence unavailable
 

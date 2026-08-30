@@ -166,27 +166,21 @@
   const KnowledgeGraph = {
     canvas: null,
     ctx: null,
-    nodes: [
-      { id: 'ch01', label: 'Chương 1: Tổng quan', x: 140, y: 90, r: 8, color: '#0969da', link: '../theory/ch01-overview.html' },
-      { id: 'dualmode', label: 'Dual-Mode', x: 80, y: 40, r: 6, color: '#0e7490', link: '../theory/ch01-overview.html#dual-mode' },
-      { id: 'interrupt', label: 'Ngắt (Interrupt)', x: 60, y: 140, r: 6, color: '#0e7490', link: '../theory/ch01-overview.html#interrupt' },
-      { id: 'syscall', label: 'System Call', x: 200, y: 50, r: 6, color: '#1a7f37', link: '../theory/ch02-structure.html' },
-      { id: 'process', label: 'Chương 3: Tiến trình', x: 220, y: 130, r: 7, color: '#0969da', link: '../theory/ch03-process.html' },
-      { id: 'sub01', label: 'Tự luận Ch1', x: 140, y: 160, r: 5, color: '#9a6700', link: '../questions/ch01-subjective.html' }
-    ],
-    edges: [
-      { from: 'ch01', to: 'dualmode' },
-      { from: 'ch01', to: 'interrupt' },
-      { from: 'ch01', to: 'syscall' },
-      { from: 'ch01', to: 'sub01' },
-      { from: 'syscall', to: 'process' },
-      { from: 'dualmode', to: 'syscall' }
-    ],
+    nodes: [],
+    edges: [],
 
     init() {
       this.canvas = document.getElementById('knowledge-graph-canvas');
       if (!this.canvas) return;
       this.ctx = this.canvas.getContext('2d');
+      const depth = window.location.pathname.split('/').filter(Boolean).length - (window.location.pathname.endsWith('/') ? 0 : 1);
+      const prefix = '../'.repeat(Math.max(0, depth));
+      fetch(`${prefix}graph_data.json`).then(response => response.json()).then(data => {
+        this.nodes = data.nodes || [];
+        this.edges = data.edges || [];
+        this.nodes.forEach(node => { node.link = `${prefix}${node.link}`; });
+        this.draw();
+      }).catch(() => this.draw());
       this.resize();
       this.draw();
 
@@ -258,19 +252,19 @@
   // 5. SEARCH MODAL ENGINE
   // ==========================================
   const SearchEngine = {
-    searchIndex: [
-      { title: 'Chương 1: Tổng quan về Hệ điều hành', url: '../theory/ch01-overview.html', snippet: 'Định nghĩa HDH, User view, System view, cơ chế ngắt, Dual-mode, 4 môi trường tính toán.' },
-      { title: 'Câu Hỏi Tự Luận: Chương 1', url: '../questions/ch01-subjective.html', snippet: 'Barem điểm câu hỏi Chế độ hoạt động kép, Lệnh đặc quyền, Chu trình ngắt, So sánh đa chương.' },
-      { title: 'Lab 1: Lệnh Linux & Quản trị Hệ thống tệp', url: '../labs/lab01-linux-basics.html', snippet: 'Cây thư mục FHS, phân quyền chmod/chown bát phân, viva questions, bài tập tìm kiếm.' },
-      { title: 'Đề Thi Giữa Kỳ HK1 2023–2024', url: '../exams/midterm-2023-2024-hk1.html', snippet: 'Đáp án chi tiết bài toán cây fork, định thời CPU SRTF và Round Robin.' },
-      { title: 'Từ Điển Thuật Ngữ IT007', url: '../glossary/index.html', snippet: 'Tra cứu nhanh định nghĩa tiếng Anh - tiếng Việt: Belady, EAT, PCB, Semaphore, Thrashing.' }
-    ],
+    searchIndex: [],
 
     init() {
       const modalOverlay = document.getElementById('search-modal-overlay');
       const triggerBtn = document.getElementById('search-trigger-btn');
       const searchInput = document.getElementById('search-input');
       const resultsList = document.getElementById('search-results-list');
+
+      const depth = window.location.pathname.split('/').filter(Boolean).length - (window.location.pathname.endsWith('/') ? 0 : 1);
+      const prefix = '../'.repeat(Math.max(0, depth));
+      fetch(`${prefix}search_index.json`).then(response => response.json()).then(items => {
+        this.searchIndex = items.map(item => ({ ...item, url: `${prefix}${item.url}` }));
+      }).catch(() => { this.searchIndex = []; });
 
       const openSearch = () => {
         if (modalOverlay) {

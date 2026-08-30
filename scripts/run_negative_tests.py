@@ -1,193 +1,73 @@
 #!/usr/bin/env python3
-"""
-scripts/run_negative_tests.py
-Executes 6 deliberate failure injections to prove all validation gates catch defects.
-Generates research/GATE_NEGATIVE_TESTS.md.
-"""
+"""Inject one defect at a time and prove each foundation gate fails."""
 
-import os
-import sys
+from __future__ import annotations
+
 import subprocess
+import sys
 from pathlib import Path
 
-sys.stdout.reconfigure(encoding='utf-8')
-
 ROOT = Path(__file__).resolve().parent.parent
-OUTPUT_MD = ROOT / "research" / "GATE_NEGATIVE_TESTS.md"
+REPORT = ROOT / "research" / "GATE_NEGATIVE_TESTS.md"
 
-def run_test(name, mutate_fn, test_cmd, expected_error_substr):
-    print(f"\n>>> Running Negative Test: {name}...")
-    orig_state = mutate_fn(apply=True)
+
+def run_case(name, mutate, command, expected):
+    changed = []
     try:
-        res = subprocess.run(test_cmd, cwd=ROOT, capture_output=True, text=True)
-        failed_as_expected = res.returncode != 0
-        error_output = (res.stdout + "\n" + res.stderr).strip()
-        matched = expected_error_substr.lower() in error_output.lower()
-        
-        print(f"  Result: Exit Code = {res.returncode} (Failed as expected: {failed_as_expected}, Matched error: {matched})")
-        return {
-            "name": name,
-            "passed": failed_as_expected and matched,
-            "exit_code": res.returncode,
-            "error_snippet": error_output[:300].replace("\n", " ")
-        }
+        changed = mutate()
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+        output = (result.stdout + "\n" + result.stderr).strip()
+        passed = result.returncode != 0 and expected.lower() in output.lower()
+        return {"name": name, "passed": passed, "exit_code": result.returncode, "evidence": output[:240].replace("\n", " ")}
     finally:
-        mutate_fn(apply=False, orig_state=orig_state)
+        for path, original in reversed(changed):
+            if original is None:
+                path.unlink(missing_ok=True)
+            else:
+                path.write_text(original, encoding="utf-8")
+
+
+def replace(path, old, new):
+    original = path.read_text(encoding="utf-8")
+    if old not in original:
+        raise RuntimeError(f"mutation anchor not found: {path}")
+    path.write_text(original.replace(old, new, 1), encoding="utf-8")
+    return [(path, original)]
+
 
 def main():
     py = sys.executable
-    results = []
-    
-    # 1. Duplicate Source ID in registry.yaml
-    reg_path = ROOT / "content" / "sources" / "registry.yaml"
-    def mut_dup_source(apply, orig_state=None):
-        if apply:
-            txt = reg_path.read_text(encoding="utf-8")
-            dup_txt = txt + '\n  - id: "UIT-SLIDE-CH01-2024"\n    tier: "A"\n    type: "official_slide"\n'
-            reg_path.write_text(dup_txt, encoding="utf-8")
-            return txt
-        else:
-            reg_path.write_text(orig_state, encoding="utf-8")
-            
-    res1 = run_test(
-        "NEG-01: Duplicate Source ID Injection",
-        mut_dup_source,
-        [py, "scripts/validate_sources.py"],
-        "Duplicate source ID"
-    )
-    results.append(res1)
+    registry = ROOT / "content/sources/registry.yaml"
+    ch01 = ROOT / "content/theory/ch01-overview.md"
+    slides = ROOT / "research/data/slide_coverage.yaml"
+    exam = ROOT / "content/exams/midterm/2023-2024-hk1.md"
+    cases = []
+    cases.append(run_case("NEG-01 duplicate source ID", lambda: replace(registry, "\n  - id: \"UIT-SLIDE-CH01-2024\"", "\n  - id: \"UIT-SLIDE-CH01-2024\"\n  - id: \"UIT-SLIDE-CH01-2024\""), [py, "scripts/validate_sources.py"], "Duplicate source ID"))
+    cases.append(run_case("NEG-02 unknown source reference", lambda: replace(ch01, '  - "UIT-SLIDE-CH01-2024"', '  - "NO-SUCH-SOURCE"'), [py, "scripts/validate_sources.py"], "Unknown source ID"))
+    cases.append(run_case("NEG-03 malformed source hash", lambda: replace(registry, 'sha256: "4fc70c3a35d9632d678be2dbc5df1082388064a782b20a6bb7795c9a5d5adc62"', 'sha256: "not-a-sha256"'), [py, "scripts/validate_sources.py"], "invalid sha256"))
+    cases.append(run_case("NEG-04 unmapped slide page", lambda: replace(slides, 'topic: "Định nghĩa & Vai trò HDH (User view vs System view)"\n        mapping_status: "MAPPED"', 'topic: "Định nghĩa & Vai trò HDH (User view vs System view)"\n        mapping_status: "UNMAPPED"'), [py, "scripts/verify_research_gates.py"], "status: FAIL"))
+    cases.append(run_case("NEG-05 forbidden workstation path", lambda: [(ch01, ch01.read_text(encoding="utf-8"))] + (ch01.write_text(ch01.read_text(encoding="utf-8") + "\n<!-- C:\\Users\\injected -->\n", encoding="utf-8") or []), [py, "scripts/check_public_hygiene.py"], "PUBLIC HYGIENE AUDIT FAILED"))
+    cases.append(run_case("NEG-06 broken wikilink", lambda: [(ch01, ch01.read_text(encoding="utf-8"))] + (ch01.write_text(ch01.read_text(encoding="utf-8") + "\n[[missing-document]]\n", encoding="utf-8") or []), [py, "scripts/validate_v2_content.py"], "Broken wikilink"))
 
-    # 2. Introduce Unknown Source Ref in Markdown
-    ch01_path = ROOT / "content" / "theory" / "ch01-overview.md"
-    def mut_unknown_source(apply, orig_state=None):
-        if apply:
-            txt = ch01_path.read_text(encoding="utf-8")
-            mod_txt = txt.replace('sources:\n  - "UIT-SLIDE-CH01-2024"', 'sources:\n  - "NON-EXISTENT-SOURCE-999"')
-            ch01_path.write_text(mod_txt, encoding="utf-8")
-            return txt
-        else:
-            ch01_path.write_text(orig_state, encoding="utf-8")
-            
-    res2 = run_test(
-        "NEG-02: Unknown Source Reference Injection",
-        mut_unknown_source,
-        [py, "scripts/validate_sources.py"],
-        "Unknown source ID"
-    )
-    results.append(res2)
+    rubric_path = ROOT / "content/questions/subjective/ch01.md"
+    cases.append(run_case("NEG-07 unsupported OFFICIAL_RUBRIC", lambda: [(rubric_path, rubric_path.read_text(encoding="utf-8"))] + (rubric_path.write_text(rubric_path.read_text(encoding="utf-8") + "\nBarem Chấm Điểm Chính Thức\n", encoding="utf-8") or []), [py, "scripts/validate_v2_content.py"], "SELF_CHECK_RUBRIC"))
 
-    # 3. Change One Source Hash in registry.yaml
-    def mut_bad_hash(apply, orig_state=None):
-        if apply:
-            txt = reg_path.read_text(encoding="utf-8")
-            mod_txt = txt.replace('sha256: "4fc70c3a35d9', 'sha256: "000000000000')
-            reg_path.write_text(mod_txt, encoding="utf-8")
-            return txt
-        else:
-            reg_path.write_text(orig_state, encoding="utf-8")
-            
-    res3 = run_test(
-        "NEG-03: Invalid Source SHA-256 Hash Injection",
-        mut_bad_hash,
-        [py, "scripts/verify_research_gates.py"],
-        "RESEARCH_GATE_QA.md"
-    )
-    results.append(res3)
+    duplicate = ROOT / "content/fixtures/duplicate-id.md"
+    def add_duplicate():
+        duplicate.parent.mkdir(parents=True, exist_ok=True)
+        duplicate.write_text('---\nid: "theory-ch01-overview"\ntitle: "duplicate"\n---\n', encoding="utf-8")
+        return [(duplicate, None)]
+    cases.append(run_case("NEG-08 duplicate document ID", add_duplicate, [py, "scripts/validate_v2_content.py"], "Duplicate document ID"))
+    cases.append(run_case("NEG-09 malformed exam classification", lambda: replace(exam, 'classification: "RECONSTRUCTED_PRACTICE"', 'classification: "INVENTED_EXAM"'), [py, "scripts/validate_v2_content.py"], "invalid classification"))
+    cases.append(run_case("NEG-10 duplicate slide page", lambda: replace(slides, 'page_range: "4-8"\n        page_count: 5', 'page_range: "1-8"\n        page_count: 8'), [py, "scripts/verify_research_gates.py"], "status: FAIL"))
+    cases.append(run_case("NEG-11 missing slide page", lambda: replace(slides, 'page_range: "56-57"\n        page_count: 2', 'page_range: "57"\n        page_count: 1'), [py, "scripts/verify_research_gates.py"], "status: FAIL"))
 
-    # 4. Mark One Required Slide Page UNMAPPED in slide_coverage.yaml
-    slide_yaml = ROOT / "research" / "data" / "slide_coverage.yaml"
-    def mut_unmapped_slide(apply, orig_state=None):
-        if apply:
-            txt = slide_yaml.read_text(encoding="utf-8")
-            # Replace in section block (after sections:)
-            mod_txt = txt.replace('topic: "Định nghĩa & Vai trò HDH (User view vs System view)"\n        mapping_status: "MAPPED"',
-                                  'topic: "Định nghĩa & Vai trò HDH (User view vs System view)"\n        mapping_status: "UNMAPPED"')
-            slide_yaml.write_text(mod_txt, encoding="utf-8")
-            return txt
-        else:
-            slide_yaml.write_text(orig_state, encoding="utf-8")
-            
-    res4 = run_test(
-        "NEG-04: Unmapped Slide Page Injection",
-        mut_unmapped_slide,
-        [py, "scripts/verify_research_gates.py"],
-        "status: FAIL"
-    )
-    results.append(res4)
+    passed = all(case["passed"] for case in cases)
+    rows = "\n".join(f"| {case['name']} | exit {case['exit_code']} | {'PASS' if case['passed'] else 'FAIL'} | {case['evidence']} |" for case in cases)
+    REPORT.write_text(f"# Gate Negative Tests\n\n**Result:** **{'PASS' if passed else 'FAIL'}** ({sum(c['passed'] for c in cases)}/{len(cases)} defects rejected)\n\n| Injected defect | Exit | Result | Evidence |\n|---|---:|:---:|---|\n{rows}\n\nEach mutation is restored in a `finally` block before the next case.\n", encoding="utf-8")
+    print(f"NEGATIVE TESTS: {'PASS' if passed else 'FAIL'} ({sum(c['passed'] for c in cases)}/{len(cases)})")
+    return passed
 
-    # 5. Insert Forbidden Local Path into Markdown
-    def mut_path_leak(apply, orig_state=None):
-        if apply:
-            txt = ch01_path.read_text(encoding="utf-8")
-            mod_txt = txt + '\n<!-- leaked path: C:\\Users\\fake_user\\test -->'
-            ch01_path.write_text(mod_txt, encoding="utf-8")
-            return txt
-        else:
-            ch01_path.write_text(orig_state, encoding="utf-8")
-            
-    res5 = run_test(
-        "NEG-05: Forbidden Local Workstation Path Injection",
-        mut_path_leak,
-        [py, "scripts/check_public_hygiene.py"],
-        "PUBLIC HYGIENE AUDIT FAILED"
-    )
-    results.append(res5)
-
-    # 6. Create Broken Internal Route / Wikilink
-    def mut_broken_route(apply, orig_state=None):
-        if apply:
-            txt = ch01_path.read_text(encoding="utf-8")
-            mod_txt = txt + '\nTham khảo: [[broken-non-existent-page-link]]'
-            ch01_path.write_text(mod_txt, encoding="utf-8")
-            return txt
-        else:
-            ch01_path.write_text(orig_state, encoding="utf-8")
-            
-    res6 = run_test(
-        "NEG-06: Broken Internal Wikilink Injection",
-        mut_broken_route,
-        [py, "scripts/validate_v2_content.py"],
-        "Broken wikilink"
-    )
-    results.append(res6)
-
-    # Compile report
-    all_passed = all(r["passed"] for r in results)
-    verdict = "PASS" if all_passed else "FAIL"
-    
-    rows = []
-    for r in results:
-        rows.append(f"| **{r['name']}** | Exit Code {r['exit_code']} (Failed as expected) | {r['error_snippet'][:120]}... | **PASS (Caught)** |")
-        
-    report = f"""# BÁO CÁO KIỂM THỬ PHỦ ĐỊNH CỔNG NỀN TẢNG (GATE NEGATIVE TESTS)
-
-**Thời gian thực hiện:** 2026-08-30  
-**Người thực hiện:** Automated Security & Validation Test Suite  
-**Trạng thái kiểm thử:** **{verdict}** (6/6 Kịch bản lỗi được phát hiện chính xác)
-
----
-
-## 1. Mục Đích Kiểm Thử (Objective)
-
-Chứng minh rằng hệ thống kiểm tra không bị "dương tính giả" (False Positive), và mỗi khi có bất kỳ sai phạm nào xảy ra trong mã nguồn hoặc siêu dữ liệu, bộ công cụ kiểm thử sẽ lập tức chặn lại và báo lỗi chi tiết.
-
----
-
-## 2. Bảng Kết Quả 6 Kịch Bản Lỗi Cố Ý (Injected Faults)
-
-| Kịch Bản Lỗi Tiêm Vào | Phản Hồi Của Bộ Kiểm Thử | Trích Đoạn Báo Lỗi | Đánh Giá |
-| :--- | :--- | :--- | :---: |
-{chr(10).join(rows)}
-
----
-
-## 3. Kết Luận (Verdict)
-
-Toàn bộ 6 cổng kiểm thử hoạt động nhạy bén và chính xác 100%. Mọi đột biến kiểm thử đã được hoàn nguyên về trạng thái sạch sẽ.
-"""
-
-    OUTPUT_MD.write_text(report, encoding="utf-8")
-    print(f"\nGenerated {OUTPUT_MD} with verdict: {verdict}")
 
 if __name__ == "__main__":
-    main()
+    sys.exit(0 if main() else 1)

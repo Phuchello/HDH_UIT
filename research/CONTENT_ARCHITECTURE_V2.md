@@ -27,7 +27,8 @@
 ┌──────────────────┐            ┌──────────────────┐            ┌──────────────────┐
 │   PRODUCT A:     │            │   PRODUCT B:     │            │   PRODUCT C:     │
 │  THEORY BOOK     │            │    LAB BOOK      │            │  WEB COMPANION   │
-│  (A4 Print PDF)  │            │  (A4 Print PDF)  │            │ (Quartz SSG)     │
+│  (A4 Print PDF)  │            │  (A4 Print PDF)  │            │ (Custom Static   │
+│                  │            │                  │            │  Generator)      │
 │  - Deep Theory   │            │  - Lab 1 -> 6    │            │ - Full Search    │
 │  - Worked Ex     │            │  - it007sh Study │            │ - Local Graph    │
 │  - Review Matrix │            │  - POSIX C Specs │            │ - Offline KaTeX  │
@@ -102,7 +103,7 @@ content/
                |                               |
                v                               v
 +------------------------------+ +------------------------------+
-|   PDF & Print HTML Pipeline  | |     Quartz Web Generator     |
+|   PDF & Print HTML Pipeline  | |   Custom Web Generator       |
 |     (scripts/build.js)       | |    (scripts/build_web.py)    |
 +--------------+---------------+ +--------------+---------------+
                |                               |

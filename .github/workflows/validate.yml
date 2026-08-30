@@ -2,7 +2,7 @@ name: Validate Handbook Repository
 
 on:
   push:
-    branches: [ main, release/* ]
+    branches: [ main, release/*, v2/complete-theory-labs ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -30,6 +30,7 @@ jobs:
 
       - name: Run Repository Validation Suite
         run: |
+          python scripts/generate_foundation_gate.py
           python scripts/validate.py
           python scripts/validate_final.py
           python scripts/technical_checks.py --compile

@@ -4,12 +4,12 @@
 # ==============================================================================
 
 summary:
-  total_questions: 64
-  source_verified: 64
-  mapped_questions: 64
+  total_questions: 60
+  source_verified: 60
+  mapped_questions: 60
   unmapped_questions: 0
   drafted_questions: 11  # Chapter 1
-  not_written_questions: 53 # Chapters 2-9
+  not_written_questions: 49 # Chapters 2-9
 
 questions:
   # Chương 1 - ThS. Phan Đình Duy (Cau hoi chuong 1 HDH.docx)

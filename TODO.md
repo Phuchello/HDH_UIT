@@ -19,7 +19,7 @@
 ## Giai Đoạn 2: Xử Lý Kiểm Toán GLM & Hoàn Thiện Nền Tảng SSOT
 - [x] **AUD-V2-01:** Xây dựng Sổ đăng ký nguồn bất biến toàn cầu `content/sources/registry.yaml` và `scripts/validate_sources.py`.
 - [x] **AUD-V2-02:** Chuyển toàn bộ nguyên mẫu HTML viết tay sang `archive/web-prototype-v2/`; xác lập `content/` là nguồn duy nhất.
-- [x] **AUD-V2-03:** Thiết lập cấu hình Quartz 4 (`quartz.config.ts`, `quartz.layout.ts`, `package.json`) và kịch bản `scripts/build_web.py`.
+- [x] **AUD-V2-03:** Thiết lập bộ sinh web tĩnh tùy biến tất định (`scripts/build_web.py`, `package.json`); Quartz CLI là tùy chọn thông tin, chưa triển khai.
 - [x] **AUD-V2-04:** Tự động sinh `search_index.json` và `graph_data.json` từ toàn bộ Markdown trong `content/`; loại bỏ liên kết chết.
 - [x] **AUD-V2-05:** Loại bỏ toàn bộ nạp CDN bên ngoài tại runtime; đóng gói KaTeX/MathJax cục bộ.
 - [x] **AUD-V2-06 & AUD-V2-07:** Phân loại đề thi chuẩn xác (`RECONSTRUCTED_PRACTICE`), xây dựng schema kiểm tra siêu dữ liệu đề thi.

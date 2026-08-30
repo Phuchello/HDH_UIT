@@ -4,7 +4,7 @@
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
 **Giai đoạn hiện tại (Current Phase):** `V2_FOUNDATION_LOCKED_READY_TO_SCALE_CONTENT`  
 **Sẵn sàng mở rộng nội dung (Ready to Scale Content):** `YES` (Đã vượt qua cổng kiểm toán nền tảng tự động `scripts/generate_foundation_gate.py`)  
-**Hành động tiếp theo chính xác (Exact Next Action):** Soạn thảo chính thức các Chương 2–9 (`content/theory/`), Bài Lab 2–6 (`content/labs/`) và các ngân hàng câu hỏi còn lại từ kho bằng chứng đã khóa trong `content/sources/registry.yaml`.  
+**Hành động tiếp theo chính xác (Exact Next Action):** Luna Ultra authors canonical Theory Batch 1: Chapters 1–4 + Midterm Review.
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-08-30  
 
@@ -42,7 +42,7 @@ Một kho dữ liệu nguồn duy nhất (**Single Source of Truth** tại thư 
 | [`research/RESEARCH_GATE_QA.md`](research/RESEARCH_GATE_QA.md) | Báo cáo kiểm toán nghiên cứu định lượng tự động tính toán 100% từ cấu trúc dữ liệu. | `PASS` |
 | [`research/GATE_NEGATIVE_TESTS.md`](research/GATE_NEGATIVE_TESTS.md) | Báo cáo kiểm thử phủ định 6 kịch bản lỗi cố ý (6/6 phát hiện chính xác). | `PASS` |
 | [`research/SSOT_BUILD_PROOF.md`](research/SSOT_BUILD_PROOF.md) | Báo cáo thực nghiệm chứng minh cơ chế nguồn đơn nhất tất định. | `PASS` |
-| [`research/data/slide_coverage.yaml`](research/data/slide_coverage.yaml) | Dữ liệu cấu trúc 14 slide decks (721 trang vật lý: 660 content, 61 non-content). | `VERIFIED` |
+| [`research/data/slide_coverage.yaml`](research/data/slide_coverage.yaml) | Dữ liệu cấu trúc 14 slide decks (721 trang vật lý: 665 content, 56 non-content). | `VERIFIED` |
 | [`research/data/official_review_questions.yaml`](research/data/official_review_questions.yaml) | Dữ liệu cấu trúc 60 câu hỏi ôn tập chính thức phân theo từng chương. | `VERIFIED` |
 | [`research/data/exam_evidence.yaml`](research/data/exam_evidence.yaml) | Dữ liệu cấu trúc 20 hồ sơ đề thi thật có đối soát mã băm và tệp PDF gốc. | `VERIFIED` |
 | [`content/sources/registry.yaml`](content/sources/registry.yaml) | Sổ đăng ký 61 mã định danh tài liệu nguồn bất biến toàn cầu. | `VERIFIED` |

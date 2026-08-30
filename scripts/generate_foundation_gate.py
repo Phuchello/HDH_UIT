@@ -1,131 +1,71 @@
 #!/usr/bin/env python3
-"""
-scripts/generate_foundation_gate.py
-Executes full V2 test suite, collects machine-readable verification metrics,
-evaluates all foundation criteria, and generates research/V2_FOUNDATION_GATE.md.
-Gate FAILS if any required invariant is violated.
-"""
+"""Run the foundation gates and generate a truthful machine-readable report."""
 
-import os
-import sys
+from __future__ import annotations
+
 import subprocess
-import json
+import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
-sys.stdout.reconfigure(encoding='utf-8')
-
 ROOT = Path(__file__).resolve().parent.parent
-OUTPUT_MD = ROOT / "research" / "V2_FOUNDATION_GATE.md"
+REPORT = ROOT / "research/V2_FOUNDATION_GATE.md"
 
-def run_step(cmd_args, name):
-    print(f"  -> Running {name}...")
-    res = subprocess.run(cmd_args, cwd=ROOT, capture_output=True, text=True)
-    return {
-        "name": name,
-        "exit_code": res.returncode,
-        "stdout": res.stdout,
-        "stderr": res.stderr,
-        "passed": res.returncode == 0
-    }
 
-def generate_foundation_gate():
-    print(">>> Generating Machine-Audited V2 Foundation Gate...")
-    
-    python_exec = sys.executable
-    
-    # 1. Validate Sources
-    step_sources = run_step([python_exec, "scripts/validate_sources.py"], "validate_sources")
-    
-    # 2. Check Public Hygiene
-    step_hygiene = run_step([python_exec, "scripts/check_public_hygiene.py"], "check_public_hygiene")
-    
-    # 3. Validate Canonical Content & Exam Schemas
-    step_content = run_step([python_exec, "scripts/validate_v2_content.py"], "validate_v2_content")
-    
-    # 4. Verify Research Gates (Slide, Questions, Exams, Hashes)
-    step_research = run_step([python_exec, "scripts/verify_research_gates.py"], "verify_research_gates")
-    
-    # 5. Build Web & SSOT Verification
-    step_build = run_step([python_exec, "scripts/build_web.py"], "build_web")
-    
-    # 6. Check Quartz Architecture Truthfulness
-    # As audited, the repository uses our deterministic Custom SSG (scripts/build_web.py)
-    # rather than an installed Quartz CLI package.
-    quartz_installed = (ROOT / "node_modules" / "@jackyzha0" / "quartz").exists() or (ROOT / "quartz" / "cli.js").exists()
-    real_quartz_status = "PASS" if quartz_installed else "NOT_IMPLEMENTED"
-    site_generator_type = "QUARTZ_4_CLI" if quartz_installed else "CUSTOM_STATIC_GENERATOR"
-    site_generator_pass = step_build["passed"]
-    
-    # Evaluate All Foundation Invariants
-    invariants = [
-        ("REAL_SSOT", step_build["passed"], "100% trang web tĩnh sinh tự động từ Markdown content/"),
-        ("SITE_GENERATOR", site_generator_pass, f"Công cụ sinh web tĩnh hoạt động tất định ({site_generator_type})"),
-        ("REAL_QUARTZ_CLI", real_quartz_status == "PASS", f"Quartz CLI Package: {real_quartz_status} (Đã phân loại trung thực là {site_generator_type})"),
-        ("SOURCE_REGISTRY", step_sources["passed"], "Sổ đăng ký 61 nguồn tài liệu bất biến trong registry.yaml"),
-        ("SOURCE_COLLISIONS_ZERO", step_sources["passed"], "Không có mã nguồn nào bị trùng lặp"),
-        ("PUBLIC_PATH_LEAKS_ZERO", step_hygiene["passed"], "Không có đường dẫn máy trạm hoặc công cụ AI nào bị rò rỉ"),
-        ("EXAM_SCHEMAS_VALID", step_content["passed"], "Phân loại đề thi & schema theo dõi độ trung thực hợp lệ"),
-        ("RUBRIC_MISLABELS_ZERO", step_content["passed"], "Không có barem chính thức giả mạo không có căn cứ"),
-        ("BROKEN_SITE_LINKS_ZERO", step_content["passed"], "Không có liên kết nội bộ bị chết"),
-        ("RESEARCH_GATE_QA", step_research["passed"], "Báo cáo kiểm toán nghiên cứu định lượng tự động đạt PASS")
+def run(name, command):
+    result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
+    return {"name": name, "ok": result.returncode == 0, "output": (result.stdout + "\n" + result.stderr).strip()}
+
+
+def main():
+    py = sys.executable
+    steps = [
+        run("validate_sources", [py, "scripts/validate_sources.py"]),
+        run("check_public_hygiene", [py, "scripts/check_public_hygiene.py"]),
+        run("validate_v2_content", [py, "scripts/validate_v2_content.py"]),
+        run("build_web", [py, "scripts/build_web.py"]),
+        run("validate_site_routes", [py, "scripts/validate_site_routes.py"]),
+        run("renderer_stress_test", [py, "scripts/stress_test_web_renderer.py"]),
+        run("negative_tests", [py, "scripts/run_negative_tests.py"]),
+        run("verify_research_gates", [py, "scripts/verify_research_gates.py"]),
     ]
-    
-    # Overall Foundation Gate Condition
-    # All functional and evidence invariants must pass, and generator must be truthful
-    overall_pass = (
-        step_sources["passed"] and
-        step_hygiene["passed"] and
-        step_content["passed"] and
-        step_research["passed"] and
-        step_build["passed"]
-    )
-    
-    gate_verdict = "PASS" if overall_pass else "FAIL"
-    ready_to_scale = "YES" if overall_pass else "NO"
-    
-    table_rows = []
-    for code, passed, desc in invariants:
-        status_text = "**PASS**" if passed else ("**INFO**" if code == "REAL_QUARTZ_CLI" else "**FAIL**")
-        table_rows.append(f"| **{code}** | {desc} | {status_text} |")
-
+    passed = all(step["ok"] for step in steps)
+    generator = "CUSTOM_STATIC_GENERATOR"
+    quartz = "IMPLEMENTED" if (ROOT / "node_modules/@jackyzha0/quartz").exists() else "NOT_IMPLEMENTED / INFO"
+    rows = []
+    for step in steps:
+        rows.append(f"| `{step['name']}` | {'PASS' if step['ok'] else 'FAIL'} |")
+    rows.append(f"| `REAL_QUARTZ_CLI` | INFO — {quartz} (does not gate readiness) |")
     report = f"""# V2 FOUNDATION GATE REPORT — HDH_UIT
-# Machine-Generated Audit by scripts/generate_foundation_gate.py
 
-**Thời gian thẩm định:** 2026-08-30  
-**Người thẩm định:** Automated Engineering Gate Runner  
-**Trạng thái Cổng Nền tảng (Foundation Gate):** **{gate_verdict}**  
-**Sẵn sàng mở rộng nội dung (Ready to Scale Content):** **{ready_to_scale}**  
-**Kiểu bộ sinh web (Site Generator):** **{site_generator_type}** ({'Hoạt động chuẩn mực' if site_generator_pass else 'Lỗi'})
+**Generated:** {datetime.now(timezone.utc).isoformat()}
+**Site generator:** `{generator}`
+**Foundation Gate:** **{'PASS' if passed else 'FAIL'}**
+**Ready to scale content:** **{'YES' if passed else 'NO'}**
 
----
+The custom generator is the declared architecture. Quartz CLI is informational only. Gate decisions below are based on executed validators and their exit codes; no fixed page/question totals are embedded in this report.
 
-## 1. Bảng Tiêu Chí Khóa Cổng Nền Tảng (Machine-Audited Checklist)
+| Check | Result |
+|---|:---:|
+{chr(10).join(rows)}
 
-| Tiêu Chí Kiểm Toán | Diễn Giải Chi Tiết & Bằng Chứng | Trạng Thái |
-| :--- | :--- | :---: |
-{chr(10).join(table_rows)}
+## Evidence outputs
 
----
+- `research/RESEARCH_GATE_QA.md` — computed registry, source-mode, slide-page, and question metrics.
+- `research/data/source_verification.json` — portable `REPO_ONLY` or explicit `LOCAL_SOURCE_VERIFICATION` results.
+- `research/data/slide_coverage_expanded.json` — one record for every expanded physical slide page, with gap/duplicate checks.
+- `research/data/route_validation.json` — generated-site internal `href`/`src` crawl.
+- `research/WEB_RENDERER_STRESS_TEST.md` — temporary realistic-fixture build and HTML structure test.
+- `research/GATE_NEGATIVE_TESTS.md` — injected defects that must produce non-zero validator exits.
 
-## 2. Minh Bạch Kiến Trúc Công Cụ Sinh Web (Architecture Transparency)
+## Milestone
 
-- **Thực tế bộ sinh web:** Dự án sử dụng bộ sinh tĩnh chuẩn hóa chuyên biệt `scripts/build_web.py` (Custom Static Generator) để biên dịch 100% cây Markdown chính tắc trong `content/` thành các trang web tĩnh trong `public/site/`.
-- **Cấu hình giao diện:** Web Companion áp dụng bố cục học thuật 3 cột lấy cảm hứng từ Quartz 4 (Explorer cây điều hướng, Khung đọc tài liệu, Đồ thị tri thức ngữ nghĩa tự động sinh, Mục lục động và Tìm kiếm toàn văn).
-- **Tính toán ngoại tuyến:** Toàn bộ công thức toán học và bảng thuật ngữ được kết xuất ngoại tuyến không phụ thuộc vào CDN bên ngoài.
-
----
-
-## 3. Quyết Định Chuyển Giai Đoạn (Milestone Transition)
-
-- **Giai đoạn trước:** `V2_FOUNDATION_REPAIR_IN_PROGRESS`
-- **Giai đoạn hiện tại:** `{'V2_FOUNDATION_LOCKED_READY_TO_SCALE_CONTENT' if overall_pass else 'V2_FOUNDATION_REPAIR_IN_PROGRESS'}`
-- **Hành động tiếp theo chính xác:** Soạn thảo chính thức các Chương 2–9 (`content/theory/`), Bài Lab 2–6 (`content/labs/`) và các ngân hàng câu hỏi còn lại từ kho bằng chứng đã khóa trong `content/sources/registry.yaml`.
+Current implementation is ready for Chapters 2–9 and Labs 2–6 only when this report is **PASS** and the report’s open-blocker/open-major count is zero. This gate does not author those materials.
 """
+    REPORT.write_text(report, encoding="utf-8")
+    print(f"FOUNDATION GATE: {'PASS' if passed else 'FAIL'}")
+    return passed
 
-    OUTPUT_MD.write_text(report, encoding="utf-8")
-    print(f"Generated {OUTPUT_MD} with verdict: {gate_verdict}")
-    return overall_pass
 
 if __name__ == "__main__":
-    success = generate_foundation_gate()
-    sys.exit(0 if success else 1)
+    sys.exit(0 if main() else 1)

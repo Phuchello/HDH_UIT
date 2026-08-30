@@ -1,230 +1,219 @@
 #!/usr/bin/env python3
-"""
-scripts/verify_research_gates.py
-Verifies all research evidence gates dynamically from structured data files and local source files.
-ZERO hardcoded success values.
-"""
+"""Verify V2 research evidence without hidden workstation paths or magic totals."""
 
-import os
-import sys
+from __future__ import annotations
+
 import argparse
 import hashlib
+import json
+import subprocess
+import sys
+from datetime import datetime, timezone
 from pathlib import Path
-
-sys.stdout.reconfigure(encoding='utf-8')
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "research" / "data"
 REGISTRY_PATH = ROOT / "content" / "sources" / "registry.yaml"
 OUTPUT_MD = ROOT / "research" / "RESEARCH_GATE_QA.md"
+VERIFICATION_JSON = DATA_DIR / "source_verification.json"
+EXPANDED_COVERAGE_JSON = DATA_DIR / "slide_coverage_expanded.json"
 
-def parse_simple_yaml_list(path):
-    """Parses list of dicts from simple YAML file"""
-    if not path.exists():
-        return []
-    items = []
-    current = {}
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f:
-            l = line.rstrip()
-            if l.strip().startswith("- "):
-                if current:
-                    items.append(current)
-                current = {}
-                rest = l.strip()[2:].strip()
-                if ":" in rest:
-                    k, v = rest.split(":", 1)
-                    k = k.strip()
-                    v = v.strip().strip('"\'')
-                    current[k] = v
-            elif ":" in l and current:
-                k, v = l.strip().split(":", 1)
-                k = k.strip()
-                v = v.strip().strip('"\'')
-                if v == "null": v = None
-                elif v == "true": v = True
-                elif v == "false": v = False
-                elif v.isdigit(): v = int(v)
-                current[k] = v
-        if current:
-            items.append(current)
-    return items
+sys.stdout.reconfigure(encoding="utf-8")
 
-def parse_slide_coverage(path):
-    sections = []
-    current_section = {}
-    physical_pages_total = 0
-    
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f:
-            l = line.strip()
-            if l.startswith("physical_pages:") and "total" not in l:
-                physical_pages_total += int(l.split(":")[1].strip())
-            elif l.startswith("- page_range:"):
-                if current_section:
-                    sections.append(current_section)
-                current_section = {"page_range": l.split(":")[1].strip().strip('"\'')}
-            elif ":" in l and current_section:
-                k, v = l.split(":", 1)
-                k = k.strip()
-                v = v.strip().strip('"\'')
-                if v.isdigit(): v = int(v)
-                current_section[k] = v
-        if current_section:
-            sections.append(current_section)
-            
-    content_pages = sum(s.get("page_count", 0) for s in sections if s.get("classification") == "CONTENT")
-    non_content_pages = sum(s.get("page_count", 0) for s in sections if s.get("classification") == "NON_CONTENT")
-    mapped_content_pages = sum(s.get("page_count", 0) for s in sections if s.get("classification") == "CONTENT" and s.get("mapping_status") == "MAPPED")
-    unmapped_content_pages = sum(s.get("page_count", 0) for s in sections if s.get("classification") == "CONTENT" and s.get("mapping_status") == "UNMAPPED")
-    drafted_content_pages = sum(s.get("page_count", 0) for s in sections if s.get("classification") == "CONTENT" and s.get("content_status") == "DRAFTED")
-    
+from research_utils import expand_coverage, parse_exams, parse_page_range, parse_questions, parse_registry, parse_slide_coverage
+
+
+def _page_count(path: Path):
+    if path.suffix.lower() != ".pdf":
+        return None
+    try:
+        from pypdf import PdfReader
+        return len(PdfReader(str(path)).pages)
+    except Exception:
+        return None
+
+
+def _local_source_verification(registry, source_root: Path | None):
+    local_mode = source_root is not None
+    if local_mode and not source_root.is_dir():
+        raise ValueError(f"--source-root is not a directory: {source_root}")
+    rows = []
+    for source in registry:
+        if source.get("tier") != "A":
+            continue
+        filename = source.get("exact_filename")
+        found = list(source_root.rglob(str(filename))) if local_mode and filename else []
+        path = found[0] if found else None
+        actual_sha = hashlib.sha256(path.read_bytes()).hexdigest() if path else None
+        actual_pages = _page_count(path) if path else None
+        expected_sha = source.get("sha256")
+        expected_pages = source.get("page_count")
+        rows.append({
+            "source_id": source.get("id"),
+            "file_present": bool(path),
+            "actual_sha256": actual_sha,
+            "hash_match": (actual_sha == expected_sha) if path and expected_sha else None,
+            "actual_page_count": actual_pages,
+            "page_count_match": (actual_pages == expected_pages) if actual_pages is not None and expected_pages is not None else None,
+            "verification_timestamp": datetime.now(timezone.utc).isoformat(),
+        })
+    VERIFICATION_JSON.write_text(json.dumps({
+        "mode": "LOCAL_SOURCE_VERIFICATION" if local_mode else "REPO_ONLY",
+        "sources": rows,
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if not local_mode:
+        return rows, True
+    return rows, all(r["file_present"] and r["hash_match"] is True and (r["page_count_match"] in (True, None)) for r in rows)
+
+
+def _coverage_metrics(decks, registry):
+    slide_sources = {s.get("id"): s for s in registry if s.get("type") == "official_slide"}
+    physical_from_registry = sum(int(s.get("page_count") or 0) for s in slide_sources.values())
+    expanded = expand_coverage(decks)
+    duplicate_pages = []
+    gaps = []
+    schema_errors = []
+    deck_results = []
+    for deck in decks:
+        sid = deck.get("source_id")
+        expected = int(deck.get("physical_pages") or 0)
+        pages = []
+        malformed = []
+        for section in deck.get("sections", []):
+            section_pages = parse_page_range(section.get("page_range"))
+            if section.get("page_count") != len(section_pages):
+                malformed.append(section.get("page_range"))
+            for field in ("topic", "classification", "mapping_status", "v2_destination", "content_status"):
+                if section.get(field) in (None, ""):
+                    schema_errors.append(f"{sid}:{section.get('page_range')}:{field}")
+            pages.extend(section_pages)
+        seen = set()
+        for page in pages:
+            if page in seen:
+                duplicate_pages.append(f"{sid}:{page}")
+            seen.add(page)
+        expected_set = set(range(1, expected + 1))
+        gaps.extend(f"{sid}:{p}" for p in sorted(expected_set - seen))
+        gaps.extend(f"{sid}:{p}(out-of-range)" for p in sorted(seen - expected_set))
+        deck_results.append({
+            "source_id": sid,
+            "physical_pages": expected,
+            "covered_pages": len(pages),
+            "coverage_complete": seen == expected_set and not malformed,
+            "malformed_ranges": malformed,
+        })
+        if sid in slide_sources and int(slide_sources[sid].get("page_count") or 0) != expected:
+            gaps.append(f"{sid}:registry_page_count_mismatch")
+    content = sum(1 for p in expanded if p.get("classification") == "CONTENT")
+    non_content = sum(1 for p in expanded if p.get("classification") == "NON_CONTENT")
+    mapped = sum(1 for p in expanded if p.get("classification") == "CONTENT" and p.get("mapping_status") == "MAPPED")
+    unmapped = sum(1 for p in expanded if p.get("classification") == "CONTENT" and p.get("mapping_status") != "MAPPED")
+    drafted = sum(1 for p in expanded if p.get("classification") == "CONTENT" and p.get("content_status") == "DRAFTED")
+    EXPANDED_COVERAGE_JSON.write_text(json.dumps({
+        "schema": "one-record-per-physical-page",
+        "records": expanded,
+        "coverage_gaps": gaps,
+        "duplicate_pages": duplicate_pages,
+        "schema_errors": schema_errors,
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return {
-        "physical_pages_total": physical_pages_total,
-        "content_pages_total": content_pages,
-        "non_content_pages_total": non_content_pages,
-        "mapped_content_pages": mapped_content_pages,
-        "unmapped_content_pages": unmapped_content_pages,
-        "drafted_content_pages": drafted_content_pages
+        "physical_pages_total": physical_from_registry,
+        "coverage_pages_total": len(expanded),
+        "content_pages_total": content,
+        "non_content_pages_total": non_content,
+        "mapped_content_pages": mapped,
+        "unmapped_content_pages": unmapped,
+        "drafted_content_pages": drafted,
+        "coverage_gaps": gaps,
+        "duplicate_pages": duplicate_pages,
+        "schema_errors": schema_errors,
+        "deck_results": deck_results,
     }
+
+
+def _run(cmd):
+    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+    return result.returncode == 0, (result.stdout + "\n" + result.stderr).strip()
+
 
 def verify_gates(source_root=None):
     print(">>> Executing Evidence-Driven Research Gate Verification...")
-    
-    # 1. Parse Registry
-    registry_sources = parse_simple_yaml_list(REGISTRY_PATH)
-    total_registry_sources = len(registry_sources)
-    registry_ids = [s.get("id") for s in registry_sources if s.get("id")]
-    unique_registry_ids = len(set(registry_ids))
-    duplicate_registry_ids = total_registry_sources - unique_registry_ids
-    
-    # 2. Local Source File Verification
-    verified_local_count = 0
-    hash_matched_count = 0
-    
-    user_home = Path.home()
-    search_dirs = [
-        source_root,
-        str(user_home / "Downloads" / "drive-download-20260802T090312Z-1-001"),
-        str(user_home / "Downloads" / "drive-download-20260802T090317Z-1-001"),
-        str(user_home / "Downloads")
-    ]
-    search_dirs = [d for d in search_dirs if d and os.path.exists(d)]
-    
-    tier_a_sources = [s for s in registry_sources if s.get("tier") == "A"]
-    for s in tier_a_sources:
-        fname = s.get("exact_filename")
-        expected_sha = s.get("sha256")
-        found_path = None
-        for d in search_dirs:
-            p = os.path.join(d, fname)
-            if os.path.exists(p):
-                found_path = p
-                break
-        if found_path:
-            verified_local_count += 1
-            with open(found_path, "rb") as f:
-                actual_sha = hashlib.sha256(f.read()).hexdigest()
-            if actual_sha == expected_sha:
-                hash_matched_count += 1
+    registry = parse_registry(REGISTRY_PATH)
+    registry_ids = [s.get("id") for s in registry if s.get("id")]
+    duplicate_ids = len(registry_ids) - len(set(registry_ids))
+    registry_schema_ok = bool(registry) and duplicate_ids == 0 and all(s.get("id") and s.get("title") and s.get("type") for s in registry)
 
-    # 3. Slide Coverage
-    slide_stats = parse_slide_coverage(DATA_DIR / "slide_coverage.yaml")
-    
-    # 4. Questions
-    questions = parse_simple_yaml_list(DATA_DIR / "official_review_questions.yaml")
-    total_q = len(questions)
-    mapped_q = sum(1 for q in questions if q.get("mapping_status") == "MAPPED")
-    unmapped_q = sum(1 for q in questions if q.get("mapping_status") == "UNMAPPED")
-    drafted_q = sum(1 for q in questions if q.get("content_status") == "DRAFTED")
+    verification_rows, source_verification_ok = _local_source_verification(registry, Path(source_root).resolve() if source_root else None)
+    decks = parse_slide_coverage(DATA_DIR / "slide_coverage.yaml")
+    slides = _coverage_metrics(decks, registry)
+    questions = parse_questions(DATA_DIR / "official_review_questions.yaml")
+    required_question_fields = ("source_id", "question_id", "source_locator", "topic", "mapping_status", "v2_destination", "content_status")
+    question_schema_ok = bool(questions) and all(all(q.get(k) not in (None, "") for k in required_question_fields) for q in questions)
+    question_ids = [q.get("question_id") for q in questions]
+    question_id_ok = len(question_ids) == len(set(question_ids))
+    mapped_questions = sum(q.get("mapping_status") == "MAPPED" for q in questions)
+    unmapped_questions = len(questions) - mapped_questions
+    drafted_questions = sum(q.get("content_status") == "DRAFTED" for q in questions)
 
-    # 5. Exams
-    exams = parse_simple_yaml_list(DATA_DIR / "exam_evidence.yaml")
-    total_exams = len(exams)
-    verified_exam_files = sum(1 for e in exams if e.get("source_file_present") is True)
-    reconstructed_practice_exams = sum(1 for e in exams if e.get("classification") == "RECONSTRUCTED_PRACTICE")
-    unverified_reference_exams = sum(1 for e in exams if e.get("classification") == "UNVERIFIED_REFERENCE")
+    exams = parse_exams(DATA_DIR / "exam_evidence.yaml")
+    exam_schema_ok = bool(exams) and all(e.get("exam_id") and e.get("source_id") and e.get("classification") for e in exams)
+    hygiene_ok, _ = _run([sys.executable, "scripts/check_public_hygiene.py"])
+    content_ok, _ = _run([sys.executable, "scripts/validate_v2_content.py"])
 
-    # 6. Public Hygiene & Content Validations
-    import subprocess
-    hygiene_res = subprocess.run([sys.executable, str(ROOT / "scripts" / "check_public_hygiene.py")], capture_output=True, text=True)
-    hygiene_pass = hygiene_res.returncode == 0
-    
-    content_val_res = subprocess.run([sys.executable, str(ROOT / "scripts" / "validate_v2_content.py")], capture_output=True, text=True)
-    content_val_pass = content_val_res.returncode == 0
-
-    all_pass = (
-        duplicate_registry_ids == 0 and
-        slide_stats["unmapped_content_pages"] == 0 and
-        unmapped_q == 0 and
-        slide_stats["physical_pages_total"] == 721 and
-        (slide_stats["content_pages_total"] + slide_stats["non_content_pages_total"]) == 721 and
-        hash_matched_count == len(tier_a_sources) and
-        hygiene_pass and
-        content_val_pass
+    slide_invariants_ok = (
+        bool(decks)
+        and not slides["coverage_gaps"]
+        and not slides["duplicate_pages"]
+        and not slides["schema_errors"]
+        and slides["physical_pages_total"] == slides["coverage_pages_total"]
+        and slides["content_pages_total"] + slides["non_content_pages_total"] == slides["physical_pages_total"]
+        and slides["unmapped_content_pages"] == 0
     )
-    
-    gate_status = "PASS" if all_pass else "FAIL"
+    questions_ok = question_schema_ok and question_id_ok and unmapped_questions == 0
+    overall = all((registry_schema_ok, source_verification_ok, slide_invariants_ok, questions_ok, exam_schema_ok, hygiene_ok, content_ok))
+    status = lambda ok: "PASS" if ok else "FAIL"
+    mode = "LOCAL_SOURCE_VERIFICATION" if source_root else "REPO_ONLY"
+    report = f"""# RESEARCH GATE QUALITY ASSURANCE REPORT (HDH_UIT V2)
 
-    report_content = f"""# RESEARCH GATE QUALITY ASSURANCE REPORT (HDH_UIT V2)
+**Thời gian thẩm định:** {datetime.now(timezone.utc).date().isoformat()}
+**Chế độ:** `{mode}`
+**GATE STATUS:** **{"PASS" if overall else "FAIL"}**
 
-**Thời gian thẩm định:** 2026-08-30  
-**Trạng thái Cổng Nghiên cứu (Gate Status):** **{gate_status}**  
-**Phương pháp:** Tính toán động 100% từ cấu trúc dữ liệu (`slide_coverage.yaml`, `official_review_questions.yaml`, `exam_evidence.yaml`, `registry.yaml`).
+All totals below are computed from registry records, expanded slide-page records, and question records. The former summary targets are informational only and are never used as gate inputs.
 
----
+| Metric | Actual | Requirement | Result |
+|---|---:|---|:---:|
+| Registered sources | {len(registry)} | unique IDs and required schema | **{status(registry_schema_ok)}** |
+| Tier-A local files / hash checks | {sum(r['file_present'] for r in verification_rows)} / {sum(r['hash_match'] is True for r in verification_rows)} | REPO_ONLY is informational; LOCAL requires all hashes | **{status(source_verification_ok)}** |
+| Physical slide pages | {slides['physical_pages_total']} | sum of official-slide registry page counts | **PASS** |
+| Expanded coverage records | {slides['coverage_pages_total']} | exactly physical-page total | **{status(slides['coverage_pages_total'] == slides['physical_pages_total'])}** |
+| Content / non-content pages | {slides['content_pages_total']} / {slides['non_content_pages_total']} | sum equals physical total | **{status(slides['content_pages_total'] + slides['non_content_pages_total'] == slides['physical_pages_total'])}** |
+| Coverage gaps / duplicates / schema errors | {len(slides['coverage_gaps'])} / {len(slides['duplicate_pages'])} / {len(slides['schema_errors'])} | zero | **{status(not slides['coverage_gaps'] and not slides['duplicate_pages'] and not slides['schema_errors'])}** |
+| Unmapped content pages | {slides['unmapped_content_pages']} | zero | **{status(slides['unmapped_content_pages'] == 0)}** |
+| Drafted content pages | {slides['drafted_content_pages']} | informational current authored set | **INFO** |
+| Official question records | {len(questions)} | count of structured records | **{status(questions_ok)}** |
+| Mapped / unmapped questions | {mapped_questions} / {unmapped_questions} | zero unmapped; required fields | **{status(questions_ok)}** |
+| Drafted questions | {drafted_questions} | informational current authored set | **INFO** |
+| Exam evidence records | {len(exams)} | valid record schema | **{status(exam_schema_ok)}** |
+| Public hygiene | — | no forbidden paths | **{status(hygiene_ok)}** |
+| Canonical content validation | — | schema/rubric/wikilink checks | **{status(content_ok)}** |
 
-## 1. Bảng Chỉ Số Nghiên Cứu Định Lượng (Calculated Metrics)
+## Coverage integrity
 
-| Nhóm Chỉ Số | Tên Đo Lường | Giá Trị Thực Tế | Tiêu Chuẩn Đạt | Kết Quả |
-| :--- | :--- | :---: | :---: | :---: |
-| **Global Registry** | Tổng số nguồn đăng ký (`registry.yaml`) | **{total_registry_sources}** | >= 50 | **PASS** |
-| | Số ID duy nhất | **{unique_registry_ids}** | = Tổng số | **PASS** |
-| | Số ID trùng lặp (Collisions) | **{duplicate_registry_ids}** | 0 | **PASS** |
-| **Local File Verification** | Tệp Tier A quét thấy tại máy trạm | **{verified_local_count} / {len(tier_a_sources)}** | Toàn bộ tệp Tier A | **LOCAL_FILE_VERIFIED** |
-| | Tệp Tier A khớp mã băm SHA-256 | **{hash_matched_count} / {len(tier_a_sources)}** | 100% tệp hiện hữu | **HASH_VERIFIED** |
-| **Slide Coverage** | Tổng số trang vật lý (PHYSICAL_PAGES) | **{slide_stats['physical_pages_total']}** | 721 trang | **PASS** |
-| | Tổng số trang nội dung (CONTENT_PAGES) | **{slide_stats['content_pages_total']}** | 665 trang | **PASS** |
-| | Trang phi nội dung (NON_CONTENT_PAGES) | **{slide_stats['non_content_pages_total']}** | 56 trang | **PASS** |
-| | Trang nội dung đã định tuyến (MAPPED) | **{slide_stats['mapped_content_pages']}** | {slide_stats['content_pages_total']} (100%) | **TOPIC_MAPPED** |
-| | Trang nội dung chưa định tuyến (UNMAPPED) | **{slide_stats['unmapped_content_pages']}** | 0 | **PASS** |
-| | Trang nội dung đã viết (Chương 1) | **{slide_stats['drafted_content_pages']}** | 51 trang | **CONTENT_DRAFTED** |
-| **Official Questions** | Tổng số câu hỏi ôn tập chính thức | **{total_q}** | 64 câu hỏi | **PASS** |
-| | Câu hỏi đã định tuyến (MAPPED) | **{mapped_q}** | {total_q} (100%) | **SOURCE_VERIFIED** |
-| | Câu hỏi chưa định tuyến (UNMAPPED) | **{unmapped_q}** | 0 | **PASS** |
-| | Câu hỏi đã có lời giải mẫu (Chương 1) | **{drafted_q}** | 11 câu hỏi | **DRAFTED** |
-| **Exam Evidence** | Tổng số hồ sơ đề thi thật | **{total_exams}** | 20 đề thi | **PASS** |
-| | Đề thi có tệp PDF gốc kèm mã băm | **{verified_exam_files}** | 19 đề thi | **VERIFIED_SOURCE_FILE** |
-| | Đề thi thực luyện tái cấu trúc | **{reconstructed_practice_exams}** | 1 đề thi | **RECONSTRUCTED_PRACTICE** |
-| | Đề thi tham khảo chưa giải chi tiết | **{unverified_reference_exams}** | 19 đề thi | **UNVERIFIED_REFERENCE** |
-| **Public Hygiene** | Lỗi rò rỉ đường dẫn máy tính / AI tools | **0** | 0 | **PASS** |
-| **Content Schemas** | Lỗi schema đề thi, rubric, broken links | **0** | 0 | **PASS** |
+Every declared slide range is expanded into `research/data/slide_coverage_expanded.json`. Each deck is checked for malformed ranges, overlaps, gaps, and registry page-count mismatches.
+Coverage gaps: `{len(slides['coverage_gaps'])}`; duplicate physical pages: `{len(slides['duplicate_pages'])}`.
 
----
+## Source verification semantics
 
-## 2. Giải Quyết Mâu Thuẫn Số Trang Slide (721 vs 733)
-
-- **Nguyên nhân sai lệch lịch sử:** Số 733 trong các bản nháp trước đây là kết quả cộng nhầm số học (+12 trang).
-- **Kiểm chứng thực tế:** Tổng số trang vật lý của 14 bộ slide bài giảng chính thức (Week 01 – Week 14) được đọc và đếm trực tiếp qua `pypdf` là chính xác **721 trang** (57 + 57 + 64 + 56 + 34 + 46 + 58 + 16 + 55 + 32 + 67 + 72 + 50 + 57 = 721).
-- Trong đó: **{slide_stats['content_pages_total']} trang** là nội dung bài giảng chuyên môn (CONTENT_PAGES) và **{slide_stats['non_content_pages_total']} trang** là trang bìa, mục lục, trang phân cách và trang cảm ơn (NON_CONTENT_PAGES). Total: **{slide_stats['physical_pages_total']} trang**.
-
----
-
-## 3. Kết Luận & Quyết Định Cổng Nghiên Cứu
-
-Mọi chỉ số nghiên cứu được xác thực độc lập và định lượng tự động từ các tệp dữ liệu nguồn.
-
-**GATE STATUS:** **{gate_status}**
+`REPO_ONLY` validates registry/schema references and deliberately does not claim workstation files are present. `LOCAL_SOURCE_VERIFICATION` requires `--source-root`, locates exact filenames below that root, computes hashes, and records only portable IDs/results (never absolute paths) in `research/data/source_verification.json`.
 """
+    OUTPUT_MD.write_text(report, encoding="utf-8")
+    print(f"Generated {OUTPUT_MD} with status: {'PASS' if overall else 'FAIL'}")
+    return overall
 
-    OUTPUT_MD.write_text(report_content, encoding="utf-8")
-    print(f"Generated research/RESEARCH_GATE_QA.md with status: {gate_status}")
-    return all_pass
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source-root", help="Path to local source directory", default=None)
+    parser.add_argument("--source-root", help="Explicit local source directory for LOCAL_SOURCE_VERIFICATION")
     args = parser.parse_args()
-    
-    success = verify_gates(args.source_root)
-    sys.exit(0 if success else 1)
+    sys.exit(0 if verify_gates(args.source_root) else 1)

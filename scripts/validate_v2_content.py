@@ -51,12 +51,18 @@ def validate_content():
     known_doc_ids = set()
     md_files = list(CONTENT_DIR.glob("**/*.md"))
     
+    duplicate_ids = {}
     for md_file in md_files:
         txt = md_file.read_text(encoding="utf-8")
         meta, _ = parse_frontmatter(txt)
         doc_id = meta.get("id") or meta.get("exam_id")
         if doc_id:
+            duplicate_ids.setdefault(doc_id, []).append(md_file)
             known_doc_ids.add(doc_id)
+
+    for doc_id, paths in duplicate_ids.items():
+        if len(paths) > 1:
+            errors.append(f"Duplicate document ID '{doc_id}' in " + ", ".join(str(p.relative_to(ROOT)).replace("\\", "/") for p in paths))
             
     print(f"Discovered {len(known_doc_ids)} unique canonical document IDs.")
     
@@ -86,7 +92,7 @@ def validate_content():
                     errors.append(f"VERIFIED_ARCHIVE exam {rel_posix} requires duration_minutes and source_locator")
                     
         # Rubric integrity check (AUD-V2-08)
-        if "Barem Chấm Điểm Chính Thức" in body or "Barem chính thức" in body or 'type="OFFICIAL_RUBRIC"' in body:
+        if "Barem Chấm Điểm Chính Thức" in body or "Barem chính thức" in body or 'type="OFFICIAL_RUBRIC"' in body or "OFFICIAL_RUBRIC" in body:
             # Check if source locator is explicitly cited
             if "OFFICIAL_VERIFIED" not in meta.get("rubric_status", ""):
                 errors.append(f"Unverified 'Barem chính thức' claim in {rel_posix}. Use SELF_CHECK_RUBRIC instead.")
