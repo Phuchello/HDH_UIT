@@ -13,7 +13,7 @@ All Batch 1 theory documents live under `content/` and cite registered Tier-A so
 | Chapter 1 | `content/theory/ch01-overview.md` | 53 content pages mapped | CONTENT_DRAFTED |
 | Chapter 2 | `content/theory/ch02-structure.md` | 53 content pages mapped | CONTENT_DRAFTED |
 | Chapter 3 | `content/theory/ch03-process.md` | 60 content pages mapped | CONTENT_DRAFTED |
-| Chapter 4 | `content/theory/ch04-cpu-scheduling.md` | 123 content pages mapped | CONTENT_DRAFTED |
+| Chapter 4 | `content/theory/ch04-scheduling.md` | 123 content pages mapped | CONTENT_DRAFTED |
 | Midterm Review | `content/reviews/midterm.md` | 13 content pages mapped | CONTENT_DRAFTED |
 
 The page totals are expanded from the registered slide ranges (not copied from a summary target). Non-content cover/end pages remain metadata and are not marked drafted.

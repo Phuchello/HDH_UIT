@@ -232,14 +232,14 @@ decks:
         classification: "CONTENT"
         topic: "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
         mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch04-cpu-scheduling.md#1-vi-sao-can-dinh-thoi"
+        v2_destination: "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi"
         content_status: "CONTENT_DRAFTED"
       - page_range: "16-54"
         page_count: 39
         classification: "CONTENT"
         topic: "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
         mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch04-cpu-scheduling.md#2-cac-thuat-toan-co-ban"
+        v2_destination: "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban"
         content_status: "CONTENT_DRAFTED"
       - page_range: "55-56"
         page_count: 2
@@ -266,7 +266,7 @@ decks:
         classification: "CONTENT"
         topic: "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
         mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch04-cpu-scheduling.md#3-multilevel-queue-va-mlfq"
+        v2_destination: "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq"
         content_status: "CONTENT_DRAFTED"
       - page_range: "33-34"
         page_count: 2
@@ -293,7 +293,7 @@ decks:
         classification: "CONTENT"
         topic: "Định thời Thread (PCS/SCS), Đa xử lý (SMP/Affinity/Load balancing), Real-Time (RMS/EDF) & Linux CFS"
         mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch04-cpu-scheduling.md#4-thread-da-xu-ly-va-load-balancing"
+        v2_destination: "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing"
         content_status: "CONTENT_DRAFTED"
       - page_range: "45-46"
         page_count: 2
