@@ -10,6 +10,7 @@
     "validate:hygiene": "python scripts/check_public_hygiene.py",
     "validate:content": "python scripts/validate_v2_content.py",
     "validate:research": "python scripts/verify_research_gates.py",
+    "validate:ch05": "python scripts/validate_ch05_source_map.py",
     "validate:routes": "python scripts/validate_site_routes.py",
     "validate:negative": "python scripts/run_negative_tests.py",
     "validate:renderer": "python scripts/stress_test_web_renderer.py",

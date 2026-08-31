@@ -5,14 +5,14 @@
 
 summary:
   # Informational snapshot only; the verifier computes these from deck records.
-  total_slide_decks: 13
-  physical_pages_total: 719
-  content_pages_total: 665
-  non_content_pages_total: 54
-  mapped_content_pages: 665
+  total_slide_decks: 12
+  physical_pages_total: 713
+  content_pages_total: 664
+  non_content_pages_total: 49
+  mapped_content_pages: 664
   unmapped_content_pages: 0
   drafted_content_pages: 307  # Chapters 1–4 + Midterm Review (informational snapshot)
-  not_written_content_pages: 358 # Chapters 5–9 (verifier computes authoritative totals)
+  not_written_content_pages: 357 # Chapters 5–9 (verifier computes authoritative totals)
 
 decks:
   - source_id: "UIT-SLIDE-CH01-2024"
@@ -416,40 +416,6 @@ decks:
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"
 
-  - source_id: "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58"
-    exact_filename: "Week07-Chapter5-1 2024.pdf"
-    title: "Chương 5: Đồng bộ Tiến trình (local variant, chưa canonical)"
-    physical_pages: 58
-    sections:
-      - page_range: "1-3"
-        page_count: 3
-        classification: "NON_CONTENT"
-        topic: "Trang bìa & mục tiêu"
-        mapping_status: "MAPPED"
-        v2_destination: "None (Meta)"
-        content_status: "NOT_WRITTEN"
-      - page_range: "4-25"
-        page_count: 22
-        classification: "CONTENT"
-        topic: "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn"
-        mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch05-synchronization.md#1-critical-section"
-        content_status: "NOT_WRITTEN"
-      - page_range: "26-56"
-        page_count: 31
-        classification: "CONTENT"
-        topic: "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks"
-        mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch05-synchronization.md#2-hardware-mutex"
-        content_status: "NOT_WRITTEN"
-      - page_range: "57-58"
-        page_count: 2
-        classification: "NON_CONTENT"
-        topic: "Tổng kết phần 1"
-        mapping_status: "MAPPED"
-        v2_destination: "None (Meta)"
-        content_status: "NOT_WRITTEN"
-
   - source_id: "UIT-SLIDE-MIDTERM-REVIEW-2024"
     exact_filename: "#Week08-Midterm Review.pptx"
     title: "Slide Ôn tập Giữa kỳ IT007 Tuần 8 (canonical PPTX)"
@@ -519,55 +485,146 @@ decks:
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"
 
-  - source_id: "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55"
-    exact_filename: "Week09-Chapter5-2 2024.pdf"
-    title: "Chương 5: Đồng bộ Tiến trình (local variant, chưa canonical)"
-    physical_pages: 55
+  - source_id: "UIT-SLIDE-CH05-1-2024"
+    exact_filename: "#Week06-Chapter5-1 2024.pdf"
+    title: "Chương 5: Đồng bộ Tiến trình (Phần 1 - canonical 67 trang)"
+    physical_pages: 67
+    notes: "SOURCE_STRUCTURE_CONFLICT: Canonical user attachment has 67 pages (63 CONTENT + 4 NON_CONTENT). Older 58-page local variant Week07-Chapter5-1 2024.pdf is excluded from canonical coverage."
     sections:
-      - page_range: "1-2"
-        page_count: 2
+      - page_range: "1-3"
+        page_count: 3
         classification: "NON_CONTENT"
-        topic: "Trang bìa & mục tiêu"
+        topic: "Trang bìa, mục tiêu & nội dung Phần 1"
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"
-      - page_range: "3-53"
-        page_count: 51
+      - page_range: "4-15"
+        page_count: 12
         classification: "CONTENT"
-        topic: "Semaphore, classical synchronization problems and monitors"
+        topic: "5.1 Bối cảnh đồng bộ & 5.2 Khái niệm Race Condition"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition"
+        content_status: "NOT_WRITTEN"
+      - page_range: "16-36"
+        page_count: 21
+        classification: "CONTENT"
+        topic: "5.3 Vấn đề Miền găng (Critical Section) & 3 yêu cầu giải pháp (Mutual Exclusion, Progress, Bounded Waiting)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap"
+        content_status: "NOT_WRITTEN"
+      - page_range: "37-51"
+        page_count: 15
+        classification: "CONTENT"
+        topic: "5.4 Các giải pháp phần mềm & Giải pháp Peterson (cổ điển vs kiến trúc hiện đại)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson"
+        content_status: "NOT_WRITTEN"
+      - page_range: "52-55"
+        page_count: 4
+        classification: "CONTENT"
+        topic: "5.5.1 Hỗ trợ phần cứng: Memory Barrier trong kiến trúc hiện đại"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#4-ho-tro-phan-cung-va-memory-barrier"
+        content_status: "NOT_WRITTEN"
+      - page_range: "56"
+        page_count: 1
+        classification: "CONTENT"
+        topic: "5.5.2-5.5.4 Lệnh phần cứng test_and_set, compare_and_swap & Atomic Variables (SELF_STUDY)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#4-ho-tro-phan-cung-va-memory-barrier"
+        content_status: "NOT_WRITTEN"
+        notes: "SELF_STUDY"
+      - page_range: "57-65"
+        page_count: 9
+        classification: "CONTENT"
+        topic: "5.6 Mutex Locks: Định nghĩa, Spinlock vs Non-busy waiting & Cách sử dụng"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#5-mutex-locks"
+        content_status: "NOT_WRITTEN"
+      - page_range: "66"
+        page_count: 1
+        classification: "CONTENT"
+        topic: "Tóm tắt lại Phần 1"
         mapping_status: "MAPPED"
         v2_destination: "content/theory/ch05-synchronization.md"
         content_status: "NOT_WRITTEN"
-      - page_range: "54-55"
-        page_count: 2
+      - page_range: "67"
+        page_count: 1
         classification: "NON_CONTENT"
-        topic: "Tổng kết phần 2"
+        topic: "Thảo luận / Kết thúc Phần 1"
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"
-  - source_id: "UIT-SLIDE-CH05-3-2024"
-    exact_filename: "Week10-Chapter5-3 2024.pdf"
-    title: "Chương 5: Bài toán đồng bộ kinh điển (Phần 3)"
-    physical_pages: 32
+
+  - source_id: "UIT-SLIDE-CH05-2-2024"
+    exact_filename: "#Week07-Chapter5-2 2024.pdf"
+    title: "Chương 5: Đồng bộ Tiến trình (Phần 2 - canonical 72 trang)"
+    physical_pages: 72
+    notes: "SOURCE_STRUCTURE_CONFLICT: Canonical user attachment has 72 pages (68 CONTENT + 4 NON_CONTENT). Older 55-page local variant Week09-Chapter5-2 and 32-page variant Week10-Chapter5-3 are excluded from canonical coverage."
     sections:
-      - page_range: "1-2"
-        page_count: 2
+      - page_range: "1-3"
+        page_count: 3
         classification: "NON_CONTENT"
-        topic: "Trang bìa"
+        topic: "Trang bìa, mục tiêu & nội dung Phần 2"
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"
-      - page_range: "3-30"
-        page_count: 28
+      - page_range: "4-32"
+        page_count: 29
         classification: "CONTENT"
-        topic: "3 bài toán kinh điển (Bounded Buffer, Readers-Writers, Dining Philosophers) & Monitors"
+        topic: "5.7 Semaphore: Định nghĩa, Phân loại, Hiện thực (Block/Wakeup), Ứng dụng & Vấn đề"
         mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch05-synchronization.md#4-classic-problems"
+        v2_destination: "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc"
         content_status: "NOT_WRITTEN"
-      - page_range: "31-32"
-        page_count: 2
+      - page_range: "33-40"
+        page_count: 8
+        classification: "CONTENT"
+        topic: "5.8 Monitor: Định nghĩa, Biến điều kiện (Condition Variables) & Đồng bộ thứ tự"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#7-monitors-va-condition-variables"
+        content_status: "NOT_WRITTEN"
+      - page_range: "41-43"
+        page_count: 3
+        classification: "CONTENT"
+        topic: "5.9 Liveness: Deadlock, Starvation & Priority Inversion (Kèm Priority Inheritance)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#8-liveness-deadlock-va-priority-inversion"
+        content_status: "NOT_WRITTEN"
+      - page_range: "44-53"
+        page_count: 10
+        classification: "CONTENT"
+        topic: "5.10 Bài toán Đồng bộ Bounded-Buffer (Producer-Consumer)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#9-bai-toan-bounded-buffer"
+        content_status: "NOT_WRITTEN"
+      - page_range: "54-60"
+        page_count: 7
+        classification: "CONTENT"
+        topic: "5.11 Bài toán Readers-Writers (Phát biểu, Phân tích & Lời giải Semaphore)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#10-bai-toan-readers-writers"
+        content_status: "NOT_WRITTEN"
+      - page_range: "61-70"
+        page_count: 10
+        classification: "CONTENT"
+        topic: "5.12 Bài toán Bữa ăn các Triết gia Dining-Philosophers (Phát biểu, Phân tích, Deadlock & Lời giải)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md#11-bai-toan-dining-philosophers"
+        content_status: "NOT_WRITTEN"
+      - page_range: "71"
+        page_count: 1
+        classification: "CONTENT"
+        topic: "Tóm tắt lại Chương 5"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch05-synchronization.md"
+        content_status: "NOT_WRITTEN"
+      - page_range: "72"
+        page_count: 1
         classification: "NON_CONTENT"
-        topic: "Tổng kết phần 3"
+        topic: "Thảo luận / Kết thúc Chương 5"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"

@@ -10,9 +10,9 @@ All totals below are computed from registry records, expanded slide-page records
 |---|---:|---|:---:|
 | Registered sources | 66 | unique IDs and required schema | **PASS** |
 | Tier-A local files / hash checks | 0 / 0 | REPO_ONLY is informational; LOCAL requires all hashes | **PASS** |
-| Physical slide pages | 719 | sum of referenced deck registry page/slide counts | **PASS** |
-| Expanded coverage records | 719 | exactly physical-page total | **PASS** |
-| Content / non-content pages | 665 / 54 | sum equals physical total | **PASS** |
+| Physical slide pages | 713 | sum of referenced deck registry page/slide counts | **PASS** |
+| Expanded coverage records | 713 | exactly physical-page total | **PASS** |
+| Content / non-content pages | 664 / 49 | sum equals physical total | **PASS** |
 | Coverage gaps / duplicates / schema errors | 0 / 0 / 0 | zero | **PASS** |
 | Unmapped content pages | 0 | zero | **PASS** |
 | Drafted content pages | 0 | informational current authored set | **INFO** |

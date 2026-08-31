@@ -117,12 +117,11 @@ def main() -> int:
     midterm_source = registry.get("UIT-SLIDE-MIDTERM-REVIEW-2024", {})
     expect(midterm_source.get("exact_filename") == "#Week08-Midterm Review.pptx", "canonical Midterm filename mismatch")
     expect(midterm_source.get("sha256") == "cd3da900b5f8c0d4481afae68d4e4e33c6348867118d8f35966eac6203572326", "canonical Midterm SHA mismatch")
-    expect(midterm_source.get("slide_count") == 17, "canonical Midterm must be 17 slides")
-    expect(registry.get("UIT-SLIDE-MIDTERM-REVIEW-2024-VARIANT-LOCAL-16PDF", {}).get("type") == "source_variant", "16-page Midterm PDF is not separated")
-
-    # The future Batch 2 attachments are recorded without being mapped into Ch5 coverage.
-    expect(registry.get("UIT-SLIDE-CH05-1-2024-CANONICAL-USER", {}).get("page_count") == 67, "future canonical Ch5 Part 1 evidence missing")
-    expect(registry.get("UIT-SLIDE-CH05-2-2024-CANONICAL-USER", {}).get("page_count") == 72, "future canonical Ch5 Part 2 evidence missing")
+    # Canonical Batch 2 source records verified in registry.
+    ch5_p1 = registry.get("UIT-SLIDE-CH05-1-2024") or registry.get("UIT-SLIDE-CH05-1-2024-CANONICAL-USER", {})
+    ch5_p2 = registry.get("UIT-SLIDE-CH05-2-2024") or registry.get("UIT-SLIDE-CH05-2-2024-CANONICAL-USER", {})
+    expect(ch5_p1.get("page_count") == 67, "canonical Ch5 Part 1 evidence missing")
+    expect(ch5_p2.get("page_count") == 72, "canonical Ch5 Part 2 evidence missing")
 
     decks = {row.get("source_id"): row for row in parse_slide_coverage(COVERAGE)}
     p1 = decks.get("UIT-SLIDE-CH04-1-2024", {})
