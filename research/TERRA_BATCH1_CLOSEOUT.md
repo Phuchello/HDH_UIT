@@ -3,6 +3,7 @@
 **Scope:** Batch 1 build, renderer, generated-site, provenance serialization, and regression engineering only.
 **REMOTE HEAD TESTED:** `2516b732c9747b9de2ec053fdb16da4f20343cce`
 **Academic verification:** `PASS — BATCH 1 ONLY`
+**Engineering verification:** `PASS — BATCH 1 CLOSED`
 **Chapter 5:** not authored; `main` not merged.
 
 ## Required closeout fields
@@ -31,7 +32,7 @@
 | OFFLINE | PASS — local runtime assets and MathJax; 0 remote runtime dependencies. |
 | PUBLIC_HYGIENE | PASS — repository hygiene gate passes. |
 | NPM_TEST | PASS — foundation gate and all Batch 1 gates pass. |
-| CI | PENDING — GitHub Actions will be verified on the pushed closeout commit. |
+| CI | PASS — GitHub Actions run [33376970284](https://github.com/Phuchello/HDH_UIT/actions/runs/33376970284) passed for closeout commit `ecad5806e1c4f964ac9a1743d96e8bc4b49fba94`. |
 
 ## Determinism
 
@@ -48,3 +49,9 @@ production build and matching fixture trees). Unexplained differences: `0`.
 The temporary fixture is deleted after each stress-test run. No source content
 was rewritten beyond the mechanical Slide 15 serialization required for
 verbatim line preservation.
+
+## Final state
+
+`V2_THEORY_BATCH1_LOCKED_READY_FOR_BATCH2_SOURCE_MAPPING`
+
+Exact next action: **Luna Ultra performs canonical Chapter 5 source-map audit and prepares Theory Batch 2 evidence before any Chapter 5 authoring.**
