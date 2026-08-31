@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ngân hàng tự luận — Chương 5: Đồng bộ Tiến trình — IT007 UIT</title><link rel="stylesheet" href="../../assets/css/style.css"><script src="../../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch05-synchronization.html">Chương 5: Đồng bộ Tiến trình</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
+<li class="nav-tree-item"><a class="nav-link active" href="ch05.html">Ngân hàng tự luận — Chương 5: Đồng bộ Tiến trình</a></li>
+</ul>
+<div class="nav-section-title">ÔN TẬP</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../reviews/midterm.html">Ôn tập Giữa kỳ IT007 — Chương 1–4</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../../index.html">Trang chủ</a> <span>/</span> <span>Ngân hàng tự luận — Chương 5: Đồng bộ Tiến trình</span></div><article class="article-body"><h1 id="ngan-hang-tu-luan-chuong-5-ong-bo-tien-trinh">Ngân hàng tự luận Chương 5: Đồng bộ Tiến trình</h1>
+
+<blockquote><strong>Căn cứ nguồn học liệu chính tắc:</strong><br>Toàn bộ 18 câu hỏi và bài tập dưới đây được đối soát trực tiếp từ tệp nhị phân chính thức <code>UIT-QBANK-CH05-2024</code> (<code>Bai tap chuong 5 HDH.docx</code>, SHA-256: <code>503cd8fdb619bcfd664cfaa198915bc50d0ba6bb910c74d14ccff5252e646186</code>, kích thước: 56,369 bytes) gồm 129 đoạn trích xuất XML (1 đoạn tiêu đề + 128 đoạn nội dung).</blockquote>
+
+<p>---</p>
+
+<h2 id="phan-1-cau-hoi-ly-thuyet-nen-tang-9-cau">PHẦN 1: CÂU HỎI LÝ THUYẾT NỀN TẢNG (9 CÂU)</h2>
+
+<p>---</p>
+
+<h3 id="cau-1-ieu-kien-xay-ra-tranh-chap">Câu 1 — Điều kiện Xảy ra Tranh chấp</h3>
+
+<p><strong>QUESTION:</strong> Khi nào thì xảy ra tranh chấp?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 1 / Đoạn XML 3; <code>UIT-SLIDE-CH05-1-2024</code>, slide 14–16.</p>
+
+<p><strong>TYPE:</strong> Khái niệm &amp; Bối cảnh hệ thống.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Tranh chấp (Race Condition) xảy ra khi nhiều tiến trình hoặc tiểu trình cùng truy xuất và thao tác đồng thời trên cùng một vùng dữ liệu/tài nguyên chia sẻ, trong đó có ít nhất một thao tác ghi, và kết quả thực thi cuối cùng phụ thuộc vào thứ tự thực thi/đan xen cụ thể của các lệnh máy.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Nhiều tiến trình/tiểu trình chạy đồng thời (concurrency/multiprogramming).</li><li>Có tài nguyên/dữ liệu dùng chung (shared memory, global variable, file, kernel table).</li><li>Ít nhất một tiến trình thực hiện thao tác cập nhật/ghi (write).</li><li>Không có cơ chế đồng bộ hóa để kiểm soát thứ tự truy xuất độc quyền.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong> Trong hệ thống đa nhiệm, hệ điều hành có thể thu hồi CPU (preempt) tại bất kỳ thời điểm nào giữa các lệnh máy cơ bản. Một thao tác ở ngôn ngữ bậc cao (như <code>count++</code>) thực chất gồm 3 bước phần cứng (Load $\rightarrow$ Modify $\rightarrow$ Store). Nếu tiến trình bị ngắt giữa chừng và tiến trình khác ghi đè lên biến dùng chung, giá trị cập nhật sẽ bị mất hoặc sai lệch (như ví dụ Producer-Consumer hay cấp phát PID).</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Quên điều kiện phải có thao tác ghi dữ liệu (nếu tất cả chỉ đọc thì không xảy ra race condition); không giải thích vai trò của việc đan xen lệnh máy do context switch.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Cho rằng race condition chỉ xảy ra trên hệ thống đa nhân đa chip (thực tế hệ đơn nhân đa nhiệm vẫn xảy ra do timer interrupt preemption).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra cẩm nang: Đạt nếu nêu đủ 4 yếu tố (đồng thời, dữ liệu chung, thao tác ghi, phụ thuộc thứ tự đan xen lệnh); Đạt một phần nếu chỉ nêu định nghĩa chung chung mà không giải thích bản chất đan xen lệnh.</p>
+
+<p>---</p>
+
+<h3 id="cau-2-khai-niem-mien-gang-critical-section">Câu 2 — Khái niệm Miền găng (Critical Section)</h3>
+
+<p><strong>QUESTION:</strong> Vấn đề vùng tranh chấp (critical section) là gì?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 2 / Đoạn XML 4; <code>UIT-SLIDE-CH05-1-2024</code>, slide 17–19.</p>
+
+<p><strong>TYPE:</strong> Định nghĩa cấu trúc mã nguồn.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Miền găng (Critical Section / Vùng tranh chấp) là đoạn mã lệnh trong một tiến trình mà tại đó tiến trình truy xuất và thao tác trực tiếp trên các tài nguyên/dữ liệu dùng chung. Bài toán miền găng là thiết kế giao thức phối hợp sao cho khi một tiến trình đang thực thi trong miền găng của nó, không tiến trình nào khác được vào miền găng.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Đoạn mã thao tác trên tài nguyên chia sẻ.</li><li>4 phân đoạn cấu trúc của tiến trình: Entry Section $\rightarrow$ Critical Section $\rightarrow$ Exit Section $\rightarrow$ Remainder Section.</li><li>Mục tiêu bài toán: Bảo đảm tính loại trừ tương hỗ khi thực thi miền găng.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong> Cấu trúc chuẩn của tiến trình:</p>
+
+<ol><li><em>Entry Section:</em> Đoạn mã xin phép truy xuất tài nguyên.</li><li><em>Critical Section:</em> Đoạn mã thao tác biến/tài nguyên chung.</li><li><em>Exit Section:</em> Đoạn mã thông báo giải phóng quyền truy xuất.</li><li><em>Remainder Section:</em> Đoạn mã xử lý độc lập còn lại.</li></ol>
+
+<p>Bài toán miền găng đòi hỏi các tiến trình phải tuân thủ nghiêm ngặt giao thức vào/ra để ngăn ngừa Race Condition.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Quên liệt kê 4 phân đoạn mã của tiến trình (Entry, Critical, Exit, Remainder).</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Nhầm miền găng là vùng nhớ RAM vật lý (Critical section là phân đoạn mã lệnh trong chương trình, không phải vùng nhớ).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu nêu rõ khái niệm đoạn mã truy xuất dữ liệu chung, trình bày đủ 4 phân đoạn mã; Đạt một phần nếu chỉ nêu khái niệm đoạn mã.</p>
+
+<p>---</p>
+
+<h3 id="cau-3-ba-yeu-cau-giai-phap-mien-gang">Câu 3 — Ba Yêu cầu Giải pháp Miền găng</h3>
+
+<p><strong>QUESTION:</strong> Có những yêu cầu nào dành cho lời giải của bài toán vùng tranh chấp?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 3 / Đoạn XML 5; <code>UIT-SLIDE-CH05-1-2024</code>, slide 20–25.</p>
+
+<p><strong>TYPE:</strong> Tiêu chuẩn thuật toán.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Lời giải bài toán miền găng bắt buộc phải thỏa mãn đồng thời 3 yêu cầu:</p>
+
+<ol><li><strong>Loại trừ tương hỗ (Mutual Exclusion):</strong> Nếu $P_i$ đang trong miền găng, không tiến trình nào khác được trong miền găng.</li><li><strong>Tiến triển (Progress):</strong> Nếu miền găng trống và có tiến trình muốn vào, chỉ các tiến trình không ở remainder section được quyết định ai vào tiếp theo, và quyết định không bị trì hoãn vô hạn.</li><li><strong>Chờ đợi có giới hạn (Bounded Waiting):</strong> Có giới hạn về số lần các tiến trình khác được vào miền găng sau khi một tiến trình đã yêu cầu vào và trước khi yêu cầu đó được chấp thuận.</li></ol>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Nêu chính xác định nghĩa của cả 3 tiêu chí: Mutual Exclusion, Progress, Bounded Waiting.</li><li>Giải thích điều kiện tham gia quyết định của Progress (tiến trình ở remainder section không được cản trở).</li><li>Phân biệt Bounded Waiting là giới hạn số lượt vượt mặt, không phải giới hạn thời gian chạy.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong></p>
+
+<ul><li><em>Mutual Exclusion:</em> Đảm bảo tính nhất quán dữ liệu (an toàn).</li><li><em>Progress:</em> Đảm bảo hệ thống không bị bế tắc vô ích (liveness cơ bản) khi tài nguyên đang rảnh rỗi.</li><li><em>Bounded Waiting:</em> Ngăn chặn tình trạng đói tài nguyên (starvation) của từng tiến trình riêng lẻ.</li></ul>
+
+<p><strong>COMMON MISSING POINTS:</strong> Quên điều kiện "tiến trình trong remainder section không được tham gia quyết định" trong mục Progress; nhầm Bounded Waiting là giới hạn thời gian thực thi.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Tự ý thêm giả định về tốc độ CPU hoặc số lượng CPU (lời giải chuẩn không phụ thuộc vào giả định tốc độ tương đối giữa các CPU).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu định nghĩa chuẩn xác cả 3 tiêu chí kèm phân tích ý nghĩa; Đạt một phần nếu thiếu 1 tiêu chí hoặc định nghĩa sai Progress.</p>
+
+<p>---</p>
+
+<h3 id="cau-4-phan-tich-giai-phap-dua-tren-ngat-disable-interrupts">Câu 4 — Phân tích Giải pháp Dựa trên Ngắt (Disable Interrupts)</h3>
+
+<p><strong>QUESTION:</strong> Phân tích các giải pháp đồng bộ dựa trên ngắt (giải pháp phần mềm)? Các giải pháp này có những vấn đề gì?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 4 / Đoạn XML 6; <code>UIT-SLIDE-CH05-1-2024</code>, slide 29–30.</p>
+
+<p><strong>TYPE:</strong> Phân tích cơ chế hệ thống &amp; Đánh giá hạn chế.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Giải pháp dựa trên ngắt là vô hiệu hóa ngắt (Disable Interrupts) trước khi vào miền găng và bật lại ngắt sau khi rời miền găng. Các vấn đề nghiêm trọng gồm: không an toàn cho tiến trình người dùng (User Process), làm tê liệt đồng hồ hệ thống (Timer Interrupt), và không hiệu quả trên hệ thống đa xử lý (Multiprocessor).</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Cơ chế: Tắt ngắt (<code>cli</code>) tại Entry Section, Bật ngắt (<code>sti</code>) tại Exit Section.</li><li>Lý do hoạt động trên đơn xử lý: Ngăn chặn bộ lập lịch CPU chuyển ngữ cảnh giữa chừng khi đang chạy miền găng.</li><li>Vấn đề an toàn: User process có thể quên bật lại ngắt, làm treo OS.</li><li>Vấn đề đa xử lý: Tắt ngắt trên CPU này không ngăn được CPU khác truy xuất bộ nhớ chia sẻ; gửi tín hiệu tắt ngắt liên CPU (IPI) rất chậm.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong> Trên hệ đơn CPU, việc cấm ngắt đảm bảo chuỗi lệnh trong miền găng thực thi liên tục không bị chia cắt. Tuy nhiên, kernel mất hoàn toàn quyền kiểm soát timer preemption. Trên hệ đa nhân, mỗi nhân có bảng ngắt riêng, thao tác tắt ngắt chỉ có tính cục bộ, do đó không thể ngăn chặn race condition giữa hai luồng chạy trên hai nhân vật lý khác nhau.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Không giải thích vì sao giải pháp này bất khả thi trên hệ đa xử lý (multiprocessor).</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Cho rằng tắt ngắt là giải pháp phần mềm thuần túy (đây là giải pháp cấp thấp can thiệp cờ ngắt phần cứng của CPU, được kernel sử dụng hạn chế cho các cấu trúc ngắn).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu nêu cơ chế, ưu điểm đơn CPU, và 3 nhược điểm cốt lõi (User space hazard, Timer loss, Multiprocessor limitation); Đạt một phần nếu thiếu phân tích đa xử lý.</p>
+
+<p>---</p>
+
+<h3 id="cau-5-cac-giai-phap-ong-bo-dua-tren-phan-cung">Câu 5 — Các Giải pháp Đồng bộ Dựa trên Phần cứng</h3>
+
+<p><strong>QUESTION:</strong> Trình bày các giải pháp đồng bộ dựa trên phần cứng?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 5 / Đoạn XML 7; <code>UIT-SLIDE-CH05-1-2024</code>, slide 52–56.</p>
+
+<p><strong>TYPE:</strong> Tổng hợp cơ chế phần cứng.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Các giải pháp phần cứng dựa trên các chỉ thị máy nguyên tử (Atomic Instructions) không thể bị chia cắt và Rào chắn bộ nhớ:</p>
+
+<ol><li><strong>Memory Barrier (Rào chắn bộ nhớ):</strong> Cưỡng chế thứ tự truy xuất bộ nhớ, ngăn chặn compiler/CPU memory reordering.</li><li><strong>Chỉ thị <code>test_and_set(&amp;lock)</code>:</strong> Đọc giá trị cũ và gán <code>lock = true</code> nguyên tử.</li><li><strong>Chỉ thị <code>compare_and_swap(&amp;val, expected, new_val)</code>:</strong> So sánh và ghi giá trị mới nếu giá trị cũ khớp kỳ vọng.</li><li><strong>Biến đơn nguyên (Atomic Variables):</strong> Hỗ trợ các phép toán đếm/cập nhật nguyên tử không cần khóa.</li></ol>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Tính nguyên tử (Atomicity): Thực hiện trọn vẹn trong 1 chu kỳ bus/cache, không bị ngắt.</li><li>Trình bày mã giả và ứng dụng của <code>test_and_set</code> và <code>compare_and_swap</code>.</li><li>Vai trò của Memory Barrier đối với kiến trúc hiện đại (OoO execution).</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong></p>
+
+<ul><li><code>test_and_set</code>: Trả về giá trị cũ của biến và đồng thời gán biến bằng <code>true</code>. Đoạn mã vào: <code>while (test_and_set(&amp;lock)); /* CS */ lock = false;</code>.</li><li><code>compare_and_swap</code>: Chỉ cập nhật <code>*val = new_val</code> khi <code>*val == expected</code>. Cho phép xây dựng các thuật toán đồng bộ lock-free tinh vi.</li><li><code>Memory Barrier</code>: Giải quyết hiện tượng hoán đổi trật tự lệnh đọc/ghi trên các kiến trúc bộ nhớ yếu (Weak Memory Models).</li></ul>
+
+<p><strong>COMMON MISSING POINTS:</strong> Quên chỉ thị <code>Memory Barrier</code> hoặc không giải thích được ý nghĩa của tham số trong <code>compare_and_swap</code>.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Nhầm <code>test_and_set</code> có thể bị ngắt giữa thao tác đọc và thao tác ghi.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu trình bày đầy đủ cả Memory Barrier, Test-and-Set, Compare-and-Swap kèm mã giả và nguyên lý hoạt động; Đạt một phần nếu chỉ nêu tên không có mã giả.</p>
+
+<p>---</p>
+
+<h3 id="cau-6-khai-niem-va-cach-su-dung-mutex-lock">Câu 6 — Khái niệm và Cách Sử dụng Mutex Lock</h3>
+
+<p><strong>QUESTION:</strong> Mutex lock là gì? Đặc điểm và cách sử dụng của mutex lock?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 6 / Đoạn XML 8; <code>UIT-SLIDE-CH05-1-2024</code>, slide 57–65.</p>
+
+<p><strong>TYPE:</strong> Công cụ đồng bộ hệ điều hành.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Mutex (Mutual Exclusion Lock) là công cụ đồng bộ hóa do hệ điều hành/thư viện cung cấp để bảo vệ miền găng. Đặc điểm: có biến boolean <code>available</code> và hai thao tác nguyên tử <code>acquire()</code> (lấy khóa) và <code>release()</code> (nhả khóa). Cách sử dụng: gọi <code>acquire()</code> trước miền găng và <code>release()</code> ngay sau miền găng.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Định nghĩa Mutex và trạng thái khóa (<code>available: true/false</code>).</li><li>Hai thao tác nguyên tử: <code>acquire()</code> và <code>release()</code>.</li><li>Phân biệt hai cơ chế: Spinlock (busy waiting) vs Mutex ngủ (blocking/sleep &amp; wakeup).</li><li>Tính sở hữu (Ownership): Luồng acquire khóa là luồng duy nhất được release khóa.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong></p>
+
+<ul><li><em>Spinlock:</em> Liên tục lặp kiểm tra. Tiết kiệm chi phí context switch nếu thời gian giữ khóa rất ngắn trên hệ đa CPU.</li><li><em>Blocking Mutex:</em> Đưa luồng vào hàng đợi chờ và nhường CPU. Phù hợp cho miền găng dài.</li><li>Mẫu sử dụng chuẩn:</li></ul>
+
+<p>  ``<code>c<br>  acquire(&amp;mutex);<br>  /* CRITICAL SECTION */<br>  release(&amp;mutex);<br>  </code>``</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Quên phân tích sự khác nhau giữa Spinlock và Blocking Mutex; quên đặc điểm sở hữu khóa (Ownership).</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Cho rằng Mutex có thể đếm số lượng tài nguyên như Semaphore (Mutex chỉ là khóa nhị phân 0/1).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu trình bày định nghĩa, mã giả acquire/release, phân tích Spinlock vs Blocking và tính sở hữu; Đạt một phần nếu chỉ viết đoạn mã acquire/release cơ bản.</p>
+
+<p>---</p>
+
+<h3 id="cau-7-khai-niem-phan-loai-va-hien-thuc-semaphore">Câu 7 — Khái niệm, Phân loại và Hiện thực Semaphore</h3>
+
+<p><strong>QUESTION:</strong> Semaphore là gì? Đặc điểm của semaphore? Cách thức hiện thực semaphore? Có mấy loại semaphore? Khi sử dụng semaphore cần lưu ý những vấn đề gì?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 7 / Đoạn XML 9; <code>UIT-SLIDE-CH05-2-2024</code>, slide 4–32.</p>
+
+<p><strong>TYPE:</strong> Tổng hợp công cụ đồng bộ cốt lõi.</p>
+
+<p><strong>MINIMUM ANSWER:</strong></p>
+
+<ol><li><strong>Khái niệm &amp; Đặc điểm:</strong> Semaphore $S$ là biến nguyên chỉ truy xuất qua hai hàm nguyên tử <code>wait(S)</code> ($P$) và <code>signal(S)</code> ($V$).</li><li><strong>Phân loại:</strong><ul><li><em>Counting Semaphore:</em> $S \ge 0$, quản lý $N$ thực thể tài nguyên.</li><li><em>Binary Semaphore:</em> $S \in \{0, 1\}$, dùng cho loại trừ tương hỗ.</li></ul></li><li><strong>Cách thức hiện thực:</strong> Cấu trúc gồm biến nguyên <code>value</code> và hàng đợi tiến trình <code>list</code>. Hàm <code>wait()</code> giảm <code>value</code>, nếu $&lt; 0$ thì gọi <code>block()</code>; <code>signal()</code> tăng <code>value</code>, nếu $\le 0$ thì gọi <code>wakeup()</code>.</li><li><strong>Lưu ý khi sử dụng:</strong> Nguy cơ Deadlock do đảo thứ tự lệnh, Starvation, và vi phạm miền găng nếu gọi nhầm <code>signal</code> trước <code>wait</code>.</li></ol>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Định nghĩa hai hàm nguyên tử <code>wait(S)</code> và <code>signal(S)</code>.</li><li>Phân biệt Counting Semaphore vs Binary Semaphore.</li><li>Hiện thực mức nhân có cấu trúc <code>typedef struct { int value; struct process *list; } semaphore;</code> kèm mã <code>block()</code> và <code>wakeup()</code>.</li><li>Giải thích ý nghĩa giá trị âm của <code>value</code> trong mô hình giáo trình.</li><li>Các lỗi kinh điển: đảo thứ tự <code>signal/wait</code>, quên <code>signal</code>, gọi 2 lần <code>wait</code>.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong><br>Semaphore cung cấp giải pháp đa năng: vừa làm khóa loại trừ tương hỗ, vừa làm tín hiệu đồng bộ thứ tự thực thi giữa các tiến trình, vừa quản lý cấp phát nhóm tài nguyên. Hiện thực không busy-waiting giúp giải phóng hoàn toàn chu kỳ CPU cho các tiến trình khác khi phải chờ tài nguyên.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Quên trình bày cấu trúc dữ liệu gồm <code>value</code> và hàng đợi <code>list</code>; không nêu các lỗi thường gặp (Deadlock/Starvation).</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Nhầm <code>signal()</code> của Semaphore giống <code>signal()</code> của Monitor (trong Semaphore, <code>signal()</code> luôn làm tăng giá trị biến đếm bất kể có tiến trình đang chờ hay không).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu trả lời trọn vẹn 5 vế câu hỏi: Khái niệm, Đặc điểm, Phân loại, Mã hiện thực Block/Wakeup, và 3 Lưu ý; Đạt một phần nếu thiếu phần hiện thực mã nhân.</p>
+
+<p>---</p>
+
+<h3 id="cau-8-khai-niem-monitor-va-condition-variable">Câu 8 — Khái niệm Monitor và Condition Variable</h3>
+
+<p><strong>QUESTION:</strong> Monitor là gì?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 8 / Đoạn XML 10; <code>UIT-SLIDE-CH05-2-2024</code>, slide 33–40.</p>
+
+<p><strong>TYPE:</strong> Kiểu dữ liệu trừu tượng (ADT) bậc cao.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Monitor là một cấu trúc đồng bộ hóa trừu tượng bậc cao (ADT) đóng gói dữ liệu chia sẻ cùng các thủ tục thao tác trên dữ liệu đó. Nguyên lý cốt lõi: Tại một thời điểm, <strong>chỉ có duy nhất một tiến trình được phép thực thi bên trong monitor</strong> (Mutual Exclusion được đảm bảo tự động bởi ngôn ngữ/trình biên dịch). Để hỗ trợ chờ điều kiện, monitor sử dụng <strong>Biến điều kiện (Condition Variable)</strong> với hai thao tác <code>wait()</code> và <code>signal()</code>.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Định nghĩa ADT đóng gói biến chung và hàm thủ tục.</li><li>Tính loại trừ tương hỗ ngầm định (Implicit Mutual Exclusion).</li><li>Khái niệm Biến điều kiện (<code>condition x;</code>).</li><li>Cơ chế của <code>x.wait()</code>: Tự động giải phóng khóa monitor khi vào hàng đợi ngủ, và tái chiếm lại khóa monitor khi được đánh thức trước khi chạy tiếp.</li><li>Cơ chế của <code>x.signal()</code>: Đánh thức 1 tiến trình trong hàng đợi condition (nếu rỗng thì không có tác dụng gì).</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong><br>Lập trình với Semaphore dễ gặp lỗi do lập trình viên phải tự quản lý <code>wait/signal</code>. Monitor chuyển trách nhiệm bảo đảm miền găng cho trình biên dịch. Khi tiến trình gọi hàm trong monitor, nó tự động chiếm khóa; khi thoát hàm, tự động nhả khóa. Hai hàng đợi cơ bản:</p>
+
+<ul><li><em>Entry Queue:</em> Chứa các tiến trình chờ vào monitor.</li><li><em>Condition Queue:</em> Chứa các tiến trình đã vào monitor nhưng đang chờ điều kiện logic thông qua <code>x.wait()</code>.</li></ul>
+
+<p><strong>COMMON MISSING POINTS:</strong> Quên giải thích cơ chế "nhả khóa khi wait và tái chiếm khóa khi thức dậy" của biến điều kiện.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Nghĩ rằng monitor chỉ là một class bình thường trong OOP mà không có cơ chế khóa ngầm định.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu nêu rõ tính đóng gói, loại trừ tương hỗ tự động, vai trò và cơ chế giải phóng/tái chiếm khóa của Condition Variable; Đạt một phần nếu không nêu Biến điều kiện.</p>
+
+<p>---</p>
+
+<h3 id="cau-9-ac-iem-va-yeu-cau-cua-cac-bai-toan-ong-bo-kinh-ien">Câu 9 — Đặc điểm và Yêu cầu của các Bài toán Đồng bộ Kinh điển</h3>
+
+<p><strong>QUESTION:</strong> Đặc điểm và yêu cầu đồng bộ của các bài toán đồng bộ kinh điển?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 9 / Đoạn XML 11; <code>UIT-SLIDE-CH05-2-2024</code>, slide 44–70.</p>
+
+<p><strong>TYPE:</strong> Tổng hợp so sánh 3 bài toán kinh điển.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Ba bài toán đồng bộ kinh điển gồm:</p>
+
+<ol><li><strong>Bounded-Buffer (Producer-Consumer):</strong><ul><li><em>Đặc điểm:</em> Bộ đệm vòng dung lượng $N$.</li><li><em>Yêu cầu:</em> Producer không ghi khi đệm đầy; Consumer không đọc khi đệm rỗng; truy xuất đệm phải độc quyền.</li></ul></li><li><strong>Readers-Writers:</strong><ul><li><em>Đặc điểm:</em> Nhiều Reader có thể đọc đồng thời; Writer cần độc quyền tuyệt đối.</li><li><em>Yêu cầu:</em> Không cho phép Writer ghi khi đang có Reader đọc hoặc Writer khác đang ghi; cần giải pháp cân bằng tránh Starvation cho Writer/Reader.</li></ul></li><li><strong>Dining-Philosophers:</strong><ul><li><em>Đặc điểm:</em> 5 triết gia chia sẻ 5 chiếc đũa, mỗi người cần 2 đũa kề cạnh để ăn.</li><li><em>Yêu cầu:</em> Loại trừ tương hỗ khi dùng đũa; triệt tiêu hoàn toàn nguy cơ Deadlock (chờ vòng tròn) và Starvation.</li></ul></li></ol>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Trình bày rõ ràng 3 bài toán: Bounded-Buffer, Readers-Writers, Dining-Philosophers.</li><li>Nêu rõ tài nguyên chia sẻ, vai trò của từng loại tiến trình, và các bất biến đồng bộ (Invariants) bắt buộc.</li><li>Nêu các công cụ semaphore/biến điều kiện đặc trưng dùng giải quyết từng bài toán.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong></p>
+
+<ul><li><em>Bounded-Buffer:</em> Dùng 3 Semaphore (<code>mutex=1</code>, <code>empty=N</code>, <code>full=0</code>).</li><li><em>Readers-Writers:</em> Dùng <code>rw_mutex=1</code>, <code>mutex=1</code>, biến đếm <code>read_count=0</code> (kỹ thuật Reader đầu tiên khóa Writer, Reader cuối cùng nhả khóa).</li><li><em>Dining-Philosophers:</em> Dùng mảng <code>chopstick[5]</code>, áp dụng các giải pháp phi đối xứng, giới hạn 4 người, hoặc Monitor để tránh Deadlock.</li></ul>
+
+<p><strong>COMMON MISSING POINTS:</strong> Thiếu 1 trong 3 bài toán; không nêu được yêu cầu đồng bộ cốt lõi của từng bài.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Nhầm lẫn giữa yêu cầu của Readers-Writers với Producer-Consumer.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu tóm tắt chuẩn xác cả 3 bài toán kèm tài nguyên và yêu cầu đồng bộ; Đạt một phần nếu chỉ nêu 2 bài toán.</p>
+
+<p>---</p>
+
+<h2 id="phan-2-bai-tap-cau-truc-va-giai-thuat-ong-bo-9-bai">PHẦN 2: BÀI TẬP CẤU TRÚC VÀ GIẢI THUẬT ĐỒNG BỘ (9 BÀI)</h2>
+
+<p>---</p>
+
+<h3 id="cau-10-bai-tap-1-phan-tich-giai-thuat-dekker">Câu 10 (Bài tập 1) — Phân tích Giải thuật Dekker</h3>
+
+<p><strong>QUESTION:</strong> (Bài tập mẫu) Xét giải pháp phần mềm do Dekker đề nghị để tổ chức truy xuất độc quyền cho 2 tiến trình. Hai tiến trình $P_0$ và $P_1$ chia sẻ các biến sau:</p>
+
+<pre><code class="language-c">boolean flag[2]; /* initially false */
+int turn;</code></pre>
+
+<p>Cấu trúc một tiến trình $P_i$ (với $i = 0$ hay $1$ và $j$ là tiến trình còn lại) như sau:</p>
+
+<pre><code class="language-c">while (true) {
+    flag[i] = true;
+    while (flag[j]) {
+        if (turn == j) {
+            flag[i] = false;
+            while (turn == j)
+                ; /* do nothing */
+            flag[i] = true;
+        }
+    }
+    /* critical section */
+    turn = j;
+    flag[i] = false;
+    /* remainder section */
+}</code></pre>
+
+<p>Giải pháp này có thỏa 3 yêu cầu trong việc giải quyết tranh chấp không?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Bài tập 1 / Đoạn XML 12–35.</p>
+
+<p><strong>TYPE:</strong> Phân tích và Chứng minh thuật toán phần mềm.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Giải pháp Dekker <strong>THỎA MÃN ĐẦY ĐỦ CẢ 3 YÊU CẦU</strong>: Loại trừ tương hỗ (Mutual Exclusion), Tiến triển (Progress) và Chờ đợi có giới hạn (Bounded Waiting).</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li><strong>Loại trừ tương hỗ:</strong> $P_i$ chỉ vào miền găng khi <code>flag[j] == false</code>. Nếu $P_0$ đang trong miền găng thì <code>flag[0] = true</code>, $P_1$ bị chặn ở vòng lặp <code>while (flag[j])</code>.</li><li><strong>Tiến triển:</strong> Khi cả hai cùng muốn vào (<code>flag[0] = flag[1] = true</code>), biến <code>turn</code> sẽ quyết định. Nếu <code>turn == 0</code>, $P_1$ thấy <code>turn == j</code> nên tạm hạ cờ <code>flag[1] = false</code>, giúp $P_0$ thoát khỏi <code>while (flag[j])</code> và vào miền găng ngay lập tức mà không bị bế tắc.</li><li><strong>Chờ đợi có giới hạn:</strong> Mỗi tiến trình chỉ phải chờ tối đa sau 1 lần tiến trình kia vào miền găng (vì khi $P_j$ ra khỏi miền găng, nó gán <code>turn = i</code> và <code>flag[j] = false</code>).</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong><br>Thuật toán Dekker là lời giải phần mềm đúng đắn đầu tiên cho 2 tiến trình. Điểm tinh tế của Dekker so với Peterson là khi xảy ra tranh chấp cờ (<code>flag[0] == flag[1] == true</code>), tiến trình không có quyền ưu tiên (<code>turn != i</code>) sẽ chủ động <strong>hạ cờ của mình xuống (<code>flag[i] = false</code>)</strong> và chờ cho đến khi <code>turn</code> đổi giá trị, nhờ đó triệt tiêu hoàn toàn nguy cơ Deadlock của Giải pháp 2.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Không phân tích nhánh <code>if (turn == j)</code> khi cả hai cùng giơ cờ đồng thời.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Nhầm giải thuật Dekker bị deadlock như Giải pháp 2.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu chứng minh chặt chẽ cả 3 tiêu chí kèm phân tích nhánh hạ cờ của biến <code>turn</code>; Đạt một phần nếu chỉ khẳng định "thỏa mãn" mà không chứng minh.</p>
+
+<p>---</p>
+
+<h3 id="cau-11-bai-tap-2-phan-tich-bien-the-giai-thuat-peterson">Câu 11 (Bài tập 2) — Phân tích Biến thể Giải thuật Peterson</h3>
+
+<p><strong>QUESTION:</strong> Xét giải pháp đồng bộ hóa sau:</p>
+
+<pre><code class="language-c">while (TRUE) {
+    int j = 1 - i;
+    flag[i] = TRUE;
+    turn = i;
+    while (turn == j &amp;&amp; flag[j] == TRUE)
+        ;
+    critical_section();
+    flag[i] = FALSE;
+    noncritical_section();
+}</code></pre>
+
+<p>Giải pháp này có thỏa yêu cầu độc quyền truy xuất không?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Bài tập 2 / Đoạn XML 36–46.</p>
+
+<p><strong>TYPE:</strong> Phát hiện lỗi thuật toán và phân tích phản ví dụ (Counterexample).</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Giải pháp này <strong>KHÔNG THỎA MÃN YÊU CẦU ĐỘC QUYỀN TRUY XUẤT (VI PHẠM MUTUAL EXCLUSION)</strong>.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Chỉ ra điểm sai lệch cốt lõi: Câu lệnh <code>turn = i;</code> (thay vì <code>turn = j;</code> như Peterson chuẩn).</li><li>Lập phản ví dụ (Interleaving Trace) chứng minh cả $P_0$ và $P_1$ cùng vào miền găng tại một thời điểm.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong></p>
+
+<ul><li><strong>Trạng thái ban đầu:</strong> <code>flag[0] = flag[1] = FALSE; turn = 0;</code></li><li><strong>Kịch bản đan xen lệnh:</strong><ol><li>$P_0$ thực hiện:<ul><li><code>flag[0] = TRUE;</code></li><li><code>turn = 0;</code></li><li>Kiểm tra điều kiện <code>while (turn == 1 &amp;&amp; flag[1] == TRUE);</code> $\rightarrow$ Điều kiện SAI (vì <code>turn = 0</code> và <code>flag[1] = FALSE</code>).</li><li>$P_0$ lập tức <strong>VÀO MIỀN GĂNG (<code>critical_section</code>)</strong>.</li></ul></li><li>Ngay khi $P_0$ đang trong miền găng, xảy ra chuyển ngữ cảnh sang $P_1$:<ul><li>$P_1$ thực hiện:</li><li><code>flag[1] = TRUE;</code></li><li><code>turn = 1;</code></li><li>Kiểm tra điều kiện <code>while (turn == 0 &amp;&amp; flag[0] == TRUE);</code> $\rightarrow$ Điều kiện SAI (vì <code>turn = 1</code>, mặc dù <code>flag[0] = TRUE</code>).</li><li>$P_1$ lập tức <strong>VÀO MIỀN GĂNG (<code>critical_section</code>)</strong>.</li></ul></li></ol></li><li><strong>Kết luận:</strong> Cả $P_0$ và $P_1$ cùng có mặt trong <code>critical_section</code> đồng thời $\rightarrow$ <strong>Vi phạm nghiêm trọng tính Loại trừ tương hỗ (Mutual Exclusion)</strong>.</li></ul>
+
+<p><strong>COMMON MISSING POINTS:</strong> Chỉ trả lời "không thỏa mãn" mà không dựng kịch bản đan xen lệnh từng bước để chứng minh.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Nhầm rằng thuật toán bị Deadlock (thực chất thuật toán này cho cả 2 vào cùng lúc chứ không bị kẹt).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu khẳng định vi phạm Mutual Exclusion và viết chi tiết bảng đan xen lệnh $P_0, P_1$ cùng vào miền găng; Đạt một phần nếu chỉ giải thích định tính.</p>
+
+<p>---</p>
+
+<h3 id="cau-12-bai-tap-3-hien-thuc-mien-gang-voi-chi-thi-swap">Câu 12 (Bài tập 3) — Hiện thực Miền găng với Chỉ thị <code>Swap</code></h3>
+
+<p><strong>QUESTION:</strong> Giả sử một máy tính không có chỉ thị TSL, nhưng có chỉ thị Swap có khả năng hoán đổi nội dung của hai từ nhớ chỉ bằng một thao tác không thể phân chia:</p>
+
+<pre><code class="language-pascal">procedure Swap(var a, b: boolean);
+var temp: boolean;
+begin
+    temp := a;
+    a := b;
+    b := temp;
+end;</code></pre>
+
+<p>Sử dụng chỉ thị này có thể tổ chức truy xuất độc quyền không? Nếu có, xây dựng cấu trúc chương trình tương ứng.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Bài tập 3 / Đoạn XML 47–56.</p>
+
+<p><strong>TYPE:</strong> Thiết kế giải pháp phần cứng.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Hoàn toàn <strong>CÓ THỂ</strong> tổ chức truy xuất độc quyền bằng chỉ thị <code>Swap</code>. Sử dụng một biến chia sẻ <code>boolean lock = false;</code> và mỗi tiến trình $P_i$ sở hữu một biến cục bộ <code>boolean key = true;</code>.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Khẳng định CÓ.</li><li>Khai báo biến toàn cục: <code>boolean lock = false;</code> (false: khóa rảnh, true: khóa bận).</li><li>Cấu trúc tiến trình $P_i$ với biến cục bộ <code>key</code>:</li></ul>
+
+<p>  ```c<br>  do {<br>      key = true;<br>      while (key == true)<br>          Swap(&amp;lock, &amp;key);</p>
+
+<p>      /<em> CRITICAL SECTION </em>/</p>
+
+<p>      lock = false;</p>
+
+<p>      /<em> REMAINDER SECTION </em>/<br>  } while (true);<br>  ```</p>
+
+<ul><li>Giải thích cơ chế hoạt động: Khi <code>lock = false</code>, <code>Swap(&amp;lock, &amp;key)</code> sẽ đổi <code>key</code> thành <code>false</code> và <code>lock</code> thành <code>true</code>, giúp tiến trình thoát khỏi <code>while</code> để vào miền găng.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong><br>Chỉ thị <code>Swap</code> hoán đổi nguyên tử giá trị của <code>lock</code> và <code>key</code>. Nếu một tiến trình khác đang trong miền găng (<code>lock = true</code>), các tiến trình đến sau khi thực hiện <code>Swap(&amp;lock, &amp;key)</code> sẽ nhận về <code>key = true</code> và tiếp tục bị kẹt trong vòng lặp <code>while (key == true)</code>. Khi tiến trình trong miền găng thoát ra, nó gán <code>lock = false</code>, cho phép đúng 1 tiến trình đang lặp hoán đổi nhận được <code>key = false</code> để vào miền găng kế tiếp.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Quên khai báo biến cục bộ <code>key</code> bên trong vòng lặp của tiến trình.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Quên gán lại <code>key = true</code> ở đầu mỗi vòng lặp; quên gán <code>lock = false</code> ở Exit Section.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu khẳng định CÓ, viết đúng mã C/Pascal có biến <code>lock</code> toàn cục và <code>key</code> cục bộ kèm giải thích cơ chế; Đạt một phần nếu viết sai vị trí gán <code>key = true</code>.</p>
+
+<p>---</p>
+
+<h3 id="cau-13-bai-tap-4-ong-bo-rang-buoc-gia-tri-tien-trinh-a-va-b">Câu 13 (Bài tập 4) — Đồng bộ Ràng buộc Giá trị Tiến trình A và B</h3>
+
+<p><strong>QUESTION:</strong> Xét hai tiến trình sau:</p>
+
+<pre><code class="language-c">process A { while (TRUE) na = na + 1; }
+process B { while (TRUE) nb = nb + 1; }</code></pre>
+
+<p>a. Đồng bộ hóa xử lý của 2 tiến trình trên, sử dụng 2 semaphore tổng quát, sao cho tại bất kỳ thời điểm nào cũng có $n_b \le n_a \le n_b + 10$.  <br>b. Nếu giảm điều kiện chỉ còn là $n_a \le n_b + 10$, cần sửa chữa giải pháp trên như thế nào?  <br>c. Giải pháp trên còn đúng nếu có nhiều tiến trình loại A và B cùng thực hiện?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Bài tập 4 / Đoạn XML 57–62.</p>
+
+<p><strong>TYPE:</strong> Thiết kế Semaphore có ràng buộc bất đẳng thức &amp; Đánh giá mở rộng đa luồng.</p>
+
+<p><strong>MINIMUM ANSWER:</strong></p>
+
+<ul><li><strong>Câu a:</strong> Dùng 2 semaphore:<ul><li><code>sem_a = 10;</code> (Khống chế $n_a - n_b \le 10 \rightarrow$ A không được chạy trước B quá 10 lần).</li><li><code>sem_b = 0;</code> (Khống chế $n_a - n_b \ge 0 \rightarrow$ B không được chạy vượt quá A).</li><li><em>Tiến trình A:</em> <code>while (true) { wait(&amp;sem_a); na = na + 1; signal(&amp;sem_b); }</code></li><li><em>Tiến trình B:</em> <code>while (true) { wait(&amp;sem_b); nb = nb + 1; signal(&amp;sem_a); }</code></li></ul></li><li><strong>Câu b:</strong> Bỏ ràng buộc $n_b \le n_a$ (B có thể chạy nhanh tùy ý vượt A). Do đó chỉ cần khống chế A không vượt B quá 10 lần $\rightarrow$ <strong>Loại bỏ <code>sem_b</code></strong>, chỉ giữ <code>sem_a = 10;</code>:<ul><li><em>Tiến trình A:</em> <code>while (true) { wait(&amp;sem_a); na = na + 1; }</code></li><li><em>Tiến trình B:</em> <code>while (true) { nb = nb + 1; signal(&amp;sem_a); }</code></li></ul></li><li><strong>Câu c:</strong> Giải pháp <strong>KHÔNG CÒN ĐÚNG</strong> nếu có nhiều tiến trình loại A và B cùng chạy, vì việc cập nhật <code>na = na + 1</code> và <code>nb = nb + 1</code> không được bảo vệ loại trừ tương hỗ, sẽ dẫn đến Race Condition làm hỏng giá trị biến đếm. Cần bổ sung 2 Mutex lock riêng biệt để bảo vệ <code>na</code> và <code>nb</code>.</li></ul>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Khởi tạo giá trị Semaphore chính xác cho câu a (<code>sem_a = 10</code>, <code>sem_b = 0</code>).</li><li>Mã nguồn tiến trình A và B câu a và câu b.</li><li>Phân tích hiện tượng Race Condition trên <code>na, nb</code> khi mở rộng nhiều tiến trình ở câu c.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong><br>Bất đẳng thức $n_b \le n_a \le n_b + 10 \iff \begin{cases} n_a - n_b \le 10 \\ n_a - n_b \ge 0 \end{cases}$.<br>Mỗi lần A chạy làm hiệu số tăng 1; mỗi lần B chạy làm hiệu số giảm 1. Semaphore <code>sem_a</code> cấp 10 "vé" cho A chạy trước. Khi A chạy 1 lần, A tiêu thụ 1 vé <code>sem_a</code> và cấp 1 vé <code>sem_b</code> cho B. B chạy tiêu thụ 1 vé <code>sem_b</code> và hoàn trả 1 vé <code>sem_a</code> cho A.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Khởi tạo nhầm giá trị ban đầu của 2 semaphore; không giải thích nguyên nhân sai ở câu c do thiếu Mutex bảo vệ biến đếm.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Cho rằng câu c vẫn đúng vì semaphore đã đồng bộ (thực chất semaphore chỉ đồng bộ số lần chạy, không đồng bộ miền găng biến <code>na, nb</code> khi có nhiều tiến trình A/B).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu giải đúng và đủ cả 3 câu a, b, c kèm giải thích bản chất "vé"; Đạt một phần nếu sai câu b hoặc c.</p>
+
+<p>---</p>
+
+<h3 id="cau-14-bai-tap-5-ong-bo-o-thi-phu-thuoc-4-tieu-trinh">Câu 14 (Bài tập 5) — Đồng bộ Đồ thị Phụ thuộc 4 Tiểu trình</h3>
+
+<p><strong>QUESTION:</strong> (Bài tập mẫu) Xét một hệ thống có 4 tiểu trình $T_1, T_2, T_3, T_4$. Quan hệ giữa các tiểu trình này được biểu diễn như sơ đồ: $T_1$ bắt đầu trước; sau khi $T_1$ kết thúc thì $T_2$ và $T_3$ có thể thực thi đồng thời; $T_4$ chỉ có thể bắt đầu khi cả $T_2$ và $T_3$ đều đã kết thúc. Hãy sử dụng semaphore để đồng bộ hoạt động của các tiểu trình.</p>
+
+<pre><code class="language-">       ┌───► T2 ───┐
+  T1 ──┤           ├──► T4
+       └───► T3 ───┘</code></pre>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Bài tập 5 / Đoạn XML 63–107.</p>
+
+<p><strong>TYPE:</strong> Đồng bộ đồ thị phụ thuộc (Precedence Graph / DAG).</p>
+
+<p><strong>MINIMUM ANSWER:</strong></p>
+
+<ul><li>Khởi tạo 2 semaphore:</li></ul>
+
+<p>  ``<code>c<br>  semaphore sem1 = 0; // Báo hiệu T1 đã hoàn tất (cho T2 và T3)<br>  semaphore sem2 = 0; // Báo hiệu T2 và T3 đã hoàn tất (cho T4)<br>  </code>``</p>
+
+<ul><li>Cấu trúc các tiểu trình:</li></ul>
+
+<p>  ```c<br>  void T1(void) {<br>      // T1 thực thi<br>      signal(&amp;sem1); // Cấp tín hiệu cho T2<br>      signal(&amp;sem1); // Cấp tín hiệu cho T3<br>  }</p>
+
+<p>  void T2(void) {<br>      wait(&amp;sem1);   // Chờ T1 xong<br>      // T2 thực thi<br>      signal(&amp;sem2); // Báo hiệu cho T4<br>  }</p>
+
+<p>  void T3(void) {<br>      wait(&amp;sem1);   // Chờ T1 xong<br>      // T3 thực thi<br>      signal(&amp;sem2); // Báo hiệu cho T4<br>  }</p>
+
+<p>  void T4(void) {<br>      wait(&amp;sem2);   // Chờ nhánh thứ nhất (T2 hoặc T3) xong<br>      wait(&amp;sem2);   // Chờ nhánh thứ hai xong<br>      // T4 thực thi<br>  }<br>  ```</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>$T_1$ phải gọi <code>signal(&amp;sem1)</code> <strong>2 lần</strong> vì có 2 tiến trình ($T_2, T_3$) cùng chờ <code>sem1</code>.</li><li>$T_4$ phải gọi <code>wait(&amp;sem2)</code> <strong>2 lần</strong> vì phải đợi cả 2 tiến trình ($T_2, T_3$) cùng phát tín hiệu <code>signal(&amp;sem2)</code>.</li><li>Khởi tạo <code>sem1 = 0, sem2 = 0</code>.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong><br>Đây là bài toán đồng bộ phân nhánh và hợp luồng (Fork-Join). Giá trị khởi tạo bằng 0 đảm bảo $T_2, T_3, T_4$ nếu chạy trước đều bị block ngay lập tức. Việc gọi 2 lần <code>signal</code>/<code>wait</code> trên cùng một Counting Semaphore là giải pháp tối ưu và thanh lịch nhất mà không cần phải khai báo 4 semaphore riêng biệt.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Quên gọi 2 lần <code>signal</code> ở $T_1$ hoặc quên gọi 2 lần <code>wait</code> ở $T_4$.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Khởi tạo <code>sem1 = 1</code> hoặc <code>sem2 = 1</code> (sẽ làm $T_2$ hoặc $T_4$ chạy trước khi tiến trình trước nó hoàn thành).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu viết chuẩn mã nguồn 4 tiểu trình và khởi tạo đúng <code>sem1=0, sem2=0</code>; Đạt một phần nếu chỉ gọi 1 lần signal/wait.</p>
+
+<p>---</p>
+
+<h3 id="cau-15-bai-tap-6-bien-chia-se-x-tang-en-20-va-race-condition">Câu 15 (Bài tập 6) — Biến Chia sẻ $X$ Tăng Đến 20 và Race Condition</h3>
+
+<p><strong>QUESTION:</strong> Một biến $X$ được chia sẻ bởi 2 tiến trình cùng thực hiện đoạn code sau:</p>
+
+<pre><code class="language-c">do {
+    X = X + 1;
+    if (X == 20)
+        X = 0;
+} while (TRUE);</code></pre>
+
+<p>Bắt đầu với giá trị $X = 0$, chứng tỏ rằng giá trị $X$ có thể vượt quá 20. Cần sửa chữa đoạn chương trình trên như thế nào để đảm bảo $X$ không vượt quá 20?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Bài tập 6 / Đoạn XML 108–113.</p>
+
+<p><strong>TYPE:</strong> Lần vết Race Condition &amp; Đề xuất giải pháp sửa lỗi.</p>
+
+<p><strong>MINIMUM ANSWER:</strong></p>
+
+<ol><li><strong>Chứng minh $X$ vượt quá 20:</strong> Thao tác <code>X = X + 1</code> và câu lệnh <code>if (X == 20)</code> không nguyên tử. Nếu khi $X = 19$, $P_1$ tăng $X$ lên $20$ nhưng bị ngắt trước khi kiểm tra <code>if</code>; $P_2$ chạy và tăng tiếp $X$ lên $21$, sau đó $P_1$ mới chạy kiểm tra <code>if (21 == 20)</code> $\rightarrow$ SAI $\rightarrow$ $X$ sẽ tiếp tục tăng vượt quá 20.</li><li><strong>Sửa chữa:</strong> Đặt toàn bộ đoạn cập nhật và kiểm tra $X$ vào trong Miền găng được bảo vệ bởi một Semaphore nhị phân hoặc Mutex lock:</li></ol>
+
+<p>   ``<code>c<br>   semaphore mutex = 1;<br>   do {<br>       wait(&amp;mutex);<br>       X = X + 1;<br>       if (X == 20)<br>           X = 0;<br>       signal(&amp;mutex);<br>   } while (TRUE);<br>   </code>``</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Dựng kịch bản đan xen lệnh rõ ràng khi $X = 19$.</li><li>Chỉ rõ câu lệnh kiểm tra <code>if (X == 20)</code> bị bỏ qua do $X$ bị nhảy cóc từ 19 lên 21.</li><li>Viết mã sửa lỗi bằng Mutex/Semaphore bảo vệ toàn bộ khối lệnh.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong></p>
+
+<table><thead><tr><th>Bước</th><th>Tiến trình</th><th>Thao tác</th><th>Giá trị $X$</th></tr></thead><tbody><tr><td>1</td><td>$P_1$</td><td>Thực hiện vòng lặp đến khi $X = 19$.</td><td><code>19</code></td></tr><tr><td>2</td><td>$P_1$</td><td>Thực thi <code>X = X + 1</code></td><td><code>20</code></td></tr><tr><td>3</td><td>—</td><td><em>Xảy ra chuyển ngữ cảnh sang $P_2$ TRƯỚC KHI $P_1$ kiểm tra <code>if</code></em></td><td><code>20</code></td></tr><tr><td>4</td><td>$P_2$</td><td>Thực thi <code>X = X + 1</code></td><td><strong><code>21</code></strong></td></tr><tr><td>5</td><td>$P_2$</td><td>Kiểm tra <code>if (X == 20)</code> $\rightarrow$ <code>if (21 == 20)</code> $\rightarrow$ <strong>SAI (không reset $X$)</strong></td><td><code>21</code></td></tr><tr><td>6</td><td>$P_1$</td><td>Chạy lại, kiểm tra <code>if (X == 20)</code> $\rightarrow$ <code>if (21 == 20)</code> $\rightarrow$ <strong>SAI (không reset $X$)</strong></td><td><code>21</code></td></tr></tbody></table>
+
+<p>$\rightarrow$ $X$ đạt giá trị 21 ($&gt; 20$) và sẽ tiếp tục tăng không bao giờ được reset về 0.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Chỉ giải thích chung chung mà không đưa ra kịch bản đan xen cụ thể tại mốc $X = 19 \rightarrow 21$.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Nghĩ rằng chỉ cần khóa riêng câu lệnh <code>X = X + 1</code> (phải khóa cả câu lệnh <code>if (X == 20)</code> mới giải quyết triệt để).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu dựng đúng kịch bản $X$ tăng lên 21 và viết đúng mã sửa lỗi dùng Semaphore; Đạt một phần nếu mã sửa lỗi chỉ bao bọc <code>X = X + 1</code>.</p>
+
+<p>---</p>
+
+<h3 id="cau-16-bai-tap-7-rao-chan-ong-bo-barrier-co-ban-p_1-p_2">Câu 16 (Bài tập 7) — Rào chắn Đồng bộ Barrier Cơ bản ($P_1, P_2$)</h3>
+
+<p><strong>QUESTION:</strong> Xét 2 tiến trình xử lý đoạn chương trình sau:</p>
+
+<pre><code class="language-c">process P1 { A1; A2; }
+process P2 { B1; B2; }</code></pre>
+
+<p>Đồng bộ hóa hoạt động của 2 tiến trình này sao cho cả $A_1$ và $B_1$ đều hoàn tất trước khi $A_2$ và $B_2$ bắt đầu.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Bài tập 7 / Đoạn XML 114–117.</p>
+
+<p><strong>TYPE:</strong> Thiết kế Rào chắn đồng bộ (Barrier Synchronization).</p>
+
+<p><strong>MINIMUM ANSWER:</strong></p>
+
+<ul><li>Khởi tạo 2 semaphore:</li></ul>
+
+<p>  ``<code>c<br>  semaphore a1_done = 0; // Báo hiệu A1 đã hoàn tất<br>  semaphore b1_done = 0; // Báo hiệu B1 đã hoàn tất<br>  </code>``</p>
+
+<ul><li>Cấu trúc tiến trình $P_1$:</li></ul>
+
+<p>  ``<code>c<br>  A1;<br>  signal(&amp;a1_done); // Báo cho P2 biết A1 đã xong<br>  wait(&amp;b1_done);   // Chờ B1 xong mới chạy tiếp A2<br>  A2;<br>  </code>``</p>
+
+<ul><li>Cấu trúc tiến trình $P_2$:</li></ul>
+
+<p>  ``<code>c<br>  B1;<br>  signal(&amp;b1_done); // Báo cho P1 biết B1 đã xong<br>  wait(&amp;a1_done);   // Chờ A1 xong mới chạy tiếp B2<br>  B2;<br>  </code>``</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Khởi tạo <code>a1_done = 0, b1_done = 0</code>.</li><li>Thứ tự tại điểm rào chắn: <strong>Phải gọi <code>signal</code> trước rồi mới gọi <code>wait</code></strong>.</li><li>Giải thích: Nếu đảo thành <code>wait</code> trước <code>signal</code> thì cả hai cùng chờ nhau và dẫn đến Deadlock.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong><br>Đây là mô hình rào chắn điểm hẹn (Rendezvous Barrier). Tại điểm phân cách giữa pha 1 ($A_1, B_1$) và pha 2 ($A_2, B_2$), mỗi tiến trình khi đến rào chắn sẽ phát tín hiệu báo đã xong pha của mình (<code>signal</code>), sau đó chờ tiến trình kia đến nơi (<code>wait</code>).</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Đảo thứ tự thành <code>wait</code> trước <code>signal</code> gây Deadlock.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Chỉ dùng 1 Semaphore duy nhất (1 Semaphore không thể phân biệt tín hiệu hai chiều giữa $P_1$ và $P_2$).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu viết chuẩn mã nguồn với 2 semaphore khởi tạo = 0 và gọi đúng thứ tự signal trước wait; Đạt một phần nếu viết sai thứ tự gây Deadlock.</p>
+
+<p>---</p>
+
+<h3 id="cau-17-bai-tap-8-tong-quat-hoa-rao-chan-ong-bo-vong-lap-100-buoc">Câu 17 (Bài tập 8) — Tổng quát hóa Rào chắn Đồng bộ Vòng lặp 100 Bước</h3>
+
+<p><strong>QUESTION:</strong> Tổng quát hóa bài tập trên cho các tiến trình có đoạn chương trình sau:</p>
+
+<pre><code class="language-c">process P1 { for (i = 1; i &lt;= 100; i++) Ai; }
+process P2 { for (j = 1; j &lt;= 100; j++) Bj; }</code></pre>
+
+<p>Đồng bộ hóa hoạt động của 2 tiến trình này sao cho với $k$ bất kỳ ($2 \le k \le 100$), $A_k$ chỉ có thể bắt đầu khi $B_{k-1}$ đã kết thúc và $B_k$ chỉ có thể bắt đầu khi $A_{k-1}$ đã kết thúc.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Bài tập 8 / Đoạn XML 118–121.</p>
+
+<p><strong>TYPE:</strong> Đồng bộ ràng buộc bước nhảy vòng lặp (Lockstep Loop Synchronization).</p>
+
+<p><strong>MINIMUM ANSWER:</strong></p>
+
+<ul><li>Khởi tạo 2 semaphore:</li></ul>
+
+<p>  ``<code>c<br>  semaphore a_step = 0; // Đếm số bước P1 đã hoàn thành<br>  semaphore b_step = 0; // Đếm số bước P2 đã hoàn thành<br>  </code>``</p>
+
+<ul><li>Cấu trúc tiến trình $P_1$:</li></ul>
+
+<p>  ```c<br>  for (int i = 1; i &lt;= 100; i++) {<br>      if (i &gt; 1)<br>          wait(&amp;b_step); // Với k &gt;= 2, Ak phải chờ B(k-1) kết thúc</p>
+
+<p>      Ai;</p>
+
+<p>      signal(&amp;a_step);   // Báo hiệu Ak đã kết thúc cho P2<br>  }<br>  ```</p>
+
+<ul><li>Cấu trúc tiến trình $P_2$:</li></ul>
+
+<p>  ```c<br>  for (int j = 1; j &lt;= 100; j++) {<br>      if (j &gt; 1)<br>          wait(&amp;a_step); // Với k &gt;= 2, Bk phải chờ A(k-1) kết thúc</p>
+
+<p>      Bj;</p>
+
+<p>      signal(&amp;b_step);   // Báo hiệu Bk đã kết thúc cho P1<br>  }<br>  ```</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Nhận xét bước đầu tiên ($k = 1$): $A_1$ và $B_1$ được phép chạy tự do không cần chờ ai.</li><li>Điều kiện <code>if (i &gt; 1) wait(...)</code> đặt trước thao tác thực thi $A_i, B_j$.</li><li>Lệnh <code>signal(...)</code> đặt ngay sau thao tác thực thi $A_i, B_j$.</li><li>Khởi tạo <code>a_step = 0, b_step = 0</code>.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong><br>Với $k=1$, cả hai cùng chạy $A_1, B_1$ rồi phát tín hiệu <code>signal</code>. Khi bước sang $k=2$, $P_1$ kiểm tra thấy $i &gt; 1$ nên gọi <code>wait(&amp;b_step)</code> (chờ tín hiệu do $B_1$ phát ra). Tương tự $P_2$ gọi <code>wait(&amp;a_step)</code> (chờ tín hiệu do $A_1$ phát ra). Quy luật này lặp lại tuần tự đến $k=100$, đảm bảo hai tiến trình chạy nhịp nhàng song hành từng bước một (Lockstep) mà không tiến trình nào được chạy vượt trước quá 1 bước.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Quên điều kiện kiểm tra <code>if (i &gt; 1)</code> khiến $A_1$ và $B_1$ bị deadlock ngay ở bước đầu tiên.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Đặt <code>signal</code> trước <code>Ai</code> (làm tín hiệu báo xong bị phát đi trước khi công việc thực sự hoàn thành).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu viết đúng vòng lặp có điều kiện <code>if (i &gt; 1)</code> và vị trí signal/wait chuẩn xác; Đạt một phần nếu thiếu điều kiện bước đầu tiên.</p>
+
+<p>---</p>
+
+<h3 id="cau-18-bai-tap-9-lap-lich-tinh-toan-cay-bieu-thuc-song-hanh-voi-semaphore">Câu 18 (Bài tập 9) — Lập lịch Tính toán Cây Biểu thức Song hành với Semaphore</h3>
+
+<p><strong>QUESTION:</strong> Sử dụng semaphore để viết lại chương trình sau theo mô hình xử lý đồng hành:</p>
+
+<pre><code class="language-pascal">w := x1 * x2;
+v := x3 * x4;
+y := v * x5;
+z := v * x6;
+x := w * y;
+z := w * z;
+ans := y + z;</code></pre>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Bài tập 9 / Đoạn XML 122–129.</p>
+
+<p><strong>TYPE:</strong> Phân tích phụ thuộc dữ liệu &amp; Thiết kế đa tiểu trình song song tối ưu.</p>
+
+<p><strong>MINIMUM ANSWER:</strong></p>
+
+<ol><li><strong>Phân tích quan hệ phụ thuộc dữ liệu (DAG):</strong><ul><li>$S_1: w = x_1 \times x_2$ (Độc lập $\rightarrow$ Chạy ngay).</li><li>$S_2: v = x_3 \times x_4$ (Độc lập $\rightarrow$ Chạy ngay).</li><li>$S_3: y = v \times x_5$ (Phụ thuộc $S_2$).</li><li>$S_4: z = v \times x_6$ (Phụ thuộc $S_2$).</li><li>$S_5: x = w \times y$ (Phụ thuộc $S_1, S_3$).</li><li>$S_6: z_{new} = w \times z_{old}$ (Phụ thuộc $S_1, S_4$).</li><li>$S_7: ans = y + z_{new}$ (Phụ thuộc $S_3, S_6$).</li></ul></li></ol>
+
+<ol><li><strong>Khởi tạo Semaphore:</strong></li></ol>
+
+<p>   ``<code>c<br>   semaphore synch_w1 = 0; // S1 -&gt; S5<br>   semaphore synch_w2 = 0; // S1 -&gt; S6<br>   semaphore synch_v1 = 0; // S2 -&gt; S3<br>   semaphore synch_v2 = 0; // S2 -&gt; S4<br>   semaphore synch_y  = 0; // S3 -&gt; S7 (và S3 -&gt; S5)<br>   semaphore synch_z  = 0; // S6 -&gt; S7<br>   </code>``</p>
+
+<ol><li><strong>Thiết kế 3 Luồng thực thi song hành tối ưu:</strong></li></ol>
+
+<p>   ```c<br>   // LUỒNG 1 (Tính toán nhánh w và x)<br>   void Thread_1(void) {<br>       w = x1 * x2;       // S1<br>       signal(&amp;synch_w1); // Báo w cho S5<br>       signal(&amp;synch_w2); // Báo w cho S6</p>
+
+<p>       wait(&amp;synch_y);    // Chờ y từ S3<br>       x = w * y;         // S5<br>   }</p>
+
+<p>   // LUỒNG 2 (Tính toán nhánh v và y)<br>   void Thread_2(void) {<br>       v = x3 * x4;       // S2<br>       signal(&amp;synch_v1); // Báo v cho S3<br>       signal(&amp;synch_v2); // Báo v cho S4</p>
+
+<p>       wait(&amp;synch_v1);   // Chờ v<br>       y = v * x5;        // S3<br>       signal(&amp;synch_y);  // Báo y cho Thread 1 (S5) và Thread 3 (S7)<br>   }</p>
+
+<p>   // LUỒNG 3 (Tính toán nhánh z và kết quả ans)<br>   void Thread_3(void) {<br>       wait(&amp;synch_v2);   // Chờ v từ S2<br>       z = v * x6;        // S4</p>
+
+<p>       wait(&amp;synch_w2);   // Chờ w từ S1<br>       z = w * z;         // S6<br>       signal(&amp;synch_z);  // Báo z_new cho S7</p>
+
+<p>       wait(&amp;synch_z);    // Chờ z_new<br>       ans = y + z;       // S7 (đã có y từ Thread 2)<br>   }<br>   ```</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong></p>
+
+<ul><li>Vẽ/Liệt kê đúng bảng phụ thuộc dữ liệu của 7 câu lệnh.</li><li>Nhận diện các câu lệnh có thể chạy song song độc lập ($S_1$ và $S_2$).</li><li>Khởi tạo semaphore bằng 0 và bố trí các cặp <code>wait/signal</code> chính xác không gây deadlock và không tính toán sai dữ liệu.</li></ul>
+
+<p><strong>FULL EXPLANATION:</strong><br>Bằng cách phân tích đồ thị Bernstein/DAG, ta phân chia 7 phép tính tuần tự thành các luồng chạy đồng hành trên hệ thống đa nhân. Các phép nhân $x_1 \times x_2$ và $x_3 \times x_4$ được tính song song ở hai lõi CPU khác nhau. Semaphore đảm bảo không một phép toán nào sử dụng dữ liệu trước khi biến đó được tính toán xong.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> Quên xử lý xung đột ghi đè biến $z$ giữa $S_4$ và $S_6$; bố trí thiếu tín hiệu chờ giữa $S_1$ và $S_6$.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> Khởi tạo semaphore bằng 1 (làm các phép toán sau chạy trước khi biến đầu vào được tính).</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu phân tích đúng quan hệ phụ thuộc DAG và thiết kế các luồng chạy song song với Semaphore đồng bộ chính xác; Đạt một phần nếu thiết kế luồng bị lỗi phụ thuộc dữ liệu.</p>
+
+<p>---<br><em>Ngân hàng câu hỏi tự luận IT007 Hệ điều hành — Phục vụ ôn tập và rèn luyện tư duy giải thuật đồng bộ.</em></p><section class="backlinks" aria-label="Liên kết từ các trang khác"><h2>LIÊN KẾT TỪ CÁC TRANG KHÁC</h2><ul><li><a href="../../theory/ch05-synchronization.html">Chương 5: Đồng bộ Tiến trình</a></li></ul></section><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#phan-1-cau-hoi-ly-thuyet-nen-tang-9-cau">PHẦN 1: CÂU HỎI LÝ THUYẾT NỀN TẢNG (9 CÂU)</a></li><li class="toc-item"><a class="toc-link" href="#cau-1-ieu-kien-xay-ra-tranh-chap">Câu 1 — Điều kiện Xảy ra Tranh chấp</a></li><li class="toc-item"><a class="toc-link" href="#cau-2-khai-niem-mien-gang-critical-section">Câu 2 — Khái niệm Miền găng (Critical Section)</a></li><li class="toc-item"><a class="toc-link" href="#cau-3-ba-yeu-cau-giai-phap-mien-gang">Câu 3 — Ba Yêu cầu Giải pháp Miền găng</a></li><li class="toc-item"><a class="toc-link" href="#cau-4-phan-tich-giai-phap-dua-tren-ngat-disable-interrupts">Câu 4 — Phân tích Giải pháp Dựa trên Ngắt (Disable Interrupts)</a></li><li class="toc-item"><a class="toc-link" href="#cau-5-cac-giai-phap-ong-bo-dua-tren-phan-cung">Câu 5 — Các Giải pháp Đồng bộ Dựa trên Phần cứng</a></li><li class="toc-item"><a class="toc-link" href="#cau-6-khai-niem-va-cach-su-dung-mutex-lock">Câu 6 — Khái niệm và Cách Sử dụng Mutex Lock</a></li><li class="toc-item"><a class="toc-link" href="#cau-7-khai-niem-phan-loai-va-hien-thuc-semaphore">Câu 7 — Khái niệm, Phân loại và Hiện thực Semaphore</a></li><li class="toc-item"><a class="toc-link" href="#cau-8-khai-niem-monitor-va-condition-variable">Câu 8 — Khái niệm Monitor và Condition Variable</a></li><li class="toc-item"><a class="toc-link" href="#cau-9-ac-iem-va-yeu-cau-cua-cac-bai-toan-ong-bo-kinh-ien">Câu 9 — Đặc điểm và Yêu cầu của các Bài toán Đồng bộ Kinh điển</a></li><li class="toc-item"><a class="toc-link" href="#phan-2-bai-tap-cau-truc-va-giai-thuat-ong-bo-9-bai">PHẦN 2: BÀI TẬP CẤU TRÚC VÀ GIẢI THUẬT ĐỒNG BỘ (9 BÀI)</a></li><li class="toc-item"><a class="toc-link" href="#cau-10-bai-tap-1-phan-tich-giai-thuat-dekker">Câu 10 (Bài tập 1) — Phân tích Giải thuật Dekker</a></li><li class="toc-item"><a class="toc-link" href="#cau-11-bai-tap-2-phan-tich-bien-the-giai-thuat-peterson">Câu 11 (Bài tập 2) — Phân tích Biến thể Giải thuật Peterson</a></li><li class="toc-item"><a class="toc-link" href="#cau-12-bai-tap-3-hien-thuc-mien-gang-voi-chi-thi-swap">Câu 12 (Bài tập 3) — Hiện thực Miền găng với Chỉ thị &lt;code&gt;Swap&lt;/code&gt;</a></li><li class="toc-item"><a class="toc-link" href="#cau-13-bai-tap-4-ong-bo-rang-buoc-gia-tri-tien-trinh-a-va-b">Câu 13 (Bài tập 4) — Đồng bộ Ràng buộc Giá trị Tiến trình A và B</a></li><li class="toc-item"><a class="toc-link" href="#cau-14-bai-tap-5-ong-bo-o-thi-phu-thuoc-4-tieu-trinh">Câu 14 (Bài tập 5) — Đồng bộ Đồ thị Phụ thuộc 4 Tiểu trình</a></li><li class="toc-item"><a class="toc-link" href="#cau-15-bai-tap-6-bien-chia-se-x-tang-en-20-va-race-condition">Câu 15 (Bài tập 6) — Biến Chia sẻ $X$ Tăng Đến 20 và Race Condition</a></li><li class="toc-item"><a class="toc-link" href="#cau-16-bai-tap-7-rao-chan-ong-bo-barrier-co-ban-p_1-p_2">Câu 16 (Bài tập 7) — Rào chắn Đồng bộ Barrier Cơ bản ($P_1, P_2$)</a></li><li class="toc-item"><a class="toc-link" href="#cau-17-bai-tap-8-tong-quat-hoa-rao-chan-ong-bo-vong-lap-100-buoc">Câu 17 (Bài tập 8) — Tổng quát hóa Rào chắn Đồng bộ Vòng lặp 100 Bước</a></li><li class="toc-item"><a class="toc-link" href="#cau-18-bai-tap-9-lap-lich-tinh-toan-cay-bieu-thuc-song-hanh-voi-semaphore">Câu 18 (Bài tập 9) — Lập lịch Tính toán Cây Biểu thức Song hành với Semaphore</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../../assets/js/app.js"></script></body></html>

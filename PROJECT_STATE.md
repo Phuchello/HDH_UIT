@@ -2,13 +2,13 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH2_CH5_SOURCE_MAP_READY_FOR_INDEPENDENT_CHECK`  
-**Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `COMPLETE — PENDING INDEPENDENT CHECK`  
-**Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `NOT_STARTED`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — canonical attachment evidence, precision range signatures, and verified page/slide maps are recorded with explicit source statuses; local variants remain separate.  
-**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 ONLY`  
-**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 PRECISION GATED & TESTED`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Independent final review of Chapter 5 canonical source map.  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH2_CH5_DRAFT_READY_FOR_ENGINEERING_QA`  
+**Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
+**Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_DRAFTED`  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — 131 canonical content pages drafted with 0 missing pages; 18/18 QBank questions drafted with verified SHA-256 provenance.  
+**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 ONLY; CH5 DRAFT — NOT YET VERIFIED`  
+**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 CONTENT GATED & TESTED`  
+**Hành động tiếp theo chính xác (Exact Next Action):** Terra Medium performs Chapter 5 engineering/build regression, followed by Luna Ultra independent Chapter 5 academic review.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-08-31
 

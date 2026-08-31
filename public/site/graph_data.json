@@ -73,11 +73,20 @@
       "color": "#0969da"
     },
     {
+      "id": "sub-ch05",
+      "label": "Ngân hàng tự luận — Chương 5: Đồ",
+      "link": "questions/subjective/ch05.html",
+      "x": 306,
+      "y": 129,
+      "r": 7,
+      "color": "#0969da"
+    },
+    {
       "id": "review-midterm",
       "label": "Ôn tập Giữa kỳ IT007 — Chương 1–",
       "link": "reviews/midterm.html",
-      "x": 306,
-      "y": 129,
+      "x": 103,
+      "y": 47,
       "r": 7,
       "color": "#0969da"
     },
@@ -85,8 +94,8 @@
       "id": "theory-ch01-overview",
       "label": "Chương 1: Tổng quan về Hệ điều h",
       "link": "theory/ch01-overview.html",
-      "x": 103,
-      "y": 47,
+      "x": 170,
+      "y": 90,
       "r": 7,
       "color": "#0969da"
     },
@@ -94,8 +103,8 @@
       "id": "theory-ch02-structure",
       "label": "Chương 2: Cấu trúc và dịch vụ Hệ",
       "link": "theory/ch02-structure.html",
-      "x": 170,
-      "y": 90,
+      "x": 237,
+      "y": 133,
       "r": 7,
       "color": "#0969da"
     },
@@ -103,8 +112,8 @@
       "id": "theory-ch03-process",
       "label": "Chương 3: Tiến trình và Tiểu trì",
       "link": "theory/ch03-process.html",
-      "x": 237,
-      "y": 133,
+      "x": 304,
+      "y": 51,
       "r": 7,
       "color": "#0969da"
     },
@@ -112,8 +121,17 @@
       "id": "theory-ch04-cpu-scheduling",
       "label": "Chương 4: Định thời CPU",
       "link": "theory/ch04-scheduling.html",
-      "x": 304,
-      "y": 51,
+      "x": 101,
+      "y": 94,
+      "r": 7,
+      "color": "#0969da"
+    },
+    {
+      "id": "theory-ch05-synchronization",
+      "label": "Chương 5: Đồng bộ Tiến trình",
+      "link": "theory/ch05-synchronization.html",
+      "x": 168,
+      "y": 137,
       "r": 7,
       "color": "#0969da"
     }
@@ -150,6 +168,10 @@
     {
       "from": "sub-ch04",
       "to": "theory-ch04-cpu-scheduling"
+    },
+    {
+      "from": "sub-ch05",
+      "to": "theory-ch05-synchronization"
     },
     {
       "from": "review-midterm",
@@ -202,6 +224,10 @@
     {
       "from": "theory-ch04-cpu-scheduling",
       "to": "theory-ch01-overview"
+    },
+    {
+      "from": "theory-ch05-synchronization",
+      "to": "sub-ch05"
     }
   ]
 }

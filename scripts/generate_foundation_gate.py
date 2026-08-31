@@ -30,6 +30,7 @@ def main():
         run("negative_tests", [py, "scripts/run_negative_tests.py"]),
         run("batch1_canonical_source", [py, "scripts/validate_batch1_canonical.py"]),
         run("validate_ch05_source_map", [py, "scripts/validate_ch05_source_map.py"]),
+        run("validate_ch05_content", [py, "scripts/validate_ch05_content.py"]),
         run("verify_research_gates", [py, "scripts/verify_research_gates.py"]),
     ]
     passed = all(step["ok"] for step in steps)

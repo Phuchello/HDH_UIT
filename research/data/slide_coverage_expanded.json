@@ -5262,7 +5262,7 @@
       "classification": "NON_CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "1-3"
     },
     {
@@ -5278,7 +5278,7 @@
       "classification": "NON_CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "1-3"
     },
     {
@@ -5294,7 +5294,7 @@
       "classification": "NON_CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "1-3"
     },
     {
@@ -5310,7 +5310,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-11"
     },
     {
@@ -5326,7 +5326,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-11"
     },
     {
@@ -5342,7 +5342,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-11"
     },
     {
@@ -5358,7 +5358,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-11"
     },
     {
@@ -5374,7 +5374,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-11"
     },
     {
@@ -5390,7 +5390,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-11"
     },
     {
@@ -5406,7 +5406,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-11"
     },
     {
@@ -5422,7 +5422,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-11"
     },
     {
@@ -5438,7 +5438,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "12-13"
     },
     {
@@ -5454,7 +5454,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "12-13"
     },
     {
@@ -5470,7 +5470,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "14-16"
     },
     {
@@ -5486,7 +5486,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "14-16"
     },
     {
@@ -5502,7 +5502,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#1-boi-canh-va-race-condition",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "14-16"
     },
     {
@@ -5518,7 +5518,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "17-19"
     },
     {
@@ -5534,7 +5534,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "17-19"
     },
     {
@@ -5550,7 +5550,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "17-19"
     },
     {
@@ -5566,7 +5566,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "20-25"
     },
     {
@@ -5582,7 +5582,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "20-25"
     },
     {
@@ -5598,7 +5598,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "20-25"
     },
     {
@@ -5614,7 +5614,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "20-25"
     },
     {
@@ -5630,7 +5630,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "20-25"
     },
     {
@@ -5646,7 +5646,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "20-25"
     },
     {
@@ -5662,7 +5662,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "26-28"
     },
     {
@@ -5678,7 +5678,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "26-28"
     },
     {
@@ -5694,7 +5694,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "26-28"
     },
     {
@@ -5710,7 +5710,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "29-30"
     },
     {
@@ -5726,7 +5726,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "29-30"
     },
     {
@@ -5742,7 +5742,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "31-36"
     },
     {
@@ -5758,7 +5758,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "31-36"
     },
     {
@@ -5774,7 +5774,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "31-36"
     },
     {
@@ -5790,7 +5790,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "31-36"
     },
     {
@@ -5806,7 +5806,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "31-36"
     },
     {
@@ -5822,7 +5822,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "31-36"
     },
     {
@@ -5838,7 +5838,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "37-40"
     },
     {
@@ -5854,7 +5854,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "37-40"
     },
     {
@@ -5870,7 +5870,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "37-40"
     },
     {
@@ -5886,7 +5886,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "37-40"
     },
     {
@@ -5902,7 +5902,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "41-46"
     },
     {
@@ -5918,7 +5918,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "41-46"
     },
     {
@@ -5934,7 +5934,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "41-46"
     },
     {
@@ -5950,7 +5950,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "41-46"
     },
     {
@@ -5966,7 +5966,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "41-46"
     },
     {
@@ -5982,7 +5982,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "41-46"
     },
     {
@@ -5998,7 +5998,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "47-51"
     },
     {
@@ -6014,7 +6014,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "47-51"
     },
     {
@@ -6030,7 +6030,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "47-51"
     },
     {
@@ -6046,7 +6046,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "47-51"
     },
     {
@@ -6062,7 +6062,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#3-giai-phap-phan-mem-va-giai-phap-peterson",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "47-51"
     },
     {
@@ -6078,7 +6078,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#4-ho-tro-phan-cung-va-memory-barrier",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "52-55"
     },
     {
@@ -6094,7 +6094,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#4-ho-tro-phan-cung-va-memory-barrier",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "52-55"
     },
     {
@@ -6110,7 +6110,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#4-ho-tro-phan-cung-va-memory-barrier",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "52-55"
     },
     {
@@ -6126,7 +6126,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#4-ho-tro-phan-cung-va-memory-barrier",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "52-55"
     },
     {
@@ -6142,7 +6142,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#4-ho-tro-phan-cung-va-memory-barrier",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": 56
     },
     {
@@ -6158,7 +6158,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#5-mutex-locks",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "57-60"
     },
     {
@@ -6174,7 +6174,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#5-mutex-locks",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "57-60"
     },
     {
@@ -6190,7 +6190,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#5-mutex-locks",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "57-60"
     },
     {
@@ -6206,7 +6206,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#5-mutex-locks",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "57-60"
     },
     {
@@ -6222,7 +6222,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#5-mutex-locks",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "61-63"
     },
     {
@@ -6238,7 +6238,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#5-mutex-locks",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "61-63"
     },
     {
@@ -6254,7 +6254,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#5-mutex-locks",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "61-63"
     },
     {
@@ -6270,7 +6270,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#5-mutex-locks",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "64-65"
     },
     {
@@ -6286,7 +6286,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#5-mutex-locks",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "64-65"
     },
     {
@@ -6301,8 +6301,8 @@
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md",
-      "content_status": "NOT_WRITTEN",
+      "v2_destination": "content/theory/ch05-synchronization.md#tom-tat-va-huong-dan-on-tap",
+      "content_status": "CONTENT_DRAFTED",
       "range": 66
     },
     {
@@ -6318,7 +6318,7 @@
       "classification": "NON_CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": 67
     },
     {
@@ -6334,7 +6334,7 @@
       "classification": "NON_CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "1-3"
     },
     {
@@ -6350,7 +6350,7 @@
       "classification": "NON_CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "1-3"
     },
     {
@@ -6366,7 +6366,7 @@
       "classification": "NON_CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "1-3"
     },
     {
@@ -6382,7 +6382,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6398,7 +6398,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6414,7 +6414,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6430,7 +6430,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6446,7 +6446,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6462,7 +6462,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6478,7 +6478,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6494,7 +6494,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6510,7 +6510,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6526,7 +6526,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6542,7 +6542,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6558,7 +6558,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "4-15"
     },
     {
@@ -6574,7 +6574,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "16-17"
     },
     {
@@ -6590,7 +6590,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "16-17"
     },
     {
@@ -6606,7 +6606,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "18-22"
     },
     {
@@ -6622,7 +6622,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "18-22"
     },
     {
@@ -6638,7 +6638,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "18-22"
     },
     {
@@ -6654,7 +6654,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "18-22"
     },
     {
@@ -6670,7 +6670,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "18-22"
     },
     {
@@ -6686,7 +6686,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "23-26"
     },
     {
@@ -6702,7 +6702,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "23-26"
     },
     {
@@ -6718,7 +6718,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "23-26"
     },
     {
@@ -6734,7 +6734,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "23-26"
     },
     {
@@ -6750,7 +6750,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "27-29"
     },
     {
@@ -6766,7 +6766,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "27-29"
     },
     {
@@ -6782,7 +6782,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "27-29"
     },
     {
@@ -6798,7 +6798,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "30-32"
     },
     {
@@ -6814,7 +6814,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "30-32"
     },
     {
@@ -6830,7 +6830,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#6-semaphore-va-hien-thuc",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "30-32"
     },
     {
@@ -6846,7 +6846,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#7-monitors-va-condition-variables",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "33-36"
     },
     {
@@ -6862,7 +6862,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#7-monitors-va-condition-variables",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "33-36"
     },
     {
@@ -6878,7 +6878,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#7-monitors-va-condition-variables",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "33-36"
     },
     {
@@ -6894,7 +6894,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#7-monitors-va-condition-variables",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "33-36"
     },
     {
@@ -6910,7 +6910,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#7-monitors-va-condition-variables",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "37-40"
     },
     {
@@ -6926,7 +6926,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#7-monitors-va-condition-variables",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "37-40"
     },
     {
@@ -6942,7 +6942,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#7-monitors-va-condition-variables",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "37-40"
     },
     {
@@ -6958,7 +6958,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#7-monitors-va-condition-variables",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "37-40"
     },
     {
@@ -6974,7 +6974,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#8-liveness-va-deadlock",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "41-43"
     },
     {
@@ -6990,7 +6990,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#8-liveness-va-deadlock",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "41-43"
     },
     {
@@ -7006,7 +7006,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#8-liveness-va-deadlock",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "41-43"
     },
     {
@@ -7022,7 +7022,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#9-bai-toan-bounded-buffer",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "44-46"
     },
     {
@@ -7038,7 +7038,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#9-bai-toan-bounded-buffer",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "44-46"
     },
     {
@@ -7054,7 +7054,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#9-bai-toan-bounded-buffer",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "44-46"
     },
     {
@@ -7070,7 +7070,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#9-bai-toan-bounded-buffer",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "47-50"
     },
     {
@@ -7086,7 +7086,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#9-bai-toan-bounded-buffer",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "47-50"
     },
     {
@@ -7102,7 +7102,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#9-bai-toan-bounded-buffer",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "47-50"
     },
     {
@@ -7118,7 +7118,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#9-bai-toan-bounded-buffer",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "47-50"
     },
     {
@@ -7134,7 +7134,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#9-bai-toan-bounded-buffer",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "51-53"
     },
     {
@@ -7150,7 +7150,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#9-bai-toan-bounded-buffer",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "51-53"
     },
     {
@@ -7166,7 +7166,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#9-bai-toan-bounded-buffer",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "51-53"
     },
     {
@@ -7182,7 +7182,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#10-bai-toan-readers-writers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "54-57"
     },
     {
@@ -7198,7 +7198,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#10-bai-toan-readers-writers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "54-57"
     },
     {
@@ -7214,7 +7214,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#10-bai-toan-readers-writers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "54-57"
     },
     {
@@ -7230,7 +7230,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#10-bai-toan-readers-writers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "54-57"
     },
     {
@@ -7246,7 +7246,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#10-bai-toan-readers-writers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "58-60"
     },
     {
@@ -7262,7 +7262,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#10-bai-toan-readers-writers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "58-60"
     },
     {
@@ -7278,7 +7278,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#10-bai-toan-readers-writers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "58-60"
     },
     {
@@ -7294,7 +7294,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#11-bai-toan-dining-philosophers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "61-63"
     },
     {
@@ -7310,7 +7310,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#11-bai-toan-dining-philosophers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "61-63"
     },
     {
@@ -7326,7 +7326,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#11-bai-toan-dining-philosophers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "61-63"
     },
     {
@@ -7342,7 +7342,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#11-bai-toan-dining-philosophers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "64-70"
     },
     {
@@ -7358,7 +7358,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#11-bai-toan-dining-philosophers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "64-70"
     },
     {
@@ -7374,7 +7374,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#11-bai-toan-dining-philosophers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "64-70"
     },
     {
@@ -7390,7 +7390,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#11-bai-toan-dining-philosophers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "64-70"
     },
     {
@@ -7406,7 +7406,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#11-bai-toan-dining-philosophers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "64-70"
     },
     {
@@ -7422,7 +7422,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#11-bai-toan-dining-philosophers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "64-70"
     },
     {
@@ -7438,7 +7438,7 @@
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch05-synchronization.md#11-bai-toan-dining-philosophers",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": "64-70"
     },
     {
@@ -7453,8 +7453,8 @@
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md",
-      "content_status": "NOT_WRITTEN",
+      "v2_destination": "content/theory/ch05-synchronization.md#tom-tat-va-huong-dan-on-tap",
+      "content_status": "CONTENT_DRAFTED",
       "range": 71
     },
     {
@@ -7470,7 +7470,7 @@
       "classification": "NON_CONTENT",
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
+      "content_status": "CONTENT_DRAFTED",
       "range": 72
     },
     {
