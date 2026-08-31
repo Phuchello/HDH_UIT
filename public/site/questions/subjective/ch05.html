@@ -147,21 +147,23 @@
 
 <p><strong>TYPE:</strong> Tổng hợp cơ chế phần cứng.</p>
 
-<p><strong>MINIMUM ANSWER:</strong> Các giải pháp phần cứng dựa trên các chỉ thị máy nguyên tử (Atomic Instructions) không thể bị chia cắt và Rào chắn bộ nhớ:</p>
+<p><strong>MINIMUM ANSWER:</strong> Các giải pháp phần cứng dựa trên các chỉ thị máy nguyên tử (Atomic Instructions), được quan sát như không thể chia cắt trong mô hình truy cập cạnh tranh liên quan, và Rào chắn bộ nhớ:</p>
 
 <ol><li><strong>Memory Barrier (Rào chắn bộ nhớ):</strong> Cưỡng chế thứ tự truy xuất bộ nhớ, ngăn chặn compiler/CPU memory reordering.</li><li><strong>Chỉ thị <code>test_and_set(&amp;lock)</code>:</strong> Đọc giá trị cũ và gán <code>lock = true</code> nguyên tử.</li><li><strong>Chỉ thị <code>compare_and_swap(&amp;val, expected, new_val)</code>:</strong> So sánh và ghi giá trị mới nếu giá trị cũ khớp kỳ vọng.</li><li><strong>Biến đơn nguyên (Atomic Variables):</strong> Hỗ trợ các phép toán đếm/cập nhật nguyên tử không cần khóa.</li></ol>
 
 <p><strong>REQUIRED KEY POINTS:</strong></p>
 
-<ul><li>Tính nguyên tử (Atomicity): Thực hiện trọn vẹn trong 1 chu kỳ bus/cache, không bị ngắt.</li><li>Trình bày mã giả và ứng dụng của <code>test_and_set</code> và <code>compare_and_swap</code>.</li><li>Vai trò của Memory Barrier đối với kiến trúc hiện đại (OoO execution).</li></ul>
+<ul><li>Tính nguyên tử (Atomicity): Thao tác được quan sát như không thể chia cắt đối với truy cập cạnh tranh trong mô hình bộ nhớ liên quan; atomicity không đồng nghĩa với một chu kỳ bus/cache.</li><li>Trình bày mã giả và ứng dụng của <code>test_and_set</code> và <code>compare_and_swap</code>.</li><li>Vai trò của Memory Barrier đối với kiến trúc hiện đại (OoO execution).</li><li>Phân biệt atomic counter với lời giải bounded-buffer hoàn chỉnh.</li></ul>
 
 <p><strong>FULL EXPLANATION:</strong></p>
 
 <ul><li><code>test_and_set</code>: Trả về giá trị cũ của biến và đồng thời gán biến bằng <code>true</code>. Đoạn mã vào: <code>while (test_and_set(&amp;lock)); /* CS */ lock = false;</code>.</li><li><code>compare_and_swap</code>: Chỉ cập nhật <code>*val = new_val</code> khi <code>*val == expected</code>. Cho phép xây dựng các thuật toán đồng bộ lock-free tinh vi.</li><li><code>Memory Barrier</code>: Giải quyết hiện tượng hoán đổi trật tự lệnh đọc/ghi trên các kiến trúc bộ nhớ yếu (Weak Memory Models).</li></ul>
 
+<p><strong>TIER-B TECHNICAL NOTE — Atomic counter scope:</strong> <code>atomic_fetch_add</code>/<code>atomic_fetch_sub</code> chỉ làm cho cập nhật biến đếm là nguyên tử. Chúng không tự cung cấp kiểm soát sức chứa, chặn <code>empty/full</code>, độc quyền ô/chỉ số, đồng bộ dữ liệu buffer, hay thứ tự producer–consumer; atomic counter không phải lời giải bounded-buffer hoàn chỉnh.</p>
+
 <p><strong>COMMON MISSING POINTS:</strong> Quên chỉ thị <code>Memory Barrier</code> hoặc không giải thích được ý nghĩa của tham số trong <code>compare_and_swap</code>.</p>
 
-<p><strong>COMMON WRONG CLAIMS:</strong> Nhầm <code>test_and_set</code> có thể bị ngắt giữa thao tác đọc và thao tác ghi.</p>
+<p><strong>COMMON WRONG CLAIMS:</strong> Nhầm <code>test_and_set</code> không phải là một thao tác đọc–sửa–ghi nguyên tử.</p>
 
 <p><strong>SELF_CHECK_RUBRIC:</strong> Đạt nếu trình bày đầy đủ cả Memory Barrier, Test-and-Set, Compare-and-Swap kèm mã giả và nguyên lý hoạt động; Đạt một phần nếu chỉ nêu tên không có mã giả.</p>
 
@@ -199,7 +201,7 @@
 
 <p><strong>QUESTION:</strong> Semaphore là gì? Đặc điểm của semaphore? Cách thức hiện thực semaphore? Có mấy loại semaphore? Khi sử dụng semaphore cần lưu ý những vấn đề gì?</p>
 
-<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 7 / Đoạn XML 9; <code>UIT-SLIDE-CH05-2-2024</code>, slide 4–32.</p>
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 7 / Đoạn XML 9; <code>UIT-SLIDE-CH05-2-2024</code>, trang 4–32.</p>
 
 <p><strong>TYPE:</strong> Tổng hợp công cụ đồng bộ cốt lõi.</p>
 
@@ -225,19 +227,21 @@
 
 <p><strong>QUESTION:</strong> Monitor là gì?</p>
 
-<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 8 / Đoạn XML 10; <code>UIT-SLIDE-CH05-2-2024</code>, slide 33–40.</p>
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 8 / Đoạn XML 10; <code>UIT-SLIDE-CH05-2-2024</code>, trang 33–40.</p>
 
 <p><strong>TYPE:</strong> Kiểu dữ liệu trừu tượng (ADT) bậc cao.</p>
 
-<p><strong>MINIMUM ANSWER:</strong> Monitor là một cấu trúc đồng bộ hóa trừu tượng bậc cao (ADT) đóng gói dữ liệu chia sẻ cùng các thủ tục thao tác trên dữ liệu đó. Nguyên lý cốt lõi: Tại một thời điểm, <strong>chỉ có duy nhất một tiến trình được phép thực thi bên trong monitor</strong> (Mutual Exclusion được đảm bảo tự động bởi ngôn ngữ/trình biên dịch). Để hỗ trợ chờ điều kiện, monitor sử dụng <strong>Biến điều kiện (Condition Variable)</strong> với hai thao tác <code>wait()</code> và <code>signal()</code>.</p>
+<p><strong>MINIMUM ANSWER:</strong> Monitor là một cấu trúc đồng bộ hóa trừu tượng bậc cao (ADT) đóng gói dữ liệu chia sẻ cùng các thủ tục thao tác trên dữ liệu đó. Nguyên lý cốt lõi: Tại một thời điểm, <strong>chỉ có duy nhất một tiến trình được phép thực thi bên trong monitor</strong>. Ngữ nghĩa loại trừ tương hỗ do ngôn ngữ/runtime hoặc hiện thực monitor thực thi; compiler có thể tham gia hiện thực nhưng không phải một thuộc tính phổ quát của compiler đơn độc. Để hỗ trợ chờ điều kiện, monitor sử dụng <strong>Biến điều kiện (Condition Variable)</strong> với hai thao tác <code>wait()</code> và <code>signal()</code>.</p>
 
 <p><strong>REQUIRED KEY POINTS:</strong></p>
 
 <ul><li>Định nghĩa ADT đóng gói biến chung và hàm thủ tục.</li><li>Tính loại trừ tương hỗ ngầm định (Implicit Mutual Exclusion).</li><li>Khái niệm Biến điều kiện (<code>condition x;</code>).</li><li>Cơ chế của <code>x.wait()</code>: Tự động giải phóng khóa monitor khi vào hàng đợi ngủ, và tái chiếm lại khóa monitor khi được đánh thức trước khi chạy tiếp.</li><li>Cơ chế của <code>x.signal()</code>: Đánh thức 1 tiến trình trong hàng đợi condition (nếu rỗng thì không có tác dụng gì).</li></ul>
 
-<p><strong>FULL EXPLANATION:</strong><br>Lập trình với Semaphore dễ gặp lỗi do lập trình viên phải tự quản lý <code>wait/signal</code>. Monitor chuyển trách nhiệm bảo đảm miền găng cho trình biên dịch. Khi tiến trình gọi hàm trong monitor, nó tự động chiếm khóa; khi thoát hàm, tự động nhả khóa. Hai hàng đợi cơ bản:</p>
+<p><strong>FULL EXPLANATION:</strong><br>Lập trình với Semaphore dễ gặp lỗi do lập trình viên phải tự quản lý <code>wait/signal</code>. Monitor chuyển trách nhiệm bảo đảm miền găng cho ngữ nghĩa của ngôn ngữ/runtime hoặc hiện thực monitor. Khi tiến trình gọi hàm trong monitor, nó tự động chiếm khóa; khi thoát hàm, tự động nhả khóa. Hai hàng đợi cơ bản:</p>
 
 <ul><li><em>Entry Queue:</em> Chứa các tiến trình chờ vào monitor.</li><li><em>Condition Queue:</em> Chứa các tiến trình đã vào monitor nhưng đang chờ điều kiện logic thông qua <code>x.wait()</code>.</li></ul>
+
+<p><strong>TIER-B TECHNICAL NOTE — Language/runtime examples:</strong> Java <code>synchronized</code>, C# <code>Monitor</code>, hoặc các thư viện tương tự là các hiện thực cụ thể; chi tiết khóa và lịch đánh thức phụ thuộc vào ngôn ngữ/runtime, không nên gán chung cho mọi compiler.</p>
 
 <p><strong>COMMON MISSING POINTS:</strong> Quên giải thích cơ chế "nhả khóa khi wait và tái chiếm khóa khi thức dậy" của biến điều kiện.</p>
 
@@ -251,7 +255,7 @@
 
 <p><strong>QUESTION:</strong> Đặc điểm và yêu cầu đồng bộ của các bài toán đồng bộ kinh điển?</p>
 
-<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 9 / Đoạn XML 11; <code>UIT-SLIDE-CH05-2-2024</code>, slide 44–70.</p>
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH05-2024</code>, Câu 9 / Đoạn XML 11; <code>UIT-SLIDE-CH05-2-2024</code>, trang 44–70.</p>
 
 <p><strong>TYPE:</strong> Tổng hợp so sánh 3 bài toán kinh điển.</p>
 

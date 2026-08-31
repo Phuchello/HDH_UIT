@@ -99,3 +99,21 @@ Các tệp nội dung đã tạo lập:
 - **OPEN CONTENT MAJORS:** **`0`**
 - **OPEN CONTENT MINORS:** **`0`**
 - **SẴN SÀNG SOẠN THẢO CHƯƠNG 6:** **`NO`** *(Cần hoàn tất toàn bộ quy trình kiểm toán học thuật và QA kỹ thuật cho Chương 5 trước)*.
+
+---
+
+## POST-DRAFT INDEPENDENT FIDELITY CORRECTION
+
+This correction pass addresses source-fidelity and standards wording findings discovered after the Chapter 5 draft gate. It does not mark Chapter 5 academically verified.
+
+- **CH5-PROV-001:** Canonical Part 2 references now use `UIT-SLIDE-CH05-2-2024`; the legacy Part 2 identity is absent repository-wide. QBank identity remains `UIT-QBANK-CH05-2024` with SHA-256 `503cd8fdb619bcfd664cfaa198915bc50d0ba6bb910c74d14ccff5252e646186` and 18 drafted units.
+- **CH5-TECH-001:** The source-model semaphore invariant is stated explicitly (`S->value >= 0` counts waits that can proceed; negative values represent `|S->value|` waiters). POSIX/Linux behavior is separately labeled as a Tier-B technical note.
+- **CH5-TECH-002:** Atomicity wording no longer claims a single bus/cache cycle or an interrupt-timing guarantee. The atomic counter example is explicitly bounded to count-update atomicity and not a complete bounded-buffer solution. Monitor and POSIX/Linux details are labeled Tier-B where they exceed the UIT slide model.
+- **CH5-COVERAGE-001:** Canonical content ranges remain `CONTENT_DRAFTED`; all four non-content ranges (Part 1 pages 1–3 and 67; Part 2 pages 1–3 and 72) are `NOT_WRITTEN`.
+- **CH5-QA-001:** Draft validator now checks canonical source IDs, exact generated heading anchors, non-content statuses, neutral frontmatter metadata, and the standards/atomicity wording guards. Its PASS message states that independent academic verification is still pending.
+
+**Known engineering issue:** `CH5_NESTED_FENCED_CODE_RENDERING` — generated Chapter 5 HTML can mangle fenced code blocks nested/indented under list items. This is recorded for Terra engineering/build regression; renderer, CSS, and JS are intentionally unchanged in this pass.
+
+**Open content blockers:** `0`  
+**Open content majors:** `0`  
+**Open content minors:** `0` *(the nested fenced-code issue is an engineering follow-up, not a content finding)*

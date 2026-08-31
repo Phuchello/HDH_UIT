@@ -12,8 +12,8 @@ prerequisites:
 related:
   - "sub-ch05"
   - "theory-ch06-deadlock"
-exam_relevance:
-  frequent_topics:
+review_topics:
+  source_emphasized_topics:
     - "Khái niệm Race Condition và lần vết Interleaving Producer-Consumer / PID"
     - "3 yêu cầu vùng tranh chấp: Mutual Exclusion, Progress, Bounded Waiting"
     - "Phân tích 3 giải pháp phần mềm (Turn, Flag, Peterson)"
@@ -156,6 +156,8 @@ Một giải pháp giải quyết bài toán miền găng được coi là đún
 
 *(Nguồn: Slide 29–30)*
 
+> **TIER-B TECHNICAL NOTE — `cli`/`sti` và IPI:** Tên lệnh và chi phí IPI là chi tiết triển khai kiến trúc/kernel; slide dùng chúng để minh họa giới hạn của vô hiệu hóa ngắt trên hệ đa xử lý.
+
 Một giải pháp phần cứng đơn giản ở mức nhân là: Trước khi vào miền găng, CPU thực thi lệnh tắt toàn bộ ngắt (`cli`); khi ra khỏi miền găng, bật ngắt trở lại (`sti`).
 
 - **Vì sao không áp dụng cho User Process?**
@@ -253,6 +255,8 @@ Giải thuật Peterson kết hợp cả hai biến `turn` và mảng `flag[2]`,
 
 *(Nguồn: Slide 47–51)*
 
+> **TIER-B TECHNICAL NOTE — modern architecture/compiler:**
+>
 > **Đánh giá bản chất kỹ thuật:**
 > Về mặt toán học và lý thuyết, giải thuật Peterson **hoàn toàn đúng đắn** dưới giả định mô hình bộ nhớ tuần tự nhất quán (Sequential Consistency). Tuy nhiên, trên các bộ xử lý hiện đại (x86, ARM, RISC-V) và trình biên dịch tối ưu:
 > - **Memory Reordering:** Trình biên dịch và CPU Out-of-Order có thể hoán đổi thứ tự thực thi của hai lệnh không phụ thuộc dữ liệu: `flag[i] = true;` và `turn = j;` có thể bị ghi vào Store Buffer theo thứ tự ngược lại hoặc bị trì hoãn hiển thị sang lõi CPU khác.
@@ -284,7 +288,7 @@ turn = 0;
 
 *(Nguồn: Slide 56 ghi nhận nội dung Tự học; phần dưới đây chuẩn hóa cơ chế kỹ thuật phục vụ thi cử)*
 
-Phần cứng hiện đại cung cấp các chỉ thị nguyên tử (Atomic Instructions - thực thi trọn vẹn trong một chu kỳ bus/cache, không thể bị ngắt giữa chừng).
+> **TIER-B TECHNICAL NOTE — Atomicity and implementation:** Các primitive đọc–sửa–ghi nguyên tử (read-modify-write) cung cấp một thao tác được quan sát như **không thể chia cắt** đối với các truy cập cạnh tranh trong mô hình bộ nhớ/kiến trúc liên quan. Việc triển khai có thể cần nhiều chu kỳ của bộ xử lý, cache hoặc interconnect; **atomic không đồng nghĩa với một chu kỳ phần cứng duy nhất** và cũng không phải cam kết về thời điểm ngắt.
 
 #### 1. Chỉ thị `test_and_set`
 
@@ -337,7 +341,7 @@ Phần cứng hiện đại cung cấp các chỉ thị nguyên tử (Atomic Ins
 
 #### 3. Biến đơn nguyên (Atomic Variables)
 
-Biến đơn nguyên (như `atomic_int` trong C11 hoặc `atomic_t` trong Linux Kernel) sử dụng trực tiếp các lệnh nguyên tử của CPU để thực hiện các phép toán cơ bản (như `fetch_and_add`) mà không cần khóa mutex. Thao tác đếm trong bài toán Producer-Consumer được giải quyết an toàn bằng:
+Biến đơn nguyên (như `atomic_int` trong C11 hoặc `atomic_t` trong Linux Kernel) cung cấp các phép toán cập nhật nguyên tử (như `atomic_fetch_add`/`atomic_fetch_sub`) mà không cần khóa mutex. Chúng chỉ giải quyết **tính nguyên tử của bản thân cập nhật `count`**, không tự giải quyết toàn bộ bài toán Producer–Consumer:
 ```c
 atomic_int count = 0;
 // Producer:
@@ -345,6 +349,8 @@ atomic_fetch_add(&count, 1);
 // Consumer:
 atomic_fetch_sub(&count, 1);
 ```
+
+> **ĐỪNG NHẦM — TIER-B TECHNICAL NOTE:** Atomic counter không tự cung cấp kiểm soát sức chứa bounded-buffer, chặn khi `empty/full`, độc quyền cập nhật ô/chỉ số, đồng bộ dữ liệu trong buffer, hay thứ tự producer–consumer. Vì vậy, `atomic_fetch_add`/`atomic_fetch_sub` **không phải** là lời giải bounded-buffer hoàn chỉnh.
 
 ---
 
@@ -386,7 +392,7 @@ atomic_fetch_sub(&count, 1);
    - Khi không thể lấy được khóa, tiến trình tự chuyển trạng thái sang `Waiting/Blocked`, đưa PCB vào hàng đợi `wait_queue` của khóa và gọi hàm lập lịch `yield()` / `sleep()`.
    - Khi tiến trình đang giữ khóa gọi `release()`, nó sẽ đánh thức một tiến trình trong `wait_queue` chuyển về trạng thái `Ready`.
 
-> **Lưu ý chuẩn xác kỹ thuật:**
+> **TIER-B TECHNICAL NOTE — POSIX pthread:**
 > - Khác với Semaphore, Mutex có khái niệm **quyền sở hữu (Ownership)**: Chỉ luồng đã gọi `acquire()` mới có quyền gọi `release()`.
 > - Chuẩn POSIX (`pthread_mutex_unlock`) không đảm bảo các luồng đang chờ sẽ được đánh thức theo thứ tự FIFO nghiêm ngặt.
 
@@ -394,7 +400,7 @@ atomic_fetch_sub(&count, 1);
 
 ## 6. Semaphore và Hiện thực
 
-*(Nguồn: `UIT-SLIDE-CH07-2-2024`, Slide 4–32)*
+*(Nguồn: `UIT-SLIDE-CH05-2-2024`, trang 4–32)*
 
 ### 6.1 Định nghĩa Semaphore của Dijkstra
 
@@ -453,11 +459,11 @@ void signal(semaphore *S) {
 }
 ```
 
-> **Ý nghĩa của giá trị `S->value` trong mô hình Slide:**
-> - Khi `S->value >= 0`: Đại diện cho **số lượng thực thể tài nguyên đang khả dụng**.
-> - Khi `S->value < 0`: Độ lớn $|S\text{->value}|$ đại diện cho **số lượng tiến trình đang bị khóa và chờ đợi trong hàng đợi `S->list`**.
-> 
-> *Ghi chú chuẩn hóa POSIX:* Với giao thức chuẩn POSIX (`sem_wait`), giá trị quan sát được qua `sem_getvalue()` không bao giờ âm; tiến trình sẽ block nếu giá trị bằng $0$.
+> **SOURCE MODEL — UIT SLIDE PSEUDOCODE (trang 27–29):**
+> - Khi `S->value >= 0`: giá trị cho biết có bao nhiêu lần `wait` có thể tiếp tục mà không bị block.
+> - Khi `S->value < 0`: độ lớn $|S\text{->value}|$ cho biết số process/thread đang chờ trên `S`.
+>
+> **TIER-B TECHNICAL NOTE — POSIX/Linux:** `sem_wait()` giảm/giữ semaphore khi có thể tiếp tục; nếu giá trị là `0`, luồng sẽ block cho đến khi phép giảm có thể thực hiện. Khi có waiter, POSIX cho phép `sem_getvalue()` báo **0** hoặc báo một giá trị âm có độ lớn bằng số waiter. Linux chọn hành vi thứ nhất và báo `0`. Đây là ngữ nghĩa API, không phải wording của mô hình semaphore nội bộ trên slide.
 
 ### 6.4 Các Dạng Ứng dụng Cơ bản của Semaphore
 
@@ -490,7 +496,7 @@ Khởi tạo `semaphore resources = N;` (với $N$ là số lượng tài nguyê
 
 ## 7. Monitors và Condition Variables
 
-*(Nguồn: `UIT-SLIDE-CH07-2-2024`, Slide 33–40)*
+*(Nguồn: `UIT-SLIDE-CH05-2-2024`, trang 33–40)*
 
 ### 7.1 Cấu trúc Trừu tượng của Monitor
 
@@ -514,7 +520,7 @@ Mặc dù Semaphore rất mạnh mẽ, việc sử dụng sai thứ tự các l�
 ```
 
 > **Nguyên lý cốt lõi của Monitor:**
-> Tại một thời điểm, **chỉ duy nhất một tiến trình được phép hoạt động bên trong monitor**. Tính loại trừ tương hỗ được tự động bảo đảm bởi trình biên dịch mà lập trình viên không cần gọi các lệnh lock/unlock thủ công.
+> Tại một thời điểm, **chỉ duy nhất một tiến trình được phép hoạt động bên trong monitor**. Ngữ nghĩa loại trừ tương hỗ được thực thi bởi **ngôn ngữ/runtime hoặc hiện thực monitor**; trình biên dịch có thể tham gia hiện thực đó, nhưng không nên hiểu đây là thuộc tính của riêng compiler.
 
 ### 7.2 Biến Điều kiện (Condition Variables)
 
@@ -529,7 +535,7 @@ Mặc dù Semaphore rất mạnh mẽ, việc sử dụng sai thứ tự các l�
 
 ## 8. Liveness và Deadlock
 
-*(Nguồn: `UIT-SLIDE-CH07-2-2024`, Slide 41–43)*
+*(Nguồn: `UIT-SLIDE-CH05-2-2024`, trang 41–43)*
 
 ### 8.1 Khái niệm Liveness
 
@@ -571,7 +577,7 @@ Mặc dù Semaphore rất mạnh mẽ, việc sử dụng sai thứ tự các l�
 
 ## 9. Bài toán Bounded-Buffer
 
-*(Nguồn: `UIT-SLIDE-CH07-2-2024`, Slide 44–53)*
+*(Nguồn: `UIT-SLIDE-CH05-2-2024`, trang 44–53)*
 
 ### 9.1 Mô tả Bài toán & Thiết kế Đồng bộ
 
@@ -637,7 +643,7 @@ do {
 
 ## 10. Bài toán Readers – Writers
 
-*(Nguồn: `UIT-SLIDE-CH07-2-2024`, Slide 54–60)*
+*(Nguồn: `UIT-SLIDE-CH05-2-2024`, trang 54–60)*
 
 ### 10.1 Mô tả Bài toán & Yêu cầu
 
@@ -686,7 +692,7 @@ Một cơ sở dữ liệu/tệp tin được chia sẻ giữa nhiều tiến tr
 
 ## 11. Bài toán Dining – Philosophers
 
-*(Nguồn: `UIT-SLIDE-CH07-2-2024`, Slide 61–70)*
+*(Nguồn: `UIT-SLIDE-CH05-2-2024`, trang 61–70)*
 
 ### 11.1 Phát biểu Bài toán
 

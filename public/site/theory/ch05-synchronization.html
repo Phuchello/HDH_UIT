@@ -123,6 +123,8 @@
 
 <p><em>(Nguồn: Slide 29–30)</em></p>
 
+<blockquote><strong>TIER-B TECHNICAL NOTE — <code>cli</code>/<code>sti</code> và IPI:</strong> Tên lệnh và chi phí IPI là chi tiết triển khai kiến trúc/kernel; slide dùng chúng để minh họa giới hạn của vô hiệu hóa ngắt trên hệ đa xử lý.</blockquote>
+
 <p>Một giải pháp phần cứng đơn giản ở mức nhân là: Trước khi vào miền găng, CPU thực thi lệnh tắt toàn bộ ngắt (<code>cli</code>); khi ra khỏi miền găng, bật ngắt trở lại (<code>sti</code>).</p>
 
 <ul><li><strong>Vì sao không áp dụng cho User Process?</strong></li></ul>
@@ -199,7 +201,7 @@
 
 <p><em>(Nguồn: Slide 47–51)</em></p>
 
-<blockquote><strong>Đánh giá bản chất kỹ thuật:</strong><br>Về mặt toán học và lý thuyết, giải thuật Peterson <strong>hoàn toàn đúng đắn</strong> dưới giả định mô hình bộ nhớ tuần tự nhất quán (Sequential Consistency). Tuy nhiên, trên các bộ xử lý hiện đại (x86, ARM, RISC-V) và trình biên dịch tối ưu:<br>- <strong>Memory Reordering:</strong> Trình biên dịch và CPU Out-of-Order có thể hoán đổi thứ tự thực thi của hai lệnh không phụ thuộc dữ liệu: <code>flag[i] = true;</code> và <code>turn = j;</code> có thể bị ghi vào Store Buffer theo thứ tự ngược lại hoặc bị trì hoãn hiển thị sang lõi CPU khác.<br>- Hậu quả: Hai lõi CPU có thể cùng đọc thấy <code>flag</code> của đối phương là <code>false</code> trước khi lệnh ghi <code>true</code> kịp lan truyền, dẫn đến vi phạm Mutual Exclusion. Do đó, việc triển khai trên phần cứng thực tế bắt buộc phải sử dụng <strong>Memory Barrier</strong>.</blockquote>
+<blockquote><strong>TIER-B TECHNICAL NOTE — modern architecture/compiler:</strong><br><br><strong>Đánh giá bản chất kỹ thuật:</strong><br>Về mặt toán học và lý thuyết, giải thuật Peterson <strong>hoàn toàn đúng đắn</strong> dưới giả định mô hình bộ nhớ tuần tự nhất quán (Sequential Consistency). Tuy nhiên, trên các bộ xử lý hiện đại (x86, ARM, RISC-V) và trình biên dịch tối ưu:<br>- <strong>Memory Reordering:</strong> Trình biên dịch và CPU Out-of-Order có thể hoán đổi thứ tự thực thi của hai lệnh không phụ thuộc dữ liệu: <code>flag[i] = true;</code> và <code>turn = j;</code> có thể bị ghi vào Store Buffer theo thứ tự ngược lại hoặc bị trì hoãn hiển thị sang lõi CPU khác.<br>- Hậu quả: Hai lõi CPU có thể cùng đọc thấy <code>flag</code> của đối phương là <code>false</code> trước khi lệnh ghi <code>true</code> kịp lan truyền, dẫn đến vi phạm Mutual Exclusion. Do đó, việc triển khai trên phần cứng thực tế bắt buộc phải sử dụng <strong>Memory Barrier</strong>.</blockquote>
 
 <p>---</p>
 
@@ -225,7 +227,7 @@ turn = 0;</code></pre>
 
 <p><em>(Nguồn: Slide 56 ghi nhận nội dung Tự học; phần dưới đây chuẩn hóa cơ chế kỹ thuật phục vụ thi cử)</em></p>
 
-<p>Phần cứng hiện đại cung cấp các chỉ thị nguyên tử (Atomic Instructions - thực thi trọn vẹn trong một chu kỳ bus/cache, không thể bị ngắt giữa chừng).</p>
+<blockquote><strong>TIER-B TECHNICAL NOTE — Atomicity and implementation:</strong> Các primitive đọc–sửa–ghi nguyên tử (read-modify-write) cung cấp một thao tác được quan sát như <strong>không thể chia cắt</strong> đối với các truy cập cạnh tranh trong mô hình bộ nhớ/kiến trúc liên quan. Việc triển khai có thể cần nhiều chu kỳ của bộ xử lý, cache hoặc interconnect; <strong>atomic không đồng nghĩa với một chu kỳ phần cứng duy nhất</strong> và cũng không phải cam kết về thời điểm ngắt.</blockquote>
 
 <h4 id="1-chi-thi-test_and_set">1. Chỉ thị <code>test_and_set</code></h4>
 
@@ -261,13 +263,15 @@ turn = 0;</code></pre>
 
 <h4 id="3-bien-on-nguyen-atomic-variables">3. Biến đơn nguyên (Atomic Variables)</h4>
 
-<p>Biến đơn nguyên (như <code>atomic_int</code> trong C11 hoặc <code>atomic_t</code> trong Linux Kernel) sử dụng trực tiếp các lệnh nguyên tử của CPU để thực hiện các phép toán cơ bản (như <code>fetch_and_add</code>) mà không cần khóa mutex. Thao tác đếm trong bài toán Producer-Consumer được giải quyết an toàn bằng:</p>
+<p>Biến đơn nguyên (như <code>atomic_int</code> trong C11 hoặc <code>atomic_t</code> trong Linux Kernel) cung cấp các phép toán cập nhật nguyên tử (như <code>atomic_fetch_add</code>/<code>atomic_fetch_sub</code>) mà không cần khóa mutex. Chúng chỉ giải quyết <strong>tính nguyên tử của bản thân cập nhật <code>count</code></strong>, không tự giải quyết toàn bộ bài toán Producer–Consumer:</p>
 
 <pre><code class="language-c">atomic_int count = 0;
 // Producer:
 atomic_fetch_add(&amp;count, 1);
 // Consumer:
 atomic_fetch_sub(&amp;count, 1);</code></pre>
+
+<blockquote><strong>ĐỪNG NHẦM — TIER-B TECHNICAL NOTE:</strong> Atomic counter không tự cung cấp kiểm soát sức chứa bounded-buffer, chặn khi <code>empty/full</code>, độc quyền cập nhật ô/chỉ số, đồng bộ dữ liệu trong buffer, hay thứ tự producer–consumer. Vì vậy, <code>atomic_fetch_add</code>/<code>atomic_fetch_sub</code> <strong>không phải</strong> là lời giải bounded-buffer hoàn chỉnh.</blockquote>
 
 <p>---</p>
 
@@ -295,13 +299,13 @@ atomic_fetch_sub(&amp;count, 1);</code></pre>
 
 <ol><li><strong>Mutex Lock không Busy Waiting (Blocking / Sleep &amp; Wakeup):</strong><ul><li>Khi không thể lấy được khóa, tiến trình tự chuyển trạng thái sang <code>Waiting/Blocked</code>, đưa PCB vào hàng đợi <code>wait_queue</code> của khóa và gọi hàm lập lịch <code>yield()</code> / <code>sleep()</code>.</li><li>Khi tiến trình đang giữ khóa gọi <code>release()</code>, nó sẽ đánh thức một tiến trình trong <code>wait_queue</code> chuyển về trạng thái <code>Ready</code>.</li></ul></li></ol>
 
-<blockquote><strong>Lưu ý chuẩn xác kỹ thuật:</strong><br>- Khác với Semaphore, Mutex có khái niệm <strong>quyền sở hữu (Ownership)</strong>: Chỉ luồng đã gọi <code>acquire()</code> mới có quyền gọi <code>release()</code>.<br>- Chuẩn POSIX (<code>pthread_mutex_unlock</code>) không đảm bảo các luồng đang chờ sẽ được đánh thức theo thứ tự FIFO nghiêm ngặt.</blockquote>
+<blockquote><strong>TIER-B TECHNICAL NOTE — POSIX pthread:</strong><br>- Khác với Semaphore, Mutex có khái niệm <strong>quyền sở hữu (Ownership)</strong>: Chỉ luồng đã gọi <code>acquire()</code> mới có quyền gọi <code>release()</code>.<br>- Chuẩn POSIX (<code>pthread_mutex_unlock</code>) không đảm bảo các luồng đang chờ sẽ được đánh thức theo thứ tự FIFO nghiêm ngặt.</blockquote>
 
 <p>---</p>
 
 <h2 id="6-semaphore-va-hien-thuc">6. Semaphore và Hiện thực</h2>
 
-<p><em>(Nguồn: <code>UIT-SLIDE-CH07-2-2024</code>, Slide 4–32)</em></p>
+<p><em>(Nguồn: <code>UIT-SLIDE-CH05-2-2024</code>, trang 4–32)</em></p>
 
 <h3 id="6-1-inh-nghia-semaphore-cua-dijkstra">6.1 Định nghĩa Semaphore của Dijkstra</h3>
 
@@ -352,7 +356,7 @@ void signal(semaphore *S) {
     }
 }</code></pre>
 
-<blockquote><strong>Ý nghĩa của giá trị <code>S-&gt;value</code> trong mô hình Slide:</strong><br>- Khi <code>S-&gt;value &gt;= 0</code>: Đại diện cho <strong>số lượng thực thể tài nguyên đang khả dụng</strong>.<br>- Khi <code>S-&gt;value &lt; 0</code>: Độ lớn $|S\text{-&gt;value}|$ đại diện cho <strong>số lượng tiến trình đang bị khóa và chờ đợi trong hàng đợi <code>S-&gt;list</code></strong>.<br><br><em>Ghi chú chuẩn hóa POSIX:</em> Với giao thức chuẩn POSIX (<code>sem_wait</code>), giá trị quan sát được qua <code>sem_getvalue()</code> không bao giờ âm; tiến trình sẽ block nếu giá trị bằng $0$.</blockquote>
+<blockquote><strong>SOURCE MODEL — UIT SLIDE PSEUDOCODE (trang 27–29):</strong><br>- Khi <code>S-&gt;value &gt;= 0</code>: giá trị cho biết có bao nhiêu lần <code>wait</code> có thể tiếp tục mà không bị block.<br>- Khi <code>S-&gt;value &lt; 0</code>: độ lớn $|S\text{-&gt;value}|$ cho biết số process/thread đang chờ trên <code>S</code>.<br><br><strong>TIER-B TECHNICAL NOTE — POSIX/Linux:</strong> <code>sem_wait()</code> giảm/giữ semaphore khi có thể tiếp tục; nếu giá trị là <code>0</code>, luồng sẽ block cho đến khi phép giảm có thể thực hiện. Khi có waiter, POSIX cho phép <code>sem_getvalue()</code> báo <strong>0</strong> hoặc báo một giá trị âm có độ lớn bằng số waiter. Linux chọn hành vi thứ nhất và báo <code>0</code>. Đây là ngữ nghĩa API, không phải wording của mô hình semaphore nội bộ trên slide.</blockquote>
 
 <h3 id="6-4-cac-dang-ung-dung-co-ban-cua-semaphore">6.4 Các Dạng Ứng dụng Cơ bản của Semaphore</h3>
 
@@ -384,7 +388,7 @@ signal(&amp;mutex);</code></pre>
 
 <h2 id="7-monitors-va-condition-variables">7. Monitors và Condition Variables</h2>
 
-<p><em>(Nguồn: <code>UIT-SLIDE-CH07-2-2024</code>, Slide 33–40)</em></p>
+<p><em>(Nguồn: <code>UIT-SLIDE-CH05-2-2024</code>, trang 33–40)</em></p>
 
 <h3 id="7-1-cau-truc-truu-tuong-cua-monitor">7.1 Cấu trúc Trừu tượng của Monitor</h3>
 
@@ -405,7 +409,7 @@ signal(&amp;mutex);</code></pre>
 │  └───────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────┘</code></pre>
 
-<blockquote><strong>Nguyên lý cốt lõi của Monitor:</strong><br>Tại một thời điểm, <strong>chỉ duy nhất một tiến trình được phép hoạt động bên trong monitor</strong>. Tính loại trừ tương hỗ được tự động bảo đảm bởi trình biên dịch mà lập trình viên không cần gọi các lệnh lock/unlock thủ công.</blockquote>
+<blockquote><strong>Nguyên lý cốt lõi của Monitor:</strong><br>Tại một thời điểm, <strong>chỉ duy nhất một tiến trình được phép hoạt động bên trong monitor</strong>. Ngữ nghĩa loại trừ tương hỗ được thực thi bởi <strong>ngôn ngữ/runtime hoặc hiện thực monitor</strong>; trình biên dịch có thể tham gia hiện thực đó, nhưng không nên hiểu đây là thuộc tính của riêng compiler.</blockquote>
 
 <h3 id="7-2-bien-ieu-kien-condition-variables">7.2 Biến Điều kiện (Condition Variables)</h3>
 
@@ -421,7 +425,7 @@ signal(&amp;mutex);</code></pre>
 
 <h2 id="8-liveness-va-deadlock">8. Liveness và Deadlock</h2>
 
-<p><em>(Nguồn: <code>UIT-SLIDE-CH07-2-2024</code>, Slide 41–43)</em></p>
+<p><em>(Nguồn: <code>UIT-SLIDE-CH05-2-2024</code>, trang 41–43)</em></p>
 
 <h3 id="8-1-khai-niem-liveness">8.1 Khái niệm Liveness</h3>
 
@@ -457,7 +461,7 @@ signal(&amp;mutex);</code></pre>
 
 <h2 id="9-bai-toan-bounded-buffer">9. Bài toán Bounded-Buffer</h2>
 
-<p><em>(Nguồn: <code>UIT-SLIDE-CH07-2-2024</code>, Slide 44–53)</em></p>
+<p><em>(Nguồn: <code>UIT-SLIDE-CH05-2-2024</code>, trang 44–53)</em></p>
 
 <h3 id="9-1-mo-ta-bai-toan-thiet-ke-ong-bo">9.1 Mô tả Bài toán &amp; Thiết kế Đồng bộ</h3>
 
@@ -511,7 +515,7 @@ do {
 
 <h2 id="10-bai-toan-readers-writers">10. Bài toán Readers – Writers</h2>
 
-<p><em>(Nguồn: <code>UIT-SLIDE-CH07-2-2024</code>, Slide 54–60)</em></p>
+<p><em>(Nguồn: <code>UIT-SLIDE-CH05-2-2024</code>, trang 54–60)</em></p>
 
 <h3 id="10-1-mo-ta-bai-toan-yeu-cau">10.1 Mô tả Bài toán &amp; Yêu cầu</h3>
 
@@ -543,7 +547,7 @@ do {
 
 <h2 id="11-bai-toan-dining-philosophers">11. Bài toán Dining – Philosophers</h2>
 
-<p><em>(Nguồn: <code>UIT-SLIDE-CH07-2-2024</code>, Slide 61–70)</em></p>
+<p><em>(Nguồn: <code>UIT-SLIDE-CH05-2-2024</code>, trang 61–70)</em></p>
 
 <h3 id="11-1-phat-bieu-bai-toan">11.1 Phát biểu Bài toán</h3>
 

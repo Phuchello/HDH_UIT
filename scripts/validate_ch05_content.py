@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 # Ensure standard UTF-8 console output
@@ -31,24 +32,28 @@ EXPECTED_QBANK_SHA = "503cd8fdb619bcfd664cfaa198915bc50d0ba6bb910c74d14ccff5252e
 
 
 def extract_anchors_from_markdown(text: str) -> set[str]:
-    """Extract slugified anchors from markdown headings."""
-    anchors = set()
-    for line in text.splitlines():
-        line = line.strip()
-        if line.startswith("#"):
-            # Strip leading #'s
-            heading = re.sub(r"^#+\s*", "", line)
-            # Remove markdown links/formatting if any
-            heading = re.sub(r"\[(.*?)\]\(.*?\)", r"\1", heading)
-            # Normalize to GitHub-style slug
-            # Lowercase, replace non-alphanumeric (Vietnamese unicode friendly)
-            # Python re slug matching
-            slug = heading.lower().strip()
-            # Replace spaces and punctuation with hyphens
-            slug = re.sub(r"[^\w\s-]", "", slug)
-            slug = re.sub(r"[\s_]+", "-", slug).strip("-")
-            anchors.add(slug)
+    """Extract heading IDs using the same ASCII slugging as build_web.py."""
+    anchors: set[str] = set()
+    for match in re.finditer(r"^#{1,6}\s+(.+?)\s*#*$", text, re.MULTILINE):
+        heading = re.sub(r"\[(.*?)\]\(.*?\)", r"\1", match.group(1).strip())
+        ascii_value = unicodedata.normalize("NFKD", heading).encode("ascii", "ignore").decode("ascii")
+        anchor = re.sub(r"[^a-zA-Z0-9_-]+", "-", ascii_value.lower()).strip("-") or "section"
+        anchors.add(anchor)
     return anchors
+
+
+def repository_contains_forbidden_source_id(forbidden: str) -> bool:
+    """Check source/content/build outputs while avoiding VCS and dependency trees."""
+    excluded = {".git", "node_modules", "__pycache__", ".pytest_cache", "build"}
+    for path in ROOT.rglob("*"):
+        if not path.is_file() or any(part in excluded for part in path.parts):
+            continue
+        try:
+            if forbidden in path.read_text(encoding="utf-8"):
+                return True
+        except (UnicodeDecodeError, OSError):
+            continue
+    return False
 
 
 def validate_ch05_content():
@@ -61,8 +66,40 @@ def validate_ch05_content():
         return False, failures
 
     theory_text = CH5_THEORY_PATH.read_text(encoding="utf-8")
+    actual_anchors = extract_anchors_from_markdown(theory_text)
     if len(theory_text) < 2000:
         failures.append(f"Chapter 5 theory file is too brief ({len(theory_text)} bytes)")
+
+    # Source-ID and draft-metadata regressions.
+    expected_p1 = "UIT-SLIDE-CH05-1-2024"
+    expected_p2 = "UIT-SLIDE-CH05-2-2024"
+    forbidden_p2 = "UIT-SLIDE-CH07-" + "2-2024"
+    if expected_p1 not in theory_text:
+        failures.append(f"Chapter 5 theory must cite canonical Part 1 source ID '{expected_p1}'")
+    if expected_p2 not in theory_text:
+        failures.append(f"Chapter 5 theory must cite canonical Part 2 source ID '{expected_p2}'")
+    if repository_contains_forbidden_source_id(forbidden_p2):
+        failures.append("Forbidden legacy Part 2 source ID remains somewhere in the repository")
+    frontmatter = theory_text.split("---", 2)[1] if theory_text.startswith("---") and theory_text.count("---") >= 2 else ""
+    if "exam_relevance:" in frontmatter or "frequent_topics:" in frontmatter:
+        failures.append("Chapter 5 frontmatter contains unsupported exam-frequency metadata")
+    if "review_topics:" not in frontmatter or "source_emphasized_topics:" not in frontmatter:
+        failures.append("Chapter 5 frontmatter must use neutral review_topics/source_emphasized_topics metadata")
+
+    # Standards and implementation wording guards.
+    combined_text = theory_text.lower()
+    if re.search(r"sem_getvalue\(.*(?:không bao giờ âm|never\s+(?:returns?|reports?)\s+negative)", combined_text):
+        failures.append("POSIX sem_getvalue wording incorrectly claims negative values are impossible")
+    if re.search(r"một\s+chu\s+kỳ\s+bus/cache|one\s+bus/cache\s+cycle|atomic[^.]{0,120}(?:một|one)\s+(?:chu\s+kỳ|cycle)\s+(?:bus/cache|bus|cache)", combined_text):
+        failures.append("Atomicity is incorrectly described as a single bus/cache cycle")
+    bad_monitor_phrases = (
+        "tự động bảo đảm bởi trình biên dịch",
+        "được tự động bảo đảm bởi trình biên dịch",
+        "đảm bảo tự động bởi ngôn ngữ/trình biên dịch",
+        "compiler tự động bảo đảm",
+    )
+    if any(phrase in combined_text for phrase in bad_monitor_phrases):
+        failures.append("Monitor semantics are incorrectly attributed to compiler alone")
 
     # 2. Check Slide Coverage YAML Mapping and Anchors
     decks = parse_slide_coverage(COVERAGE_PATH)
@@ -75,7 +112,7 @@ def validate_ch05_content():
         failures.append("Missing UIT-SLIDE-CH05-1-2024 or UIT-SLIDE-CH05-2-2024 in slide_coverage.yaml")
         return False, failures
 
-    # Check that all CONTENT ranges are CONTENT_DRAFTED and none are CONTENT_VERIFIED
+    # Check that all CONTENT ranges are CONTENT_DRAFTED and NON_CONTENT is NOT_WRITTEN.
     for d_name, d_obj in [("Part 1", p1), ("Part 2", p2)]:
         for sec in d_obj.get("sections", []):
             prange = sec.get("page_range")
@@ -90,11 +127,10 @@ def validate_ch05_content():
                     failures.append(f"{d_name} CONTENT range '{prange}' missing valid v2_destination")
                 elif "ch05-synchronization.md#" in dest:
                     anchor = dest.split("#", 1)[1]
-                    # Verify anchor exists in text
-                    # We check both exact anchor or normalized heading text
-                    heading_keywords = [w for w in anchor.split("-") if len(w) > 2 and not w.isdigit()]
-                    if not any(kw in theory_text.lower() for kw in heading_keywords):
+                    if anchor not in actual_anchors:
                         failures.append(f"{d_name} range '{prange}' destination anchor '{anchor}' not found in theory text")
+            elif cls == "NON_CONTENT" and c_status in {"CONTENT_DRAFTED", "CONTENT_VERIFIED"}:
+                failures.append(f"{d_name} NON_CONTENT range '{prange}' must be 'NOT_WRITTEN', got '{c_status}'")
 
     # 3. Check Academic Topic Coverage in Theory
     theory_lower = theory_text.lower()
@@ -181,10 +217,10 @@ def validate_ch05_content():
             print(f"  - {f}")
         return False, failures
 
-    print("PASS: Chapter 5 Canonical Content & Academic Fidelity fully verified:")
+    print("PASS: Chapter 5 draft content gate passed. Independent academic verification is still pending.")
     print("  [OK] Theory file content/theory/ch05-synchronization.md verified (comprehensive, 11 sections)")
     print("  [OK] All 131 canonical content pages (63 Part 1 + 68 Part 2) mapped to real destinations")
-    print("  [OK] Content statuses set to 'CONTENT_DRAFTED'; zero 'CONTENT_VERIFIED' premature markers")
+    print("  [OK] CONTENT ranges are CONTENT_DRAFTED and NON_CONTENT ranges are NOT_WRITTEN")
     print("  [OK] Page 56 marked as SELF_STUDY with clear technical explanation")
     print("  [OK] Section 8 covers Liveness, Deadlock, Starvation, Priority Inversion & Priority Inheritance protocol")
     print("  [OK] Clean separation from Chapter 6 (0 Banker algorithm / RAG intrusions)")

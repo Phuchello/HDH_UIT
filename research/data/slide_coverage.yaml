@@ -497,7 +497,7 @@ decks:
         topic: "Trang bìa, mục tiêu & nội dung Phần 1"
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
-        content_status: "CONTENT_DRAFTED"
+        content_status: "NOT_WRITTEN"
       - page_range: "4-11"
         page_count: 8
         classification: "CONTENT"
@@ -524,28 +524,28 @@ decks:
         classification: "CONTENT"
         topic: "5.2 Critical Section Problem (critical section, entry, exit, remainder)"
         mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap"
+        v2_destination: "content/theory/ch05-synchronization.md#2-van-e-mien-gang-va-3-yeu-cau-giai-phap"
         content_status: "CONTENT_DRAFTED"
       - page_range: "20-25"
         page_count: 6
         classification: "CONTENT"
         topic: "5.3.1 Requirements (Mutual Exclusion, Progress, Bounded Waiting)"
         mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap"
+        v2_destination: "content/theory/ch05-synchronization.md#2-van-e-mien-gang-va-3-yeu-cau-giai-phap"
         content_status: "CONTENT_DRAFTED"
       - page_range: "26-28"
         page_count: 3
         classification: "CONTENT"
         topic: "5.3.2 Solution classification (software/hardware, OS support, busy-waiting vs blocking/sleep-wakeup)"
         mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap"
+        v2_destination: "content/theory/ch05-synchronization.md#2-van-e-mien-gang-va-3-yeu-cau-giai-phap"
         content_status: "CONTENT_DRAFTED"
       - page_range: "29-30"
         page_count: 2
         classification: "CONTENT"
         topic: "5.3.3 Disable Interrupts"
         mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch05-synchronization.md#2-van-de-mien-gang-va-3-yeu-cau-giai-phap"
+        v2_destination: "content/theory/ch05-synchronization.md#2-van-e-mien-gang-va-3-yeu-cau-giai-phap"
         content_status: "CONTENT_DRAFTED"
       - page_range: "31-36"
         page_count: 6
@@ -624,7 +624,7 @@ decks:
         topic: "discussion/end"
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
-        content_status: "CONTENT_DRAFTED"
+        content_status: "NOT_WRITTEN"
 
   - source_id: "UIT-SLIDE-CH05-2-2024"
     exact_filename: "#Week07-Chapter5-2 2024.pdf"
@@ -638,7 +638,7 @@ decks:
         topic: "Trang bìa, mục tiêu & nội dung Phần 2"
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
-        content_status: "CONTENT_DRAFTED"
+        content_status: "NOT_WRITTEN"
       - page_range: "4-15"
         page_count: 12
         classification: "CONTENT"
@@ -764,7 +764,7 @@ decks:
         topic: "discussion/end"
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
-        content_status: "CONTENT_DRAFTED"
+        content_status: "NOT_WRITTEN"
 
   - source_id: "UIT-SLIDE-CH06-2024"
     exact_filename: "Week11-Chapter6 2024.pdf"
