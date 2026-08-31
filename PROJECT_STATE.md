@@ -2,11 +2,13 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH2_CH5_SOURCE_MAP_READY_FOR_INDEPENDENT_CHECK`
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — canonical attachment evidence and verified page/slide maps are recorded with explicit source statuses; local variants remain separate.
-**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 CLOSED, CH5 SOURCE-MAP VERIFIED`
-**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 SOURCE MAP GATED & TESTED`
-**Hành động tiếp theo chính xác (Exact Next Action):** Independent check of Chapter 5 canonical source map before authoring Chapter 5 theory.
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH2_CH5_SOURCE_MAP_READY_FOR_INDEPENDENT_CHECK`  
+**Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `COMPLETE — PENDING INDEPENDENT CHECK`  
+**Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `NOT_STARTED`  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — canonical attachment evidence, precision range signatures, and verified page/slide maps are recorded with explicit source statuses; local variants remain separate.  
+**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 CLOSED, CH5 PRECISE SOURCE-MAP VERIFIED`  
+**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 PRECISION GATED & TESTED`  
+**Hành động tiếp theo chính xác (Exact Next Action):** Independent review of the precise canonical Chapter 5 source map.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-08-31
 
