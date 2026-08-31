@@ -108,7 +108,12 @@ def _coverage_metrics(decks, registry):
     non_content = sum(1 for p in expanded if p.get("classification") == "NON_CONTENT")
     mapped = sum(1 for p in expanded if p.get("classification") == "CONTENT" and p.get("mapping_status") == "MAPPED")
     unmapped = sum(1 for p in expanded if p.get("classification") == "CONTENT" and p.get("mapping_status") != "MAPPED")
-    drafted = sum(1 for p in expanded if p.get("classification") == "CONTENT" and p.get("content_status") == "DRAFTED")
+    drafted = sum(
+        1
+        for p in expanded
+        if p.get("classification") == "CONTENT"
+        and p.get("content_status") in {"DRAFTED", "CONTENT_DRAFTED"}
+    )
     EXPANDED_COVERAGE_JSON.write_text(json.dumps({
         "schema": "one-record-per-physical-page",
         "records": expanded,

@@ -54,7 +54,7 @@ content/
 │   ├── ch02-structure.md                  # Chương 2: Cấu trúc HDH, Dịch vụ & System Calls
 │   ├── ch03-process.md                    # Chương 3: Quản lý Tiến trình, Luồng & IPC
 │   ├── ch04-cpu-scheduling.md             # Chương 4: Định thời CPU & Hệ thống Đa xử lý
-│   ├── midterm-review.md                  # Ôn tập Giữa kỳ tổng hợp
+│   ├── reviews/midterm.md                 # Ôn tập Giữa kỳ tổng hợp
 │   ├── ch05-synchronization.md            # Chương 5: Đồng bộ Tiến trình & Bài toán kinh điển
 │   ├── ch06-deadlock.md                   # Chương 6: Deadlock & Thuật toán Banker
 │   ├── ch07-memory-management.md          # Chương 7: Quản lý Bộ nhớ, Phân trang & TLB

@@ -36,9 +36,11 @@
 ---
 
 ## Giai Đoạn 3: Mở Rộng Soạn Thảo Toàn Diện (Scale Content)
-- [ ] Soạn thảo đầy đủ các chương lý thuyết còn lại trong `content/theory/` (Chương 2 -> Chương 9, Midterm Review, Final Review).
+- [x] Soạn thảo Theory Batch 1 (`content/theory/` Chương 1–4 và `content/reviews/midterm.md`); chờ engineering QA độc lập.
+- [ ] Soạn thảo các chương lý thuyết còn lại trong `content/theory/` (Chương 5 -> Chương 9, Final Review).
 - [ ] Soạn thảo đầy đủ các bài thực hành trong `content/labs/` (Lab 2 -> Lab 6 Case Study `it007sh`).
-- [ ] Hoàn thiện toàn bộ ngân hàng câu hỏi tự luận `content/questions/subjective/` (Ch2 -> Ch9).
+- [x] Hoàn thiện ngân hàng tự luận Batch 1 `content/questions/subjective/` (Chương 1–4).
+- [ ] Hoàn thiện ngân hàng câu hỏi tự luận (Chương 5 -> Chương 9).
 - [ ] Hoàn thiện các tệp trắc nghiệm, bài tập tính toán và flashcards.
 
 ---

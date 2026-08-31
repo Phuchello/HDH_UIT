@@ -2,9 +2,9 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_FOUNDATION_LOCKED_READY_TO_SCALE_CONTENT`  
+**Giai đoạn hiện tại (Current Phase):** `V2_THEORY_BATCH1_DRAFTED_READY_FOR_ENGINEERING_QA`
 **Sẵn sàng mở rộng nội dung (Ready to Scale Content):** `YES` (Đã vượt qua cổng kiểm toán nền tảng tự động `scripts/generate_foundation_gate.py`)  
-**Hành động tiếp theo chính xác (Exact Next Action):** Luna Ultra authors canonical Theory Batch 1: Chapters 1–4 + Midterm Review.
+**Hành động tiếp theo chính xác (Exact Next Action):** Terra Medium performs engineering/build regression, then Luna Ultra performs independent academic review.
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-08-30  
 
