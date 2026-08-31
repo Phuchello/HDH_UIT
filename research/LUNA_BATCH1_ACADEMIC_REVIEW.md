@@ -11,7 +11,7 @@
 | Severity | Open | Resolved in this pass |
 |---|---:|---:|
 | BLOCKER | 0 | 0 |
-| MAJOR | 0 | 0 |
+| MAJOR | 0 | 2 |
 | MINOR | 0 | 4 |
 
 The review used the repository’s immutable source registry and previously recorded Tier-A attachment hashes/page maps.  The canonical source binaries were not mounted for a second binary read in this turn; this report therefore does not make a new binary-verification claim.  Existing `USER_ATTACHMENT_VERIFIED` statuses are preserved.
@@ -95,5 +95,6 @@ The correction preserves the 33 concrete occurrence count and adds exact `source
 | ID | Severity | Finding | Resolution | Final status |
 |---|---|---|---|---|
 | ACAD-005 | MAJOR | Midterm normalized topics and compound answers had drifted from the canonical Slide 5/7/9/10/11/15 source semantics. | Restored source-faithful wording, source identity, dedicated answers, exact answer destinations, and regression gates in `validate_batch1_canonical.py` and `check_batch1_numeric.py`. | RESOLVED |
+| ACAD-006 | MAJOR | `source_question` remained normalized for Slides 10/11/14/15, and Slide 11 lacked the requested literal parent–child tree. | Restored verbatim canonical prompts, separated Slide 15 `source_data`, added the explicit P0–P15 logical tree, and added validator gates for verbatim provenance and tree topology. | RESOLVED |
 
 After this correction, Midterm content status is restored to `CONTENT_VERIFIED`; the academic verification remains **PASS — BATCH 1 ONLY** pending engineering closeout. Chapter 5 remains out of scope.

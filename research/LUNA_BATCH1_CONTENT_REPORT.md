@@ -42,6 +42,8 @@ The former 56/34/46-page Chapter 4 files and 16-page Midterm PDF remain explicit
 
 A direct inspection after the initial academic pass found that normalized Slide 5/7/9 topics and the Slide 10/11/15 compound answers had drifted from the canonical `#Week08-Midterm Review.pptx`. The repair preserves the 33 concrete occurrence count, adds exact `source_question` text to every Midterm occurrence, reproduces the `test.c` and four-fork source snippets, records the 16/15/30 fork accounting, and maps Slide 15 to a dedicated canonical P1–P5 solution. The prior pass is retained as history; the finding is now resolved.
 
+The final verbatim patch also restores the canonical Slide 10/11/14/15 prompt wording, stores Slide 15’s process table as separate `source_data`, and includes the explicit logical P0–P15 parent–child tree for Slide 11. These are recorded as resolved findings ACAD-005 and ACAD-006 in the academic review log.
+
 ## Future Batch 2 source blocker
 
 Canonical Ch5 attachments are recorded as separate, unmapped evidence IDs: `#Week06-Chapter5-1 2024.pdf` (67 pages, SHA256 `2ef4be67449ea22aada6e8bd69b49b781bbcb8c6f0eb601b16e9f18a004c7416`) and `#Week07-Chapter5-2 2024.pdf` (72 pages, SHA256 `f7e9fc9eb9a35f3a02eb60b2c8e01fa134342d0c5256f47deef4247a0db141d2`). Do not author Chapter 5 or mix these with local variants until the same source-fidelity split/map is performed.

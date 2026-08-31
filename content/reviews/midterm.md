@@ -87,16 +87,16 @@ Slide 10 và 11 dưới đây là hai bài nguồn độc lập; phần enrichme
 
 Canonical slide 14 có **10 question bullets**:
 
-1. Vì sao cần scheduling và các loại scheduler.
-2. Định nghĩa CPU scheduling và scheduler chịu trách nhiệm.
-3. Chi phí scheduling/dispatch.
-4. Các tiêu chí đánh giá (slide nêu sáu; qbank wording “năm” được giữ nguyên ở qbank).
-5. Tên các thuật toán scheduling.
-6. Đặc tính, ưu/nhược của FCFS/SJF/SRTF/RR/Priority/HRRN/MQ/MFQ.
-7. Multiprocessor scheduling và load balancing.
-8. Real-time scheduling.
-9. Linux CFS.
-10. Windows scheduling.
+1. **Tại sao phải định thời? Có những loại bộ định thời nào?**
+2. **Định thời CPU là gì? Bộ định thời nào chịu trách nhiệm thực hiện việc này?**
+3. **Phí tổn gây ra khi định thời là gì?**
+4. **Trình bày các tiêu chuẩn định thời CPU?** (slide nêu sáu; qbank wording “năm” được giữ nguyên ở qbank).
+5. **Kể tên các giải thuật định thời CPU?**
+6. **Mô tả và nêu ưu điểm, nhược điểm của từng giải thuật định thời sau: FCFS, SJF, SRTF, RR, Priority Scheduling, HRRN, MQ, MFQ.**
+7. **Đặc điểm của định thời trên hệ thống có nhiều bộ xử lý? Khi nào cần phải thực hiện cân bằng tải?**
+8. **Đặc điểm định thời theo thời gian thực?**
+9. **Mô tả các đặc điểm cơ bản của bộ định thời CFS trên Linux?**
+10. **Mô tả các đặc điểm cơ bản của định thời trên Windows?**
 
 Solaris không phải prompt của Midterm Review; nó chỉ là phần đọc thêm trong canonical Chương 4 Part 2.
 
@@ -162,6 +162,8 @@ int main(void) {
 
 ### Slide 10 — Source-faithful state-transition answer
 
+**Source question (verbatim):** “Cho đoạn chương trình sau: Hỏi trong quá trình thực thi thì tiến trình khi chạy từ chương trình trên đã trải qua những trạng thái nào? Vẽ sơ đồ chuyển trạng thái trong quá trình thực thi?”
+
 Đây là đúng đoạn mã xuất hiện trên slide (giữ nguyên cả việc slide không chép các `#include`):
 
 ```c
@@ -184,6 +186,8 @@ Trình tự tối thiểu cần vẽ là `New → Ready → Running → Terminat
 
 ### Slide 11 — Source-faithful fork/output answer
 
+**Source question (verbatim):** “Cho đoạn chương trình sau: Hỏi khi chạy thì tiến trình được tạo ra từ chương trình trên sẽ in ra màn hình những gì? Vẽ cây tiến trình và những từ được in ra khi thực thi đoạn chương trình trên?”
+
 Đoạn mã canonical của slide 11 là:
 
 ```c
@@ -202,11 +206,36 @@ int main()
 }
 ```
 
-Mỗi vòng lặp nhân đôi số nhánh đang thực thi. Sau bốn lần `fork`, số process là `2 → 4 → 8 → 16`; vì vậy `FINAL_PROCESS_COUNT = 16`, `NEW_CHILDREN_CREATED = 15`, và số lần các process thực thi `printf` là `TOTAL_PRINTF_EXECUTIONS = 2 + 4 + 8 + 16 = 30`. Với terminal thông thường và line-buffered stdout, kết quả quan sát là 30 dòng `hello`; thứ tự tương đối không xác định. Khi redirect sang file, full buffering có thể làm bản sao buffer đã chứa dữ liệu đi qua `fork`, nên số dòng thực tế phụ thuộc trạng thái buffer. Sơ đồ 2/4/8/16 là sơ đồ nhánh thực thi; cây process literal còn phụ thuộc process nào gọi `fork` ở từng vòng.
+Mỗi vòng lặp, mọi process đi tới vòng đó đều gọi `fork()` đúng một lần. Sau bốn lần `fork`, số process là `2 → 4 → 8 → 16`; vì vậy `FINAL_PROCESS_COUNT = 16`, `NEW_CHILDREN_CREATED = 15`, và số lần các process thực thi `printf` là `TOTAL_PRINTF_EXECUTIONS = 2 + 4 + 8 + 16 = 30`.
+
+Một cây cha–con logic hợp lệ (các nhãn chỉ là ID sư phạm, không phải PID thật) là:
+
+```text
+P0
+├── P1          (child created by P0 at fork #1)
+│   ├── P3      (child created by P1 at fork #2)
+│   │   ├── P7  (child created by P3 at fork #3)
+│   │   │   └── P15
+│   │   └── P11
+│   ├── P5
+│   │   └── P13
+│   └── P9
+├── P2          (child created by P0 at fork #2)
+│   ├── P6
+│   │   └── P14
+│   └── P10
+├── P4          (child created by P0 at fork #3)
+│   └── P12
+└── P8          (child created by P0 at fork #4)
+```
+
+Sơ đồ trên là **cây process literal**; sơ đồ doubling `2/4/8/16` là **các nhánh thực thi theo từng vòng**. Topology trừu tượng này suy ra được vì mọi process đều thực hiện `fork()` ở mỗi vòng còn lại; PID thật và thứ tự lập lịch/output là không xác định. Với terminal thông thường và line-buffered stdout, kết quả quan sát là 30 dòng `hello`. Khi redirect sang file, full buffering có thể làm bản sao buffer đã chứa dữ liệu đi qua `fork`, nên số dòng thực tế phụ thuộc trạng thái buffer.
 
 ## E. CPU scheduling practice
 
 ### Slide 15 — Source-faithful solution (canonical dataset)
+
+**Source question (verbatim):** “Cho 5 tiến trình với thời gian vào hàng đợi ready và thời gian cần CPU tương ứng như bảng sau: Vẽ giản đồ Gantt và tính thời gian đợi trung bình, thời gian đáp ứng trung bình và thời gian lưu lại trong hệ thống (turnaround time) trung bình cho các giải thuật sau: FCFS; SJF preemptive; RR với quantum time = 10”
 
 **Dữ liệu và giả định của slide:** P1(AT=0, BT=10), P2(AT=2, BT=29), P3(AT=4, BT=3), P4(AT=5, BT=7), P5(AT=7, BT=12); không có context-switch overhead đáng kể, không có tie cần quy ước thêm. Ba thuật toán là FCFS, SJF trưng dụng/SRTF và Round Robin `q=10`.
 

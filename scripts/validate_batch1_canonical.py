@@ -22,6 +22,8 @@ CH4_BANK = ROOT / "content/questions/subjective/ch04.md"
 MIDTERM = ROOT / "content/reviews/midterm.md"
 MIDTERM_MAPPING = ROOT / "research/data/midterm_answer_mapping.yaml"
 
+# Regression fixture copied from the canonical PPTX wording and checked against
+# the machine-readable source_question fields in official_review_questions.yaml.
 EXPECTED_MIDTERM_SOURCE_QUESTIONS = {
     **{
         f"MIDTERM-REVIEW-{index:02d}": question
@@ -46,19 +48,19 @@ EXPECTED_MIDTERM_SOURCE_QUESTIONS = {
             "PCB là gì? Dùng để làm gì?",
             "Tiểu trình là gì?",
             "Trình tự thực thi của tiến trình cha và tiến trình con?",
-            "Hãy xác định các trạng thái của tiến trình trong quá trình thực thi chương trình test.c và vẽ sơ đồ chuyển trạng thái.",
-            "Cho chương trình fork/printf sau, hãy xác định số tiến trình và số lần xuất hiện hello.",
-            "Vì sao cần định thời và có những loại scheduler nào?",
-            "Định thời CPU là gì và scheduler chịu trách nhiệm gì?",
-            "Chi phí của định thời/dispatch là gì?",
-            "Các tiêu chí đánh giá thuật toán định thời là gì?",
-            "Kể tên các thuật toán định thời.",
-            "Nêu đặc tính, ưu và nhược điểm của FCFS, SJF, SRTF, RR, Priority, HRRN, MQ, MFQ.",
-            "Định thời đa xử lý và load balancing là gì?",
-            "Real-time scheduling là gì?",
-            "Linux CFS hoạt động như thế nào?",
-            "Windows scheduling hoạt động như thế nào?",
-            "Cho các tiến trình P1(AT=0,BT=10), P2(AT=2,BT=29), P3(AT=4,BT=3), P4(AT=5,BT=7), P5(AT=7,BT=12), hãy giải FCFS, SJF trưng dụng (SRTF) và Round Robin với q=10, tính CT/TAT/WT/RT.",
+            "Cho đoạn chương trình sau: Hỏi trong quá trình thực thi thì tiến trình khi chạy từ chương trình trên đã trải qua những trạng thái nào? Vẽ sơ đồ chuyển trạng thái trong quá trình thực thi?",
+            "Cho đoạn chương trình sau: Hỏi khi chạy thì tiến trình được tạo ra từ chương trình trên sẽ in ra màn hình những gì? Vẽ cây tiến trình và những từ được in ra khi thực thi đoạn chương trình trên?",
+            "Tại sao phải định thời? Có những loại bộ định thời nào?",
+            "Định thời CPU là gì? Bộ định thời nào chịu trách nhiệm thực hiện việc này?",
+            "Phí tổn gây ra khi định thời là gì?",
+            "Trình bày các tiêu chuẩn định thời CPU?",
+            "Kể tên các giải thuật định thời CPU?",
+            "Mô tả và nêu ưu điểm, nhược điểm của từng giải thuật định thời sau: FCFS, SJF, SRTF, RR, Priority Scheduling, HRRN, MQ, MFQ.",
+            "Đặc điểm của định thời trên hệ thống có nhiều bộ xử lý? Khi nào cần phải thực hiện cân bằng tải?",
+            "Đặc điểm định thời theo thời gian thực?",
+            "Mô tả các đặc điểm cơ bản của bộ định thời CFS trên Linux?",
+            "Mô tả các đặc điểm cơ bản của định thời trên Windows?",
+            "Cho 5 tiến trình với thời gian vào hàng đợi ready và thời gian cần CPU tương ứng như bảng sau: Vẽ giản đồ Gantt và tính thời gian đợi trung bình, thời gian đáp ứng trung bình và thời gian lưu lại trong hệ thống (turnaround time) trung bình cho các giải thuật sau: FCFS; SJF preemptive; RR với quantum time = 10",
         ], start=1)
     },
     "MIDTERM-REVIEW-REF-12": "REFERENCE_TO_EXTERNAL_EXERCISE_SET",
@@ -175,10 +177,15 @@ def main() -> int:
             expect(not any(term in str(question.get("source_question")) for term in ("User view", "Hard real-time", "Timer", "protection")), "Slide 5 source question contains normalized-only framing")
         if str(question.get("source_locator", "")).startswith("Slide 7"):
             expect("protection/security" not in str(question.get("source_question")), "Slide 7 protection boundary was promoted to a source question")
+    slide15_manifest = next((q for q in midterm_questions if q.get("question_id") == "MIDTERM-REVIEW-33"), {})
+    expect(slide15_manifest.get("source_data") == "P1 0 10; P2 2 29; P3 4 3; P4 5 7; P5 7 12", "Slide 15 source_data table is missing or incorrect")
     expect("int main(int argc, char** argv)" in midterm_text and "for (int i = 1; i < 5; i++)" in midterm_text and 'printf("Hello world\\n");' in midterm_text, "Slide 10 source code identity missing")
     expect("New → Ready → Running → Terminated" in midterm_text and "không thể khẳng định" in midterm_text and "Waiting/Blocked" in midterm_text, "Slide 10 lifecycle answer or caveat missing")
     expect("for (i = 0; i < 4; i++)" in midterm_text and 'printf("hello\\n");' in midterm_text and "FINAL_PROCESS_COUNT = 16" in midterm_text and "NEW_CHILDREN_CREATED = 15" in midterm_text and "TOTAL_PRINTF_EXECUTIONS = 2 + 4 + 8 + 16 = 30" in midterm_text, "Slide 11 source/answer facts missing")
-    expect("full buffering" in midterm_text and "thứ tự tương đối không xác định" in midterm_text, "Slide 11 buffering/order caveat missing")
+    expect("full buffering" in midterm_text and ("thứ tự tương đối không xác định" in midterm_text or "thứ tự lập lịch/output là không xác định" in midterm_text), "Slide 11 buffering/order caveat missing")
+    tree_markers = ("P0", "├── P1", "│   ├── P3", "│   │   ├── P7", "│   │   │   └── P15", "│   │   └── P11", "├── P2", "│   ├── P6", "│   │   └── P14", "│   └── P10", "├── P4", "│   └── P12", "└── P8")
+    expect(all(marker in midterm_text for marker in tree_markers), "Slide 11 literal parent-child process tree representation missing")
+    expect("mọi process đi tới vòng đó đều gọi `fork()` đúng một lần" in midterm_text and "cây process literal" in midterm_text, "Slide 11 tree/doubling distinction missing")
     slide15_start = midterm_text.find("### Slide 15 — Source-faithful solution (canonical dataset)")
     slide15_end = midterm_text.find("### E1.", slide15_start)
     slide15_text = midterm_text[slide15_start:slide15_end if slide15_end != -1 else None]
