@@ -112,6 +112,23 @@ related:
 - Thread
   - PC
   - Registers
+- Producer:
+  ```c
+  while (true) {
+      produce();
+  }
+  ```
+- Consumer:
+  ```c
+  while (true) {
+      consume();
+  }
+  ```
+
+> Note with code:
+> ```c
+> signal(empty);
+> ```
 
 | Cột | Ví dụ |
 | --- | --- |
@@ -192,6 +209,8 @@ def main():
         for label, ok in list_checks.items():
             checks.append((label, ok))
         checks.append(("table pipe, fenced code, Unicode, math and wikilink survive", all(token in theory for token in ("a | b", "language-c", "Định hướng", "mc", 'class="wikilink"'))))
+        checks.append(("indented fenced code remains inside list items", theory.count('class="language-c"') >= 3 and "```" not in theory and "<li>Producer:<pre>" in theory and "<li>Consumer:<pre>" in theory))
+        checks.append(("blockquote fenced code remains a code block", '<blockquote>' in theory and 'signal(empty);</code></pre></blockquote>' in theory))
         checks.append(("callout survives", '<div class="callout note">' in theory))
         questions_html = (output / "questions/fixture-questions.html").read_text(encoding="utf-8") if (output / "questions/fixture-questions.html").is_file() else ""
         checks.append(("StudyCard survives", 'class="study-card"' in questions_html))

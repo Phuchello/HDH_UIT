@@ -15,6 +15,8 @@
 - PASS — mixed ordered/unordered list
 - PASS — depth-3 list
 - PASS — table pipe, fenced code, Unicode, math and wikilink survive
+- PASS — indented fenced code remains inside list items
+- PASS — blockquote fenced code remains a code block
 - PASS — callout survives
 - PASS — StudyCard survives
 - PASS — consecutive clean builds are deterministic

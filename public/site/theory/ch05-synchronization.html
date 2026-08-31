@@ -41,13 +41,20 @@
 
 <p>Xét bài toán Producer – Consumer chia sẻ một bộ đệm vòng có dung lượng tối đa $N$ phần tử:</p>
 
-<ul><li>Biến nguyên <code>count</code> lưu số lượng phần tử hiện có trong bộ đệm (khởi tạo <code>count = 0</code>).</li><li><strong>Tiến trình Producer</strong> thêm phần tử vào bộ đệm và tăng <code>count</code>:</li></ul>
-
-<p>  ``<code>c<br>  while (true) {<br>      /* sản xuất một item */<br>      while (count == BUFFER_SIZE)<br>          ; /* do nothing - chờ đệm có chỗ trống */<br>      buffer[in] = next_produced;<br>      in = (in + 1) % BUFFER_SIZE;<br>      count++;<br>  }<br>  </code>``</p>
-
-<ul><li><strong>Tiến trình Consumer</strong> lấy phần tử khỏi bộ đệm và giảm <code>count</code>:</li></ul>
-
-<p>  ``<code>c<br>  while (true) {<br>      while (count == 0)<br>          ; /* do nothing - chờ đệm có phần tử */<br>      next_consumed = buffer[out];<br>      out = (out + 1) % BUFFER_SIZE;<br>      count--;<br>  }<br>  </code>``</p>
+<ul><li>Biến nguyên <code>count</code> lưu số lượng phần tử hiện có trong bộ đệm (khởi tạo <code>count = 0</code>).</li><li><strong>Tiến trình Producer</strong> thêm phần tử vào bộ đệm và tăng <code>count</code>:<pre><code class="language-c">while (true) {
+    /* sản xuất một item */
+    while (count == BUFFER_SIZE)
+        ; /* do nothing - chờ đệm có chỗ trống */
+    buffer[in] = next_produced;
+    in = (in + 1) % BUFFER_SIZE;
+    count++;
+}</code></pre></li><li><strong>Tiến trình Consumer</strong> lấy phần tử khỏi bộ đệm và giảm <code>count</code>:<pre><code class="language-c">while (true) {
+    while (count == 0)
+        ; /* do nothing - chờ đệm có phần tử */
+    next_consumed = buffer[out];
+    out = (out + 1) % BUFFER_SIZE;
+    count--;
+}</code></pre></li></ul>
 
 <p>Ở mức ngôn ngữ bậc cao, thao tác <code>count++</code> và <code>count--</code> có vẻ là một thao tác đơn lẻ. Tuy nhiên, ở mức hợp ngữ/mã máy, mỗi lệnh được biên dịch thành 3 thao tác phần cứng tách biệt:</p>
 
@@ -145,19 +152,24 @@
 
 <h3 id="3-1-giai-phap-phan-mem-1-dung-bien-turn">3.1 Giải pháp Phần mềm 1: Dùng biến <code>turn</code></h3>
 
-<ul><li><strong>Biến chia sẻ:</strong> <code>int turn = 0;</code> (<code>turn = i</code> cho phép $P_i$ vào).</li><li><strong>Cấu trúc tiến trình $P_i$:</strong></li></ul>
-
-<p>  ``<code>c<br>  do {<br>      while (turn != i)<br>          ; /* busy waiting */<br>      /* CRITICAL SECTION */<br>      turn = j;<br>      /* REMAINDER SECTION */<br>  } while (true);<br>  </code>``</p>
-
-<ul><li><strong>Phân tích 3 tiêu chí:</strong><ul><li><strong>Mutual Exclusion:</strong> <strong>THỎA MÃN.</strong> Tại một thời điểm, biến <code>turn</code> chỉ nhận một giá trị duy nhất ($0$ hoặc $1$), do đó không thể có chuyện cả $P_0$ và $P_1$ cùng vượt qua vòng lặp <code>while</code>.</li><li><strong>Progress:</strong> <strong>VI PHẠM.</strong> Thuật toán ép buộc hai tiến trình phải luân phiên nghiêm ngặt (Strict Alternation). Giả sử <code>turn = 0</code>, $P_0$ vào miền găng, ra gán <code>turn = 1</code> rồi vào remainder section rất lâu. Nếu $P_1$ chạy xong và gán <code>turn = 0</code>, lúc này $P_0$ không muốn vào nữa nhưng $P_1$ muốn vào tiếp thì $P_1$ bị chặn vĩnh viễn ở <code>while (turn != 1)</code> dù miền găng đang trống!</li><li><strong>Bounded Waiting:</strong> <strong>THỎA MÃN.</strong> Mỗi tiến trình chỉ phải chờ tối đa 1 lượt.</li></ul></li></ul>
+<ul><li><strong>Biến chia sẻ:</strong> <code>int turn = 0;</code> (<code>turn = i</code> cho phép $P_i$ vào).</li><li><strong>Cấu trúc tiến trình $P_i$:</strong><pre><code class="language-c">do {
+    while (turn != i)
+        ; /* busy waiting */
+    /* CRITICAL SECTION */
+    turn = j;
+    /* REMAINDER SECTION */
+} while (true);</code></pre></li><li><strong>Phân tích 3 tiêu chí:</strong><ul><li><strong>Mutual Exclusion:</strong> <strong>THỎA MÃN.</strong> Tại một thời điểm, biến <code>turn</code> chỉ nhận một giá trị duy nhất ($0$ hoặc $1$), do đó không thể có chuyện cả $P_0$ và $P_1$ cùng vượt qua vòng lặp <code>while</code>.</li><li><strong>Progress:</strong> <strong>VI PHẠM.</strong> Thuật toán ép buộc hai tiến trình phải luân phiên nghiêm ngặt (Strict Alternation). Giả sử <code>turn = 0</code>, $P_0$ vào miền găng, ra gán <code>turn = 1</code> rồi vào remainder section rất lâu. Nếu $P_1$ chạy xong và gán <code>turn = 0</code>, lúc này $P_0$ không muốn vào nữa nhưng $P_1$ muốn vào tiếp thì $P_1$ bị chặn vĩnh viễn ở <code>while (turn != 1)</code> dù miền găng đang trống!</li><li><strong>Bounded Waiting:</strong> <strong>THỎA MÃN.</strong> Mỗi tiến trình chỉ phải chờ tối đa 1 lượt.</li></ul></li></ul>
 
 <h3 id="3-2-giai-phap-phan-mem-2-dung-mang-flag-2">3.2 Giải pháp Phần mềm 2: Dùng mảng <code>flag[2]</code></h3>
 
-<ul><li><strong>Biến chia sẻ:</strong> <code>boolean flag[2];</code> (khởi tạo <code>flag[0] = flag[1] = false;</code>). <code>flag[i] = true</code> thể hiện $P_i$ muốn vào miền găng.</li><li><strong>Cấu trúc tiến trình $P_i$:</strong></li></ul>
-
-<p>  ``<code>c<br>  do {<br>      flag[i] = true;<br>      while (flag[j])<br>          ; /* busy waiting */<br>      /* CRITICAL SECTION */<br>      flag[i] = false;<br>      /* REMAINDER SECTION */<br>  } while (true);<br>  </code>``</p>
-
-<ul><li><strong>Phân tích 3 tiêu chí:</strong><ul><li><strong>Mutual Exclusion:</strong> <strong>THỎA MÃN.</strong> $P_i$ chỉ vào miền găng khi <code>flag[j] == false</code>.</li><li><strong>Progress &amp; Bounded Waiting:</strong> <strong>VI PHẠM (Nguy cơ Deadlock).</strong> Nếu $P_0$ gán <code>flag[0] = true</code>, ngay lúc đó context switch sang $P_1$ và $P_1$ gán <code>flag[1] = true</code>. Khi đó cả hai cùng chạy đến lệnh <code>while (flag[j])</code>. Do cả hai cờ đều bằng <code>true</code>, cả $P_0$ và $P_1$ đều lặp vô hạn và không tiến trình nào có thể vào được miền găng.</li></ul></li></ul>
+<ul><li><strong>Biến chia sẻ:</strong> <code>boolean flag[2];</code> (khởi tạo <code>flag[0] = flag[1] = false;</code>). <code>flag[i] = true</code> thể hiện $P_i$ muốn vào miền găng.</li><li><strong>Cấu trúc tiến trình $P_i$:</strong><pre><code class="language-c">do {
+    flag[i] = true;
+    while (flag[j])
+        ; /* busy waiting */
+    /* CRITICAL SECTION */
+    flag[i] = false;
+    /* REMAINDER SECTION */
+} while (true);</code></pre></li><li><strong>Phân tích 3 tiêu chí:</strong><ul><li><strong>Mutual Exclusion:</strong> <strong>THỎA MÃN.</strong> $P_i$ chỉ vào miền găng khi <code>flag[j] == false</code>.</li><li><strong>Progress &amp; Bounded Waiting:</strong> <strong>VI PHẠM (Nguy cơ Deadlock).</strong> Nếu $P_0$ gán <code>flag[0] = true</code>, ngay lúc đó context switch sang $P_1$ và $P_1$ gán <code>flag[1] = true</code>. Khi đó cả hai cùng chạy đến lệnh <code>while (flag[j])</code>. Do cả hai cờ đều bằng <code>true</code>, cả $P_0$ và $P_1$ đều lặp vô hạn và không tiến trình nào có thể vào được miền găng.</li></ul></li></ul>
 
 <h3 id="3-3-giai-thuat-peterson">3.3 Giải thuật Peterson</h3>
 
@@ -165,19 +177,19 @@
 
 <p>Giải thuật Peterson kết hợp cả hai biến <code>turn</code> và mảng <code>flag[2]</code>, tạo nên lời giải phần mềm hoàn chỉnh cho bài toán 2 tiến trình.</p>
 
-<ul><li><strong>Biến chia sẻ:</strong></li></ul>
+<ul><li><strong>Biến chia sẻ:</strong><pre><code class="language-c">int turn;
+boolean flag[2] = {false, false};</code></pre></li><li><strong>Cấu trúc tiến trình $P_i$ ($i \in \{0, 1\}, j = 1 - i$):</strong><pre><code class="language-c">do {
+    flag[i] = true;              // Bày tỏ ý định muốn vào
+    turn = j;                    // Nhường quyền ưu tiên cho đối phương
+    while (flag[j] &amp;&amp; turn == j)
+        ; /* busy waiting */
 
-<p>  ``<code>c<br>  int turn;<br>  boolean flag[2] = {false, false};<br>  </code>``</p>
+    /* CRITICAL SECTION */
 
-<ul><li><strong>Cấu trúc tiến trình $P_i$ ($i \in \{0, 1\}, j = 1 - i$):</strong></li></ul>
+    flag[i] = false;             // Báo hiệu đã rời khỏi miền găng
 
-<p>  ```c<br>  do {<br>      flag[i] = true;              // Bày tỏ ý định muốn vào<br>      turn = j;                    // Nhường quyền ưu tiên cho đối phương<br>      while (flag[j] &amp;&amp; turn == j)<br>          ; /<em> busy waiting </em>/</p>
-
-<p>      /<em> CRITICAL SECTION </em>/</p>
-
-<p>      flag[i] = false;             // Báo hiệu đã rời khỏi miền găng</p>
-
-<p>      /<em> REMAINDER SECTION </em>/<br>  } while (true);<br>  ```</p>
+    /* REMAINDER SECTION */
+} while (true);</code></pre></li></ul>
 
 <h4 id="chung-minh-tinh-ung-an-cua-giai-thuat-peterson">Chứng minh tính đúng đắn của Giải thuật Peterson:</h4>
 
@@ -231,35 +243,38 @@ turn = 0;</code></pre>
 
 <h4 id="1-chi-thi-test_and_set">1. Chỉ thị <code>test_and_set</code></h4>
 
-<ul><li>Định nghĩa hành vi phần cứng:</li></ul>
+<ul><li>Định nghĩa hành vi phần cứng:<pre><code class="language-c">boolean test_and_set(boolean *target) {
+    boolean rv = *target; // Lưu lại giá trị cũ
+    *target = true;       // Gán giá trị mới là true
+    return rv;            // Trả về giá trị cũ
+}</code></pre></li><li>Giải pháp miền găng với biến khóa <code>lock</code> (khởi tạo <code>lock = false</code>):<pre><code class="language-c">do {
+    while (test_and_set(&amp;lock))
+        ; /* busy waiting */
 
-<p>  ``<code>c<br>  boolean test_and_set(boolean *target) {<br>      boolean rv = *target; // Lưu lại giá trị cũ<br>      *target = true;       // Gán giá trị mới là true<br>      return rv;            // Trả về giá trị cũ<br>  }<br>  </code>``</p>
+    /* CRITICAL SECTION */
 
-<ul><li>Giải pháp miền găng với biến khóa <code>lock</code> (khởi tạo <code>lock = false</code>):</li></ul>
+    lock = false;
 
-<p>  ```c<br>  do {<br>      while (test_and_set(&amp;lock))<br>          ; /<em> busy waiting </em>/</p>
-
-<p>      /<em> CRITICAL SECTION </em>/</p>
-
-<p>      lock = false;</p>
-
-<p>      /<em> REMAINDER SECTION </em>/<br>  } while (true);<br>  ```</p>
+    /* REMAINDER SECTION */
+} while (true);</code></pre></li></ul>
 
 <h4 id="2-chi-thi-compare_and_swap-cas">2. Chỉ thị <code>compare_and_swap</code> (CAS)</h4>
 
-<ul><li>Định nghĩa hành vi phần cứng:</li></ul>
+<ul><li>Định nghĩa hành vi phần cứng:<pre><code class="language-c">int compare_and_swap(int *value, int expected, int new_value) {
+    int temp = *value;
+    if (*value == expected)
+        *value = new_value;
+    return temp;
+}</code></pre></li><li>Giải pháp miền găng với <code>lock = 0</code>:<pre><code class="language-c">do {
+    while (compare_and_swap(&amp;lock, 0, 1) != 0)
+        ; /* busy waiting */
 
-<p>  ``<code>c<br>  int compare_and_swap(int *value, int expected, int new_value) {<br>      int temp = *value;<br>      if (*value == expected)<br>          *value = new_value;<br>      return temp;<br>  }<br>  </code>``</p>
+    /* CRITICAL SECTION */
 
-<ul><li>Giải pháp miền găng với <code>lock = 0</code>:</li></ul>
+    lock = 0;
 
-<p>  ```c<br>  do {<br>      while (compare_and_swap(&amp;lock, 0, 1) != 0)<br>          ; /<em> busy waiting </em>/</p>
-
-<p>      /<em> CRITICAL SECTION </em>/</p>
-
-<p>      lock = 0;</p>
-
-<p>      /<em> REMAINDER SECTION </em>/<br>  } while (true);<br>  ```</p>
+    /* REMAINDER SECTION */
+} while (true);</code></pre></li></ul>
 
 <h4 id="3-bien-on-nguyen-atomic-variables">3. Biến đơn nguyên (Atomic Variables)</h4>
 
@@ -283,15 +298,17 @@ atomic_fetch_sub(&amp;count, 1);</code></pre>
 
 <p><strong>Mutex (Mutual Exclusion Lock)</strong> là công cụ đồng bộ hóa phần mềm đơn giản nhất do hệ điều hành cung cấp để bảo vệ miền găng.</p>
 
-<ul><li>Cấu trúc: Một biến boolean <code>available</code> thể hiện trạng thái khóa khả dụng (<code>true</code>) hay đang bị chiếm giữ (<code>false</code>).</li><li>Hai hàm cơ bản:</li></ul>
+<ul><li>Cấu trúc: Một biến boolean <code>available</code> thể hiện trạng thái khóa khả dụng (<code>true</code>) hay đang bị chiếm giữ (<code>false</code>).</li><li>Hai hàm cơ bản:<pre><code class="language-c">acquire() {
+    while (!available)
+        ; /* busy waiting */
+    available = false;
+}
 
-<p>  ```c<br>  acquire() {<br>      while (!available)<br>          ; /<em> busy waiting </em>/<br>      available = false;<br>  }</p>
-
-<p>  release() {<br>      available = true;<br>  }<br>  ```</p>
-
-<ul><li>Mẫu sử dụng chuẩn:</li></ul>
-
-<p>  ``<code>c<br>  acquire(&amp;mutex);<br>  /* CRITICAL SECTION */<br>  release(&amp;mutex);<br>  </code>``</p>
+release() {
+    available = true;
+}</code></pre></li><li>Mẫu sử dụng chuẩn:<pre><code class="language-c">acquire(&amp;mutex);
+/* CRITICAL SECTION */
+release(&amp;mutex);</code></pre></li></ul>
 
 <h3 id="5-2-spinlock-vs-mutex-khong-busy-waiting">5.2 Spinlock vs Mutex không Busy Waiting</h3>
 
@@ -311,11 +328,15 @@ atomic_fetch_sub(&amp;count, 1);</code></pre>
 
 <p><strong>Semaphore</strong> $S$ là một biến nguyên (integer variable), ngoài việc khởi tạo, chỉ có thể được truy xuất thông qua hai thao tác nguyên tử chuẩn: <code>wait(S)</code> (còn gọi là phép toán $P$) và <code>signal(S)</code> (còn gọi là phép toán $V$).</p>
 
-<ul><li><strong>Định nghĩa kinh điển theo Dijkstra:</strong></li></ul>
+<ul><li><strong>Định nghĩa kinh điển theo Dijkstra:</strong><pre><code class="language-c">wait(S) {
+    while (S &lt;= 0)
+        ; /* busy waiting */
+    S--;
+}
 
-<p>  ```c<br>  wait(S) {<br>      while (S &lt;= 0)<br>          ; /<em> busy waiting </em>/<br>      S--;<br>  }</p>
-
-<p>  signal(S) {<br>      S++;<br>  }<br>  ```</p>
+signal(S) {
+    S++;
+}</code></pre></li></ul>
 
 <h3 id="6-2-phan-loai-semaphore">6.2 Phân loại Semaphore</h3>
 
@@ -372,13 +393,9 @@ signal(&amp;mutex);</code></pre>
 
 <p>Muốn câu lệnh $S_1$ của tiến trình $P_1$ <strong>luôn luôn thực thi trước</strong> câu lệnh $S_2$ của tiến trình $P_2$:</p>
 
-<ul><li>Khởi tạo <code>semaphore synch = 0;</code></li><li>Mã nguồn $P_1$:</li></ul>
-
-<p>  ``<code>c<br>  S1;<br>  signal(&amp;synch); // Báo hiệu S1 đã xong<br>  </code>``</p>
-
-<ul><li>Mã nguồn $P_2$:</li></ul>
-
-<p>  ``<code>c<br>  wait(&amp;synch);   // Chờ S1 hoàn thành mới được chạy tiếp<br>  S2;<br>  </code>``</p>
+<ul><li>Khởi tạo <code>semaphore synch = 0;</code></li><li>Mã nguồn $P_1$:<pre><code class="language-c">S1;
+signal(&amp;synch); // Báo hiệu S1 đã xong</code></pre></li><li>Mã nguồn $P_2$:<pre><code class="language-c">wait(&amp;synch);   // Chờ S1 hoàn thành mới được chạy tiếp
+S2;</code></pre></li></ul>
 
 <h4 id="3-quan-ly-tai-nguyen-a-thuc-the">3. Quản lý Tài nguyên Đa thực thể</h4>
 
@@ -509,7 +526,8 @@ do {
     // 2. Tiêu thụ item trong next_consumed
 } while (true);</code></pre>
 
-<blockquote><strong>Bẫy đề thi quan trọng:</strong><br>Nếu Producer đảo thứ tự gọi thành:<br>``<code>c<br>wait(&amp;mutex);<br>wait(&amp;empty);<br></code>`<code><br>Khi bộ đệm đầy (</code>empty = 0<code>), Producer lấy </code>mutex<code> thành công rồi bị block ở </code>wait(&amp;empty)<code>. Consumer muốn vào lấy item để giải phóng ô trống nhưng bị chặn ở </code>wait(&amp;mutex)<code> $\rightarrow$ **DEADLOCK**. Quy tắc bắt buộc: **Phải chờ điều kiện tài nguyên (</code>empty<code>/</code>full<code>) trước khi lấy khóa miền găng (</code>mutex`)**.</blockquote>
+<blockquote><strong>Bẫy đề thi quan trọng:</strong><br>Nếu Producer đảo thứ tự gọi thành:<br><pre><code class="language-c">wait(&amp;mutex);
+wait(&amp;empty);</code></pre><br>Khi bộ đệm đầy (<code>empty = 0</code>), Producer lấy <code>mutex</code> thành công rồi bị block ở <code>wait(&amp;empty)</code>. Consumer muốn vào lấy item để giải phóng ô trống nhưng bị chặn ở <code>wait(&amp;mutex)</code> $\rightarrow$ <strong>DEADLOCK</strong>. Quy tắc bắt buộc: <strong>Phải chờ điều kiện tài nguyên (<code>empty</code>/<code>full</code>) trước khi lấy khóa miền găng (<code>mutex</code>)</strong>.</blockquote>
 
 <p>---</p>
 
@@ -525,21 +543,27 @@ do {
 
 <h3 id="10-2-giai-phap-first-readers-writers-uu-tien-reader">10.2 Giải pháp First Readers – Writers (Ưu tiên Reader)</h3>
 
-<ul><li><strong>Biến chia sẻ &amp; Semaphore:</strong></li></ul>
+<ul><li><strong>Biến chia sẻ &amp; Semaphore:</strong><pre><code class="language-c">semaphore rw_mutex = 1; // Khóa loại trừ tương hỗ cho Writer và Reader đầu/cuối
+semaphore mutex = 1;    // Bảo vệ biến đếm read_count
+int read_count = 0;     // Đếm số lượng Reader đang đọc dữ liệu</code></pre></li><li><strong>Mã nguồn Writer:</strong><pre><code class="language-c">do {
+    wait(&amp;rw_mutex);
+    /* WRITING SECTION (Ghi dữ liệu) */
+    signal(&amp;rw_mutex);
+} while (true);</code></pre></li><li><strong>Mã nguồn Reader:</strong><pre><code class="language-c">do {
+    wait(&amp;mutex);
+    read_count++;
+    if (read_count == 1)
+        wait(&amp;rw_mutex); // Reader đầu tiên vào: chặn toàn bộ Writer
+    signal(&amp;mutex);
 
-<p>  ``<code>c<br>  semaphore rw_mutex = 1; // Khóa loại trừ tương hỗ cho Writer và Reader đầu/cuối<br>  semaphore mutex = 1;    // Bảo vệ biến đếm read_count<br>  int read_count = 0;     // Đếm số lượng Reader đang đọc dữ liệu<br>  </code>``</p>
+    /* READING SECTION (Đọc dữ liệu) */
 
-<ul><li><strong>Mã nguồn Writer:</strong></li></ul>
-
-<p>  ``<code>c<br>  do {<br>      wait(&amp;rw_mutex);<br>      /* WRITING SECTION (Ghi dữ liệu) */<br>      signal(&amp;rw_mutex);<br>  } while (true);<br>  </code>``</p>
-
-<ul><li><strong>Mã nguồn Reader:</strong></li></ul>
-
-<p>  ```c<br>  do {<br>      wait(&amp;mutex);<br>      read_count++;<br>      if (read_count == 1)<br>          wait(&amp;rw_mutex); // Reader đầu tiên vào: chặn toàn bộ Writer<br>      signal(&amp;mutex);</p>
-
-<p>      /<em> READING SECTION (Đọc dữ liệu) </em>/</p>
-
-<p>      wait(&amp;mutex);<br>      read_count--;<br>      if (read_count == 0)<br>          signal(&amp;rw_mutex); // Reader cuối cùng ra: nhả khóa cho Writer<br>      signal(&amp;mutex);<br>  } while (true);<br>  ```</p>
+    wait(&amp;mutex);
+    read_count--;
+    if (read_count == 0)
+        signal(&amp;rw_mutex); // Reader cuối cùng ra: nhả khóa cho Writer
+    signal(&amp;mutex);
+} while (true);</code></pre></li></ul>
 
 <blockquote><strong>Đánh giá giải pháp:</strong> Giải pháp trên ưu tiên Reader. Nếu các Reader liên tục đến gối đầu nhau, <code>read_count</code> không bao giờ về $0$, dẫn đến các tiến trình Writer bị <strong>đói tài nguyên (Starvation)</strong> vĩnh viễn.</blockquote>
 

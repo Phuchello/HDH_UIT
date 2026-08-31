@@ -164,6 +164,70 @@ def render_callout(kind, body, doc_id, routes, current_rel):
     return f'<div class="callout {html.escape(lower)}"><div class="callout-title">{title}</div><p>{body_html}</p></div>'
 
 
+def render_fenced_code(language, code):
+    """Render a fenced block while preserving code bytes and indentation."""
+    code_text = "\n".join(code)
+    return f'<pre><code class="language-{html.escape(language)}">{html.escape(code_text)}</code></pre>'
+
+
+def parse_indented_fence(lines, start, parent_indent):
+    """Parse a fenced block indented as a list-item continuation.
+
+    CommonMark permits a fenced block to be indented beneath a list item.  The
+    handbook uses two-space continuation indentation, so the fence indentation
+    is removed from each code line while indentation inside the code remains
+    untouched.  Return ``(html, next_index)`` or ``(None, start)`` when the
+    current line is not such a fence.
+    """
+    opening = re.match(r"^(?P<indent> +)```(?P<language>.*)$", lines[start])
+    if not opening or len(opening.group("indent")) <= parent_indent:
+        return None, start
+    fence_indent = len(opening.group("indent"))
+    language = opening.group("language").strip()
+    index = start + 1
+    code = []
+    while index < len(lines):
+        current = lines[index]
+        if current.strip().startswith("```") and len(current) - len(current.lstrip(" ")) <= fence_indent:
+            return render_fenced_code(language, code), index + 1
+        if current.strip():
+            code.append(current[fence_indent:] if current.startswith(" " * fence_indent) else current)
+        else:
+            code.append("")
+        index += 1
+    # Keep an unterminated fence visible as a code block, matching root-level
+    # fence handling while allowing the rest of the list to continue safely.
+    return render_fenced_code(language, code), index
+
+
+def render_blockquote_body(lines, routes, current_rel):
+    """Render blockquote text while preserving fenced code blocks."""
+    parts, paragraph, index = [], [], 0
+
+    def flush_paragraph():
+        if paragraph:
+            parts.append(inline("\n".join(paragraph), routes, current_rel).replace("\n", "<br>"))
+            paragraph.clear()
+
+    while index < len(lines):
+        opening = re.match(r"^\s*```(?P<language>.*)$", lines[index])
+        if not opening:
+            paragraph.append(lines[index])
+            index += 1
+            continue
+        flush_paragraph()
+        language, code = opening.group("language").strip(), []
+        index += 1
+        while index < len(lines) and not re.match(r"^\s*```", lines[index]):
+            code.append(lines[index])
+            index += 1
+        if index < len(lines):
+            index += 1
+        parts.append(render_fenced_code(language, code))
+    flush_paragraph()
+    return "<br>".join(parts)
+
+
 def markdown_to_html(text, doc_id, routes, current_rel):
     lines = text.replace("\r\n", "\n").split("\n")
     output, index = [], 0
@@ -177,7 +241,7 @@ def markdown_to_html(text, doc_id, routes, current_rel):
                 index += 1
             if index < len(lines):
                 index += 1
-            output.append(f'<pre><code class="language-{html.escape(language)}">{html.escape("\n".join(code))}</code></pre>')
+            output.append(render_fenced_code(language, code))
             continue
         heading = re.match(r"^(#{1,6})\s+(.+?)\s*#*$", line)
         if heading:
@@ -213,7 +277,7 @@ def markdown_to_html(text, doc_id, routes, current_rel):
             while index < len(lines) and lines[index].startswith(">"):
                 body.append(re.sub(r"^>\s?", "", lines[index]))
                 index += 1
-            output.append(f'<blockquote>{inline("\n".join(body), routes, current_rel).replace(chr(10), "<br>")}</blockquote>')
+            output.append(f'<blockquote>{render_blockquote_body(body, routes, current_rel)}</blockquote>')
             continue
         if not line.strip():
             index += 1
@@ -271,6 +335,11 @@ def render_list(lines, start, routes, current_rel):
             if child and len(child.group("indent")) > root_indent:
                 child_html, index = render_list(lines, index, routes, current_rel)
                 nested.append(child_html)
+                continue
+            fenced_html, fenced_index = parse_indented_fence(lines, index, root_indent)
+            if fenced_html is not None:
+                nested.append(fenced_html)
+                index = fenced_index
                 continue
             break
         output.append(f"<li>{item_text}{''.join(nested)}</li>")

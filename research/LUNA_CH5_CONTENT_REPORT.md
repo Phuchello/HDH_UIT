@@ -3,11 +3,11 @@
 **Thời gian lập:** 2026-08-31  
 **Người thực hiện:** Senior Operating Systems Author + Source-Faithful Question Author (Codex Luna Ultra)  
 **Nhánh Git:** `v2/complete-theory-labs`  
-**Giai đoạn:** `V2_BATCH2_CH5_DRAFT_READY_FOR_ENGINEERING_QA`  
+**Giai đoạn:** `V2_BATCH2_CH5_ENGINEERING_QA`  
 **Trạng thái Lập bản đồ nguồn:** `VERIFIED — INDEPENDENT CHECK PASS`  
 **Trạng thái Soạn thảo Chương 5:** `CONTENT_DRAFTED`  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 ONLY; CH5 DRAFT — NOT YET VERIFIED`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Terra Medium thực hiện kiểm thử hồi quy kỹ thuật/build, sau đó Luna Ultra tiến hành thẩm định học thuật độc lập cho Chương 5.  
+**Hành động tiếp theo chính xác (Exact Next Action):** Luna Ultra tiến hành thẩm định học thuật độc lập cho Chương 5 sau khi engineering/build QA hoàn tất.  
 
 ---
 
@@ -112,8 +112,18 @@ This correction pass addresses source-fidelity and standards wording findings di
 - **CH5-COVERAGE-001:** Canonical content ranges remain `CONTENT_DRAFTED`; all four non-content ranges (Part 1 pages 1–3 and 67; Part 2 pages 1–3 and 72) are `NOT_WRITTEN`.
 - **CH5-QA-001:** Draft validator now checks canonical source IDs, exact generated heading anchors, non-content statuses, neutral frontmatter metadata, and the standards/atomicity wording guards. Its PASS message states that independent academic verification is still pending.
 
-**Known engineering issue:** `CH5_NESTED_FENCED_CODE_RENDERING` — generated Chapter 5 HTML can mangle fenced code blocks nested/indented under list items. This is recorded for Terra engineering/build regression; renderer, CSS, and JS are intentionally unchanged in this pass.
+**Previously known engineering issue (RESOLVED):** `CH5_NESTED_FENCED_CODE_RENDERING` — `scripts/build_web.py` now preserves fenced code blocks indented beneath list items and inside blockquotes as `<pre><code>` elements. The regression fixture and rebuilt Chapter 5 HTML both pass.
 
 **Open content blockers:** `0`  
 **Open content majors:** `0`  
-**Open content minors:** `0` *(the nested fenced-code issue is an engineering follow-up, not a content finding)*
+**Open content minors:** `0`
+
+## ENGINEERING QA — NESTED FENCED CODE REGRESSION
+
+- Renderer fix: `scripts/build_web.py` parses indented list-item and blockquote fences without changing source Markdown or academic content.
+- Regression coverage: `scripts/stress_test_web_renderer.py` verifies list-item and blockquote fences, deterministic rebuilds, and the existing mixed-list/table/code fixture.
+- Real-site rebuild: `npm test` / foundation gate **PASS**; Chapter 5 HTML contains zero raw fence markers and zero malformed backtick/code remnants.
+- Browser smoke checks: desktop and 390px mobile render with zero root horizontal overflow; all 28 fenced C blocks remain selectable, including 18 inside list items and 1 inside a blockquote.
+- Publication regression: `scripts/validate_final.py` **PASS** with five existing non-failing internal solution-step width diagnostics; no root viewport overflow is present in the web checks above.
+- Generated output: Chapter 5 theory and subjective pages rebuilt; no Chapter 1–4 source files or Chapter 6 content were modified.
+- Engineering verification: **PASS — CH5 WEB RENDERER QA**. Academic verification remains pending.

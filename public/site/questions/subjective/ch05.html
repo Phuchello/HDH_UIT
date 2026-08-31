@@ -185,9 +185,9 @@
 
 <p><strong>FULL EXPLANATION:</strong></p>
 
-<ul><li><em>Spinlock:</em> Liên tục lặp kiểm tra. Tiết kiệm chi phí context switch nếu thời gian giữ khóa rất ngắn trên hệ đa CPU.</li><li><em>Blocking Mutex:</em> Đưa luồng vào hàng đợi chờ và nhường CPU. Phù hợp cho miền găng dài.</li><li>Mẫu sử dụng chuẩn:</li></ul>
-
-<p>  ``<code>c<br>  acquire(&amp;mutex);<br>  /* CRITICAL SECTION */<br>  release(&amp;mutex);<br>  </code>``</p>
+<ul><li><em>Spinlock:</em> Liên tục lặp kiểm tra. Tiết kiệm chi phí context switch nếu thời gian giữ khóa rất ngắn trên hệ đa CPU.</li><li><em>Blocking Mutex:</em> Đưa luồng vào hàng đợi chờ và nhường CPU. Phù hợp cho miền găng dài.</li><li>Mẫu sử dụng chuẩn:<pre><code class="language-c">acquire(&amp;mutex);
+/* CRITICAL SECTION */
+release(&amp;mutex);</code></pre></li></ul>
 
 <p><strong>COMMON MISSING POINTS:</strong> Quên phân tích sự khác nhau giữa Spinlock và Blocking Mutex; quên đặc điểm sở hữu khóa (Ownership).</p>
 
@@ -391,17 +391,17 @@ end;</code></pre>
 
 <p><strong>REQUIRED KEY POINTS:</strong></p>
 
-<ul><li>Khẳng định CÓ.</li><li>Khai báo biến toàn cục: <code>boolean lock = false;</code> (false: khóa rảnh, true: khóa bận).</li><li>Cấu trúc tiến trình $P_i$ với biến cục bộ <code>key</code>:</li></ul>
+<ul><li>Khẳng định CÓ.</li><li>Khai báo biến toàn cục: <code>boolean lock = false;</code> (false: khóa rảnh, true: khóa bận).</li><li>Cấu trúc tiến trình $P_i$ với biến cục bộ <code>key</code>:<pre><code class="language-c">do {
+    key = true;
+    while (key == true)
+        Swap(&amp;lock, &amp;key);
 
-<p>  ```c<br>  do {<br>      key = true;<br>      while (key == true)<br>          Swap(&amp;lock, &amp;key);</p>
+    /* CRITICAL SECTION */
 
-<p>      /<em> CRITICAL SECTION </em>/</p>
+    lock = false;
 
-<p>      lock = false;</p>
-
-<p>      /<em> REMAINDER SECTION </em>/<br>  } while (true);<br>  ```</p>
-
-<ul><li>Giải thích cơ chế hoạt động: Khi <code>lock = false</code>, <code>Swap(&amp;lock, &amp;key)</code> sẽ đổi <code>key</code> thành <code>false</code> và <code>lock</code> thành <code>true</code>, giúp tiến trình thoát khỏi <code>while</code> để vào miền găng.</li></ul>
+    /* REMAINDER SECTION */
+} while (true);</code></pre></li><li>Giải thích cơ chế hoạt động: Khi <code>lock = false</code>, <code>Swap(&amp;lock, &amp;key)</code> sẽ đổi <code>key</code> thành <code>false</code> và <code>lock</code> thành <code>true</code>, giúp tiến trình thoát khỏi <code>while</code> để vào miền găng.</li></ul>
 
 <p><strong>FULL EXPLANATION:</strong><br>Chỉ thị <code>Swap</code> hoán đổi nguyên tử giá trị của <code>lock</code> và <code>key</code>. Nếu một tiến trình khác đang trong miền găng (<code>lock = true</code>), các tiến trình đến sau khi thực hiện <code>Swap(&amp;lock, &amp;key)</code> sẽ nhận về <code>key = true</code> và tiếp tục bị kẹt trong vòng lặp <code>while (key == true)</code>. Khi tiến trình trong miền găng thoát ra, nó gán <code>lock = false</code>, cho phép đúng 1 tiến trình đang lặp hoán đổi nhận được <code>key = false</code> để vào miền găng kế tiếp.</p>
 
@@ -458,19 +458,30 @@ process B { while (TRUE) nb = nb + 1; }</code></pre>
 
 <p><strong>MINIMUM ANSWER:</strong></p>
 
-<ul><li>Khởi tạo 2 semaphore:</li></ul>
+<ul><li>Khởi tạo 2 semaphore:<pre><code class="language-c">semaphore sem1 = 0; // Báo hiệu T1 đã hoàn tất (cho T2 và T3)
+semaphore sem2 = 0; // Báo hiệu T2 và T3 đã hoàn tất (cho T4)</code></pre></li><li>Cấu trúc các tiểu trình:<pre><code class="language-c">void T1(void) {
+    // T1 thực thi
+    signal(&amp;sem1); // Cấp tín hiệu cho T2
+    signal(&amp;sem1); // Cấp tín hiệu cho T3
+}
 
-<p>  ``<code>c<br>  semaphore sem1 = 0; // Báo hiệu T1 đã hoàn tất (cho T2 và T3)<br>  semaphore sem2 = 0; // Báo hiệu T2 và T3 đã hoàn tất (cho T4)<br>  </code>``</p>
+void T2(void) {
+    wait(&amp;sem1);   // Chờ T1 xong
+    // T2 thực thi
+    signal(&amp;sem2); // Báo hiệu cho T4
+}
 
-<ul><li>Cấu trúc các tiểu trình:</li></ul>
+void T3(void) {
+    wait(&amp;sem1);   // Chờ T1 xong
+    // T3 thực thi
+    signal(&amp;sem2); // Báo hiệu cho T4
+}
 
-<p>  ```c<br>  void T1(void) {<br>      // T1 thực thi<br>      signal(&amp;sem1); // Cấp tín hiệu cho T2<br>      signal(&amp;sem1); // Cấp tín hiệu cho T3<br>  }</p>
-
-<p>  void T2(void) {<br>      wait(&amp;sem1);   // Chờ T1 xong<br>      // T2 thực thi<br>      signal(&amp;sem2); // Báo hiệu cho T4<br>  }</p>
-
-<p>  void T3(void) {<br>      wait(&amp;sem1);   // Chờ T1 xong<br>      // T3 thực thi<br>      signal(&amp;sem2); // Báo hiệu cho T4<br>  }</p>
-
-<p>  void T4(void) {<br>      wait(&amp;sem2);   // Chờ nhánh thứ nhất (T2 hoặc T3) xong<br>      wait(&amp;sem2);   // Chờ nhánh thứ hai xong<br>      // T4 thực thi<br>  }<br>  ```</p>
+void T4(void) {
+    wait(&amp;sem2);   // Chờ nhánh thứ nhất (T2 hoặc T3) xong
+    wait(&amp;sem2);   // Chờ nhánh thứ hai xong
+    // T4 thực thi
+}</code></pre></li></ul>
 
 <p><strong>REQUIRED KEY POINTS:</strong></p>
 
@@ -504,9 +515,14 @@ process B { while (TRUE) nb = nb + 1; }</code></pre>
 
 <p><strong>MINIMUM ANSWER:</strong></p>
 
-<ol><li><strong>Chứng minh $X$ vượt quá 20:</strong> Thao tác <code>X = X + 1</code> và câu lệnh <code>if (X == 20)</code> không nguyên tử. Nếu khi $X = 19$, $P_1$ tăng $X$ lên $20$ nhưng bị ngắt trước khi kiểm tra <code>if</code>; $P_2$ chạy và tăng tiếp $X$ lên $21$, sau đó $P_1$ mới chạy kiểm tra <code>if (21 == 20)</code> $\rightarrow$ SAI $\rightarrow$ $X$ sẽ tiếp tục tăng vượt quá 20.</li><li><strong>Sửa chữa:</strong> Đặt toàn bộ đoạn cập nhật và kiểm tra $X$ vào trong Miền găng được bảo vệ bởi một Semaphore nhị phân hoặc Mutex lock:</li></ol>
-
-<p>   ``<code>c<br>   semaphore mutex = 1;<br>   do {<br>       wait(&amp;mutex);<br>       X = X + 1;<br>       if (X == 20)<br>           X = 0;<br>       signal(&amp;mutex);<br>   } while (TRUE);<br>   </code>``</p>
+<ol><li><strong>Chứng minh $X$ vượt quá 20:</strong> Thao tác <code>X = X + 1</code> và câu lệnh <code>if (X == 20)</code> không nguyên tử. Nếu khi $X = 19$, $P_1$ tăng $X$ lên $20$ nhưng bị ngắt trước khi kiểm tra <code>if</code>; $P_2$ chạy và tăng tiếp $X$ lên $21$, sau đó $P_1$ mới chạy kiểm tra <code>if (21 == 20)</code> $\rightarrow$ SAI $\rightarrow$ $X$ sẽ tiếp tục tăng vượt quá 20.</li><li><strong>Sửa chữa:</strong> Đặt toàn bộ đoạn cập nhật và kiểm tra $X$ vào trong Miền găng được bảo vệ bởi một Semaphore nhị phân hoặc Mutex lock:<pre><code class="language-c">semaphore mutex = 1;
+do {
+    wait(&amp;mutex);
+    X = X + 1;
+    if (X == 20)
+        X = 0;
+    signal(&amp;mutex);
+} while (TRUE);</code></pre></li></ol>
 
 <p><strong>REQUIRED KEY POINTS:</strong></p>
 
@@ -541,17 +557,14 @@ process P2 { B1; B2; }</code></pre>
 
 <p><strong>MINIMUM ANSWER:</strong></p>
 
-<ul><li>Khởi tạo 2 semaphore:</li></ul>
-
-<p>  ``<code>c<br>  semaphore a1_done = 0; // Báo hiệu A1 đã hoàn tất<br>  semaphore b1_done = 0; // Báo hiệu B1 đã hoàn tất<br>  </code>``</p>
-
-<ul><li>Cấu trúc tiến trình $P_1$:</li></ul>
-
-<p>  ``<code>c<br>  A1;<br>  signal(&amp;a1_done); // Báo cho P2 biết A1 đã xong<br>  wait(&amp;b1_done);   // Chờ B1 xong mới chạy tiếp A2<br>  A2;<br>  </code>``</p>
-
-<ul><li>Cấu trúc tiến trình $P_2$:</li></ul>
-
-<p>  ``<code>c<br>  B1;<br>  signal(&amp;b1_done); // Báo cho P1 biết B1 đã xong<br>  wait(&amp;a1_done);   // Chờ A1 xong mới chạy tiếp B2<br>  B2;<br>  </code>``</p>
+<ul><li>Khởi tạo 2 semaphore:<pre><code class="language-c">semaphore a1_done = 0; // Báo hiệu A1 đã hoàn tất
+semaphore b1_done = 0; // Báo hiệu B1 đã hoàn tất</code></pre></li><li>Cấu trúc tiến trình $P_1$:<pre><code class="language-c">A1;
+signal(&amp;a1_done); // Báo cho P2 biết A1 đã xong
+wait(&amp;b1_done);   // Chờ B1 xong mới chạy tiếp A2
+A2;</code></pre></li><li>Cấu trúc tiến trình $P_2$:<pre><code class="language-c">B1;
+signal(&amp;b1_done); // Báo cho P1 biết B1 đã xong
+wait(&amp;a1_done);   // Chờ A1 xong mới chạy tiếp B2
+B2;</code></pre></li></ul>
 
 <p><strong>REQUIRED KEY POINTS:</strong></p>
 
@@ -582,25 +595,22 @@ process P2 { for (j = 1; j &lt;= 100; j++) Bj; }</code></pre>
 
 <p><strong>MINIMUM ANSWER:</strong></p>
 
-<ul><li>Khởi tạo 2 semaphore:</li></ul>
+<ul><li>Khởi tạo 2 semaphore:<pre><code class="language-c">semaphore a_step = 0; // Đếm số bước P1 đã hoàn thành
+semaphore b_step = 0; // Đếm số bước P2 đã hoàn thành</code></pre></li><li>Cấu trúc tiến trình $P_1$:<pre><code class="language-c">for (int i = 1; i &lt;= 100; i++) {
+    if (i &gt; 1)
+        wait(&amp;b_step); // Với k &gt;= 2, Ak phải chờ B(k-1) kết thúc
 
-<p>  ``<code>c<br>  semaphore a_step = 0; // Đếm số bước P1 đã hoàn thành<br>  semaphore b_step = 0; // Đếm số bước P2 đã hoàn thành<br>  </code>``</p>
+    Ai;
 
-<ul><li>Cấu trúc tiến trình $P_1$:</li></ul>
+    signal(&amp;a_step);   // Báo hiệu Ak đã kết thúc cho P2
+}</code></pre></li><li>Cấu trúc tiến trình $P_2$:<pre><code class="language-c">for (int j = 1; j &lt;= 100; j++) {
+    if (j &gt; 1)
+        wait(&amp;a_step); // Với k &gt;= 2, Bk phải chờ A(k-1) kết thúc
 
-<p>  ```c<br>  for (int i = 1; i &lt;= 100; i++) {<br>      if (i &gt; 1)<br>          wait(&amp;b_step); // Với k &gt;= 2, Ak phải chờ B(k-1) kết thúc</p>
+    Bj;
 
-<p>      Ai;</p>
-
-<p>      signal(&amp;a_step);   // Báo hiệu Ak đã kết thúc cho P2<br>  }<br>  ```</p>
-
-<ul><li>Cấu trúc tiến trình $P_2$:</li></ul>
-
-<p>  ```c<br>  for (int j = 1; j &lt;= 100; j++) {<br>      if (j &gt; 1)<br>          wait(&amp;a_step); // Với k &gt;= 2, Bk phải chờ A(k-1) kết thúc</p>
-
-<p>      Bj;</p>
-
-<p>      signal(&amp;b_step);   // Báo hiệu Bk đã kết thúc cho P1<br>  }<br>  ```</p>
+    signal(&amp;b_step);   // Báo hiệu Bk đã kết thúc cho P1
+}</code></pre></li></ul>
 
 <p><strong>REQUIRED KEY POINTS:</strong></p>
 
@@ -636,25 +646,46 @@ ans := y + z;</code></pre>
 
 <ol><li><strong>Phân tích quan hệ phụ thuộc dữ liệu (DAG):</strong><ul><li>$S_1: w = x_1 \times x_2$ (Độc lập $\rightarrow$ Chạy ngay).</li><li>$S_2: v = x_3 \times x_4$ (Độc lập $\rightarrow$ Chạy ngay).</li><li>$S_3: y = v \times x_5$ (Phụ thuộc $S_2$).</li><li>$S_4: z = v \times x_6$ (Phụ thuộc $S_2$).</li><li>$S_5: x = w \times y$ (Phụ thuộc $S_1, S_3$).</li><li>$S_6: z_{new} = w \times z_{old}$ (Phụ thuộc $S_1, S_4$).</li><li>$S_7: ans = y + z_{new}$ (Phụ thuộc $S_3, S_6$).</li></ul></li></ol>
 
-<ol><li><strong>Khởi tạo Semaphore:</strong></li></ol>
+<ol><li><strong>Khởi tạo Semaphore:</strong><pre><code class="language-c">semaphore synch_w1 = 0; // S1 -&gt; S5
+semaphore synch_w2 = 0; // S1 -&gt; S6
+semaphore synch_v1 = 0; // S2 -&gt; S3
+semaphore synch_v2 = 0; // S2 -&gt; S4
+semaphore synch_y  = 0; // S3 -&gt; S7 (và S3 -&gt; S5)
+semaphore synch_z  = 0; // S6 -&gt; S7</code></pre></li></ol>
 
-<p>   ``<code>c<br>   semaphore synch_w1 = 0; // S1 -&gt; S5<br>   semaphore synch_w2 = 0; // S1 -&gt; S6<br>   semaphore synch_v1 = 0; // S2 -&gt; S3<br>   semaphore synch_v2 = 0; // S2 -&gt; S4<br>   semaphore synch_y  = 0; // S3 -&gt; S7 (và S3 -&gt; S5)<br>   semaphore synch_z  = 0; // S6 -&gt; S7<br>   </code>``</p>
+<ol><li><strong>Thiết kế 3 Luồng thực thi song hành tối ưu:</strong><pre><code class="language-c">// LUỒNG 1 (Tính toán nhánh w và x)
+void Thread_1(void) {
+    w = x1 * x2;       // S1
+    signal(&amp;synch_w1); // Báo w cho S5
+    signal(&amp;synch_w2); // Báo w cho S6
 
-<ol><li><strong>Thiết kế 3 Luồng thực thi song hành tối ưu:</strong></li></ol>
+    wait(&amp;synch_y);    // Chờ y từ S3
+    x = w * y;         // S5
+}
 
-<p>   ```c<br>   // LUỒNG 1 (Tính toán nhánh w và x)<br>   void Thread_1(void) {<br>       w = x1 * x2;       // S1<br>       signal(&amp;synch_w1); // Báo w cho S5<br>       signal(&amp;synch_w2); // Báo w cho S6</p>
+// LUỒNG 2 (Tính toán nhánh v và y)
+void Thread_2(void) {
+    v = x3 * x4;       // S2
+    signal(&amp;synch_v1); // Báo v cho S3
+    signal(&amp;synch_v2); // Báo v cho S4
 
-<p>       wait(&amp;synch_y);    // Chờ y từ S3<br>       x = w * y;         // S5<br>   }</p>
+    wait(&amp;synch_v1);   // Chờ v
+    y = v * x5;        // S3
+    signal(&amp;synch_y);  // Báo y cho Thread 1 (S5) và Thread 3 (S7)
+}
 
-<p>   // LUỒNG 2 (Tính toán nhánh v và y)<br>   void Thread_2(void) {<br>       v = x3 * x4;       // S2<br>       signal(&amp;synch_v1); // Báo v cho S3<br>       signal(&amp;synch_v2); // Báo v cho S4</p>
+// LUỒNG 3 (Tính toán nhánh z và kết quả ans)
+void Thread_3(void) {
+    wait(&amp;synch_v2);   // Chờ v từ S2
+    z = v * x6;        // S4
 
-<p>       wait(&amp;synch_v1);   // Chờ v<br>       y = v * x5;        // S3<br>       signal(&amp;synch_y);  // Báo y cho Thread 1 (S5) và Thread 3 (S7)<br>   }</p>
+    wait(&amp;synch_w2);   // Chờ w từ S1
+    z = w * z;         // S6
+    signal(&amp;synch_z);  // Báo z_new cho S7
 
-<p>   // LUỒNG 3 (Tính toán nhánh z và kết quả ans)<br>   void Thread_3(void) {<br>       wait(&amp;synch_v2);   // Chờ v từ S2<br>       z = v * x6;        // S4</p>
-
-<p>       wait(&amp;synch_w2);   // Chờ w từ S1<br>       z = w * z;         // S6<br>       signal(&amp;synch_z);  // Báo z_new cho S7</p>
-
-<p>       wait(&amp;synch_z);    // Chờ z_new<br>       ans = y + z;       // S7 (đã có y từ Thread 2)<br>   }<br>   ```</p>
+    wait(&amp;synch_z);    // Chờ z_new
+    ans = y + z;       // S7 (đã có y từ Thread 2)
+}</code></pre></li></ol>
 
 <p><strong>REQUIRED KEY POINTS:</strong></p>
 

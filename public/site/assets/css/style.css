@@ -404,6 +404,20 @@ body {
   overflow-x: auto;
 }
 
+/* Display math can be wider than a narrow reading canvas.  Keep the
+   formula scrollable in place instead of widening the document viewport. */
+.article-body mjx-container {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.article-body p,
+.article-body li {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 /* Callouts / Admonitions */
 .callout {
   border-left: 4px solid var(--accent-primary);
