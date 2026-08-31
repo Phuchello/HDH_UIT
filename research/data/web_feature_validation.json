@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "unreachable_reader_pages": [],
+  "search_cases": {
+    "convoy effect": "theory/ch04-scheduling.html",
+    "exponential averaging": "theory/ch04-scheduling.html",
+    "dispatch latency": "theory/ch04-scheduling.html",
+    "zombie": "theory/ch03-process.html",
+    "processor affinity": "theory/ch04-scheduling.html"
+  },
+  "failures": []
+}

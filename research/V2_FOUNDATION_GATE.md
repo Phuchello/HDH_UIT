@@ -1,6 +1,6 @@
 # V2 FOUNDATION GATE REPORT — HDH_UIT
 
-**Generated:** 2026-08-31T03:46:54.124058+00:00
+**Generated:** 2026-08-31T03:58:31.179157+00:00
 **Site generator:** `CUSTOM_STATIC_GENERATOR`
 **Foundation Gate:** **PASS**
 **Ready to scale content:** **YES**
@@ -14,6 +14,7 @@ The custom generator is the declared architecture. Quartz CLI is informational o
 | `validate_v2_content` | PASS |
 | `build_web` | PASS |
 | `validate_site_routes` | PASS |
+| `validate_web_features` | PASS |
 | `renderer_stress_test` | PASS |
 | `negative_tests` | PASS |
 | `batch1_canonical_source` | PASS |

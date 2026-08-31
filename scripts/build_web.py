@@ -21,7 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CONTENT = ROOT / "content"
 DEFAULT_OUTPUT = ROOT / "public" / "site"
-ARCHIVE_ASSETS = ROOT / "archive" / "web-prototype-v2" / "assets"
+PRODUCTION_ASSETS = ROOT / "src" / "web" / "assets"
 SHARED_VENDOR = ROOT / "src" / "shared" / "vendor"
 
 
@@ -157,7 +157,7 @@ def render_callout(kind, body, doc_id, routes, current_rel):
             if line.strip().startswith("-"):
                 weight = re.search(r"\[([0-9.]+)\s*điểm\]", line)
                 rows.append(f'<div class="rubric-item"><input type="checkbox" class="rubric-check" data-weight="{weight.group(1) if weight else "0.5"}"><div>{inline(line.lstrip("- ").strip(), routes, current_rel)}</div></div>')
-        return f'<div class="subjective-practice" data-practice-id="{html.escape(item_id)}" data-max-score="{score.group(1) if score else "1.0"}"><div class="practice-header"><h3>Luyện Tập Viết Tự Luận</h3><span class="card-tag">Tự đánh giá</span></div><div>{inline(prompt.strip(), routes, current_rel)}</div><textarea class="practice-textarea"></textarea><button class="btn-card primary btn-compare">So Sánh Với Rubric Tự Kiểm Tra</button><div class="rubric-container">{''.join(rows)}</div></div>'
+        return f'<div class="subjective-practice" data-practice-id="{html.escape(item_id)}" data-max-score="{score.group(1) if score else "1.0"}"><div class="practice-header"><h3>Luyện Tập Viết Tự Luận</h3><span class="card-tag">Tự đánh giá</span></div><div>{inline(prompt.strip(), routes, current_rel)}</div><textarea class="practice-textarea" aria-label="Bài làm tự luận"></textarea><button class="btn-card primary btn-compare">So sánh với Rubric tự kiểm tra</button><div class="rubric-container" aria-label="Rubric tự kiểm tra">{''.join(rows)}<p class="self-check-score">Tự kiểm tra: <output class="current-score">0.00</output> / {score.group(1) if score else "1.0"}</p></div></div>'
     title = {"characteristics": "ĐẶC TÍNH KỸ THUẬT", "note": "LƯU Ý QUAN TRỌNG", "important": "YÊU CẦU QUAN TRỌNG", "warning": "CẢNH BÁO KỸ THUẬT", "tip": "KHUYẾN NGHỊ THỰC HÀNH"}.get(lower, lower.upper())
     body_html = inline(body, routes, current_rel).replace("\n", "<br>")
     return f'<div class="callout {html.escape(lower)}"><div class="callout-title">{title}</div><p>{body_html}</p></div>'
@@ -239,12 +239,22 @@ def relative_link(from_route, to_route):
     return os.path.relpath(to_route, base).replace("\\", "/")
 
 
+def search_text(markdown: str) -> str:
+    """Canonical-document text for offline full-text search; never derive it from HTML."""
+    clean = re.sub(r"```.*?```", " ", markdown, flags=re.DOTALL)
+    clean = re.sub(r"<!--.*?-->", " ", clean, flags=re.DOTALL)
+    clean = re.sub(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", r"\1", clean)
+    clean = re.sub(r"[`*_>#|]", " ", clean)
+    return re.sub(r"\s+", " ", clean).strip()
+
+
 def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
     content_root, output_dir = Path(content_root), Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     assets = output_dir / "assets"
-    if ARCHIVE_ASSETS.exists():
-        shutil.copytree(ARCHIVE_ASSETS, assets, dirs_exist_ok=True)
+    if not PRODUCTION_ASSETS.is_dir():
+        raise RuntimeError(f"Missing production web assets: {PRODUCTION_ASSETS}")
+    shutil.copytree(PRODUCTION_ASSETS, assets, dirs_exist_ok=True)
     vendor = assets / "vendor"
     vendor.mkdir(parents=True, exist_ok=True)
     if SHARED_VENDOR.exists():
@@ -259,14 +269,17 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
     routes = {doc["id"]: doc["route"] for doc in docs}
     routes.update({Path(doc["route"]).stem: doc["route"] for doc in docs})
 
-    search = [{"id": doc["id"], "title": doc["title"], "url": doc["route"], "snippet": doc["summary"] or doc["title"]} for doc in docs]
+    for doc in docs:
+        doc["headings"] = re.findall(r"^#{1,6}\s+(.+?)\s*$", doc["body"], flags=re.MULTILINE)
+        doc["searchable_text"] = search_text(doc["body"])
+    search = [{"id": doc["id"], "title": doc["title"], "summary": doc["summary"], "headings": doc["headings"], "searchable_text": doc["searchable_text"], "url": doc["route"], "snippet": doc["summary"] or doc["title"]} for doc in docs]
     (output_dir / "search_index.json").write_text(json.dumps(search, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     graph_nodes = [{"id": doc["id"], "label": doc["title"][:32], "link": doc["route"], "x": 40 + (i * 67) % 270, "y": 35 + (i * 43) % 125, "r": 7, "color": "#0969da"} for i, doc in enumerate(docs)]
     graph_edges = [{"from": doc["id"], "to": rel} for doc in docs for rel in (doc["meta"].get("related", []) if isinstance(doc["meta"].get("related", []), list) else []) if rel in routes]
     (output_dir / "graph_data.json").write_text(json.dumps({"nodes": graph_nodes, "edges": graph_edges}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     def nav(current):
-        groups = [("LÝ THUYẾT (THEORY)", "theory"), ("NGÂN HÀNG CÂU HỎI", "questions"), ("THỰC HÀNH (LAB)", "labs"), ("ĐỀ THI & TRA CỨU", ("exams", "glossary", "flashcards"))]
+        groups = [("LÝ THUYẾT", "theory"), ("NGÂN HÀNG CÂU HỎI", "questions"), ("ÔN TẬP", "reviews"), ("THỰC HÀNH", "labs"), ("ĐỀ THI & TRA CỨU", ("exams", "glossary", "flashcards"))]
         out = []
         for label, kinds in groups:
             out.append(f'<div class="nav-section-title">{label}</div><ul class="nav-tree">')
@@ -281,12 +294,19 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
         route, depth = doc["route"], len(Path(doc["route"]).parts) - 1
         prefix = "../" * depth
         rendered = markdown_to_html(doc["body"], doc["id"], routes, route)
+        references = set(doc["meta"].get("related", []) if isinstance(doc["meta"].get("related", []), list) else [])
+        references.update(match.group(1).split("|", 1)[0].strip() for match in re.finditer(r"\[\[([^\]]+)\]\]", doc["body"]))
+        backlink_docs = [source for source in docs if doc["id"] in set(source["meta"].get("related", []) if isinstance(source["meta"].get("related", []), list) else []) or doc["id"] in {match.group(1).split("|", 1)[0].strip() for match in re.finditer(r"\[\[([^\]]+)\]\]", source["body"])}]
+        backlinks = ""
+        if backlink_docs:
+            links = "".join(f'<li><a href="{relative_link(route, source["route"])}">{html.escape(str(source["title"]))}</a></li>' for source in backlink_docs)
+            backlinks = f'<section class="backlinks" aria-label="Liên kết từ các trang khác"><h2>LIÊN KẾT TỪ CÁC TRANG KHÁC</h2><ul>{links}</ul></section>'
         toc = "".join(f'<li class="toc-item"><a class="toc-link" href="#{m.group(1)}">{html.escape(m.group(2))}</a></li>' for m in re.finditer(r'<h[23] id="([^"]+)">(.+?)</h[23]>', rendered))
         title = html.escape(str(doc["title"]))
         return f'''<!DOCTYPE html>
 <html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>{title} — IT007 UIT</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><script src="{prefix}assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
 <body><header class="app-header"><a class="brand-container" href="{prefix}index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
-<div class="workspace-layout"><aside class="sidebar-left">{nav(route)}</aside><main class="content-center"><div class="breadcrumbs"><a href="{prefix}index.html">Trang chủ</a> <span>/</span> <span>{title}</span></div><article class="article-body">{rendered}<div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list">{toc or '<li class="toc-item">Trang không có tiểu mục</li>'}</ul></div></aside></div>
+<div class="workspace-layout"><aside class="sidebar-left">{nav(route)}</aside><main class="content-center"><div class="breadcrumbs"><a href="{prefix}index.html">Trang chủ</a> <span>/</span> <span>{title}</span></div><article class="article-body">{rendered}{backlinks}<div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list">{toc or '<li class="toc-item">Trang không có tiểu mục</li>'}</ul></div></aside></div>
 <div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="{prefix}assets/js/app.js"></script></body></html>'''
 
     for doc in docs:
@@ -298,7 +318,7 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
     for doc in docs:
         if "theory" in doc["rel"]:
             cards.append(f'<a href="{doc["route"]}"><h3>{html.escape(doc["title"])}</h3><p>{html.escape(str(doc["summary"]))}</p></a>')
-    index = f'''<!DOCTYPE html><html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>IT007 · Hệ Điều Hành UIT</title><link rel="stylesheet" href="assets/css/style.css"><script src="assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head><body><header class="app-header"><a class="brand-container" href="index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header><div class="workspace-layout"><aside class="sidebar-left">{nav("index.html")}</aside><main class="content-center"><article class="article-body"><h1>Hệ Điều Hành (IT007)</h1><p>Lý thuyết · Tự luận · Bài tập · Thực hành · Đề thi</p><div class="article-meta-bar">Biên soạn: <strong>Võ Trọng Phúc</strong> · Bộ sinh: <strong>CUSTOM_STATIC_GENERATOR</strong></div><h2>Các Chuyên Đề Cốt Lõi</h2><div class="document-grid">{"".join(cards)}</div><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div></aside></div><div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="assets/js/app.js"></script></body></html>'''
+    index = f'''<!DOCTYPE html><html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>IT007 · Hệ Điều Hành UIT</title><link rel="stylesheet" href="assets/css/style.css"><script src="assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head><body><header class="app-header"><a class="brand-container" href="index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">Tìm kiếm <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header><div class="workspace-layout"><aside class="sidebar-left">{nav("index.html")}</aside><main class="content-center"><article class="article-body"><h1>Hệ Điều Hành</h1><p>IT007 · Lý thuyết · Tự luận · Bài tập · Thực hành · Ôn tập · Đề thi</p><div class="article-meta-bar">Biên soạn: <strong>Võ Trọng Phúc</strong></div><h2>Các Chuyên Đề Cốt Lõi</h2><div class="document-grid">{"".join(cards)}</div><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div></aside></div><div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper"><input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="assets/js/app.js"></script></body></html>'''
     (output_dir / "index.html").write_text(index, encoding="utf-8")
     print(f"Successfully compiled {len(docs) + 1} static pages into {output_dir}.")
     return docs

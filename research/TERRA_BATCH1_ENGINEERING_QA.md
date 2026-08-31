@@ -73,3 +73,24 @@ The unambiguous Ch4 metadata mismatch was normalized: both 74-page Part 1 and 59
 `V2_THEORY_BATCH1_ENGINEERING_QA_PASS_READY_FOR_ACADEMIC_REVIEW`
 
 Exact next action: **Luna Ultra performs independent academic/source review of Batch 1.**
+
+## ENGINEERING HOTFIX / INDEPENDENT REVIEW REMEDIATION
+
+| Area | Result |
+|---|:---:|
+| PRODUCTION_ASSET_SOURCE | PASS — `src/web/assets/` is the sole active CSS/JS source; build rejects archive references. |
+| FULL_TEXT_SEARCH | PASS — canonical Markdown supplies title, summary, headings, and body-derived `searchable_text`; convoy effect, exponential averaging, dispatch latency, zombie, and processor affinity regressions resolve. |
+| MIDTERM_NAVIGATION | PASS — visible `ÔN TẬP` sidebar group reaches `reviews/midterm.html` from the homepage. |
+| BACKLINKS | IMPLEMENTED — reverse `related`/wikilink references are generated as `LIÊN KẾT TỪ CÁC TRANG KHÁC`. |
+| STUDYCARD_PERSISTENCE | PASS — browser mark/reload checks retained remembered and forgotten `data-state` values. |
+| SUBJECTIVE_PRACTICE_PERSISTENCE | IMPLEMENTED, NOT INSTANTIATED — draft, checkbox selection, rubric visibility, and self-check score restore code is present, but current Batch 1 content renders zero SubjectivePractice instances; no untested browser-PASS claim is made. |
+| READER_UI_HYGIENE | PASS — no reader-facing `CUSTOM_STATIC_GENERATOR`, `Barem Chấm`, or `Barem Điểm`. |
+| READER_PAGE_REACHABILITY | PASS — `UNREACHABLE_READER_PAGES=0` for all required reader documents. |
+
+Interactive browser checks also confirmed deep-content search, theme persistence, Midterm navigation, graph canvas presence, backlinks, and mobile rendering without root overflow for Chapters 1–4 and Midterm.
+
+### Hotfix disposition
+
+- **ENGINEERING_BLOCKERS:** 0
+- **ENGINEERING_MAJORS:** 0
+- **ENGINEERING_MINORS:** 1 — SubjectivePractice is not currently instantiated in Batch 1 content, so its persistence cannot be exercised against a reader page without adding new learning UI/content. The component persistence path is implemented and its status is recorded truthfully above.
