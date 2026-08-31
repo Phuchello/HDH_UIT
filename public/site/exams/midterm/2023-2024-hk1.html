@@ -1,207 +1,108 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="light">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024) — IT007 UIT</title>
-  <link rel="stylesheet" href="../../assets/css/style.css">
-  <script src="../../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-
-  <!-- Top App Header -->
-  <header class="app-header">
-    <a class="brand-container" href="../../index.html">
-      <span class="brand-badge">IT007</span>
-      <span class="brand-title">Hệ Điều Hành · IT007 UIT</span>
-    </a>
-    <div class="header-actions">
-      <button class="search-trigger-btn" id="search-trigger-btn">
-        <span>🔍 Tìm kiếm nhanh...</span>
-        <kbd class="kbd-shortcut">Ctrl+K</kbd>
-      </button>
-      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng / Tối">
-        <span id="theme-icon">🌙</span>
-      </button>
-    </div>
-  </header>
-
-  <!-- 3-Column Workspace Layout -->
-  <div class="workspace-layout">
-
-    <!-- Left Sidebar (Explorer) -->
-    <aside class="sidebar-left">
-      <div class="nav-section-title">LÝ THUYẾT (THEORY)</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link" href="../../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành & Kiến trúc Máy tính</a></li>
+<html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024) — IT007 UIT</title><link rel="stylesheet" href="../../assets/css/style.css"><script src="../../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT (THEORY)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
 </ul>
-<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link" href="../../questions/subjective/ch01.html">Câu Hỏi Tự Luận & Barem Điểm — Chương 1: Tổng Quan HDH</a></li>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../questions/subjective/ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../questions/subjective/ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../questions/subjective/ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../questions/subjective/ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
 </ul>
-<div class="nav-section-title">THỰC HÀNH (LAB)</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link" href="../../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin & Lệnh Cơ Bản</a></li>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
 </ul>
-<div class="nav-section-title">ĐỀ THI & TRA CỨU</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link" href="../../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
-  <li class="nav-tree-item"><a class="nav-link" href="../../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
-  <li class="nav-tree-item"><a class="nav-link active" href="../../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
-</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link active" href="2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../../index.html">Trang chủ</a> <span>/</span> <span>Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</span></div><article class="article-body"><h1 id="bai-tap-thuc-luyen-dua-tren-e-giua-ky-it007-hk1-20232024">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</h1>
 
-    </aside>
-
-    <!-- Center Column (Reading Canvas) -->
-    <main class="content-center">
-      <div class="breadcrumbs">
-        <a href="../../index.html">Trang chủ</a> <span>/</span> <span>Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</span>
-      </div>
-
-      <article class="article-body">
-        <h1 id="bi-tp-thc-luyn-da-trn--gia-k-it007-hk1-20232024">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</h1>
-
-<div class="callout note"><div class="callout-title">LƯU Ý QUAN TRỌNG</div><p>> Tài liệu này được biên soạn và tái cấu trúc từ nguồn lưu trữ đề thi tham khảo của Ban Hỗ Trợ Học Tập CNPM (HK1 2023–2024). Lời giải và giải thích chi tiết được thẩm định độc lập theo chuẩn giáo trình.</p></div>
----
-
-<h2 id="phn-1-cu-hi-trc-nghim--in-t">PHẦN 1: CÂU HỎI TRẮC NGHIỆM & ĐIỀN TỪ</h2>
-
-<h3 id="cu-1-xc-nh-ng--sai">Câu 1: Xác định Đúng / Sai</h3>
-1. *Tiểu trình trong cùng một tiến trình chia sẻ chung Stack.* $\rightarrow$ **SAI** (Mỗi tiểu trình bắt buộc phải có Stack riêng để quản lý các lời gọi hàm cục bộ).
-2. *Lệnh nạp lại thanh ghi Base/Limit của bộ nhớ là lệnh đặc quyền.* $\rightarrow$ **ĐÚNG** (Chỉ Kernel mode mới có quyền thay đổi thanh ghi giới hạn địa chỉ).
-3. *Thuật toán định thời SJF không trưng dụng luôn tối ưu hóa thời gian chờ trung bình so với FCFS.* $\rightarrow$ **ĐÚNG** (Đã được chứng minh bằng toán học).
-4. *Khi tiến trình chuyển từ trạng thái Running sang Waiting thì không cần lưu lại PCB.* $\rightarrow$ **SAI** (Bắt buộc phải lưu Program Counter và các thanh ghi CPU vào PCB).
-
-<h3 id="cu-2-in-thut-ng-ting-anh-ngn-gn">Câu 2: Điền thuật ngữ tiếng Anh ngắn gọn</h3>
-- Thao tác hoán đổi tiến trình đang chạy trên CPU sang tiến trình khác: <code>Context Switch</code>
-- Phần mềm nạp đầu tiên từ ROM khi bật máy tính: <code>Bootstrap Program</code> (hoặc <code>BIOS</code> / <code>Firmware</code>)
-- Cấu trúc dữ liệu lưu trữ toàn bộ thông tin của một tiến trình trong nhân: <code>Process Control Block</code> (hoặc <code>PCB</code>)
-- Độ trễ từ khi dừng tiến trình cũ đến khi bắt đầu nạp tiến trình mới: <code>Dispatch Latency</code>
+<div class="callout note"><div class="callout-title">LƯU Ý QUAN TRỌNG</div><p><br>Tài liệu này được biên soạn và tái cấu trúc từ nguồn lưu trữ đề thi tham khảo của Ban Hỗ Trợ Học Tập CNPM (HK1 2023–2024). Lời giải và giải thích chi tiết được thẩm định độc lập theo chuẩn giáo trình.</p></div>
 
 <p>---</p>
 
-<h2 id="phn-2-bi-ton-ln-vt-tin-trnh--cy-fork">PHẦN 2: BÀI TOÁN LẦN VẾT TIẾN TRÌNH & CÂY FORK</h2>
+<h2 id="phan-1-cau-hoi-trac-nghiem-ien-tu">PHẦN 1: CÂU HỎI TRẮC NGHIỆM &amp; ĐIỀN TỪ</h2>
 
-<h3 id="-bi">Đề bài:</h3>
-Cho đoạn mã nguồn C sau:
+<h3 id="cau-1-xac-inh-ung-sai">Câu 1: Xác định Đúng / Sai</h3>
+
+<ol><li><em>Tiểu trình trong cùng một tiến trình chia sẻ chung Stack.</em> $\rightarrow$ <strong>SAI</strong> (Mỗi tiểu trình bắt buộc phải có Stack riêng để quản lý các lời gọi hàm cục bộ).</li><li><em>Lệnh nạp lại thanh ghi Base/Limit của bộ nhớ là lệnh đặc quyền.</em> $\rightarrow$ <strong>ĐÚNG</strong> (Chỉ Kernel mode mới có quyền thay đổi thanh ghi giới hạn địa chỉ).</li><li><em>Thuật toán định thời SJF không trưng dụng luôn tối ưu hóa thời gian chờ trung bình so với FCFS.</em> $\rightarrow$ <strong>ĐÚNG</strong> (Đã được chứng minh bằng toán học).</li><li><em>Khi tiến trình chuyển từ trạng thái Running sang Waiting thì không cần lưu lại PCB.</em> $\rightarrow$ <strong>SAI</strong> (Bắt buộc phải lưu Program Counter và các thanh ghi CPU vào PCB).</li></ol>
+
+<h3 id="cau-2-ien-thuat-ngu-tieng-anh-ngan-gon">Câu 2: Điền thuật ngữ tiếng Anh ngắn gọn</h3>
+
+<ul><li>Thao tác hoán đổi tiến trình đang chạy trên CPU sang tiến trình khác: <code>Context Switch</code></li><li>Phần mềm nạp đầu tiên từ ROM khi bật máy tính: <code>Bootstrap Program</code> (hoặc <code>BIOS</code> / <code>Firmware</code>)</li><li>Cấu trúc dữ liệu lưu trữ toàn bộ thông tin của một tiến trình trong nhân: <code>Process Control Block</code> (hoặc <code>PCB</code>)</li><li>Độ trễ từ khi dừng tiến trình cũ đến khi bắt đầu nạp tiến trình mới: <code>Dispatch Latency</code></li></ul>
+
+<p>---</p>
+
+<h2 id="phan-2-bai-toan-lan-vet-tien-trinh-cay-fork">PHẦN 2: BÀI TOÁN LẦN VẾT TIẾN TRÌNH &amp; CÂY FORK</h2>
+
+<h3 id="e-bai">Đề bài:</h3>
+
+<p>Cho đoạn mã nguồn C sau:</p>
+
 <pre><code class="language-c">#include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;sys/wait.h&gt;
 
-<p>int main() {
+int main() {
     pid_t pid1, pid2;
     pid1 = fork();
     if (pid1 == 0) {
-        printf("A\n");
+        printf(&quot;A\n&quot;);
         pid2 = fork();
         if (pid2 == 0) {
-            printf("B\n");
+            printf(&quot;B\n&quot;);
         } else {
             wait(NULL);
-            printf("C\n");
+            printf(&quot;C\n&quot;);
         }
     } else {
         wait(NULL);
-        printf("D\n");
+        printf(&quot;D\n&quot;);
     }
     return 0;
-}
-</code></pre></p>
+}</code></pre>
 
-<h4 id="yu-cu">Yêu cầu:</h4>
-1. Vẽ cây tiến trình sinh ra khi chương trình thực thi.
-2. Xác định thứ tự xuất hiện của các ký tự <code>A, B, C, D</code> trên màn hình terminal.
+<h4 id="yeu-cau">Yêu cầu:</h4>
 
-<h4 id="li-gii--phn-tch">Lời giải & Phân tích:</h4>
-1. **Cây tiến trình:**
-   - Tiến trình gốc $P_0$ gọi <code>fork()</code> tạo ra tiến trình con $P_1$.
-   - $P_0$ vào nhánh <code>else</code>, gọi <code>wait(NULL)</code> chờ $P_1$ kết thúc rồi in <code>D</code>.
-   - $P_1$ in chữ <code>A</code>, sau đó gọi <code>fork()</code> tạo ra tiến trình cháu $P_2$.
-   - $P_2$ vào nhánh con in chữ <code>B</code>.
-   - $P_1$ vào nhánh cha của <code>fork()</code> thứ hai, gọi <code>wait(NULL)</code> chờ $P_2$ kết thúc rồi in <code>C</code>.
-2. **Thứ tự in ký tự:**
-   - Nhờ các lệnh <code>wait(NULL)</code> đồng bộ tuần tự, thứ tự in ra màn hình là:
-   $$\text{A} \rightarrow \text{B} \rightarrow \text{C} \rightarrow \text{D}$$
+<ol><li>Vẽ cây tiến trình sinh ra khi chương trình thực thi.</li><li>Xác định thứ tự xuất hiện của các ký tự <code>A, B, C, D</code> trên màn hình terminal.</li></ol>
+
+<h4 id="loi-giai-phan-tich">Lời giải &amp; Phân tích:</h4>
+
+<ol><li><strong>Cây tiến trình:</strong></li><li>Tiến trình gốc $P_0$ gọi <code>fork()</code> tạo ra tiến trình con $P_1$.</li><li>$P_0$ vào nhánh <code>else</code>, gọi <code>wait(NULL)</code> chờ $P_1$ kết thúc rồi in <code>D</code>.</li><li>$P_1$ in chữ <code>A</code>, sau đó gọi <code>fork()</code> tạo ra tiến trình cháu $P_2$.</li><li>$P_2$ vào nhánh con in chữ <code>B</code>.</li><li>$P_1$ vào nhánh cha của <code>fork()</code> thứ hai, gọi <code>wait(NULL)</code> chờ $P_2$ kết thúc rồi in <code>C</code>.</li><li><strong>Thứ tự in ký tự:</strong></li><li>Nhờ các lệnh <code>wait(NULL)</code> đồng bộ tuần tự, thứ tự in ra màn hình là:</li></ol>
+
+<p>   $$\text{A} \rightarrow \text{B} \rightarrow \text{C} \rightarrow \text{D}$$</p>
 
 <p>---</p>
 
-<h2 id="phn-3-bi-ton-nh-thi-cpu">PHẦN 3: BÀI TOÁN ĐỊNH THỜI CPU</h2>
+<h2 id="phan-3-bai-toan-inh-thoi-cpu">PHẦN 3: BÀI TOÁN ĐỊNH THỜI CPU</h2>
 
-<h3 id="-bi">Đề bài:</h3>
-Xét hệ thống có 4 tiến trình với thời điểm đến và thời gian bùng nổ CPU như sau:
+<h3 id="e-bai">Đề bài:</h3>
 
-<table>
-  <thead><tr><th>Tiến trình</th><th>Thời điểm đến ($AT$)</th><th>Thời gian thực thi ($BT$)</th></tr></thead>
-  <tbody><tr><td>**$P_1$**</td><td>0</td><td>7</td></tr><tr><td>**$P_2$**</td><td>2</td><td>4</td></tr><tr><td>**$P_3$**</td><td>4</td><td>1</td></tr><tr><td>**$P_4$**</td><td>5</td><td>4</td></tr></tbody>
-</table>
+<p>Xét hệ thống có 4 tiến trình với thời điểm đến và thời gian bùng nổ CPU như sau:</p>
 
-<h4 id="yu-cu">Yêu cầu:</h4>
-Vẽ sơ đồ Gantt và tính thời gian chờ trung bình ($WT_{avg}$), thời gian lưu lại trung bình ($TAT_{avg}$) cho giải thuật **SJF Trưng dụng (Preemptive SJF / SRTF)**.
+<table><thead><tr><th>Tiến trình</th><th>Thời điểm đến ($AT$)</th><th>Thời gian thực thi ($BT$)</th></tr></thead><tbody><tr><td><strong>$P_1$</strong></td><td>0</td><td>7</td></tr><tr><td><strong>$P_2$</strong></td><td>2</td><td>4</td></tr><tr><td><strong>$P_3$</strong></td><td>4</td><td>1</td></tr><tr><td><strong>$P_4$</strong></td><td>5</td><td>4</td></tr></tbody></table>
 
-<h4 id="li-gii-chi-tit">Lời giải chi tiết:</h4>
-- $t=0$: $P_1$ chạy. Đến $t=2$, $P_1$ còn $BT=5$. $P_2$ đến với $BT=4 < 5 \Rightarrow P_2$ chiếm CPU.
-- $t=4$: $P_2$ còn $BT=2$. $P_3$ đến với $BT=1 < 2 \Rightarrow P_3$ chiếm CPU.
-- $t=5$: $P_3$ hoàn thành. $P_4$ đến với $BT=4$. So sánh: $P_2 (2) < P_4 (4) \le P_1 (5) \Rightarrow P_2$ chạy tiếp.
-- $t=7$: $P_2$ hoàn thành. So sánh: $P_4 (4) < P_1 (5) \Rightarrow P_4$ chạy.
-- $t=11$: $P_4$ hoàn thành. $P_1 (5)$ chạy nốt.
-- $t=16$: $P_1$ hoàn thành.
+<h4 id="yeu-cau">Yêu cầu:</h4>
 
-<p><strong>Sơ đồ Gantt SRTF:</strong>
+<p>Vẽ sơ đồ Gantt và tính thời gian chờ trung bình ($WT_{avg}$), thời gian lưu lại trung bình ($TAT_{avg}$) cho giải thuật <strong>SJF Trưng dụng (Preemptive SJF / SRTF)</strong>.</p>
+
+<h4 id="loi-giai-chi-tiet">Lời giải chi tiết:</h4>
+
+<ul><li>$t=0$: $P_1$ chạy. Đến $t=2$, $P_1$ còn $BT=5$. $P_2$ đến với $BT=4 &lt; 5 \Rightarrow P_2$ chiếm CPU.</li><li>$t=4$: $P_2$ còn $BT=2$. $P_3$ đến với $BT=1 &lt; 2 \Rightarrow P_3$ chiếm CPU.</li><li>$t=5$: $P_3$ hoàn thành. $P_4$ đến với $BT=4$. So sánh: $P_2 (2) &lt; P_4 (4) \le P_1 (5) \Rightarrow P_2$ chạy tiếp.</li><li>$t=7$: $P_2$ hoàn thành. So sánh: $P_4 (4) &lt; P_1 (5) \Rightarrow P_4$ chạy.</li><li>$t=11$: $P_4$ hoàn thành. $P_1 (5)$ chạy nốt.</li><li>$t=16$: $P_1$ hoàn thành.</li></ul>
+
+<p><strong>Sơ đồ Gantt SRTF:</strong></p>
+
 <pre><code class="language-">|  P1  |  P2  | P3 |  P2  |  P4  |   P1   |
-0      2      4    5      7      11       16
-</code></pre></p>
+0      2      4    5      7      11       16</code></pre>
 
-<p><strong>Bảng tính toán:</strong>
-- $P_1$: $CT = 16, TAT = 16 - 0 = 16, WT = 16 - 7 = 9$
-- $P_2$: $CT = 7, TAT = 7 - 2 = 5, WT = 5 - 4 = 1$
-- $P_3$: $CT = 5, TAT = 5 - 4 = 1, WT = 1 - 1 = 0$
-- $P_4$: $CT = 11, TAT = 11 - 5 = 6, WT = 6 - 4 = 2$</p>
+<p><strong>Bảng tính toán:</strong></p>
 
-<p>$$\mathbf{TAT_{avg}} = \frac{16 + 5 + 1 + 6}{4} = \mathbf{7.0}\text{ ms}$$
-$$\mathbf{WT_{avg}} = \frac{9 + 1 + 0 + 2}{4} = \mathbf{3.0}\text{ ms}$$</p>
-        
-        <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.82rem; color: var(--text-muted); text-align: center;">
-          Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.
-        </div>
-      </article>
-    </main>
+<ul><li>$P_1$: $CT = 16, TAT = 16 - 0 = 16, WT = 16 - 7 = 9$</li><li>$P_2$: $CT = 7, TAT = 7 - 2 = 5, WT = 5 - 4 = 1$</li><li>$P_3$: $CT = 5, TAT = 5 - 4 = 1, WT = 1 - 1 = 0$</li><li>$P_4$: $CT = 11, TAT = 11 - 5 = 6, WT = 6 - 4 = 2$</li></ul>
 
-    <!-- Right Sidebar (Local Graph & TOC) -->
-    <aside class="sidebar-right">
-      <div class="graph-container">
-        <div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div>
-        <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
-      </div>
-
-      <div class="toc-container">
-        <div class="toc-title">MỤC LỤC TRANG</div>
-        <ul class="toc-list">
-          <li class="toc-item"><a class="toc-link" href="#phn-1-cu-hi-trc-nghim--in-t">PHẦN 1: CÂU HỎI TRẮC NGHIỆM & ĐIỀN TỪ</a></li>
-<li class="toc-item"><a class="toc-link" href="#cu-1-xc-nh-ng--sai">Câu 1: Xác định Đúng / Sai</a></li>
-<li class="toc-item"><a class="toc-link" href="#cu-2-in-thut-ng-ting-anh-ngn-gn">Câu 2: Điền thuật ngữ tiếng Anh ngắn gọn</a></li>
-<li class="toc-item"><a class="toc-link" href="#phn-2-bi-ton-ln-vt-tin-trnh--cy-fork">PHẦN 2: BÀI TOÁN LẦN VẾT TIẾN TRÌNH & CÂY FORK</a></li>
-<li class="toc-item"><a class="toc-link" href="#-bi">Đề bài:</a></li>
-<li class="toc-item"><a class="toc-link" href="#phn-3-bi-ton-nh-thi-cpu">PHẦN 3: BÀI TOÁN ĐỊNH THỜI CPU</a></li>
-<li class="toc-item"><a class="toc-link" href="#-bi">Đề bài:</a></li>
-
-        </ul>
-      </div>
-    </aside>
-
-  </div>
-
-  <!-- Full-Text Search Modal -->
-  <div class="search-modal-overlay" id="search-modal-overlay">
-    <div class="search-modal">
-      <div class="search-input-wrapper">
-        <span>🔍</span>
-        <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm khái niệm, câu hỏi, bài lab...">
-        <kbd class="kbd-shortcut">ESC</kbd>
-      </div>
-      <ul class="search-results-list" id="search-results-list"></ul>
-    </div>
-  </div>
-
-  <script src="../../assets/js/app.js"></script>
-</body>
-</html>
+<p>$$\mathbf{TAT_{avg}} = \frac{16 + 5 + 1 + 6}{4} = \mathbf{7.0}\text{ ms}$$<br>$$\mathbf{WT_{avg}} = \frac{9 + 1 + 0 + 2}{4} = \mathbf{3.0}\text{ ms}$$</p><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#phan-1-cau-hoi-trac-nghiem-ien-tu">PHẦN 1: CÂU HỎI TRẮC NGHIỆM &amp;amp; ĐIỀN TỪ</a></li><li class="toc-item"><a class="toc-link" href="#cau-1-xac-inh-ung-sai">Câu 1: Xác định Đúng / Sai</a></li><li class="toc-item"><a class="toc-link" href="#cau-2-ien-thuat-ngu-tieng-anh-ngan-gon">Câu 2: Điền thuật ngữ tiếng Anh ngắn gọn</a></li><li class="toc-item"><a class="toc-link" href="#phan-2-bai-toan-lan-vet-tien-trinh-cay-fork">PHẦN 2: BÀI TOÁN LẦN VẾT TIẾN TRÌNH &amp;amp; CÂY FORK</a></li><li class="toc-item"><a class="toc-link" href="#e-bai">Đề bài:</a></li><li class="toc-item"><a class="toc-link" href="#phan-3-bai-toan-inh-thoi-cpu">PHẦN 3: BÀI TOÁN ĐỊNH THỜI CPU</a></li><li class="toc-item"><a class="toc-link" href="#e-bai">Đề bài:</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../../assets/js/app.js"></script></body></html>

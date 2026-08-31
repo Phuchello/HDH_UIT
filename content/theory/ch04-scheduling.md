@@ -36,7 +36,7 @@ Nội dung bám hai binary canonical được người dùng cung cấp: `UIT-SL
 
 ## 1. Vì sao cần định thời?
 
-Một process thường luân phiên **CPU burst** (thực thi) và **I/O burst** (chờ thiết bị). Khi process chuyển waiting, CPU scheduler chọn một process ready khác để tránh CPU rỗi; khi I/O hoàn tất hoặc timer hết quantum, process trở lại ready queue. Scheduler là bộ chọn; dispatcher thực hiện context switch, chuyển mode/address space (nếu cần), nạp thanh ghi và nhảy tới PC. Khoảng từ quyết định đến lúc process mới chạy là **dispatch latency**.
+Một process thường luân phiên **CPU burst** (thực thi) và **I/O burst** (chờ thiết bị). Workload **CPU-bound** có burst tính toán dài; workload **I/O-bound** có burst ngắn xen kẽ thời gian chờ thiết bị. Khi process chuyển waiting, CPU scheduler chọn một process ready khác để tránh CPU rỗi; khi I/O hoàn tất hoặc timer hết quantum, process trở lại ready queue. Scheduler là bộ chọn; dispatcher thực hiện context switch, chuyển mode/address space (nếu cần), nạp thanh ghi và nhảy tới PC. Khoảng từ quyết định đến lúc process mới chạy là **dispatch latency**.
 
 ### Tiêu chí
 
@@ -47,8 +47,17 @@ Một process thường luân phiên **CPU burst** (thực thi) và **I/O burst*
 | Turnaround (TAT) | `completion − arrival`. | Thấp hơn. |
 | Waiting (WT) | Tổng thời gian trong ready queue; với một CPU burst `WT = TAT − BT`. | Thấp hơn. |
 | Response (RT) | `lần chạy đầu − arrival`. | Thấp hơn, quan trọng cho tương tác. |
+| Fairness | Mức phân chia cơ hội CPU hợp lý giữa các process; thường đánh giá định tính hoặc bằng chỉ số riêng. | Tránh đói và thiên lệch. |
+
+Slide Week04 liệt kê **sáu** tiêu chí: ba tiêu chí hướng người dùng (response, turnaround, waiting) và ba tiêu chí hướng hệ thống (CPU utilization, fairness, throughput). Qbank Chương 4 ghi “5 tiêu chuẩn”; đó là **SOURCE_CONFLICT**, không được âm thầm sửa câu hỏi qbank. Fairness được dạy theo slide nhưng thường không xuất hiện trong năm đại lượng số của bài tính.
 
 Không có thuật toán tối ưu đồng thời mọi tiêu chí; workload và chính sách hệ thống quyết định trade-off.
+
+### Selection function và decision mode
+
+Selection function là quy tắc ánh xạ trạng thái ready queue (arrival, remaining burst, priority, deadline, quantum…) sang process được chọn. Decision mode nói **khi nào** quy tắc được áp dụng: non-preemptive chỉ quyết định khi process kết thúc/block; preemptive còn quyết định khi process mới đến, I/O hoàn tất, timer hết quantum hoặc một sự kiện kernel làm thay đổi ready queue. Với mọi ví dụ, ghi rõ điểm ra quyết định và quy tắc tie-break; không tự gán một tie-break “chuẩn UIT”.
+
+Ba lớp scheduler trong slide có vai trò khác nhau: **long-term scheduler** kiểm soát admission/job mix, **medium-term scheduler** có thể suspend/resume hoặc swap process, còn **short-term scheduler** chọn process ready kế tiếp để trao CPU. Các sự kiện gọi short-term scheduler gồm process chuyển running→waiting/terminated, waiting→ready, process mới đến và timer/quantum hết.
 
 ## 2. Các thuật toán cơ bản
 
@@ -63,6 +72,8 @@ Không có thuật toán tối ưu đồng thời mọi tiêu chí; workload và
 **Selection:** trong các process ready, chọn burst CPU kế tiếp ngắn nhất; bản cơ bản non-preemptive. **Cơ chế:** cần ước lượng burst nếu chưa biết. **Ưu:** tối ưu WT trung bình trong mô hình single CPU, biết chính xác burst và không có overhead. **Hạn chế:** burst tương lai khó biết; process dài có thể starvation. **Aging:** tăng ưu tiên theo thời gian chờ để giảm starvation; đó là bổ sung chính sách.
 
 **Worked example:** P1(0,7), P2(2,4), P3(4,1). P1 chạy 0–7; tại 7 chọn P3 7–8 rồi P2 8–12 (nếu không có quy tắc khác). Đừng dùng SJF khi đề nói “shortest **remaining**”.
+
+**Dự đoán CPU burst:** khi burst kế tiếp chưa biết, exponential averaging thường dùng `τ(n+1) = α·t(n) + (1−α)·τ(n)` với `0 ≤ α ≤ 1`; đây là ước lượng phục vụ selection, không phải burst thực tế. Chọn α và giá trị ban đầu theo giả định của đề.
 
 **Tie:** nếu burst bằng nhau, dùng arrival/ID chỉ khi đề hoặc quy ước lớp học cho phép; nếu không, ghi “đồng hạng, cần giả định”.
 
@@ -83,6 +94,8 @@ Không có thuật toán tối ưu đồng thời mọi tiêu chí; workload và
 **Selection:** ready queue vòng tròn, mỗi process tối đa time quantum `q`, hết q thì preempt và xếp cuối hàng nếu còn việc. **Ưu:** response công bằng, phù hợp time-sharing. **Hạn chế:** q quá lớn gần FCFS; q quá nhỏ làm context-switch overhead tăng và throughput giảm. Starvation thấp nếu queue được phục vụ tuần tự; aging không cần thiết trong RR thuần túy.
 
 **Worked example:** P1=5, P2=3, P3=1 đến cùng lúc, q=2 ⇒ `P1 0–2 | P2 2–4 | P3 4–5 | P1 5–7 | P2 7–8 | P1 8–9`. Nếu process đến trong lát, thứ tự “enqueue trước hay sau process hết quantum” phải nêu rõ.
+
+Trong mô hình slide giả định một ready queue, không có I/O và mọi process đã sẵn sàng từ đầu, một process có thể chờ nhiều nhất khoảng **`(n−1)q`** trước lát đầu tiên (chưa tính context-switch overhead); đây là bound theo giả định, không phải lời hứa cho mọi hệ thống. q càng nhỏ thường giảm response nhưng tăng overhead; q lớn tiến gần FCFS.
 
 ### 2.6 HRRN — Highest Response Ratio Next
 
@@ -119,7 +132,7 @@ Các trade-off trên là nguyên lý; implementation Linux/Windows/Solaris có c
 
 ## 5. Real-time scheduling
 
-Task real-time có computation time, period/deadline và yêu cầu đúng hạn. **RMS (Rate Monotonic Scheduling)** là fixed priority: period ngắn hơn ⇒ priority cao hơn, thường cho periodic tasks độc lập. **EDF (Earliest Deadline First)** là dynamic priority: deadline gần nhất chạy trước. Cả hai cần giả định về preemption, thời gian chuyển ngữ cảnh và tài nguyên; không tự kết luận schedulable nếu thiếu dữ liệu. Hard real-time coi deadline là điều kiện bắt buộc; soft real-time tối ưu xác suất/chất lượng đúng hạn.
+Task real-time có computation time, period/deadline và yêu cầu đúng hạn. **Periodic** lặp theo chu kỳ; **aperiodic** đến không theo chu kỳ; **sporadic** không định kỳ nhưng có khoảng cách tối thiểu giữa hai lần đến. **RMS (Rate Monotonic Scheduling)** là fixed priority: period ngắn hơn ⇒ priority cao hơn, thường cho periodic tasks độc lập. **EDF (Earliest Deadline First)** là dynamic priority: deadline gần nhất chạy trước. **TBS (Total Bandwidth Server)** phục vụ yêu cầu aperiodic bằng cách gán deadline ảo theo ngân sách bandwidth để dùng cùng cơ chế deadline. Cả ba cần giả định về preemption, thời gian chuyển ngữ cảnh và tài nguyên; không tự kết luận schedulable nếu thiếu dữ liệu. Hard real-time coi deadline là điều kiện bắt buộc; soft real-time tối ưu xác suất/chất lượng đúng hạn.
 
 ## 6. Scheduler thực tế — đọc đúng mức nguồn
 

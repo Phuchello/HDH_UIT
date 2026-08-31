@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Chương 2: Cấu trúc và dịch vụ Hệ điều hành — IT007 UIT</title><link rel="stylesheet" href="../assets/css/style.css"><script src="../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT (THEORY)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link active" href="ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../index.html">Trang chủ</a> <span>/</span> <span>Chương 2: Cấu trúc và dịch vụ Hệ điều hành</span></div><article class="article-body"><h1 id="chuong-2-cau-truc-va-dich-vu-he-ieu-hanh">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</h1>
+
+<h2 id="muc-tieu-va-pham-vi-nguon">Mục tiêu và phạm vi nguồn</h2>
+
+<p>Chương này đi theo <code>UIT-SLIDE-CH02-2024</code>, slide 4–56 và qbank <code>UIT-QBANK-CH02-2024</code>, Câu 1–7 / Mục 2. Giáo trình <code>SILBERSCHATZ-OSC10</code> chỉ dùng để làm rõ ranh giới API–system call và trade-off kiến trúc; tên sản phẩm cụ thể không được suy ra thành tuyên bố chính thức của UIT.</p>
+
+<h2 id="1-cac-thanh-phan-cua-os">1. Các thành phần của OS</h2>
+
+<p>Một kernel không phải là một chương trình đơn lẻ. Các thành phần dưới đây phối hợp qua cấu trúc dữ liệu và system call.</p>
+
+<table><thead><tr><th>Thành phần</th><th>Trách nhiệm cốt lõi</th><th>Ví dụ đối tượng quản lý</th></tr></thead><tbody><tr><td>Quản lý tiến trình</td><td>Tạo/kết thúc, lập lịch, đồng bộ và giao tiếp tiến trình.</td><td>PCB, ready queue, context.</td></tr><tr><td>Quản lý bộ nhớ chính</td><td>Theo dõi vùng dùng/tự do, cấp phát/thu hồi, bảo vệ và ánh xạ.</td><td>Frame, page table, địa chỉ logic.</td></tr><tr><td>Quản lý file</td><td>Tên, thư mục, quyền, mở/đóng, đọc/ghi và ánh xạ file–thiết bị.</td><td>inode/FCB, file descriptor.</td></tr><tr><td>Quản lý I/O</td><td>Cung cấp giao diện thống nhất, driver, buffering/caching/spooling.</td><td>device queue, driver.</td></tr><tr><td>Quản lý lưu trữ phụ</td><td>Cấp phát block, lập lịch đĩa, theo dõi dung lượng và độ tin cậy.</td><td>block, free-space list.</td></tr><tr><td>Protection system</td><td>Kiểm soát tiến trình/chủ thể nào được truy cập đối tượng nào; trong phạm vi slide, security là khía cạnh của protection.</td><td>mode, ACL, capability.</td></tr><tr><td>Command interpreter/UI</td><td>Nhận lệnh hoặc thao tác đồ họa, gọi dịch vụ và hiển thị kết quả.</td><td>shell, desktop UI.</td></tr></tbody></table>
+
+<p>Đây là <strong>bảy thành phần cốt lõi theo slide UIT</strong>. Một số bản qbank/giáo trình tách networking/distributed hoặc security thành mục riêng, tạo cảm giác có tám hoặc chín thành phần. Khi gặp cách liệt kê đó, giữ bảy mục trên làm câu trả lời theo slide và ghi rõ các mục tách thêm là mở rộng giáo trình, không phải thành phần UIT thứ tám.</p>
+
+<h3 id="1-1-mo-rong-giao-trinh-khong-tinh-vao-bay-muc-uit">1.1 Mở rộng giáo trình (không tính vào bảy mục UIT)</h3>
+
+<p>Ở tầng mở rộng <code>SILBERSCHATZ-OSC10</code> hoặc các bản textbook khác, có thể phân biệt thêm:</p>
+
+<ul><li><strong>Networking/distributed:</strong> giao tiếp máy–máy, giao thức và tài nguyên phân tán (socket, message, remote service).</li><li><strong>Security distinction:</strong> xác thực, đặc quyền, toàn vẹn và chống lạm dụng (credential, audit); trong slide UIT, các chức năng này nằm trong protection system.</li></ul>
+
+<p>Hai nhãn mở rộng này hữu ích khi so sánh giáo trình, nhưng không được dùng để thay đổi số lượng bảy thành phần của câu trả lời theo slide UIT.</p>
+
+<h2 id="2-dich-vu-os">2. Dịch vụ OS</h2>
+
+<h3 id="dich-vu-huong-nguoi-dung">Dịch vụ hướng người dùng</h3>
+
+<ol><li><strong>User interface:</strong> CLI, GUI hoặc batch.</li><li><strong>Program execution:</strong> nạp, khởi tạo, chạy và kết thúc chương trình.</li><li><strong>I/O operations:</strong> đọc/ghi thiết bị với kiểm tra quyền và trạng thái.</li><li><strong>File-system manipulation:</strong> tạo/xóa/mở/đóng/đọc/ghi và thư mục.</li><li><strong>Communication:</strong> trao đổi dữ liệu giữa tiến trình hoặc qua mạng.</li><li><strong>Error detection:</strong> phát hiện lỗi CPU, bộ nhớ, I/O, chương trình và ghi nhận phù hợp.</li></ol>
+
+<h3 id="dich-vu-bao-am-van-hanh-hieu-qua">Dịch vụ bảo đảm vận hành hiệu quả</h3>
+
+<ol><li><strong>Resource allocation:</strong> quyết định CPU, RAM, thiết bị, file và khóa cho các yêu cầu cạnh tranh.</li><li><strong>Accounting:</strong> ghi nhận mức sử dụng để theo dõi, tính phí hoặc điều chỉnh chính sách.</li><li><strong>Protection and security:</strong> cách ly và kiểm tra quyền trước khi truy cập tài nguyên.</li></ol>
+
+<p>“Dịch vụ” là khả năng OS cung cấp; “thành phần” là bộ phận thực hiện. Ví dụ, file management là thành phần, còn tạo/mở/đọc file là dịch vụ.</p>
+
+<h2 id="3-system-call-api-va-truyen-tham-so">3. System call, API và truyền tham số</h2>
+
+<h3 id="3-1-ba-khai-niem-khong-ong-nhat">3.1 Ba khái niệm không đồng nhất</h3>
+
+<table><thead><tr><th>Khái niệm</th><th>Ai định nghĩa?</th><th>Vai trò</th></tr></thead><tbody><tr><td>Ordinary function call</td><td>Ngôn ngữ/ABI của chương trình</td><td>Nhảy tới mã đã liên kết trong cùng không gian (thường không đổi đặc quyền).</td></tr><tr><td>API</td><td>Thư viện/chuẩn lập trình</td><td>Giao diện ổn định như <code>open</code>, <code>read</code>, <code>pthread_create</code>; có thể bọc một hoặc nhiều system call.</td></tr><tr><td>System call</td><td>Kernel/kiến trúc OS</td><td>Điểm vào được bảo vệ để user code yêu cầu dịch vụ nhân qua trap/instruction đặc biệt.</td></tr></tbody></table>
+
+<p>Ví dụ <code>printf</code> là hàm thư viện; thư viện có thể gọi <code>write</code> system call. Tên API không chứng minh có đúng một trap hay có cùng tên trên mọi OS.</p>
+
+<h3 id="3-2-nhom-system-call">3.2 Nhóm system call</h3>
+
+<p>Các nhóm trong slide gồm process control (create, load, execute, wait, terminate), file management, device management, information maintenance, communications và protection. Nhóm là cách phân loại học tập; một lời gọi thực tế có thể liên quan nhiều tài nguyên.</p>
+
+<h3 id="3-3-ba-cach-truyen-tham-so">3.3 Ba cách truyền tham số</h3>
+
+<ol><li><strong>Thanh ghi:</strong> đặt một số tham số nhỏ trực tiếp trong register; nhanh nhưng giới hạn số lượng/kích thước.</li><li><strong>Block/table trong bộ nhớ:</strong> đặt tham số trong vùng nhớ, truyền địa chỉ vùng đó qua register; phù hợp cấu trúc dài.</li><li><strong>Stack:</strong> đẩy tham số vào stack rồi trap; quy ước calling convention quyết định thứ tự và ai dọn stack.</li></ol>
+
+<p>Kernel phải kiểm tra con trỏ/vùng nhớ user trước khi đọc/ghi; truyền địa chỉ không tự cấp quyền truy cập.</p>
+
+<h2 id="4-system-programs-mot-lop-thuc-su-cua-he-thong">4. System programs — một lớp thực sự của hệ thống</h2>
+
+<p>System programs là các chương trình tiện ích cung cấp môi trường thuận tiện cho phát triển và chạy chương trình; chúng thường chạy ở user mode và <strong>gọi</strong> kernel, không phải bản thân kernel.</p>
+
+<table><thead><tr><th>Nhóm</th><th>Công việc</th><th>Ví dụ loại tiện ích</th></tr></thead><tbody><tr><td>File management</td><td>Tạo, sao chép, đổi tên, xóa, hiển thị và phân quyền file.</td><td><code>cp</code>, <code>mv</code>, <code>chmod</code>.</td></tr><tr><td>Status information</td><td>Xem ngày giờ, người dùng, tài nguyên, log và trạng thái hệ thống.</td><td><code>ps</code>, <code>free</code>, <code>uname</code>.</td></tr><tr><td>File modification</td><td>Soạn thảo/chuyển đổi nội dung văn bản hoặc dữ liệu.</td><td>editor, filter.</td></tr><tr><td>Programming-language support</td><td>Compiler, assembler, linker, debugger, interpreter.</td><td><code>gcc</code>, <code>ld</code>, <code>gdb</code>.</td></tr><tr><td>Program loading/execution</td><td>Loader, runtime, job control, script runner.</td><td>shell, loader.</td></tr><tr><td>Communications</td><td>Mail, remote login, truyền file, pipeline và network tools.</td><td><code>ssh</code>, <code>ftp</code>, pipe utility.</td></tr></tbody></table>
+
+<p>Một shell là system program thực hiện parse lệnh rồi dùng system call như <code>fork</code>, <code>exec</code>, <code>wait</code>; shell không phải là kernel.</p>
+
+<h2 id="5-cau-truc-thiet-ke-os">5. Cấu trúc thiết kế OS</h2>
+
+<h3 id="5-1-co-che-va-trade-off">5.1 Cơ chế và trade-off</h3>
+
+<table><thead><tr><th>Cấu trúc</th><th>Cách tổ chức</th><th>Ưu điểm</th><th>Hạn chế/điểm cần phân biệt</th></tr></thead><tbody><tr><td>Simple/monolithic</td><td>Nhiều dịch vụ chạy trong cùng không gian kernel, gọi trực tiếp nhau.</td><td>Nhanh, giao tiếp đơn giản.</td><td>Biên bảo vệ lớn; lỗi một driver có thể ảnh hưởng kernel; khó kiểm thử.</td></tr><tr><td>Layered</td><td>Chia lớp, lớp trên chỉ dùng dịch vụ lớp dưới theo hợp đồng.</td><td>Dễ hiểu, kiểm thử và thay thế.</td><td>Khó chọn ranh giới; có overhead/giới hạn phụ thuộc.</td></tr><tr><td>Microkernel</td><td>Kernel tối thiểu (IPC, scheduling, address spaces); service ở user space.</td><td>Cô lập lỗi, linh hoạt, dễ mở rộng.</td><td>IPC/context switch thêm chi phí; thiết kế protocol phức tạp.</td></tr><tr><td>Modules</td><td>Kernel lõi hỗ trợ module nạp động, mỗi module phục vụ chức năng.</td><td>Mở rộng linh hoạt gần hiệu năng monolithic.</td><td>Module vẫn có thể chạy đặc quyền; ABI và độ tin cậy là rủi ro.</td></tr><tr><td>Hybrid</td><td>Kết hợp ý tưởng nhiều cấu trúc, một số dịch vụ ở kernel, một số tách biệt.</td><td>Cân bằng tương thích, hiệu năng và cô lập.</td><td>Ranh giới thực tế phức tạp; nhãn “hybrid” cần nêu nguồn/phạm vi.</td></tr></tbody></table>
+
+<p>“Monolithic” nói về cách các dịch vụ liên kết trong kernel, không có nghĩa code không modular. “Hybrid” không phải giấy phép gán nhãn cho mọi OS; hãy mô tả thành phần cụ thể và ghi rằng đó là cách phân loại kiến trúc.</p>
+
+<h3 id="5-2-luong-goi-minh-hoa">5.2 Luồng gọi minh họa</h3>
+
+<pre><code class="language-">Ứng dụng → API/thư viện → trap/system-call entry → kernel service → driver → thiết bị
+             (user)                  (mode switch)          (privileged)</code></pre>
+
+<p>Mỗi mũi tên là một hợp đồng: API kiểm tra kiểu/tiện ích, entry kiểm tra quyền và số hiệu, kernel kiểm tra đối số rồi gọi driver.</p>
+
+<h2 id="6-tu-kiem-tra">6. Tự kiểm tra</h2>
+
+<ul><li>Vì sao <code>printf</code> không đồng nghĩa với một system call duy nhất?</li><li>Hãy lập bảng “thành phần” và “dịch vụ” cho ví dụ đọc file.</li><li>Nêu một lý do microkernel tăng độ tin cậy và một lý do nó có thể chậm hơn.</li></ul>
+
+<p>Ngân hàng câu hỏi nguồn-backed: <a class="wikilink" href="../questions/subjective/ch02.html">sub-ch02</a> · Nối sang quản lý tiến trình: <a class="wikilink" href="ch03-process.html">theory-ch03-process</a></p><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#muc-tieu-va-pham-vi-nguon">Mục tiêu và phạm vi nguồn</a></li><li class="toc-item"><a class="toc-link" href="#1-cac-thanh-phan-cua-os">1. Các thành phần của OS</a></li><li class="toc-item"><a class="toc-link" href="#1-1-mo-rong-giao-trinh-khong-tinh-vao-bay-muc-uit">1.1 Mở rộng giáo trình (không tính vào bảy mục UIT)</a></li><li class="toc-item"><a class="toc-link" href="#2-dich-vu-os">2. Dịch vụ OS</a></li><li class="toc-item"><a class="toc-link" href="#dich-vu-huong-nguoi-dung">Dịch vụ hướng người dùng</a></li><li class="toc-item"><a class="toc-link" href="#dich-vu-bao-am-van-hanh-hieu-qua">Dịch vụ bảo đảm vận hành hiệu quả</a></li><li class="toc-item"><a class="toc-link" href="#3-system-call-api-va-truyen-tham-so">3. System call, API và truyền tham số</a></li><li class="toc-item"><a class="toc-link" href="#3-1-ba-khai-niem-khong-ong-nhat">3.1 Ba khái niệm không đồng nhất</a></li><li class="toc-item"><a class="toc-link" href="#3-2-nhom-system-call">3.2 Nhóm system call</a></li><li class="toc-item"><a class="toc-link" href="#3-3-ba-cach-truyen-tham-so">3.3 Ba cách truyền tham số</a></li><li class="toc-item"><a class="toc-link" href="#4-system-programs-mot-lop-thuc-su-cua-he-thong">4. System programs — một lớp thực sự của hệ thống</a></li><li class="toc-item"><a class="toc-link" href="#5-cau-truc-thiet-ke-os">5. Cấu trúc thiết kế OS</a></li><li class="toc-item"><a class="toc-link" href="#5-1-co-che-va-trade-off">5.1 Cơ chế và trade-off</a></li><li class="toc-item"><a class="toc-link" href="#5-2-luong-goi-minh-hoa">5.2 Luồng gọi minh họa</a></li><li class="toc-item"><a class="toc-link" href="#6-tu-kiem-tra">6. Tự kiểm tra</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../assets/js/app.js"></script></body></html>

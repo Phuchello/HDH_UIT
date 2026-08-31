@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ngân hàng tự luận — Chương 4: Định thời CPU — IT007 UIT</title><link rel="stylesheet" href="../../assets/css/style.css"><script src="../../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT (THEORY)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link active" href="ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../../index.html">Trang chủ</a> <span>/</span> <span>Ngân hàng tự luận — Chương 4: Định thời CPU</span></div><article class="article-body"><h1 id="ngan-hang-tu-luan-chuong-4">Ngân hàng tự luận Chương 4</h1>
+
+<p><strong>Phân loại nguồn:</strong> năm mục dưới đây là <code>QBANK_OFFICIAL</code>; các prompt về thuật toán/đa xử lý/real-time trong slide ôn tập là <code>MIDTERM_REVIEW_OFFICIAL</code> và được lập record riêng. Không dùng qbank count để đại diện cho toàn bộ review slide.</p>
+
+<h2 id="cau-1-tieu-chuan-inh-thoi">Câu 1 — Tiêu chuẩn định thời</h2>
+
+<p><strong>QUESTION:</strong> Nêu năm tiêu chuẩn đánh giá thuật toán định thời CPU.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH04-2024</code>, Câu 1 / Mục 4; <code>UIT-SLIDE-CH04-1-2024</code>, slide 4–15.</p>
+
+<p><strong>QUESTION TYPE:</strong> Definitions + metrics.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Theo slide canonical: CPU utilization, fairness, throughput, turnaround, waiting và response time; nêu hướng tối ưu/công thức. Fairness thường là tiêu chí định tính, không phải một cột số trong bài tính.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> distinction TAT/WT/RT; utilization/fairness/throughput; workload trade-off; dispatch latency có thể nêu bổ sung.</p>
+
+<p><strong>FULL EXPLANATION:</strong> TAT từ arrival tới completion; WT chỉ thời gian trong ready queue; RT tới lần chạy đầu. Utilization/fairness/throughput là ba tiêu chí hướng hệ thống, ba thời gian là tiêu chí hướng người dùng; không thể tối ưu tất cả cùng lúc.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> lẫn RT với TAT; quên throughput.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> WT bao gồm I/O waiting; utilization cao luôn đồng nghĩa response tốt.</p>
+
+<p><strong>SOURCE CONFLICT NOTE:</strong> Slide Week04 có sáu tiêu chí và bao gồm fairness; qbank wording giữ nguyên “năm tiêu chuẩn”. Bản giải dạy đủ sáu theo slide, đồng thời ghi rõ fairness thường được chấm định tính.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu đủ sáu tiêu chí theo slide, công thức/ý nghĩa và hướng tối ưu; Mostly complete nếu thiếu một; Partial nếu lẫn WT/RT.</p>
+
+<h2 id="cau-2-tinh-toi-uu-sjf">Câu 2 — Tính tối ưu SJF</h2>
+
+<p><strong>QUESTION:</strong> Giải thích vì sao SJF tối ưu waiting time trung bình trong mô hình cơ bản.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH04-2024</code>, Câu 2 / Mục 4; <code>UIT-SLIDE-CH04-1-2024</code>, slide 16–25.</p>
+
+<p><strong>QUESTION TYPE:</strong> Proof sketch.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Đặt job ngắn trước làm giảm số job phải chờ thêm; đổi chỗ một cặp dài–ngắn chứng minh tổng WT không tăng.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> assumptions (single CPU, known BT, non-preemptive/no release complication); adjacent-swap argument.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Nếu A dài đứng trước B ngắn, hoán đổi làm B hoàn tất sớm <code>BT(A)</code> và A trễ <code>BT(B)</code>; tổng waiting giảm <code>BT(A)-BT(B)&gt;0</code>. Lặp hoán đổi đưa về thứ tự tăng dần.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> không nêu giả định biết BT.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> SJF luôn tối ưu TAT/response trong mọi workload; SRTF và SJF là cùng một cơ chế.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu có giả định và lập luận hoán đổi; Mostly complete nếu thiếu một giả định; Partial nếu chỉ kết luận “job ngắn chạy trước”.</p>
+
+<h2 id="cau-3-starvation-va-aging">Câu 3 — Starvation và aging</h2>
+
+<p><strong>QUESTION:</strong> Giải thích starvation CPU và kỹ thuật aging.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH04-2024</code>, Câu 3 / Mục 4; <code>UIT-SLIDE-CH04-1-2024</code>, slide 26–35.</p>
+
+<p><strong>QUESTION TYPE:</strong> Problem + remedy.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Process chờ vô hạn do luôn bị job ưu tiên cao vượt; aging tăng priority dần theo thời gian chờ.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> priority/SJF cause; aging policy; trade-off/fairness.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Aging không làm job ngắn hơn; nó thay đổi selection priority để job chờ lâu có cơ hội. Mức tăng và giới hạn cần policy cụ thể.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> nhầm starvation với deadlock.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> aging bảo đảm deadline hard real-time; RR thuần túy luôn starvation.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu nêu hiện tượng, nguyên nhân và aging; Mostly complete nếu thiếu trade-off; Partial nếu chỉ đưa giải pháp.</p>
+
+<h2 id="cau-4-quantum-trong-rr">Câu 4 — Quantum trong RR</h2>
+
+<p><strong>QUESTION:</strong> Phân tích ảnh hưởng của kích thước time quantum trong Round Robin.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH04-2024</code>, Câu 4 / Mục 4; <code>UIT-SLIDE-CH04-1-2024</code>, slide 36–54.</p>
+
+<p><strong>QUESTION TYPE:</strong> Trade-off analysis.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> q lớn gần FCFS, q nhỏ response tốt hơn nhưng context-switch overhead cao.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> workload, fairness, arrival/tie assumptions; không gán q “chuẩn”.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Khi q vượt burst của hầu hết job, preemption ít; khi q quá nhỏ, CPU dành nhiều thời gian chuyển ngữ cảnh. Chọn q là cân bằng response và overhead.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> chỉ nói q nhỏ “nhanh”.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> q nhỏ luôn tăng throughput; RR không bao giờ preempt.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu nêu hai biên q và trade-off; Mostly complete nếu thiếu workload; Partial nếu đảo ảnh hưởng.</p>
+
+<h2 id="cau-5-mlfq">Câu 5 — MLFQ</h2>
+
+<p><strong>QUESTION:</strong> Trình bày nguyên lý định thời Multilevel Feedback Queue.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH04-2024</code>, Câu 5 / Mục 4; <code>UIT-SLIDE-CH04-2-2024</code>, slide 3–32.</p>
+
+<p><strong>QUESTION TYPE:</strong> Mechanism + policy.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Nhiều queue ưu tiên, process di chuyển theo mức dùng CPU; job interactive giữ/nâng, job dùng hết quantum hạ; boost chống starvation.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> queues; per-queue algorithm; promotion/demotion; boost; parameter dependence.</p>
+
+<p><strong>FULL EXPLANATION:</strong> MLFQ thích ứng workload nhưng cần đặc tả đầy đủ; chỉ tên “feedback” chưa cho biết quantum, số queue hay quy tắc tie.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> quên periodic boost.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> MLFQ giống MLQ vì process không đổi queue; mọi MLFQ có cùng tham số.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu mô tả selection, movement và starvation control; Mostly complete nếu thiếu một policy; Partial nếu đồng nhất với MLQ.</p><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#cau-1-tieu-chuan-inh-thoi">Câu 1 — Tiêu chuẩn định thời</a></li><li class="toc-item"><a class="toc-link" href="#cau-2-tinh-toi-uu-sjf">Câu 2 — Tính tối ưu SJF</a></li><li class="toc-item"><a class="toc-link" href="#cau-3-starvation-va-aging">Câu 3 — Starvation và aging</a></li><li class="toc-item"><a class="toc-link" href="#cau-4-quantum-trong-rr">Câu 4 — Quantum trong RR</a></li><li class="toc-item"><a class="toc-link" href="#cau-5-mlfq">Câu 5 — MLFQ</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../../assets/js/app.js"></script></body></html>

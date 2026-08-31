@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Chương 4: Định thời CPU — IT007 UIT</title><link rel="stylesheet" href="../assets/css/style.css"><script src="../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT (THEORY)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link active" href="ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../index.html">Trang chủ</a> <span>/</span> <span>Chương 4: Định thời CPU</span></div><article class="article-body"><h1 id="chuong-4-inh-thoi-cpu">Chương 4: Định thời CPU</h1>
+
+<h2 id="pham-vi-va-cach-giai-bai">Phạm vi và cách giải bài</h2>
+
+<p>Nội dung bám hai binary canonical được người dùng cung cấp: <code>UIT-SLIDE-CH04-1-2024</code> (74 trang) và <code>UIT-SLIDE-CH04-2-2024</code> (59 trang), cùng qbank <code>UIT-QBANK-CH04-2024</code>, Câu 1–5 / Mục 4. Bộ 56/34/46 trang từng có trong workspace là <strong>different source version</strong>, không được dùng để suy ra số trang canonical. Khi làm bài số, luôn ghi giả định: thời điểm đến, burst, preemptive hay không, quantum, quy tắc tie-break và thời điểm process mới vào ready queue. Không có tie-break “toàn cầu” nếu đề không nêu.</p>
+
+<h2 id="1-vi-sao-can-inh-thoi">1. Vì sao cần định thời?</h2>
+
+<p>Một process thường luân phiên <strong>CPU burst</strong> (thực thi) và <strong>I/O burst</strong> (chờ thiết bị). Workload <strong>CPU-bound</strong> có burst tính toán dài; workload <strong>I/O-bound</strong> có burst ngắn xen kẽ thời gian chờ thiết bị. Khi process chuyển waiting, CPU scheduler chọn một process ready khác để tránh CPU rỗi; khi I/O hoàn tất hoặc timer hết quantum, process trở lại ready queue. Scheduler là bộ chọn; dispatcher thực hiện context switch, chuyển mode/address space (nếu cần), nạp thanh ghi và nhảy tới PC. Khoảng từ quyết định đến lúc process mới chạy là <strong>dispatch latency</strong>.</p>
+
+<h3 id="tieu-chi">Tiêu chí</h3>
+
+<table><thead><tr><th>Tiêu chí</th><th>Công thức/ý nghĩa</th><th>Hướng tối ưu</th></tr></thead><tbody><tr><td>CPU utilization</td><td>Tỷ lệ thời gian CPU thực thi công việc hữu ích.</td><td>Cao hơn, nhưng không đánh đổi response vô hạn.</td></tr><tr><td>Throughput</td><td>Số process hoàn tất trong một đơn vị thời gian.</td><td>Cao hơn.</td></tr><tr><td>Turnaround (TAT)</td><td><code>completion − arrival</code>.</td><td>Thấp hơn.</td></tr><tr><td>Waiting (WT)</td><td>Tổng thời gian trong ready queue; với một CPU burst <code>WT = TAT − BT</code>.</td><td>Thấp hơn.</td></tr><tr><td>Response (RT)</td><td><code>lần chạy đầu − arrival</code>.</td><td>Thấp hơn, quan trọng cho tương tác.</td></tr><tr><td>Fairness</td><td>Mức phân chia cơ hội CPU hợp lý giữa các process; thường đánh giá định tính hoặc bằng chỉ số riêng.</td><td>Tránh đói và thiên lệch.</td></tr></tbody></table>
+
+<p>Slide Week04 liệt kê <strong>sáu</strong> tiêu chí: ba tiêu chí hướng người dùng (response, turnaround, waiting) và ba tiêu chí hướng hệ thống (CPU utilization, fairness, throughput). Qbank Chương 4 ghi “5 tiêu chuẩn”; đó là <strong>SOURCE_CONFLICT</strong>, không được âm thầm sửa câu hỏi qbank. Fairness được dạy theo slide nhưng thường không xuất hiện trong năm đại lượng số của bài tính.</p>
+
+<p>Không có thuật toán tối ưu đồng thời mọi tiêu chí; workload và chính sách hệ thống quyết định trade-off.</p>
+
+<h3 id="selection-function-va-decision-mode">Selection function và decision mode</h3>
+
+<p>Selection function là quy tắc ánh xạ trạng thái ready queue (arrival, remaining burst, priority, deadline, quantum…) sang process được chọn. Decision mode nói <strong>khi nào</strong> quy tắc được áp dụng: non-preemptive chỉ quyết định khi process kết thúc/block; preemptive còn quyết định khi process mới đến, I/O hoàn tất, timer hết quantum hoặc một sự kiện kernel làm thay đổi ready queue. Với mọi ví dụ, ghi rõ điểm ra quyết định và quy tắc tie-break; không tự gán một tie-break “chuẩn UIT”.</p>
+
+<p>Ba lớp scheduler trong slide có vai trò khác nhau: <strong>long-term scheduler</strong> kiểm soát admission/job mix, <strong>medium-term scheduler</strong> có thể suspend/resume hoặc swap process, còn <strong>short-term scheduler</strong> chọn process ready kế tiếp để trao CPU. Các sự kiện gọi short-term scheduler gồm process chuyển running→waiting/terminated, waiting→ready, process mới đến và timer/quantum hết.</p>
+
+<h2 id="2-cac-thuat-toan-co-ban">2. Các thuật toán cơ bản</h2>
+
+<h3 id="2-1-fcfs-first-come-first-served">2.1 FCFS — First-Come, First-Served</h3>
+
+<p><strong>Định nghĩa/selection:</strong> chọn process đến ready queue trước; thường non-preemptive. <strong>Cơ chế:</strong> chạy đến hết CPU burst hoặc block. <strong>Ưu:</strong> đơn giản, công bằng theo arrival, overhead thấp. <strong>Hạn chế:</strong> convoy effect làm process ngắn chờ sau process dài; response kém. Starvation không thường xảy ra nếu queue hữu hạn; aging không phải thành phần bắt buộc.</p>
+
+<p><strong>Ví dụ:</strong> P1(AT=0,BT=5), P2(AT=1,BT=2), P3(AT=2,BT=1) ⇒ <code>P1 0–5 | P2 5–7 | P3 7–8</code>; WT lần lượt 0,4,5. Nếu đề cho preemptive FCFS thì đó là chính sách khác; không tự đổi.</p>
+
+<h3 id="2-2-sjf-shortest-job-first">2.2 SJF — Shortest Job First</h3>
+
+<p><strong>Selection:</strong> trong các process ready, chọn burst CPU kế tiếp ngắn nhất; bản cơ bản non-preemptive. <strong>Cơ chế:</strong> cần ước lượng burst nếu chưa biết. <strong>Ưu:</strong> tối ưu WT trung bình trong mô hình single CPU, biết chính xác burst và không có overhead. <strong>Hạn chế:</strong> burst tương lai khó biết; process dài có thể starvation. <strong>Aging:</strong> tăng ưu tiên theo thời gian chờ để giảm starvation; đó là bổ sung chính sách.</p>
+
+<p><strong>Worked example:</strong> P1(0,7), P2(2,4), P3(4,1). P1 chạy 0–7; tại 7 chọn P3 7–8 rồi P2 8–12 (nếu không có quy tắc khác). Đừng dùng SJF khi đề nói “shortest <strong>remaining</strong>”.</p>
+
+<p><strong>Dự đoán CPU burst:</strong> khi burst kế tiếp chưa biết, exponential averaging thường dùng <code>τ(n+1) = α·t(n) + (1−α)·τ(n)</code> với <code>0 ≤ α ≤ 1</code>; đây là ước lượng phục vụ selection, không phải burst thực tế. Chọn α và giá trị ban đầu theo giả định của đề.</p>
+
+<p><strong>Tie:</strong> nếu burst bằng nhau, dùng arrival/ID chỉ khi đề hoặc quy ước lớp học cho phép; nếu không, ghi “đồng hạng, cần giả định”.</p>
+
+<h3 id="2-3-srtf-shortest-remaining-time-first">2.3 SRTF — Shortest Remaining Time First</h3>
+
+<p><strong>Selection:</strong> process có remaining CPU time nhỏ nhất; preemptive SJF. <strong>Cơ chế:</strong> mỗi khi process mới đến hoặc event xảy ra, so sánh remaining time và có thể preempt. <strong>Ưu:</strong> thường giảm WT/TAT của job ngắn và response tốt hơn SJF. <strong>Hạn chế:</strong> context switch nhiều, cần estimate; job dài có thể starvation. Aging/capping priority có thể giảm starvation nhưng không nằm trong định nghĩa SRTF.</p>
+
+<p><strong>Ví dụ có kiểm tra:</strong> P1(0,7), P2(2,4), P3(4,1), P4(5,4). Với tie giữ process đang chạy: <code>P1 0–2 | P2 2–4 | P3 4–5 | P2 5–7 | P4 7–11 | P1 11–16</code>; CT = 16,7,5,11; WT = 9,1,0,2; WTavg = 3.00 và TATavg = 7.00. Nếu tie-break khác, Gantt/WT có thể đổi.</p>
+
+<h3 id="2-4-priority-scheduling">2.4 Priority scheduling</h3>
+
+<p><strong>Selection:</strong> process có priority cao nhất; có bản non-preemptive và preemptive. Hướng “số nhỏ ưu tiên cao” hay ngược lại phải ghi theo đề. <strong>Ưu:</strong> biểu đạt importance/deadline. <strong>Hạn chế:</strong> priority thấp starvation; aging tăng priority dần khi chờ. Priority không tự đồng nghĩa với response tốt hay deadline đúng.</p>
+
+<p><strong>Ví dụ:</strong> P1 priority 2 chạy, P2 priority 1 đến sau. Nếu hệ quy ước 1 cao và preemptive, P2 chiếm ngay; nếu non-preemptive, P1 chạy hết burst. Đây là hai đáp án khác nhau hợp lệ theo hai giả định.</p>
+
+<h3 id="2-5-round-robin-rr">2.5 Round Robin (RR)</h3>
+
+<p><strong>Selection:</strong> ready queue vòng tròn, mỗi process tối đa time quantum <code>q</code>, hết q thì preempt và xếp cuối hàng nếu còn việc. <strong>Ưu:</strong> response công bằng, phù hợp time-sharing. <strong>Hạn chế:</strong> q quá lớn gần FCFS; q quá nhỏ làm context-switch overhead tăng và throughput giảm. Starvation thấp nếu queue được phục vụ tuần tự; aging không cần thiết trong RR thuần túy.</p>
+
+<p><strong>Worked example:</strong> P1=5, P2=3, P3=1 đến cùng lúc, q=2 ⇒ <code>P1 0–2 | P2 2–4 | P3 4–5 | P1 5–7 | P2 7–8 | P1 8–9</code>. Nếu process đến trong lát, thứ tự “enqueue trước hay sau process hết quantum” phải nêu rõ.</p>
+
+<p>Trong mô hình slide giả định một ready queue, không có I/O và mọi process đã sẵn sàng từ đầu, một process có thể chờ nhiều nhất khoảng <strong><code>(n−1)q</code></strong> trước lát đầu tiên (chưa tính context-switch overhead); đây là bound theo giả định, không phải lời hứa cho mọi hệ thống. q càng nhỏ thường giảm response nhưng tăng overhead; q lớn tiến gần FCFS.</p>
+
+<h3 id="2-6-hrrn-highest-response-ratio-next">2.6 HRRN — Highest Response Ratio Next</h3>
+
+<p><strong>Selection:</strong> non-preemptive, chọn process có <code>RR = (WT + BT) / BT = 1 + WT/BT</code> cao nhất khi CPU rảnh. <strong>Ưu:</strong> cân bằng job ngắn và job đã chờ lâu; giảm starvation tự nhiên. <strong>Hạn chế:</strong> cần biết BT và tính lại tại mỗi lần chọn; không preemptive nên job dài đang chạy vẫn giữ CPU. <strong>Aging:</strong> thành phần <code>WT</code> chính là cơ chế ưu tiên thời gian chờ.</p>
+
+<p><strong>Ví dụ:</strong> tại thời điểm chọn, A(WT=4,BT=4) có RR=2; B(WT=1,BT=2) có RR=1.5 ⇒ chọn A. Tie giữa RR bằng nhau cần quy tắc arrival/ID được ghi rõ.</p>
+
+<h2 id="3-multilevel-queue-va-mlfq">3. Multilevel Queue và MLFQ</h2>
+
+<h3 id="3-1-multilevel-queue-mlq">3.1 Multilevel Queue (MLQ)</h3>
+
+<p>Ready queue chia thành các lớp cố định (ví dụ interactive và batch); scheduler giữa lớp có thể strict priority hoặc time-slice, bên trong lớp dùng RR/FCFS. Process thường <strong>không đổi lớp</strong>. Ưu: phản ánh loại workload; hạn chế: lớp thấp có starvation và phân loại cứng.</p>
+
+<h3 id="3-2-multilevel-feedback-queue-mlfq">3.2 Multilevel Feedback Queue (MLFQ)</h3>
+
+<p>Process có thể di chuyển giữa các queue theo hành vi: job dùng hết quantum bị hạ cấp; job I/O-bound/nhường CPU sớm có thể giữ hoặc được nâng cấp; periodic priority boost chống starvation.</p>
+
+<pre><code class="language-">Q0 (q nhỏ, ưu tiên cao) → Q1 → Q2 (q lớn/FCFS)
+          dùng hết q: hạ cấp   nhường sớm: giữ/nâng tùy policy</code></pre>
+
+<p><strong>Thông số bắt buộc:</strong> số queue, algorithm mỗi queue, quy tắc promotion/demotion, priority boost và xử lý process mới. MLFQ linh hoạt, response tốt cho interactive nhưng khó chứng minh fairness nếu policy không đầy đủ. Không tự gán một bộ tham số là “chuẩn UIT”.</p>
+
+<h2 id="4-thread-a-xu-ly-va-load-balancing">4. Thread, đa xử lý và load balancing</h2>
+
+<p>Thread scheduling có thể theo <strong>PCS</strong> (process contention scope: cạnh tranh trong process) hoặc <strong>SCS</strong> (system contention scope: cạnh tranh với mọi kernel thread). Trên SMP, scheduler phải chọn CPU và thread.</p>
+
+<ul><li><strong>Processor affinity:</strong> soft affinity cố gắng giữ thread trên CPU cũ để tận dụng cache; hard affinity ràng buộc tập CPU được phép.</li><li><strong>Load balancing:</strong> phân phối runnable threads; <em>push migration</em> CPU bận đẩy việc ra, <em>pull migration</em> CPU rỗi kéo việc vào. Cân bằng quá thường xuyên cũng tốn cache locality.</li><li><strong>Multiprocessor policies:</strong> global queue đơn giản nhưng tranh chấp; per-CPU queues mở rộng tốt nhưng cần migration.</li></ul>
+
+<p>Các trade-off trên là nguyên lý; implementation Linux/Windows/Solaris có chính sách khác nhau.</p>
+
+<h2 id="5-real-time-scheduling">5. Real-time scheduling</h2>
+
+<p>Task real-time có computation time, period/deadline và yêu cầu đúng hạn. <strong>Periodic</strong> lặp theo chu kỳ; <strong>aperiodic</strong> đến không theo chu kỳ; <strong>sporadic</strong> không định kỳ nhưng có khoảng cách tối thiểu giữa hai lần đến. <strong>RMS (Rate Monotonic Scheduling)</strong> là fixed priority: period ngắn hơn ⇒ priority cao hơn, thường cho periodic tasks độc lập. <strong>EDF (Earliest Deadline First)</strong> là dynamic priority: deadline gần nhất chạy trước. <strong>TBS (Total Bandwidth Server)</strong> phục vụ yêu cầu aperiodic bằng cách gán deadline ảo theo ngân sách bandwidth để dùng cùng cơ chế deadline. Cả ba cần giả định về preemption, thời gian chuyển ngữ cảnh và tài nguyên; không tự kết luận schedulable nếu thiếu dữ liệu. Hard real-time coi deadline là điều kiện bắt buộc; soft real-time tối ưu xác suất/chất lượng đúng hạn.</p>
+
+<h2 id="6-scheduler-thuc-te-oc-ung-muc-nguon">6. Scheduler thực tế — đọc đúng mức nguồn</h2>
+
+<ul><li><strong>Linux CFS:</strong> mô hình hóa fairness bằng virtual runtime (<code>vruntime</code>), thường chọn runnable task có <code>vruntime</code> nhỏ nhất trong cấu trúc cây cân bằng; weight/nice và kernel version ảnh hưởng chi tiết. “CFS luôn chạy theo FCFS” là sai.</li><li><strong>Windows:</strong> hệ thống ưu tiên nhiều mức, có dynamic priority boost và quantum/feedback; chi tiết phụ thuộc phiên bản và lớp thread. Không giản lược thành “32 mức cố định” nếu không chỉ rõ tài liệu.</li><li><strong>Solaris:</strong> có nhiều lớp scheduler (ví dụ time-sharing, real-time) với priority/quantum riêng. Hãy trình bày đúng depth của slide/read-more, không suy ra hành vi mọi bản phát hành.</li></ul>
+
+<h2 id="7-quy-trinh-giai-bai-inh-thoi">7. Quy trình giải bài định thời</h2>
+
+<ol><li>Vẽ timeline sự kiện arrival/I-O và ghi ready queue ở từng mốc.</li><li>Áp selection rule, đánh dấu preemption/quantum và tie-break.</li><li>Tính CT, TAT, WT, RT từng process; kiểm tra <code>TAT = WT + BT</code> khi chỉ có một CPU burst.</li><li>Báo cáo average và nêu giả định. Gantt là bằng chứng, không thay thế giải thích cơ chế.</li></ol>
+
+<p>Ngân hàng câu hỏi: <a class="wikilink" href="../questions/subjective/ch04.html">sub-ch04</a> · Nền tảng process: <a class="wikilink" href="ch03-process.html">theory-ch03-process</a></p><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#pham-vi-va-cach-giai-bai">Phạm vi và cách giải bài</a></li><li class="toc-item"><a class="toc-link" href="#1-vi-sao-can-inh-thoi">1. Vì sao cần định thời?</a></li><li class="toc-item"><a class="toc-link" href="#tieu-chi">Tiêu chí</a></li><li class="toc-item"><a class="toc-link" href="#selection-function-va-decision-mode">Selection function và decision mode</a></li><li class="toc-item"><a class="toc-link" href="#2-cac-thuat-toan-co-ban">2. Các thuật toán cơ bản</a></li><li class="toc-item"><a class="toc-link" href="#2-1-fcfs-first-come-first-served">2.1 FCFS — First-Come, First-Served</a></li><li class="toc-item"><a class="toc-link" href="#2-2-sjf-shortest-job-first">2.2 SJF — Shortest Job First</a></li><li class="toc-item"><a class="toc-link" href="#2-3-srtf-shortest-remaining-time-first">2.3 SRTF — Shortest Remaining Time First</a></li><li class="toc-item"><a class="toc-link" href="#2-4-priority-scheduling">2.4 Priority scheduling</a></li><li class="toc-item"><a class="toc-link" href="#2-5-round-robin-rr">2.5 Round Robin (RR)</a></li><li class="toc-item"><a class="toc-link" href="#2-6-hrrn-highest-response-ratio-next">2.6 HRRN — Highest Response Ratio Next</a></li><li class="toc-item"><a class="toc-link" href="#3-multilevel-queue-va-mlfq">3. Multilevel Queue và MLFQ</a></li><li class="toc-item"><a class="toc-link" href="#3-1-multilevel-queue-mlq">3.1 Multilevel Queue (MLQ)</a></li><li class="toc-item"><a class="toc-link" href="#3-2-multilevel-feedback-queue-mlfq">3.2 Multilevel Feedback Queue (MLFQ)</a></li><li class="toc-item"><a class="toc-link" href="#4-thread-a-xu-ly-va-load-balancing">4. Thread, đa xử lý và load balancing</a></li><li class="toc-item"><a class="toc-link" href="#5-real-time-scheduling">5. Real-time scheduling</a></li><li class="toc-item"><a class="toc-link" href="#6-scheduler-thuc-te-oc-ung-muc-nguon">6. Scheduler thực tế — đọc đúng mức nguồn</a></li><li class="toc-item"><a class="toc-link" href="#7-quy-trinh-giai-bai-inh-thoi">7. Quy trình giải bài định thời</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../assets/js/app.js"></script></body></html>

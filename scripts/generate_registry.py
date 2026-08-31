@@ -80,78 +80,159 @@ sources = [
         'tier': 'A',
         'type': 'official_slide',
         'title': 'Slide Bài giảng Tuần 4 - Chương 4 (Phần 1): Định thời CPU',
-        'exact_filename': 'Week04-Chapter4-1 2024.pdf',
-        'path': os.path.join(slides_dir, 'Week04-Chapter4-1 2024.pdf'),
+        'exact_filename': '#Week04-Chapter4-1 2024.pdf',
+        'path': '',
+        'declared_sha256': 'f2323c438f260d0b5c37322e78eb0eee7af3e036bec109d68de9db31c4714dae',
+        'declared_page_count': 74,
         'year': '2024',
         'author': 'Khoa Kỹ thuật Máy tính - UIT',
         'public_url': 'https://courses.uit.edu.vn',
-        'status': 'VERIFIED_LOCAL',
-        'notes': 'Slide chính thức Chương 4 Phần 1 (56 trang).'
+        'status': 'USER_ATTACHMENT_VERIFIED',
+        'notes': 'Canonical user-provided binary; 74 physical pages. Local variants must use separate IDs.'
     },
     {
         'id': 'UIT-SLIDE-CH04-2-2024',
         'tier': 'A',
         'type': 'official_slide',
         'title': 'Slide Bài giảng Tuần 5 - Chương 4 (Phần 2): Định thời CPU',
-        'exact_filename': 'Week05-Chapter4-2 2024.pdf',
-        'path': os.path.join(slides_dir, 'Week05-Chapter4-2 2024.pdf'),
+        'exact_filename': '#Week05-Chapter4-2 2024.pdf',
+        'path': '',
+        'declared_sha256': '9221a7e4a42ff88a98ee8f2980d879860ded2abd5e6de04ca35d7f768aee2040',
+        'declared_page_count': 59,
         'year': '2024',
         'author': 'Khoa Kỹ thuật Máy tính - UIT',
         'public_url': 'https://courses.uit.edu.vn',
-        'status': 'VERIFIED_LOCAL',
-        'notes': 'Slide chính thức Chương 4 Phần 2 (34 trang).'
+        'status': 'USER_ATTACHMENT_VERIFIED',
+        'notes': 'Canonical user-provided binary; 59 physical pages. Local variants must use separate IDs.'
     },
     {
-        'id': 'UIT-SLIDE-CH04-3-2024',
+        'id': 'UIT-SLIDE-CH04-1-2024-VARIANT-LOCAL-56',
         'tier': 'A',
-        'type': 'official_slide',
-        'title': 'Slide Bài giảng Tuần 6 - Chương 4 (Phần 3): Định thời Đa xử lý & Real-Time',
+        'type': 'source_variant',
+        'title': 'Different local variant — Week04 Chapter 4 Part 1 (56 pages)',
+        'exact_filename': 'Week04-Chapter4-1 2024.pdf',
+        'path': os.path.join(slides_dir, 'Week04-Chapter4-1 2024.pdf'),
+        'declared_sha256': 'afa1dfc7a262582936d04cec913ae42c5d0cdfcb565ded38f15061a833128fb3',
+        'declared_page_count': 56,
+        'year': '2024',
+        'author': 'Khoa Kỹ thuật Máy tính - UIT',
+        'public_url': 'https://courses.uit.edu.vn',
+        'status': 'VERIFIED_LOCAL_VARIANT',
+        'notes': 'Different local binary; not the canonical 74-page user attachment.'
+    },
+    {
+        'id': 'UIT-SLIDE-CH04-2-2024-VARIANT-LOCAL-34',
+        'tier': 'A',
+        'type': 'source_variant',
+        'title': 'Different local variant — Week05 Chapter 4 Part 2 (34 pages)',
+        'exact_filename': 'Week05-Chapter4-2 2024.pdf',
+        'path': os.path.join(slides_dir, 'Week05-Chapter4-2 2024.pdf'),
+        'declared_sha256': '8e6d61aa80bf177463d20ff6b25a4bc12a5ff2dad21a8b3f9e60ce74a7f1c7c2',
+        'declared_page_count': 34,
+        'year': '2024',
+        'author': 'Khoa Kỹ thuật Máy tính - UIT',
+        'public_url': 'https://courses.uit.edu.vn',
+        'status': 'VERIFIED_LOCAL_VARIANT',
+        'notes': 'Different local binary; not the canonical 59-page user attachment.'
+    },
+    {
+        'id': 'UIT-SLIDE-CH04-3-2024-VARIANT-LOCAL-46',
+        'tier': 'A',
+        'type': 'source_variant',
+        'title': 'Different local variant — Week06 Chapter 4 Part 3 (46 pages)',
         'exact_filename': 'Week06-Chapter4-3 2024.pdf',
         'path': os.path.join(slides_dir, 'Week06-Chapter4-3 2024.pdf'),
         'year': '2024',
         'author': 'Khoa Kỹ thuật Máy tính - UIT',
         'public_url': 'https://courses.uit.edu.vn',
-        'status': 'VERIFIED_LOCAL',
-        'notes': 'Slide chính thức Chương 4 Phần 3 (46 trang).'
+        'status': 'VERIFIED_LOCAL_VARIANT',
+        'notes': 'Retained only as a distinct local variant; excluded from official canonical coverage.'
     },
     {
-        'id': 'UIT-SLIDE-CH05-1-2024',
+        'id': 'UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58',
         'tier': 'A',
-        'type': 'official_slide',
-        'title': 'Slide Bài giảng Tuần 7 - Chương 5 (Phần 1): Đồng bộ Tiến trình',
+        'type': 'source_variant',
+        'title': 'Different local variant — Week07 Chapter 5 Part 1 (58 pages)',
         'exact_filename': 'Week07-Chapter5-1 2024.pdf',
         'path': os.path.join(slides_dir, 'Week07-Chapter5-1 2024.pdf'),
         'year': '2024',
         'author': 'Khoa Kỹ thuật Máy tính - UIT',
         'public_url': 'https://courses.uit.edu.vn',
-        'status': 'VERIFIED_LOCAL',
-        'notes': 'Slide chính thức Chương 5 Phần 1 (58 trang).'
+        'status': 'VERIFIED_LOCAL_VARIANT',
+        'notes': 'Existing local corpus; not the canonical user-provided 67-page attachment.'
+    },
+    {
+        'id': 'UIT-SLIDE-CH05-1-2024-CANONICAL-USER',
+        'tier': 'A',
+        'type': 'source_attachment',
+        'title': 'Canonical user attachment — Week06 Chapter 5 Part 1 (67 pages)',
+        'exact_filename': '#Week06-Chapter5-1 2024.pdf',
+        'path': '',
+        'declared_sha256': '2ef4be67449ea22aada6e8bd69b49b781bbcb8c6f0eb601b16e9f18a004c7416',
+        'declared_page_count': 67,
+        'year': '2024',
+        'author': 'Khoa Kỹ thuật Máy tính - UIT',
+        'public_url': 'https://courses.uit.edu.vn',
+        'status': 'USER_ATTACHMENT_VERIFIED',
+        'notes': 'Future Batch 2 source-fidelity blocker; do not mix with local variant.'
     },
     {
         'id': 'UIT-SLIDE-MIDTERM-REVIEW-2024',
         'tier': 'A',
         'type': 'official_slide',
         'title': 'Slide Ôn tập Giữa kỳ IT007 Tuần 8',
-        'exact_filename': 'Week08-Midterm Review.pdf',
-        'path': os.path.join(slides_dir, 'Week08-Midterm Review.pdf'),
+        'exact_filename': '#Week08-Midterm Review.pptx',
+        'path': '',
+        'declared_sha256': 'cd3da900b5f8c0d4481afae68d4e4e33c6348867118d8f35966eac6203572326',
+        'declared_slide_count': 17,
         'year': '2024',
         'author': 'Khoa Kỹ thuật Máy tính - UIT',
         'public_url': 'https://courses.uit.edu.vn',
-        'status': 'VERIFIED_LOCAL',
-        'notes': 'Slide Ôn tập giữa kỳ chính thức (16 trang).'
+        'status': 'USER_ATTACHMENT_VERIFIED',
+        'notes': 'Canonical user-provided PPTX; 17 slides. The local 16-page PDF is a separate variant.'
     },
     {
-        'id': 'UIT-SLIDE-CH05-2-2024',
+        'id': 'UIT-SLIDE-MIDTERM-REVIEW-2024-VARIANT-LOCAL-16PDF',
         'tier': 'A',
-        'type': 'official_slide',
-        'title': 'Slide Bài giảng Tuần 9 - Chương 5 (Phần 2): Đồng bộ Tiến trình',
+        'type': 'source_variant',
+        'title': 'Different local variant — Week08 Midterm Review (16-page PDF)',
+        'exact_filename': 'Week08-Midterm Review.pdf',
+        'path': os.path.join(slides_dir, 'Week08-Midterm Review.pdf'),
+        'declared_sha256': '1be07c18d5ce983a5f21d0304a0ed44c3b28781d090f2250db21f64c90608f4b',
+        'declared_page_count': 16,
+        'year': '2024',
+        'author': 'Khoa Kỹ thuật Máy tính - UIT',
+        'public_url': 'https://courses.uit.edu.vn',
+        'status': 'VERIFIED_LOCAL_VARIANT',
+        'notes': 'Older local PDF variant; never substitute it for the canonical 17-slide PPTX.'
+    },
+    {
+        'id': 'UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55',
+        'tier': 'A',
+        'type': 'source_variant',
+        'title': 'Different local variant — Week09 Chapter 5 Part 2 (55 pages)',
         'exact_filename': 'Week09-Chapter5-2 2024.pdf',
         'path': os.path.join(slides_dir, 'Week09-Chapter5-2 2024.pdf'),
         'year': '2024',
         'author': 'Khoa Kỹ thuật Máy tính - UIT',
         'public_url': 'https://courses.uit.edu.vn',
-        'status': 'VERIFIED_LOCAL',
-        'notes': 'Slide chính thức Chương 5 Phần 2 (55 trang).'
+        'status': 'VERIFIED_LOCAL_VARIANT',
+        'notes': 'Existing local corpus; not the canonical user-provided 72-page attachment.'
+    },
+    {
+        'id': 'UIT-SLIDE-CH05-2-2024-CANONICAL-USER',
+        'tier': 'A',
+        'type': 'source_attachment',
+        'title': 'Canonical user attachment — Week07 Chapter 5 Part 2 (72 pages)',
+        'exact_filename': '#Week07-Chapter5-2 2024.pdf',
+        'path': '',
+        'declared_sha256': 'f7e9fc9eb9a35f3a02eb60b2c8e01fa134342d0c5256f47deef4247a0db141d2',
+        'declared_page_count': 72,
+        'year': '2024',
+        'author': 'Khoa Kỹ thuật Máy tính - UIT',
+        'public_url': 'https://courses.uit.edu.vn',
+        'status': 'USER_ATTACHMENT_VERIFIED',
+        'notes': 'Future Batch 2 source-fidelity blocker; do not mix with local variant.'
     },
     {
         'id': 'UIT-SLIDE-CH05-3-2024',
@@ -833,6 +914,8 @@ out_lines = [
 
 for s in sources:
     sha, pages = get_file_info(s['path']) if s['path'] else ('', 0)
+    sha = s.get('declared_sha256') or sha
+    pages = s.get('declared_page_count') or pages
     out_lines.append(f"  - id: \"{s['id']}\"")
     out_lines.append(f"    tier: \"{s['tier']}\"")
     out_lines.append(f"    type: \"{s['type']}\"")
@@ -840,7 +923,9 @@ for s in sources:
     out_lines.append(f"    exact_filename: \"{s['exact_filename']}\"")
     if sha:
         out_lines.append(f"    sha256: \"{sha}\"")
-    if pages > 0:
+    if s.get('declared_slide_count'):
+        out_lines.append(f"    slide_count: {s['declared_slide_count']}")
+    elif pages > 0:
         out_lines.append(f"    page_count: {pages}")
     out_lines.append(f"    year: \"{s['year']}\"")
     out_lines.append(f"    author: \"{s['author']}\"")

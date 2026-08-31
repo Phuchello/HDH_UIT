@@ -8,17 +8,17 @@ All totals below are computed from registry records, expanded slide-page records
 
 | Metric | Actual | Requirement | Result |
 |---|---:|---|:---:|
-| Registered sources | 63 | unique IDs and required schema | **PASS** |
+| Registered sources | 66 | unique IDs and required schema | **PASS** |
 | Tier-A local files / hash checks | 0 / 0 | REPO_ONLY is informational; LOCAL requires all hashes | **PASS** |
-| Physical slide pages | 718 | sum of official-slide registry page counts | **PASS** |
-| Expanded coverage records | 718 | exactly physical-page total | **PASS** |
-| Content / non-content pages | 666 / 52 | sum equals physical total | **PASS** |
+| Physical slide pages | 719 | sum of referenced deck registry page/slide counts | **PASS** |
+| Expanded coverage records | 719 | exactly physical-page total | **PASS** |
+| Content / non-content pages | 665 / 54 | sum equals physical total | **PASS** |
 | Coverage gaps / duplicates / schema errors | 0 / 0 / 0 | zero | **PASS** |
 | Unmapped content pages | 0 | zero | **PASS** |
-| Drafted content pages | 308 | informational current authored set | **INFO** |
-| Official question records | 76 | count of structured records | **PASS** |
-| Mapped / unmapped questions | 76 / 0 | zero unmapped; required fields | **PASS** |
-| Drafted questions | 47 | informational current authored set | **INFO** |
+| Drafted content pages | 307 | informational current authored set | **INFO** |
+| Official question records | 95 | count of structured records | **PASS** |
+| Mapped / unmapped questions | 95 / 0 | zero unmapped; required fields | **PASS** |
+| Drafted questions | 66 | informational current authored set | **INFO** |
 | Exam evidence records | 20 | valid record schema | **PASS** |
 | Public hygiene | — | no forbidden paths | **PASS** |
 | Canonical content validation | — | schema/rubric/wikilink checks | **PASS** |

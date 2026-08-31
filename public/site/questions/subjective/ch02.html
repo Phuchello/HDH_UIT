@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành — IT007 UIT</title><link rel="stylesheet" href="../../assets/css/style.css"><script src="../../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT (THEORY)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link active" href="ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../../index.html">Trang chủ</a> <span>/</span> <span>Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</span></div><article class="article-body"><h1 id="ngan-hang-tu-luan-chuong-2">Ngân hàng tự luận Chương 2</h1>
+
+<p><strong>Phân loại nguồn:</strong> các mục qbank là <code>QBANK_OFFICIAL</code>; các prompt tương đương từ slide ôn tập được gắn <code>MIDTERM_REVIEW_OFFICIAL</code> trong manifest. Một lời giải canonical có thể được tái sử dụng, nhưng không gộp mất source locator.</p>
+
+<h2 id="cau-1-thanh-phan-os">Câu 1 — Thành phần OS</h2>
+
+<p><strong>QUESTION (giữ nguyên wording qbank):</strong> Nêu 8 thành phần cốt lõi của hệ điều hành và vai trò.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH02-2024</code>, Câu 1 / Mục 2; <code>UIT-SLIDE-CH02-2024</code>, slide 4–15.</p>
+
+<p><strong>SOURCE CONFLICT:</strong> Qbank dùng cụm “8 thành phần”; slide UIT canonical chỉ enumerates bảy mục core. Không invent mục thứ tám: lời giải theo slide nêu đủ bảy mục và ghi networking/security là mở rộng Tier B khi phù hợp.</p>
+
+<p><strong>QUESTION TYPE:</strong> Enumeration + characteristics.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Process management, main-memory management, file management, I/O system management, secondary-storage management, protection system và command interpreter system; mỗi mục kèm một trách nhiệm.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> không chỉ liệt kê; phân biệt resource manager và interface; có protection system. Nếu đề hoặc giáo trình tách networking/distributed hay security, phải ghi đó là mở rộng Tier B, không thay cho bảy mục UIT.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Bảy thành phần quản lý vòng đời tiến trình, ánh xạ bộ nhớ, file/thiết bị/lưu trữ, quyền truy cập và giao diện lệnh. Networking/distributed và security có thể được tách trong giáo trình mở rộng, nhưng slide UIT gộp security vào protection system.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> gộp I/O vào file rồi quên I/O; tách security/networking thành mục UIT thứ tám thay vì ghi chú mở rộng; thiếu protection system.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> shell luôn chạy trong kernel; component và service là cùng một khái niệm.</p>
+
+<p><strong>SOURCE CONFLICT NOTE:</strong> tiêu đề qbank ghi “8 thành phần”, trong khi slide UIT trình bày bảy thành phần cốt lõi. Bản v2 ưu tiên số đếm của slide; networking/distributed và security được ghi như mở rộng Tier B để không làm mất bằng chứng qbank.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu đủ bảy nhóm UIT và vai trò, đồng thời nhận diện ghi chú mở rộng khi cần; Mostly complete nếu thiếu một nhóm nhưng cơ chế đúng; Partial nếu chỉ ghi danh sách.</p>
+
+<h2 id="cau-2-dich-vu-os">Câu 2 — Dịch vụ OS</h2>
+
+<p><strong>QUESTION:</strong> Trình bày các dịch vụ OS cung cấp cho người dùng và chương trình.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH02-2024</code>, Câu 2 / Mục 2; <code>UIT-SLIDE-CH02-2024</code>, slide 16–22.</p>
+
+<p><strong>QUESTION TYPE:</strong> Characteristics / classification.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> UI, program execution, I/O, file-system manipulation, communication, error detection, resource allocation, accounting, protection/security.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> nhóm hướng người dùng và nhóm hiệu quả hệ thống; ví dụ ít nhất hai dịch vụ.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Sáu dịch vụ đầu tạo môi trường dùng được; ba dịch vụ sau bảo đảm chia sẻ và kiểm soát. Ví dụ mở file vừa là file service vừa cần protection.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> quên accounting hoặc error detection.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> dịch vụ chỉ dành cho GUI; resource allocation không liên quan đến protection.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete khi nêu đủ chín dịch vụ và phân nhóm; Mostly complete khi thiếu một; Partial khi lẫn component với service.</p>
+
+<h2 id="cau-3-system-call-va-api">Câu 3 — System Call và API</h2>
+
+<p><strong>QUESTION:</strong> Khái niệm system call và phân biệt với API/ordinary function call.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH02-2024</code>, Câu 3 / Mục 2; <code>UIT-SLIDE-CH02-2024</code>, slide 23–30.</p>
+
+<p><strong>QUESTION TYPE:</strong> Definition + distinction.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> System call là điểm vào kernel có bảo vệ; API là giao diện thư viện/chuẩn có thể bọc nhiều system call; ordinary function không tự đổi đặc quyền.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> user/kernel boundary; trap; wrapper; không giả định 1–1.</p>
+
+<p><strong>FULL EXPLANATION:</strong> <code>printf</code> có thể xử lý buffer trong thư viện rồi gọi <code>write</code>; tên API không cho biết số trap. Kernel kiểm tra tham số trước khi dùng tài nguyên.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> gọi API là “lệnh CPU”; quên ordinary call.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> mọi API đều là system call; system call luôn chạy toàn bộ trong user mode.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu phân biệt đủ ba khái niệm và có ví dụ; Mostly complete nếu thiếu wrapper; Partial nếu đồng nhất API với syscall.</p>
+
+<h2 id="cau-4-truyen-tham-so">Câu 4 — Truyền tham số</h2>
+
+<p><strong>QUESTION:</strong> Trình bày ba phương pháp truyền tham số cho system call.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH02-2024</code>, Câu 4 / Mục 2; <code>UIT-SLIDE-CH02-2024</code>, slide 31–35.</p>
+
+<p><strong>QUESTION TYPE:</strong> Mechanism.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Thanh ghi, block/table trong bộ nhớ và stack.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> cách đặt địa chỉ/giá trị; ưu nhược điểm; kernel kiểm tra con trỏ user.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Register hợp với ít tham số; block truyền địa chỉ một cấu trúc lớn; stack theo calling convention. Địa chỉ user không mặc nhiên hợp lệ.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> nêu ba tên nhưng không mô tả dòng dữ liệu.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> kernel tin mọi địa chỉ được truyền; block luôn nhanh hơn register.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete khi mô tả đúng cả ba phương pháp và kiểm tra an toàn; Mostly complete khi thiếu trade-off; Partial khi nhầm stack với heap.</p>
+
+<h2 id="cau-5-system-programs">Câu 5 — System programs</h2>
+
+<p><strong>QUESTION:</strong> Phân loại sáu nhóm system programs và nêu chức năng.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH02-2024</code>, Câu 5 / Mục 2; <code>UIT-SLIDE-CH02-2024</code>, slide 36–42.</p>
+
+<p><strong>QUESTION TYPE:</strong> Enumeration + examples.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> File management; status information; file modification; programming-language support; program loading/execution; communications.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> mỗi nhóm một ví dụ; phân biệt với kernel.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Compiler, editor, shell, <code>ps</code>, <code>cp</code>, <code>ssh</code> là tiện ích user-space dựa trên dịch vụ kernel. Có thể một công cụ thuộc nhiều nhóm tùy chức năng.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> thiếu communications; coi driver là system program.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> system program luôn là privileged code; shell tự truy cập thiết bị không qua syscall.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu đủ sáu nhóm và ví dụ; Mostly complete nếu thiếu một ví dụ; Partial nếu nhầm system program với component.</p>
+
+<h2 id="cau-6-monolithic">Câu 6 — Monolithic</h2>
+
+<p><strong>QUESTION:</strong> Trình bày ưu và nhược điểm của kiến trúc monolithic.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH02-2024</code>, Câu 6 / Mục 2; <code>UIT-SLIDE-CH02-2024</code>, slide 43–47.</p>
+
+<p><strong>QUESTION TYPE:</strong> Architecture comparison.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Dịch vụ cùng không gian kernel, gọi trực tiếp; ưu hiệu năng/đơn giản giao tiếp; nhược biên lỗi lớn, khó bảo trì và kiểm thử.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> protection boundary; module nuance; no product universal.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Monolithic có thể modular về code nhưng module vẫn chạy đặc quyền. Một lỗi driver có thể làm hỏng kernel; đổi lại đường gọi ngắn hơn microkernel.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> đồng nhất monolithic với “không có module”.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> monolithic luôn nhanh hơn trong mọi workload; microkernel không thể dùng driver.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete khi nêu cơ chế, hai ưu/nhược và nuance module; Mostly complete khi thiếu nuance; Partial khi chỉ nói “nhanh”.</p>
+
+<h2 id="cau-7-microkernel">Câu 7 — Microkernel</h2>
+
+<p><strong>QUESTION:</strong> Trình bày cơ chế và ưu nhược điểm của microkernel.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH02-2024</code>, Câu 7 / Mục 2; <code>UIT-SLIDE-CH02-2024</code>, slide 48–52.</p>
+
+<p><strong>QUESTION TYPE:</strong> Architecture mechanism.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Kernel giữ primitive tối thiểu và IPC; dịch vụ chạy user-space; ưu cô lập/mở rộng; nhược IPC/context switch và protocol overhead.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> what remains in kernel; user-space servers; fault isolation; performance trade-off.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Client gửi message tới server file/device; microkernel kiểm tra quyền và chuyển message. Server lỗi ít có khả năng phá toàn kernel, nhưng nhiều lần crossing boundary có chi phí.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> không đề cập IPC; gọi “kernel rỗng”.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> microkernel cấm mọi driver ở user space; microkernel luôn chậm không thể tối ưu.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete khi mô tả primitive, server, IPC và trade-off; Mostly complete khi thiếu fault isolation; Partial nếu chỉ nêu định nghĩa.</p><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#cau-1-thanh-phan-os">Câu 1 — Thành phần OS</a></li><li class="toc-item"><a class="toc-link" href="#cau-2-dich-vu-os">Câu 2 — Dịch vụ OS</a></li><li class="toc-item"><a class="toc-link" href="#cau-3-system-call-va-api">Câu 3 — System Call và API</a></li><li class="toc-item"><a class="toc-link" href="#cau-4-truyen-tham-so">Câu 4 — Truyền tham số</a></li><li class="toc-item"><a class="toc-link" href="#cau-5-system-programs">Câu 5 — System programs</a></li><li class="toc-item"><a class="toc-link" href="#cau-6-monolithic">Câu 6 — Monolithic</a></li><li class="toc-item"><a class="toc-link" href="#cau-7-microkernel">Câu 7 — Microkernel</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../../assets/js/app.js"></script></body></html>

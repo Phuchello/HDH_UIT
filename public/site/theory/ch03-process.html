@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Chương 3: Tiến trình và Tiểu trình — IT007 UIT</title><link rel="stylesheet" href="../assets/css/style.css"><script src="../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT (THEORY)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link active" href="ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../index.html">Trang chủ</a> <span>/</span> <span>Chương 3: Tiến trình và Tiểu trình</span></div><article class="article-body"><h1 id="chuong-3-tien-trinh-va-tieu-trinh">Chương 3: Tiến trình và Tiểu trình</h1>
+
+<h2 id="pham-vi-va-muc-tieu">Phạm vi và mục tiêu</h2>
+
+<p>Theo <code>UIT-SLIDE-CH03-2024</code>, slide 4–63 và qbank <code>UIT-QBANK-CH03-2024</code>, Câu 1–8 / Mục 3, chương này giải thích một chương trình trở thành thực thể được OS quản lý như thế nào. Các chi tiết gọi hàm Linux/POSIX được đánh dấu là làm rõ từ <code>POSIX-FORK</code>, <code>POSIX-EXEC</code>, <code>POSIX-WAITPID</code>, <code>POSIX-PIPE</code> và <code>POSIX-PTHREAD</code>.</p>
+
+<h2 id="1-process-va-bo-cuc-khong-gian-nho">1. Process và bố cục không gian nhớ</h2>
+
+<p>Program là file/thủ tục tĩnh; <strong>process</strong> là một instance đang thực thi, có trạng thái CPU, không gian địa chỉ và tài nguyên riêng. Cùng một program có thể có nhiều process.</p>
+
+<pre><code class="language-">địa chỉ cao  ┌──────────────┐
+             │ stack (mỗi thread riêng) │
+             ├──────────────┤
+             │     heap ↑   │ cấp phát động
+             ├──────────────┤
+             │ BSS/data     │ biến toàn cục, static (BSS thường zero-init)
+             ├──────────────┤
+             │ text/rodata  │ mã lệnh, hằng chỉ đọc
+địa chỉ thấp └──────────────┘</code></pre>
+
+<p>Text thường dùng chung giữa các instance; data chứa biến đã khởi tạo; BSS là vùng biến tĩnh/ toàn cục chưa khởi tạo; heap tăng theo cấp phát; stack chứa frame gọi hàm, tham số và biến cục bộ của <strong>từng thread</strong>. Layout và hướng tăng là mô hình điển hình, có thể thay đổi bởi ABI/ASLR.</p>
+
+<h2 id="2-trang-thai-hang-oi-va-pcb">2. Trạng thái, hàng đợi và PCB</h2>
+
+<h3 id="2-1-nam-trang-thai-kinh-ien">2.1 Năm trạng thái kinh điển</h3>
+
+<pre><code class="language-">new ──admit──&gt; ready ──dispatch──&gt; running ──exit──&gt; terminated
+                  ▲                  │
+       I/O done ──┘                  ├─ I/O/event wait ─&gt; waiting
+                  └──── preempt ─────┘</code></pre>
+
+<ul><li><strong>New:</strong> đang được tạo.</li><li><strong>Ready:</strong> đã sẵn sàng, chờ CPU trong ready queue.</li><li><strong>Running:</strong> đang giữ CPU.</li><li><strong>Waiting/blocked:</strong> chờ I/O, lock hoặc sự kiện; không thể chạy dù CPU rảnh.</li><li><strong>Terminated:</strong> đã kết thúc, chờ OS thu hồi/ghi nhận trạng thái.</li></ul>
+
+<p>Chuyển running→ready có thể do preemption; running→waiting do yêu cầu I/O; waiting→ready khi sự kiện hoàn tất. Một OS có thể thêm suspended states nhưng không thay thế mô hình 5 trạng thái khi trả lời qbank.</p>
+
+<h3 id="2-2-process-control-block-pcb">2.2 Process Control Block (PCB)</h3>
+
+<p>PCB là bản ghi kernel dùng để dừng và tiếp tục process. Các nhóm trường chính:</p>
+
+<table><thead><tr><th>Nhóm</th><th>Nội dung ví dụ</th></tr></thead><tbody><tr><td>Định danh</td><td>PID, PPID, user/credential.</td></tr><tr><td>Trạng thái &amp; thanh ghi</td><td>state, program counter, general registers, stack pointer, flags/mode.</td></tr><tr><td>Thông tin scheduling</td><td>priority, queue pointers, CPU time, affinity.</td></tr><tr><td>Quản lý bộ nhớ</td><td>base/limit hoặc page/segment tables, address-space metadata.</td></tr><tr><td>Accounting</td><td>thời gian CPU, giới hạn, job/process number.</td></tr><tr><td>I/O &amp; file</td><td>thiết bị cấp phát, open-file descriptors, pending I/O.</td></tr><tr><td>Quan hệ/IPC</td><td>parent/child, signal, IPC endpoints và quyền.</td></tr></tbody></table>
+
+<p>Không phải mọi hệ điều hành đặt tên trường giống nhau; điểm cốt lõi là PCB phải đủ để khôi phục execution context và quản lý tài nguyên.</p>
+
+<h2 id="3-scheduler-va-context-switch">3. Scheduler và context switch</h2>
+
+<table><thead><tr><th>Bộ điều phối</th><th>Quyết định</th><th>Tần suất/độ nhanh</th><th>Tác động</th></tr></thead><tbody><tr><td>Long-term (job scheduler)</td><td>Job nào được nạp thành process resident.</td><td>Thưa, chậm hơn.</td><td>Kiểm soát degree of multiprogramming và cân bằng CPU/I/O jobs.</td></tr><tr><td>Short-term (CPU scheduler)</td><td>Process ready nào nhận CPU tiếp.</td><td>Rất thường xuyên, cần nhanh.</td><td>Chọn algorithm; ảnh hưởng response/waiting.</td></tr><tr><td>Medium-term</td><td>Tạm suspend/swap process rồi đưa trở lại.</td><td>Trung gian.</td><td>Điều chỉnh memory pressure và degree of multiprogramming.</td></tr></tbody></table>
+
+<p>Dispatcher trao CPU cho process đã chọn: context switch, đổi mode/address space nếu cần, nhảy tới PC mới. <strong>Context switch</strong> lưu state của P vào PCB/stack và khôi phục state của Q; chi phí gồm lưu/khôi phục register, cache/TLB perturbation, kiểm tra quyền và scheduler/dispatcher time. Nó là overhead, không tạo thêm tiến độ ứng dụng; thời gian cụ thể phụ thuộc kiến trúc.</p>
+
+<h2 id="4-tao-lap-process-fork-exec-wait-exit">4. Tạo lập process: fork, exec, wait, exit</h2>
+
+<p><code>fork()</code> (POSIX) tạo process con gần như bản sao: trả 0 ở con, PID con ở cha, -1 khi lỗi. Cơ chế copy-on-write giúp tránh sao chép ngay toàn bộ page. <code>exec*()</code> thay image hiện tại bằng chương trình mới; PID thường giữ nguyên nhưng text/data/stack được nạp lại. <code>wait()</code>/<code>waitpid()</code> thu hồi trạng thái con và đồng bộ; <code>exit()</code> kết thúc process và gửi trạng thái cho cha.</p>
+
+<h3 id="cay-process-va-vi-du-co-thu-tu">Cây process và ví dụ có thứ tự</h3>
+
+<pre><code class="language-c">pid_t p = fork();
+if (p == 0) {                 /* child */
+    execlp(&quot;echo&quot;, &quot;echo&quot;, &quot;child&quot;, (char *)0);
+    _exit(127);               /* chỉ chạy nếu exec lỗi */
+}
+if (p &gt; 0) { waitpid(p, NULL, 0); }</code></pre>
+
+<p>Cha gọi <code>waitpid</code> nên không thoát trước con trong ví dụ. Trong bài trace, phải tách nhánh theo giá trị trả về của <strong>từng</strong> fork; số process tăng theo số fork được thực thi ở mỗi nhánh, không phải theo số dòng.</p>
+
+<pre><code class="language-">P0 (fork #1)
+├── P1 (child branch)
+└── P0 (parent branch; wait P1)</code></pre>
+
+<h3 id="zombie-va-orphan">Zombie và orphan</h3>
+
+<p>Zombie là child đã <code>exit</code> nhưng entry trạng thái chưa được parent thu hồi bằng wait; nó không tiếp tục chạy nhưng giữ một phần metadata. Orphan là child còn chạy khi parent kết thúc; trên Linux/POSIX, một process “reaper” (thường PID 1 hoặc subreaper) nhận nuôi và có thể wait. Đây là hành vi hệ thống cụ thể, không nên suy ra mọi OS giống Linux.</p>
+
+<h2 id="5-ipc">5. IPC</h2>
+
+<table><thead><tr><th>Cơ chế</th><th>Luồng dữ liệu</th><th>Đồng bộ/bảo vệ</th><th>Ưu/nhược</th></tr></thead><tbody><tr><td>Shared memory</td><td>Các process map chung vùng nhớ; đọc/ghi trực tiếp.</td><td>Ứng dụng phải dùng semaphore/mutex/atomic để tránh race.</td><td>Nhanh cho dữ liệu lớn; khó thiết kế đúng.</td></tr><tr><td>Message passing</td><td>OS truyền message qua mailbox/queue/socket.</td><td>Kernel kiểm soát endpoint và thứ tự theo API.</td><td>Cô lập, hợp phân tán; copy/overhead cao hơn.</td></tr><tr><td>Pipe (POSIX)</td><td>Byte stream một chiều giữa các descriptor; named pipe có tên.</td><td><code>read</code>/<code>write</code> có thể block; descriptor inheritance qua fork.</td><td>Đơn giản cho pipeline; không phù hợp mọi topology.</td></tr></tbody></table>
+
+<p>Shared memory là cơ chế chia sẻ dữ liệu, không tự là giải pháp đồng bộ. Pipe là API cụ thể của message/stream IPC, không phải mọi IPC.</p>
+
+<h2 id="6-threads">6. Threads</h2>
+
+<p>Thread là đơn vị thực thi trong process. Các thread cùng process chia sẻ text, data, heap, open files và address space; mỗi thread sở hữu PC, register set, stack và scheduling state riêng. Vì vậy thread tạo/đổi context nhẹ hơn process nhưng lỗi/race có thể lan trong cùng address space.</p>
+
+<p><strong>Lợi ích:</strong> responsiveness (UI không bị chặn), resource sharing, economy (nhẹ hơn process), scalability trên multicore. Cái giá là đồng bộ, debug khó và cần xử lý race/exception.</p>
+
+<table><thead><tr><th>Mô hình</th><th>Ánh xạ user threads : kernel threads</th><th>Ưu điểm</th><th>Giới hạn</th></tr></thead><tbody><tr><td>Many-to-one</td><td>Nhiều : 1</td><td>User library nhanh, portable.</td><td>Một blocking syscall chặn cả process; không chạy song song đa core.</td></tr><tr><td>One-to-one</td><td>1 : 1</td><td>Blocking thread không chặn thread khác; song song thật.</td><td>Tạo/quản lý kernel thread tốn tài nguyên; OS có thể giới hạn số lượng.</td></tr><tr><td>Many-to-many</td><td>Nhiều : nhiều (pool kernel)</td><td>Cân bằng song song và chi phí.</td><td>Runtime/kernel phối hợp phức tạp.</td></tr></tbody></table>
+
+<p>User-level scheduling (PCS) chọn thread trong process; kernel-level scheduling (SCS) chọn kernel thread trên CPU. Tên và chi tiết mapping phụ thuộc runtime/OS.</p>
+
+<h2 id="7-kiem-tra-nhanh">7. Kiểm tra nhanh</h2>
+
+<ul><li>Phân biệt “process terminated” và “zombie” bằng câu hỏi: còn chạy không, còn metadata không?</li><li>Với <code>fork</code> + <code>exec</code>, dòng nào tạo PID mới và dòng nào thay image?</li><li>Liệt kê những gì hai thread chia sẻ và hai thứ mỗi thread bắt buộc có riêng.</li></ul>
+
+<p>Ngân hàng câu hỏi: <a class="wikilink" href="../questions/subjective/ch03.html">sub-ch03</a> · Định thời CPU tiếp theo: <a class="wikilink" href="ch04-scheduling.html">theory-ch04-cpu-scheduling</a></p><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#pham-vi-va-muc-tieu">Phạm vi và mục tiêu</a></li><li class="toc-item"><a class="toc-link" href="#1-process-va-bo-cuc-khong-gian-nho">1. Process và bố cục không gian nhớ</a></li><li class="toc-item"><a class="toc-link" href="#2-trang-thai-hang-oi-va-pcb">2. Trạng thái, hàng đợi và PCB</a></li><li class="toc-item"><a class="toc-link" href="#2-1-nam-trang-thai-kinh-ien">2.1 Năm trạng thái kinh điển</a></li><li class="toc-item"><a class="toc-link" href="#2-2-process-control-block-pcb">2.2 Process Control Block (PCB)</a></li><li class="toc-item"><a class="toc-link" href="#3-scheduler-va-context-switch">3. Scheduler và context switch</a></li><li class="toc-item"><a class="toc-link" href="#4-tao-lap-process-fork-exec-wait-exit">4. Tạo lập process: fork, exec, wait, exit</a></li><li class="toc-item"><a class="toc-link" href="#cay-process-va-vi-du-co-thu-tu">Cây process và ví dụ có thứ tự</a></li><li class="toc-item"><a class="toc-link" href="#zombie-va-orphan">Zombie và orphan</a></li><li class="toc-item"><a class="toc-link" href="#5-ipc">5. IPC</a></li><li class="toc-item"><a class="toc-link" href="#6-threads">6. Threads</a></li><li class="toc-item"><a class="toc-link" href="#7-kiem-tra-nhanh">7. Kiểm tra nhanh</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../assets/js/app.js"></script></body></html>

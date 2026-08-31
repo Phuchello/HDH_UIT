@@ -1,0 +1,320 @@
+{
+  "mode": "REPO_ONLY",
+  "sources": [
+    {
+      "source_id": "UIT-OUTLINE-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH01-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH02-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH03-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH04-1-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH04-2-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH04-1-2024-VARIANT-LOCAL-56",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH04-2-2024-VARIANT-LOCAL-34",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH04-3-2024-VARIANT-LOCAL-46",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-1-2024-CANONICAL-USER",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024-VARIANT-LOCAL-16PDF",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-CANONICAL-USER",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-3-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH06-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH07-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH08-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH09-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-QBANK-CH01-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-QBANK-CH02-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-QBANK-CH03-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-QBANK-CH04-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-QBANK-CH05-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-QBANK-CH06-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-QBANK-CH07-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-QBANK-CH08-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-QBANK-CH09-2024",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-LAB01-MANUAL-2023",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-LAB02-MANUAL-2023",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-LAB03-MANUAL-2023",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-LAB04-MANUAL-2023",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-LAB05-MANUAL-2023",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    },
+    {
+      "source_id": "UIT-LAB06-P19-1-2023",
+      "file_present": false,
+      "actual_sha256": null,
+      "hash_match": null,
+      "actual_page_count": null,
+      "page_count_match": null,
+      "verification_timestamp": "2026-08-31T03:20:18.871062+00:00"
+    }
+  ]
+}

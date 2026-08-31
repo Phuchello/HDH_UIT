@@ -1,19 +1,19 @@
 # Gate Negative Tests
 
-**Result:** **PASS** (11 requested injected defects are rejected by non-zero validators)
+**Result:** **PASS** (11/11 defects rejected)
 
-| Injected defect | Validator |
-|---|---|
-| Duplicate source ID | `validate_sources.py` |
-| Unknown source reference | `validate_sources.py` |
-| Malformed source hash | `validate_sources.py` |
-| Unmapped slide page | `verify_research_gates.py` |
-| Forbidden workstation path | `check_public_hygiene.py` |
-| Broken internal wikilink | `validate_v2_content.py` |
-| Unsupported OFFICIAL_RUBRIC | `validate_v2_content.py` |
-| Duplicate document ID | `validate_v2_content.py` |
-| Malformed exam classification | `validate_v2_content.py` |
-| Duplicate slide/page coverage | `verify_research_gates.py` |
-| Missing slide/page coverage | `verify_research_gates.py` |
+| Injected defect | Exit | Result | Evidence |
+|---|---:|:---:|---|
+| NEG-01 duplicate source ID | exit 1 | PASS | >>> Validating Global Source Registry... Found 67 registered source IDs; verified 46 content references. SOURCE VALIDATION FAILED:   - Duplicate source ID in registry   - Source UIT-SLIDE-CH01-2024 missing title   - Source UIT-SLIDE-CH01-20 |
+| NEG-02 unknown source reference | exit 1 | PASS | >>> Validating Global Source Registry... Found 66 registered source IDs; verified 45 content references. SOURCE VALIDATION FAILED:   - Unknown source ID 'NO-SUCH-SOURCE' in content/theory/ch01-overview.md |
+| NEG-03 malformed source hash | exit 1 | PASS | >>> Validating Global Source Registry... Found 66 registered source IDs; verified 46 content references. SOURCE VALIDATION FAILED:   - VERIFIED_LOCAL source UIT-SLIDE-CH01-2024 has invalid sha256 |
+| NEG-04 unmapped slide page | exit 1 | PASS | >>> Executing Evidence-Driven Research Gate Verification... Generated C:\Users\lyle3\Documents\Codex\2026-08-13\codex-final-publication-pass-it007-handbook\work\HDH_UIT\research\RESEARCH_GATE_QA.md with status: FAIL |
+| NEG-05 forbidden workstation path | exit 1 | PASS | >>> Running Public Hygiene & Path Leak Audit... Scanned 109 tracked files.  ============================================================ PUBLIC HYGIENE AUDIT FAILED with 1 leaked paths:   - content/theory/ch01-overview.md:131 [Pattern: 'C:\ |
+| NEG-06 broken wikilink | exit 1 | PASS | >>> Validating Canonical Content & Exam Models... Discovered 13 unique canonical document IDs.  ============================================================ CONTENT VALIDATION FAILED with 1 errors:   - Broken wikilink [[missing-document]] i |
+| NEG-07 unsupported OFFICIAL_RUBRIC | exit 1 | PASS | >>> Validating Canonical Content & Exam Models... Discovered 13 unique canonical document IDs.  ============================================================ CONTENT VALIDATION FAILED with 1 errors:   - Unverified 'Barem chÃ­nh thá»©c' claim |
+| NEG-08 duplicate document ID | exit 1 | PASS | >>> Validating Canonical Content & Exam Models... Discovered 13 unique canonical document IDs.  ============================================================ CONTENT VALIDATION FAILED with 1 errors:   - Duplicate document ID 'theory-ch01-ove |
+| NEG-09 malformed exam classification | exit 1 | PASS | >>> Validating Canonical Content & Exam Models... Discovered 13 unique canonical document IDs.  ============================================================ CONTENT VALIDATION FAILED with 1 errors:   - Exam file content/exams/midterm/2023-2 |
+| NEG-10 duplicate slide page | exit 1 | PASS | >>> Executing Evidence-Driven Research Gate Verification... Generated C:\Users\lyle3\Documents\Codex\2026-08-13\codex-final-publication-pass-it007-handbook\work\HDH_UIT\research\RESEARCH_GATE_QA.md with status: FAIL |
+| NEG-11 missing slide page | exit 1 | PASS | >>> Executing Evidence-Driven Research Gate Verification... Generated C:\Users\lyle3\Documents\Codex\2026-08-13\codex-final-publication-pass-it007-handbook\work\HDH_UIT\research\RESEARCH_GATE_QA.md with status: FAIL |
 
-`scripts/run_negative_tests.py` injects one defect at a time and restores each mutation in a `finally` block before continuing.
+Each mutation is restored in a `finally` block before the next case.

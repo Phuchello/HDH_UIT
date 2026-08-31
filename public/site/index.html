@@ -1,104 +1,20 @@
-<!DOCTYPE html>
-<html lang="vi" data-theme="light">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IT007 · Hệ Điều Hành UIT</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script src="assets/vendor/mathjax/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-
-  <header class="app-header">
-    <a class="brand-container" href="index.html">
-      <span class="brand-badge">IT007</span>
-      <span class="brand-title">Hệ Điều Hành · IT007 UIT</span>
-    </a>
-    <div class="header-actions">
-      <button class="search-trigger-btn" id="search-trigger-btn">
-        <span>🔍 Tìm kiếm nhanh...</span>
-        <kbd class="kbd-shortcut">Ctrl+K</kbd>
-      </button>
-      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng / Tối">
-        <span id="theme-icon">🌙</span>
-      </button>
-    </div>
-  </header>
-
-  <div class="workspace-layout">
-    <aside class="sidebar-left">
-      <div class="nav-section-title">LÝ THUYẾT (THEORY)</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link" href="theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành & Kiến trúc Máy tính</a></li>
+<!DOCTYPE html><html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>IT007 · Hệ Điều Hành UIT</title><link rel="stylesheet" href="assets/css/style.css"><script src="assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head><body><header class="app-header"><a class="brand-container" href="index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header><div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT (THEORY)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="theory/ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="theory/ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="theory/ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
 </ul>
-<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link" href="questions/subjective/ch01.html">Câu Hỏi Tự Luận & Barem Điểm — Chương 1: Tổng Quan HDH</a></li>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="questions/subjective/ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="questions/subjective/ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="questions/subjective/ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="questions/subjective/ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
 </ul>
-<div class="nav-section-title">THỰC HÀNH (LAB)</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link" href="labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin & Lệnh Cơ Bản</a></li>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
 </ul>
-<div class="nav-section-title">ĐỀ THI & TRA CỨU</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link" href="flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
-  <li class="nav-tree-item"><a class="nav-link" href="glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
-  <li class="nav-tree-item"><a class="nav-link" href="exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
-</ul>
-
-    </aside>
-
-    <main class="content-center">
-      <article class="article-body">
-        <h1>Hệ Điều Hành (IT007)</h1>
-        <p style="font-size: 1.1rem; color: var(--text-secondary);">Lý thuyết · Tự luận · Bài tập · Thực hành · Đề thi</p>
-        
-        <div class="article-meta-bar">
-          <span class="meta-item">Biên soạn: <strong>Võ Trọng Phúc</strong></span>
-          <span class="meta-item">Đối chuẩn: <strong>Khoa Kỹ thuật Máy tính · UIT</strong></span>
-        </div>
-
-        <p>
-          Chào mừng bạn đến với tài liệu học tập và tra cứu môn <strong>Hệ điều hành (IT007)</strong>. Mọi nội dung được biên soạn từ các nguồn tài liệu giảng dạy chính thức, tiêu chuẩn quốc tế POSIX/Linux và ngân hàng đề thi lưu trữ.
-        </p>
-
-        <h2>Các Chuyên Đề Cốt Lõi</h2>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
-          <a href="theory/ch01-overview.html" style="display: block; padding: 1.2rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit;">
-            <h3 style="margin-top: 0; color: var(--accent-text);">📖 Lý Thuyết Chương 1</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0;">Tổng quan HDH, cơ chế ngắt, phân cấp lưu trữ và Dual-Mode.</p>
-          </a>
-          <a href="questions/subjective/ch01.html" style="display: block; padding: 1.2rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 8px; text-decoration: none; color: inherit;">
-            <h3 style="margin-top: 0; color: var(--accent-text);">✍️ Ngân Hàng Tự Luận</h3>
-            <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 0;">Luyện viết tự luận có rubric tự kiểm tra gợi ý.</p>
-          </a>
-        </div>
-
-        <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.82rem; color: var(--text-muted); text-align: center;">
-          Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.
-        </div>
-      </article>
-    </main>
-
-    <aside class="sidebar-right">
-      <div class="graph-container">
-        <div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div>
-        <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
-      </div>
-    </aside>
-  </div>
-
-  <div class="search-modal-overlay" id="search-modal-overlay">
-    <div class="search-modal">
-      <div class="search-input-wrapper">
-        <span>🔍</span>
-        <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm...">
-        <kbd class="kbd-shortcut">ESC</kbd>
-      </div>
-      <ul class="search-results-list" id="search-results-list"></ul>
-    </div>
-  </div>
-
-  <script src="assets/js/app.js"></script>
-</body>
-</html>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><article class="article-body"><h1>Hệ Điều Hành (IT007)</h1><p>Lý thuyết · Tự luận · Bài tập · Thực hành · Đề thi</p><div class="article-meta-bar">Biên soạn: <strong>Võ Trọng Phúc</strong> · Bộ sinh: <strong>CUSTOM_STATIC_GENERATOR</strong></div><h2>Các Chuyên Đề Cốt Lõi</h2><div class="document-grid"><a href="theory/ch01-overview.html"><h3>Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</h3><p>Từ vai trò của hệ điều hành đến bootstrap, ngắt, lưu trữ, bộ xử lý, dual-mode và các môi trường tính toán.</p></a><a href="theory/ch02-structure.html"><h3>Chương 2: Cấu trúc và dịch vụ Hệ điều hành</h3><p>Thành phần, dịch vụ, system call, system programs và các kiểu cấu trúc kernel.</p></a><a href="theory/ch03-process.html"><h3>Chương 3: Tiến trình và Tiểu trình</h3><p>Process, bố cục bộ nhớ, trạng thái, PCB, scheduler, fork/exec/wait/exit, IPC và mô hình thread.</p></a><a href="theory/ch04-scheduling.html"><h3>Chương 4: Định thời CPU</h3><p>CPU–I/O burst, tiêu chí đánh giá, FCFS/SJF/SRTF/Priority/RR/HRRN, MLQ/MLFQ, đa xử lý, real-time và scheduler hệ điều hành.</p></a></div><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div></aside></div><div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="assets/js/app.js"></script></body></html>

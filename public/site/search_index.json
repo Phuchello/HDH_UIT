@@ -1,5 +1,11 @@
 [
   {
+    "id": "exams/midterm/2023-2024-hk1",
+    "title": "Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)",
+    "url": "exams/midterm/2023-2024-hk1.html",
+    "snippet": "Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)"
+  },
+  {
     "id": "flashcards-ch01",
     "title": "Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH",
     "url": "flashcards/ch01-cards.html",
@@ -18,21 +24,57 @@
     "snippet": "Làm quen với môi trường Linux Ubuntu, cấu trúc cây thư mục FHS, hệ thống phân quyền tệp tin (chmod/chown), quản lý tiến trình cơ bản (ps/top/kill) và các thao tác dòng lệnh thiết yếu."
   },
   {
-    "id": "theory-ch01-overview",
-    "title": "Chương 1: Tổng quan về Hệ điều hành & Kiến trúc Máy tính",
-    "url": "theory/ch01-overview.html",
-    "snippet": "Định nghĩa hệ điều hành, kiến trúc phân tầng 4 lớp, cơ chế ngắt phần cứng và ngoại lệ, phân cấp bộ nhớ lưu trữ, kiến trúc đa bộ xử lý và gom cụm, chế độ hoạt động kép Dual-Mode, lệnh đặc quyền và 4 môi trường tính toán."
-  },
-  {
-    "id": "exams/midterm/2023-2024-hk1",
-    "title": "Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)",
-    "url": "exams/midterm/2023-2024-hk1.html",
-    "snippet": "Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)"
-  },
-  {
     "id": "sub-ch01",
-    "title": "Câu Hỏi Tự Luận & Barem Điểm — Chương 1: Tổng Quan HDH",
+    "title": "Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành",
     "url": "questions/subjective/ch01.html",
-    "snippet": "Ngân hàng câu hỏi tự luận có barem chấm chi tiết, danh sách từ khóa bắt buộc, câu hỏi tự kiểm tra SubjectivePractice và StudyCards phục vụ ôn tập Giữa kỳ IT007."
+    "snippet": "Câu hỏi nguồn-backed về định nghĩa OS, ngắt, lưu trữ, bộ xử lý, dual-mode và môi trường tính toán."
+  },
+  {
+    "id": "sub-ch02",
+    "title": "Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành",
+    "url": "questions/subjective/ch02.html",
+    "snippet": "Bảy câu hỏi chính thức về thành phần, dịch vụ, system call, system programs và kiến trúc kernel."
+  },
+  {
+    "id": "sub-ch03",
+    "title": "Ngân hàng tự luận — Chương 3: Quản lý tiến trình",
+    "url": "questions/subjective/ch03.html",
+    "snippet": "Tám câu hỏi nguồn-backed về layout, states, PCB, scheduler, process creation, IPC và threads."
+  },
+  {
+    "id": "sub-ch04",
+    "title": "Ngân hàng tự luận — Chương 4: Định thời CPU",
+    "url": "questions/subjective/ch04.html",
+    "snippet": "Năm câu hỏi chính thức về tiêu chí, SJF, starvation/aging, RR và MLFQ."
+  },
+  {
+    "id": "review-midterm",
+    "title": "Ôn tập Giữa kỳ IT007 — Chương 1–4",
+    "url": "reviews/midterm.html",
+    "snippet": "Bản ôn tập dựng từ slide Midterm Review và câu hỏi Chương 1–4; gồm recall, lý thuyết, so sánh, fork và scheduling."
+  },
+  {
+    "id": "theory-ch01-overview",
+    "title": "Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính",
+    "url": "theory/ch01-overview.html",
+    "snippet": "Từ vai trò của hệ điều hành đến bootstrap, ngắt, lưu trữ, bộ xử lý, dual-mode và các môi trường tính toán."
+  },
+  {
+    "id": "theory-ch02-structure",
+    "title": "Chương 2: Cấu trúc và dịch vụ Hệ điều hành",
+    "url": "theory/ch02-structure.html",
+    "snippet": "Thành phần, dịch vụ, system call, system programs và các kiểu cấu trúc kernel."
+  },
+  {
+    "id": "theory-ch03-process",
+    "title": "Chương 3: Tiến trình và Tiểu trình",
+    "url": "theory/ch03-process.html",
+    "snippet": "Process, bố cục bộ nhớ, trạng thái, PCB, scheduler, fork/exec/wait/exit, IPC và mô hình thread."
+  },
+  {
+    "id": "theory-ch04-cpu-scheduling",
+    "title": "Chương 4: Định thời CPU",
+    "url": "theory/ch04-scheduling.html",
+    "snippet": "CPU–I/O burst, tiêu chí đánh giá, FCFS/SJF/SRTF/Priority/RR/HRRN, MLQ/MLFQ, đa xử lý, real-time và scheduler hệ điều hành."
   }
 ]

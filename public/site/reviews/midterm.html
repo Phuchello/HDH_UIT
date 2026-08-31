@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ôn tập Giữa kỳ IT007 — Chương 1–4 — IT007 UIT</title><link rel="stylesheet" href="../assets/css/style.css"><script src="../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT (THEORY)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../theory/ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../theory/ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../theory/ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../index.html">Trang chủ</a> <span>/</span> <span>Ôn tập Giữa kỳ IT007 — Chương 1–4</span></div><article class="article-body"><h1 id="on-tap-giua-ky-it007-chuong-14">Ôn tập Giữa kỳ IT007 — Chương 1–4</h1>
+
+<h2 id="cach-dung-va-gioi-han-bang-chung">Cách dùng và giới hạn bằng chứng</h2>
+
+<p>Khung này được tổng hợp từ canonical PPTX <code>UIT-SLIDE-MIDTERM-REVIEW-2024</code>, slide 2–16, và các qbank Chương 1–4 đã đăng ký. Tài liệu lịch sử chỉ cho biết phong cách quan sát được; không có tuyên bố “UIT luôn hỏi”, điểm số hay barem chính thức nếu không có locator xác minh. Hãy trả lời theo cơ chế và đặc tính trước, sau đó mới dùng mẹo nhận diện.</p>
+
+<h2 id="format-shown-in-the-official-2024-midterm-review">Format shown in the official 2024 Midterm Review</h2>
+
+<p>Slide 2 của bộ <code>UIT-SLIDE-MIDTERM-REVIEW-2024</code> trình bày một format lịch sử của đợt ôn tập này:</p>
+
+<table><thead><tr><th>Phần</th><th>Cấu trúc thể hiện trên slide</th><th>Điểm thể hiện trên slide</th></tr></thead><tbody><tr><td>Tự luận</td><td>Câu ngắn + tạo tiến trình: 3 câu</td><td>1.5</td></tr><tr><td>Tự luận</td><td>Định thời CPU: 2 câu</td><td>2.5</td></tr><tr><td>Trắc nghiệm (MCQ)</td><td>12 câu, mỗi câu 0.5</td><td>6.0</td></tr></tbody></table>
+
+<p>Tổng format được trình bày là 10 điểm. Đây là thông tin <strong>đặc thù của slide ôn tập 2024</strong>, không phải cam kết cho mọi học kỳ; không dùng nó để suy ra thời lượng, barem hay cấu trúc kỳ thi khác nếu không có nguồn xác minh.</p>
+
+<h2 id="chuong-1-source-prompts">Chương 1 — Source prompts</h2>
+
+<p>Canonical slide 5 có <strong>9 question bullets</strong>. Các bullet dưới đây là occurrence riêng biệt trong review, có thể trỏ về lời giải qbank nhưng không làm mất locator slide:</p>
+
+<ol><li>Computer-system structure: các thành phần và vai trò của hệ thống máy tính (<code>UIT-SLIDE-MIDTERM-REVIEW-2024</code>, slide 5, bullet 1).</li><li>User view và system view của hệ điều hành (slide 5, bullet 2).</li><li>System programs so với application programs (slide 5, bullet 3).</li><li>Interrupt, trap/exception và chu trình xử lý (slide 5, bullet 4).</li><li>Storage hierarchy và caching/locality (slide 5, bullet 5).</li><li>Single-processor, SMP/AMP và clustered systems (slide 5, bullet 6).</li><li>Dual mode, mode bit và privileged instruction (slide 5, bullet 7).</li><li>Timer, protection và lý do OS lấy lại CPU (slide 5, bullet 8).</li><li>Hard real-time so với soft real-time (slide 5, bullet 9).</li></ol>
+
+<h2 id="chuong-2-source-prompts">Chương 2 — Source prompts</h2>
+
+<p>Canonical slide 7 có <strong>5 question bullets</strong>:</p>
+
+<ol><li>OS structures và ví dụ monolithic/microkernel (slide 7, bullet 1).</li><li>System programs: nhóm chức năng và ví dụ (slide 7, bullet 2).</li><li>OS services cho user/program và system-efficiency services (slide 7, bullet 3).</li><li>System calls, API và cách truyền tham số (slide 7, bullet 4).</li><li>Protection/security boundary và sự khác nhau giữa component, service, system program (slide 7, bullet 5).</li></ol>
+
+<h2 id="chuong-3-source-prompts">Chương 3 — Source prompts</h2>
+
+<p>Canonical slide 9 có <strong>6 question bullets</strong>:</p>
+
+<ol><li>Process và program; process address space (slide 9, bullet 1).</li><li>Process states và state-transition diagram (slide 9, bullet 2).</li><li>PCB và context switch (slide 9, bullet 3).</li><li>Vì sao process hợp tác/cooperating (slide 9, bullet 4).</li><li>Parent/child và thứ tự thực thi (slide 9, bullet 5).</li><li>Threads: lợi ích và mô hình mapping (slide 9, bullet 6).</li></ol>
+
+<p>Slide 10 có <strong>1 compound state-transition exercise</strong>: từ chuỗi sự kiện arrival, I/O, preemption và termination, vẽ trạng thái/giải thích từng cạnh (<code>MIDTERM-REVIEW-10</code>). Slide 11 có <strong>1 compound fork/output/process-tree exercise</strong> (<code>MIDTERM-REVIEW-11</code>): đếm process theo từng nhánh, thứ tự output chỉ kết luận khi có <code>wait</code>/đồng bộ; <code>exec</code> không tạo PID mới.</p>
+
+<h2 id="chuong-4-source-prompts">Chương 4 — Source prompts</h2>
+
+<p>Canonical slide 14 có <strong>10 question bullets</strong>:</p>
+
+<ol><li>Vì sao cần scheduling và các loại scheduler.</li><li>Định nghĩa CPU scheduling và scheduler chịu trách nhiệm.</li><li>Chi phí scheduling/dispatch.</li><li>Các tiêu chí đánh giá (slide nêu sáu; qbank wording “năm” được giữ nguyên ở qbank).</li><li>Tên các thuật toán scheduling.</li><li>Đặc tính, ưu/nhược của FCFS/SJF/SRTF/RR/Priority/HRRN/MQ/MFQ.</li><li>Multiprocessor scheduling và load balancing.</li><li>Real-time scheduling.</li><li>Linux CFS.</li><li>Windows scheduling.</li></ol>
+
+<p>Solaris không phải prompt của Midterm Review; nó chỉ là phần đọc thêm trong canonical Chương 4 Part 2.</p>
+
+<p>Slide 15 có <strong>1 compound scheduling calculation exercise</strong> (<code>MIDTERM-REVIEW-15</code>): giải FCFS, preemptive SJF và RR với <code>q=10</code>, ghi arrival/burst, decision mode, tie-break và CT/TAT/WT/RT.</p>
+
+<h2 id="reference-to-external-exercise-set">Reference to external exercise set</h2>
+
+<p>Slides 12 và 16 chỉ tham chiếu các bài tập còn lại. Chúng được ghi là <code>REFERENCE_TO_EXTERNAL_EXERCISE_SET</code> trong question manifest, không được biến thành câu hỏi tự phát hay gán đáp án không có source locator.</p>
+
+<h2 id="a-core-property-recall">A. Core-property recall</h2>
+
+<ol><li>OS có hai góc nhìn nào? — User view (tiện dụng/phản hồi) và system view (resource allocator/control program).</li><li>IVT và ISR là gì? — IVT ánh xạ vector tới địa chỉ ISR; ISR phục vụ sự kiện.</li><li>Ba tiêu chí storage hierarchy? — access time/speed, capacity, cost per bit.</li><li>CPU, processor và core khác nhau thế nào? — processor là đơn vị được lập lịch; core là engine bên trong package; “CPU” cần nói rõ cấp phần cứng.</li><li>PCB giữ những nhóm trường nào? — identity/state/registers, scheduling, memory, accounting, I/O/file và quan hệ/IPC.</li><li>TAT, WT, RT? — <code>CT−AT</code>, thời gian trong ready queue, và thời điểm chạy đầu−AT.</li></ol>
+
+<h2 id="b-short-theory-answers">B. Short theory answers</h2>
+
+<h3 id="b1-interrupt">B1. Interrupt</h3>
+
+<p>Nêu nguồn và tính đồng bộ của hardware interrupt/trap, sau đó viết chuỗi <code>save state → IVT → ISR → restore</code>. System call là trap có chủ đích; page fault là exception được kernel xử lý. Locator: <code>UIT-SLIDE-CH01-2024</code>, slide 14–22.</p>
+
+<h3 id="b2-system-call">B2. System call</h3>
+
+<p>System call là điểm vào kernel có bảo vệ; API là giao diện thư viện có thể bọc nhiều call; ordinary function call không tự đổi đặc quyền. Ba cách truyền tham số: register, block/table trong memory, stack. Locator: <code>UIT-SLIDE-CH02-2024</code>, slide 23–35.</p>
+
+<h3 id="b3-process-lifecycle">B3. Process lifecycle</h3>
+
+<p>Vẽ <code>new → ready → running → waiting → ready</code> và <code>running → terminated</code>; giải thích PCB, scheduler và context switch. Ready chờ CPU, waiting chờ event. Locator: <code>UIT-SLIDE-CH03-2024</code>, slide 4–27.</p>
+
+<h3 id="b4-scheduler">B4. Scheduler</h3>
+
+<p>Phân biệt scheduler (chọn) và dispatcher (trao CPU). Nêu CPU/I-O burst, dispatch latency và <strong>sáu</strong> metrics trên slide (response, turnaround, waiting, utilization, fairness, throughput); fairness thường được nhận xét định tính. Locator: <code>UIT-SLIDE-CH04-1-2024</code>, slide 4–22.</p>
+
+<h2 id="c-comparison-questions">C. Comparison questions</h2>
+
+<table><thead><tr><th>Cặp cần phân biệt</th><th>Trục trả lời</th></tr></thead><tbody><tr><td>Multiprogramming vs time-sharing</td><td>CPU utilization/throughput so với response/interactive; timer preemption.</td></tr><tr><td>SMP vs AMP vs cluster</td><td>Bình đẳng/chung memory; chủ–tớ; nhiều nút qua network.</td></tr><tr><td>Process vs thread</td><td>Address space/isolation so với shared memory; PC/register/stack riêng.</td></tr><tr><td>Monolithic vs microkernel</td><td>Kernel boundary, IPC, fault isolation, performance.</td></tr><tr><td>MLQ vs MLFQ</td><td>Queue cố định/không di chuyển so với feedback promotion/demotion/boost.</td></tr><tr><td>SJF vs SRTF</td><td>Non-preemptive shortest burst so với preemptive shortest remaining.</td></tr></tbody></table>
+
+<p>Khi bảng so sánh dùng thuật ngữ “Linux hybrid” hoặc “SJF luôn tối ưu”, phải ghi phạm vi và giả định; các mệnh đề tuyệt đối là dấu hiệu cần kiểm tra nguồn.</p>
+
+<h2 id="d-process-fork-trace">D. Process/fork trace</h2>
+
+<h3 id="bai-tap">Bài tập</h3>
+
+<pre><code class="language-c">int main(void) {
+    pid_t p = fork();
+    if (p == 0) { puts(&quot;child&quot;); _exit(0); }
+    if (p &gt; 0) { waitpid(p, NULL, 0); puts(&quot;parent&quot;); }
+}</code></pre>
+
+<p><strong>Đáp án kiểm tra:</strong> Có hai process; child in trước, parent in sau nhờ <code>waitpid</code>. Nếu <code>fork</code> nằm trong vòng lặp, tính số lần fork ở từng nhánh rồi dựng cây; không đếm số dòng mã. <code>exec</code> thay image chứ không tạo PID mới. Locator: <code>UIT-QBANK-CH03-2024</code>, Câu 5–6 / Mục 3; chi tiết POSIX tại <code>POSIX-FORK</code>, <code>POSIX-WAITPID</code>.</p>
+
+<h2 id="e-cpu-scheduling-practice">E. CPU scheduling practice</h2>
+
+<h3 id="e1-fcfs-sjf-srtf">E1. FCFS/SJF/SRTF</h3>
+
+<p>Với P1(0,7), P2(2,4), P3(4,1), P4(5,4), SRTF và tie giữ process đang chạy cho:</p>
+
+<pre><code class="language-">| P1 | P2 | P3 | P2 | P4 | P1 |
+0    2    4    5    7    11   16</code></pre>
+
+<p>CT lần lượt P1=16, P2=7, P3=5, P4=11; WT = 9,1,0,2; <code>WTavg = 3.00</code> và <code>TATavg = 7.00</code> khi dùng đúng công thức và BT. Kiểm tra: tổng WT=12 nên <code>WTavg=3.00</code>; tổng TAT=28 nên <code>TATavg=7.00</code>. Ghi rõ arrival/tie; đổi quy ước có thể đổi Gantt.</p>
+
+<h3 id="e2-rr-va-quantum">E2. RR và quantum</h3>
+
+<p>Với q nhỏ, response thường tốt nhưng context-switch overhead cao; q lớn tiến gần FCFS. Đề phải cho biết quy tắc process đến đúng lúc quantum hết.</p>
+
+<h3 id="e3-mlfq">E3. MLFQ</h3>
+
+<p>Nêu số queue, algorithm mỗi queue, promotion/demotion, boost và xử lý job mới. Chỉ nói “ưu tiên queue cao” là chưa đủ một lời giải.</p>
+
+<h2 id="f-terminology-quick-check">F. Terminology quick check</h2>
+
+<ul><li><strong>Bootstrap:</strong> firmware nạp kernel.</li><li><strong>Mode bit:</strong> trong quy ước slide IT007, 0 kernel/1 user; ghi rõ phạm vi.</li><li><strong>Privileged instruction:</strong> chỉ kernel được phép; user vi phạm tạo exception.</li><li><strong>System program:</strong> tiện ích user-space gọi system call.</li><li><strong>Dispatch latency:</strong> thời gian từ quyết định đến khi task mới bắt đầu chạy.</li><li><strong>Zombie:</strong> child đã exit, chưa wait; <strong>orphan:</strong> child còn chạy, parent đã exit.</li><li><strong>Aging:</strong> tăng ưu tiên theo thời gian chờ, không phải rút ngắn burst.</li></ul>
+
+<h2 id="g-mixed-mcq-true-false-co-giai-thich">G. Mixed MCQ / True-False có giải thích</h2>
+
+<ol><li><strong>Đ/S:</strong> “API luôn là một system call.” — <strong>Sai:</strong> API có thể là wrapper hoặc nhiều call.</li><li><strong>Đ/S:</strong> “Ready process đang chờ I/O.” — <strong>Sai:</strong> waiting/blocked mới chờ event; ready chờ CPU.</li><li><strong>Đ/S:</strong> “SJF không preemptive và SRTF preemptive.” — <strong>Đúng</strong> theo định nghĩa cơ bản.</li><li><strong>MCQ:</strong> Cấu trúc nào đặt service ở user space để cô lập lỗi? — <strong>Microkernel</strong>, với chi phí IPC có thể tăng.</li><li><strong>MCQ:</strong> Metric từ arrival đến completion? — <strong>Turnaround time</strong>.</li><li><strong>Đ/S:</strong> “Timer giúp user process giữ CPU vô hạn.” — <strong>Sai:</strong> timer giúp kernel preempt/lấy lại quyền.</li></ol>
+
+<h2 id="checklist-truoc-khi-nop-bai">Checklist trước khi nộp bài</h2>
+
+<ul><li>Có nêu <strong>định nghĩa + đặc tính + cơ chế + ưu/nhược</strong> thay vì chỉ mẹo?</li><li>Mọi con số Gantt có arrival, BT, quantum và tie-break?</li><li>Mọi claim về Linux/Windows/đề thi có nguồn hoặc được gắn <code>INSUFFICIENT_EVIDENCE</code>?</li><li>Nếu cần tự chấm, dùng Complete/Mostly complete/Partial; không tự gán điểm hay gọi là barem chính thức.</li></ul>
+
+<p>Các ngân hàng chi tiết: <a class="wikilink" href="../questions/subjective/ch01.html">sub-ch01</a>, <a class="wikilink" href="../questions/subjective/ch02.html">sub-ch02</a>, <a class="wikilink" href="../questions/subjective/ch03.html">sub-ch03</a>, <a class="wikilink" href="../questions/subjective/ch04.html">sub-ch04</a></p><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#cach-dung-va-gioi-han-bang-chung">Cách dùng và giới hạn bằng chứng</a></li><li class="toc-item"><a class="toc-link" href="#format-shown-in-the-official-2024-midterm-review">Format shown in the official 2024 Midterm Review</a></li><li class="toc-item"><a class="toc-link" href="#chuong-1-source-prompts">Chương 1 — Source prompts</a></li><li class="toc-item"><a class="toc-link" href="#chuong-2-source-prompts">Chương 2 — Source prompts</a></li><li class="toc-item"><a class="toc-link" href="#chuong-3-source-prompts">Chương 3 — Source prompts</a></li><li class="toc-item"><a class="toc-link" href="#chuong-4-source-prompts">Chương 4 — Source prompts</a></li><li class="toc-item"><a class="toc-link" href="#reference-to-external-exercise-set">Reference to external exercise set</a></li><li class="toc-item"><a class="toc-link" href="#a-core-property-recall">A. Core-property recall</a></li><li class="toc-item"><a class="toc-link" href="#b-short-theory-answers">B. Short theory answers</a></li><li class="toc-item"><a class="toc-link" href="#b1-interrupt">B1. Interrupt</a></li><li class="toc-item"><a class="toc-link" href="#b2-system-call">B2. System call</a></li><li class="toc-item"><a class="toc-link" href="#b3-process-lifecycle">B3. Process lifecycle</a></li><li class="toc-item"><a class="toc-link" href="#b4-scheduler">B4. Scheduler</a></li><li class="toc-item"><a class="toc-link" href="#c-comparison-questions">C. Comparison questions</a></li><li class="toc-item"><a class="toc-link" href="#d-process-fork-trace">D. Process/fork trace</a></li><li class="toc-item"><a class="toc-link" href="#bai-tap">Bài tập</a></li><li class="toc-item"><a class="toc-link" href="#e-cpu-scheduling-practice">E. CPU scheduling practice</a></li><li class="toc-item"><a class="toc-link" href="#e1-fcfs-sjf-srtf">E1. FCFS/SJF/SRTF</a></li><li class="toc-item"><a class="toc-link" href="#e2-rr-va-quantum">E2. RR và quantum</a></li><li class="toc-item"><a class="toc-link" href="#e3-mlfq">E3. MLFQ</a></li><li class="toc-item"><a class="toc-link" href="#f-terminology-quick-check">F. Terminology quick check</a></li><li class="toc-item"><a class="toc-link" href="#g-mixed-mcq-true-false-co-giai-thich">G. Mixed MCQ / True-False có giải thích</a></li><li class="toc-item"><a class="toc-link" href="#checklist-truoc-khi-nop-bai">Checklist trước khi nộp bài</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../assets/js/app.js"></script></body></html>

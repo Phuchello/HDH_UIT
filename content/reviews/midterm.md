@@ -30,7 +30,7 @@ last_updated: "2026-08-31"
 
 ## Cách dùng và giới hạn bằng chứng
 
-Khung này được tổng hợp từ `UIT-SLIDE-MIDTERM-REVIEW-2024`, slide 3–15 và các qbank Chương 1–4 đã đăng ký. Tài liệu lịch sử chỉ cho biết phong cách quan sát được; không có tuyên bố “UIT luôn hỏi”, điểm số hay barem chính thức nếu không có locator xác minh. Hãy trả lời theo cơ chế và đặc tính trước, sau đó mới dùng mẹo nhận diện.
+Khung này được tổng hợp từ canonical PPTX `UIT-SLIDE-MIDTERM-REVIEW-2024`, slide 2–16, và các qbank Chương 1–4 đã đăng ký. Tài liệu lịch sử chỉ cho biết phong cách quan sát được; không có tuyên bố “UIT luôn hỏi”, điểm số hay barem chính thức nếu không có locator xác minh. Hãy trả lời theo cơ chế và đặc tính trước, sau đó mới dùng mẹo nhận diện.
 
 ## Format shown in the official 2024 Midterm Review
 
@@ -43,6 +43,66 @@ Slide 2 của bộ `UIT-SLIDE-MIDTERM-REVIEW-2024` trình bày một format lị
 | Trắc nghiệm (MCQ) | 12 câu, mỗi câu 0.5 | 6.0 |
 
 Tổng format được trình bày là 10 điểm. Đây là thông tin **đặc thù của slide ôn tập 2024**, không phải cam kết cho mọi học kỳ; không dùng nó để suy ra thời lượng, barem hay cấu trúc kỳ thi khác nếu không có nguồn xác minh.
+
+## Chương 1 — Source prompts
+
+Canonical slide 5 có **9 question bullets**. Các bullet dưới đây là occurrence riêng biệt trong review, có thể trỏ về lời giải qbank nhưng không làm mất locator slide:
+
+1. Computer-system structure: các thành phần và vai trò của hệ thống máy tính (`UIT-SLIDE-MIDTERM-REVIEW-2024`, slide 5, bullet 1).
+2. User view và system view của hệ điều hành (slide 5, bullet 2).
+3. System programs so với application programs (slide 5, bullet 3).
+4. Interrupt, trap/exception và chu trình xử lý (slide 5, bullet 4).
+5. Storage hierarchy và caching/locality (slide 5, bullet 5).
+6. Single-processor, SMP/AMP và clustered systems (slide 5, bullet 6).
+7. Dual mode, mode bit và privileged instruction (slide 5, bullet 7).
+8. Timer, protection và lý do OS lấy lại CPU (slide 5, bullet 8).
+9. Hard real-time so với soft real-time (slide 5, bullet 9).
+
+## Chương 2 — Source prompts
+
+Canonical slide 7 có **5 question bullets**:
+
+1. OS structures và ví dụ monolithic/microkernel (slide 7, bullet 1).
+2. System programs: nhóm chức năng và ví dụ (slide 7, bullet 2).
+3. OS services cho user/program và system-efficiency services (slide 7, bullet 3).
+4. System calls, API và cách truyền tham số (slide 7, bullet 4).
+5. Protection/security boundary và sự khác nhau giữa component, service, system program (slide 7, bullet 5).
+
+## Chương 3 — Source prompts
+
+Canonical slide 9 có **6 question bullets**:
+
+1. Process và program; process address space (slide 9, bullet 1).
+2. Process states và state-transition diagram (slide 9, bullet 2).
+3. PCB và context switch (slide 9, bullet 3).
+4. Vì sao process hợp tác/cooperating (slide 9, bullet 4).
+5. Parent/child và thứ tự thực thi (slide 9, bullet 5).
+6. Threads: lợi ích và mô hình mapping (slide 9, bullet 6).
+
+Slide 10 có **1 compound state-transition exercise**: từ chuỗi sự kiện arrival, I/O, preemption và termination, vẽ trạng thái/giải thích từng cạnh (`MIDTERM-REVIEW-10`). Slide 11 có **1 compound fork/output/process-tree exercise** (`MIDTERM-REVIEW-11`): đếm process theo từng nhánh, thứ tự output chỉ kết luận khi có `wait`/đồng bộ; `exec` không tạo PID mới.
+
+## Chương 4 — Source prompts
+
+Canonical slide 14 có **10 question bullets**:
+
+1. Vì sao cần scheduling và các loại scheduler.
+2. Định nghĩa CPU scheduling và scheduler chịu trách nhiệm.
+3. Chi phí scheduling/dispatch.
+4. Các tiêu chí đánh giá (slide nêu sáu; qbank wording “năm” được giữ nguyên ở qbank).
+5. Tên các thuật toán scheduling.
+6. Đặc tính, ưu/nhược của FCFS/SJF/SRTF/RR/Priority/HRRN/MQ/MFQ.
+7. Multiprocessor scheduling và load balancing.
+8. Real-time scheduling.
+9. Linux CFS.
+10. Windows scheduling.
+
+Solaris không phải prompt của Midterm Review; nó chỉ là phần đọc thêm trong canonical Chương 4 Part 2.
+
+Slide 15 có **1 compound scheduling calculation exercise** (`MIDTERM-REVIEW-15`): giải FCFS, preemptive SJF và RR với `q=10`, ghi arrival/burst, decision mode, tie-break và CT/TAT/WT/RT.
+
+## Reference to external exercise set
+
+Slides 12 và 16 chỉ tham chiếu các bài tập còn lại. Chúng được ghi là `REFERENCE_TO_EXTERNAL_EXERCISE_SET` trong question manifest, không được biến thành câu hỏi tự phát hay gán đáp án không có source locator.
 
 ## A. Core-property recall
 
@@ -69,7 +129,7 @@ Vẽ `new → ready → running → waiting → ready` và `running → terminat
 
 ### B4. Scheduler
 
-Phân biệt scheduler (chọn) và dispatcher (trao CPU). Nêu CPU/I-O burst, dispatch latency và năm metrics. Locator: `UIT-SLIDE-CH04-1-2024`, slide 4–15.
+Phân biệt scheduler (chọn) và dispatcher (trao CPU). Nêu CPU/I-O burst, dispatch latency và **sáu** metrics trên slide (response, turnaround, waiting, utilization, fairness, throughput); fairness thường được nhận xét định tính. Locator: `UIT-SLIDE-CH04-1-2024`, slide 4–22.
 
 ## C. Comparison questions
 

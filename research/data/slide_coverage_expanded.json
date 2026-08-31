@@ -2900,10 +2900,10 @@
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 4,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Khái niệm định thời, multitasking, service/burst time, CPU-bound và I/O-bound",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Khái niệm định thời, multitasking, service/burst time, CPU-bound và I/O-bound"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -2911,15 +2911,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "4-8"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 5,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Khái niệm định thời, multitasking, service/burst time, CPU-bound và I/O-bound",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Khái niệm định thời, multitasking, service/burst time, CPU-bound và I/O-bound"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -2927,15 +2927,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "4-8"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 6,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Khái niệm định thời, multitasking, service/burst time, CPU-bound và I/O-bound",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Khái niệm định thời, multitasking, service/burst time, CPU-bound và I/O-bound"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -2943,15 +2943,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "4-8"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 7,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Khái niệm định thời, multitasking, service/burst time, CPU-bound và I/O-bound",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Khái niệm định thời, multitasking, service/burst time, CPU-bound và I/O-bound"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -2959,15 +2959,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "4-8"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 8,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Khái niệm định thời, multitasking, service/burst time, CPU-bound và I/O-bound",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Khái niệm định thời, multitasking, service/burst time, CPU-bound và I/O-bound"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -2975,15 +2975,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "4-8"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 9,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -2991,15 +2991,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "9-18"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 10,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3007,15 +3007,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "9-18"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 11,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3023,15 +3023,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "9-18"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 12,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3039,15 +3039,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "9-18"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 13,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3055,15 +3055,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "9-18"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 14,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3071,15 +3071,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "9-18"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 15,
-      "heading": "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời",
+      "heading": "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency",
       "subheading": "",
       "bullet_clusters": [
-        "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3087,207 +3087,207 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "4-15"
+      "range": "9-18"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 16,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "9-18"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 17,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "9-18"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 18,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "9-18"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 19,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Sáu tiêu chí định thời: response, turnaround, waiting, utilization, fairness, throughput",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Sáu tiêu chí định thời: response, turnaround, waiting, utilization, fairness, throughput"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "19-22"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 20,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Sáu tiêu chí định thời: response, turnaround, waiting, utilization, fairness, throughput",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Sáu tiêu chí định thời: response, turnaround, waiting, utilization, fairness, throughput"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "19-22"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 21,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Sáu tiêu chí định thời: response, turnaround, waiting, utilization, fairness, throughput",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Sáu tiêu chí định thời: response, turnaround, waiting, utilization, fairness, throughput"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "19-22"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 22,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Sáu tiêu chí định thời: response, turnaround, waiting, utilization, fairness, throughput",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Sáu tiêu chí định thời: response, turnaround, waiting, utilization, fairness, throughput"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "19-22"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 23,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Selection function, decision mode, preemptive/non-preemptive và các điểm ra quyết định",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Selection function, decision mode, preemptive/non-preemptive và các điểm ra quyết định"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "23-27"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 24,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Selection function, decision mode, preemptive/non-preemptive và các điểm ra quyết định",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Selection function, decision mode, preemptive/non-preemptive và các điểm ra quyết định"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "23-27"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 25,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Selection function, decision mode, preemptive/non-preemptive và các điểm ra quyết định",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Selection function, decision mode, preemptive/non-preemptive và các điểm ra quyết định"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "23-27"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 26,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Selection function, decision mode, preemptive/non-preemptive và các điểm ra quyết định",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Selection function, decision mode, preemptive/non-preemptive và các điểm ra quyết định"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "23-27"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 27,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Selection function, decision mode, preemptive/non-preemptive và các điểm ra quyết định",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Selection function, decision mode, preemptive/non-preemptive và các điểm ra quyết định"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "23-27"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 28,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "FCFS: cơ chế, ví dụ và RT/WT/TAT",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "FCFS: cơ chế, ví dụ và RT/WT/TAT"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3295,15 +3295,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "28-33"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 29,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "FCFS: cơ chế, ví dụ và RT/WT/TAT",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "FCFS: cơ chế, ví dụ và RT/WT/TAT"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3311,15 +3311,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "28-33"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 30,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "FCFS: cơ chế, ví dụ và RT/WT/TAT",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "FCFS: cơ chế, ví dụ và RT/WT/TAT"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3327,15 +3327,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "28-33"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 31,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "FCFS: cơ chế, ví dụ và RT/WT/TAT",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "FCFS: cơ chế, ví dụ và RT/WT/TAT"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3343,15 +3343,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "28-33"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 32,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "FCFS: cơ chế, ví dụ và RT/WT/TAT",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "FCFS: cơ chế, ví dụ và RT/WT/TAT"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3359,15 +3359,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "28-33"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 33,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "FCFS: cơ chế, ví dụ và RT/WT/TAT",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "FCFS: cơ chế, ví dụ và RT/WT/TAT"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3375,15 +3375,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "28-33"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 34,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3391,15 +3391,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 35,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3407,15 +3407,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 36,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3423,15 +3423,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 37,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3439,15 +3439,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 38,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3455,15 +3455,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 39,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3471,15 +3471,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 40,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3487,15 +3487,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 41,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3503,15 +3503,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 42,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3519,15 +3519,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 43,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3535,15 +3535,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 44,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3551,15 +3551,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 45,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3567,15 +3567,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 46,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3583,15 +3583,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 47,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3599,15 +3599,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "34-47"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 48,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Priority scheduling, starvation, aging và ví dụ",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Priority scheduling, starvation, aging và ví dụ"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3615,15 +3615,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "48-52"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 49,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Priority scheduling, starvation, aging và ví dụ",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Priority scheduling, starvation, aging và ví dụ"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3631,15 +3631,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "48-52"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 50,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Priority scheduling, starvation, aging và ví dụ",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Priority scheduling, starvation, aging và ví dụ"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3647,15 +3647,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "48-52"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 51,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Priority scheduling, starvation, aging và ví dụ",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Priority scheduling, starvation, aging và ví dụ"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3663,15 +3663,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "48-52"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 52,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Priority scheduling, starvation, aging và ví dụ",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Priority scheduling, starvation, aging và ví dụ"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3679,15 +3679,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "48-52"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 53,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3695,15 +3695,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "53-63"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 54,
-      "heading": "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin",
+      "heading": "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn",
       "subheading": "",
       "bullet_clusters": [
-        "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3711,15 +3711,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "16-54"
+      "range": "53-63"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 55,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3727,15 +3727,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "53-63"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 56,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3743,15 +3743,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "53-63"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 57,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3759,15 +3759,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "53-63"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 58,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3775,15 +3775,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "53-63"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 59,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3791,15 +3791,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "53-63"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 60,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3807,15 +3807,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "53-63"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 61,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3823,15 +3823,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "53-63"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 62,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3839,15 +3839,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "53-63"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 63,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -3855,175 +3855,223 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "53-63"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 64,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Tóm tắt Chương 4",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Tóm tắt Chương 4"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/theory/ch04-scheduling.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": 64
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 65,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Câu hỏi ôn tập chính thức Chương 4",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Câu hỏi ôn tập chính thức Chương 4"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/questions/subjective/ch04.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": 65
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 66,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Bài tập định thời chính thức 1–8",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Bài tập định thời chính thức 1–8"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/questions/subjective/ch04.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "66-73"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 67,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Bài tập định thời chính thức 1–8",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Bài tập định thời chính thức 1–8"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/questions/subjective/ch04.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "66-73"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 68,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Bài tập định thời chính thức 1–8",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Bài tập định thời chính thức 1–8"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/questions/subjective/ch04.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "66-73"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 69,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Bài tập định thời chính thức 1–8",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Bài tập định thời chính thức 1–8"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/questions/subjective/ch04.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "66-73"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 70,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Bài tập định thời chính thức 1–8",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Bài tập định thời chính thức 1–8"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/questions/subjective/ch04.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "66-73"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 71,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Bài tập định thời chính thức 1–8",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Bài tập định thời chính thức 1–8"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/questions/subjective/ch04.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "66-73"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 72,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Bài tập định thời chính thức 1–8",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Bài tập định thời chính thức 1–8"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/questions/subjective/ch04.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "66-73"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 73,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Bài tập định thời chính thức 1–8",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Bài tập định thời chính thức 1–8"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
+      "v2_destination": "content/questions/subjective/ch04.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
+      "range": "66-73"
     },
     {
       "source_id": "UIT-SLIDE-CH04-1-2024",
       "page": 74,
-      "heading": "HRRN và các trường hợp phân tích định thời mở rộng",
+      "heading": "Thảo luận/kết thúc",
       "subheading": "",
       "bullet_clusters": [
-        "HRRN và các trường hợp phân tích định thời mở rộng"
+        "Thảo luận/kết thúc"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "NON_CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "None (Meta)",
+      "content_status": "NOT_WRITTEN",
+      "range": 74
+    },
+    {
+      "source_id": "UIT-SLIDE-CH04-2-2024",
+      "page": 1,
+      "heading": "Trang bìa",
+      "subheading": "",
+      "bullet_clusters": [
+        "Trang bìa"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "NON_CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "None (Meta)",
+      "content_status": "NOT_WRITTEN",
+      "range": "1-2"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH04-2-2024",
+      "page": 2,
+      "heading": "Trang bìa",
+      "subheading": "",
+      "bullet_clusters": [
+        "Trang bìa"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "NON_CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "None (Meta)",
+      "content_status": "NOT_WRITTEN",
+      "range": "1-2"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH04-2-2024",
+      "page": 3,
+      "heading": "HRRN: response-ratio mechanism, aging comparison and trade-offs",
+      "subheading": "",
+      "bullet_clusters": [
+        "HRRN: response-ratio mechanism, aging comparison and trade-offs"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -4031,79 +4079,31 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "55-74"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH04-2-2024",
-      "page": 1,
-      "heading": "Trang bìa",
-      "subheading": "",
-      "bullet_clusters": [
-        "Trang bìa"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "NON_CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
-      "range": "1-2"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH04-2-2024",
-      "page": 2,
-      "heading": "Trang bìa",
-      "subheading": "",
-      "bullet_clusters": [
-        "Trang bìa"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "NON_CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
-      "range": "1-2"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH04-2-2024",
-      "page": 3,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
-      "subheading": "",
-      "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
-      "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "3-4"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 4,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "HRRN: response-ratio mechanism, aging comparison and trade-offs",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "HRRN: response-ratio mechanism, aging comparison and trade-offs"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "3-4"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 5,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multilevel Queue: phân loại queue và inter-queue scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multilevel Queue: phân loại queue và inter-queue scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -4111,15 +4111,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "5-9"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 6,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multilevel Queue: phân loại queue và inter-queue scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multilevel Queue: phân loại queue và inter-queue scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -4127,15 +4127,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "5-9"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 7,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multilevel Queue: phân loại queue và inter-queue scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multilevel Queue: phân loại queue và inter-queue scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -4143,15 +4143,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "5-9"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 8,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multilevel Queue: phân loại queue và inter-queue scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multilevel Queue: phân loại queue và inter-queue scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -4159,15 +4159,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "5-9"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 9,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multilevel Queue: phân loại queue và inter-queue scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multilevel Queue: phân loại queue và inter-queue scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -4175,15 +4175,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "5-9"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 10,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multilevel Feedback Queue: movement, ví dụ và tham số thiết kế",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multilevel Feedback Queue: movement, ví dụ và tham số thiết kế"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -4191,15 +4191,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "10-13"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 11,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multilevel Feedback Queue: movement, ví dụ và tham số thiết kế",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multilevel Feedback Queue: movement, ví dụ và tham số thiết kế"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -4207,15 +4207,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "10-13"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 12,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multilevel Feedback Queue: movement, ví dụ và tham số thiết kế",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multilevel Feedback Queue: movement, ví dụ và tham số thiết kế"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -4223,15 +4223,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "10-13"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 13,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multilevel Feedback Queue: movement, ví dụ và tham số thiết kế",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multilevel Feedback Queue: movement, ví dụ và tham số thiết kế"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -4239,746 +4239,746 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "10-13"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 14,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "So sánh các thuật toán định thời",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "So sánh các thuật toán định thời"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#7-quy-trinh-giai-bai-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "14-15"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 15,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "So sánh các thuật toán định thời",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "So sánh các thuật toán định thời"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#7-quy-trinh-giai-bai-dinh-thoi",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "14-15"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 16,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Thread scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Thread scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "16-17"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 17,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Thread scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Thread scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "16-17"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 18,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "18-28"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 19,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "18-28"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 20,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "18-28"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 21,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "18-28"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 22,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "18-28"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 23,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "18-28"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 24,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "18-28"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 25,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "18-28"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 26,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "18-28"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 27,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "18-28"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 28,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "18-28"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 29,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#5-real-time-scheduling",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "29-37"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 30,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#5-real-time-scheduling",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "29-37"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 31,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#5-real-time-scheduling",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "29-37"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 32,
-      "heading": "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)",
+      "heading": "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS",
       "subheading": "",
       "bullet_clusters": [
-        "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq",
+      "v2_destination": "content/theory/ch04-scheduling.md#5-real-time-scheduling",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-32"
+      "range": "29-37"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 33,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#5-real-time-scheduling",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "29-37"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 34,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#5-real-time-scheduling",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "29-37"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 35,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#5-real-time-scheduling",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "29-37"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 36,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#5-real-time-scheduling",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "29-37"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 37,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#5-real-time-scheduling",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "29-37"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 38,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Linux scheduling / CFS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Linux scheduling / CFS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "38-44"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 39,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Linux scheduling / CFS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Linux scheduling / CFS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "38-44"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 40,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Linux scheduling / CFS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Linux scheduling / CFS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "38-44"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 41,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Linux scheduling / CFS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Linux scheduling / CFS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "38-44"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 42,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Linux scheduling / CFS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Linux scheduling / CFS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "38-44"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 43,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Linux scheduling / CFS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Linux scheduling / CFS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "38-44"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 44,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Linux scheduling / CFS",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Linux scheduling / CFS"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "38-44"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 45,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Windows scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Windows scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "45-51"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 46,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Windows scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Windows scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "45-51"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 47,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Windows scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Windows scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "45-51"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 48,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Windows scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Windows scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "45-51"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 49,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Windows scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Windows scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "45-51"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 50,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Windows scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Windows scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "45-51"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 51,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Windows scheduling",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Windows scheduling"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "45-51"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 52,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Solaris scheduling (đọc thêm theo depth của source)",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Solaris scheduling (đọc thêm theo depth của source)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "52-56"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 53,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Solaris scheduling (đọc thêm theo depth của source)",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Solaris scheduling (đọc thêm theo depth của source)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "52-56"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 54,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Solaris scheduling (đọc thêm theo depth của source)",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Solaris scheduling (đọc thêm theo depth của source)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "52-56"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 55,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Solaris scheduling (đọc thêm theo depth của source)",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Solaris scheduling (đọc thêm theo depth của source)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "52-56"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 56,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Solaris scheduling (đọc thêm theo depth của source)",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Solaris scheduling (đọc thêm theo depth của source)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": "52-56"
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 57,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Tóm tắt Chương 4",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Tóm tắt Chương 4"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/theory/ch04-scheduling.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": 57
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 58,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Câu hỏi ôn tập chính thức Chương 4",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Câu hỏi ôn tập chính thức Chương 4"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
+      "v2_destination": "content/questions/subjective/ch04.md",
       "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "range": 58
     },
     {
       "source_id": "UIT-SLIDE-CH04-2-2024",
       "page": 59,
-      "heading": "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris",
+      "heading": "Thảo luận/kết thúc",
       "subheading": "",
       "bullet_clusters": [
-        "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        "Thảo luận/kết thúc"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
+      "classification": "NON_CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing",
-      "content_status": "CONTENT_DRAFTED",
-      "range": "33-59"
+      "v2_destination": "None (Meta)",
+      "content_status": "NOT_WRITTEN",
+      "range": 59
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 1,
       "heading": "Trang bìa & mục tiêu",
       "subheading": "",
@@ -4994,7 +4994,7 @@
       "range": "1-3"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 2,
       "heading": "Trang bìa & mục tiêu",
       "subheading": "",
@@ -5010,7 +5010,7 @@
       "range": "1-3"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 3,
       "heading": "Trang bìa & mục tiêu",
       "subheading": "",
@@ -5026,7 +5026,7 @@
       "range": "1-3"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 4,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5042,7 +5042,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 5,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5058,7 +5058,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 6,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5074,7 +5074,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 7,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5090,7 +5090,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 8,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5106,7 +5106,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 9,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5122,7 +5122,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 10,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5138,7 +5138,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 11,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5154,7 +5154,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 12,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5170,7 +5170,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 13,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5186,7 +5186,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 14,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5202,7 +5202,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 15,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5218,7 +5218,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 16,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5234,7 +5234,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 17,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5250,7 +5250,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 18,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5266,7 +5266,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 19,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5282,7 +5282,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 20,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5298,7 +5298,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 21,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5314,7 +5314,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 22,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5330,7 +5330,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 23,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5346,7 +5346,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 24,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5362,7 +5362,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 25,
       "heading": "Race Condition, Miền găng Critical Section & 3 điều kiện an toàn",
       "subheading": "",
@@ -5378,7 +5378,7 @@
       "range": "4-25"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 26,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5394,7 +5394,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 27,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5410,7 +5410,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 28,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5426,7 +5426,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 29,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5442,7 +5442,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 30,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5458,7 +5458,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 31,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5474,7 +5474,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 32,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5490,7 +5490,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 33,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5506,7 +5506,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 34,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5522,7 +5522,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 35,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5538,7 +5538,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 36,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5554,7 +5554,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 37,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5570,7 +5570,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 38,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5586,7 +5586,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 39,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5602,7 +5602,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 40,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5618,7 +5618,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 41,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5634,7 +5634,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 42,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5650,7 +5650,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 43,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5666,7 +5666,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 44,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5682,7 +5682,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 45,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5698,7 +5698,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 46,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5714,7 +5714,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 47,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5730,7 +5730,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 48,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5746,7 +5746,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 49,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5762,7 +5762,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 50,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5778,7 +5778,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 51,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5794,7 +5794,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 52,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5810,7 +5810,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 53,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5826,7 +5826,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 54,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5842,7 +5842,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 55,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5858,7 +5858,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 56,
       "heading": "Giải thuật Peterson, Hỗ trợ phần cứng (TestAndSet, CAS) & Mutex Locks",
       "subheading": "",
@@ -5874,7 +5874,7 @@
       "range": "26-56"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 57,
       "heading": "Tổng kết phần 1",
       "subheading": "",
@@ -5890,7 +5890,7 @@
       "range": "57-58"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-1-2024",
+      "source_id": "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58",
       "page": 58,
       "heading": "Tổng kết phần 1",
       "subheading": "",
@@ -5940,1077 +5940,1093 @@
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 3,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 1; slide 5 có 9 question bullets",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 1; slide 5 có 9 question bullets"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-1-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "3-5"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 4,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 1; slide 5 có 9 question bullets",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 1; slide 5 có 9 question bullets"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-1-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "3-5"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 5,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 1; slide 5 có 9 question bullets",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 1; slide 5 có 9 question bullets"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-1-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "3-5"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 6,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 2; slide 7 có 5 question bullets",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 2; slide 7 có 5 question bullets"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-2-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "6-7"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 7,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 2; slide 7 có 5 question bullets",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 2; slide 7 có 5 question bullets"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-2-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "6-7"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 8,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 3; slide 9 có 6 bullets, slides 10–11 có bài tập compound",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 3; slide 9 có 6 bullets, slides 10–11 có bài tập compound"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-3-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "8-11"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 9,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 3; slide 9 có 6 bullets, slides 10–11 có bài tập compound",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 3; slide 9 có 6 bullets, slides 10–11 có bài tập compound"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-3-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "8-11"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 10,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 3; slide 9 có 6 bullets, slides 10–11 có bài tập compound",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 3; slide 9 có 6 bullets, slides 10–11 có bài tập compound"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-3-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "8-11"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 11,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 3; slide 9 có 6 bullets, slides 10–11 có bài tập compound",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 3; slide 9 có 6 bullets, slides 10–11 có bài tập compound"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-3-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "8-11"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 12,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "REFERENCE_TO_EXTERNAL_EXERCISE_SET — không phát minh câu hỏi",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "REFERENCE_TO_EXTERNAL_EXERCISE_SET — không phát minh câu hỏi"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#reference-to-external-exercise-set",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": 12
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 13,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 4; slide 14 có 10 bullets, slide 15 có bài tập tính",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 4; slide 14 có 10 bullets, slide 15 có bài tập tính"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-4-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "13-15"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 14,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 4; slide 14 có 10 bullets, slide 15 có bài tập tính",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 4; slide 14 có 10 bullets, slide 15 có bài tập tính"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-4-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "13-15"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 15,
-      "heading": "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007",
+      "heading": "Ôn tập Chương 4; slide 14 có 10 bullets, slide 15 có bài tập tính",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        "Ôn tập Chương 4; slide 14 có 10 bullets, slide 15 có bài tập tính"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/reviews/midterm.md",
+      "v2_destination": "content/reviews/midterm.md#chương-4-source-prompts",
       "content_status": "CONTENT_DRAFTED",
-      "range": "3-15"
+      "range": "13-15"
     },
     {
       "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 16,
-      "heading": "Trang kết thúc",
+      "heading": "REFERENCE_TO_EXTERNAL_EXERCISE_SET — không phát minh câu hỏi",
       "subheading": "",
       "bullet_clusters": [
-        "Trang kết thúc"
+        "REFERENCE_TO_EXTERNAL_EXERCISE_SET — không phát minh câu hỏi"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
-      "classification": "NON_CONTENT",
+      "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
+      "v2_destination": "content/reviews/midterm.md#reference-to-external-exercise-set",
+      "content_status": "CONTENT_DRAFTED",
       "range": 16
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 1,
-      "heading": "Trang bìa",
-      "subheading": "",
-      "bullet_clusters": [
-        "Trang bìa"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "NON_CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
-      "range": "1-2"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 2,
-      "heading": "Trang bìa",
-      "subheading": "",
-      "bullet_clusters": [
-        "Trang bìa"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "NON_CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "None (Meta)",
-      "content_status": "NOT_WRITTEN",
-      "range": "1-2"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 3,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 4,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 5,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 6,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 7,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 8,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 9,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 10,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 11,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 12,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 13,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 14,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 15,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
-      "page": 16,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
-      "subheading": "",
-      "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
-      "content_status": "NOT_WRITTEN",
-      "range": "3-53"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-MIDTERM-REVIEW-2024",
       "page": 17,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Thảo luận/kết thúc",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Thảo luận/kết thúc"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "NON_CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "None (Meta)",
+      "content_status": "NOT_WRITTEN",
+      "range": 17
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 1,
+      "heading": "Trang bìa & mục tiêu",
+      "subheading": "",
+      "bullet_clusters": [
+        "Trang bìa & mục tiêu"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "NON_CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "None (Meta)",
+      "content_status": "NOT_WRITTEN",
+      "range": "1-2"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 2,
+      "heading": "Trang bìa & mục tiêu",
+      "subheading": "",
+      "bullet_clusters": [
+        "Trang bìa & mục tiêu"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "NON_CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "None (Meta)",
+      "content_status": "NOT_WRITTEN",
+      "range": "1-2"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 3,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 4,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 5,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 6,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 7,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 8,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 9,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 10,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 11,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 12,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 13,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 14,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 15,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 16,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
+      "page": 17,
+      "heading": "Semaphore, classical synchronization problems and monitors",
+      "subheading": "",
+      "bullet_clusters": [
+        "Semaphore, classical synchronization problems and monitors"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch05-synchronization.md",
+      "content_status": "NOT_WRITTEN",
+      "range": "3-53"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 18,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 19,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 20,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 21,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 22,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 23,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 24,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 25,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 26,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 27,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 28,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 29,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 30,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 31,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 32,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 33,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 34,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 35,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 36,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 37,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 38,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 39,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 40,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 41,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 42,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 43,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 44,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 45,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 46,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 47,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 48,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 49,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 50,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 51,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 52,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 53,
-      "heading": "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation",
+      "heading": "Semaphore, classical synchronization problems and monitors",
       "subheading": "",
       "bullet_clusters": [
-        "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        "Semaphore, classical synchronization problems and monitors"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch05-synchronization.md#3-semaphore",
+      "v2_destination": "content/theory/ch05-synchronization.md",
       "content_status": "NOT_WRITTEN",
       "range": "3-53"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 54,
       "heading": "Tổng kết phần 2",
       "subheading": "",
@@ -7026,7 +7042,7 @@
       "range": "54-55"
     },
     {
-      "source_id": "UIT-SLIDE-CH05-2-2024",
+      "source_id": "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55",
       "page": 55,
       "heading": "Tổng kết phần 2",
       "subheading": "",

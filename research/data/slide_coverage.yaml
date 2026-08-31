@@ -6,12 +6,12 @@
 summary:
   # Informational snapshot only; the verifier computes these from deck records.
   total_slide_decks: 13
-  physical_pages_total: 718
-  content_pages_total: 666
-  non_content_pages_total: 52
-  mapped_content_pages: 666
+  physical_pages_total: 719
+  content_pages_total: 665
+  non_content_pages_total: 54
+  mapped_content_pages: 665
   unmapped_content_pages: 0
-  drafted_content_pages: 308  # Chapters 1–4 + Midterm Review (informational snapshot)
+  drafted_content_pages: 307  # Chapters 1–4 + Midterm Review (informational snapshot)
   not_written_content_pages: 358 # Chapters 5–9 (verifier computes authoritative totals)
 
 decks:
@@ -216,7 +216,7 @@ decks:
         content_status: "NOT_WRITTEN"
 
   - source_id: "UIT-SLIDE-CH04-1-2024"
-    exact_filename: "Week04-Chapter4-1 2024.pdf"
+    exact_filename: "#Week04-Chapter4-1 2024.pdf"
     title: "Chương 4: Định thời CPU (Phần 1)"
     physical_pages: 74
     sections:
@@ -227,30 +227,93 @@ decks:
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"
-      - page_range: "4-15"
-        page_count: 12
+      - page_range: "4-8"
+        page_count: 5
         classification: "CONTENT"
-        topic: "Chu kỳ CPU-I/O Burst, CPU Scheduler, Dispatcher & 5 tiêu chuẩn định thời"
+        topic: "Khái niệm định thời, multitasking, service/burst time, CPU-bound và I/O-bound"
         mapping_status: "MAPPED"
         v2_destination: "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi"
         content_status: "CONTENT_DRAFTED"
-      - page_range: "16-54"
-        page_count: 39
+      - page_range: "9-18"
+        page_count: 10
         classification: "CONTENT"
-        topic: "Các thuật toán định thời cơ bản: FCFS, SJF, SRTF, Priority, Round Robin"
+        topic: "Các loại scheduler, sự kiện gọi scheduler, dispatcher và dispatch latency"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "19-22"
+        page_count: 4
+        classification: "CONTENT"
+        topic: "Sáu tiêu chí định thời: response, turnaround, waiting, utilization, fairness, throughput"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "23-27"
+        page_count: 5
+        classification: "CONTENT"
+        topic: "Selection function, decision mode, preemptive/non-preemptive và các điểm ra quyết định"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#1-vi-sao-can-dinh-thoi"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "28-33"
+        page_count: 6
+        classification: "CONTENT"
+        topic: "FCFS: cơ chế, ví dụ và RT/WT/TAT"
         mapping_status: "MAPPED"
         v2_destination: "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban"
         content_status: "CONTENT_DRAFTED"
-      - page_range: "55-74"
-        page_count: 20
+      - page_range: "34-47"
+        page_count: 14
         classification: "CONTENT"
-        topic: "HRRN và các trường hợp phân tích định thời mở rộng"
+        topic: "SJF/SRTF, starvation, tính tối ưu, dự đoán CPU burst và exponential averaging"
         mapping_status: "MAPPED"
         v2_destination: "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban"
         content_status: "CONTENT_DRAFTED"
+      - page_range: "48-52"
+        page_count: 5
+        classification: "CONTENT"
+        topic: "Priority scheduling, starvation, aging và ví dụ"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "53-63"
+        page_count: 11
+        classification: "CONTENT"
+        topic: "Round Robin, quantum, response/turnaround, overhead và các ví dụ nguồn"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "64"
+        page_count: 1
+        classification: "CONTENT"
+        topic: "Tóm tắt Chương 4"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "65"
+        page_count: 1
+        classification: "CONTENT"
+        topic: "Câu hỏi ôn tập chính thức Chương 4"
+        mapping_status: "MAPPED"
+        v2_destination: "content/questions/subjective/ch04.md"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "66-73"
+        page_count: 8
+        classification: "CONTENT"
+        topic: "Bài tập định thời chính thức 1–8"
+        mapping_status: "MAPPED"
+        v2_destination: "content/questions/subjective/ch04.md"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "74"
+        page_count: 1
+        classification: "NON_CONTENT"
+        topic: "Thảo luận/kết thúc"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
 
   - source_id: "UIT-SLIDE-CH04-2-2024"
-    exact_filename: "Week05-Chapter4-2 2024.pdf"
+    exact_filename: "#Week05-Chapter4-2 2024.pdf"
     title: "Chương 4: Định thời CPU (Phần 2)"
     physical_pages: 59
     sections:
@@ -261,24 +324,101 @@ decks:
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"
-      - page_range: "3-32"
-        page_count: 30
+      - page_range: "3-4"
+        page_count: 2
         classification: "CONTENT"
-        topic: "Multilevel Queue (MQ) & Multilevel Feedback Queue (MLFQ)"
+        topic: "HRRN: response-ratio mechanism, aging comparison and trade-offs"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "5-9"
+        page_count: 5
+        classification: "CONTENT"
+        topic: "Multilevel Queue: phân loại queue và inter-queue scheduling"
         mapping_status: "MAPPED"
         v2_destination: "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq"
         content_status: "CONTENT_DRAFTED"
-      - page_range: "33-59"
-        page_count: 27
+      - page_range: "10-13"
+        page_count: 4
         classification: "CONTENT"
-        topic: "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
+        topic: "Multilevel Feedback Queue: movement, ví dụ và tham số thiết kế"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "14-15"
+        page_count: 2
+        classification: "CONTENT"
+        topic: "So sánh các thuật toán định thời"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#7-quy-trinh-giai-bai-dinh-thoi"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "16-17"
+        page_count: 2
+        classification: "CONTENT"
+        topic: "Thread scheduling"
         mapping_status: "MAPPED"
         v2_destination: "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing"
         content_status: "CONTENT_DRAFTED"
+      - page_range: "18-28"
+        page_count: 11
+        classification: "CONTENT"
+        topic: "Multiprocessor scheduling: AMP, SMP, load balancing và processor affinity"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "29-37"
+        page_count: 9
+        classification: "CONTENT"
+        topic: "Real-time: periodic/aperiodic/sporadic, Rate Monotonic, EDF và TBS"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#5-real-time-scheduling"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "38-44"
+        page_count: 7
+        classification: "CONTENT"
+        topic: "Linux scheduling / CFS"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "45-51"
+        page_count: 7
+        classification: "CONTENT"
+        topic: "Windows scheduling"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "52-56"
+        page_count: 5
+        classification: "CONTENT"
+        topic: "Solaris scheduling (đọc thêm theo depth của source)"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-doc-dung-muc-nguon"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "57"
+        page_count: 1
+        classification: "CONTENT"
+        topic: "Tóm tắt Chương 4"
+        mapping_status: "MAPPED"
+        v2_destination: "content/theory/ch04-scheduling.md"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "58"
+        page_count: 1
+        classification: "CONTENT"
+        topic: "Câu hỏi ôn tập chính thức Chương 4"
+        mapping_status: "MAPPED"
+        v2_destination: "content/questions/subjective/ch04.md"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "59"
+        page_count: 1
+        classification: "NON_CONTENT"
+        topic: "Thảo luận/kết thúc"
+        mapping_status: "MAPPED"
+        v2_destination: "None (Meta)"
+        content_status: "NOT_WRITTEN"
 
-  - source_id: "UIT-SLIDE-CH05-1-2024"
+  - source_id: "UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58"
     exact_filename: "Week07-Chapter5-1 2024.pdf"
-    title: "Chương 5: Đồng bộ Tiến trình (Phần 1)"
+    title: "Chương 5: Đồng bộ Tiến trình (local variant, chưa canonical)"
     physical_pages: 58
     sections:
       - page_range: "1-3"
@@ -311,9 +451,9 @@ decks:
         content_status: "NOT_WRITTEN"
 
   - source_id: "UIT-SLIDE-MIDTERM-REVIEW-2024"
-    exact_filename: "Week08-Midterm Review.pdf"
-    title: "Slide Ôn tập Giữa kỳ IT007 Tuần 8"
-    physical_pages: 16
+    exact_filename: "#Week08-Midterm Review.pptx"
+    title: "Slide Ôn tập Giữa kỳ IT007 Tuần 8 (canonical PPTX)"
+    physical_pages: 17
     sections:
       - page_range: "1"
         page_count: 1
@@ -329,39 +469,74 @@ decks:
         mapping_status: "MAPPED"
         v2_destination: "content/reviews/midterm.md#format-shown-in-the-official-2024-midterm-review"
         content_status: "CONTENT_DRAFTED"
-      - page_range: "3-15"
-        page_count: 13
+      - page_range: "3-5"
+        page_count: 3
         classification: "CONTENT"
-        topic: "Tổng hợp kiến thức trọng tâm & Ma trận đề thi Giữa kỳ IT007"
+        topic: "Ôn tập Chương 1; slide 5 có 9 question bullets"
         mapping_status: "MAPPED"
-        v2_destination: "content/reviews/midterm.md"
+        v2_destination: "content/reviews/midterm.md#chương-1-source-prompts"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "6-7"
+        page_count: 2
+        classification: "CONTENT"
+        topic: "Ôn tập Chương 2; slide 7 có 5 question bullets"
+        mapping_status: "MAPPED"
+        v2_destination: "content/reviews/midterm.md#chương-2-source-prompts"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "8-11"
+        page_count: 4
+        classification: "CONTENT"
+        topic: "Ôn tập Chương 3; slide 9 có 6 bullets, slides 10–11 có bài tập compound"
+        mapping_status: "MAPPED"
+        v2_destination: "content/reviews/midterm.md#chương-3-source-prompts"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "12"
+        page_count: 1
+        classification: "CONTENT"
+        topic: "REFERENCE_TO_EXTERNAL_EXERCISE_SET — không phát minh câu hỏi"
+        mapping_status: "MAPPED"
+        v2_destination: "content/reviews/midterm.md#reference-to-external-exercise-set"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "13-15"
+        page_count: 3
+        classification: "CONTENT"
+        topic: "Ôn tập Chương 4; slide 14 có 10 bullets, slide 15 có bài tập tính"
+        mapping_status: "MAPPED"
+        v2_destination: "content/reviews/midterm.md#chương-4-source-prompts"
         content_status: "CONTENT_DRAFTED"
       - page_range: "16"
         page_count: 1
+        classification: "CONTENT"
+        topic: "REFERENCE_TO_EXTERNAL_EXERCISE_SET — không phát minh câu hỏi"
+        mapping_status: "MAPPED"
+        v2_destination: "content/reviews/midterm.md#reference-to-external-exercise-set"
+        content_status: "CONTENT_DRAFTED"
+      - page_range: "17"
+        page_count: 1
         classification: "NON_CONTENT"
-        topic: "Trang kết thúc"
+        topic: "Thảo luận/kết thúc"
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"
 
-  - source_id: "UIT-SLIDE-CH05-2-2024"
+  - source_id: "UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55"
     exact_filename: "Week09-Chapter5-2 2024.pdf"
-    title: "Chương 5: Đồng bộ Tiến trình (Phần 2)"
+    title: "Chương 5: Đồng bộ Tiến trình (local variant, chưa canonical)"
     physical_pages: 55
     sections:
       - page_range: "1-2"
         page_count: 2
         classification: "NON_CONTENT"
-        topic: "Trang bìa"
+        topic: "Trang bìa & mục tiêu"
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"
       - page_range: "3-53"
         page_count: 51
         classification: "CONTENT"
-        topic: "Biến đồng bộ Semaphore (Counting/Binary), Block/Wakeup & Deadlock/Starvation"
+        topic: "Semaphore, classical synchronization problems and monitors"
         mapping_status: "MAPPED"
-        v2_destination: "content/theory/ch05-synchronization.md#3-semaphore"
+        v2_destination: "content/theory/ch05-synchronization.md"
         content_status: "NOT_WRITTEN"
       - page_range: "54-55"
         page_count: 2
@@ -370,7 +545,6 @@ decks:
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"
-
   - source_id: "UIT-SLIDE-CH05-3-2024"
     exact_filename: "Week10-Chapter5-3 2024.pdf"
     title: "Chương 5: Bài toán đồng bộ kinh điển (Phần 3)"

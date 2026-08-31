@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ngân hàng tự luận — Chương 3: Quản lý tiến trình — IT007 UIT</title><link rel="stylesheet" href="../../assets/css/style.css"><script src="../../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT (THEORY)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link active" href="ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../../index.html">Trang chủ</a> <span>/</span> <span>Ngân hàng tự luận — Chương 3: Quản lý tiến trình</span></div><article class="article-body"><h1 id="ngan-hang-tu-luan-chuong-3">Ngân hàng tự luận Chương 3</h1>
+
+<p><strong>Phân loại nguồn:</strong> <code>QBANK_OFFICIAL</code> chỉ qbank Chương 3; <code>MIDTERM_REVIEW_OFFICIAL</code> chỉ prompt xuất hiện trong slide ôn tập. Hai source family có thể trỏ cùng lời giải khi nội dung tương đương.</p>
+
+<h2 id="cau-1-memory-layout">Câu 1 — Memory layout</h2>
+
+<p><strong>QUESTION:</strong> Trình bày bố cục bộ nhớ của một process: text, data, heap, stack và BSS.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH03-2024</code>, Câu 1 / Mục 3; <code>UIT-SLIDE-CH03-2024</code>, slide 4–12.</p>
+
+<p><strong>QUESTION TYPE:</strong> Diagram + explanation.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Text/rodata, data/BSS, heap cấp phát động, stack frame; stack riêng cho mỗi thread.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> program vs process; hướng tăng chỉ là mô hình; BSS nuance; shared address space.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Process là instance có address space; text thường có thể chia sẻ, data/BSS chứa biến tĩnh, heap tăng khi malloc, stack giữ lời gọi hàm của từng thread. ABI/ASLR có thể thay đổi chi tiết.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> quên BSS hoặc cho rằng mọi thread dùng chung stack.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> heap là vùng kernel; text thay đổi khi gọi hàm thông thường.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete khi có sơ đồ và vai trò bốn vùng + BSS; Mostly complete nếu thiếu nuance; Partial nếu nhầm stack/heap.</p>
+
+<h2 id="cau-2-process-states">Câu 2 — Process states</h2>
+
+<p><strong>QUESTION:</strong> Nêu năm trạng thái process và luồng chuyển.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH03-2024</code>, Câu 2 / Mục 3; <code>UIT-SLIDE-CH03-2024</code>, slide 13–18.</p>
+
+<p><strong>QUESTION TYPE:</strong> State machine.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> New, ready, running, waiting/blocked, terminated và các chuyển admit/dispatch/preempt/I-O/exit.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> ready khác waiting; preemption; event completion.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Ready chờ CPU và có thể chạy ngay; waiting chờ I/O/event nên chưa thể chạy. Mở rộng suspended state chỉ nêu khi được hỏi thêm.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> thiếu new hoặc terminated.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> process ở waiting vẫn cạnh tranh CPU; dispatch là running→waiting.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu đủ 5 trạng thái và mũi tên; Mostly complete nếu thiếu một mũi tên; Partial nếu lẫn ready với waiting.</p>
+
+<h2 id="cau-3-pcb">Câu 3 — PCB</h2>
+
+<p><strong>QUESTION:</strong> Cấu trúc PCB và vai trò.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH03-2024</code>, Câu 3 / Mục 3; <code>UIT-SLIDE-CH03-2024</code>, slide 13–18.</p>
+
+<p><strong>QUESTION TYPE:</strong> Enumeration + purpose.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> PID/state, PC/registers, scheduling, memory, accounting, I/O/file và quan hệ/IPC.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> restore context; resource ownership; scheduler pointers.</p>
+
+<p><strong>FULL EXPLANATION:</strong> PCB là record kernel; context switch lưu state cũ vào PCB và lấy state mới. Trường cụ thể khác theo OS.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> chỉ nêu PID; quên PC/registers.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> PCB là chương trình executable; PCB được process user sửa trực tiếp.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu có bảy nhóm và vai trò; Mostly complete nếu thiếu một nhóm; Partial nếu không nói khôi phục context.</p>
+
+<h2 id="cau-4-ba-scheduler">Câu 4 — Ba scheduler</h2>
+
+<p><strong>QUESTION:</strong> So sánh long-term, short-term và medium-term scheduler.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH03-2024</code>, Câu 4 / Mục 3; <code>UIT-SLIDE-CH03-2024</code>, slide 19–27.</p>
+
+<p><strong>QUESTION TYPE:</strong> Comparison table.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Long-term chọn job resident; short-term chọn ready process nhận CPU; medium-term suspend/resume để điều chỉnh memory/degree.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> tần suất; queue/state; mục tiêu.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Short-term cần rất nhanh vì chạy thường xuyên; long-term cân bằng CPU/I/O jobs; medium-term hỗ trợ swapping/suspension. Không mọi hệ hiện đại đều có long/medium scheduler rõ ràng.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> đánh đồng long-term với dispatcher.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> medium-term quyết định instruction kế tiếp; long-term chạy mỗi timer tick.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu so sánh được quyết định, tần suất và mục tiêu; Mostly complete nếu thiếu tần suất; Partial nếu chỉ nêu tên.</p>
+
+<h2 id="cau-5-context-switch">Câu 5 — Context switch</h2>
+
+<p><strong>QUESTION:</strong> Context switch là gì và vì sao có chi phí?</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH03-2024</code>, Câu 5 / Mục 3; <code>UIT-SLIDE-CH03-2024</code>, slide 19–27.</p>
+
+<p><strong>QUESTION TYPE:</strong> Mechanism + cost.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Lưu PC/register/state của P vào PCB và khôi phục của Q; tốn CPU do save/restore, scheduler, cache/TLB và đổi address space.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> overhead không phải progress; cost phụ thuộc hardware/OS.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Dispatcher thực hiện phần chuyển sau khi scheduler quyết định. Đổi process có thể làm mất locality cache/TLB, còn chuyển thread cùng process thường ít đổi address space hơn.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> chỉ nói “đổi PCB”.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> context switch làm chương trình chạy nhanh hơn; chi phí luôn bằng một hằng số.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu có thao tác và ba nguồn cost; Mostly complete nếu thiếu cache/TLB; Partial nếu không nêu lưu state.</p>
+
+<h2 id="cau-6-zombie-orphan">Câu 6 — Zombie/orphan</h2>
+
+<p><strong>QUESTION:</strong> Phân biệt zombie và orphan trong Linux.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH03-2024</code>, Câu 6 / Mục 3; <code>UIT-SLIDE-CH03-2024</code>, slide 28–38; làm rõ <code>POSIX-WAITPID</code>.</p>
+
+<p><strong>QUESTION TYPE:</strong> Linux/POSIX clarification.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Zombie đã exit nhưng parent chưa wait; orphan còn chạy khi parent exit và được reaper nhận nuôi.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> zombie không chạy; wait thu hồi; reparenting; scope Linux/POSIX.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Zombie giữ exit status/metadata; waitpid giải phóng entry. Orphan vẫn là process bình thường, được gán parent mới tùy chính sách hệ thống.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> gọi zombie là process đang chạy.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> orphan luôn trở thành zombie; mọi OS dùng PID 1 giống Linux.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu phân biệt lifecycle và vai trò wait/reaper; Mostly complete nếu thiếu scope; Partial nếu đảo hai khái niệm.</p>
+
+<h2 id="cau-7-process-va-thread">Câu 7 — Process và thread</h2>
+
+<p><strong>QUESTION:</strong> So sánh process và thread.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH03-2024</code>, Câu 7 / Mục 3; <code>UIT-SLIDE-CH03-2024</code>, slide 49–59.</p>
+
+<p><strong>QUESTION TYPE:</strong> Comparison.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Process có address space/tài nguyên riêng; thread là execution unit chia sẻ address space nhưng có PC/register/stack riêng.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> isolation; sharing; cost; failure/race trade-off.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Thread nhẹ và hỗ trợ song song trong process; process cô lập tốt hơn nhưng IPC/context switch nặng hơn.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> nói thread “chia sẻ stack”.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> hai process luôn chia sẻ heap; thread không cần synchronization.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu so sánh memory, execution state, cost và isolation; Mostly complete nếu thiếu isolation; Partial nếu nhầm stack.</p>
+
+<h2 id="cau-8-mo-hinh-thread">Câu 8 — Mô hình thread</h2>
+
+<p><strong>QUESTION:</strong> Trình bày many-to-one, one-to-one, many-to-many.</p>
+
+<p><strong>SOURCE:</strong> <code>UIT-QBANK-CH03-2024</code>, Câu 8 / Mục 3; <code>UIT-SLIDE-CH03-2024</code>, slide 49–59.</p>
+
+<p><strong>QUESTION TYPE:</strong> Model comparison.</p>
+
+<p><strong>MINIMUM ANSWER:</strong> Nêu ánh xạ user:kernel, ưu điểm và giới hạn của từng mô hình.</p>
+
+<p><strong>REQUIRED KEY POINTS:</strong> blocking; multicore parallelism; resource overhead.</p>
+
+<p><strong>FULL EXPLANATION:</strong> Many-to-one rẻ nhưng block cả process; one-to-one song song và cô lập block tốt nhưng tốn kernel resource; many-to-many linh hoạt nhưng runtime phức tạp.</p>
+
+<p><strong>COMMON MISSING POINTS:</strong> chỉ vẽ mũi tên không nêu trade-off.</p>
+
+<p><strong>COMMON WRONG CLAIMS:</strong> many-to-one chạy song song trên nhiều core; one-to-one không có giới hạn.</p>
+
+<p><strong>SELF_CHECK_RUBRIC:</strong> Rubric tự kiểm tra do cẩm nang biên soạn, không phải barem chính thức của học phần. Complete nếu có mapping + ưu/nhược của cả 3; Mostly complete nếu thiếu một trade-off; Partial nếu sai hướng ánh xạ.</p><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#cau-1-memory-layout">Câu 1 — Memory layout</a></li><li class="toc-item"><a class="toc-link" href="#cau-2-process-states">Câu 2 — Process states</a></li><li class="toc-item"><a class="toc-link" href="#cau-3-pcb">Câu 3 — PCB</a></li><li class="toc-item"><a class="toc-link" href="#cau-4-ba-scheduler">Câu 4 — Ba scheduler</a></li><li class="toc-item"><a class="toc-link" href="#cau-5-context-switch">Câu 5 — Context switch</a></li><li class="toc-item"><a class="toc-link" href="#cau-6-zombie-orphan">Câu 6 — Zombie/orphan</a></li><li class="toc-item"><a class="toc-link" href="#cau-7-process-va-thread">Câu 7 — Process và thread</a></li><li class="toc-item"><a class="toc-link" href="#cau-8-mo-hinh-thread">Câu 8 — Mô hình thread</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../../assets/js/app.js"></script></body></html>

@@ -27,6 +27,7 @@ def main():
         run("validate_site_routes", [py, "scripts/validate_site_routes.py"]),
         run("renderer_stress_test", [py, "scripts/stress_test_web_renderer.py"]),
         run("negative_tests", [py, "scripts/run_negative_tests.py"]),
+        run("batch1_canonical_source", [py, "scripts/validate_batch1_canonical.py"]),
         run("verify_research_gates", [py, "scripts/verify_research_gates.py"]),
     ]
     passed = all(step["ok"] for step in steps)

@@ -1,6 +1,6 @@
 # BẢNG ÁNH XẠ CÂU HỎI ÔN TẬP CHÍNH THỨC (OFFICIAL REVIEW QUESTION MAP)
 
-Tài liệu này kiểm kê và ánh xạ **100% câu hỏi ôn tập, câu hỏi lý thuyết và bài tập mẫu** từ toàn bộ các tệp tài liệu chính thức của Khoa KTMT – UIT (`Cau hoi chuong 1, 2, 9 HDH.docx`, `Bai tap chuong 3, 4, 5, 6, 7, 8 HDH.docx`, và `Week08-Midterm Review.pdf`).
+Tài liệu này kiểm kê và ánh xạ **100% câu hỏi ôn tập, câu hỏi lý thuyết và bài tập mẫu** từ toàn bộ các tệp tài liệu chính thức của Khoa KTMT – UIT (`Cau hoi chuong 1, 2, 9 HDH.docx`, `Bai tap chuong 3, 4, 5, 6, 7, 8 HDH.docx`, và canonical `#Week08-Midterm Review.pptx`, 17 slides). Các câu hỏi Midterm được ghi theo occurrence/slide locator trong `research/data/official_review_questions.yaml`; slides 12 và 16 chỉ là `REFERENCE_TO_EXTERNAL_EXERCISE_SET`.
 
 ---
 

@@ -1,59 +1,207 @@
 {
   "nodes": [
     {
-      "id": "flashcards-ch01",
-      "label": "Thẻ Nhớ Flashcards — Chương 1",
-      "x": 140,
-      "y": 90,
+      "id": "exams/midterm/2023-2024-hk1",
+      "label": "Bài Tập Thực Luyện Dựa Trên Đề G",
+      "link": "exams/midterm/2023-2024-hk1.html",
+      "x": 40,
+      "y": 35,
       "r": 7,
-      "color": "#9a6700",
-      "link": "flashcards/ch01-cards.html"
+      "color": "#0969da"
+    },
+    {
+      "id": "flashcards-ch01",
+      "label": "Thẻ Nhớ Flashcards — Chương 1: T",
+      "link": "flashcards/ch01-cards.html",
+      "x": 107,
+      "y": 78,
+      "r": 7,
+      "color": "#0969da"
     },
     {
       "id": "glossary-terms",
-      "label": "Từ Điển Thuật Ngữ Hệ",
-      "x": 95,
-      "y": 60,
+      "label": "Từ Điển Thuật Ngữ Hệ Điều Hành S",
+      "link": "glossary/terms.html",
+      "x": 174,
+      "y": 121,
       "r": 7,
-      "color": "#9a6700",
-      "link": "glossary/terms.html"
+      "color": "#0969da"
     },
     {
       "id": "lab01-linux-basics",
-      "label": "Lab 1",
-      "x": 90,
-      "y": 180,
+      "label": "Lab 1: Giới thiệu Linux, Quản tr",
+      "link": "labs/lab01-linux-basics.html",
+      "x": 241,
+      "y": 39,
       "r": 7,
-      "color": "#0e7490",
-      "link": "labs/lab01-linux-basics.html"
-    },
-    {
-      "id": "theory-ch01-overview",
-      "label": "Chương 1",
-      "x": 245,
-      "y": 50,
-      "r": 7,
-      "color": "#0969da",
-      "link": "theory/ch01-overview.html"
-    },
-    {
-      "id": "exams/midterm/2023-2024-hk1",
-      "label": "Bài Tập Thực Luyện D",
-      "x": 280,
-      "y": 150,
-      "r": 7,
-      "color": "#9a6700",
-      "link": "exams/midterm/2023-2024-hk1.html"
+      "color": "#0969da"
     },
     {
       "id": "sub-ch01",
-      "label": "Câu Hỏi Tự Luận & Barem Điểm — Chương 1",
-      "x": 215,
-      "y": 200,
+      "label": "Ngân hàng tự luận — Chương 1: Tổ",
+      "link": "questions/subjective/ch01.html",
+      "x": 308,
+      "y": 82,
       "r": 7,
-      "color": "#9a6700",
-      "link": "questions/subjective/ch01.html"
+      "color": "#0969da"
+    },
+    {
+      "id": "sub-ch02",
+      "label": "Ngân hàng tự luận — Chương 2: Cấ",
+      "link": "questions/subjective/ch02.html",
+      "x": 105,
+      "y": 125,
+      "r": 7,
+      "color": "#0969da"
+    },
+    {
+      "id": "sub-ch03",
+      "label": "Ngân hàng tự luận — Chương 3: Qu",
+      "link": "questions/subjective/ch03.html",
+      "x": 172,
+      "y": 43,
+      "r": 7,
+      "color": "#0969da"
+    },
+    {
+      "id": "sub-ch04",
+      "label": "Ngân hàng tự luận — Chương 4: Đị",
+      "link": "questions/subjective/ch04.html",
+      "x": 239,
+      "y": 86,
+      "r": 7,
+      "color": "#0969da"
+    },
+    {
+      "id": "review-midterm",
+      "label": "Ôn tập Giữa kỳ IT007 — Chương 1–",
+      "link": "reviews/midterm.html",
+      "x": 306,
+      "y": 129,
+      "r": 7,
+      "color": "#0969da"
+    },
+    {
+      "id": "theory-ch01-overview",
+      "label": "Chương 1: Tổng quan về Hệ điều h",
+      "link": "theory/ch01-overview.html",
+      "x": 103,
+      "y": 47,
+      "r": 7,
+      "color": "#0969da"
+    },
+    {
+      "id": "theory-ch02-structure",
+      "label": "Chương 2: Cấu trúc và dịch vụ Hệ",
+      "link": "theory/ch02-structure.html",
+      "x": 170,
+      "y": 90,
+      "r": 7,
+      "color": "#0969da"
+    },
+    {
+      "id": "theory-ch03-process",
+      "label": "Chương 3: Tiến trình và Tiểu trì",
+      "link": "theory/ch03-process.html",
+      "x": 237,
+      "y": 133,
+      "r": 7,
+      "color": "#0969da"
+    },
+    {
+      "id": "theory-ch04-cpu-scheduling",
+      "label": "Chương 4: Định thời CPU",
+      "link": "theory/ch04-scheduling.html",
+      "x": 304,
+      "y": 51,
+      "r": 7,
+      "color": "#0969da"
     }
   ],
-  "edges": []
+  "edges": [
+    {
+      "from": "flashcards-ch01",
+      "to": "theory-ch01-overview"
+    },
+    {
+      "from": "flashcards-ch01",
+      "to": "sub-ch01"
+    },
+    {
+      "from": "lab01-linux-basics",
+      "to": "theory-ch01-overview"
+    },
+    {
+      "from": "sub-ch01",
+      "to": "theory-ch01-overview"
+    },
+    {
+      "from": "sub-ch01",
+      "to": "flashcards-ch01"
+    },
+    {
+      "from": "sub-ch02",
+      "to": "theory-ch02-structure"
+    },
+    {
+      "from": "sub-ch03",
+      "to": "theory-ch03-process"
+    },
+    {
+      "from": "sub-ch04",
+      "to": "theory-ch04-cpu-scheduling"
+    },
+    {
+      "from": "review-midterm",
+      "to": "sub-ch01"
+    },
+    {
+      "from": "review-midterm",
+      "to": "sub-ch02"
+    },
+    {
+      "from": "review-midterm",
+      "to": "sub-ch03"
+    },
+    {
+      "from": "review-midterm",
+      "to": "sub-ch04"
+    },
+    {
+      "from": "theory-ch01-overview",
+      "to": "sub-ch01"
+    },
+    {
+      "from": "theory-ch01-overview",
+      "to": "glossary-terms"
+    },
+    {
+      "from": "theory-ch01-overview",
+      "to": "flashcards-ch01"
+    },
+    {
+      "from": "theory-ch02-structure",
+      "to": "sub-ch02"
+    },
+    {
+      "from": "theory-ch02-structure",
+      "to": "theory-ch03-process"
+    },
+    {
+      "from": "theory-ch03-process",
+      "to": "sub-ch03"
+    },
+    {
+      "from": "theory-ch03-process",
+      "to": "theory-ch04-cpu-scheduling"
+    },
+    {
+      "from": "theory-ch04-cpu-scheduling",
+      "to": "sub-ch04"
+    },
+    {
+      "from": "theory-ch04-cpu-scheduling",
+      "to": "theory-ch01-overview"
+    }
+  ]
 }

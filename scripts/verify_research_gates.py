@@ -67,8 +67,19 @@ def _local_source_verification(registry, source_root: Path | None):
 
 
 def _coverage_metrics(decks, registry):
-    slide_sources = {s.get("id"): s for s in registry if s.get("type") == "official_slide"}
-    physical_from_registry = sum(int(s.get("page_count") or 0) for s in slide_sources.values())
+    registry_by_id = {s.get("id"): s for s in registry if s.get("id")}
+    # Count only the deck identities actually present in the coverage manifest.
+    # This keeps local variants (which are deliberately separate source IDs) in
+    # the historical manifest while excluding future canonical attachments that
+    # are recorded as blockers but have not yet been mapped.
+    physical_from_registry = 0
+    slide_sources = {}
+    for deck in decks:
+        sid = deck.get("source_id")
+        source = registry_by_id.get(sid)
+        if source is not None:
+            slide_sources[sid] = source
+            physical_from_registry += int(source.get("page_count") or source.get("slide_count") or 0)
     expanded = expand_coverage(decks)
     duplicate_pages = []
     gaps = []
@@ -102,7 +113,8 @@ def _coverage_metrics(decks, registry):
             "coverage_complete": seen == expected_set and not malformed,
             "malformed_ranges": malformed,
         })
-        if sid in slide_sources and int(slide_sources[sid].get("page_count") or 0) != expected:
+        registered_count = int((slide_sources.get(sid) or {}).get("page_count") or (slide_sources.get(sid) or {}).get("slide_count") or 0)
+        if sid in slide_sources and registered_count != expected:
             gaps.append(f"{sid}:registry_page_count_mismatch")
     content = sum(1 for p in expanded if p.get("classification") == "CONTENT")
     non_content = sum(1 for p in expanded if p.get("classification") == "NON_CONTENT")
@@ -190,7 +202,7 @@ All totals below are computed from registry records, expanded slide-page records
 |---|---:|---|:---:|
 | Registered sources | {len(registry)} | unique IDs and required schema | **{status(registry_schema_ok)}** |
 | Tier-A local files / hash checks | {sum(r['file_present'] for r in verification_rows)} / {sum(r['hash_match'] is True for r in verification_rows)} | REPO_ONLY is informational; LOCAL requires all hashes | **{status(source_verification_ok)}** |
-| Physical slide pages | {slides['physical_pages_total']} | sum of official-slide registry page counts | **PASS** |
+| Physical slide pages | {slides['physical_pages_total']} | sum of referenced deck registry page/slide counts | **PASS** |
 | Expanded coverage records | {slides['coverage_pages_total']} | exactly physical-page total | **{status(slides['coverage_pages_total'] == slides['physical_pages_total'])}** |
 | Content / non-content pages | {slides['content_pages_total']} / {slides['non_content_pages_total']} | sum equals physical total | **{status(slides['content_pages_total'] + slides['non_content_pages_total'] == slides['physical_pages_total'])}** |
 | Coverage gaps / duplicates / schema errors | {len(slides['coverage_gaps'])} / {len(slides['duplicate_pages'])} / {len(slides['schema_errors'])} | zero | **{status(not slides['coverage_gaps'] and not slides['duplicate_pages'] and not slides['schema_errors'])}** |

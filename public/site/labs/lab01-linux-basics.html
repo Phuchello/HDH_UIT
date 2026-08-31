@@ -1,81 +1,42 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="light">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lab 1: Giới thiệu Linux, Quản trị Tệp tin & Lệnh Cơ Bản — IT007 UIT</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
-  <script src="../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-
-  <!-- Top App Header -->
-  <header class="app-header">
-    <a class="brand-container" href="../index.html">
-      <span class="brand-badge">IT007</span>
-      <span class="brand-title">Hệ Điều Hành · IT007 UIT</span>
-    </a>
-    <div class="header-actions">
-      <button class="search-trigger-btn" id="search-trigger-btn">
-        <span>🔍 Tìm kiếm nhanh...</span>
-        <kbd class="kbd-shortcut">Ctrl+K</kbd>
-      </button>
-      <button class="theme-toggle-btn" id="theme-toggle-btn" title="Chuyển đổi giao diện Sáng / Tối">
-        <span id="theme-icon">🌙</span>
-      </button>
-    </div>
-  </header>
-
-  <!-- 3-Column Workspace Layout -->
-  <div class="workspace-layout">
-
-    <!-- Left Sidebar (Explorer) -->
-    <aside class="sidebar-left">
-      <div class="nav-section-title">LÝ THUYẾT (THEORY)</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link" href="../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành & Kiến trúc Máy tính</a></li>
+<html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản — IT007 UIT</title><link rel="stylesheet" href="../assets/css/style.css"><script src="../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT (THEORY)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../theory/ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../theory/ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../theory/ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
 </ul>
-<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch01.html">Câu Hỏi Tự Luận & Barem Điểm — Chương 1: Tổng Quan HDH</a></li>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
 </ul>
-<div class="nav-section-title">THỰC HÀNH (LAB)</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link active" href="../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin & Lệnh Cơ Bản</a></li>
+<div class="nav-section-title">THỰC HÀNH (LAB)</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link active" href="lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
 </ul>
-<div class="nav-section-title">ĐỀ THI & TRA CỨU</div>
-<ul class="nav-tree">
-  <li class="nav-tree-item"><a class="nav-link" href="../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
-  <li class="nav-tree-item"><a class="nav-link" href="../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
-  <li class="nav-tree-item"><a class="nav-link" href="../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
-</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../index.html">Trang chủ</a> <span>/</span> <span>Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</span></div><article class="article-body"><h1 id="lab-1-gioi-thieu-linux-quan-tri-he-thong-tep">Lab 1: Giới thiệu Linux &amp; Quản trị Hệ Thống Tệp</h1>
 
-    </aside>
+<h2 id="1-muc-tieu-hoc-thuat-chuan-au-ra">1. Mục Tiêu Học Thuật &amp; Chuẩn Đầu Ra</h2>
 
-    <!-- Center Column (Reading Canvas) -->
-    <main class="content-center">
-      <div class="breadcrumbs">
-        <a href="../index.html">Trang chủ</a> <span>/</span> <span>Lab 1: Giới thiệu Linux, Quản trị Tệp tin & Lệnh Cơ Bản</span>
-      </div>
-
-      <article class="article-body">
-        <h1 id="lab-1-gii-thiu-linux--qun-tr-h-thng-tp">Lab 1: Giới thiệu Linux & Quản trị Hệ Thống Tệp</h1>
-
-<h2 id="1-mc-tiu-hc-thut--chun-u-ra">1. Mục Tiêu Học Thuật & Chuẩn Đầu Ra</h2>
-- Nắm vững kiến trúc cây thư mục chuẩn Filesystem Hierarchy Standard (FHS) của Linux.
-- Sử dụng thành thạo các lệnh điều hướng, thao tác tệp tin và tìm kiếm (<code>cd</code>, <code>ls</code>, <code>mkdir</code>, <code>cp</code>, <code>mv</code>, <code>rm</code>, <code>find</code>, <code>grep</code>).
-- Hiểu rõ cơ chế phân quyền người dùng (User/Group/Other) và thay đổi thuộc tính tệp tin bằng <code>chmod</code>, <code>chown</code>.
-- Thực hiện giám sát và điều khiển tiến trình cơ bản qua Terminal (<code>ps</code>, <code>top</code>, <code>kill</code>).
+<ul><li>Nắm vững kiến trúc cây thư mục chuẩn Filesystem Hierarchy Standard (FHS) của Linux.</li><li>Sử dụng thành thạo các lệnh điều hướng, thao tác tệp tin và tìm kiếm (<code>cd</code>, <code>ls</code>, <code>mkdir</code>, <code>cp</code>, <code>mv</code>, <code>rm</code>, <code>find</code>, <code>grep</code>).</li><li>Hiểu rõ cơ chế phân quyền người dùng (User/Group/Other) và thay đổi thuộc tính tệp tin bằng <code>chmod</code>, <code>chown</code>.</li><li>Thực hiện giám sát và điều khiển tiến trình cơ bản qua Terminal (<code>ps</code>, <code>top</code>, <code>kill</code>).</li></ul>
 
 <p>---</p>
 
-<h2 id="2-phn-nh-yu-cu-chnh-thc-vs-khuyn-ngh-cm-nang">2. Phân Định Yêu Cầu Chính Thức vs Khuyến Nghị Cẩm Nang</h2>
+<h2 id="2-phan-inh-yeu-cau-chinh-thuc-vs-khuyen-nghi-cam-nang">2. Phân Định Yêu Cầu Chính Thức vs Khuyến Nghị Cẩm Nang</h2>
 
-<div class="callout important"><div class="callout-title">YÊU CẦU QUAN TRỌNG</div><p>> <strong>YÊU CẦU THỰC HÀNH CỦA BỘ MÔN (THEO TÀI LIỆU LAB 1):</strong><br>> 1. Thực hiện đầy đủ các bài tập điều hướng và thao tác tệp theo hướng dẫn trong <code>Lab 1 v2023.pdf</code>.<br>> 2. Thiết lập đúng quyền truy xuất cho tệp tin theo mã bát phân (Octal notation) hoặc ký hiệu (Symbolic notation).<br>> 3. Chuẩn bị báo cáo thực hành chứa kết quả thực thi các lệnh được yêu cầu.</p></div>
-<div class="callout tip"><div class="callout-title">KHUYẾN NGHỊ THỰC HÀNH</div><p>> <strong>KHUYẾN NGHỊ KỸ THUẬT CỦA CẨM NANG:</strong><br>> - Sử dụng phím <code>Tab</code> để tự động hoàn thành đường dẫn (Tab-completion), hạn chế tối đa việc gõ nhầm.<br>> - Luôn kiểm tra kết quả thao tác bằng <code>ls -la</code> hoặc <code>echo $?</code> để xác nhận lệnh đã thực thi thành công.<br>> - Cẩn trọng với các lệnh xóa tệp đệ quy <code>rm -rf</code>.</p></div>
----
+<div class="callout important"><div class="callout-title">YÊU CẦU QUAN TRỌNG</div><p><br><strong>YÊU CẦU THỰC HÀNH CỦA BỘ MÔN (THEO TÀI LIỆU LAB 1):</strong><br>1. Thực hiện đầy đủ các bài tập điều hướng và thao tác tệp theo hướng dẫn trong <code>Lab 1 v2023.pdf</code>.<br>2. Thiết lập đúng quyền truy xuất cho tệp tin theo mã bát phân (Octal notation) hoặc ký hiệu (Symbolic notation).<br>3. Chuẩn bị báo cáo thực hành chứa kết quả thực thi các lệnh được yêu cầu.</p></div>
 
-<h2 id="3-h-thng-cy-th-mc-linux-filesystem-hierarchy-standard">3. Hệ Thống Cây Thư Mục Linux (Filesystem Hierarchy Standard)</h2>
+<div class="callout tip"><div class="callout-title">KHUYẾN NGHỊ THỰC HÀNH</div><p><br><strong>KHUYẾN NGHỊ KỸ THUẬT CỦA CẨM NANG:</strong><br>- Sử dụng phím <code>Tab</code> để tự động hoàn thành đường dẫn (Tab-completion), hạn chế tối đa việc gõ nhầm.<br>- Luôn kiểm tra kết quả thao tác bằng <code>ls -la</code> hoặc <code>echo $?</code> để xác nhận lệnh đã thực thi thành công.<br>- Cẩn trọng với các lệnh xóa tệp đệ quy <code>rm -rf</code>.</p></div>
+
+<p>---</p>
+
+<h2 id="3-he-thong-cay-thu-muc-linux-filesystem-hierarchy-standard">3. Hệ Thống Cây Thư Mục Linux (Filesystem Hierarchy Standard)</h2>
 
 <p>Khác với Windows sử dụng các ổ đĩa riêng biệt (<code>C:\</code>, <code>D:\</code>), hệ thống Linux tổ chức toàn bộ dữ liệu dưới dạng <strong>một cây phân cấp duy nhất</strong> bắt đầu từ thư mục gốc <code>/</code> (Root directory):</p>
 
@@ -88,12 +49,11 @@
 ├── var/      -&gt; Dữ liệu biến đổi trong quá trình chạy (log files, mail spool)
 ├── tmp/      -&gt; Thư mục chứa tệp tạm thời (tự động dọn dẹp khi khởi động lại)
 ├── dev/      -&gt; Các tệp đại diện cho thiết bị phần cứng (dev/sda, dev/null, dev/zero)
-└── proc/     -&gt; Hệ thống tệp ảo ánh xạ trực tiếp trạng thái nhân Linux (proc/cpuinfo)
-</code></pre>
+└── proc/     -&gt; Hệ thống tệp ảo ánh xạ trực tiếp trạng thái nhân Linux (proc/cpuinfo)</code></pre>
 
 <p>---</p>
 
-<h2 id="4-c-ch-phn-quyn-tp-tin-file-permissions">4. Cơ Chế Phân Quyền Tệp Tin (File Permissions)</h2>
+<h2 id="4-co-che-phan-quyen-tep-tin-file-permissions">4. Cơ Chế Phân Quyền Tệp Tin (File Permissions)</h2>
 
 <p>Khi gõ lệnh <code>ls -l</code>, mỗi dòng xuất ra sẽ có định dạng:</p>
 
@@ -103,119 +63,57 @@
 |  |   |   +--&gt; Quyền của Người khác (Others): r-- (chỉ đọc)
 |  |   +------&gt; Quyền của Nhóm (Group): r-x (đọc + thực thi)
 |  +----------&gt; Quyền của Chủ sở hữu (User/Owner): rwx (đọc + ghi + thực thi)
-+-------------&gt; Loại tệp (-: file thông thường, d: directory, l: symlink)
-</code></pre>
++-------------&gt; Loại tệp (-: file thông thường, d: directory, l: symlink)</code></pre>
 
-<h3 id="bng-gi-tr-quyn-bt-phn-octal-values">Bảng Giá Trị Quyền Bát Phân (Octal Values)</h3>
-<table>
-  <thead><tr><th>Quyền</th><th>Ký hiệu</th><th>Giá trị nhị phân</th><th>Giá trị bát phân</th><th>Ý nghĩa đối với File</th><th>Ý nghĩa đối với Directory</th></tr></thead>
-  <tbody><tr><td>**Read**</td><td><code>r</code></td><td><code>100</code></td><td>**4**</td><td>Đọc nội dung file</td><td>Liệt kê danh sách file bên trong (<code>ls</code>)</td></tr><tr><td>**Write**</td><td><code>w</code></td><td><code>010</code></td><td>**2**</td><td>Sửa đổi/ghi nội dung file</td><td>Tạo mới, đổi tên hoặc xóa file bên trong</td></tr><tr><td>**Execute**</td><td><code>x</code></td><td><code>001</code></td><td>**1**</td><td>Chạy file như chương trình</td><td>Truy cập / đi vào thư mục (<code>cd</code>)</td></tr></tbody>
-</table>
+<h3 id="bang-gia-tri-quyen-bat-phan-octal-values">Bảng Giá Trị Quyền Bát Phân (Octal Values)</h3>
 
-<h3 id="v-d-thc-hnh-phn-quyn">Ví dụ Thực Hành Phân Quyền</h3>
-<pre><code class="language-bash">&lt;h1 id="gn-quyn-ownerrwx-7-grouprx-5-othersr-4"&gt;Gán quyền: Owner=rwx (7), Group=rx (5), Others=r (4)&lt;/h1&gt;
+<table><thead><tr><th>Quyền</th><th>Ký hiệu</th><th>Giá trị nhị phân</th><th>Giá trị bát phân</th><th>Ý nghĩa đối với File</th><th>Ý nghĩa đối với Directory</th></tr></thead><tbody><tr><td><strong>Read</strong></td><td><code>r</code></td><td><code>100</code></td><td><strong>4</strong></td><td>Đọc nội dung file</td><td>Liệt kê danh sách file bên trong (<code>ls</code>)</td></tr><tr><td><strong>Write</strong></td><td><code>w</code></td><td><code>010</code></td><td><strong>2</strong></td><td>Sửa đổi/ghi nội dung file</td><td>Tạo mới, đổi tên hoặc xóa file bên trong</td></tr><tr><td><strong>Execute</strong></td><td><code>x</code></td><td><code>001</code></td><td><strong>1</strong></td><td>Chạy file như chương trình</td><td>Truy cập / đi vào thư mục (<code>cd</code>)</td></tr></tbody></table>
+
+<h3 id="vi-du-thuc-hanh-phan-quyen">Ví dụ Thực Hành Phân Quyền</h3>
+
+<pre><code class="language-bash"># Gán quyền: Owner=rwx (7), Group=rx (5), Others=r (4)
 chmod 754 script.sh
 
-<p>&lt;h1 id="gn-quyn-thc-thi-thm-cho-user"&gt;Gán quyền thực thi thêm cho User:&lt;/h1&gt;
-chmod u+x script.sh</p>
+# Gán quyền thực thi thêm cho User:
+chmod u+x script.sh
 
-<p>&lt;h1 id="i-ch-s-hu-file-sang-user-sinhvien"&gt;Đổi chủ sở hữu file sang user 'sinhvien':&lt;/h1&gt;
-sudo chown sinhvien script.sh
-</code></pre></p>
-
-<p>---</p>
-
-<h2 id="5-cc-cu-hi-vn-p-thc-hnh-chun-b-viva-questions">5. Các Câu Hỏi Vấn Đáp Thực Hành Chuẩn Bị (Viva Questions)</h2>
-
-<div class="study-card" data-card-id="viva-lab01-hardlink-symlink">
-  <div class="card-header">
-    <span class="card-tag">Active Recall</span>
-    <span class="card-stats">Tự học tương tác</span>
-  </div>
-  <div class="card-question">> <strong>Câu hỏi Vấn đáp:</strong> Phân biệt Hard Link và Symbolic Link (Soft Link) trong Linux. Điều gì xảy ra khi ta xóa file gốc?
-<blockquote></div
-</blockquote><div class="card-section card-hint"><strong>💡 Gợi ý:</strong> > Gợi ý: Hãy nghĩ về số hiệu Inode và bảng quản lý tệp trên đĩa.
-<blockquote></div
-</blockquote><div class="card-section card-keypoints"><strong>🔑 Từ khóa bắt buộc:</strong><ul></ul></div>
-<div class="card-section card-answer"><strong>📖 Lời giải hoàn chỉnh:</strong><p>> Hard Link tạo ra một tên gọi mới trỏ cùng vào một Inode và dữ liệu vật lý trên đĩa. Dung lượng và số inode của hard link hoàn toàn trùng với file gốc. Khi xóa file gốc, chỉ số đếm liên kết giảm đi 1, dữ liệu chỉ thực sự bị giải phóng khi mọi hard link bị xóa hết. Soft Link là một tệp con trỏ chứa đường dẫn của tệp gốc. Nếu tệp gốc bị xóa hoặc đổi tên, Soft Link sẽ trở thành liên kết chết (Dangling/Broken Link).</p></div>
-
-<div class="card-actions">
-    <button class="btn-card btn-hint">💡 Gợi ý</button>
-    <button class="btn-card btn-keypoints">🔑 Xem Từ Khóa</button>
-    <button class="btn-card primary btn-answer">📖 Hiện Lời Giải</button>
-    <button class="btn-card success btn-remember">✅ Đã Thuộc</button>
-    <button class="btn-card danger btn-forgot">❌ Chưa Nhớ</button>
-  </div>
-</div>
+# Đổi chủ sở hữu file sang user &#x27;sinhvien&#x27;:
+sudo chown sinhvien script.sh</code></pre>
 
 <p>---</p>
 
-<h2 id="6-bi-tp-thc-hnh-lab-1">6. Bài Tập Thực Hành Lab 1</h2>
+<h2 id="5-cac-cau-hoi-van-ap-thuc-hanh-chuan-bi-viva-questions">5. Các Câu Hỏi Vấn Đáp Thực Hành Chuẩn Bị (Viva Questions)</h2>
 
-<h3 id="bi-1-qun-tr-cu-trc-th-mc">Bài 1: Quản trị cấu trúc thư mục</h3>
-Tạo cấu trúc thư mục dự án sau chỉ bằng một lệnh duy nhất:
+<div class="study-card" data-card-id="viva-lab01-hardlink-symlink"><div class="card-header"><span class="card-tag">Active Recall</span><span class="card-stats">Tự học tương tác</span></div><div class="card-question"><strong>Câu hỏi Vấn đáp:</strong> Phân biệt Hard Link và Symbolic Link (Soft Link) trong Linux. Điều gì xảy ra khi ta xóa file gốc?</div><div class="card-section card-hint"><strong>💡 Gợi ý:</strong> Gợi ý: Hãy nghĩ về số hiệu Inode và bảng quản lý tệp trên đĩa.
+&lt;!-- keypoints --&gt;
+- [ ] Hard link trỏ trực tiếp đến cùng một chỉ số Inode trên đĩa; xóa file gốc thì file hard link vẫn đọc được bình thường.
+- [ ] Soft link (Symlink) là file riêng chứa chuỗi đường dẫn trỏ tới file gốc; xóa file gốc thì soft link bị hỏng (Broken link).
+- [ ] Hard link không thể liên kết xuyên qua các phân vùng đĩa khác nhau (Cross-filesystem) và không thể liên kết thư mục.
+&lt;!-- answer --&gt;
+Hard Link tạo ra một tên gọi mới trỏ cùng vào một Inode và dữ liệu vật lý trên đĩa. Dung lượng và số inode của hard link hoàn toàn trùng với file gốc. Khi xóa file gốc, chỉ số đếm liên kết giảm đi 1, dữ liệu chỉ thực sự bị giải phóng khi mọi hard link bị xóa hết. Soft Link là một tệp con trỏ chứa đường dẫn của tệp gốc. Nếu tệp gốc bị xóa hoặc đổi tên, Soft Link sẽ trở thành liên kết chết (Dangling/Broken Link).</div><div class="card-actions"><button class="btn-card success btn-remember">✅ Đã Thuộc</button><button class="btn-card danger btn-forgot">❌ Chưa Nhớ</button></div></div>
+
+<p>---</p>
+
+<h2 id="6-bai-tap-thuc-hanh-lab-1">6. Bài Tập Thực Hành Lab 1</h2>
+
+<h3 id="bai-1-quan-tri-cau-truc-thu-muc">Bài 1: Quản trị cấu trúc thư mục</h3>
+
+<p>Tạo cấu trúc thư mục dự án sau chỉ bằng một lệnh duy nhất:</p>
+
 <pre><code class="language-">project/
 ├── src/
 │   ├── core/
 │   └── utils/
 ├── include/
-└── build/
-</code></pre>
+└── build/</code></pre>
 
-<p><strong>Lệnh giải quyết:</strong>
-<pre><code class="language-bash">mkdir -p project/src/{core,utils} project/include project/build
-</code></pre></p>
+<p><strong>Lệnh giải quyết:</strong></p>
 
-<h3 id="bi-2-tm-kim-tp-tin--lc-chui">Bài 2: Tìm kiếm tệp tin & Lọc chuỗi</h3>
-Tìm tất cả các tệp có đuôi <code>.c</code> trong thư mục hiện tại có dung lượng lớn hơn <code>10KB</code> và chứa chuỗi từ khóa <code>fork</code>:
-<pre><code class="language-bash">find . -type f -name "*.c" -size +10k -exec grep -H "fork" {} +
-</code></pre>
-        
-        <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.82rem; color: var(--text-muted); text-align: center;">
-          Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.
-        </div>
-      </article>
-    </main>
+<pre><code class="language-bash">mkdir -p project/src/{core,utils} project/include project/build</code></pre>
 
-    <!-- Right Sidebar (Local Graph & TOC) -->
-    <aside class="sidebar-right">
-      <div class="graph-container">
-        <div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div>
-        <canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas>
-      </div>
+<h3 id="bai-2-tim-kiem-tep-tin-loc-chuoi">Bài 2: Tìm kiếm tệp tin &amp; Lọc chuỗi</h3>
 
-      <div class="toc-container">
-        <div class="toc-title">MỤC LỤC TRANG</div>
-        <ul class="toc-list">
-          <li class="toc-item"><a class="toc-link" href="#1-mc-tiu-hc-thut--chun-u-ra">1. Mục Tiêu Học Thuật & Chuẩn Đầu Ra</a></li>
-<li class="toc-item"><a class="toc-link" href="#2-phn-nh-yu-cu-chnh-thc-vs-khuyn-ngh-cm-nang">2. Phân Định Yêu Cầu Chính Thức vs Khuyến Nghị Cẩm Nang</a></li>
-<li class="toc-item"><a class="toc-link" href="#3-h-thng-cy-th-mc-linux-filesystem-hierarchy-standard">3. Hệ Thống Cây Thư Mục Linux (Filesystem Hierarchy Standard)</a></li>
-<li class="toc-item"><a class="toc-link" href="#4-c-ch-phn-quyn-tp-tin-file-permissions">4. Cơ Chế Phân Quyền Tệp Tin (File Permissions)</a></li>
-<li class="toc-item"><a class="toc-link" href="#bng-gi-tr-quyn-bt-phn-octal-values">Bảng Giá Trị Quyền Bát Phân (Octal Values)</a></li>
-<li class="toc-item"><a class="toc-link" href="#v-d-thc-hnh-phn-quyn">Ví dụ Thực Hành Phân Quyền</a></li>
-<li class="toc-item"><a class="toc-link" href="#5-cc-cu-hi-vn-p-thc-hnh-chun-b-viva-questions">5. Các Câu Hỏi Vấn Đáp Thực Hành Chuẩn Bị (Viva Questions)</a></li>
-<li class="toc-item"><a class="toc-link" href="#6-bi-tp-thc-hnh-lab-1">6. Bài Tập Thực Hành Lab 1</a></li>
-<li class="toc-item"><a class="toc-link" href="#bi-1-qun-tr-cu-trc-th-mc">Bài 1: Quản trị cấu trúc thư mục</a></li>
-<li class="toc-item"><a class="toc-link" href="#bi-2-tm-kim-tp-tin--lc-chui">Bài 2: Tìm kiếm tệp tin & Lọc chuỗi</a></li>
+<p>Tìm tất cả các tệp có đuôi <code>.c</code> trong thư mục hiện tại có dung lượng lớn hơn <code>10KB</code> và chứa chuỗi từ khóa <code>fork</code>:</p>
 
-        </ul>
-      </div>
-    </aside>
-
-  </div>
-
-  <!-- Full-Text Search Modal -->
-  <div class="search-modal-overlay" id="search-modal-overlay">
-    <div class="search-modal">
-      <div class="search-input-wrapper">
-        <span>🔍</span>
-        <input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm khái niệm, câu hỏi, bài lab...">
-        <kbd class="kbd-shortcut">ESC</kbd>
-      </div>
-      <ul class="search-results-list" id="search-results-list"></ul>
-    </div>
-  </div>
-
-  <script src="../assets/js/app.js"></script>
-</body>
-</html>
+<pre><code class="language-bash">find . -type f -name &quot;*.c&quot; -size +10k -exec grep -H &quot;fork&quot; {} +</code></pre><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">🌐 Đồ Thị Tri Thức Cục Bộ</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#1-muc-tieu-hoc-thuat-chuan-au-ra">1. Mục Tiêu Học Thuật &amp;amp; Chuẩn Đầu Ra</a></li><li class="toc-item"><a class="toc-link" href="#2-phan-inh-yeu-cau-chinh-thuc-vs-khuyen-nghi-cam-nang">2. Phân Định Yêu Cầu Chính Thức vs Khuyến Nghị Cẩm Nang</a></li><li class="toc-item"><a class="toc-link" href="#3-he-thong-cay-thu-muc-linux-filesystem-hierarchy-standard">3. Hệ Thống Cây Thư Mục Linux (Filesystem Hierarchy Standard)</a></li><li class="toc-item"><a class="toc-link" href="#4-co-che-phan-quyen-tep-tin-file-permissions">4. Cơ Chế Phân Quyền Tệp Tin (File Permissions)</a></li><li class="toc-item"><a class="toc-link" href="#bang-gia-tri-quyen-bat-phan-octal-values">Bảng Giá Trị Quyền Bát Phân (Octal Values)</a></li><li class="toc-item"><a class="toc-link" href="#vi-du-thuc-hanh-phan-quyen">Ví dụ Thực Hành Phân Quyền</a></li><li class="toc-item"><a class="toc-link" href="#5-cac-cau-hoi-van-ap-thuc-hanh-chuan-bi-viva-questions">5. Các Câu Hỏi Vấn Đáp Thực Hành Chuẩn Bị (Viva Questions)</a></li><li class="toc-item"><a class="toc-link" href="#6-bai-tap-thuc-hanh-lab-1">6. Bài Tập Thực Hành Lab 1</a></li><li class="toc-item"><a class="toc-link" href="#bai-1-quan-tri-cau-truc-thu-muc">Bài 1: Quản trị cấu trúc thư mục</a></li><li class="toc-item"><a class="toc-link" href="#bai-2-tim-kiem-tep-tin-loc-chuoi">Bài 2: Tìm kiếm tệp tin &amp;amp; Lọc chuỗi</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../assets/js/app.js"></script></body></html>
