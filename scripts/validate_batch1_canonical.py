@@ -32,9 +32,11 @@ def main() -> int:
     expect(registry.get("UIT-SLIDE-CH04-1-2024", {}).get("exact_filename") == "#Week04-Chapter4-1 2024.pdf", "canonical Ch4 Part 1 filename mismatch")
     expect(registry.get("UIT-SLIDE-CH04-1-2024", {}).get("sha256") == "f2323c438f260d0b5c37322e78eb0eee7af3e036bec109d68de9db31c4714dae", "canonical Ch4 Part 1 SHA mismatch")
     expect(registry.get("UIT-SLIDE-CH04-1-2024", {}).get("page_count") == 74, "canonical Ch4 Part 1 must be 74 pages")
+    expect(registry.get("UIT-SLIDE-CH04-1-2024", {}).get("status") == "USER_ATTACHMENT_VERIFIED", "canonical Ch4 Part 1 verification status mismatch")
     expect(registry.get("UIT-SLIDE-CH04-2-2024", {}).get("sha256") == "9221a7e4a42ff88a98ee8f2980d879860ded2abd5e6de04ca35d7f768aee2040", "canonical Ch4 Part 2 SHA mismatch")
     expect(registry.get("UIT-SLIDE-CH04-2-2024", {}).get("exact_filename") == "#Week05-Chapter4-2 2024.pdf", "canonical Ch4 Part 2 filename mismatch")
     expect(registry.get("UIT-SLIDE-CH04-2-2024", {}).get("page_count") == 59, "canonical Ch4 Part 2 must be 59 pages")
+    expect(registry.get("UIT-SLIDE-CH04-2-2024", {}).get("status") == "USER_ATTACHMENT_VERIFIED", "canonical Ch4 Part 2 verification status mismatch")
     expect("UIT-SLIDE-CH04-3-2024" not in registry, "unsupported official Ch4 Part 3 identity remains")
     expect(registry.get("UIT-SLIDE-CH04-3-2024-VARIANT-LOCAL-46", {}).get("type") == "source_variant", "local Ch4 Part 3 is not explicitly separated")
 

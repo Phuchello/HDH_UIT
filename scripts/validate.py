@@ -107,8 +107,9 @@ def validate():
     author_user_pat = r"ly" + r"le3"
     forbidden = [user_pat, author_user_pat, r"sk-[a-zA-Z0-9]{20,}", r"OPENAI_" + r"API_KEY", r"GEMINI_" + r"API_KEY"]
 
+    transient_dirs = {".git", "dist", "vendor", "build", "node_modules", "__pycache__", ".pytest_cache"}
     for root, _, files in os.walk(ROOT):
-        if ".git" in root or "dist" in root or "vendor" in root or "build" in root:
+        if any(part in transient_dirs for part in Path(root).parts):
             continue
         for f in files:
             path = Path(root) / f

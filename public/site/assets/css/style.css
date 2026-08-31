@@ -252,12 +252,14 @@ body {
   max-width: var(--content-max-width);
   margin: 0 auto;
   width: 100%;
+  min-width: 0;
 }
 
 /* Breadcrumbs */
 .breadcrumbs {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.4rem;
   font-size: 0.8rem;
   color: var(--text-muted);
@@ -348,6 +350,7 @@ body {
 
 .article-body table {
   width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
   font-size: 0.9rem;
@@ -379,6 +382,18 @@ body {
   overflow-x: auto;
   border-radius: 8px;
   line-height: 1.5;
+}
+
+/* Wide source tables and code stay scrollable inside the reading canvas,
+   rather than widening the viewport on small screens. */
+.article-body pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.article-body table {
+  display: block;
+  overflow-x: auto;
 }
 
 /* Callouts / Admonitions */
@@ -795,7 +810,7 @@ body {
 
 @media (max-width: 768px) {
   .workspace-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .sidebar-left {
     display: none;

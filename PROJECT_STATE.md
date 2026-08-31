@@ -2,9 +2,10 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_THEORY_BATCH1_DRAFTED_READY_FOR_ENGINEERING_QA`
+**Giai đoạn hiện tại (Current Phase):** `V2_THEORY_BATCH1_ENGINEERING_QA_PASS_READY_FOR_ACADEMIC_REVIEW`
 **Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — canonical attachment evidence and verified page/slide maps are recorded with explicit source statuses; local variants remain separate.
-**Hành động tiếp theo chính xác (Exact Next Action):** Terra Medium performs engineering/build regression. Do not start Chapter 5.
+**Xác minh học thuật (Academic Verification):** `NOT_YET_PERFORMED`
+**Hành động tiếp theo chính xác (Exact Next Action):** Luna Ultra performs independent academic/source review of Batch 1.
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-08-31
 

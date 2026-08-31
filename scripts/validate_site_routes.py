@@ -31,7 +31,7 @@ class LinkParser(HTMLParser):
             self.ids.add(attrs["name"])
         for key in ("href", "src"):
             if attrs.get(key) is not None:
-                self.links.append((key, attrs[key]))
+                self.links.append((tag, key, attrs[key]))
 
 
 def _is_external(url: str):
@@ -42,6 +42,8 @@ def _is_external(url: str):
 def crawl(site: Path):
     broken = []
     internal_count = 0
+    remote_runtime_dependencies = []
+    invalid_empty_fragments = []
     pages = sorted(site.rglob("*.html")) if site.exists() else []
     for page in pages:
         parser = LinkParser()
@@ -50,8 +52,12 @@ def crawl(site: Path):
         except Exception as exc:
             broken.append({"page": page.relative_to(site).as_posix(), "target": "<parse>", "reason": str(exc)})
             continue
-        for attr, raw_url in parser.links:
-            if not raw_url or _is_external(raw_url) or raw_url.startswith(("mailto:", "javascript:", "data:")):
+        for tag, attr, raw_url in parser.links:
+            if _is_external(raw_url):
+                if attr == "src" or tag == "link":
+                    remote_runtime_dependencies.append({"page": page.relative_to(site).as_posix(), "target": raw_url})
+                continue
+            if not raw_url or raw_url.startswith(("mailto:", "javascript:", "data:")):
                 continue
             internal_count += 1
             path_part, fragment = urldefrag(raw_url)
@@ -59,6 +65,7 @@ def crawl(site: Path):
                 if fragment and fragment not in parser.ids:
                     broken.append({"page": page.relative_to(site).as_posix(), "target": raw_url, "reason": "missing same-page anchor"})
                 elif not fragment:
+                    invalid_empty_fragments.append({"page": page.relative_to(site).as_posix(), "target": raw_url})
                     broken.append({"page": page.relative_to(site).as_posix(), "target": raw_url, "reason": "empty internal URL"})
                 continue
             target_rel = posixpath.normpath(posixpath.join(page.relative_to(site).parent.as_posix(), path_part))
@@ -71,15 +78,23 @@ def crawl(site: Path):
                 target_parser.feed(target.read_text(encoding="utf-8"))
                 if fragment not in target_parser.ids:
                     broken.append({"page": page.relative_to(site).as_posix(), "target": raw_url, "reason": "missing target anchor"})
+    broken_assets = [item for item in broken if item["target"].split("#", 1)[0].lower().endswith((".css", ".js", ".svg", ".png", ".jpg", ".jpeg", ".gif", ".webp", ".woff", ".woff2"))]
+    broken_anchors = [item for item in broken if "anchor" in item["reason"]]
+    broken_routes = [item for item in broken if item not in broken_assets and item not in broken_anchors]
     result = {
         "site_root": site.name,
         "pages": len(pages),
         "internal_links": internal_count,
         "broken": broken,
-        "passed": not broken and bool(pages),
+        "broken_routes": broken_routes,
+        "broken_assets": broken_assets,
+        "broken_anchors": broken_anchors,
+        "invalid_empty_fragments": invalid_empty_fragments,
+        "remote_runtime_dependencies": remote_runtime_dependencies,
+        "passed": not broken and not remote_runtime_dependencies and bool(pages),
     }
     OUTPUT.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"SITE ROUTE VALIDATION: {'PASS' if result['passed'] else 'FAIL'} ({len(pages)} pages, {len(broken)} broken routes)")
+    print(f"SITE ROUTE VALIDATION: {'PASS' if result['passed'] else 'FAIL'} ({len(pages)} pages, {len(broken_routes)} broken routes, {len(broken_anchors)} broken anchors, {len(broken_assets)} broken assets, {len(remote_runtime_dependencies)} remote runtime dependencies)")
     if broken:
         for item in broken[:25]:
             print(f"  - {item['page']} -> {item['target']}: {item['reason']}")

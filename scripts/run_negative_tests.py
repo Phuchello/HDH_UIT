@@ -5,10 +5,18 @@ from __future__ import annotations
 
 import subprocess
 import sys
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "research" / "GATE_NEGATIVE_TESTS.md"
+
+
+def safe_evidence(output: str) -> str:
+    """Keep failure evidence useful without publishing workstation paths."""
+    compact = output.replace(str(ROOT), "<REPO_ROOT>")
+    compact = re.sub(r"[A-Za-z]:\\Users\\[^\\\s]+(?:\\[^\s]*)?", "<LOCAL_PATH>", compact)
+    return compact[:240].replace("\n", " ")
 
 
 def run_case(name, mutate, command, expected):
@@ -18,7 +26,7 @@ def run_case(name, mutate, command, expected):
         result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
         output = (result.stdout + "\n" + result.stderr).strip()
         passed = result.returncode != 0 and expected.lower() in output.lower()
-        return {"name": name, "passed": passed, "exit_code": result.returncode, "evidence": output[:240].replace("\n", " ")}
+        return {"name": name, "passed": passed, "exit_code": result.returncode, "evidence": safe_evidence(output)}
     finally:
         for path, original in reversed(changed):
             if original is None:

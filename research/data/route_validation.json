@@ -3,5 +3,10 @@
   "pages": 14,
   "internal_links": 382,
   "broken": [],
+  "broken_routes": [],
+  "broken_assets": [],
+  "broken_anchors": [],
+  "invalid_empty_fragments": [],
+  "remote_runtime_dependencies": [],
   "passed": true
 }
