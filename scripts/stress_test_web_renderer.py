@@ -6,7 +6,6 @@ from __future__ import annotations
 import html.parser
 import hashlib
 import json
-import shutil
 import subprocess
 import sys
 import tempfile
@@ -14,6 +13,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "research" / "WEB_RENDERER_STRESS_TEST.md"
+sys.path.insert(0, str(ROOT / "scripts"))
+from build_web import assert_safe_output_dir
 
 
 class StructureParser(html.parser.HTMLParser):
@@ -213,9 +214,28 @@ def main():
         except (OSError, json.JSONDecodeError):
             checks.extend([("search index has no deleted document", False), ("graph has no deleted document", False), ("navigation has no deleted route", False)])
 
-        for label, unsafe_path in (("repository root", ROOT), ("content child", ROOT / "content" / "_unsafe-fixture-output")):
-            unsafe_result = subprocess.run([sys.executable, "scripts/build_web.py", "--content-root", str(content), "--output-dir", str(unsafe_path)], cwd=ROOT, capture_output=True, text=True)
-            checks.append((f"unsafe {label} cleanup is rejected", unsafe_result.returncode != 0 and "Refusing unsafe generated output directory" in (unsafe_result.stdout + unsafe_result.stderr)))
+        unsafe_paths = {
+            "repository root": ROOT,
+            "repository parent": ROOT.parent,
+            "home": Path.home(),
+            "public parent": ROOT / "public",
+            "content": ROOT / "content",
+            "src": ROOT / "src",
+            "scripts": ROOT / "scripts",
+            "research": ROOT / "research",
+            "external sibling": ROOT.parent / "_hdh-uit-unsafe-sibling-do-not-touch",
+        }
+        for label, unsafe_path in unsafe_paths.items():
+            existed_before = unsafe_path.exists()
+            try:
+                assert_safe_output_dir(unsafe_path)
+            except RuntimeError as error:
+                rejected = "Refusing unsafe generated output directory" in str(error)
+            else:
+                rejected = False
+            checks.append((f"unsafe {label} validation is rejected without mutation", rejected and unsafe_path.exists() == existed_before))
+        checks.append(("canonical production site validation is allowed", assert_safe_output_dir(ROOT / "public" / "site") == (ROOT / "public" / "site").resolve()))
+        checks.append(("temporary output validation is allowed", assert_safe_output_dir(root / "allowed-temp-output") == (root / "allowed-temp-output").resolve()))
         passed = all(ok for _, ok in checks)
         rows = "\n".join(f"- {'PASS' if ok else 'FAIL'} — {label}" for label, ok in checks)
         REPORT.write_text(f"# Web Renderer Stress Test\n\n**Result:** **{'PASS' if passed else 'FAIL'}**\n\n{rows}\n\nFixtures are temporary and are deleted after this run.\n", encoding="utf-8")

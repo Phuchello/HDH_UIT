@@ -15,6 +15,7 @@ import os
 import re
 import shutil
 import sys
+import tempfile
 import unicodedata
 from pathlib import Path
 
@@ -277,29 +278,45 @@ def render_list(lines, start, routes, current_rel):
     return "".join(output), index
 
 
-def clean_output_dir(output_dir):
-    """Safely make a generated output directory represent one clean build."""
+def assert_safe_output_dir(output_dir):
+    """Validate an output path without mutating the filesystem.
+
+    Destructive cleanup is allowlisted to the canonical generated site and to
+    descendants of the operating system's real temporary directory.  Every
+    path is resolved first so ``..`` and symlinked components cannot bypass
+    the policy.
+    """
     candidate = Path(output_dir).expanduser()
     if candidate.is_symlink():
         raise RuntimeError(f"Refusing to clean symlink output directory: {candidate}")
     resolved = candidate.resolve()
-    forbidden = {
-        (ROOT / name).resolve() for name in ("content", "src", "scripts", "research", "archive")
-    }
-    if resolved == ROOT.resolve() or any(parent in resolved.parents or resolved == parent for parent in forbidden):
+    production_root = (ROOT / "public" / "site").resolve()
+    temp_root = Path(tempfile.gettempdir()).resolve()
+    allowed = (
+        resolved == production_root
+        or production_root in resolved.parents
+        or temp_root in resolved.parents
+    )
+    if not allowed:
         raise RuntimeError(f"Refusing unsafe generated output directory: {resolved}")
     if candidate.exists() and not candidate.is_dir():
         raise RuntimeError(f"Generated output path is not a directory: {resolved}")
-    candidate.mkdir(parents=True, exist_ok=True)
-    for child in list(candidate.iterdir()):
+    return resolved
+
+
+def clean_output_dir(output_dir):
+    """Safely make a generated output directory represent one clean build."""
+    output_dir = assert_safe_output_dir(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for child in list(output_dir.iterdir()):
         child_resolved = child.resolve()
-        if resolved not in child_resolved.parents:
+        if output_dir not in child_resolved.parents:
             raise RuntimeError(f"Refusing cleanup outside output directory: {child}")
         if child.is_symlink() or child.is_file():
             child.unlink()
         elif child.is_dir():
             shutil.rmtree(child)
-    return candidate
+    return output_dir
 
 
 def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):

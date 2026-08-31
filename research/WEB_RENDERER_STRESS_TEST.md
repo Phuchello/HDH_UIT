@@ -24,7 +24,16 @@
 - PASS — search index has no deleted document
 - PASS — graph has no deleted document
 - PASS — navigation has no deleted route
-- PASS — unsafe repository root cleanup is rejected
-- PASS — unsafe content child cleanup is rejected
+- PASS — unsafe repository root validation is rejected without mutation
+- PASS — unsafe repository parent validation is rejected without mutation
+- PASS — unsafe home validation is rejected without mutation
+- PASS — unsafe public parent validation is rejected without mutation
+- PASS — unsafe content validation is rejected without mutation
+- PASS — unsafe src validation is rejected without mutation
+- PASS — unsafe scripts validation is rejected without mutation
+- PASS — unsafe research validation is rejected without mutation
+- PASS — unsafe external sibling validation is rejected without mutation
+- PASS — canonical production site validation is allowed
+- PASS — temporary output validation is allowed
 
 Fixtures are temporary and are deleted after this run.

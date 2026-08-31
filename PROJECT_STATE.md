@@ -2,11 +2,11 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_THEORY_BATCH1_LOCKED_READY_FOR_BATCH2_SOURCE_MAPPING`
+**Giai đoạn hiện tại (Current Phase):** `V2_THEORY_BATCH1_ENGINEERING_CLOSEOUT_SAFETY_PATCH`
 **Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — canonical attachment evidence and verified page/slide maps are recorded with explicit source statuses; local variants remain separate.
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 ONLY`
-**Xác minh kỹ thuật (Engineering Verification):** `PASS — BATCH 1 CLOSED`
-**Hành động tiếp theo chính xác (Exact Next Action):** Luna Ultra performs canonical Chapter 5 source-map audit and prepares Theory Batch 2 evidence before any Chapter 5 authoring.
+**Xác minh kỹ thuật (Engineering Verification):** `REOPENED — OUTPUT CLEANUP SAFETY`
+**Hành động tiếp theo chính xác (Exact Next Action):** Codex hardens generated output cleanup safety.
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-08-31
 

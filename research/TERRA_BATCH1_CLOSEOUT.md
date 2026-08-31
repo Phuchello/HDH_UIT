@@ -3,7 +3,8 @@
 **Scope:** Batch 1 build, renderer, generated-site, provenance serialization, and regression engineering only.
 **REMOTE HEAD TESTED:** `2516b732c9747b9de2ec053fdb16da4f20343cce`
 **Academic verification:** `PASS — BATCH 1 ONLY`
-**Engineering verification:** `PASS — BATCH 1 CLOSED`
+**Engineering verification:** `REOPENED — OUTPUT CLEANUP SAFETY`
+**Previous closeout result:** `PASS — BATCH 1 CLOSED` (preserved; this patch reopens only output-cleanup safety.)
 **Chapter 5:** not authored; `main` not merged.
 
 ## Required closeout fields
@@ -32,7 +33,7 @@
 | OFFLINE | PASS — local runtime assets and MathJax; 0 remote runtime dependencies. |
 | PUBLIC_HYGIENE | PASS — repository hygiene gate passes. |
 | NPM_TEST | PASS — foundation gate and all Batch 1 gates pass. |
-| CI | PASS — GitHub Actions run [33376970284](https://github.com/Phuchello/HDH_UIT/actions/runs/33376970284) passed for closeout commit `ecad5806e1c4f964ac9a1743d96e8bc4b49fba94`. |
+| CI | PASS — GitHub Actions run [33376970284](https://github.com/Phuchello/HDH_UIT/actions/runs/33376970284) passed for the prior closeout commit; this safety patch is pending its own remote run. |
 
 ## Determinism
 
@@ -55,3 +56,29 @@ verbatim line preservation.
 `V2_THEORY_BATCH1_LOCKED_READY_FOR_BATCH2_SOURCE_MAPPING`
 
 Exact next action: **Luna Ultra performs canonical Chapter 5 source-map audit and prepares Theory Batch 2 evidence before any Chapter 5 authoring.**
+
+## POST-CLOSEOUT SAFETY CORRECTION
+
+The first cleanup guard correctly blocked the repository root and protected
+source directories but did not reject arbitrary external or ancestor output
+paths. The build now validates a resolved absolute path with a pure function
+before any `mkdir`, `unlink`, or `rmtree` operation. Destructive cleanup is
+allowlisted only for `ROOT/public/site` (and descendants) and descendants of
+`Path(tempfile.gettempdir())`; output symlinks remain rejected.
+
+| Safety case | Result |
+|---|---|
+| UNSAFE_REPO_ROOT | PASS |
+| UNSAFE_REPO_PARENT | PASS |
+| UNSAFE_HOME | PASS |
+| UNSAFE_PUBLIC_PARENT | PASS |
+| UNSAFE_SOURCE_DIRS | PASS — `content`, `src`, `scripts`, and `research` |
+| UNSAFE_EXTERNAL_DIR | PASS — arbitrary non-temp sibling |
+| ALLOWED_PRODUCTION_SITE | PASS |
+| ALLOWED_TEMP_OUTPUT | PASS |
+
+The negative cases call `assert_safe_output_dir()` directly and verify that
+existence is unchanged; the destructive cleaner is never invoked on unsafe
+parent or external paths. Stale-route, search, graph, navigation, nested-list,
+determinism, route, anchor, asset, offline, and public-hygiene regressions
+remain passing.
