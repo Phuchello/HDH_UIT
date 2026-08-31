@@ -17,8 +17,34 @@
 - PASS — table pipe, fenced code, Unicode, math and wikilink survive
 - PASS — indented fenced code remains inside list items
 - PASS — blockquote fenced code remains a code block
+- PASS — standalone horizontal rules render as hr
+- PASS — inline hyphens remain paragraph text
+- PASS — list continuation blockquote stays inside the correct ordered list item
+- PASS — list continuation has no escaped quote marker
+- PASS — fixture balanced HTML
+- PASS — fixture no orphan li
+- PASS — fixture valid nested-list relationships
 - PASS — callout survives
 - PASS — StudyCard survives
+- PASS — real Chapter 5 theory exists
+- PASS — real Chapter 5 theory balanced HTML
+- PASS — real Chapter 5 theory no orphan li
+- PASS — real Chapter 5 theory valid nested-list relationships
+- PASS — real Chapter 5 theory has no raw fence leak
+- PASS — real Chapter 5 theory has no escaped quote marker leak
+- PASS — real Chapter 5 theory has no paragraph horizontal-rule leak
+- PASS — real Chapter 5 QBank exists
+- PASS — real Chapter 5 QBank balanced HTML
+- PASS — real Chapter 5 QBank no orphan li
+- PASS — real Chapter 5 QBank valid nested-list relationships
+- PASS — real Chapter 5 QBank has no raw fence leak
+- PASS — real Chapter 5 QBank has no escaped quote marker leak
+- PASS — real Chapter 5 QBank has no paragraph horizontal-rule leak
+- PASS — real Chapter 5 condition-variable list relationship
+- PASS — real Chapter 5 Producer/Consumer and exercise code render
+- PASS — real Chapter 5 standalone rules render as hr
+- PASS — real Chapter 5 QBank exercise code renders
+- PASS — real Chapter 5 QBank standalone rules render as hr
 - PASS — consecutive clean builds are deterministic
 - PASS — rebuild after source deletion exits zero
 - PASS — stale deleted route is removed

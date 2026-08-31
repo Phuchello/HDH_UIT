@@ -29,7 +29,7 @@
 
 <blockquote><strong>Căn cứ nguồn học liệu chính tắc:</strong><br>Nội dung chương bám sát hai slide bài giảng chính thức năm 2024 của Khoa Kỹ thuật Máy tính - Trường Đại học Công nghệ Thông tin (ĐHQG-HCM): <code>UIT-SLIDE-CH05-1-2024</code> (67 trang) và <code>UIT-SLIDE-CH05-2-2024</code> (72 trang), cùng Bộ bài tập chính thức <code>UIT-QBANK-CH05-2024</code> (129 đoạn trích xuất XML / 18 câu hỏi cấu trúc).</blockquote>
 
-<p>---</p>
+<hr>
 
 <h2 id="1-boi-canh-va-race-condition">1. Bối cảnh và Race Condition</h2>
 
@@ -82,7 +82,7 @@
 
 <p>Để ngăn chặn Race Condition, hệ điều hành bắt buộc phải đảm bảo tại một thời điểm, <strong>chỉ có duy nhất một tiến trình</strong> được phép thao tác trên phần dữ liệu chia sẻ đó. Cơ chế này được gọi là <strong>đồng bộ hóa tiến trình (Process Synchronization)</strong>.</p>
 
-<p>---</p>
+<hr>
 
 <h2 id="2-van-e-mien-gang-va-3-yeu-cau-giai-phap">2. Vấn đề Miền găng và 3 Yêu cầu Giải pháp</h2>
 
@@ -142,7 +142,7 @@
 
 <p>  Lệnh tắt ngắt chỉ có hiệu lực trên lõi CPU đang thực thi lệnh đó. Các tiến trình chạy trên các lõi CPU khác vẫn truy xuất đồng thời vào bộ nhớ chia sẻ. Việc truyền tín hiệu tắt ngắt liên lõi (Inter-Processor Interrupt - IPI) có chi phí trễ quá lớn và làm suy giảm nghiêm trọng thông lượng của hệ thống.</p>
 
-<p>---</p>
+<hr>
 
 <h2 id="3-giai-phap-phan-mem-va-giai-phap-peterson">3. Giải pháp Phần mềm và Giải pháp Peterson</h2>
 
@@ -215,7 +215,7 @@ boolean flag[2] = {false, false};</code></pre></li><li><strong>Cấu trúc tiế
 
 <blockquote><strong>TIER-B TECHNICAL NOTE — modern architecture/compiler:</strong><br><br><strong>Đánh giá bản chất kỹ thuật:</strong><br>Về mặt toán học và lý thuyết, giải thuật Peterson <strong>hoàn toàn đúng đắn</strong> dưới giả định mô hình bộ nhớ tuần tự nhất quán (Sequential Consistency). Tuy nhiên, trên các bộ xử lý hiện đại (x86, ARM, RISC-V) và trình biên dịch tối ưu:<br>- <strong>Memory Reordering:</strong> Trình biên dịch và CPU Out-of-Order có thể hoán đổi thứ tự thực thi của hai lệnh không phụ thuộc dữ liệu: <code>flag[i] = true;</code> và <code>turn = j;</code> có thể bị ghi vào Store Buffer theo thứ tự ngược lại hoặc bị trì hoãn hiển thị sang lõi CPU khác.<br>- Hậu quả: Hai lõi CPU có thể cùng đọc thấy <code>flag</code> của đối phương là <code>false</code> trước khi lệnh ghi <code>true</code> kịp lan truyền, dẫn đến vi phạm Mutual Exclusion. Do đó, việc triển khai trên phần cứng thực tế bắt buộc phải sử dụng <strong>Memory Barrier</strong>.</blockquote>
 
-<p>---</p>
+<hr>
 
 <h2 id="4-ho-tro-phan-cung-va-memory-barrier">4. Hỗ trợ Phần cứng và Memory Barrier</h2>
 
@@ -288,7 +288,7 @@ atomic_fetch_sub(&amp;count, 1);</code></pre>
 
 <blockquote><strong>ĐỪNG NHẦM — TIER-B TECHNICAL NOTE:</strong> Atomic counter không tự cung cấp kiểm soát sức chứa bounded-buffer, chặn khi <code>empty/full</code>, độc quyền cập nhật ô/chỉ số, đồng bộ dữ liệu trong buffer, hay thứ tự producer–consumer. Vì vậy, <code>atomic_fetch_add</code>/<code>atomic_fetch_sub</code> <strong>không phải</strong> là lời giải bounded-buffer hoàn chỉnh.</blockquote>
 
-<p>---</p>
+<hr>
 
 <h2 id="5-mutex-locks">5. Mutex Locks</h2>
 
@@ -318,7 +318,7 @@ release(&amp;mutex);</code></pre></li></ul>
 
 <blockquote><strong>TIER-B TECHNICAL NOTE — POSIX pthread:</strong><br>- Khác với Semaphore, Mutex có khái niệm <strong>quyền sở hữu (Ownership)</strong>: Chỉ luồng đã gọi <code>acquire()</code> mới có quyền gọi <code>release()</code>.<br>- Chuẩn POSIX (<code>pthread_mutex_unlock</code>) không đảm bảo các luồng đang chờ sẽ được đánh thức theo thứ tự FIFO nghiêm ngặt.</blockquote>
 
-<p>---</p>
+<hr>
 
 <h2 id="6-semaphore-va-hien-thuc">6. Semaphore và Hiện thực</h2>
 
@@ -401,7 +401,7 @@ S2;</code></pre></li></ul>
 
 <p>Khởi tạo <code>semaphore resources = N;</code> (với $N$ là số lượng tài nguyên khả dụng).</p>
 
-<p>---</p>
+<hr>
 
 <h2 id="7-monitors-va-condition-variables">7. Monitors và Condition Variables</h2>
 
@@ -432,13 +432,9 @@ S2;</code></pre></li></ul>
 
 <p>Để cho phép tiến trình tạm dừng và chờ đợi các điều kiện logic bên trong monitor, cơ chế <strong>Biến điều kiện (Condition Variable)</strong> được sử dụng:</p>
 
-<ul><li>Khai báo: <code>condition x, y;</code></li><li>Hai thao tác cơ bản:<ol><li><code>x.wait()</code>: Tiến trình gọi lệnh này sẽ bị tạm dừng và đưa vào hàng đợi của biến điều kiện $x$.</li></ol></li></ul>
+<ul><li>Khai báo: <code>condition x, y;</code></li><li>Hai thao tác cơ bản:<ol><li><code>x.wait()</code>: Tiến trình gọi lệnh này sẽ bị tạm dừng và đưa vào hàng đợi của biến điều kiện $x$.<blockquote><strong>Cơ chế bắt buộc:</strong> Khi gọi <code>x.wait()</code>, tiến trình <strong>bắt buộc phải tự động giải phóng khóa monitor</strong> để tiến trình khác có thể vào monitor thay đổi điều kiện. Sau khi được đánh thức, tiến trình <strong>phải tái chiếm lại khóa monitor</strong> trước khi tiếp tục thực thi lệnh tiếp theo.</blockquote></li><li><code>x.signal()</code>: Đánh thức chính xác một tiến trình đang bị khóa trong hàng đợi của $x$. Nếu không có tiến trình nào đang chờ trên $x$, lệnh <code>signal()</code> không có tác dụng gì (khác hoàn toàn với Semaphore vốn sẽ tăng biến đếm).</li></ol></li></ul>
 
-<p>     &gt; <strong>Cơ chế bắt buộc:</strong> Khi gọi <code>x.wait()</code>, tiến trình <strong>bắt buộc phải tự động giải phóng khóa monitor</strong> để tiến trình khác có thể vào monitor thay đổi điều kiện. Sau khi được đánh thức, tiến trình <strong>phải tái chiếm lại khóa monitor</strong> trước khi tiếp tục thực thi lệnh tiếp theo.</p>
-
-<ol><li><code>x.signal()</code>: Đánh thức chính xác một tiến trình đang bị khóa trong hàng đợi của $x$. Nếu không có tiến trình nào đang chờ trên $x$, lệnh <code>signal()</code> không có tác dụng gì (khác hoàn toàn với Semaphore vốn sẽ tăng biến đếm).</li></ol>
-
-<p>---</p>
+<hr>
 
 <h2 id="8-liveness-va-deadlock">8. Liveness và Deadlock</h2>
 
@@ -474,7 +470,7 @@ S2;</code></pre></li></ul>
 
 <ol><li><strong>Priority Inheritance Protocol (Giao thức Thừa kế Độ ưu tiên):</strong><ul><li><strong>Giải pháp:</strong> Khi tiến trình $H$ phải chờ tài nguyên do tiến trình $L$ nắm giữ, tiến trình $L$ sẽ <strong>tạm thời được thừa kế mức độ ưu tiên cao bằng $H$</strong>.</li><li>Nhờ đó, các tiến trình trung bình $M$ không thể chiếm quyền CPU của $L$. Tiến trình $L$ hoàn thành miền găng nhanh chóng, nhả khóa và trả lại độ ưu tiên ban đầu, giúp $H$ lấy khóa và thực thi ngay lập tức.</li></ul></li></ol>
 
-<p>---</p>
+<hr>
 
 <h2 id="9-bai-toan-bounded-buffer">9. Bài toán Bounded-Buffer</h2>
 
@@ -529,7 +525,7 @@ do {
 <blockquote><strong>Bẫy đề thi quan trọng:</strong><br>Nếu Producer đảo thứ tự gọi thành:<br><pre><code class="language-c">wait(&amp;mutex);
 wait(&amp;empty);</code></pre><br>Khi bộ đệm đầy (<code>empty = 0</code>), Producer lấy <code>mutex</code> thành công rồi bị block ở <code>wait(&amp;empty)</code>. Consumer muốn vào lấy item để giải phóng ô trống nhưng bị chặn ở <code>wait(&amp;mutex)</code> $\rightarrow$ <strong>DEADLOCK</strong>. Quy tắc bắt buộc: <strong>Phải chờ điều kiện tài nguyên (<code>empty</code>/<code>full</code>) trước khi lấy khóa miền găng (<code>mutex</code>)</strong>.</blockquote>
 
-<p>---</p>
+<hr>
 
 <h2 id="10-bai-toan-readers-writers">10. Bài toán Readers – Writers</h2>
 
@@ -567,7 +563,7 @@ int read_count = 0;     // Đếm số lượng Reader đang đọc dữ liệu<
 
 <blockquote><strong>Đánh giá giải pháp:</strong> Giải pháp trên ưu tiên Reader. Nếu các Reader liên tục đến gối đầu nhau, <code>read_count</code> không bao giờ về $0$, dẫn đến các tiến trình Writer bị <strong>đói tài nguyên (Starvation)</strong> vĩnh viễn.</blockquote>
 
-<p>---</p>
+<hr>
 
 <h2 id="11-bai-toan-dining-philosophers">11. Bài toán Dining – Philosophers</h2>
 
@@ -609,7 +605,7 @@ do {
 
 <p>   Quản lý 3 trạng thái của mỗi triết gia <code>enum {THINKING, HUNGRY, EATING} state[5];</code> và sử dụng mảng biến điều kiện <code>condition self[5];</code> để đồng bộ.</p>
 
-<p>---</p>
+<hr>
 
 <h2 id="tom-tat-va-huong-dan-on-tap">Tóm tắt và Hướng dẫn Ôn tập</h2>
 
@@ -617,5 +613,7 @@ do {
 
 <table><thead><tr><th>Tiêu chí</th><th>Mutex Lock (Spinlock)</th><th>Mutex Lock (Blocking)</th><th>Semaphore</th><th>Monitor</th></tr></thead><tbody><tr><td><strong>Bản chất cơ chế</strong></td><td>Vòng lặp kiểm tra bận liên tục</td><td>Đưa tiến trình vào hàng đợi ngủ</td><td>Biến nguyên + hàng đợi chờ</td><td>Cấu trúc dữ liệu trừu tượng ADT</td></tr><tr><td><strong>Mức độ hỗ trợ</strong></td><td>Phần cứng / Kernel</td><td>Hệ điều hành</td><td>Hệ điều hành</td><td>Ngôn ngữ lập trình / Trình biên dịch</td></tr><tr><td><strong>Quyền sở hữu (Ownership)</strong></td><td>Có (chỉ luồng lock mới unlock)</td><td>Có</td><td>Không (luồng khác có thể signal)</td><td>Tự động quản lý theo hàm</td></tr><tr><td><strong>Tiêu tốn CPU khi chờ</strong></td><td>Rất cao (100% Core)</td><td>Bằng 0 (nhường CPU)</td><td>Bằng 0</td><td>Bằng 0</td></tr><tr><td><strong>Trường hợp áp dụng tối ưu</strong></td><td>Miền găng cực ngắn trên đa CPU</td><td>Miền găng dài, I/O bound</td><td>Quản lý đa tài nguyên / Thứ tự</td><td>Lập trình ứng dụng phức tạp, hướng đối tượng</td></tr></tbody></table>
 
-<p>---<br><em>Cẩm nang IT007 Hệ điều hành — Biên soạn phục vụ học tập và nghiên cứu chuẩn mực.</em></p><section class="backlinks" aria-label="Liên kết từ các trang khác"><h2>LIÊN KẾT TỪ CÁC TRANG KHÁC</h2><ul><li><a href="../questions/subjective/ch05.html">Ngân hàng tự luận — Chương 5: Đồng bộ Tiến trình</a></li></ul></section><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#1-boi-canh-va-race-condition">1. Bối cảnh và Race Condition</a></li><li class="toc-item"><a class="toc-link" href="#1-1-van-e-producer-consumer-voi-bien-em-count">1.1 Vấn đề Producer – Consumer với biến đếm &lt;code&gt;count&lt;/code&gt;</a></li><li class="toc-item"><a class="toc-link" href="#1-2-tranh-chap-cap-phat-pid-trong-kernel">1.2 Tranh chấp cấp phát PID trong Kernel</a></li><li class="toc-item"><a class="toc-link" href="#1-3-inh-nghia-tinh-trang-tranh-chap-race-condition">1.3 Định nghĩa Tình trạng Tranh chấp (Race Condition)</a></li><li class="toc-item"><a class="toc-link" href="#2-van-e-mien-gang-va-3-yeu-cau-giai-phap">2. Vấn đề Miền găng và 3 Yêu cầu Giải pháp</a></li><li class="toc-item"><a class="toc-link" href="#2-1-cau-truc-ma-nguon-tien-trinh">2.1 Cấu trúc Mã nguồn Tiến trình</a></li><li class="toc-item"><a class="toc-link" href="#2-2-ba-tieu-chi-bat-buoc-cua-giai-phap-mien-gang">2.2 Ba Tiêu chí Bắt buộc của Giải pháp Miền găng</a></li><li class="toc-item"><a class="toc-link" href="#2-3-phan-loai-giai-phap-ong-bo">2.3 Phân loại Giải pháp Đồng bộ</a></li><li class="toc-item"><a class="toc-link" href="#2-4-anh-gia-giai-phap-vo-hieu-hoa-ngat-disable-interrupts">2.4 Đánh giá Giải pháp Vô hiệu hóa Ngắt (Disable Interrupts)</a></li><li class="toc-item"><a class="toc-link" href="#3-giai-phap-phan-mem-va-giai-phap-peterson">3. Giải pháp Phần mềm và Giải pháp Peterson</a></li><li class="toc-item"><a class="toc-link" href="#3-1-giai-phap-phan-mem-1-dung-bien-turn">3.1 Giải pháp Phần mềm 1: Dùng biến &lt;code&gt;turn&lt;/code&gt;</a></li><li class="toc-item"><a class="toc-link" href="#3-2-giai-phap-phan-mem-2-dung-mang-flag-2">3.2 Giải pháp Phần mềm 2: Dùng mảng &lt;code&gt;flag[2]&lt;/code&gt;</a></li><li class="toc-item"><a class="toc-link" href="#3-3-giai-thuat-peterson">3.3 Giải thuật Peterson</a></li><li class="toc-item"><a class="toc-link" href="#3-4-giai-thuat-peterson-tren-kien-truc-phan-cung-hien-ai">3.4 Giải thuật Peterson trên Kiến trúc Phần cứng Hiện đại</a></li><li class="toc-item"><a class="toc-link" href="#4-ho-tro-phan-cung-va-memory-barrier">4. Hỗ trợ Phần cứng và Memory Barrier</a></li><li class="toc-item"><a class="toc-link" href="#4-1-rao-chan-bo-nho-memory-barrier">4.1 Rào chắn Bộ nhớ (Memory Barrier)</a></li><li class="toc-item"><a class="toc-link" href="#4-2-cac-chi-thi-nguyen-tu-phan-cung-source_depth-self_study">4.2 Các Chỉ thị Nguyên tử Phần cứng (&lt;code&gt;source_depth: SELF_STUDY&lt;/code&gt;)</a></li><li class="toc-item"><a class="toc-link" href="#5-mutex-locks">5. Mutex Locks</a></li><li class="toc-item"><a class="toc-link" href="#5-1-khai-niem-hoat-ong">5.1 Khái niệm &amp;amp; Hoạt động</a></li><li class="toc-item"><a class="toc-link" href="#5-2-spinlock-vs-mutex-khong-busy-waiting">5.2 Spinlock vs Mutex không Busy Waiting</a></li><li class="toc-item"><a class="toc-link" href="#6-semaphore-va-hien-thuc">6. Semaphore và Hiện thực</a></li><li class="toc-item"><a class="toc-link" href="#6-1-inh-nghia-semaphore-cua-dijkstra">6.1 Định nghĩa Semaphore của Dijkstra</a></li><li class="toc-item"><a class="toc-link" href="#6-2-phan-loai-semaphore">6.2 Phân loại Semaphore</a></li><li class="toc-item"><a class="toc-link" href="#6-3-hien-thuc-semaphore-khong-busy-waiting">6.3 Hiện thực Semaphore không Busy Waiting</a></li><li class="toc-item"><a class="toc-link" href="#6-4-cac-dang-ung-dung-co-ban-cua-semaphore">6.4 Các Dạng Ứng dụng Cơ bản của Semaphore</a></li><li class="toc-item"><a class="toc-link" href="#7-monitors-va-condition-variables">7. Monitors và Condition Variables</a></li><li class="toc-item"><a class="toc-link" href="#7-1-cau-truc-truu-tuong-cua-monitor">7.1 Cấu trúc Trừu tượng của Monitor</a></li><li class="toc-item"><a class="toc-link" href="#7-2-bien-ieu-kien-condition-variables">7.2 Biến Điều kiện (Condition Variables)</a></li><li class="toc-item"><a class="toc-link" href="#8-liveness-va-deadlock">8. Liveness và Deadlock</a></li><li class="toc-item"><a class="toc-link" href="#8-1-khai-niem-liveness">8.1 Khái niệm Liveness</a></li><li class="toc-item"><a class="toc-link" href="#8-2-cac-dang-that-bai-liveness-ien-hinh">8.2 Các Dạng Thất bại Liveness Điển hình</a></li><li class="toc-item"><a class="toc-link" href="#9-bai-toan-bounded-buffer">9. Bài toán Bounded-Buffer</a></li><li class="toc-item"><a class="toc-link" href="#9-1-mo-ta-bai-toan-thiet-ke-ong-bo">9.1 Mô tả Bài toán &amp;amp; Thiết kế Đồng bộ</a></li><li class="toc-item"><a class="toc-link" href="#9-2-khoi-tao-semaphore">9.2 Khởi tạo Semaphore</a></li><li class="toc-item"><a class="toc-link" href="#9-3-ma-nguon-giai-phap-chuan">9.3 Mã nguồn Giải pháp Chuẩn</a></li><li class="toc-item"><a class="toc-link" href="#10-bai-toan-readers-writers">10. Bài toán Readers – Writers</a></li><li class="toc-item"><a class="toc-link" href="#10-1-mo-ta-bai-toan-yeu-cau">10.1 Mô tả Bài toán &amp;amp; Yêu cầu</a></li><li class="toc-item"><a class="toc-link" href="#10-2-giai-phap-first-readers-writers-uu-tien-reader">10.2 Giải pháp First Readers – Writers (Ưu tiên Reader)</a></li><li class="toc-item"><a class="toc-link" href="#11-bai-toan-dining-philosophers">11. Bài toán Dining – Philosophers</a></li><li class="toc-item"><a class="toc-link" href="#11-1-phat-bieu-bai-toan">11.1 Phát biểu Bài toán</a></li><li class="toc-item"><a class="toc-link" href="#11-2-giai-phap-naive-va-nguy-co-be-tac">11.2 Giải pháp Naive và Nguy cơ Bế tắc</a></li><li class="toc-item"><a class="toc-link" href="#11-3-cac-giai-phap-tranh-deadlock">11.3 Các Giải pháp Tránh Deadlock</a></li><li class="toc-item"><a class="toc-link" href="#tom-tat-va-huong-dan-on-tap">Tóm tắt và Hướng dẫn Ôn tập</a></li><li class="toc-item"><a class="toc-link" href="#bang-ma-tran-so-sanh-cong-cu-ong-bo-hoa">Bảng Ma trận So sánh Công cụ Đồng bộ Hóa</a></li></ul></div></aside></div>
+<hr>
+
+<p><em>Cẩm nang IT007 Hệ điều hành — Biên soạn phục vụ học tập và nghiên cứu chuẩn mực.</em></p><section class="backlinks" aria-label="Liên kết từ các trang khác"><h2>LIÊN KẾT TỪ CÁC TRANG KHÁC</h2><ul><li><a href="../questions/subjective/ch05.html">Ngân hàng tự luận — Chương 5: Đồng bộ Tiến trình</a></li></ul></section><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#1-boi-canh-va-race-condition">1. Bối cảnh và Race Condition</a></li><li class="toc-item"><a class="toc-link" href="#1-1-van-e-producer-consumer-voi-bien-em-count">1.1 Vấn đề Producer – Consumer với biến đếm &lt;code&gt;count&lt;/code&gt;</a></li><li class="toc-item"><a class="toc-link" href="#1-2-tranh-chap-cap-phat-pid-trong-kernel">1.2 Tranh chấp cấp phát PID trong Kernel</a></li><li class="toc-item"><a class="toc-link" href="#1-3-inh-nghia-tinh-trang-tranh-chap-race-condition">1.3 Định nghĩa Tình trạng Tranh chấp (Race Condition)</a></li><li class="toc-item"><a class="toc-link" href="#2-van-e-mien-gang-va-3-yeu-cau-giai-phap">2. Vấn đề Miền găng và 3 Yêu cầu Giải pháp</a></li><li class="toc-item"><a class="toc-link" href="#2-1-cau-truc-ma-nguon-tien-trinh">2.1 Cấu trúc Mã nguồn Tiến trình</a></li><li class="toc-item"><a class="toc-link" href="#2-2-ba-tieu-chi-bat-buoc-cua-giai-phap-mien-gang">2.2 Ba Tiêu chí Bắt buộc của Giải pháp Miền găng</a></li><li class="toc-item"><a class="toc-link" href="#2-3-phan-loai-giai-phap-ong-bo">2.3 Phân loại Giải pháp Đồng bộ</a></li><li class="toc-item"><a class="toc-link" href="#2-4-anh-gia-giai-phap-vo-hieu-hoa-ngat-disable-interrupts">2.4 Đánh giá Giải pháp Vô hiệu hóa Ngắt (Disable Interrupts)</a></li><li class="toc-item"><a class="toc-link" href="#3-giai-phap-phan-mem-va-giai-phap-peterson">3. Giải pháp Phần mềm và Giải pháp Peterson</a></li><li class="toc-item"><a class="toc-link" href="#3-1-giai-phap-phan-mem-1-dung-bien-turn">3.1 Giải pháp Phần mềm 1: Dùng biến &lt;code&gt;turn&lt;/code&gt;</a></li><li class="toc-item"><a class="toc-link" href="#3-2-giai-phap-phan-mem-2-dung-mang-flag-2">3.2 Giải pháp Phần mềm 2: Dùng mảng &lt;code&gt;flag[2]&lt;/code&gt;</a></li><li class="toc-item"><a class="toc-link" href="#3-3-giai-thuat-peterson">3.3 Giải thuật Peterson</a></li><li class="toc-item"><a class="toc-link" href="#3-4-giai-thuat-peterson-tren-kien-truc-phan-cung-hien-ai">3.4 Giải thuật Peterson trên Kiến trúc Phần cứng Hiện đại</a></li><li class="toc-item"><a class="toc-link" href="#4-ho-tro-phan-cung-va-memory-barrier">4. Hỗ trợ Phần cứng và Memory Barrier</a></li><li class="toc-item"><a class="toc-link" href="#4-1-rao-chan-bo-nho-memory-barrier">4.1 Rào chắn Bộ nhớ (Memory Barrier)</a></li><li class="toc-item"><a class="toc-link" href="#4-2-cac-chi-thi-nguyen-tu-phan-cung-source_depth-self_study">4.2 Các Chỉ thị Nguyên tử Phần cứng (&lt;code&gt;source_depth: SELF_STUDY&lt;/code&gt;)</a></li><li class="toc-item"><a class="toc-link" href="#5-mutex-locks">5. Mutex Locks</a></li><li class="toc-item"><a class="toc-link" href="#5-1-khai-niem-hoat-ong">5.1 Khái niệm &amp;amp; Hoạt động</a></li><li class="toc-item"><a class="toc-link" href="#5-2-spinlock-vs-mutex-khong-busy-waiting">5.2 Spinlock vs Mutex không Busy Waiting</a></li><li class="toc-item"><a class="toc-link" href="#6-semaphore-va-hien-thuc">6. Semaphore và Hiện thực</a></li><li class="toc-item"><a class="toc-link" href="#6-1-inh-nghia-semaphore-cua-dijkstra">6.1 Định nghĩa Semaphore của Dijkstra</a></li><li class="toc-item"><a class="toc-link" href="#6-2-phan-loai-semaphore">6.2 Phân loại Semaphore</a></li><li class="toc-item"><a class="toc-link" href="#6-3-hien-thuc-semaphore-khong-busy-waiting">6.3 Hiện thực Semaphore không Busy Waiting</a></li><li class="toc-item"><a class="toc-link" href="#6-4-cac-dang-ung-dung-co-ban-cua-semaphore">6.4 Các Dạng Ứng dụng Cơ bản của Semaphore</a></li><li class="toc-item"><a class="toc-link" href="#7-monitors-va-condition-variables">7. Monitors và Condition Variables</a></li><li class="toc-item"><a class="toc-link" href="#7-1-cau-truc-truu-tuong-cua-monitor">7.1 Cấu trúc Trừu tượng của Monitor</a></li><li class="toc-item"><a class="toc-link" href="#7-2-bien-ieu-kien-condition-variables">7.2 Biến Điều kiện (Condition Variables)</a></li><li class="toc-item"><a class="toc-link" href="#8-liveness-va-deadlock">8. Liveness và Deadlock</a></li><li class="toc-item"><a class="toc-link" href="#8-1-khai-niem-liveness">8.1 Khái niệm Liveness</a></li><li class="toc-item"><a class="toc-link" href="#8-2-cac-dang-that-bai-liveness-ien-hinh">8.2 Các Dạng Thất bại Liveness Điển hình</a></li><li class="toc-item"><a class="toc-link" href="#9-bai-toan-bounded-buffer">9. Bài toán Bounded-Buffer</a></li><li class="toc-item"><a class="toc-link" href="#9-1-mo-ta-bai-toan-thiet-ke-ong-bo">9.1 Mô tả Bài toán &amp;amp; Thiết kế Đồng bộ</a></li><li class="toc-item"><a class="toc-link" href="#9-2-khoi-tao-semaphore">9.2 Khởi tạo Semaphore</a></li><li class="toc-item"><a class="toc-link" href="#9-3-ma-nguon-giai-phap-chuan">9.3 Mã nguồn Giải pháp Chuẩn</a></li><li class="toc-item"><a class="toc-link" href="#10-bai-toan-readers-writers">10. Bài toán Readers – Writers</a></li><li class="toc-item"><a class="toc-link" href="#10-1-mo-ta-bai-toan-yeu-cau">10.1 Mô tả Bài toán &amp;amp; Yêu cầu</a></li><li class="toc-item"><a class="toc-link" href="#10-2-giai-phap-first-readers-writers-uu-tien-reader">10.2 Giải pháp First Readers – Writers (Ưu tiên Reader)</a></li><li class="toc-item"><a class="toc-link" href="#11-bai-toan-dining-philosophers">11. Bài toán Dining – Philosophers</a></li><li class="toc-item"><a class="toc-link" href="#11-1-phat-bieu-bai-toan">11.1 Phát biểu Bài toán</a></li><li class="toc-item"><a class="toc-link" href="#11-2-giai-phap-naive-va-nguy-co-be-tac">11.2 Giải pháp Naive và Nguy cơ Bế tắc</a></li><li class="toc-item"><a class="toc-link" href="#11-3-cac-giai-phap-tranh-deadlock">11.3 Các Giải pháp Tránh Deadlock</a></li><li class="toc-item"><a class="toc-link" href="#tom-tat-va-huong-dan-on-tap">Tóm tắt và Hướng dẫn Ôn tập</a></li><li class="toc-item"><a class="toc-link" href="#bang-ma-tran-so-sanh-cong-cu-ong-bo-hoa">Bảng Ma trận So sánh Công cụ Đồng bộ Hóa</a></li></ul></div></aside></div>
 <div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../assets/js/app.js"></script></body></html>

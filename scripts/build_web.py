@@ -228,6 +228,32 @@ def render_blockquote_body(lines, routes, current_rel):
     return "<br>".join(parts)
 
 
+def parse_indented_blockquote(lines, start, parent_indent, routes, current_rel):
+    """Parse a blockquote indented as a list-item continuation."""
+    opening = re.match(r"^(?P<indent> +)>\s?(?P<body>.*)$", lines[start])
+    if not opening or len(opening.group("indent")) <= parent_indent:
+        return None, start
+    quote_indent = len(opening.group("indent"))
+    body, index = [], start
+    while index < len(lines):
+        match = re.match(r"^(?P<indent> +)>\s?(?P<body>.*)$", lines[index])
+        if match and len(match.group("indent")) >= quote_indent:
+            body.append(match.group("body"))
+            index += 1
+            continue
+        if not lines[index].strip() and index + 1 < len(lines):
+            next_quote = re.match(r"^(?P<indent> +)>\s?(?P<body>.*)$", lines[index + 1])
+            if next_quote and len(next_quote.group("indent")) >= quote_indent:
+                body.append("")
+                index += 1
+                continue
+        break
+    return f"<blockquote>{render_blockquote_body(body, routes, current_rel)}</blockquote>", index
+
+
+HORIZONTAL_RULE_RE = re.compile(r"^\s*(?:-{3,}|\*{3,}|_{3,})\s*$")
+
+
 def markdown_to_html(text, doc_id, routes, current_rel):
     lines = text.replace("\r\n", "\n").split("\n")
     output, index = [], 0
@@ -242,6 +268,10 @@ def markdown_to_html(text, doc_id, routes, current_rel):
             if index < len(lines):
                 index += 1
             output.append(render_fenced_code(language, code))
+            continue
+        if HORIZONTAL_RULE_RE.fullmatch(line):
+            output.append("<hr>")
+            index += 1
             continue
         heading = re.match(r"^(#{1,6})\s+(.+?)\s*#*$", line)
         if heading:
@@ -336,10 +366,19 @@ def render_list(lines, start, routes, current_rel):
                 child_html, index = render_list(lines, index, routes, current_rel)
                 nested.append(child_html)
                 continue
+            if HORIZONTAL_RULE_RE.fullmatch(lines[index]) and len(lines[index]) - len(lines[index].lstrip(" ")) > root_indent:
+                nested.append("<hr>")
+                index += 1
+                continue
             fenced_html, fenced_index = parse_indented_fence(lines, index, root_indent)
             if fenced_html is not None:
                 nested.append(fenced_html)
                 index = fenced_index
+                continue
+            quote_html, quote_index = parse_indented_blockquote(lines, index, root_indent, routes, current_rel)
+            if quote_html is not None:
+                nested.append(quote_html)
+                index = quote_index
                 continue
             break
         output.append(f"<li>{item_text}{''.join(nested)}</li>")

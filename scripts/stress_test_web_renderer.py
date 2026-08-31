@@ -20,12 +20,12 @@ from build_web import assert_safe_output_dir
 class StructureParser(html.parser.HTMLParser):
     def __init__(self):
         super().__init__()
-        self.root = {"tag": "#root", "children": [], "parent": None}
+        self.root = {"tag": "#root", "attrs": {}, "text": "", "children": [], "parent": None}
         self.stack = [self.root]
         self.errors = []
 
     def handle_starttag(self, tag, attrs):
-        node = {"tag": tag, "children": [], "parent": self.stack[-1]}
+        node = {"tag": tag, "attrs": dict(attrs), "text": "", "children": [], "parent": self.stack[-1]}
         self.stack[-1]["children"].append(node)
         if tag not in {"meta", "link", "img", "input", "br", "hr"}:
             self.stack.append(node)
@@ -41,6 +41,9 @@ class StructureParser(html.parser.HTMLParser):
             return
         self.stack.pop()
 
+    def handle_data(self, data):
+        self.stack[-1]["text"] += data
+
     @property
     def open_tags(self):
         return [node["tag"] for node in self.stack[1:]]
@@ -54,6 +57,36 @@ def walk(node):
 
 def has_descendant(node, tag):
     return any(child["tag"] == tag or has_descendant(child, tag) for child in node["children"])
+
+
+def text_content(node):
+    return node.get("text", "") + "".join(text_content(child) for child in node["children"])
+
+
+def list_item_has_nested_blockquote(theory):
+    parser = StructureParser()
+    parser.feed(theory)
+    for ordered in (node for node in walk(parser.root) if node["tag"] == "ol"):
+        direct_items = [child for child in ordered["children"] if child["tag"] == "li"]
+        for first, second in zip(direct_items, direct_items[1:]):
+            if "x.wait()" in text_content(first) and has_descendant(first, "blockquote") and "x.signal()" in text_content(second):
+                return parser, True
+    return parser, False
+
+
+def structure_quality(html_text):
+    parser = StructureParser()
+    parser.feed(html_text)
+    lists = [node for node in walk(parser.root) if node["tag"] in {"ul", "ol"}]
+    items = [node for node in walk(parser.root) if node["tag"] == "li"]
+    no_orphan_items = all(item["parent"]["tag"] in {"ul", "ol"} for item in items)
+    nested_lists = [node for node in lists if any(ancestor["tag"] in {"ul", "ol"} for ancestor in ancestors(node))]
+    valid_nested_lists = all(node["parent"]["tag"] == "li" for node in nested_lists)
+    return parser, {
+        "balanced HTML": not parser.open_tags and not parser.errors,
+        "no orphan li": no_orphan_items,
+        "valid nested-list relationships": valid_nested_lists,
+    }
 
 
 def list_structure_checks(theory):
@@ -102,10 +135,11 @@ related:
   - Mục trong có `inline | pipe`
     - Mục sâu cấp ba
 - Mục ngoài thứ hai
-  1. Con ordered một
+  1. x.wait()
+     > **Cơ chế bắt buộc:** dùng `code` và [[fixture-questions|liên kết]].
      1. Cháu ordered
      2. Cháu ordered hai
-  2. Con ordered hai
+  2. x.signal()
 - Process
   1. New
   2. Ready
@@ -124,6 +158,12 @@ related:
       consume();
   }
   ```
+
+---
+***
+___
+
+abc --- xyz
 
 > Note with code:
 > ```c
@@ -211,9 +251,44 @@ def main():
         checks.append(("table pipe, fenced code, Unicode, math and wikilink survive", all(token in theory for token in ("a | b", "language-c", "Định hướng", "mc", 'class="wikilink"'))))
         checks.append(("indented fenced code remains inside list items", theory.count('class="language-c"') >= 3 and "```" not in theory and "<li>Producer:<pre>" in theory and "<li>Consumer:<pre>" in theory))
         checks.append(("blockquote fenced code remains a code block", '<blockquote>' in theory and 'signal(empty);</code></pre></blockquote>' in theory))
+        checks.append(("standalone horizontal rules render as hr", theory.count("<hr>") == 3 and "<p>---</p>" not in theory and "<p>***</p>" not in theory and "<p>___</p>" not in theory))
+        checks.append(("inline hyphens remain paragraph text", "abc --- xyz" in theory and "<p>abc --- xyz</p>" in theory))
+        condition_parser, condition_ok = list_item_has_nested_blockquote(theory)
+        checks.append(("list continuation blockquote stays inside the correct ordered list item", condition_ok))
+        checks.append(("list continuation has no escaped quote marker", "&gt; Cơ chế bắt buộc" not in theory))
+        _, fixture_structure = structure_quality(theory)
+        checks.extend((f"fixture {label}", ok) for label, ok in fixture_structure.items())
         checks.append(("callout survives", '<div class="callout note">' in theory))
         questions_html = (output / "questions/fixture-questions.html").read_text(encoding="utf-8") if (output / "questions/fixture-questions.html").is_file() else ""
         checks.append(("StudyCard survives", 'class="study-card"' in questions_html))
+
+        real_outputs = {
+            "real Chapter 5 theory": ROOT / "public/site/theory/ch05-synchronization.html",
+            "real Chapter 5 QBank": ROOT / "public/site/questions/subjective/ch05.html",
+        }
+        real_text = {}
+        for label, path in real_outputs.items():
+            exists = path.is_file()
+            checks.append((f"{label} exists", exists))
+            if not exists:
+                continue
+            content_html = path.read_text(encoding="utf-8")
+            real_text[label] = content_html
+            _, quality = structure_quality(content_html)
+            checks.extend((f"{label} {name}", ok) for name, ok in quality.items())
+            checks.append((f"{label} has no raw fence leak", "```" not in content_html))
+            checks.append((f"{label} has no escaped quote marker leak", "&gt; Cơ chế bắt buộc" not in content_html))
+            checks.append((f"{label} has no paragraph horizontal-rule leak", "<p>---</p>" not in content_html))
+        real_theory = real_text.get("real Chapter 5 theory", "")
+        if real_theory:
+            _, real_condition = list_item_has_nested_blockquote(real_theory)
+            checks.append(("real Chapter 5 condition-variable list relationship", real_condition))
+            checks.append(("real Chapter 5 Producer/Consumer and exercise code render", all(token in real_theory for token in ("Tiến trình Producer", "Tiến trình Consumer", 'class="language-c"'))))
+            checks.append(("real Chapter 5 standalone rules render as hr", real_theory.count("<hr>") >= 10))
+        real_qbank = real_text.get("real Chapter 5 QBank", "")
+        if real_qbank:
+            checks.append(("real Chapter 5 QBank exercise code renders", 'class="language-c"' in real_qbank))
+            checks.append(("real Chapter 5 QBank standalone rules render as hr", real_qbank.count("<hr>") >= 10))
 
         deterministic_output = root / "site-deterministic"
         deterministic_result = run_build(deterministic_output)
