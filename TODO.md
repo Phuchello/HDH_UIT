@@ -8,7 +8,7 @@
 - [x] Xây dựng ma trận phủ 100% Slide bài giảng Week 1–14 (`research/SLIDE_COVERAGE_MATRIX.md`).
 - [x] Xây dựng bản đồ cấu trúc Sách Lý Thuyết V2 (`research/THEORY_COVERAGE_MATRIX.md`).
 - [x] Ánh xạ câu hỏi ôn tập chính thức (`research/OFFICIAL_REVIEW_QUESTION_MAP.md`).
-- [x] Xây dựng ma trận khảo sát 20 đề thi thật UIT 2017–2025 (`research/EXAM_EVIDENCE_MATRIX.md`).
+- [x] Xây dựng ma trận 20 hồ sơ bằng chứng đề thi UIT 2017–2025 (`research/EXAM_EVIDENCE_MATRIX.md`); evidence-aware: 1 `RECONSTRUCTED_PRACTICE`, 19 `UNVERIFIED_REFERENCE`, 0 `VERIFIED_ARCHIVE`.
 - [x] Phân tích quy luật và xu hướng đề thi (`research/EXAM_PATTERN_ANALYSIS.md`).
 - [x] Phân loại các biến thể thực hành Lab 1–6 (`research/LAB_VARIANT_MAP.md`).
 - [x] Tổng hợp tài liệu API chuẩn quốc tế man7.org (`research/LAB_SOURCE_LEDGER.md`).
