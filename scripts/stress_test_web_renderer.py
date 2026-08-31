@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import html.parser
+import hashlib
 import json
 import shutil
 import subprocess
@@ -18,18 +19,69 @@ REPORT = ROOT / "research" / "WEB_RENDERER_STRESS_TEST.md"
 class StructureParser(html.parser.HTMLParser):
     def __init__(self):
         super().__init__()
-        self.open_tags = []
+        self.root = {"tag": "#root", "children": [], "parent": None}
+        self.stack = [self.root]
         self.errors = []
 
     def handle_starttag(self, tag, attrs):
+        node = {"tag": tag, "children": [], "parent": self.stack[-1]}
+        self.stack[-1]["children"].append(node)
         if tag not in {"meta", "link", "img", "input", "br", "hr"}:
-            self.open_tags.append(tag)
+            self.stack.append(node)
+
+    def handle_startendtag(self, tag, attrs):
+        self.handle_starttag(tag, attrs)
+        if self.stack[-1]["tag"] == tag:
+            self.stack.pop()
 
     def handle_endtag(self, tag):
-        if tag in self.open_tags:
-            self.open_tags.pop()
-        else:
+        if len(self.stack) == 1 or self.stack[-1]["tag"] != tag:
             self.errors.append(f"unexpected closing tag: {tag}")
+            return
+        self.stack.pop()
+
+    @property
+    def open_tags(self):
+        return [node["tag"] for node in self.stack[1:]]
+
+
+def walk(node):
+    for child in node["children"]:
+        yield child
+        yield from walk(child)
+
+
+def has_descendant(node, tag):
+    return any(child["tag"] == tag or has_descendant(child, tag) for child in node["children"])
+
+
+def list_structure_checks(theory):
+    parser = StructureParser()
+    parser.feed(theory)
+    lists = [node for node in walk(parser.root) if node["tag"] in {"ul", "ol"}]
+    items = [node for node in walk(parser.root) if node["tag"] == "li"]
+    no_orphan_items = all(item["parent"]["tag"] in {"ul", "ol"} for item in items)
+    nested_lists = [node for node in lists if any(ancestor["tag"] in {"ul", "ol"} for ancestor in ancestors(node))]
+    no_fake_siblings = all(node["parent"]["tag"] == "li" for node in nested_lists)
+    unordered_nested = any(node["tag"] == "ul" and any(child["tag"] == "li" and has_descendant(child, "ul") for child in node["children"]) for node in lists)
+    ordered_nested = any(node["tag"] == "ol" and any(child["tag"] == "li" and has_descendant(child, "ol") for child in node["children"]) for node in lists)
+    mixed_nested = any(node["tag"] == "ul" and any(child["tag"] == "li" and has_descendant(child, "ol") for child in node["children"]) for node in lists) and any(node["tag"] == "ul" and any(child["tag"] == "li" and has_descendant(child, "ul") for child in node["children"]) for node in lists)
+    depth_three = max((1 + sum(1 for ancestor in ancestors(node) if ancestor["tag"] in {"ul", "ol"}) for node in lists), default=0) >= 3
+    return parser, {
+        "no orphan li": no_orphan_items,
+        "no fake list siblings": no_fake_siblings,
+        "nested unordered list": unordered_nested,
+        "nested ordered list": ordered_nested,
+        "mixed ordered/unordered list": mixed_nested,
+        "depth-3 list": depth_three,
+    }
+
+
+def ancestors(node):
+    parent = node.get("parent")
+    while parent is not None:
+        yield parent
+        parent = parent.get("parent")
 
 
 FIXTURES = {
@@ -45,8 +97,20 @@ related:
 
 ## Dữ liệu lồng nhau
 
-- Mục ngoài
+- Mục ngoài [[fixture-questions|có liên kết]]
   - Mục trong có `inline | pipe`
+    - Mục sâu cấp ba
+- Mục ngoài thứ hai
+  1. Con ordered một
+     1. Cháu ordered
+     2. Cháu ordered hai
+  2. Con ordered hai
+- Process
+  1. New
+  2. Ready
+- Thread
+  - PC
+  - Registers
 
 | Cột | Ví dụ |
 | --- | --- |
@@ -80,6 +144,16 @@ related:
 > <!-- answer -->
 > Đáp án có `code`.
 """,
+    "theory/delete-me.md": """---
+id: "fixture-delete-me"
+title: "Xóa sau lượt build đầu"
+summary: "stale route fixture"
+---
+
+# Trang sẽ bị xóa
+
+Nội dung tạm thời.
+""",
 }
 
 
@@ -92,26 +166,65 @@ def main():
             target = content / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(body, encoding="utf-8")
-        result = subprocess.run([sys.executable, "scripts/build_web.py", "--content-root", str(content), "--output-dir", str(output)], cwd=ROOT, capture_output=True, text=True)
         checks = []
-        checks.append(("build exits zero", result.returncode == 0))
-        files = [output / "index.html", output / "theory/fixture.html", output / "questions/fixture-questions.html"]
-        checks.append(("all fixture routes exist", all(path.is_file() for path in files)))
+
+        def run_build(target_output=output):
+            return subprocess.run([sys.executable, "scripts/build_web.py", "--content-root", str(content), "--output-dir", str(target_output)], cwd=ROOT, capture_output=True, text=True)
+
+        def manifest(target_output):
+            return {
+                path.relative_to(target_output).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+                for path in target_output.rglob("*") if path.is_file()
+            }
+
+        first_result = run_build()
+        checks.append(("initial build exits zero", first_result.returncode == 0))
+        files = [output / "index.html", output / "theory/fixture.html", output / "questions/fixture-questions.html", output / "theory/delete-me.html"]
+        checks.append(("all initial fixture routes exist", all(path.is_file() for path in files)))
         for path in files:
             if path.is_file():
                 parser = StructureParser()
                 parser.feed(path.read_text(encoding="utf-8"))
                 checks.append((f"{path.name} has balanced HTML", not parser.open_tags and not parser.errors))
         theory = (output / "theory/fixture.html").read_text(encoding="utf-8") if (output / "theory/fixture.html").is_file() else ""
-        checks.append(("nested list, table pipe, fenced code, Unicode, and math survive", all(token in theory for token in ("<ul>", "a | b", "language-c", "Định hướng", "mc"))))
+        _, list_checks = list_structure_checks(theory)
+        for label, ok in list_checks.items():
+            checks.append((label, ok))
+        checks.append(("table pipe, fenced code, Unicode, math and wikilink survive", all(token in theory for token in ("a | b", "language-c", "Định hướng", "mc", 'class="wikilink"'))))
+        checks.append(("callout survives", '<div class="callout note">' in theory))
+        questions_html = (output / "questions/fixture-questions.html").read_text(encoding="utf-8") if (output / "questions/fixture-questions.html").is_file() else ""
+        checks.append(("StudyCard survives", 'class="study-card"' in questions_html))
+
+        deterministic_output = root / "site-deterministic"
+        deterministic_result = run_build(deterministic_output)
+        checks.append(("consecutive clean builds are deterministic", deterministic_result.returncode == 0 and manifest(output) == manifest(deterministic_output)))
+
+        (content / "theory/delete-me.md").unlink()
+        second_result = run_build()
+        checks.append(("rebuild after source deletion exits zero", second_result.returncode == 0))
+        checks.append(("stale deleted route is removed", not (output / "theory/delete-me.html").exists()))
+        checks.append(("kept route remains", (output / "theory/fixture.html").is_file()))
+        try:
+            search = json.loads((output / "search_index.json").read_text(encoding="utf-8"))
+            graph = json.loads((output / "graph_data.json").read_text(encoding="utf-8"))
+            checks.append(("search index has no deleted document", not any(item.get("id") == "fixture-delete-me" for item in search)))
+            checks.append(("graph has no deleted document", not any(node.get("id") == "fixture-delete-me" for node in graph.get("nodes", []))))
+            checks.append(("navigation has no deleted route", "delete-me.html" not in (output / "index.html").read_text(encoding="utf-8")))
+        except (OSError, json.JSONDecodeError):
+            checks.extend([("search index has no deleted document", False), ("graph has no deleted document", False), ("navigation has no deleted route", False)])
+
+        for label, unsafe_path in (("repository root", ROOT), ("content child", ROOT / "content" / "_unsafe-fixture-output")):
+            unsafe_result = subprocess.run([sys.executable, "scripts/build_web.py", "--content-root", str(content), "--output-dir", str(unsafe_path)], cwd=ROOT, capture_output=True, text=True)
+            checks.append((f"unsafe {label} cleanup is rejected", unsafe_result.returncode != 0 and "Refusing unsafe generated output directory" in (unsafe_result.stdout + unsafe_result.stderr)))
         passed = all(ok for _, ok in checks)
         rows = "\n".join(f"- {'PASS' if ok else 'FAIL'} — {label}" for label, ok in checks)
         REPORT.write_text(f"# Web Renderer Stress Test\n\n**Result:** **{'PASS' if passed else 'FAIL'}**\n\n{rows}\n\nFixtures are temporary and are deleted after this run.\n", encoding="utf-8")
         print(f"WEB RENDERER STRESS TEST: {'PASS' if passed else 'FAIL'}")
-        if result.stdout:
-            print(result.stdout.strip())
-        if result.stderr:
-            print(result.stderr.strip(), file=sys.stderr)
+        for build_result in (first_result, deterministic_result, second_result):
+            if build_result.stdout:
+                print(build_result.stdout.strip())
+            if build_result.stderr:
+                print(build_result.stderr.strip(), file=sys.stderr)
         return passed
 
 

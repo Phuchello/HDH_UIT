@@ -235,7 +235,13 @@ Sơ đồ trên là **cây process literal**; sơ đồ doubling `2/4/8/16` là 
 
 ### Slide 15 — Source-faithful solution (canonical dataset)
 
-**Source question (verbatim):** “Cho 5 tiến trình với thời gian vào hàng đợi ready và thời gian cần CPU tương ứng như bảng sau: Vẽ giản đồ Gantt và tính thời gian đợi trung bình, thời gian đáp ứng trung bình và thời gian lưu lại trong hệ thống (turnaround time) trung bình cho các giải thuật sau: FCFS; SJF preemptive; RR với quantum time = 10”
+**Source question (verbatim):**
+
+> Cho 5 tiến trình với thời gian vào hàng đợi ready và thời gian cần CPU tương ứng như bảng sau: Vẽ giản đồ Gantt và tính thời gian đợi trung bình, thời gian đáp ứng trung bình và thời gian lưu lại trong hệ thống (turnaround time) trung bình cho các giải thuật sau:
+>
+> FCFS
+> SJF preemptive
+> RR với quantum time = 10
 
 **Dữ liệu và giả định của slide:** P1(AT=0, BT=10), P2(AT=2, BT=29), P3(AT=4, BT=3), P4(AT=5, BT=7), P5(AT=7, BT=12); không có context-switch overhead đáng kể, không có tie cần quy ước thêm. Ba thuật toán là FCFS, SJF trưng dụng/SRTF và Round Robin `q=10`.
 

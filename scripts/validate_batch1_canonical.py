@@ -60,12 +60,20 @@ EXPECTED_MIDTERM_SOURCE_QUESTIONS = {
             "Đặc điểm định thời theo thời gian thực?",
             "Mô tả các đặc điểm cơ bản của bộ định thời CFS trên Linux?",
             "Mô tả các đặc điểm cơ bản của định thời trên Windows?",
-            "Cho 5 tiến trình với thời gian vào hàng đợi ready và thời gian cần CPU tương ứng như bảng sau: Vẽ giản đồ Gantt và tính thời gian đợi trung bình, thời gian đáp ứng trung bình và thời gian lưu lại trong hệ thống (turnaround time) trung bình cho các giải thuật sau: FCFS; SJF preemptive; RR với quantum time = 10",
+            "Cho 5 tiến trình với thời gian vào hàng đợi ready và thời gian cần CPU tương ứng như bảng sau: Vẽ giản đồ Gantt và tính thời gian đợi trung bình, thời gian đáp ứng trung bình và thời gian lưu lại trong hệ thống (turnaround time) trung bình cho các giải thuật sau:\nFCFS\nSJF preemptive\nRR với quantum time = 10",
         ], start=1)
     },
     "MIDTERM-REVIEW-REF-12": "REFERENCE_TO_EXTERNAL_EXERCISE_SET",
     "MIDTERM-REVIEW-REF-16": "REFERENCE_TO_EXTERNAL_EXERCISE_SET",
 }
+
+
+def normalize_source_question(value: object) -> str:
+    """Normalize transport whitespace only; never invent punctuation."""
+    text = str(value or "").replace("\r\n", "\n").replace("\r", "\n")
+    lines = [line.rstrip() for line in text.strip().split("\n")]
+    normalized = "\n".join(lines)
+    return re.sub(r"\n[ \t]*\n+", "\n", normalized)
 
 
 def parse_answer_mapping(path: Path) -> list[dict[str, str]]:
@@ -171,7 +179,7 @@ def main() -> int:
         expected = EXPECTED_MIDTERM_SOURCE_QUESTIONS.get(str(question.get("question_id")))
         expect(expected is not None, f"unexpected Midterm question id: {question.get('question_id')}")
         if expected is not None:
-            expect(question.get("source_question") == expected, f"source_question mismatch for {question.get('question_id')}")
+            expect(normalize_source_question(question.get("source_question")) == normalize_source_question(expected), f"source_question mismatch for {question.get('question_id')}")
     for question in midterm_questions:
         if str(question.get("source_locator", "")).startswith("Slide 5"):
             expect(not any(term in str(question.get("source_question")) for term in ("User view", "Hard real-time", "Timer", "protection")), "Slide 5 source question contains normalized-only framing")
@@ -179,6 +187,9 @@ def main() -> int:
             expect("protection/security" not in str(question.get("source_question")), "Slide 7 protection boundary was promoted to a source question")
     slide15_manifest = next((q for q in midterm_questions if q.get("question_id") == "MIDTERM-REVIEW-33"), {})
     expect(slide15_manifest.get("source_data") == "P1 0 10; P2 2 29; P3 4 3; P4 5 7; P5 7 12", "Slide 15 source_data table is missing or incorrect")
+    slide15_question = normalize_source_question(slide15_manifest.get("source_question"))
+    expect(slide15_question.endswith("FCFS\nSJF preemptive\nRR với quantum time = 10"), "Slide 15 source_question must preserve canonical algorithm line breaks")
+    expect("FCFS;" not in slide15_question and "SJF preemptive;" not in slide15_question, "Slide 15 source_question contains invented semicolon punctuation")
     expect("int main(int argc, char** argv)" in midterm_text and "for (int i = 1; i < 5; i++)" in midterm_text and 'printf("Hello world\\n");' in midterm_text, "Slide 10 source code identity missing")
     expect("New → Ready → Running → Terminated" in midterm_text and "không thể khẳng định" in midterm_text and "Waiting/Blocked" in midterm_text, "Slide 10 lifecycle answer or caveat missing")
     expect("for (i = 0; i < 4; i++)" in midterm_text and 'printf("hello\\n");' in midterm_text and "FINAL_PROCESS_COUNT = 16" in midterm_text and "NEW_CHILDREN_CREATED = 15" in midterm_text and "TOTAL_PRINTF_EXECUTIONS = 2 + 4 + 8 + 16 = 30" in midterm_text, "Slide 11 source/answer facts missing")

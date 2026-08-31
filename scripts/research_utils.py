@@ -30,8 +30,29 @@ def _records(path: Path, start_pattern: str):
         return []
     records = []
     current = None
+    block_key = None
+    block_indent = None
+    block_lines = []
+
+    def finish_block():
+        nonlocal block_key, block_indent, block_lines
+        if block_key is not None and current is not None:
+            # Literal YAML block scalars preserve line boundaries.  Remove only
+            # the structural indentation and the implicit final newline; the
+            # source wording itself remains unchanged.
+            current[block_key] = "\n".join(block_lines).rstrip("\n")
+        block_key = None
+        block_indent = None
+        block_lines = []
+
     start_re = re.compile(start_pattern)
     for raw in path.read_text(encoding="utf-8").splitlines():
+        if block_key is not None:
+            indent = len(raw) - len(raw.lstrip())
+            if not raw.strip() or indent > block_indent:
+                block_lines.append(raw[(block_indent + 2):] if raw.strip() else "")
+                continue
+            finish_block()
         if start_re.match(raw):
             if current is not None:
                 records.append(current)
@@ -47,7 +68,14 @@ def _records(path: Path, start_pattern: str):
         if ":" not in stripped:
             continue
         key, value = stripped.split(":", 1)
+        value = value.strip()
+        if value in {"|", "|-", "|+"}:
+            block_key = key.strip()
+            block_indent = len(raw) - len(raw.lstrip())
+            block_lines = []
+            continue
         current[key.strip()] = scalar(value)
+    finish_block()
     if current is not None:
         records.append(current)
     return records

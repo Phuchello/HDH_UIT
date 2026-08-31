@@ -202,17 +202,10 @@ def markdown_to_html(text, doc_id, routes, current_rel):
                 index += 1
             output.append(render_table(table, routes, current_rel))
             continue
-        list_match = re.match(r"^\s*([-*+] |\d+[.] )(.*)$", line)
+        list_match = LIST_ITEM_RE.match(line)
         if list_match:
-            ordered, items = list_match.group(1)[0].isdigit(), []
-            while index < len(lines):
-                item = re.match(r"^\s*([-*+] |\d+[.] )(.*)$", lines[index])
-                if not item:
-                    break
-                items.append(f"<li>{inline(item.group(2), routes, current_rel)}</li>")
-                index += 1
-            tag = "ol" if ordered else "ul"
-            output.append(f"<{tag}>" + "".join(items) + f"</{tag}>")
+            rendered_list, index = render_list(lines, index, routes, current_rel)
+            output.append(rendered_list)
             continue
         if line.startswith(">"):
             body = []
@@ -248,9 +241,70 @@ def search_text(markdown: str) -> str:
     return re.sub(r"\s+", " ", clean).strip()
 
 
+LIST_ITEM_RE = re.compile(r"^(?P<indent> *)(?P<marker>[-*+] |\d+[.] )(?P<text>.*)$")
+
+
+def render_list(lines, start, routes, current_rel):
+    """Render the handbook's indentation-aware list subset.
+
+    Child lists are attached to the preceding ``<li>``.  This supports the
+    mixed ordered/unordered nesting used by the handbook without attempting
+    the full CommonMark grammar.
+    """
+    first = LIST_ITEM_RE.match(lines[start])
+    if not first:
+        return "", start
+    root_indent = len(first.group("indent"))
+    tag = "ol" if first.group("marker")[0].isdigit() else "ul"
+    output = [f"<{tag}>"]
+    index = start
+    while index < len(lines):
+        match = LIST_ITEM_RE.match(lines[index])
+        if not match or len(match.group("indent")) != root_indent:
+            break
+        item_text = inline(match.group("text"), routes, current_rel)
+        index += 1
+        nested = []
+        while index < len(lines):
+            child = LIST_ITEM_RE.match(lines[index])
+            if child and len(child.group("indent")) > root_indent:
+                child_html, index = render_list(lines, index, routes, current_rel)
+                nested.append(child_html)
+                continue
+            break
+        output.append(f"<li>{item_text}{''.join(nested)}</li>")
+    output.append(f"</{tag}>")
+    return "".join(output), index
+
+
+def clean_output_dir(output_dir):
+    """Safely make a generated output directory represent one clean build."""
+    candidate = Path(output_dir).expanduser()
+    if candidate.is_symlink():
+        raise RuntimeError(f"Refusing to clean symlink output directory: {candidate}")
+    resolved = candidate.resolve()
+    forbidden = {
+        (ROOT / name).resolve() for name in ("content", "src", "scripts", "research", "archive")
+    }
+    if resolved == ROOT.resolve() or any(parent in resolved.parents or resolved == parent for parent in forbidden):
+        raise RuntimeError(f"Refusing unsafe generated output directory: {resolved}")
+    if candidate.exists() and not candidate.is_dir():
+        raise RuntimeError(f"Generated output path is not a directory: {resolved}")
+    candidate.mkdir(parents=True, exist_ok=True)
+    for child in list(candidate.iterdir()):
+        child_resolved = child.resolve()
+        if resolved not in child_resolved.parents:
+            raise RuntimeError(f"Refusing cleanup outside output directory: {child}")
+        if child.is_symlink() or child.is_file():
+            child.unlink()
+        elif child.is_dir():
+            shutil.rmtree(child)
+    return candidate
+
+
 def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
-    content_root, output_dir = Path(content_root), Path(output_dir)
-    output_dir.mkdir(parents=True, exist_ok=True)
+    content_root = Path(content_root)
+    output_dir = clean_output_dir(output_dir)
     assets = output_dir / "assets"
     if not PRODUCTION_ASSETS.is_dir():
         raise RuntimeError(f"Missing production web assets: {PRODUCTION_ASSETS}")

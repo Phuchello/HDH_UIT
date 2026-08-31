@@ -2,7 +2,7 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_THEORY_BATCH1_ACADEMIC_REVIEW_PASS_PENDING_CLOSEOUT`
+**Giai đoạn hiện tại (Current Phase):** `V2_THEORY_BATCH1_ENGINEERING_CLOSEOUT`
 **Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — canonical attachment evidence and verified page/slide maps are recorded with explicit source statuses; local variants remain separate.
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 ONLY`
 **Hành động tiếp theo chính xác (Exact Next Action):** Terra Medium performs Batch 1 engineering closeout.

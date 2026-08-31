@@ -76,7 +76,7 @@ int main() {
 
 <h4 id="loi-giai-phan-tich">Lời giải &amp; Phân tích:</h4>
 
-<ol><li><strong>Cây tiến trình:</strong></li><li>Tiến trình gốc $P_0$ gọi <code>fork()</code> tạo ra tiến trình con $P_1$.</li><li>$P_0$ vào nhánh <code>else</code>, gọi <code>wait(NULL)</code> chờ $P_1$ kết thúc rồi in <code>D</code>.</li><li>$P_1$ in chữ <code>A</code>, sau đó gọi <code>fork()</code> tạo ra tiến trình cháu $P_2$.</li><li>$P_2$ vào nhánh con in chữ <code>B</code>.</li><li>$P_1$ vào nhánh cha của <code>fork()</code> thứ hai, gọi <code>wait(NULL)</code> chờ $P_2$ kết thúc rồi in <code>C</code>.</li><li><strong>Thứ tự in ký tự:</strong></li><li>Nhờ các lệnh <code>wait(NULL)</code> đồng bộ tuần tự, thứ tự in ra màn hình là:</li></ol>
+<ol><li><strong>Cây tiến trình:</strong><ul><li>Tiến trình gốc $P_0$ gọi <code>fork()</code> tạo ra tiến trình con $P_1$.</li><li>$P_0$ vào nhánh <code>else</code>, gọi <code>wait(NULL)</code> chờ $P_1$ kết thúc rồi in <code>D</code>.</li><li>$P_1$ in chữ <code>A</code>, sau đó gọi <code>fork()</code> tạo ra tiến trình cháu $P_2$.</li><li>$P_2$ vào nhánh con in chữ <code>B</code>.</li><li>$P_1$ vào nhánh cha của <code>fork()</code> thứ hai, gọi <code>wait(NULL)</code> chờ $P_2$ kết thúc rồi in <code>C</code>.</li></ul></li><li><strong>Thứ tự in ký tự:</strong><ul><li>Nhờ các lệnh <code>wait(NULL)</code> đồng bộ tuần tự, thứ tự in ra màn hình là:</li></ul></li></ol>
 
 <p>   $$\text{A} \rightarrow \text{B} \rightarrow \text{C} \rightarrow \text{D}$$</p>
 

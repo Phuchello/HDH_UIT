@@ -66,7 +66,10 @@ def main() -> int:
     def expect(condition: bool, message: str) -> None:
         if not condition: failures.append(message)
     source = BUILD.read_text(encoding="utf-8")
-    expect("ARCHIVE_ASSETS" not in source and "archive" not in source.lower(), "production build references archive")
+    # The build script names ``archive`` only in its destructive-cleanup
+    # safety deny-list.  Reject actual archive asset/source references while
+    # allowing that guard to remain explicit and testable.
+    expect("ARCHIVE_ASSETS" not in source and "archive/" not in source.lower(), "production build references archive")
     expect((PRODUCTION / "css/style.css").is_file() and (PRODUCTION / "js/app.js").is_file(), "production asset tree incomplete")
     index = json.loads((SITE / "search_index.json").read_text(encoding="utf-8"))
     for item in index:

@@ -762,7 +762,11 @@ questions:
     counting_class: "CONCRETE_OCCURRENCE"
     question_id: "MIDTERM-REVIEW-33"
     source_locator: "Slide 15 / compound scheduling exercise"
-    source_question: "Cho 5 tiến trình với thời gian vào hàng đợi ready và thời gian cần CPU tương ứng như bảng sau: Vẽ giản đồ Gantt và tính thời gian đợi trung bình, thời gian đáp ứng trung bình và thời gian lưu lại trong hệ thống (turnaround time) trung bình cho các giải thuật sau: FCFS; SJF preemptive; RR với quantum time = 10"
+    source_question: |
+      Cho 5 tiến trình với thời gian vào hàng đợi ready và thời gian cần CPU tương ứng như bảng sau: Vẽ giản đồ Gantt và tính thời gian đợi trung bình, thời gian đáp ứng trung bình và thời gian lưu lại trong hệ thống (turnaround time) trung bình cho các giải thuật sau:
+      FCFS
+      SJF preemptive
+      RR với quantum time = 10
     source_data: "P1 0 10; P2 2 29; P3 4 3; P4 5 7; P5 7 12"
     topic: "Canonical FCFS, SRTF and RR q=10 calculation"
     mapping_status: "MAPPED"
