@@ -46,40 +46,42 @@ Tổng format được trình bày là 10 điểm. Đây là thông tin **đặc
 
 ## Chương 1 — Source prompts
 
-Canonical slide 5 có **9 question bullets**. Các bullet dưới đây là occurrence riêng biệt trong review, có thể trỏ về lời giải qbank nhưng không làm mất locator slide:
+Canonical slide 5 có **9 question bullets**. `source_question` dưới đây giữ wording tiếng Việt theo bản PPTX; phần trong ngoặc chỉ là hướng trả lời, không phải câu hỏi thay thế:
 
-1. Computer-system structure: các thành phần và vai trò của hệ thống máy tính (`UIT-SLIDE-MIDTERM-REVIEW-2024`, slide 5, bullet 1).
-2. User view và system view của hệ điều hành (slide 5, bullet 2).
-3. System programs so với application programs (slide 5, bullet 3).
-4. Interrupt, trap/exception và chu trình xử lý (slide 5, bullet 4).
-5. Storage hierarchy và caching/locality (slide 5, bullet 5).
-6. Single-processor, SMP/AMP và clustered systems (slide 5, bullet 6).
-7. Dual mode, mode bit và privileged instruction (slide 5, bullet 7).
-8. Timer, protection và lý do OS lấy lại CPU (slide 5, bullet 8).
-9. Hard real-time so với soft real-time (slide 5, bullet 9).
+1. **Định nghĩa hệ điều hành?** — nêu vai trò resource allocator/control program.
+2. **Cấu trúc hệ thống máy tính gồm những phần nào?** — CPU, bộ nhớ, I/O và bus/interconnect.
+3. **Chương trình hệ thống và chương trình ứng dụng khác nhau như thế nào?** — phân biệt tiện ích hỗ trợ hệ thống với phần mềm phục vụ người dùng.
+4. **Những đặc điểm cơ bản của ngắt?** — nguồn, tính đồng bộ/bất đồng bộ và chu trình xử lý.
+5. **Hệ thống lưu trữ được phân cấp dựa trên những yếu tố nào?** — tốc độ truy cập, dung lượng và chi phí/bit.
+6. **Phân biệt các khái niệm cơ bản về bộ xử lý?** — CPU, processor, core theo đúng cấp phần cứng.
+7. **Đặc điểm của hệ thống đơn bộ xử lý, hệ thống đa bộ xử lý, hệ thống gom cụm?** — so sánh đơn, SMP/AMP và cluster.
+8. **Có những chế độ hoạt động nào bên trong hệ điều hành?** — kernel/supervisor và user theo mode bit của slide.
+9. **Đặc điểm của hệ thống đơn chương, đa chương và đa nhiệm?** — tiến hóa từ một chương trình đến nhiều chương trình/interactive sharing.
 
 ## Chương 2 — Source prompts
 
 Canonical slide 7 có **5 question bullets**:
 
-1. OS structures và ví dụ monolithic/microkernel (slide 7, bullet 1).
-2. System programs: nhóm chức năng và ví dụ (slide 7, bullet 2).
-3. OS services cho user/program và system-efficiency services (slide 7, bullet 3).
-4. System calls, API và cách truyền tham số (slide 7, bullet 4).
-5. Protection/security boundary và sự khác nhau giữa component, service, system program (slide 7, bullet 5).
+1. **Hệ điều hành bao gồm những thành phần nào? Cụ thể từng thành phần?**
+2. **Cấu trúc hệ thống gồm những loại nào? Cho ví dụ từng loại (theo sách tham khảo)**
+3. **Chương trình hệ thống gồm những chương trình nào?**
+4. **Lời gọi hệ thống là gì và dùng để làm gì?**
+5. **Hệ điều hành cung cấp những dịch vụ nào?**
+
+Các nội dung về protection/security, API và ranh giới component/service/system program là phần giải thích bổ trợ trong đáp án; chúng không được ghi thành `source_question` mới.
 
 ## Chương 3 — Source prompts
 
 Canonical slide 9 có **6 question bullets**:
 
-1. Process và program; process address space (slide 9, bullet 1).
-2. Process states và state-transition diagram (slide 9, bullet 2).
-3. PCB và context switch (slide 9, bullet 3).
-4. Vì sao process hợp tác/cooperating (slide 9, bullet 4).
-5. Parent/child và thứ tự thực thi (slide 9, bullet 5).
-6. Threads: lợi ích và mô hình mapping (slide 9, bullet 6).
+1. **Một tiến trình chứa những thành phần gì?**
+2. **Tiến trình có những trạng thái nào? Cách tiến trình chuyển trạng thái?**
+3. **Tại sao phải cộng tác giữa các tiến trình?**
+4. **PCB là gì? Dùng để làm gì?**
+5. **Tiểu trình là gì?**
+6. **Trình tự thực thi của tiến trình cha và tiến trình con?**
 
-Slide 10 có **1 compound state-transition exercise**: từ chuỗi sự kiện arrival, I/O, preemption và termination, vẽ trạng thái/giải thích từng cạnh (`MIDTERM-REVIEW-10`). Slide 11 có **1 compound fork/output/process-tree exercise** (`MIDTERM-REVIEW-11`): đếm process theo từng nhánh, thứ tự output chỉ kết luận khi có `wait`/đồng bộ; `exec` không tạo PID mới.
+Slide 10 và 11 dưới đây là hai bài nguồn độc lập; phần enrichment chỉ nằm trong đáp án, không thay thế wording của sáu bullet trên.
 
 ## Chương 4 — Source prompts
 
@@ -98,7 +100,7 @@ Canonical slide 14 có **10 question bullets**:
 
 Solaris không phải prompt của Midterm Review; nó chỉ là phần đọc thêm trong canonical Chương 4 Part 2.
 
-Slide 15 có **1 compound scheduling calculation exercise** (`MIDTERM-REVIEW-15`): giải FCFS, preemptive SJF và RR với `q=10`, ghi arrival/burst, decision mode, tie-break và CT/TAT/WT/RT.
+Slide 15 có **1 compound scheduling calculation exercise** (`MIDTERM-REVIEW-15`): dữ liệu canonical gồm P1(AT=0,BT=10), P2(AT=2,BT=29), P3(AT=4,BT=3), P4(AT=5,BT=7), P5(AT=7,BT=12); giải FCFS, SRTF và RR với `q=10`, ghi CT/TAT/WT/RT.
 
 ## Reference to external exercise set
 
@@ -158,7 +160,99 @@ int main(void) {
 
 **Đáp án kiểm tra:** Có hai process; child in trước, parent in sau nhờ `waitpid`. Nếu `fork` nằm trong vòng lặp, tính số lần fork ở từng nhánh rồi dựng cây; không đếm số dòng mã. `exec` thay image chứ không tạo PID mới. Locator: `UIT-QBANK-CH03-2024`, Câu 5–6 / Mục 3; chi tiết POSIX tại `POSIX-FORK`, `POSIX-WAITPID`.
 
+### Slide 10 — Source-faithful state-transition answer
+
+Đây là đúng đoạn mã xuất hiện trên slide (giữ nguyên cả việc slide không chép các `#include`):
+
+```c
+/* test.c */
+int main(int argc, char** argv)
+{
+    int a;
+    for (int i = 1; i < 5; i++)
+    {
+        if (i % 2 == 0)
+            printf("Hello world\n");
+        else
+            a = 5*9;
+    }
+    exit(0);
+}
+```
+
+Trình tự tối thiểu cần vẽ là `New → Ready → Running → Terminated`. Nếu scheduler trưng dụng CPU, có thể có cạnh `Running → Ready → Running`; lời gọi `printf` có thể đi qua `Waiting/Blocked` tùy runtime và đích I/O. Chỉ từ source này không thể khẳng định một lần chuyển `Waiting` tất định, vì slide không cung cấp hành vi buffering/thiết bị. Biến `a` chỉ là phép tính trong user mode; `exit(0)` kết thúc process.
+
+### Slide 11 — Source-faithful fork/output answer
+
+Đoạn mã canonical của slide 11 là:
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main()
+{
+    int i;
+    for (i = 0; i < 4; i++)
+    {
+        fork();
+        printf("hello\n");
+    }
+    return 0;
+}
+```
+
+Mỗi vòng lặp nhân đôi số nhánh đang thực thi. Sau bốn lần `fork`, số process là `2 → 4 → 8 → 16`; vì vậy `FINAL_PROCESS_COUNT = 16`, `NEW_CHILDREN_CREATED = 15`, và số lần các process thực thi `printf` là `TOTAL_PRINTF_EXECUTIONS = 2 + 4 + 8 + 16 = 30`. Với terminal thông thường và line-buffered stdout, kết quả quan sát là 30 dòng `hello`; thứ tự tương đối không xác định. Khi redirect sang file, full buffering có thể làm bản sao buffer đã chứa dữ liệu đi qua `fork`, nên số dòng thực tế phụ thuộc trạng thái buffer. Sơ đồ 2/4/8/16 là sơ đồ nhánh thực thi; cây process literal còn phụ thuộc process nào gọi `fork` ở từng vòng.
+
 ## E. CPU scheduling practice
+
+### Slide 15 — Source-faithful solution (canonical dataset)
+
+**Dữ liệu và giả định của slide:** P1(AT=0, BT=10), P2(AT=2, BT=29), P3(AT=4, BT=3), P4(AT=5, BT=7), P5(AT=7, BT=12); không có context-switch overhead đáng kể, không có tie cần quy ước thêm. Ba thuật toán là FCFS, SJF trưng dụng/SRTF và Round Robin `q=10`.
+
+**FCFS**
+
+`P1 0–10 | P2 10–39 | P3 39–42 | P4 42–49 | P5 49–61`
+
+| Process | CT | TAT | WT | RT |
+| --- | ---: | ---: | ---: | ---: |
+| P1 | 10 | 10 | 0 | 0 |
+| P2 | 39 | 37 | 8 | 8 |
+| P3 | 42 | 38 | 35 | 35 |
+| P4 | 49 | 44 | 37 | 37 |
+| P5 | 61 | 54 | 42 | 42 |
+
+`WTavg = 24.4`, `RTavg = 24.4`, `TATavg = 36.6`.
+
+**SJF trưng dụng (SRTF)**
+
+`P1 0–4 | P3 4–7 | P1 7–13 | P4 13–20 | P5 20–32 | P2 32–61`
+
+| Process | CT | TAT | WT | RT |
+| --- | ---: | ---: | ---: | ---: |
+| P1 | 13 | 13 | 3 | 0 |
+| P2 | 61 | 59 | 30 | 30 |
+| P3 | 7 | 3 | 0 | 0 |
+| P4 | 20 | 15 | 8 | 8 |
+| P5 | 32 | 25 | 13 | 13 |
+
+`WTavg = 10.8`, `RTavg = 10.2`, `TATavg = 23.0`.
+
+**Round Robin (`q=10`)**
+
+`P1 0–10 | P2 10–20 | P3 20–23 | P4 23–30 | P5 30–40 | P2 40–50 | P5 50–52 | P2 52–61`
+
+| Process | CT | TAT | WT | RT |
+| --- | ---: | ---: | ---: | ---: |
+| P1 | 10 | 10 | 0 | 0 |
+| P2 | 61 | 59 | 30 | 8 |
+| P3 | 23 | 19 | 16 | 16 |
+| P4 | 30 | 25 | 18 | 18 |
+| P5 | 52 | 45 | 33 | 23 |
+
+`WTavg = 19.4`, `RTavg = 13.0`, `TATavg = 31.6`.
+
+The older P1(0,7), P2(2,4), P3(4,1), P4(5,4) SRTF calculation below remains an explicitly labelled **additional practice fixture**, not the Slide 15 source dataset.
 
 ### E1. FCFS/SJF/SRTF
 

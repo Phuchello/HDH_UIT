@@ -36,7 +36,11 @@ The former 56/34/46-page Chapter 4 files and 16-page Midterm PDF remain explicit
 
 ## Numerical regression
 
-`scripts/check_batch1_numeric.py` passes the SRTF fixture: WT = 9,1,0,2 ⇒ **WTavg = 3.00**; TAT = 16,5,1,6 ⇒ **TATavg = 7.00**. No stale `3.25` remains in active Batch 1 theory/review content.
+`scripts/check_batch1_numeric.py` independently recomputes the legacy SRTF fixture (WT = 9,1,0,2 ⇒ **WTavg = 3.00**; TAT = 16,5,1,6 ⇒ **TATavg = 7.00**) and the canonical Midterm Slide 15 dataset. The canonical FCFS/SRTF/RR (`q=10`) averages are WT `24.4/10.8/19.4`, RT `24.4/10.2/13.0`, and TAT `36.6/23.0/31.6`. No stale `3.25` remains in active Batch 1 theory/review content.
+
+## Post-review Midterm source correction
+
+A direct inspection after the initial academic pass found that normalized Slide 5/7/9 topics and the Slide 10/11/15 compound answers had drifted from the canonical `#Week08-Midterm Review.pptx`. The repair preserves the 33 concrete occurrence count, adds exact `source_question` text to every Midterm occurrence, reproduces the `test.c` and four-fork source snippets, records the 16/15/30 fork accounting, and maps Slide 15 to a dedicated canonical P1–P5 solution. The prior pass is retained as history; the finding is now resolved.
 
 ## Future Batch 2 source blocker
 
@@ -50,4 +54,4 @@ Canonical Ch5 attachments are recorded as separate, unmapped evidence IDs: `#Wee
 - `npm test`: PASS
 - **Current Phase:** `V2_THEORY_BATCH1_ACADEMIC_REVIEW_PASS_PENDING_CLOSEOUT`
 - **Academic Verification:** `PASS — BATCH 1 ONLY`
-- **Exact Next Action:** Terra Medium performs Batch 1 closeout: clean-build stale-output guard, true nested-list renderer semantics, then canonical Chapter 5 source-map preparation.
+- **Exact Next Action:** Terra Medium performs Batch 1 engineering closeout.

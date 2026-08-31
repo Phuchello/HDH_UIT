@@ -36,6 +36,53 @@
     },
     "gantt": ["P1 0–2", "P2 2–4", "P3 4–5", "P1 5–7", "P2 7–8", "P1 8–9"]
   },
+  "midterm_slide15": {
+    "processes": {
+      "P1": {"arrival": 0, "burst": 10, "completion": 13, "waiting": 3, "turnaround": 13, "response": 0},
+      "P2": {"arrival": 2, "burst": 29, "completion": 61, "waiting": 30, "turnaround": 59, "response": 30},
+      "P3": {"arrival": 4, "burst": 3, "completion": 7, "waiting": 0, "turnaround": 3, "response": 0},
+      "P4": {"arrival": 5, "burst": 7, "completion": 20, "waiting": 8, "turnaround": 15, "response": 8},
+      "P5": {"arrival": 7, "burst": 12, "completion": 32, "waiting": 13, "turnaround": 25, "response": 13}
+    },
+    "fcfs": {
+      "completion": {"P1": 10, "P2": 39, "P3": 42, "P4": 49, "P5": 61},
+      "waiting": {"P1": 0, "P2": 8, "P3": 35, "P4": 37, "P5": 42},
+      "turnaround": {"P1": 10, "P2": 37, "P3": 38, "P4": 44, "P5": 54},
+      "response": {"P1": 0, "P2": 8, "P3": 35, "P4": 37, "P5": 42},
+      "gantt": ["P1 0–10", "P2 10–39", "P3 39–42", "P4 42–49", "P5 49–61"],
+      "waiting_average": 24.4,
+      "response_average": 24.4,
+      "turnaround_average": 36.6
+    },
+    "srtf": {
+      "completion": {"P1": 13, "P2": 61, "P3": 7, "P4": 20, "P5": 32},
+      "waiting": {"P1": 3, "P2": 30, "P3": 0, "P4": 8, "P5": 13},
+      "turnaround": {"P1": 13, "P2": 59, "P3": 3, "P4": 15, "P5": 25},
+      "response": {"P1": 0, "P2": 30, "P3": 0, "P4": 8, "P5": 13},
+      "gantt": ["P1 0–4", "P3 4–7", "P1 7–13", "P4 13–20", "P5 20–32", "P2 32–61"],
+      "waiting_average": 10.8,
+      "response_average": 10.2,
+      "turnaround_average": 23.0
+    },
+    "rr": {
+      "quantum": 10,
+      "completion": {"P1": 10, "P2": 61, "P3": 23, "P4": 30, "P5": 52},
+      "waiting": {"P1": 0, "P2": 30, "P3": 16, "P4": 18, "P5": 33},
+      "turnaround": {"P1": 10, "P2": 59, "P3": 19, "P4": 25, "P5": 45},
+      "response": {"P1": 0, "P2": 8, "P3": 16, "P4": 18, "P5": 23},
+      "gantt": ["P1 0–10", "P2 10–20", "P3 20–23", "P4 23–30", "P5 30–40", "P2 40–50", "P5 50–52", "P2 52–61"],
+      "waiting_average": 19.4,
+      "response_average": 13.0,
+      "turnaround_average": 31.6
+    }
+  },
+  "slide11_process_counts": {
+    "forks": 4,
+    "final_processes": 16,
+    "new_children": 15,
+    "printf_executions": 30,
+    "per_iteration": [2, 4, 8, 16]
+  },
   "hrrn_example": {
     "ratios": {"A": 2.0, "B": 1.5},
     "selected": "A"

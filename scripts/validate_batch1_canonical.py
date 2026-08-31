@@ -22,6 +22,49 @@ CH4_BANK = ROOT / "content/questions/subjective/ch04.md"
 MIDTERM = ROOT / "content/reviews/midterm.md"
 MIDTERM_MAPPING = ROOT / "research/data/midterm_answer_mapping.yaml"
 
+EXPECTED_MIDTERM_SOURCE_QUESTIONS = {
+    **{
+        f"MIDTERM-REVIEW-{index:02d}": question
+        for index, question in enumerate([
+            "Định nghĩa hệ điều hành?",
+            "Cấu trúc hệ thống máy tính gồm những phần nào?",
+            "Chương trình hệ thống và chương trình ứng dụng khác nhau như thế nào?",
+            "Những đặc điểm cơ bản của ngắt?",
+            "Hệ thống lưu trữ được phân cấp dựa trên những yếu tố nào?",
+            "Phân biệt các khái niệm cơ bản về bộ xử lý?",
+            "Đặc điểm của hệ thống đơn bộ xử lý, hệ thống đa bộ xử lý, hệ thống gom cụm?",
+            "Có những chế độ hoạt động nào bên trong hệ điều hành?",
+            "Đặc điểm của hệ thống đơn chương, đa chương và đa nhiệm?",
+            "Hệ điều hành bao gồm những thành phần nào? Cụ thể từng thành phần?",
+            "Cấu trúc hệ thống gồm những loại nào? Cho ví dụ từng loại (theo sách tham khảo)",
+            "Chương trình hệ thống gồm những chương trình nào?",
+            "Lời gọi hệ thống là gì và dùng để làm gì?",
+            "Hệ điều hành cung cấp những dịch vụ nào?",
+            "Một tiến trình chứa những thành phần gì?",
+            "Tiến trình có những trạng thái nào? Cách tiến trình chuyển trạng thái?",
+            "Tại sao phải cộng tác giữa các tiến trình?",
+            "PCB là gì? Dùng để làm gì?",
+            "Tiểu trình là gì?",
+            "Trình tự thực thi của tiến trình cha và tiến trình con?",
+            "Hãy xác định các trạng thái của tiến trình trong quá trình thực thi chương trình test.c và vẽ sơ đồ chuyển trạng thái.",
+            "Cho chương trình fork/printf sau, hãy xác định số tiến trình và số lần xuất hiện hello.",
+            "Vì sao cần định thời và có những loại scheduler nào?",
+            "Định thời CPU là gì và scheduler chịu trách nhiệm gì?",
+            "Chi phí của định thời/dispatch là gì?",
+            "Các tiêu chí đánh giá thuật toán định thời là gì?",
+            "Kể tên các thuật toán định thời.",
+            "Nêu đặc tính, ưu và nhược điểm của FCFS, SJF, SRTF, RR, Priority, HRRN, MQ, MFQ.",
+            "Định thời đa xử lý và load balancing là gì?",
+            "Real-time scheduling là gì?",
+            "Linux CFS hoạt động như thế nào?",
+            "Windows scheduling hoạt động như thế nào?",
+            "Cho các tiến trình P1(AT=0,BT=10), P2(AT=2,BT=29), P3(AT=4,BT=3), P4(AT=5,BT=7), P5(AT=7,BT=12), hãy giải FCFS, SJF trưng dụng (SRTF) và Round Robin với q=10, tính CT/TAT/WT/RT.",
+        ], start=1)
+    },
+    "MIDTERM-REVIEW-REF-12": "REFERENCE_TO_EXTERNAL_EXERCISE_SET",
+    "MIDTERM-REVIEW-REF-16": "REFERENCE_TO_EXTERNAL_EXERCISE_SET",
+}
+
 
 def parse_answer_mapping(path: Path) -> list[dict[str, str]]:
     """Parse the deliberately flat one-line mapping records without PyYAML."""
@@ -118,8 +161,32 @@ def main() -> int:
         expect(heading in midterm_text, f"Midterm review missing section: {heading}")
     expect("Solaris không phải prompt" in midterm_text, "Midterm Solaris exclusion is not explicit")
 
+    # Source-question fields must preserve the canonical Midterm wording; normalized
+    # topics remain separate metadata and cannot substitute for the slide questions.
     questions = parse_questions(QUESTIONS)
     midterm_questions = [q for q in questions if q.get("source_id") == "UIT-SLIDE-MIDTERM-REVIEW-2024"]
+    for question in midterm_questions:
+        expected = EXPECTED_MIDTERM_SOURCE_QUESTIONS.get(str(question.get("question_id")))
+        expect(expected is not None, f"unexpected Midterm question id: {question.get('question_id')}")
+        if expected is not None:
+            expect(question.get("source_question") == expected, f"source_question mismatch for {question.get('question_id')}")
+    for question in midterm_questions:
+        if str(question.get("source_locator", "")).startswith("Slide 5"):
+            expect(not any(term in str(question.get("source_question")) for term in ("User view", "Hard real-time", "Timer", "protection")), "Slide 5 source question contains normalized-only framing")
+        if str(question.get("source_locator", "")).startswith("Slide 7"):
+            expect("protection/security" not in str(question.get("source_question")), "Slide 7 protection boundary was promoted to a source question")
+    expect("int main(int argc, char** argv)" in midterm_text and "for (int i = 1; i < 5; i++)" in midterm_text and 'printf("Hello world\\n");' in midterm_text, "Slide 10 source code identity missing")
+    expect("New → Ready → Running → Terminated" in midterm_text and "không thể khẳng định" in midterm_text and "Waiting/Blocked" in midterm_text, "Slide 10 lifecycle answer or caveat missing")
+    expect("for (i = 0; i < 4; i++)" in midterm_text and 'printf("hello\\n");' in midterm_text and "FINAL_PROCESS_COUNT = 16" in midterm_text and "NEW_CHILDREN_CREATED = 15" in midterm_text and "TOTAL_PRINTF_EXECUTIONS = 2 + 4 + 8 + 16 = 30" in midterm_text, "Slide 11 source/answer facts missing")
+    expect("full buffering" in midterm_text and "thứ tự tương đối không xác định" in midterm_text, "Slide 11 buffering/order caveat missing")
+    slide15_start = midterm_text.find("### Slide 15 — Source-faithful solution (canonical dataset)")
+    slide15_end = midterm_text.find("### E1.", slide15_start)
+    slide15_text = midterm_text[slide15_start:slide15_end if slide15_end != -1 else None]
+    for marker in ("P1(AT=0, BT=10)", "P2(AT=2, BT=29)", "P3(AT=4, BT=3)", "P4(AT=5, BT=7)", "P5(AT=7, BT=12)", "FCFS", "SRTF", "q=10", "WTavg = 24.4", "WTavg = 10.8", "WTavg = 19.4", "RTavg = 24.4", "RTavg = 10.2", "RTavg = 13.0", "TATavg = 36.6", "TATavg = 23.0", "TATavg = 31.6"):
+        expect(marker in slide15_text, f"Slide 15 canonical answer missing: {marker}")
+    expect("additional practice fixture" in midterm_text, "old scheduling fixture is not labelled as additional practice")
+
+    # Reuse the parsed Midterm records for occurrence and accounting checks.
     concrete = [q for q in midterm_questions if q.get("counting_class") == "CONCRETE_OCCURRENCE"]
     references = [q for q in midterm_questions if q.get("counting_class") == "REFERENCE_TO_EXTERNAL_EXERCISE_SET"]
     expect(len(concrete) == 33, f"Midterm concrete occurrence count is {len(concrete)}, expected 33")
@@ -165,6 +232,10 @@ def main() -> int:
             expect(anchor in heading_slugs, f"answer destination anchor missing for {row['question_id']}: {destination}")
     concrete_mapping = [row for row in answer_mapping if not row["question_id"].startswith("MIDTERM-REVIEW-REF-")]
     expect(not any(row["answer_status"] != "ANSWER_VERIFIED" for row in concrete_mapping), "Midterm concrete answer coverage contains PARTIAL or MISSING records")
+    mapping_by_id = {row["question_id"]: row for row in answer_mapping}
+    expect(mapping_by_id.get("MIDTERM-REVIEW-21", {}).get("canonical_answer_destination") == "content/reviews/midterm.md#slide-10-source-faithful-state-transition-answer", "Slide 10 answer is not mapped to its dedicated source-faithful section")
+    expect(mapping_by_id.get("MIDTERM-REVIEW-22", {}).get("canonical_answer_destination") == "content/reviews/midterm.md#slide-11-source-faithful-fork-output-answer", "Slide 11 answer is not mapped to its dedicated source-faithful section")
+    expect(mapping_by_id.get("MIDTERM-REVIEW-33", {}).get("canonical_answer_destination") == "content/reviews/midterm.md#slide-15-source-faithful-solution-canonical-dataset", "Slide 15 answer is not mapped to its dedicated source-faithful section")
 
     if failures:
         print("BATCH 1 CANONICAL SOURCE VALIDATION: FAIL")

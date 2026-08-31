@@ -33,7 +33,7 @@ The review used the repository’s immutable source registry and previously reco
 - Chương 2 preserves the official slide’s seven core components.  The qbank wording “8 thành phần” remains verbatim and is explicitly labelled `SOURCE CONFLICT`; networking/distributed and security enrichment is labelled Tier B rather than presented as an official eight/nine-item slide list.
 - Midterm Review format and wording are explicitly scoped to the canonical 2024 review slides.  No all-semesters claim is made; Solaris is explicitly excluded as a Midterm prompt.
 - `research/data/official_review_questions.yaml` distinguishes 60 dedicated qbank records, 33 concrete Midterm occurrences, 2 external exercise-set references, and 64 canonical deduplicated questions.
-- `research/data/midterm_answer_mapping.yaml` contains one auditable mapping for each of the 33 concrete occurrences and both external references.  Every record has `question_id`, exact `source_locator`, `canonical_answer_destination`, and an allowed `answer_status`; all concrete records are `ANSWER_VERIFIED`.  The Slide 15 q=10 occurrence is mapped to the procedure and validated scheduling examples without inventing unavailable source arrival/burst values.
+- `research/data/midterm_answer_mapping.yaml` contains one auditable mapping for each of the 33 concrete occurrences and both external references.  Every record has `question_id`, exact `source_locator`, `canonical_answer_destination`, and an allowed `answer_status`; all concrete records are `ANSWER_VERIFIED`.  The Slide 15 q=10 occurrence maps to the dedicated canonical P1–P5 source dataset and its checked FCFS/SRTF/RR solutions.
 
 ## Chapter coverage audit
 
@@ -84,4 +84,16 @@ No contradictory Batch 1 numerical value was found after these checks.
 **OPEN MAJORS: 0**
 **OPEN MINORS: 0**
 **Batch 1 status:** `CONTENT_VERIFIED`
-**Next permitted action:** Terra Medium performs Batch 1 closeout: clean-build stale-output guard, true nested-list renderer semantics, then canonical Chapter 5 source-map preparation.
+**Next permitted action:** Terra Medium performs Batch 1 engineering closeout.
+
+## POST-REVIEW SOURCE CORRECTION
+
+The first review above accepted normalized Midterm topics without reopening the canonical binary. A subsequent direct inspection of `#Week08-Midterm Review.pptx` found semantic drift in the Slide 5/7/9 wording and in the Slide 10, 11, and 15 compound exercises. That prior academic PASS was therefore reopened for a source-fidelity repair; no history was erased.
+
+The correction preserves the 33 concrete occurrence count and adds exact `source_question` fields for all 33 occurrences plus the two external references. Slide 10 now reproduces `test.c` and limits the lifecycle conclusion to `New → Ready → Running → Terminated`, with preemption/I/O caveats. Slide 11 now reproduces the four-fork program and verifies 16 final processes, 15 new children, and 30 `printf` executions with the stdout-buffering caveat. Slide 15 now records the canonical P1–P5 dataset and independently checked FCFS, SRTF, and RR (`q=10`) CT/TAT/WT/RT tables and averages; the older WTavg 3.00 fixture is explicitly additional practice.
+
+| ID | Severity | Finding | Resolution | Final status |
+|---|---|---|---|---|
+| ACAD-005 | MAJOR | Midterm normalized topics and compound answers had drifted from the canonical Slide 5/7/9/10/11/15 source semantics. | Restored source-faithful wording, source identity, dedicated answers, exact answer destinations, and regression gates in `validate_batch1_canonical.py` and `check_batch1_numeric.py`. | RESOLVED |
+
+After this correction, Midterm content status is restored to `CONTENT_VERIFIED`; the academic verification remains **PASS — BATCH 1 ONLY** pending engineering closeout. Chapter 5 remains out of scope.
