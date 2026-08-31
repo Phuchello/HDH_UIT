@@ -13,7 +13,7 @@ related:
   - "theory-ch03-process"
 exam_relevance:
   frequent_topics:
-    - "Tám thành phần và chín dịch vụ OS"
+    - "Bảy thành phần UIT và chín dịch vụ OS"
     - "System Call, API và truyền tham số"
     - "Sáu nhóm system programs"
     - "Monolithic, layered, microkernel, modules và hybrid"
@@ -43,12 +43,19 @@ Một kernel không phải là một chương trình đơn lẻ. Các thành ph�
 | Quản lý file | Tên, thư mục, quyền, mở/đóng, đọc/ghi và ánh xạ file–thiết bị. | inode/FCB, file descriptor. |
 | Quản lý I/O | Cung cấp giao diện thống nhất, driver, buffering/caching/spooling. | device queue, driver. |
 | Quản lý lưu trữ phụ | Cấp phát block, lập lịch đĩa, theo dõi dung lượng và độ tin cậy. | block, free-space list. |
-| Networking/distributed | Giao tiếp máy–máy, giao thức và tài nguyên phân tán khi nền tảng hỗ trợ. | socket, message, remote service. |
-| Protection | Kiểm soát tiến trình/chủ thể nào được truy cập đối tượng nào. | mode, ACL, capability. |
-| Security | Xác thực, kiểm soát đặc quyền, toàn vẹn và chống lạm dụng. | credential, audit. |
+| Protection system | Kiểm soát tiến trình/chủ thể nào được truy cập đối tượng nào; trong phạm vi slide, security là khía cạnh của protection. | mode, ACL, capability. |
 | Command interpreter/UI | Nhận lệnh hoặc thao tác đồ họa, gọi dịch vụ và hiển thị kết quả. | shell, desktop UI. |
 
-Slide có thể gom protection và security thành một cụm; khi trả lời qbank hãy nêu cả hai chức năng và nói rõ cách gom.
+Đây là **bảy thành phần cốt lõi theo slide UIT**. Một số bản qbank/giáo trình tách networking/distributed hoặc security thành mục riêng, tạo cảm giác có tám hoặc chín thành phần. Khi gặp cách liệt kê đó, giữ bảy mục trên làm câu trả lời theo slide và ghi rõ các mục tách thêm là mở rộng giáo trình, không phải thành phần UIT thứ tám.
+
+### 1.1 Mở rộng giáo trình (không tính vào bảy mục UIT)
+
+Ở tầng mở rộng `SILBERSCHATZ-OSC10` hoặc các bản textbook khác, có thể phân biệt thêm:
+
+- **Networking/distributed:** giao tiếp máy–máy, giao thức và tài nguyên phân tán (socket, message, remote service).
+- **Security distinction:** xác thực, đặc quyền, toàn vẹn và chống lạm dụng (credential, audit); trong slide UIT, các chức năng này nằm trong protection system.
+
+Hai nhãn mở rộng này hữu ích khi so sánh giáo trình, nhưng không được dùng để thay đổi số lượng bảy thành phần của câu trả lời theo slide UIT.
 
 ## 2. Dịch vụ OS
 

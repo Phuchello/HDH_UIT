@@ -5,14 +5,14 @@
 
 summary:
   # Informational snapshot only; the verifier computes these from deck records.
-  total_slide_decks: 14
-  physical_pages_total: 721
-  content_pages_total: 665
-  non_content_pages_total: 56
-  mapped_content_pages: 665
+  total_slide_decks: 13
+  physical_pages_total: 718
+  content_pages_total: 666
+  non_content_pages_total: 52
+  mapped_content_pages: 666
   unmapped_content_pages: 0
-  drafted_content_pages: 302  # Chapters 1–4 + Midterm Review (informational snapshot)
-  not_written_content_pages: 363 # Chapters 5–9 (verifier computes authoritative totals)
+  drafted_content_pages: 308  # Chapters 1–4 + Midterm Review (informational snapshot)
+  not_written_content_pages: 358 # Chapters 5–9 (verifier computes authoritative totals)
 
 decks:
   - source_id: "UIT-SLIDE-CH01-2024"
@@ -106,7 +106,7 @@ decks:
       - page_range: "4-15"
         page_count: 12
         classification: "CONTENT"
-        topic: "8 thành phần cốt lõi của Hệ điều hành"
+        topic: "Bảy thành phần cốt lõi theo slide UIT (qbank ghi khác; xem source-conflict note)"
         mapping_status: "MAPPED"
         v2_destination: "content/theory/ch02-structure.md#1-cac-thanh-phan-cua-os"
         content_status: "CONTENT_DRAFTED"
@@ -218,7 +218,7 @@ decks:
   - source_id: "UIT-SLIDE-CH04-1-2024"
     exact_filename: "Week04-Chapter4-1 2024.pdf"
     title: "Chương 4: Định thời CPU (Phần 1)"
-    physical_pages: 56
+    physical_pages: 74
     sections:
       - page_range: "1-3"
         page_count: 3
@@ -241,18 +241,18 @@ decks:
         mapping_status: "MAPPED"
         v2_destination: "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban"
         content_status: "CONTENT_DRAFTED"
-      - page_range: "55-56"
-        page_count: 2
-        classification: "NON_CONTENT"
-        topic: "Tổng kết phần 1"
+      - page_range: "55-74"
+        page_count: 20
+        classification: "CONTENT"
+        topic: "HRRN và các trường hợp phân tích định thời mở rộng"
         mapping_status: "MAPPED"
-        v2_destination: "None (Meta)"
-        content_status: "NOT_WRITTEN"
+        v2_destination: "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban"
+        content_status: "CONTENT_DRAFTED"
 
   - source_id: "UIT-SLIDE-CH04-2-2024"
     exact_filename: "Week05-Chapter4-2 2024.pdf"
     title: "Chương 4: Định thời CPU (Phần 2)"
-    physical_pages: 34
+    physical_pages: 59
     sections:
       - page_range: "1-2"
         page_count: 2
@@ -268,40 +268,13 @@ decks:
         mapping_status: "MAPPED"
         v2_destination: "content/theory/ch04-scheduling.md#3-multilevel-queue-va-mlfq"
         content_status: "CONTENT_DRAFTED"
-      - page_range: "33-34"
-        page_count: 2
-        classification: "NON_CONTENT"
-        topic: "Tổng kết phần 2"
-        mapping_status: "MAPPED"
-        v2_destination: "None (Meta)"
-        content_status: "NOT_WRITTEN"
-
-  - source_id: "UIT-SLIDE-CH04-3-2024"
-    exact_filename: "Week06-Chapter4-3 2024.pdf"
-    title: "Chương 4: Định thời Đa xử lý & Real-Time (Phần 3)"
-    physical_pages: 46
-    sections:
-      - page_range: "1-2"
-        page_count: 2
-        classification: "NON_CONTENT"
-        topic: "Trang bìa"
-        mapping_status: "MAPPED"
-        v2_destination: "None (Meta)"
-        content_status: "NOT_WRITTEN"
-      - page_range: "3-44"
-        page_count: 42
+      - page_range: "33-59"
+        page_count: 27
         classification: "CONTENT"
-        topic: "Định thời Thread (PCS/SCS), Đa xử lý (SMP/Affinity/Load balancing), Real-Time (RMS/EDF) & Linux CFS"
+        topic: "Thread scheduling, multiprocessor scheduling, real-time, Linux, Windows và Solaris"
         mapping_status: "MAPPED"
         v2_destination: "content/theory/ch04-scheduling.md#4-thread-da-xu-ly-va-load-balancing"
         content_status: "CONTENT_DRAFTED"
-      - page_range: "45-46"
-        page_count: 2
-        classification: "NON_CONTENT"
-        topic: "Tổng kết Chương 4"
-        mapping_status: "MAPPED"
-        v2_destination: "None (Meta)"
-        content_status: "NOT_WRITTEN"
 
   - source_id: "UIT-SLIDE-CH05-1-2024"
     exact_filename: "Week07-Chapter5-1 2024.pdf"
@@ -342,13 +315,20 @@ decks:
     title: "Slide Ôn tập Giữa kỳ IT007 Tuần 8"
     physical_pages: 16
     sections:
-      - page_range: "1-2"
-        page_count: 2
+      - page_range: "1"
+        page_count: 1
         classification: "NON_CONTENT"
         topic: "Trang bìa"
         mapping_status: "MAPPED"
         v2_destination: "None (Meta)"
         content_status: "NOT_WRITTEN"
+      - page_range: "2"
+        page_count: 1
+        classification: "CONTENT"
+        topic: "Format ôn tập/đề giữa kỳ được trình bày trong slide"
+        mapping_status: "MAPPED"
+        v2_destination: "content/reviews/midterm.md#format-shown-in-the-official-2024-midterm-review"
+        content_status: "CONTENT_DRAFTED"
       - page_range: "3-15"
         page_count: 13
         classification: "CONTENT"

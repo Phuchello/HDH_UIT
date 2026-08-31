@@ -32,6 +32,18 @@ last_updated: "2026-08-31"
 
 Khung này được tổng hợp từ `UIT-SLIDE-MIDTERM-REVIEW-2024`, slide 3–15 và các qbank Chương 1–4 đã đăng ký. Tài liệu lịch sử chỉ cho biết phong cách quan sát được; không có tuyên bố “UIT luôn hỏi”, điểm số hay barem chính thức nếu không có locator xác minh. Hãy trả lời theo cơ chế và đặc tính trước, sau đó mới dùng mẹo nhận diện.
 
+## Format shown in the official 2024 Midterm Review
+
+Slide 2 của bộ `UIT-SLIDE-MIDTERM-REVIEW-2024` trình bày một format lịch sử của đợt ôn tập này:
+
+| Phần | Cấu trúc thể hiện trên slide | Điểm thể hiện trên slide |
+| --- | --- | ---: |
+| Tự luận | Câu ngắn + tạo tiến trình: 3 câu | 1.5 |
+| Tự luận | Định thời CPU: 2 câu | 2.5 |
+| Trắc nghiệm (MCQ) | 12 câu, mỗi câu 0.5 | 6.0 |
+
+Tổng format được trình bày là 10 điểm. Đây là thông tin **đặc thù của slide ôn tập 2024**, không phải cam kết cho mọi học kỳ; không dùng nó để suy ra thời lượng, barem hay cấu trúc kỳ thi khác nếu không có nguồn xác minh.
+
 ## A. Core-property recall
 
 1. OS có hai góc nhìn nào? — User view (tiện dụng/phản hồi) và system view (resource allocator/control program).

@@ -1,0 +1,14 @@
+{
+  "schema": "batch1-numeric-regression-v1",
+  "srtf_example": {
+    "processes": {
+      "P1": {"arrival": 0, "burst": 7, "completion": 16, "waiting": 9, "turnaround": 16},
+      "P2": {"arrival": 2, "burst": 4, "completion": 7, "waiting": 1, "turnaround": 5},
+      "P3": {"arrival": 4, "burst": 1, "completion": 5, "waiting": 0, "turnaround": 1},
+      "P4": {"arrival": 5, "burst": 4, "completion": 11, "waiting": 2, "turnaround": 6}
+    },
+    "waiting_average": 3.0,
+    "turnaround_average": 7.0,
+    "gantt": ["P1 0–2", "P2 2–4", "P3 4–5", "P2 5–7", "P4 7–11", "P1 11–16"]
+  }
+}

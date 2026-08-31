@@ -22,7 +22,6 @@ sources:
   - "UIT-OUTLINE-2024"
   - "UIT-SLIDE-CH04-1-2024"
   - "UIT-SLIDE-CH04-2-2024"
-  - "UIT-SLIDE-CH04-3-2024"
   - "UIT-QBANK-CH04-2024"
   - "UIT-SLIDE-MIDTERM-REVIEW-2024"
   - "SILBERSCHATZ-OSC10"
@@ -33,7 +32,7 @@ last_updated: "2026-08-31"
 
 ## Phạm vi và cách giải bài
 
-Nội dung bám `UIT-SLIDE-CH04-1-2024`, slide 4–54; `UIT-SLIDE-CH04-2-2024`, slide 3–32; `UIT-SLIDE-CH04-3-2024`, slide 3–44 và qbank `UIT-QBANK-CH04-2024`, Câu 1–5 / Mục 4. Khi làm bài số, luôn ghi giả định: thời điểm đến, burst, preemptive hay không, quantum, quy tắc tie-break và thời điểm process mới vào ready queue. Không có tie-break “toàn cầu” nếu đề không nêu.
+Nội dung bám hai binary canonical được người dùng cung cấp: `UIT-SLIDE-CH04-1-2024` (74 trang) và `UIT-SLIDE-CH04-2-2024` (59 trang), cùng qbank `UIT-QBANK-CH04-2024`, Câu 1–5 / Mục 4. Bộ 56/34/46 trang từng có trong workspace là **different source version**, không được dùng để suy ra số trang canonical. Khi làm bài số, luôn ghi giả định: thời điểm đến, burst, preemptive hay không, quantum, quy tắc tie-break và thời điểm process mới vào ready queue. Không có tie-break “toàn cầu” nếu đề không nêu.
 
 ## 1. Vì sao cần định thời?
 
@@ -71,7 +70,7 @@ Không có thuật toán tối ưu đồng thời mọi tiêu chí; workload và
 
 **Selection:** process có remaining CPU time nhỏ nhất; preemptive SJF. **Cơ chế:** mỗi khi process mới đến hoặc event xảy ra, so sánh remaining time và có thể preempt. **Ưu:** thường giảm WT/TAT của job ngắn và response tốt hơn SJF. **Hạn chế:** context switch nhiều, cần estimate; job dài có thể starvation. Aging/capping priority có thể giảm starvation nhưng không nằm trong định nghĩa SRTF.
 
-**Ví dụ có kiểm tra:** P1(0,7), P2(2,4), P3(4,1), P4(5,4). Với tie giữ process đang chạy: `P1 0–2 | P2 2–4 | P3 4–5 | P2 5–7 | P4 7–11 | P1 11–16`; CT = 16,7,5,11; WT = 9,1,0,2; WTavg = 3.25 và TATavg = 7.00. Nếu tie-break khác, Gantt/WT có thể đổi.
+**Ví dụ có kiểm tra:** P1(0,7), P2(2,4), P3(4,1), P4(5,4). Với tie giữ process đang chạy: `P1 0–2 | P2 2–4 | P3 4–5 | P2 5–7 | P4 7–11 | P1 11–16`; CT = 16,7,5,11; WT = 9,1,0,2; WTavg = 3.00 và TATavg = 7.00. Nếu tie-break khác, Gantt/WT có thể đổi.
 
 ### 2.4 Priority scheduling
 
