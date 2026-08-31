@@ -1,7 +1,7 @@
 # LUNA THEORY BATCH 1 CONTENT REPORT — CANONICAL SOURCE MAP FINAL REPAIR
 
 **Scope:** Chapters 1–4, Midterm Review, subjective banks, and source/numerical regression  
-**Status:** `DRAFTED_READY_FOR_ENGINEERING_QA`  
+**Status:** `CONTENT_VERIFIED — ACADEMIC REVIEW PASS (BATCH 1 ONLY)`
 **Date:** 2026-08-31
 
 ## Canonical source evidence
@@ -48,6 +48,6 @@ Canonical Ch5 attachments are recorded as separate, unmapped evidence IDs: `#Wee
 - `scripts/verify_research_gates.py`: PASS
 - `scripts/check_batch1_numeric.py`: PASS
 - `npm test`: PASS
-- **Current Phase:** `V2_THEORY_BATCH1_DRAFTED_READY_FOR_ENGINEERING_QA`
-- **Ready for Engineering QA:** `YES`
-- **Exact Next Action:** Terra Medium performs engineering/build regression.
+- **Current Phase:** `V2_THEORY_BATCH1_ACADEMIC_REVIEW_PASS_PENDING_CLOSEOUT`
+- **Academic Verification:** `PASS — BATCH 1 ONLY`
+- **Exact Next Action:** Terra Medium performs Batch 1 closeout: clean-build stale-output guard, true nested-list renderer semantics, then canonical Chapter 5 source-map preparation.

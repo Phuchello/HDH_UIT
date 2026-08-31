@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -19,6 +20,26 @@ CH4 = ROOT / "content/theory/ch04-scheduling.md"
 CH2_BANK = ROOT / "content/questions/subjective/ch02.md"
 CH4_BANK = ROOT / "content/questions/subjective/ch04.md"
 MIDTERM = ROOT / "content/reviews/midterm.md"
+MIDTERM_MAPPING = ROOT / "research/data/midterm_answer_mapping.yaml"
+
+
+def parse_answer_mapping(path: Path) -> list[dict[str, str]]:
+    """Parse the deliberately flat one-line mapping records without PyYAML."""
+    records = []
+    pattern = re.compile(
+        r'question_id:\s*"([^"]+)".*?source_locator:\s*"([^"]+)".*?'
+        r'canonical_answer_destination:\s*"([^"]+)".*?answer_status:\s*"([^"]+)"'
+    )
+    for line in path.read_text(encoding="utf-8").splitlines() if path.exists() else []:
+        match = pattern.search(line)
+        if match:
+            records.append({
+                "question_id": match.group(1),
+                "source_locator": match.group(2),
+                "canonical_answer_destination": match.group(3),
+                "answer_status": match.group(4),
+            })
+    return records
 
 
 def main() -> int:
@@ -114,6 +135,36 @@ def main() -> int:
     qbank = [q for q in questions if str(q.get("source_id", "")).startswith("UIT-QBANK-")]
     expect(len(qbank) == 60, f"dedicated qbank record count is {len(qbank)}, expected 60")
     expect(len([q for q in qbank if q.get("source_id") in {"UIT-QBANK-CH01-2024", "UIT-QBANK-CH02-2024", "UIT-QBANK-CH03-2024", "UIT-QBANK-CH04-2024"}]) == 31, "Batch 1 qbank count is not 31")
+
+    # Every Midterm occurrence has an explicit, auditable answer destination.
+    answer_mapping = parse_answer_mapping(MIDTERM_MAPPING)
+    expect(len(answer_mapping) == 35, f"Midterm answer mapping has {len(answer_mapping)} records, expected 35")
+    expect(sum(1 for row in answer_mapping if row["question_id"].startswith("MIDTERM-REVIEW-REF-")) == 2, "Midterm answer mapping must preserve exactly two external references")
+    expect(sum(1 for row in answer_mapping if not row["question_id"].startswith("MIDTERM-REVIEW-REF-")) == 33, "Midterm answer mapping must contain exactly 33 concrete occurrences")
+    expected_statuses = {"ANSWER_VERIFIED", "PARTIAL", "MISSING"}
+    manifest_by_id = {str(q.get("question_id")): q for q in midterm_questions}
+    for row in answer_mapping:
+        expect(row["answer_status"] in expected_statuses, f"invalid answer status for {row['question_id']}")
+        manifest = manifest_by_id.get(row["question_id"])
+        expect(manifest is not None, f"answer mapping question is not in manifest: {row['question_id']}")
+        if manifest is not None:
+            expect(row["source_locator"] == manifest.get("source_locator"), f"source locator mismatch for {row['question_id']}")
+        destination = row["canonical_answer_destination"]
+        if destination == "REFERENCE_TO_EXTERNAL_EXERCISE_SET":
+            expect(row["question_id"].startswith("MIDTERM-REVIEW-REF-"), f"non-reference mapped to external set: {row['question_id']}")
+            continue
+        file_part, _, anchor = destination.partition("#")
+        target = ROOT / file_part
+        expect(target.exists(), f"answer destination file missing for {row['question_id']}: {file_part}")
+        if target.exists() and anchor:
+            target_text = target.read_text(encoding="utf-8")
+            heading_slugs = {
+                re.sub(r"[^a-zA-Z0-9_-]+", "-", unicodedata.normalize("NFKD", heading).encode("ascii", "ignore").decode("ascii").lower()).strip("-")
+                for heading in re.findall(r"^#{1,6}\s+(.+?)\s*#*$", target_text, flags=re.MULTILINE)
+            }
+            expect(anchor in heading_slugs, f"answer destination anchor missing for {row['question_id']}: {destination}")
+    concrete_mapping = [row for row in answer_mapping if not row["question_id"].startswith("MIDTERM-REVIEW-REF-")]
+    expect(not any(row["answer_status"] != "ANSWER_VERIFIED" for row in concrete_mapping), "Midterm concrete answer coverage contains PARTIAL or MISSING records")
 
     if failures:
         print("BATCH 1 CANONICAL SOURCE VALIDATION: FAIL")

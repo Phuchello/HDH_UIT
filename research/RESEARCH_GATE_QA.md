@@ -15,10 +15,10 @@ All totals below are computed from registry records, expanded slide-page records
 | Content / non-content pages | 665 / 54 | sum equals physical total | **PASS** |
 | Coverage gaps / duplicates / schema errors | 0 / 0 / 0 | zero | **PASS** |
 | Unmapped content pages | 0 | zero | **PASS** |
-| Drafted content pages | 307 | informational current authored set | **INFO** |
+| Drafted content pages | 0 | informational current authored set | **INFO** |
 | Official question records | 95 | count of structured records | **PASS** |
 | Mapped / unmapped questions | 95 / 0 | zero unmapped; required fields | **PASS** |
-| Drafted questions | 66 | informational current authored set | **INFO** |
+| Drafted questions | 0 | informational current authored set | **INFO** |
 | Exam evidence records | 20 | valid record schema | **PASS** |
 | Public hygiene | — | no forbidden paths | **PASS** |
 | Canonical content validation | — | schema/rubric/wikilink checks | **PASS** |

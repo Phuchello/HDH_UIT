@@ -10,5 +10,34 @@
     "waiting_average": 3.0,
     "turnaround_average": 7.0,
     "gantt": ["P1 0–2", "P2 2–4", "P3 4–5", "P2 5–7", "P4 7–11", "P1 11–16"]
+  },
+  "fcfs_example": {
+    "processes": {
+      "P1": {"arrival": 0, "burst": 5, "completion": 5, "waiting": 0, "turnaround": 5},
+      "P2": {"arrival": 1, "burst": 2, "completion": 7, "waiting": 4, "turnaround": 6},
+      "P3": {"arrival": 2, "burst": 1, "completion": 8, "waiting": 5, "turnaround": 6}
+    },
+    "gantt": ["P1 0–5", "P2 5–7", "P3 7–8"]
+  },
+  "sjf_example": {
+    "processes": {
+      "P1": {"arrival": 0, "burst": 7, "completion": 7, "waiting": 0, "turnaround": 7},
+      "P2": {"arrival": 2, "burst": 4, "completion": 12, "waiting": 6, "turnaround": 10},
+      "P3": {"arrival": 4, "burst": 1, "completion": 8, "waiting": 3, "turnaround": 4}
+    },
+    "gantt": ["P1 chạy 0–7", "P3 7–8", "P2 8–12"]
+  },
+  "rr_example": {
+    "quantum": 2,
+    "processes": {
+      "P1": {"arrival": 0, "burst": 5, "completion": 9, "waiting": 4, "turnaround": 9, "response": 0},
+      "P2": {"arrival": 0, "burst": 3, "completion": 8, "waiting": 5, "turnaround": 8, "response": 2},
+      "P3": {"arrival": 0, "burst": 1, "completion": 5, "waiting": 4, "turnaround": 5, "response": 4}
+    },
+    "gantt": ["P1 0–2", "P2 2–4", "P3 4–5", "P1 5–7", "P2 7–8", "P1 8–9"]
+  },
+  "hrrn_example": {
+    "ratios": {"A": 2.0, "B": 1.5},
+    "selected": "A"
   }
 }

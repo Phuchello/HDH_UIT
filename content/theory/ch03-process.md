@@ -103,7 +103,7 @@ Dispatcher trao CPU cho process đã chọn: context switch, đổi mode/address
 
 ## 4. Tạo lập process: fork, exec, wait, exit
 
-`fork()` (POSIX) tạo process con gần như bản sao: trả 0 ở con, PID con ở cha, -1 khi lỗi. Cơ chế copy-on-write giúp tránh sao chép ngay toàn bộ page. `exec*()` thay image hiện tại bằng chương trình mới; PID thường giữ nguyên nhưng text/data/stack được nạp lại. `wait()`/`waitpid()` thu hồi trạng thái con và đồng bộ; `exit()` kết thúc process và gửi trạng thái cho cha.
+`fork()` (POSIX) tạo process con gần như bản sao: trả 0 ở con, PID con ở cha, -1 khi lỗi. Cơ chế copy-on-write giúp tránh sao chép ngay toàn bộ page. `exec*()` thay image hiện tại bằng chương trình mới trong **chính process đó**; khi thành công nó không tạo PID mới và PID của process được giữ nguyên, còn text/data/stack được nạp lại. `wait()`/`waitpid()` thu hồi trạng thái con và đồng bộ; `exit()` kết thúc process và gửi trạng thái cho cha.
 
 ### Cây process và ví dụ có thứ tự
 

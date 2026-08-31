@@ -1,0 +1,40 @@
+# Canonical answer coverage for each concrete Midterm Review occurrence.
+# Slides 12 and 16 remain references to an external exercise set, not invented prompts.
+source_id: "UIT-SLIDE-MIDTERM-REVIEW-2024"
+answer_status_vocabulary: ["ANSWER_VERIFIED", "PARTIAL", "MISSING"]
+questions:
+  - {question_id: "MIDTERM-REVIEW-01", source_locator: "Slide 5 / bullet 1", canonical_answer_destination: "content/theory/ch01-overview.md#1-he-ieu-hanh-la-gi", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-02", source_locator: "Slide 5 / bullet 2", canonical_answer_destination: "content/theory/ch01-overview.md#1-he-ieu-hanh-la-gi", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-03", source_locator: "Slide 5 / bullet 3", canonical_answer_destination: "content/theory/ch02-structure.md#4-system-programs-mot-lop-thuc-su-cua-he-thong", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-04", source_locator: "Slide 5 / bullet 4", canonical_answer_destination: "content/theory/ch01-overview.md#2-bootstrap-va-hoat-ong-theo-ngat", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-05", source_locator: "Slide 5 / bullet 5", canonical_answer_destination: "content/theory/ch01-overview.md#3-storage-hierarchy-va-caching", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-06", source_locator: "Slide 5 / bullet 6", canonical_answer_destination: "content/theory/ch01-overview.md#4-cpu-processor-core-va-he-a-xu-ly", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-07", source_locator: "Slide 5 / bullet 7", canonical_answer_destination: "content/theory/ch01-overview.md#5-dual-mode-lenh-ac-quyen-va-timer", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-08", source_locator: "Slide 5 / bullet 8", canonical_answer_destination: "content/theory/ch01-overview.md#5-dual-mode-lenh-ac-quyen-va-timer", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-09", source_locator: "Slide 5 / bullet 9", canonical_answer_destination: "content/theory/ch01-overview.md#6-cac-moi-truong-tinh-toan", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-10", source_locator: "Slide 7 / bullet 1", canonical_answer_destination: "content/theory/ch02-structure.md#5-cau-truc-thiet-ke-os", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-11", source_locator: "Slide 7 / bullet 2", canonical_answer_destination: "content/theory/ch02-structure.md#4-system-programs-mot-lop-thuc-su-cua-he-thong", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-12", source_locator: "Slide 7 / bullet 3", canonical_answer_destination: "content/theory/ch02-structure.md#2-dich-vu-os", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-13", source_locator: "Slide 7 / bullet 4", canonical_answer_destination: "content/theory/ch02-structure.md#3-system-call-api-va-truyen-tham-so", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-14", source_locator: "Slide 7 / bullet 5", canonical_answer_destination: "content/theory/ch02-structure.md#1-cac-thanh-phan-cua-os", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-15", source_locator: "Slide 9 / bullet 1", canonical_answer_destination: "content/theory/ch03-process.md#1-process-va-bo-cuc-khong-gian-nho", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-16", source_locator: "Slide 9 / bullet 2", canonical_answer_destination: "content/theory/ch03-process.md#2-trang-thai-hang-oi-va-pcb", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-17", source_locator: "Slide 9 / bullet 3", canonical_answer_destination: "content/theory/ch03-process.md#3-scheduler-va-context-switch", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-18", source_locator: "Slide 9 / bullet 4", canonical_answer_destination: "content/theory/ch03-process.md#5-ipc", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-19", source_locator: "Slide 9 / bullet 5", canonical_answer_destination: "content/theory/ch03-process.md#4-tao-lap-process-fork-exec-wait-exit", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-20", source_locator: "Slide 9 / bullet 6", canonical_answer_destination: "content/theory/ch03-process.md#6-threads", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-21", source_locator: "Slide 10 / compound exercise", canonical_answer_destination: "content/theory/ch03-process.md#2-trang-thai-hang-oi-va-pcb", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-22", source_locator: "Slide 11 / compound exercise", canonical_answer_destination: "content/theory/ch03-process.md#4-tao-lap-process-fork-exec-wait-exit", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-23", source_locator: "Slide 14 / bullet 1", canonical_answer_destination: "content/theory/ch04-scheduling.md#1-vi-sao-can-inh-thoi", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-24", source_locator: "Slide 14 / bullet 2", canonical_answer_destination: "content/theory/ch04-scheduling.md#1-vi-sao-can-inh-thoi", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-25", source_locator: "Slide 14 / bullet 3", canonical_answer_destination: "content/theory/ch04-scheduling.md#1-vi-sao-can-inh-thoi", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-26", source_locator: "Slide 14 / bullet 4", canonical_answer_destination: "content/theory/ch04-scheduling.md#1-vi-sao-can-inh-thoi", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-27", source_locator: "Slide 14 / bullet 5", canonical_answer_destination: "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-28", source_locator: "Slide 14 / bullet 6", canonical_answer_destination: "content/theory/ch04-scheduling.md#2-cac-thuat-toan-co-ban", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-29", source_locator: "Slide 14 / bullet 7", canonical_answer_destination: "content/theory/ch04-scheduling.md#4-thread-a-xu-ly-va-load-balancing", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-30", source_locator: "Slide 14 / bullet 8", canonical_answer_destination: "content/theory/ch04-scheduling.md#5-real-time-scheduling", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-31", source_locator: "Slide 14 / bullet 9", canonical_answer_destination: "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-oc-ung-muc-nguon", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-32", source_locator: "Slide 14 / bullet 10", canonical_answer_destination: "content/theory/ch04-scheduling.md#6-scheduler-thuc-te-oc-ung-muc-nguon", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-33", source_locator: "Slide 15 / compound scheduling exercise", canonical_answer_destination: "content/reviews/midterm.md#e-cpu-scheduling-practice", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-REF-12", source_locator: "Slide 12 / reference to remaining exercise set", canonical_answer_destination: "REFERENCE_TO_EXTERNAL_EXERCISE_SET", answer_status: "ANSWER_VERIFIED"}
+  - {question_id: "MIDTERM-REVIEW-REF-16", source_locator: "Slide 16 / reference to remaining exercise set", canonical_answer_destination: "REFERENCE_TO_EXTERNAL_EXERCISE_SET", answer_status: "ANSWER_VERIFIED"}
