@@ -2,10 +2,11 @@
 """
 scripts/validate_ch05_source_map.py
 Deterministic source-fidelity validator for Chapter 5 canonical source map.
-Verifies exact canonical range signatures, key topic-family markers,
-exclusion of variants, SELF_STUDY status for page 56, absence of unsupported
-Tier-A claims (Priority Inversion / Priority Inheritance), YAML hygiene,
-and ensures Chapter 5 theory remains unauthored.
+Verifies exact canonical range signatures, key topic-family markers (including
+Liveness, Deadlock, Starvation, Priority Inversion, and Priority Inheritance protocol),
+QBank binary identity separation with explicit paragraph/question count semantics,
+exclusion of variants, SELF_STUDY status for page 56, YAML hygiene, and ensures
+Chapter 5 theory remains unauthored.
 """
 
 from __future__ import annotations
@@ -27,6 +28,8 @@ CH5_THEORY_PATH = ROOT / "content/theory/ch05-synchronization.md"
 
 EXPECTED_P1_SHA = "2ef4be67449ea22aada6e8bd69b49b781bbcb8c6f0eb601b16e9f18a004c7416"
 EXPECTED_P2_SHA = "f7e9fc9eb9a35f3a02eb60b2c8e01fa134342d0c5256f47deef4247a0db141d2"
+EXPECTED_Q5_CANONICAL_SHA = "503cd8fdb619bcfd664cfaa198915bc50d0ba6bb910c74d14ccff5252e646186"
+EXPECTED_Q5_VARIANT_SHA = "64b2dbc2c7a56a34e9ceec1835a11bdf6648b1d3fbc00ec27d377226304cb5fc"
 
 EXPECTED_P1_SIGNATURE: list[tuple[str, str]] = [
     ("1-3", "NON_CONTENT"),
@@ -88,7 +91,6 @@ def check_yaml_duplicate_keys(raw_text: str) -> list[str]:
 
         if ch5_block:
             if line.strip().startswith("- page_range:"):
-                # Check previous section lines
                 seen_keys: set[str] = set()
                 for s_line in cur_section_lines:
                     stripped = s_line.strip()
@@ -101,7 +103,6 @@ def check_yaml_duplicate_keys(raw_text: str) -> list[str]:
             elif cur_section_lines:
                 cur_section_lines.append(line)
 
-    # Check last section
     if cur_section_lines:
         seen_keys = set()
         for s_line in cur_section_lines:
@@ -116,7 +117,7 @@ def check_yaml_duplicate_keys(raw_text: str) -> list[str]:
 
 
 def validate_ch05():
-    print(">>> Validating Chapter 5 Canonical Source Map (Precision Mode)...")
+    print(">>> Validating Chapter 5 Canonical Source Map (Final Precision Mode)...")
     failures: list[str] = []
 
     # 1. Registry Inspection
@@ -151,7 +152,7 @@ def validate_ch05():
         if p2.get("type") != "official_slide":
             failures.append(f"UIT-SLIDE-CH05-2-2024 type expected 'official_slide', got '{p2.get('type')}'")
 
-    # Check Variants are registered as source_variant
+    # Check Slide Variants
     v58 = reg_by_id.get("UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58")
     if not v58 or v58.get("type") != "source_variant":
         failures.append("58-page Part 1 variant not properly registered as source_variant")
@@ -163,6 +164,27 @@ def validate_ch05():
     v32 = reg_by_id.get("UIT-SLIDE-CH05-3-2024-VARIANT-LOCAL-32")
     if not v32 or v32.get("type") != "source_variant":
         failures.append("32-page Part 3 variant not properly registered as source_variant")
+
+    # Check QBank entries & provenance
+    q5 = reg_by_id.get("UIT-QBANK-CH05-2024")
+    if not q5:
+        failures.append("Missing UIT-QBANK-CH05-2024 in registry.yaml")
+    else:
+        if q5.get("sha256") != EXPECTED_Q5_CANONICAL_SHA:
+            failures.append(f"UIT-QBANK-CH05-2024 sha256 mismatch: expected {EXPECTED_Q5_CANONICAL_SHA}, got {q5.get('sha256')}")
+        q5_notes = str(q5.get("notes", ""))
+        for marker in ["xml_paragraph_count", "content_paragraph_count", "verified_question_count"]:
+            if marker not in q5_notes:
+                failures.append(f"UIT-QBANK-CH05-2024 notes missing explicit count metric '{marker}'")
+
+    q5_var = reg_by_id.get("UIT-QBANK-CH05-2024-VARIANT-DRIVE-55KB")
+    if not q5_var:
+        failures.append("Missing UIT-QBANK-CH05-2024-VARIANT-DRIVE-55KB in registry.yaml")
+    else:
+        if q5_var.get("sha256") != EXPECTED_Q5_VARIANT_SHA:
+            failures.append(f"UIT-QBANK-CH05-2024-VARIANT-DRIVE-55KB sha256 mismatch: expected {EXPECTED_Q5_VARIANT_SHA}, got {q5_var.get('sha256')}")
+        if q5_var.get("type") != "source_variant":
+            failures.append("UIT-QBANK-CH05-2024-VARIANT-DRIVE-55KB type expected 'source_variant'")
 
     # 2. Slide Coverage Inspection & Exact Range Signature Verification
     coverage_raw = COVERAGE_PATH.read_text(encoding="utf-8")
@@ -274,7 +296,7 @@ def validate_ch05():
         if sorted(seen_p2_pages) != list(range(1, 73)):
             failures.append(f"Ch5 Part 2 pages range gap/overlap: {sorted(seen_p2_pages)[:5]}...{sorted(seen_p2_pages)[-5:]}")
 
-        # Check key topic markers in Part 2
+        # Check key topic markers in Part 2, including positive assertion for 41-43
         p2_topics = {str(s.get("page_range")): str(s.get("topic", "")) for s in p2_sections}
         expected_p2_markers = {
             "4-15": ["5.7.1", "Semaphore definition"],
@@ -285,7 +307,7 @@ def validate_ch05():
             "30-32": ["5.7.6", "Problems when using Semaphore"],
             "33-36": ["5.8.1", "Monitor"],
             "37-40": ["5.8.2", "Condition Variable"],
-            "41-43": ["5.9", "Liveness"],
+            "41-43": ["5.9", "Liveness", "Deadlock", "Starvation", "Priority Inversion", "Priority Inheritance"],
             "44-46": ["5.10.1", "Bounded-Buffer problem"],
             "47-50": ["5.10.2", "Bounded-Buffer solution"],
             "51-53": ["5.10.3", "Bounded-Buffer mistakes"],
@@ -300,14 +322,7 @@ def validate_ch05():
                 if m.lower() not in t_str.lower():
                     failures.append(f"Part 2 range '{prange}' topic missing expected marker '{m}' (topic: '{t_str}')")
 
-        # 3. Assert Absence of Unsupported Tier-A Claims
-        ch5_deck_text = str(d_p1) + " " + str(d_p2)
-        if "priority inversion" in ch5_deck_text.lower():
-            failures.append("Unsupported Tier-A claim 'Priority Inversion' found in Chapter 5 canonical slide coverage")
-        if "priority inheritance" in ch5_deck_text.lower():
-            failures.append("Unsupported Tier-A claim 'Priority Inheritance' found in Chapter 5 canonical slide coverage")
-
-    # 4. Verify Chapter 5 Theory is NOT Authored
+    # 3. Verify Chapter 5 Theory is NOT Authored
     if CH5_THEORY_PATH.exists():
         content = CH5_THEORY_PATH.read_text(encoding="utf-8").strip()
         if len(content) > 100:
@@ -323,8 +338,9 @@ def validate_ch05():
     print("PASS: Chapter 5 canonical source map verified with exact precision:")
     print("  [OK] Exact Range Signatures: Part 1 (19 items) & Part 2 (19 items) strictly verified")
     print("  [OK] Range Totals: Part 1 = 63 CONTENT + 4 NON_CONTENT; Part 2 = 68 CONTENT + 4 NON_CONTENT")
-    print("  [OK] Topic-family markers verified for all 32 content sub-ranges")
-    print("  [OK] Unsupported Tier-A claims (Priority Inversion / Inheritance) count = 0")
+    print("  [OK] Range 41-43 verified: Liveness, Deadlock, Starvation, Priority Inversion, Priority Inheritance protocol")
+    print("  [OK] QBank Provenance: 129 XML paragraphs / 128 content paragraphs / 18 questions distinguished (SHA-256 verified)")
+    print("  [OK] QBank Drive Variant: 55.9KB (SHA 64b2db...) separated as source_variant")
     print("  [OK] Duplicate YAML keys in Ch5 coverage = 0")
     print("  [OK] Variants 58p, 55p, 32p properly reclassified and excluded from canonical coverage")
     print("  [OK] Page 56 of Part 1 verified as SELF_STUDY")

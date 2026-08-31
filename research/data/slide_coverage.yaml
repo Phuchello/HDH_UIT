@@ -698,7 +698,7 @@ decks:
       - page_range: "41-43"
         page_count: 3
         classification: "CONTENT"
-        topic: "5.9 Liveness (Liveness definition, indefinite waiting, Progress, Bounded Waiting, Deadlock definition/example)"
+        topic: "5.9 Liveness (Liveness definition, indefinite waiting, Progress, Bounded Waiting, Deadlock, Starvation, Priority Inversion, Priority Inheritance protocol)"
         mapping_status: "MAPPED"
         v2_destination: "content/theory/ch05-synchronization.md#8-liveness-va-deadlock"
         content_status: "NOT_WRITTEN"

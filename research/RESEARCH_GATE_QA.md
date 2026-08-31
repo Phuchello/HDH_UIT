@@ -8,7 +8,7 @@ All totals below are computed from registry records, expanded slide-page records
 
 | Metric | Actual | Requirement | Result |
 |---|---:|---|:---:|
-| Registered sources | 66 | unique IDs and required schema | **PASS** |
+| Registered sources | 67 | unique IDs and required schema | **PASS** |
 | Tier-A local files / hash checks | 0 / 0 | REPO_ONLY is informational; LOCAL requires all hashes | **PASS** |
 | Physical slide pages | 713 | sum of referenced deck registry page/slide counts | **PASS** |
 | Expanded coverage records | 713 | exactly physical-page total | **PASS** |

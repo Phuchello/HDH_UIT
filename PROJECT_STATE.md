@@ -6,9 +6,9 @@
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `COMPLETE — PENDING INDEPENDENT CHECK`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `NOT_STARTED`  
 **Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — canonical attachment evidence, precision range signatures, and verified page/slide maps are recorded with explicit source statuses; local variants remain separate.  
-**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 CLOSED, CH5 PRECISE SOURCE-MAP VERIFIED`  
+**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 ONLY`  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 PRECISION GATED & TESTED`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Independent review of the precise canonical Chapter 5 source map.  
+**Hành động tiếp theo chính xác (Exact Next Action):** Independent final review of Chapter 5 canonical source map.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-08-31
 
