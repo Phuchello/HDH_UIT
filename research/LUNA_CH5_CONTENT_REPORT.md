@@ -3,11 +3,11 @@
 **Thời gian lập:** 2026-08-31  
 **Người thực hiện:** Senior Operating Systems Author + Source-Faithful Question Author (Codex Luna Ultra)  
 **Nhánh Git:** `v2/complete-theory-labs`  
-**Giai đoạn:** `V2_BATCH2_CH5_ENGINEERING_QA`  
+**Giai đoạn:** `V2_BATCH2_CH5_LOCKED_READY_FOR_CH6_SOURCE_MAPPING`  
 **Trạng thái Lập bản đồ nguồn:** `VERIFIED — INDEPENDENT CHECK PASS`  
-**Trạng thái Soạn thảo Chương 5:** `CONTENT_DRAFTED`  
-**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 ONLY; CH5 DRAFT — NOT YET VERIFIED`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Luna Ultra tiến hành thẩm định học thuật độc lập cho Chương 5 sau khi engineering/build QA hoàn tất.  
+**Trạng thái Soạn thảo Chương 5:** `CONTENT_VERIFIED`  
+**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5`  
+**Hành động tiếp theo chính xác (Exact Next Action):** Luna Ultra performs the canonical Chapter 6 source-map audit before any Chapter 6 authoring.  
 
 ---
 
@@ -60,7 +60,9 @@ Các tệp nội dung đã tạo lập:
 - **Trạng thái tệp nhị phân chính thức:**
   - Tệp gốc: `Bai tap chuong 5 HDH.docx` (Bản đính kèm chính thức từ người dùng).
   - Kích thước: **56,369 bytes** | SHA-256: `503cd8fdb619bcfd664cfaa198915bc50d0ba6bb910c74d14ccff5252e646186`.
-  - Khả dụng trực tiếp trên đĩa: **YES** (Đã kiểm tra mã băm khớp 100%).
+  - Khả dụng trực tiếp trên đĩa trong workspace hiện tại: **NO**. Hash và
+    provenance đã được xác minh ở source-map pass trước; bản review hiện tại
+    không tuyên bố tái kiểm tra byte-level với tệp nhị phân đã vắng mặt.
 - **Thống kê định lượng:**
   - `xml_paragraph_count`: 129 đoạn.
   - `content_paragraph_count`: 128 đoạn.
@@ -98,13 +100,13 @@ Các tệp nội dung đã tạo lập:
 - **OPEN CONTENT BLOCKERS:** **`0`**
 - **OPEN CONTENT MAJORS:** **`0`**
 - **OPEN CONTENT MINORS:** **`0`**
-- **SẴN SÀNG SOẠN THẢO CHƯƠNG 6:** **`NO`** *(Cần hoàn tất toàn bộ quy trình kiểm toán học thuật và QA kỹ thuật cho Chương 5 trước)*.
+- **SẴN SÀNG SOẠN THẢO CHƯƠNG 6:** **`NO`** *(Chỉ sẵn sàng cho bước source-map audit; chưa bắt đầu authoring Chương 6.)*.
 
 ---
 
 ## POST-DRAFT INDEPENDENT FIDELITY CORRECTION
 
-This correction pass addresses source-fidelity and standards wording findings discovered after the Chapter 5 draft gate. It does not mark Chapter 5 academically verified.
+This correction pass addressed source-fidelity and standards wording findings discovered after the Chapter 5 draft gate. The independent academic review and final validation are recorded in `research/LUNA_CH5_ACADEMIC_REVIEW.md`.
 
 - **CH5-PROV-001:** Canonical Part 2 references now use `UIT-SLIDE-CH05-2-2024`; the legacy Part 2 identity is absent repository-wide. QBank identity remains `UIT-QBANK-CH05-2024` with SHA-256 `503cd8fdb619bcfd664cfaa198915bc50d0ba6bb910c74d14ccff5252e646186` and 18 drafted units.
 - **CH5-TECH-001:** The source-model semaphore invariant is stated explicitly (`S->value >= 0` counts waits that can proceed; negative values represent `|S->value|` waiters). POSIX/Linux behavior is separately labeled as a Tier-B technical note.

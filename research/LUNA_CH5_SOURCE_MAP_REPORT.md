@@ -87,18 +87,20 @@ Trong quá trình đối soát độc lập, hai điểm cần hiệu chỉnh ng
   - `content_paragraph_count`: **128** (Số đoạn XML chứa nội dung câu hỏi/bài tập).
   - `verified_question_count`: **18** (Số lượng bài tập / câu hỏi hoàn chỉnh độc lập).
 - **Cấu trúc 18 mục câu hỏi được xác minh:**
-  - **9 câu hỏi lý thuyết ngắn** (Đoạn XML 3–11): Khái niệm tranh chấp, Miền găng, 3 yêu cầu giải pháp, Giải pháp ngắt, Giải pháp phần cứng, Mutex lock, Semaphore, Monitor, Đặc điểm bài toán kinh điển.
+  - **9 câu hỏi lý thuyết ngắn** (Đoạn XML 3–11): Khái niệm tranh chấp, Miền găng, 3 yêu cầu giải pháp, phân loại giải pháp đồng bộ, đặc điểm các loại giải pháp, phân tích busy waiting (phần cứng/phần mềm), Semaphore, Monitor/Critical Region, và các bài toán đồng bộ kinh điển.
   - **9 bài tập cấu trúc đồng bộ** (Đoạn XML 12–129):
     1. *Bài tập 1 (Đoạn 12–35):* Giải thuật Dekker & chứng minh 3 yêu cầu.
     2. *Bài tập 2 (Đoạn 36–46):* Biến thể giải thuật Peterson (turn & flag).
     3. *Bài tập 3 (Đoạn 47–56):* Chỉ thị hoán đổi nguyên tử Swap.
-    4. *Bài tập 4 (Đoạn 57–62):* Đồng bộ 2 tiến trình A & B với counting semaphore ($n_b < n_a \le n_b + 3$).
+    4. *Bài tập 4 (Đoạn 57–62):* Đồng bộ 2 tiến trình A & B với counting semaphore ($n_b \le n_a \le n_b + 10$).
     5. *Bài tập 5 (Đoạn 63–107):* Đồ thị phụ thuộc 4 tiểu trình $T_1, T_2, T_3, T_4$ và nghiệm semaphore.
     6. *Bài tập 6 (Đoạn 108–113):* Biến chia sẻ $X$ tăng đến 20 và hiện tượng race condition.
     7. *Bài tập 7 (Đoạn 114–117):* Rào chắn đồng bộ Barrier cho $P_1 \{A_1; A_2\}$ và $P_2 \{B_1; B_2\}$.
     8. *Bài tập 8 (Đoạn 118–121):* Tổng quát hóa Barrier cho vòng lặp 100 bước.
     9. *Bài tập 9 (Đoạn 122–129):* Cây biểu thức số học song hành và lập lịch semaphore.
-- **Trạng thái nội dung:** Câu hỏi được đối soát cấu trúc; **chưa soạn thảo đáp án** trong giai đoạn này.
+- **Trạng thái nội dung tại source-map pass:** Câu hỏi được đối soát cấu trúc;
+  phần đáp án hiện được khóa và thẩm định tại
+  [`content/questions/subjective/ch05.md`](../content/questions/subjective/ch05.md).
 
 ---
 

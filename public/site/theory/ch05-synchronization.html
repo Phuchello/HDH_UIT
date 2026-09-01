@@ -56,7 +56,7 @@
     count--;
 }</code></pre></li></ul>
 
-<p>Ở mức ngôn ngữ bậc cao, thao tác <code>count++</code> và <code>count--</code> có vẻ là một thao tác đơn lẻ. Tuy nhiên, ở mức hợp ngữ/mã máy, mỗi lệnh được biên dịch thành 3 thao tác phần cứng tách biệt:</p>
+<p>Ở mức ngôn ngữ bậc cao, thao tác <code>count++</code> và <code>count--</code> có vẻ là một thao tác đơn lẻ. Để minh họa race condition, giáo trình mô hình hóa chúng như một chuỗi đọc–sửa–ghi gồm ba bước (Load → Modify → Store). Đây là mô hình giải thích; compiler và ISA thực tế có thể sinh ra số lệnh khác, nên không được mặc định rằng <code>++</code> luôn là một machine instruction hoặc luôn đúng ba bước:</p>
 
 <p>$$\text{Producer: } \begin{cases} \text{register}_1 = \text{count} &amp; \text{(1. Nạp từ RAM vào thanh ghi)} \\ \text{register}_1 = \text{register}_1 + 1 &amp; \text{(2. Tăng giá trị thanh ghi)} \\ \text{count} = \text{register}_1 &amp; \text{(3. Ghi lại vào RAM)} \end{cases}$$</p>
 
@@ -80,7 +80,7 @@
 
 <blockquote><strong>Định nghĩa chuẩn (<code>UIT-SLIDE-CH05-1-2024</code>, Slide 14–16):</strong><br><strong>Tình trạng tranh chấp (Race Condition)</strong> là tình huống mà nhiều tiến trình/tiểu trình cùng truy xuất và thao tác đồng thời trên dữ liệu chia sẻ, trong đó kết quả cuối cùng của việc thực thi phụ thuộc vào <strong>thứ tự truy xuất và đan xen lệnh cụ thể</strong> của các tiến trình.</blockquote>
 
-<p>Để ngăn chặn Race Condition, hệ điều hành bắt buộc phải đảm bảo tại một thời điểm, <strong>chỉ có duy nhất một tiến trình</strong> được phép thao tác trên phần dữ liệu chia sẻ đó. Cơ chế này được gọi là <strong>đồng bộ hóa tiến trình (Process Synchronization)</strong>.</p>
+<p>Để ngăn chặn Race Condition, hệ điều hành phải áp dụng cơ chế đồng bộ phù hợp với thao tác đang tranh chấp: thường là bảo vệ miền găng để chỉ một tiến trình cập nhật dữ liệu tại một thời điểm, hoặc dùng một phép toán nguyên tử đã được định nghĩa rõ. Dữ liệu chỉ đọc không cần bị khóa theo cách này. Các cơ chế đó được gọi chung là <strong>đồng bộ hóa tiến trình (Process Synchronization)</strong>.</p>
 
 <hr>
 
@@ -183,7 +183,7 @@ boolean flag[2] = {false, false};</code></pre></li><li><strong>Cấu trúc tiế
 
 <p><em>(Nguồn: Slide 47–51)</em></p>
 
-<blockquote><strong>TIER-B TECHNICAL NOTE — modern architecture/compiler:</strong><br><br><strong>Đánh giá bản chất kỹ thuật:</strong><br>Về mặt toán học và lý thuyết, giải thuật Peterson <strong>hoàn toàn đúng đắn</strong> dưới giả định mô hình bộ nhớ tuần tự nhất quán (Sequential Consistency). Tuy nhiên, trên các bộ xử lý hiện đại (x86, ARM, RISC-V) và trình biên dịch tối ưu:<br>- <strong>Memory Reordering:</strong> Trình biên dịch và CPU Out-of-Order có thể hoán đổi thứ tự thực thi của hai lệnh không phụ thuộc dữ liệu: <code>flag[i] = true;</code> và <code>turn = j;</code> có thể bị ghi vào Store Buffer theo thứ tự ngược lại hoặc bị trì hoãn hiển thị sang lõi CPU khác.<br>- Hậu quả: Hai lõi CPU có thể cùng đọc thấy <code>flag</code> của đối phương là <code>false</code> trước khi lệnh ghi <code>true</code> kịp lan truyền, dẫn đến vi phạm Mutual Exclusion. Do đó, việc triển khai trên phần cứng thực tế bắt buộc phải sử dụng <strong>Memory Barrier</strong>.</blockquote>
+<blockquote><strong>TIER-B TECHNICAL NOTE — modern architecture/compiler:</strong><br><br><strong>Đánh giá bản chất kỹ thuật:</strong><br>Về mặt toán học và lý thuyết, giải thuật Peterson <strong>đúng đắn</strong> dưới giả định mô hình bộ nhớ tuần tự nhất quán (Sequential Consistency). Tuy nhiên, trên các bộ xử lý hiện đại (x86, ARM, RISC-V) và trình biên dịch tối ưu, các phép ghi/đọc có thể bị sắp xếp lại hoặc chưa hiển thị theo thứ tự mong muốn giữa các lõi (ví dụ qua store buffer hoặc cache-coherence protocol).<br><br>Trên C/C++ thực tế, không được dùng các biến thường cho <code>flag</code>/<code>turn</code>: đó có thể là data race và dẫn tới undefined behavior. Cần dùng biến atomic hoặc primitive khóa với memory order phù hợp. Một memory fence có thể là một thành phần của thiết kế, nhưng lời gọi <code>memory_barrier()</code> chung không tự biến chương trình thành lời giải portable/correct.</blockquote>
 
 <hr>
 
@@ -193,7 +193,7 @@ boolean flag[2] = {false, false};</code></pre></li><li><strong>Cấu trúc tiế
 
 <h3 id="4-1-rao-chan-bo-nho-memory-barrier">4.1 Rào chắn Bộ nhớ (Memory Barrier)</h3>
 
-<p><strong>Memory Barrier (hoặc Memory Fence)</strong> là chỉ thị phần cứng buộc CPU và trình biên dịch phải hoàn tất mọi thao tác đọc/ghi trước rào chắn trước khi thực thi bất kỳ thao tác đọc/ghi nào sau rào chắn:</p>
+<p><strong>Memory Barrier (hoặc Memory Fence)</strong> là phép toán ordering trong mô hình bộ nhớ, dùng để hạn chế việc sắp xếp lại và quy định quan hệ quan sát của các phép đọc/ghi trước và sau rào chắn. Hiệu lực cụ thể phụ thuộc vào ngôn ngữ, compiler, ISA và memory order; mã giả dưới đây chỉ minh họa ý tưởng của slide, không phải API portable hoàn chỉnh:</p>
 
 <pre><code class="language-c">// Tiến trình 1 (Core 1)
 flag[0] = true;
@@ -396,6 +396,8 @@ S2;</code></pre></li></ul>
 
 <ul><li>Khai báo: <code>condition x, y;</code></li><li>Hai thao tác cơ bản:<ol><li><code>x.wait()</code>: Tiến trình gọi lệnh này sẽ bị tạm dừng và đưa vào hàng đợi của biến điều kiện $x$.<blockquote><strong>Cơ chế bắt buộc:</strong> Khi gọi <code>x.wait()</code>, tiến trình <strong>bắt buộc phải tự động giải phóng khóa monitor</strong> để tiến trình khác có thể vào monitor thay đổi điều kiện. Sau khi được đánh thức, tiến trình <strong>phải tái chiếm lại khóa monitor</strong> trước khi tiếp tục thực thi lệnh tiếp theo.</blockquote></li><li><code>x.signal()</code>: Đánh thức chính xác một tiến trình đang bị khóa trong hàng đợi của $x$. Nếu không có tiến trình nào đang chờ trên $x$, lệnh <code>signal()</code> không có tác dụng gì (khác hoàn toàn với Semaphore vốn sẽ tăng biến đếm).</li></ol></li></ul>
 
+<blockquote><strong>TIER-B TECHNICAL NOTE — Monitor scheduling:</strong> Hoare và Mesa có ngữ nghĩa<br>khác nhau về thời điểm thread được <code>signal()</code> chạy tiếp. Slide không chọn<br>một mô hình cụ thể; trong runtime thực tế, luôn kiểm tra lại predicate sau<br>khi tái chiếm khóa thay vì giả định điều kiện vẫn còn đúng.</blockquote>
+
 <hr>
 
 <h2 id="8-liveness-va-deadlock">8. Liveness và Deadlock</h2>
@@ -421,6 +423,8 @@ S2;</code></pre></li></ul>
 <p>Một bộ đệm chung có $N$ vị trí lưu trữ. Producer sản xuất dữ liệu ghi vào đệm; Consumer lấy dữ liệu ra khỏi đệm.</p>
 
 <ul><li><strong>Yêu cầu an toàn:</strong><ul><li>Producer không được ghi khi đệm đầy ($count = N$).</li><li>Consumer không được đọc khi đệm rỗng ($count = 0$).</li><li>Thao tác thêm/bớt phần tử vào bộ đệm phải loại trừ tương hỗ.</li></ul></li></ul>
+
+<p>Với mô hình semaphore chuẩn, các bất biến cần giữ là<br><code>0 \le full \le N</code>, <code>0 \le empty \le N</code> và <code>full + empty = N</code> (ngoài khoảng<br>thời gian rất ngắn đang cập nhật bên trong miền găng).</p>
 
 <h3 id="9-2-khoi-tao-semaphore">9.2 Khởi tạo Semaphore</h3>
 
