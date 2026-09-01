@@ -110,17 +110,7 @@
 
 <p>Một giải pháp giải quyết bài toán miền găng được coi là đúng đắn và an toàn khi và chỉ khi thỏa mãn đồng thời cả 3 điều kiện sau:</p>
 
-<ol><li><strong>Loại trừ tương hỗ (Mutual Exclusion):</strong></li></ol>
-
-<p>   Nếu tiến trình $P_i$ đang thực thi bên trong miền găng của nó, thì không có bất kỳ tiến trình $P_j$ ($j \neq i$) nào khác được phép thực thi bên trong miền găng của nó tại cùng một thời điểm.</p>
-
-<ol><li><strong>Tiến triển (Progress):</strong></li></ol>
-
-<p>   Nếu hiện tại không có tiến trình nào đang thực thi trong miền găng và có một số tiến trình đang muốn vào miền găng, thì chỉ những tiến trình <strong>không ở trong remainder section</strong> mới được tham gia vào việc quyết định xem tiến trình nào sẽ được vào miền găng tiếp theo, và quyết định này <strong>không thể bị trì hoãn vô thời hạn</strong>.</p>
-
-<ol><li><strong>Chờ đợi có giới hạn (Bounded Waiting):</strong></li></ol>
-
-<p>   Phải tồn tại một cận trên (giới hạn số lần) về số lượt các tiến trình khác được phép vào miền găng sau khi một tiến trình đã đưa ra yêu cầu vào và trước khi yêu cầu đó được chấp thuận.<br>   &gt; <strong>Lưu ý phân biệt học thuật:</strong> Bounded Waiting là giới hạn về <strong>số lượt bị vượt mặt</strong> (tránh tình trạng một tiến trình bị đói tài nguyên - starvation vĩnh viễn), <strong>hoàn toàn không đồng nghĩa với giới hạn thời gian thực thi (execution time)</strong> bên trong miền găng của một tiến trình.</p>
+<ol><li><strong>Loại trừ tương hỗ (Mutual Exclusion):</strong><p>Nếu tiến trình $P_i$ đang thực thi bên trong miền găng của nó, thì không có bất kỳ tiến trình $P_j$ ($j \neq i$) nào khác được phép thực thi bên trong miền găng của nó tại cùng một thời điểm.</p></li><li><strong>Tiến triển (Progress):</strong><p>Nếu hiện tại không có tiến trình nào đang thực thi trong miền găng và có một số tiến trình đang muốn vào miền găng, thì chỉ những tiến trình <strong>không ở trong remainder section</strong> mới được tham gia vào việc quyết định xem tiến trình nào sẽ được vào miền găng tiếp theo, và quyết định này <strong>không thể bị trì hoãn vô thời hạn</strong>.</p></li><li><strong>Chờ đợi có giới hạn (Bounded Waiting):</strong><p>Phải tồn tại một cận trên (giới hạn số lần) về số lượt các tiến trình khác được phép vào miền găng sau khi một tiến trình đã đưa ra yêu cầu vào và trước khi yêu cầu đó được chấp thuận.</p><blockquote><strong>Lưu ý phân biệt học thuật:</strong> Bounded Waiting là giới hạn về <strong>số lượt bị vượt mặt</strong> (tránh tình trạng một tiến trình bị đói tài nguyên - starvation vĩnh viễn), <strong>hoàn toàn không đồng nghĩa với giới hạn thời gian thực thi (execution time)</strong> bên trong miền găng của một tiến trình.</blockquote></li></ol>
 
 <h3 id="2-3-phan-loai-giai-phap-ong-bo">2.3 Phân loại Giải pháp Đồng bộ</h3>
 
@@ -134,13 +124,7 @@
 
 <p>Một giải pháp phần cứng đơn giản ở mức nhân là: Trước khi vào miền găng, CPU thực thi lệnh tắt toàn bộ ngắt (<code>cli</code>); khi ra khỏi miền găng, bật ngắt trở lại (<code>sti</code>).</p>
 
-<ul><li><strong>Vì sao không áp dụng cho User Process?</strong></li></ul>
-
-<p>  Nếu cho phép chương trình người dùng vô hiệu hóa ngắt, một ứng dụng độc hại hoặc bị treo có thể không bao giờ bật lại ngắt, khiến hệ điều hành mất hoàn toàn quyền điều khiển (mất timer interrupt), làm sụp đổ toàn bộ hệ thống.</p>
-
-<ul><li><strong>Hạn chế trên Hệ thống Đa xử lý (Multiprocessor):</strong></li></ul>
-
-<p>  Lệnh tắt ngắt chỉ có hiệu lực trên lõi CPU đang thực thi lệnh đó. Các tiến trình chạy trên các lõi CPU khác vẫn truy xuất đồng thời vào bộ nhớ chia sẻ. Việc truyền tín hiệu tắt ngắt liên lõi (Inter-Processor Interrupt - IPI) có chi phí trễ quá lớn và làm suy giảm nghiêm trọng thông lượng của hệ thống.</p>
+<ul><li><strong>Vì sao không áp dụng cho User Process?</strong><p>Nếu cho phép chương trình người dùng vô hiệu hóa ngắt, một ứng dụng độc hại hoặc bị treo có thể không bao giờ bật lại ngắt, khiến hệ điều hành mất hoàn toàn quyền điều khiển (mất timer interrupt), làm sụp đổ toàn bộ hệ thống.</p></li><li><strong>Hạn chế trên Hệ thống Đa xử lý (Multiprocessor):</strong><p>Lệnh tắt ngắt chỉ có hiệu lực trên lõi CPU đang thực thi lệnh đó. Các tiến trình chạy trên các lõi CPU khác vẫn truy xuất đồng thời vào bộ nhớ chia sẻ. Việc truyền tín hiệu tắt ngắt liên lõi (Inter-Processor Interrupt - IPI) có chi phí trễ quá lớn và làm suy giảm nghiêm trọng thông lượng của hệ thống.</p></li></ul>
 
 <hr>
 
@@ -193,21 +177,7 @@ boolean flag[2] = {false, false};</code></pre></li><li><strong>Cấu trúc tiế
 
 <h4 id="chung-minh-tinh-ung-an-cua-giai-thuat-peterson">Chứng minh tính đúng đắn của Giải thuật Peterson:</h4>
 
-<ol><li><strong>Loại trừ tương hỗ (Mutual Exclusion):</strong></li></ol>
-
-<p>   Để cả hai tiến trình $P_0$ và $P_1$ cùng có mặt trong miền găng, điều kiện thoát vòng lặp của cả hai phải cùng đúng tại một thời điểm:</p>
-
-<ul><li>$P_0$ thoát khi: <code>flag[1] == false</code> HOẶC <code>turn == 0</code>.</li><li>$P_1$ thoát khi: <code>flag[0] == false</code> HOẶC <code>turn == 1</code>.</li></ul>
-
-<p>   Vì cả hai cùng muốn vào, <code>flag[0] == flag[1] == true</code>. Do đó, $P_0$ chỉ vào được nếu <code>turn == 0</code>, và $P_1$ chỉ vào được nếu <code>turn == 1</code>. Tuy nhiên, <code>turn</code> là một biến nguyên đơn lẻ trong bộ nhớ, tại một thời điểm nó chỉ có thể nhận giá trị $0$ hoặc $1$, không thể vừa bằng $0$ vừa bằng $1$. Tiến trình nào thực hiện phép gán <code>turn = ...</code> sau cùng sẽ thiết lập giá trị và nhường quyền cho tiến trình kia vào trước. Vậy tính loại trừ tương hỗ được đảm bảo.</p>
-
-<ol><li><strong>Tiến triển (Progress):</strong></li></ol>
-
-<p>   Nếu $P_j$ không muốn vào miền găng (<code>flag[j] == false</code>), điều kiện <code>while (flag[j] &amp;&amp; turn == j)</code> của $P_i$ lập tức sai, $P_i$ vào miền găng ngay mà không bị cản trở. Nếu cả hai cùng muốn vào và cùng gán <code>turn</code>, giá trị <code>turn</code> cuối cùng sẽ là $0$ hoặc $1$, giúp chính xác một tiến trình thoát khỏi <code>while</code> để vào miền găng.</p>
-
-<ol><li><strong>Chờ đợi có giới hạn (Bounded Waiting):</strong></li></ol>
-
-<p>   Khi $P_j$ rời miền găng, nó gán <code>flag[j] = false</code>, giải phóng cho $P_i$. Nếu $P_j$ muốn quay lại miền găng ngay, nó phải thực hiện <code>turn = i</code>, trao lại quyền ưu tiên cho $P_i$. Do đó, $P_i$ chỉ phải chờ tối đa 1 lượt vào của $P_j$.</p>
+<ol><li><strong>Loại trừ tương hỗ (Mutual Exclusion):</strong><p>Để cả hai tiến trình $P_0$ và $P_1$ cùng có mặt trong miền găng, điều kiện thoát vòng lặp của cả hai phải cùng đúng tại một thời điểm:</p><ul><li>$P_0$ thoát khi: <code>flag[1] == false</code> HOẶC <code>turn == 0</code>.</li><li>$P_1$ thoát khi: <code>flag[0] == false</code> HOẶC <code>turn == 1</code>.</li></ul><p>Vì cả hai cùng muốn vào, <code>flag[0] == flag[1] == true</code>. Do đó, $P_0$ chỉ vào được nếu <code>turn == 0</code>, và $P_1$ chỉ vào được nếu <code>turn == 1</code>. Tuy nhiên, <code>turn</code> là một biến nguyên đơn lẻ trong bộ nhớ, tại một thời điểm nó chỉ có thể nhận giá trị $0$ hoặc $1$, không thể vừa bằng $0$ vừa bằng $1$. Tiến trình nào thực hiện phép gán <code>turn = ...</code> sau cùng sẽ thiết lập giá trị và nhường quyền cho tiến trình kia vào trước. Vậy tính loại trừ tương hỗ được đảm bảo.</p></li><li><strong>Tiến triển (Progress):</strong><p>Nếu $P_j$ không muốn vào miền găng (<code>flag[j] == false</code>), điều kiện <code>while (flag[j] &amp;&amp; turn == j)</code> của $P_i$ lập tức sai, $P_i$ vào miền găng ngay mà không bị cản trở. Nếu cả hai cùng muốn vào và cùng gán <code>turn</code>, giá trị <code>turn</code> cuối cùng sẽ là $0$ hoặc $1$, giúp chính xác một tiến trình thoát khỏi <code>while</code> để vào miền găng.</p></li><li><strong>Chờ đợi có giới hạn (Bounded Waiting):</strong><p>Khi $P_j$ rời miền găng, nó gán <code>flag[j] = false</code>, giải phóng cho $P_i$. Nếu $P_j$ muốn quay lại miền găng ngay, nó phải thực hiện <code>turn = i</code>, trao lại quyền ưu tiên cho $P_i$. Do đó, $P_i$ chỉ phải chờ tối đa 1 lượt vào của $P_j$.</p></li></ol>
 
 <h3 id="3-4-giai-thuat-peterson-tren-kien-truc-phan-cung-hien-ai">3.4 Giải thuật Peterson trên Kiến trúc Phần cứng Hiện đại</h3>
 
@@ -312,9 +282,7 @@ release(&amp;mutex);</code></pre></li></ul>
 
 <h3 id="5-2-spinlock-vs-mutex-khong-busy-waiting">5.2 Spinlock vs Mutex không Busy Waiting</h3>
 
-<ol><li><strong>Spinlock (Khóa xoay):</strong><ul><li>Định nghĩa: Mutex lock mà trong đó tiến trình phải liên tục lặp kiểm tra trong hàm <code>acquire()</code>.</li><li><strong>Ưu điểm:</strong> Không mất chi phí chuyển ngữ cảnh (Context switch overhead).</li><li><strong>Khi nào nên dùng?</strong> Sử dụng trên hệ thống đa xử lý (Multiprocessor) khi thời gian thực thi trong miền găng <strong>cực kỳ ngắn</strong> (ngắn hơn thời gian thực hiện hai lần context switch).</li></ul></li></ol>
-
-<ol><li><strong>Mutex Lock không Busy Waiting (Blocking / Sleep &amp; Wakeup):</strong><ul><li>Khi không thể lấy được khóa, tiến trình tự chuyển trạng thái sang <code>Waiting/Blocked</code>, đưa PCB vào hàng đợi <code>wait_queue</code> của khóa và gọi hàm lập lịch <code>yield()</code> / <code>sleep()</code>.</li><li>Khi tiến trình đang giữ khóa gọi <code>release()</code>, nó sẽ đánh thức một tiến trình trong <code>wait_queue</code> chuyển về trạng thái <code>Ready</code>.</li></ul></li></ol>
+<ol><li><strong>Spinlock (Khóa xoay):</strong><ul><li>Định nghĩa: Mutex lock mà trong đó tiến trình phải liên tục lặp kiểm tra trong hàm <code>acquire()</code>.</li><li><strong>Ưu điểm:</strong> Không mất chi phí chuyển ngữ cảnh (Context switch overhead).</li><li><strong>Khi nào nên dùng?</strong> Sử dụng trên hệ thống đa xử lý (Multiprocessor) khi thời gian thực thi trong miền găng <strong>cực kỳ ngắn</strong> (ngắn hơn thời gian thực hiện hai lần context switch).</li></ul></li><li><strong>Mutex Lock không Busy Waiting (Blocking / Sleep &amp; Wakeup):</strong><ul><li>Khi không thể lấy được khóa, tiến trình tự chuyển trạng thái sang <code>Waiting/Blocked</code>, đưa PCB vào hàng đợi <code>wait_queue</code> của khóa và gọi hàm lập lịch <code>yield()</code> / <code>sleep()</code>.</li><li>Khi tiến trình đang giữ khóa gọi <code>release()</code>, nó sẽ đánh thức một tiến trình trong <code>wait_queue</code> chuyển về trạng thái <code>Ready</code>.</li></ul></li></ol>
 
 <blockquote><strong>TIER-B TECHNICAL NOTE — POSIX pthread:</strong><br>- Khác với Semaphore, Mutex có khái niệm <strong>quyền sở hữu (Ownership)</strong>: Chỉ luồng đã gọi <code>acquire()</code> mới có quyền gọi <code>release()</code>.<br>- Chuẩn POSIX (<code>pthread_mutex_unlock</code>) không đảm bảo các luồng đang chờ sẽ được đánh thức theo thứ tự FIFO nghiêm ngặt.</blockquote>
 
@@ -340,13 +308,7 @@ signal(S) {
 
 <h3 id="6-2-phan-loai-semaphore">6.2 Phân loại Semaphore</h3>
 
-<ol><li><strong>Counting Semaphore (Semaphore tổng quát / đếm):</strong></li></ol>
-
-<p>   Giá trị của $S$ có thể nhận giá trị nguyên không âm bất kỳ ($S \in [0, N]$). Thường dùng để quản lý việc cấp phát một tập hợp gồm $N$ thực thể tài nguyên giống nhau.</p>
-
-<ol><li><strong>Binary Semaphore (Semaphore nhị phân):</strong></li></ol>
-
-<p>   Giá trị của $S$ chỉ nhận giá trị $0$ hoặc $1$. Hoạt động tương đương như một Mutex Lock (dùng cho bài toán loại trừ tương hỗ).</p>
+<ol><li><strong>Counting Semaphore (Semaphore tổng quát / đếm):</strong><p>Giá trị của $S$ có thể nhận giá trị nguyên không âm bất kỳ ($S \in [0, N]$). Thường dùng để quản lý việc cấp phát một tập hợp gồm $N$ thực thể tài nguyên giống nhau.</p></li><li><strong>Binary Semaphore (Semaphore nhị phân):</strong><p>Giá trị của $S$ chỉ nhận giá trị $0$ hoặc $1$. Hoạt động tương đương như một Mutex Lock (dùng cho bài toán loại trừ tương hỗ).</p></li></ol>
 
 <h3 id="6-3-hien-thuc-semaphore-khong-busy-waiting">6.3 Hiện thực Semaphore không Busy Waiting</h3>
 
@@ -446,29 +408,7 @@ S2;</code></pre></li></ul>
 
 <h3 id="8-2-cac-dang-that-bai-liveness-ien-hinh">8.2 Các Dạng Thất bại Liveness Điển hình</h3>
 
-<ol><li><strong>Deadlock (Bế tắc):</strong></li></ol>
-
-<p>   Hiện tượng hai hay nhiều tiến trình chờ đợi vô hạn một sự kiện mà sự kiện đó chỉ có thể được tạo ra bởi chính một trong các tiến trình đang chờ trong nhóm.</p>
-
-<ul><li><strong>Ví dụ kinh điển với Semaphore nhị phân:</strong></li></ul>
-
-<p>     Khởi tạo <code>semaphore S = 1, Q = 1;</code></p>
-
-<p>     $$\begin{array}{c|c}<br>     \textbf{Tiến trình } P_0 &amp; \textbf{Tiến trình } P_1 \\ \hline<br>     \text{wait}(S); &amp; \text{wait}(Q); \\<br>     \text{wait}(Q); &amp; \text{wait}(S); \\<br>     \dots &amp; \dots \\<br>     \text{signal}(S); &amp; \text{signal}(Q); \\<br>     \text{signal}(Q); &amp; \text{signal}(S);<br>     \end{array}$$</p>
-
-<p>     Nếu $P_0$ thực thi $\text{wait}(S)$ thành công và $P_1$ thực thi $\text{wait}(Q)$ thành công, sau đó $P_0$ gọi $\text{wait}(Q)$ (bị block do $Q=0$) và $P_1$ gọi $\text{wait}(S)$ (bị block do $S=0$). Cả hai tiến trình đều giữ một khóa và chờ khóa của đối phương $\rightarrow$ <strong>Deadlock</strong>.</p>
-
-<ol><li><strong>Starvation (Đói tài nguyên / Chờ đợi vô hạn):</strong></li></ol>
-
-<p>   Tình trạng một tiến trình không bao giờ được cấp tài nguyên hoặc không bao giờ được thoát ra khỏi hàng đợi của Semaphore do liên tục bị các tiến trình khác vượt mặt (ví dụ hàng đợi ưu tiên hoặc hàng đợi LIFO).</p>
-
-<ol><li><strong>Priority Inversion (Nghịch đảo Độ ưu tiên):</strong></li></ol>
-
-<p>   Hiện tượng xảy ra trên hệ thống lập lịch theo độ ưu tiên:</p>
-
-<ul><li>Tiến trình ưu tiên thấp ($L$) đang nắm giữ một khóa tài nguyên mà tiến trình ưu tiên cao ($H$) đang cần.</li><li>Tiến trình $H$ bị block để chờ $L$ nhả khóa.</li><li>Một tiến trình ưu tiên trung bình ($M$) xuất hiện (không cần khóa). Vì $M$ có độ ưu tiên cao hơn $L$, $M$ chiếm quyền CPU và chạy liên tục, ngăn không cho $L$ chạy để nhả khóa.</li><li>Hậu quả: Tiến trình $H$ (ưu tiên cao nhất) bị trì hoãn vô thời hạn bởi tiến trình $M$ (ưu tiên trung bình) $\rightarrow$ Đảo ngược trật tự ưu tiên của hệ thống.</li></ul>
-
-<ol><li><strong>Priority Inheritance Protocol (Giao thức Thừa kế Độ ưu tiên):</strong><ul><li><strong>Giải pháp:</strong> Khi tiến trình $H$ phải chờ tài nguyên do tiến trình $L$ nắm giữ, tiến trình $L$ sẽ <strong>tạm thời được thừa kế mức độ ưu tiên cao bằng $H$</strong>.</li><li>Nhờ đó, các tiến trình trung bình $M$ không thể chiếm quyền CPU của $L$. Tiến trình $L$ hoàn thành miền găng nhanh chóng, nhả khóa và trả lại độ ưu tiên ban đầu, giúp $H$ lấy khóa và thực thi ngay lập tức.</li></ul></li></ol>
+<ol><li><strong>Deadlock (Bế tắc):</strong><p>Hiện tượng hai hay nhiều tiến trình chờ đợi vô hạn một sự kiện mà sự kiện đó chỉ có thể được tạo ra bởi chính một trong các tiến trình đang chờ trong nhóm.</p><ul><li><strong>Ví dụ kinh điển với Semaphore nhị phân:</strong><p>Khởi tạo <code>semaphore S = 1, Q = 1;</code></p><p>$$\begin{array}{c|c}<br>\textbf{Tiến trình } P_0 &amp; \textbf{Tiến trình } P_1 \\ \hline<br>\text{wait}(S); &amp; \text{wait}(Q); \\<br>\text{wait}(Q); &amp; \text{wait}(S); \\<br>\dots &amp; \dots \\<br>\text{signal}(S); &amp; \text{signal}(Q); \\<br>\text{signal}(Q); &amp; \text{signal}(S);<br>\end{array}$$</p><p>Nếu $P_0$ thực thi $\text{wait}(S)$ thành công và $P_1$ thực thi $\text{wait}(Q)$ thành công, sau đó $P_0$ gọi $\text{wait}(Q)$ (bị block do $Q=0$) và $P_1$ gọi $\text{wait}(S)$ (bị block do $S=0$). Cả hai tiến trình đều giữ một khóa và chờ khóa của đối phương $\rightarrow$ <strong>Deadlock</strong>.</p></li></ul></li><li><strong>Starvation (Đói tài nguyên / Chờ đợi vô hạn):</strong><p>Tình trạng một tiến trình không bao giờ được cấp tài nguyên hoặc không bao giờ được thoát ra khỏi hàng đợi của Semaphore do liên tục bị các tiến trình khác vượt mặt (ví dụ hàng đợi ưu tiên hoặc hàng đợi LIFO).</p></li><li><strong>Priority Inversion (Nghịch đảo Độ ưu tiên):</strong><p>Hiện tượng xảy ra trên hệ thống lập lịch theo độ ưu tiên:</p><ul><li>Tiến trình ưu tiên thấp ($L$) đang nắm giữ một khóa tài nguyên mà tiến trình ưu tiên cao ($H$) đang cần.</li><li>Tiến trình $H$ bị block để chờ $L$ nhả khóa.</li><li>Một tiến trình ưu tiên trung bình ($M$) xuất hiện (không cần khóa). Vì $M$ có độ ưu tiên cao hơn $L$, $M$ chiếm quyền CPU và chạy liên tục, ngăn không cho $L$ chạy để nhả khóa.</li><li>Hậu quả: Tiến trình $H$ (ưu tiên cao nhất) bị trì hoãn vô thời hạn bởi tiến trình $M$ (ưu tiên trung bình) $\rightarrow$ Đảo ngược trật tự ưu tiên của hệ thống.</li></ul></li><li><strong>Priority Inheritance Protocol (Giao thức Thừa kế Độ ưu tiên):</strong><ul><li><strong>Giải pháp:</strong> Khi tiến trình $H$ phải chờ tài nguyên do tiến trình $L$ nắm giữ, tiến trình $L$ sẽ <strong>tạm thời được thừa kế mức độ ưu tiên cao bằng $H$</strong>.</li><li>Nhờ đó, các tiến trình trung bình $M$ không thể chiếm quyền CPU của $L$. Tiến trình $L$ hoàn thành miền găng nhanh chóng, nhả khóa và trả lại độ ưu tiên ban đầu, giúp $H$ lấy khóa và thực thi ngay lập tức.</li></ul></li></ol>
 
 <hr>
 
@@ -601,9 +541,7 @@ do {
 
 <h3 id="11-3-cac-giai-phap-tranh-deadlock">11.3 Các Giải pháp Tránh Deadlock</h3>
 
-<ol><li><strong>Giới hạn số người ăn:</strong> Chỉ cho phép tối đa 4 triết gia cùng ngồi vào bàn ăn tại một thời điểm (dùng <code>semaphore dining_limit = 4;</code>).</li><li><strong>Nhặt đũa nguyên tử (Atomic pickup):</strong> Chỉ cho phép một triết gia nhặt đũa khi <strong>cả hai chiếc đũa</strong> đều đang khả dụng (thực hiện kiểm tra trong miền găng).</li><li><strong>Giải pháp bất đối xứng (Asymmetric solution):</strong><ul><li>Triết gia có chỉ số lẻ ($1, 3$) nhặt đũa trái trước, đũa phải sau.</li><li>Triết gia có chỉ số chẵn ($0, 2, 4$) nhặt đũa phải trước, đũa trái sau.</li><li>Phá vỡ điều kiện chờ vòng tròn (Circular Wait), triệt tiêu hoàn toàn khả năng xảy ra deadlock.</li></ul></li><li><strong>Giải pháp sử dụng Monitor:</strong></li></ol>
-
-<p>   Quản lý 3 trạng thái của mỗi triết gia <code>enum {THINKING, HUNGRY, EATING} state[5];</code> và sử dụng mảng biến điều kiện <code>condition self[5];</code> để đồng bộ.</p>
+<ol><li><strong>Giới hạn số người ăn:</strong> Chỉ cho phép tối đa 4 triết gia cùng ngồi vào bàn ăn tại một thời điểm (dùng <code>semaphore dining_limit = 4;</code>).</li><li><strong>Nhặt đũa nguyên tử (Atomic pickup):</strong> Chỉ cho phép một triết gia nhặt đũa khi <strong>cả hai chiếc đũa</strong> đều đang khả dụng (thực hiện kiểm tra trong miền găng).</li><li><strong>Giải pháp bất đối xứng (Asymmetric solution):</strong><ul><li>Triết gia có chỉ số lẻ ($1, 3$) nhặt đũa trái trước, đũa phải sau.</li><li>Triết gia có chỉ số chẵn ($0, 2, 4$) nhặt đũa phải trước, đũa trái sau.</li><li>Phá vỡ điều kiện chờ vòng tròn (Circular Wait), triệt tiêu hoàn toàn khả năng xảy ra deadlock.</li></ul></li><li><strong>Giải pháp sử dụng Monitor:</strong><p>Quản lý 3 trạng thái của mỗi triết gia <code>enum {THINKING, HUNGRY, EATING} state[5];</code> và sử dụng mảng biến điều kiện <code>condition self[5];</code> để đồng bộ.</p></li></ol>
 
 <hr>
 

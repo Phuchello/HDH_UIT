@@ -63,6 +63,40 @@ def text_content(node):
     return node.get("text", "") + "".join(text_content(child) for child in node["children"])
 
 
+def node_with_id(root, tag, node_id):
+    return next((node for node in walk(root) if node["tag"] == tag and node["attrs"].get("id") == node_id), None)
+
+
+def section_lists(root, heading_id):
+    heading = node_with_id(root, "h3", heading_id)
+    if heading is None:
+        return []
+    siblings = heading["parent"]["children"]
+    start = siblings.index(heading) + 1
+    end = next((index for index in range(start, len(siblings)) if siblings[index]["tag"] in {"h2", "h3"}), len(siblings))
+    return [node for node in siblings[start:end] if node["tag"] == "ol"]
+
+
+def section_list_shape(html_text, heading_id, expected_tokens, expected_count):
+    parser = StructureParser()
+    parser.feed(html_text)
+    lists = section_lists(parser.root, heading_id)
+    if len(lists) != 1:
+        return parser, False
+    ordered = lists[0]
+    direct_items = [child for child in ordered["children"] if child["tag"] == "li"]
+    if len(direct_items) != expected_count or len(ordered["children"]) != expected_count:
+        return parser, False
+    return parser, all(token in text_content(item) for token, item in zip(expected_tokens, direct_items))
+
+
+def ordered_lists_well_formed(html_text):
+    parser = StructureParser()
+    parser.feed(html_text)
+    ordered = [node for node in walk(parser.root) if node["tag"] == "ol"]
+    return parser, all(any(child["tag"] == "li" for child in node["children"]) and all(child["tag"] == "li" for child in node["children"]) for node in ordered)
+
+
 def list_item_has_nested_blockquote(theory):
     parser = StructureParser()
     parser.feed(theory)
@@ -158,6 +192,16 @@ related:
       consume();
   }
   ```
+
+- Continuation paragraph one
+  This explanatory paragraph stays inside the first item with **inline** formatting.
+
+- Continuation paragraph two
+
+1. Ordered continuity one
+   Its indented description remains inside the first ordered item.
+
+2. Ordered continuity two
 
 ---
 ***
@@ -256,6 +300,8 @@ def main():
         condition_parser, condition_ok = list_item_has_nested_blockquote(theory)
         checks.append(("list continuation blockquote stays inside the correct ordered list item", condition_ok))
         checks.append(("list continuation has no escaped quote marker", "&gt; Cơ chế bắt buộc" not in theory))
+        checks.append(("indented continuation paragraph stays inside its list item", "<li>Continuation paragraph one<p>This explanatory paragraph stays inside the first item with <strong>inline</strong> formatting.</p></li>" in theory))
+        checks.append(("blank lines do not split one ordered list", theory.count("<ol>") >= 2 and "<ol><li>Ordered continuity one<p>Its indented description remains inside the first ordered item.</p></li><li>Ordered continuity two</li></ol>" in theory))
         _, fixture_structure = structure_quality(theory)
         checks.extend((f"fixture {label}", ok) for label, ok in fixture_structure.items())
         checks.append(("callout survives", '<div class="callout note">' in theory))
@@ -280,12 +326,22 @@ def main():
             checks.append((f"{label} has no escaped quote marker leak", "&gt; Cơ chế bắt buộc" not in content_html))
             checks.append((f"{label} has no paragraph horizontal-rule leak", "<p>---</p>" not in content_html))
         real_theory = real_text.get("real Chapter 5 theory", "")
+        real_qbank = real_text.get("real Chapter 5 QBank", "")
         if real_theory:
             _, real_condition = list_item_has_nested_blockquote(real_theory)
             checks.append(("real Chapter 5 condition-variable list relationship", real_condition))
             checks.append(("real Chapter 5 Producer/Consumer and exercise code render", all(token in real_theory for token in ("Tiến trình Producer", "Tiến trình Consumer", 'class="language-c"'))))
             checks.append(("real Chapter 5 standalone rules render as hr", real_theory.count("<hr>") >= 10))
-        real_qbank = real_text.get("real Chapter 5 QBank", "")
+            for label, heading_id, tokens, count in (
+                ("Chapter 5 section 5.2 list continuity", "5-2-spinlock-vs-mutex-khong-busy-waiting", ("Spinlock", "Mutex Lock không Busy Waiting"), 2),
+                ("Chapter 5 section 6.2 list continuity", "6-2-phan-loai-semaphore", ("Counting Semaphore", "Binary Semaphore"), 2),
+                ("Chapter 5 section 8.2 list continuity", "8-2-cac-dang-that-bai-liveness-ien-hinh", ("Deadlock", "Starvation", "Priority Inversion", "Priority Inheritance Protocol"), 4),
+            ):
+                _, section_ok = section_list_shape(real_theory, heading_id, tokens, count)
+                checks.append((label, section_ok))
+        if real_qbank:
+            _, qbank_lists = ordered_lists_well_formed(real_qbank)
+            checks.append(("real Chapter 5 QBank ordered-list semantics", qbank_lists))
         if real_qbank:
             checks.append(("real Chapter 5 QBank exercise code renders", 'class="language-c"' in real_qbank))
             checks.append(("real Chapter 5 QBank standalone rules render as hr", real_qbank.count("<hr>") >= 10))

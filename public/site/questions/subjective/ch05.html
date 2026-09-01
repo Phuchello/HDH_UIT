@@ -644,16 +644,12 @@ ans := y + z;</code></pre>
 
 <p><strong>MINIMUM ANSWER:</strong></p>
 
-<ol><li><strong>Phân tích quan hệ phụ thuộc dữ liệu (DAG):</strong><ul><li>$S_1: w = x_1 \times x_2$ (Độc lập $\rightarrow$ Chạy ngay).</li><li>$S_2: v = x_3 \times x_4$ (Độc lập $\rightarrow$ Chạy ngay).</li><li>$S_3: y = v \times x_5$ (Phụ thuộc $S_2$).</li><li>$S_4: z = v \times x_6$ (Phụ thuộc $S_2$).</li><li>$S_5: x = w \times y$ (Phụ thuộc $S_1, S_3$).</li><li>$S_6: z_{new} = w \times z_{old}$ (Phụ thuộc $S_1, S_4$).</li><li>$S_7: ans = y + z_{new}$ (Phụ thuộc $S_3, S_6$).</li></ul></li></ol>
-
-<ol><li><strong>Khởi tạo Semaphore:</strong><pre><code class="language-c">semaphore synch_w1 = 0; // S1 -&gt; S5
+<ol><li><strong>Phân tích quan hệ phụ thuộc dữ liệu (DAG):</strong><ul><li>$S_1: w = x_1 \times x_2$ (Độc lập $\rightarrow$ Chạy ngay).</li><li>$S_2: v = x_3 \times x_4$ (Độc lập $\rightarrow$ Chạy ngay).</li><li>$S_3: y = v \times x_5$ (Phụ thuộc $S_2$).</li><li>$S_4: z = v \times x_6$ (Phụ thuộc $S_2$).</li><li>$S_5: x = w \times y$ (Phụ thuộc $S_1, S_3$).</li><li>$S_6: z_{new} = w \times z_{old}$ (Phụ thuộc $S_1, S_4$).</li><li>$S_7: ans = y + z_{new}$ (Phụ thuộc $S_3, S_6$).</li></ul></li><li><strong>Khởi tạo Semaphore:</strong><pre><code class="language-c">semaphore synch_w1 = 0; // S1 -&gt; S5
 semaphore synch_w2 = 0; // S1 -&gt; S6
 semaphore synch_v1 = 0; // S2 -&gt; S3
 semaphore synch_v2 = 0; // S2 -&gt; S4
 semaphore synch_y  = 0; // S3 -&gt; S7 (và S3 -&gt; S5)
-semaphore synch_z  = 0; // S6 -&gt; S7</code></pre></li></ol>
-
-<ol><li><strong>Thiết kế 3 Luồng thực thi song hành tối ưu:</strong><pre><code class="language-c">// LUỒNG 1 (Tính toán nhánh w và x)
+semaphore synch_z  = 0; // S6 -&gt; S7</code></pre></li><li><strong>Thiết kế 3 Luồng thực thi song hành tối ưu:</strong><pre><code class="language-c">// LUỒNG 1 (Tính toán nhánh w và x)
 void Thread_1(void) {
     w = x1 * x2;       // S1
     signal(&amp;synch_w1); // Báo w cho S5

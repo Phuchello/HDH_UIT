@@ -254,6 +254,45 @@ def parse_indented_blockquote(lines, start, parent_indent, routes, current_rel):
 HORIZONTAL_RULE_RE = re.compile(r"^\s*(?:-{3,}|\*{3,}|_{3,})\s*$")
 
 
+def line_indent(line):
+    """Return the number of leading spaces in a Markdown source line."""
+    return len(line) - len(line.lstrip(" "))
+
+
+def next_nonblank(lines, start):
+    """Return the first non-blank line at or after ``start``."""
+    index = start
+    while index < len(lines) and not lines[index].strip():
+        index += 1
+    return index
+
+
+def parse_indented_paragraph(lines, start, parent_indent, routes, current_rel):
+    """Parse a generic indented list-item continuation paragraph.
+
+    Markdown commonly puts explanatory prose below a list item with a blank
+    line before the next item.  Treat any non-structural line indented beyond
+    the current list as content of that ``<li>``; nested lists, fences,
+    blockquotes, and horizontal rules remain handled by their dedicated
+    parsers before this fallback.
+    """
+    if start >= len(lines) or not lines[start].strip() or line_indent(lines[start]) <= parent_indent:
+        return None, start
+    paragraph, index = [], start
+    while index < len(lines):
+        current = lines[index]
+        if not current.strip() or line_indent(current) <= parent_indent:
+            break
+        if LIST_ITEM_RE.match(current) or current.lstrip().startswith(">") or current.lstrip().startswith("```") or HORIZONTAL_RULE_RE.fullmatch(current):
+            break
+        paragraph.append(current.lstrip())
+        index += 1
+    if not paragraph:
+        return None, start
+    rendered = inline("\n".join(paragraph), routes, current_rel).replace("\n", "<br>")
+    return f"<p>{rendered}</p>", index
+
+
 def markdown_to_html(text, doc_id, routes, current_rel):
     lines = text.replace("\r\n", "\n").split("\n")
     output, index = [], 0
@@ -361,6 +400,21 @@ def render_list(lines, start, routes, current_rel):
         index += 1
         nested = []
         while index < len(lines):
+            if not lines[index].strip():
+                following = next_nonblank(lines, index)
+                if following >= len(lines):
+                    index = following
+                    break
+                following_match = LIST_ITEM_RE.match(lines[following])
+                if following_match and len(following_match.group("indent")) == root_indent:
+                    expected_tag = "ol" if following_match.group("marker")[0].isdigit() else "ul"
+                    if expected_tag == tag:
+                        index = following
+                    break
+                if line_indent(lines[following]) > root_indent:
+                    index = following
+                    continue
+                break
             child = LIST_ITEM_RE.match(lines[index])
             if child and len(child.group("indent")) > root_indent:
                 child_html, index = render_list(lines, index, routes, current_rel)
@@ -379,6 +433,11 @@ def render_list(lines, start, routes, current_rel):
             if quote_html is not None:
                 nested.append(quote_html)
                 index = quote_index
+                continue
+            paragraph_html, paragraph_index = parse_indented_paragraph(lines, index, root_indent, routes, current_rel)
+            if paragraph_html is not None:
+                nested.append(paragraph_html)
+                index = paragraph_index
                 continue
             break
         output.append(f"<li>{item_text}{''.join(nested)}</li>")

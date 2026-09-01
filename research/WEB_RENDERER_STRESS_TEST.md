@@ -21,6 +21,8 @@
 - PASS — inline hyphens remain paragraph text
 - PASS — list continuation blockquote stays inside the correct ordered list item
 - PASS — list continuation has no escaped quote marker
+- PASS — indented continuation paragraph stays inside its list item
+- PASS — blank lines do not split one ordered list
 - PASS — fixture balanced HTML
 - PASS — fixture no orphan li
 - PASS — fixture valid nested-list relationships
@@ -43,6 +45,10 @@
 - PASS — real Chapter 5 condition-variable list relationship
 - PASS — real Chapter 5 Producer/Consumer and exercise code render
 - PASS — real Chapter 5 standalone rules render as hr
+- PASS — Chapter 5 section 5.2 list continuity
+- PASS — Chapter 5 section 6.2 list continuity
+- PASS — Chapter 5 section 8.2 list continuity
+- PASS — real Chapter 5 QBank ordered-list semantics
 - PASS — real Chapter 5 QBank exercise code renders
 - PASS — real Chapter 5 QBank standalone rules render as hr
 - PASS — consecutive clean builds are deterministic

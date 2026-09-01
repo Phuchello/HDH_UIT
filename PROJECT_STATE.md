@@ -2,13 +2,13 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH2_CH5_ENGINEERING_QA_PASS_READY_FOR_ACADEMIC_REVIEW`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH2_CH5_ENGINEERING_QA_FINAL_PATCH`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_DRAFTED`  
 **Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — 131 canonical content pages drafted with 0 missing pages; 18/18 QBank questions drafted with verified SHA-256 provenance.  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 ONLY; CH5 DRAFT — PENDING INDEPENDENT ACADEMIC REVIEW`  
-**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Luna Ultra performs independent Chapter 5 academic/source review.  
+**Xác minh kỹ thuật (Engineering Verification):** `REOPENED — CH5 LIST CONTINUATION`  
+**Hành động tiếp theo chính xác (Exact Next Action):** Terra Medium closes the remaining Chapter 5 list-continuation structure gap.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-08-31
 
