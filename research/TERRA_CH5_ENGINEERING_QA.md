@@ -1,7 +1,7 @@
 # TERRA CHAPTER 5 ENGINEERING QA — HDH_UIT V2
 
 **Scope:** Renderer, generated-site structure, responsive layout, build safety, and regression QA only. No Chapter 5 academic prose was rewritten; Chapters 1–4 and Chapter 6 were not modified.
-**Remote HEAD tested:** `4c3dd0c4ca838494498af151e93cb66f3016b9cc`
+**Remote HEAD tested:** `deefa63b15b87de735c2f0560d13abb1bd0f2ac1`
 **Date:** 2026-08-31
 **Chapter 5 authoring:** `CONTENT_DRAFTED`
 **Academic verification:** `PASS — BATCH 1 ONLY; CH5 DRAFT — NOT YET VERIFIED`
@@ -48,7 +48,7 @@
 - `SAFE_CLEANUP_GUARD`: **PASS** — unsafe repository, parent, home, source, and sibling paths are rejected without mutation.
 - `NPM_TEST`: **PASS** — foundation gate, source/content gates, route/features, stress, negative, Batch 1, and research gates.
 - `npm run web:build`: **PASS** — 16 static pages compiled.
-- `CI`: **PENDING** — final exact-head workflow run will be recorded after this patch is pushed.
+- `CI`: **PASS** — exact-head GitHub Actions run [33460806917](https://github.com/Phuchello/HDH_UIT/actions/runs/33460806917) passed the repository validation suite.
 
 ## Audit history
 
@@ -63,4 +63,4 @@
 - **ENGINEERING_MAJORS:** `0`
 - **ENGINEERING_MINORS:** `0` for the Chapter 5 web renderer. `validate_final.py` retains five non-failing internal publication width diagnostics outside this web QA scope.
 
-Final state is set only after the pushed exact-head GitHub Actions run passes. Chapter 5 remains `CONTENT_DRAFTED`; independent academic/source review is still required.
+Final state: `V2_BATCH2_CH5_ENGINEERING_QA_PASS_READY_FOR_ACADEMIC_REVIEW`. Chapter 5 remains `CONTENT_DRAFTED`; independent academic/source review is still required.
