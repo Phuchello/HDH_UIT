@@ -4,7 +4,7 @@
 **Người thực hiện:** Luna Academic Reviewer / Source Fidelity Specialist  
 **Nhánh Git:** `v2/complete-theory-labs`  
 **Giai đoạn:** `V2_BATCH2_CH5_SOURCE_MAP_READY_FOR_INDEPENDENT_CHECK`  
-**Trạng thái Lập bản đồ nguồn:** `COMPLETE — PENDING INDEPENDENT CHECK`  
+**Trạng thái Lập bản đồ nguồn lịch sử:** `COMPLETE — PENDING INDEPENDENT CHECK` *(superseded by the independent review and verified-state closeout recorded below)*  
 **Trạng thái Soạn thảo lý thuyết:** `NOT_STARTED`  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 ONLY`  
 **SẴN SÀNG SOẠN THẢO CHƯƠNG 5 (READY FOR CH5 AUTHORING):** **`NO`** *(Đang chờ thẩm định độc lập)*  
@@ -171,5 +171,16 @@ Kịch bản kiểm thử [`scripts/validate_ch05_source_map.py`](scripts/valida
 - Kiểm tra tính vệ sinh YAML (không trùng lặp khóa): **PASS (Duplicate Keys = 0)**
 - Biến thể 58p, 55p, 32p được loại trừ khỏi độ phủ chính tắc: **PASS**
 - Trang 56 Phần 1 ghi nhận `SELF_STUDY`: **PASS**
-- Chưa soạn thảo tệp lý thuyết Chương 5 (`content/theory/ch05-synchronization.md`): **PASS**
+- **Historical pre-authoring check:** Chưa soạn thảo tệp lý thuyết Chương 5 (`content/theory/ch05-synchronization.md`): **PASS**
 - Validator Exit Code: **`0 (PASS)`**
+
+---
+
+## 9. Historical Source-Map Closeout Note
+
+This report preserves the original source-map audit trail. After the separate
+academic approval and verified-state closeout on 2026-09-02, all 131 canonical
+Chapter 5 CONTENT pages are recorded as `CONTENT_VERIFIED` in
+`research/data/slide_coverage.yaml`; the four canonical NON_CONTENT ranges
+remain `NOT_WRITTEN`. No source identity, range, hash, destination, or
+source-depth classification was changed by that lifecycle-state update.

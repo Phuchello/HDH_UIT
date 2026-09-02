@@ -5,12 +5,12 @@
 **Giai đoạn hiện tại (Current Phase):** `V2_BATCH2_CH5_LOCKED_READY_FOR_CH6_SOURCE_MAPPING`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — 131 canonical content pages drafted with 0 missing pages; 18/18 QBank questions drafted with verified SHA-256 provenance.  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — 131 canonical content pages verified with 0 missing pages; 18/18 QBank units verified under the established SHA-256 provenance chain.  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5`  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5`  
 **Hành động tiếp theo chính xác (Exact Next Action):** Luna Ultra performs the canonical Chapter 6 source-map audit before any Chapter 6 authoring.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
-**Thời gian cập nhật:** 2026-08-31
+**Thời gian cập nhật:** 2026-09-02
 
 ---
 

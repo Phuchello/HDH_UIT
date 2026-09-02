@@ -120,11 +120,11 @@ def _coverage_metrics(decks, registry):
     non_content = sum(1 for p in expanded if p.get("classification") == "NON_CONTENT")
     mapped = sum(1 for p in expanded if p.get("classification") == "CONTENT" and p.get("mapping_status") == "MAPPED")
     unmapped = sum(1 for p in expanded if p.get("classification") == "CONTENT" and p.get("mapping_status") != "MAPPED")
-    drafted = sum(
+    verified = sum(
         1
         for p in expanded
         if p.get("classification") == "CONTENT"
-        and p.get("content_status") in {"DRAFTED", "CONTENT_DRAFTED"}
+        and p.get("content_status") == "CONTENT_VERIFIED"
     )
     EXPANDED_COVERAGE_JSON.write_text(json.dumps({
         "schema": "one-record-per-physical-page",
@@ -140,7 +140,7 @@ def _coverage_metrics(decks, registry):
         "non_content_pages_total": non_content,
         "mapped_content_pages": mapped,
         "unmapped_content_pages": unmapped,
-        "drafted_content_pages": drafted,
+        "verified_content_pages": verified,
         "coverage_gaps": gaps,
         "duplicate_pages": duplicate_pages,
         "schema_errors": schema_errors,
@@ -207,7 +207,7 @@ All totals below are computed from registry records, expanded slide-page records
 | Content / non-content pages | {slides['content_pages_total']} / {slides['non_content_pages_total']} | sum equals physical total | **{status(slides['content_pages_total'] + slides['non_content_pages_total'] == slides['physical_pages_total'])}** |
 | Coverage gaps / duplicates / schema errors | {len(slides['coverage_gaps'])} / {len(slides['duplicate_pages'])} / {len(slides['schema_errors'])} | zero | **{status(not slides['coverage_gaps'] and not slides['duplicate_pages'] and not slides['schema_errors'])}** |
 | Unmapped content pages | {slides['unmapped_content_pages']} | zero | **{status(slides['unmapped_content_pages'] == 0)}** |
-| Drafted content pages | {slides['drafted_content_pages']} | informational current authored set | **INFO** |
+| Verified content pages | {slides['verified_content_pages']} | informational current verified set | **INFO** |
 | Official question records | {len(questions)} | count of structured records | **{status(questions_ok)}** |
 | Mapped / unmapped questions | {mapped_questions} / {unmapped_questions} | zero unmapped; required fields | **{status(questions_ok)}** |
 | Drafted questions | {drafted_questions} | informational current authored set | **INFO** |

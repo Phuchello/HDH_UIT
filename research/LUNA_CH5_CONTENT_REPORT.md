@@ -1,6 +1,6 @@
 # BÁO CÁO SOẠN THẢO NỘI DUNG CHƯƠNG 5 (LUNA CH5 CONTENT REPORT)
 
-**Thời gian lập:** 2026-08-31  
+**Thời gian lập / closeout:** 2026-09-02  
 **Người thực hiện:** Senior Operating Systems Author + Source-Faithful Question Author (Codex Luna Ultra)  
 **Nhánh Git:** `v2/complete-theory-labs`  
 **Giai đoạn:** `V2_BATCH2_CH5_LOCKED_READY_FOR_CH6_SOURCE_MAPPING`  
@@ -26,9 +26,9 @@ Các tệp nội dung đã tạo lập:
 
 | Phân Đoạn Slide | Tên Tệp Chính Tắc | Mã Băm SHA-256 | Số Trang Nội Dung | Số Trang Đã Soạn Thảo | Số Trang Còn Thiếu | Trạng Thái |
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: |
-| **Chương 5 - Phần 1** | `#Week06-Chapter5-1 2024.pdf` | `2ef4be67449ea22aada6e8bd69b49b781bbcb8c6f0eb601b16e9f18a004c7416` | **63** | **63** | **0** | `CONTENT_DRAFTED` |
-| **Chương 5 - Phần 2** | `#Week07-Chapter5-2 2024.pdf` | `f7e9fc9eb9a35f3a02eb60b2c8e01fa134342d0c5256f47deef4247a0db141d2` | **68** | **68** | **0** | `CONTENT_DRAFTED` |
-| **TỔNG CỘNG** | — | — | **131** | **131** | **0** | **100% HOÀN TẤT** |
+| **Chương 5 - Phần 1** | `#Week06-Chapter5-1 2024.pdf` | `2ef4be67449ea22aada6e8bd69b49b781bbcb8c6f0eb601b16e9f18a004c7416` | **63** | **63** | **0** | `CONTENT_VERIFIED` |
+| **Chương 5 - Phần 2** | `#Week07-Chapter5-2 2024.pdf` | `f7e9fc9eb9a35f3a02eb60b2c8e01fa134342d0c5256f47deef4247a0db141d2` | **68** | **68** | **0** | `CONTENT_VERIFIED` |
+| **TỔNG CỘNG** | — | — | **131** | **131** | **0** | **131/131 VERIFIED** |
 
 ---
 
@@ -46,7 +46,7 @@ Các tệp nội dung đã tạo lập:
 
 1. **Phân tích Kiến trúc Hiện đại (Modern Architectures) đối với Peterson:**
    - Phân biệt rõ: Giải thuật Peterson **đúng đắn tuyệt đối về mặt toán học** dưới mô hình Sequential Consistency.
-   - Làm rõ hiện tượng *Instruction/Memory Reordering* do trình biên dịch và CPU Out-of-Order (OoO) trên phần cứng thực tế, dẫn đến nhu cầu bắt buộc phải chèn **Memory Barrier**.
+   - Làm rõ hiện tượng *Instruction/Memory Reordering* do trình biên dịch và CPU Out-of-Order (OoO) trên phần cứng thực tế. Hiện thực C/C++ portable cần atomics hoặc locking đúng cùng memory ordering phù hợp; một generic memory fence đơn lẻ không phải bằng chứng đúng đắn phổ quát.
 2. **Hiện thực Semaphore Mức Nhân (Kernel-Level Semaphore Implementation):**
    - Trình bày mã nguồn `typedef struct { int value; struct process *list; } semaphore;` với cơ chế `block()` và `wakeup()`.
    - Phân tích rõ ý nghĩa giá trị âm của `value` trong mô hình giáo trình ($|value|$ = số tiến trình chờ) và phân biệt với ngữ nghĩa POSIX `sem_wait`.
@@ -67,7 +67,7 @@ Các tệp nội dung đã tạo lập:
   - `xml_paragraph_count`: 129 đoạn.
   - `content_paragraph_count`: 128 đoạn.
   - `verified_question_count`: **18 câu hỏi/bài tập**.
-  - `drafted_answers`: **18/18 (100%)** tại [`content/questions/subjective/ch05.md`](content/questions/subjective/ch05.md).
+  - `verified_units`: **18/18 (100%)** tại [`content/questions/subjective/ch05.md`](content/questions/subjective/ch05.md), theo provenance chain đã được thiết lập (không tuyên bố tái kiểm tra byte-level khi binary vắng mặt).
 - **Chuẩn hóa cấu trúc lời giải:**
   Mỗi câu hỏi đều có đủ 8 trường chuẩn: `QUESTION`, `SOURCE`, `TYPE`, `MINIMUM ANSWER`, `REQUIRED KEY POINTS`, `FULL EXPLANATION`, `COMMON MISSING POINTS`, `COMMON WRONG CLAIMS`, `SELF_CHECK_RUBRIC`.
 
@@ -99,7 +99,7 @@ Các tệp nội dung đã tạo lập:
 
 - **OPEN CONTENT BLOCKERS:** **`0`**
 - **OPEN CONTENT MAJORS:** **`0`**
-- **OPEN CONTENT MINORS:** **`0`**
+- **OPEN CONTENT MINORS:** **`1`** — `ACAD-CH5-006`, a non-gating exact-QBank-binary evidence limitation; it does not reopen content verification.
 - **SẴN SÀNG SOẠN THẢO CHƯƠNG 6:** **`NO`** *(Chỉ sẵn sàng cho bước source-map audit; chưa bắt đầu authoring Chương 6.)*.
 
 ---
@@ -108,17 +108,17 @@ Các tệp nội dung đã tạo lập:
 
 This correction pass addressed source-fidelity and standards wording findings discovered after the Chapter 5 draft gate. The independent academic review and final validation are recorded in `research/LUNA_CH5_ACADEMIC_REVIEW.md`.
 
-- **CH5-PROV-001:** Canonical Part 2 references now use `UIT-SLIDE-CH05-2-2024`; the legacy Part 2 identity is absent repository-wide. QBank identity remains `UIT-QBANK-CH05-2024` with SHA-256 `503cd8fdb619bcfd664cfaa198915bc50d0ba6bb910c74d14ccff5252e646186` and 18 drafted units.
+- **CH5-PROV-001:** Canonical Part 2 references now use `UIT-SLIDE-CH05-2-2024`; the legacy Part 2 identity is absent repository-wide. QBank identity remains `UIT-QBANK-CH05-2024` with SHA-256 `503cd8fdb619bcfd664cfaa198915bc50d0ba6bb910c74d14ccff5252e646186` and 18 verified units under the established provenance chain.
 - **CH5-TECH-001:** The source-model semaphore invariant is stated explicitly (`S->value >= 0` counts waits that can proceed; negative values represent `|S->value|` waiters). POSIX/Linux behavior is separately labeled as a Tier-B technical note.
 - **CH5-TECH-002:** Atomicity wording no longer claims a single bus/cache cycle or an interrupt-timing guarantee. The atomic counter example is explicitly bounded to count-update atomicity and not a complete bounded-buffer solution. Monitor and POSIX/Linux details are labeled Tier-B where they exceed the UIT slide model.
-- **CH5-COVERAGE-001:** Canonical content ranges remain `CONTENT_DRAFTED`; all four non-content ranges (Part 1 pages 1–3 and 67; Part 2 pages 1–3 and 72) are `NOT_WRITTEN`.
-- **CH5-QA-001:** Draft validator now checks canonical source IDs, exact generated heading anchors, non-content statuses, neutral frontmatter metadata, and the standards/atomicity wording guards. Its PASS message states that independent academic verification is still pending.
+- **CH5-COVERAGE-001:** All 131 canonical content pages are now `CONTENT_VERIFIED`; all four non-content ranges (Part 1 pages 1–3 and 67; Part 2 pages 1–3 and 72) remain `NOT_WRITTEN`.
+- **CH5-QA-001:** Final-state validator checks canonical source IDs, exact generated heading anchors, `CONTENT_VERIFIED`/`NOT_WRITTEN` statuses, neutral frontmatter metadata, and the standards/atomicity wording guards. Its PASS message reports the verified academic state.
 
 **Previously known engineering issue (RESOLVED):** `CH5_NESTED_FENCED_CODE_RENDERING` — `scripts/build_web.py` now preserves fenced code blocks indented beneath list items and inside blockquotes as `<pre><code>` elements. The regression fixture and rebuilt Chapter 5 HTML both pass.
 
 **Open content blockers:** `0`  
 **Open content majors:** `0`  
-**Open content minors:** `0`
+**Open content minors:** `1` — `ACAD-CH5-006` non-gating evidence limitation only.
 
 ## ENGINEERING QA — NESTED FENCED CODE REGRESSION
 
@@ -128,4 +128,15 @@ This correction pass addressed source-fidelity and standards wording findings di
 - Browser smoke checks: desktop and 390px mobile render with zero root horizontal overflow; all 28 fenced C blocks remain selectable, including 18 inside list items and 1 inside a blockquote.
 - Publication regression: `scripts/validate_final.py` **PASS** with five existing non-failing internal solution-step width diagnostics; no root viewport overflow is present in the web checks above.
 - Generated output: Chapter 5 theory and subjective pages rebuilt; no Chapter 1–4 source files or Chapter 6 content were modified.
-- Engineering verification: **PASS — CH5 WEB RENDERER QA**. Academic verification remains pending.
+- Engineering verification: **PASS — CH5 WEB RENDERER QA**. Academic verification: **PASS — BATCH 1 + CH5**.
+
+## VERIFIED-STATE FINAL CLOSEOUT
+
+### STATE-CH5-001 — MAJOR — OPEN -> RESOLVED
+
+- **Reason:** Project-level verified state, slide-coverage statuses, validator
+  semantics, and this content report diverged after academic approval.
+- **Resolution:** All 131 canonical Chapter 5 CONTENT pages now carry
+  `CONTENT_VERIFIED`; all canonical NON_CONTENT ranges remain `NOT_WRITTEN`;
+  and the validator requires and reports the final verified state.
+- **Status:** resolved. Open blockers: **0**. Open majors: **0**.
