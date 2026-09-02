@@ -85,8 +85,9 @@ and synchronization semantics. Generic `memory_barrier()` wording is now
 qualified: portable implementations require atomics or lock primitives with a
 specified ordering; a fence alone is not a universal correctness proof.
 The semaphore negative-value description is explicitly the UIT slide's
-internal model, while POSIX behavior remains a separate Tier-B note. Monitor
-signaling is intentionally neutral about Hoare versus Mesa scheduling.
+internal model, while POSIX behavior remains a separate Tier-B note. The
+Tier-A monitor model is signal-and-wait with an urgent queue; a separate Tier-B
+note explains that Mesa-style runtimes may schedule differently.
 
 ## EXERCISE RE-DERIVATION
 
@@ -171,11 +172,12 @@ this review; no broad rewrite was performed.
 - **File/section:** theory §7.2 and QBank unit 8.
 - **Claim:** condition signaling was presented without naming the scheduling
   model.
-- **Technical analysis:** Hoare and Mesa monitors differ in when a signaled
-  thread runs; the slide does not select one.
-- **Required fix:** state the model-neutral rule and require predicate
-  re-checking in a concrete runtime.
-- **Status:** resolved with a Tier-B note.
+- **Technical analysis:** Before the later source-fidelity correction, the
+  draft did not record the UIT slide's signal-and-wait/urgent-queue model;
+  portability still differs across runtimes.
+- **Required fix:** record the Tier-A urgent-queue model and retain a distinct
+  Tier-B runtime note for Mesa-style scheduling.
+- **Status:** resolved in ACAD-CH5-008.
 
 ### ACAD-CH5-005 — MINOR — RESOLVED
 
@@ -196,13 +198,64 @@ this review; no broad rewrite was performed.
   the user re-attaches the exact binaries.
 - **Status:** open evidence limitation; it does not block the content gate.
 
+### ACAD-CH5-007 — MAJOR — OPEN -> RESOLVED
+
+- **File/section:** `content/theory/ch05-synchronization.md`, §3.1.
+- **Claim:** strict alternation marked Bounded Waiting as satisfied and said
+  each process waits at most one turn.
+- **Source evidence:** `UIT-SLIDE-CH05-1-2024`, p. 36, evaluates Bounded
+  Waiting as not guaranteed.
+- **Technical analysis:** If $P_i$ wants to enter while `turn` belongs to
+  $P_j$, and $P_j$ remains in its remainder section without returning to yield
+  the turn, $P_i$ can wait indefinitely even while the critical section is
+  empty.
+- **Required fix:** mark Bounded Waiting as not guaranteed and explain this
+  remainder-section counterexample; remove the bounded one-turn claim from
+  strict alternation (while retaining the separate Peterson analysis).
+- **Status:** resolved; the theory and generated output now state
+  **KHÔNG ĐẢM BẢO** and the possible infinite wait.
+
+### ACAD-CH5-008 — MAJOR — OPEN -> RESOLVED
+
+- **File/section:** theory §7.2 and QBank unit 8.
+- **Claim:** monitor signaling was described without the canonical scheduling
+  model distinction, leaving the source behavior underspecified.
+- **Source evidence:** `UIT-SLIDE-CH05-2-2024`, pp. 38–39, uses
+  signal-and-wait semantics: `x.wait()` enters the condition queue;
+  `x.signal()` moves one waiter into the monitor and the signaler blocks in
+  the urgent queue.
+- **Technical analysis:** Leaving the urgent-queue rule implicit makes the
+  source model look interchangeable with Mesa semantics and loses an exam-
+  relevant distinction.
+- **Required fix:** state the Tier-A urgent-queue behavior and preserve a
+  separate Tier-B portability note for other runtimes, without changing the
+  source question wording.
+- **Status:** resolved; theory and QBank unit 8 now include the canonical
+  signal-and-wait/urgent-queue model.
+
+### ACAD-CH5-009 — MAJOR — OPEN -> RESOLVED
+
+- **File/section:** theory §11.3 and QBank unit 9.
+- **Claim:** the Dining-Philosophers requirements said the listed solutions
+  eliminate both deadlock and starvation, implying universal fairness.
+- **Source evidence:** `UIT-SLIDE-CH05-2-2024`, p. 70, states that the Monitor
+  solution never deadlocks but starvation may still occur.
+- **Technical analysis:** Deadlock avoidance is a safety/liveness property
+  distinct from starvation-freedom; each technique requires its own fairness
+  argument.
+- **Required fix:** remove the universal starvation claim, state the
+  deadlock-free/starvation-possible Monitor distinction, and keep fairness
+  claims conditional on evidence.
+- **Status:** resolved; theory and QBank unit 9 now make the distinction
+  explicit.
+
 ## REVIEW DECISION
 
 No unresolved Chapter 5 content BLOCKER or MAJOR remains. The single open item
 is the explicitly documented inability to re-open the exact canonical binaries
-in this workspace; provenance and page-map evidence remain locked. Chapter 5
-may be marked `CONTENT_VERIFIED` only after the required deterministic
-validation suite passes.
+in this workspace; provenance and page-map evidence remain locked. The complete
+deterministic acceptance suite now passes, so Chapter 5 is eligible for
+`CONTENT_VERIFIED`; ACAD-CH5-006 remains a non-gating evidence limitation.
 
 ## VALIDATION RESULTS
 
@@ -218,4 +271,6 @@ The final post-review run passed:
 - `npm run web:build`
 
 The generated Chapter 5 theory and QBank HTML were rebuilt from the corrected
-Markdown. No Chapter 6 source or authoring work was started.
+Markdown after the ACAD-CH5-007 through ACAD-CH5-009 hotfixes. The strict
+alternation, monitor urgent-queue, and Dining starvation-freedom regression
+guards also passed. No Chapter 6 source or authoring work was started.

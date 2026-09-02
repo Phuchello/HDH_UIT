@@ -189,7 +189,11 @@ Xét hai tiến trình $P_0$ và $P_1$. Ký hiệu $P_i$ là tiến trình đang
 - **Phân tích 3 tiêu chí:**
   - **Mutual Exclusion:** **THỎA MÃN.** Tại một thời điểm, biến `turn` chỉ nhận một giá trị duy nhất ($0$ hoặc $1$), do đó không thể có chuyện cả $P_0$ và $P_1$ cùng vượt qua vòng lặp `while`.
   - **Progress:** **VI PHẠM.** Thuật toán ép buộc hai tiến trình phải luân phiên nghiêm ngặt (Strict Alternation). Giả sử `turn = 0`, $P_0$ vào miền găng, ra gán `turn = 1` rồi vào remainder section rất lâu. Nếu $P_1$ chạy xong và gán `turn = 0`, lúc này $P_0$ không muốn vào nữa nhưng $P_1$ muốn vào tiếp thì $P_1$ bị chặn vĩnh viễn ở `while (turn != 1)` dù miền găng đang trống!
-  - **Bounded Waiting:** **THỎA MÃN.** Mỗi tiến trình chỉ phải chờ tối đa 1 lượt.
+  - **Bounded Waiting:** **KHÔNG ĐẢM BẢO theo đánh giá của slide UIT.** Nếu
+    $P_i$ muốn vào nhưng `turn` đang thuộc về $P_j$ và $P_j$ vẫn ở trong
+    remainder section rất lâu (không quay lại để nhường lượt), thì $P_i$ có
+    thể phải chờ vô hạn dù miền găng đang trống. Vì vậy không được kết luận
+    rằng mỗi tiến trình chỉ chờ tối đa một lượt.
 
 ### 3.2 Giải pháp Phần mềm 2: Dùng mảng `flag[2]`
 
@@ -529,12 +533,19 @@ Mặc dù Semaphore rất mạnh mẽ, việc sử dụng sai thứ tự các l�
 - Hai thao tác cơ bản:
   1. `x.wait()`: Tiến trình gọi lệnh này sẽ bị tạm dừng và đưa vào hàng đợi của biến điều kiện $x$.
      > **Cơ chế bắt buộc:** Khi gọi `x.wait()`, tiến trình **bắt buộc phải tự động giải phóng khóa monitor** để tiến trình khác có thể vào monitor thay đổi điều kiện. Sau khi được đánh thức, tiến trình **phải tái chiếm lại khóa monitor** trước khi tiếp tục thực thi lệnh tiếp theo.
-  2. `x.signal()`: Đánh thức chính xác một tiến trình đang bị khóa trong hàng đợi của $x$. Nếu không có tiến trình nào đang chờ trên $x$, lệnh `signal()` không có tác dụng gì (khác hoàn toàn với Semaphore vốn sẽ tăng biến đếm).
+  2. `x.signal()`: Theo mô hình **signal-and-wait** trên slide UIT (trang
+     38–39), nếu hàng đợi điều kiện $x$ không rỗng, một tiến trình được
+     chuyển từ *condition queue* vào monitor. Tiến trình gọi `x.signal()` tạm
+     thời bị chặn trong **urgent queue** để giữ loại trừ tương hỗ; tiến trình
+     được đánh thức tiếp tục thực thi bên trong monitor. Nếu hàng đợi rỗng,
+     `signal()` không có tác dụng gì (khác hoàn toàn với Semaphore vốn sẽ
+     tăng biến đếm).
 
-> **TIER-B TECHNICAL NOTE — Monitor scheduling:** Hoare và Mesa có ngữ nghĩa
-> khác nhau về thời điểm thread được `signal()` chạy tiếp. Slide không chọn
-> một mô hình cụ thể; trong runtime thực tế, luôn kiểm tra lại predicate sau
-> khi tái chiếm khóa thay vì giả định điều kiện vẫn còn đúng.
+> **TIER-B TECHNICAL NOTE — Other runtimes:** Hoare-style
+> *signal-and-wait* và Mesa-style *signal-and-continue* có ngữ nghĩa khác
+> nhau về thời điểm thread được `signal()` chạy tiếp. Khi chuyển sang runtime
+> cụ thể, hãy tuân theo hợp đồng của runtime và thường kiểm tra lại predicate
+> sau khi tái chiếm khóa thay vì giả định điều kiện vẫn còn đúng.
 
 ---
 
@@ -748,7 +759,7 @@ do {
    - Triết gia có chỉ số chẵn ($0, 2, 4$) nhặt đũa phải trước, đũa trái sau.
    - Phá vỡ điều kiện chờ vòng tròn (Circular Wait), triệt tiêu hoàn toàn khả năng xảy ra deadlock.
 4. **Giải pháp sử dụng Monitor:**
-   Quản lý 3 trạng thái của mỗi triết gia `enum {THINKING, HUNGRY, EATING} state[5];` và sử dụng mảng biến điều kiện `condition self[5];` để đồng bộ.
+   Quản lý 3 trạng thái của mỗi triết gia `enum {THINKING, HUNGRY, EATING} state[5];` và sử dụng mảng biến điều kiện `condition self[5];` để đồng bộ. Theo slide UIT (trang 70), lời giải Monitor không bao giờ deadlock; tuy nhiên **starvation vẫn có thể xảy ra**. Vì vậy, deadlock-free không đồng nghĩa starvation-free và Monitor không tự bảo đảm fairness nếu không có lập luận/lịch công bằng riêng.
 
 ---
 

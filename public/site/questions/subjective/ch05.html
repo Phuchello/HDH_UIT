@@ -233,6 +233,8 @@
 
 <ul><li><em>Entry Queue:</em> Chứa các tiến trình chờ vào monitor.</li><li><em>Condition Queue:</em> Chứa các tiến trình đã vào monitor nhưng đang chờ điều kiện logic thông qua <code>x.wait()</code>.</li></ul>
 
+<p><strong>SOURCE MODEL — UIT slide trang 38–39:</strong> Với ngữ nghĩa<br><em>signal-and-wait</em>, <code>x.signal()</code> chuyển một tiến trình từ condition queue vào<br>monitor; tiến trình gọi <code>signal()</code> tạm thời chờ trong <strong>urgent queue</strong> để<br>tiến trình được đánh thức tiếp tục với loại trừ tương hỗ. Nếu condition queue<br>rỗng, <code>signal()</code> không có tác dụng.</p>
+
 <p><strong>TIER-B TECHNICAL NOTE — Language/runtime examples:</strong> Java <code>synchronized</code>, C# <code>Monitor</code>, hoặc các thư viện tương tự là các hiện thực cụ thể; chi tiết khóa và lịch đánh thức phụ thuộc vào ngôn ngữ/runtime, không nên gán chung cho mọi compiler.</p>
 
 <p><strong>COMMON MISSING POINTS:</strong> Quên giải thích cơ chế "nhả khóa khi wait và tái chiếm khóa khi thức dậy" của biến điều kiện.</p>
@@ -253,7 +255,7 @@
 
 <p><strong>MINIMUM ANSWER:</strong> Ba bài toán đồng bộ kinh điển gồm:</p>
 
-<ol><li><strong>Bounded-Buffer (Producer-Consumer):</strong><ul><li><em>Đặc điểm:</em> Bộ đệm vòng dung lượng $N$.</li><li><em>Yêu cầu:</em> Producer không ghi khi đệm đầy; Consumer không đọc khi đệm rỗng; truy xuất đệm phải độc quyền.</li></ul></li><li><strong>Readers-Writers:</strong><ul><li><em>Đặc điểm:</em> Nhiều Reader có thể đọc đồng thời; Writer cần độc quyền tuyệt đối.</li><li><em>Yêu cầu:</em> Không cho phép Writer ghi khi đang có Reader đọc hoặc Writer khác đang ghi; cần giải pháp cân bằng tránh Starvation cho Writer/Reader.</li></ul></li><li><strong>Dining-Philosophers:</strong><ul><li><em>Đặc điểm:</em> 5 triết gia chia sẻ 5 chiếc đũa, mỗi người cần 2 đũa kề cạnh để ăn.</li><li><em>Yêu cầu:</em> Loại trừ tương hỗ khi dùng đũa; triệt tiêu hoàn toàn nguy cơ Deadlock (chờ vòng tròn) và Starvation.</li></ul></li></ol>
+<ol><li><strong>Bounded-Buffer (Producer-Consumer):</strong><ul><li><em>Đặc điểm:</em> Bộ đệm vòng dung lượng $N$.</li><li><em>Yêu cầu:</em> Producer không ghi khi đệm đầy; Consumer không đọc khi đệm rỗng; truy xuất đệm phải độc quyền.</li></ul></li><li><strong>Readers-Writers:</strong><ul><li><em>Đặc điểm:</em> Nhiều Reader có thể đọc đồng thời; Writer cần độc quyền tuyệt đối.</li><li><em>Yêu cầu:</em> Không cho phép Writer ghi khi đang có Reader đọc hoặc Writer khác đang ghi; cần giải pháp cân bằng tránh Starvation cho Writer/Reader.</li></ul></li><li><strong>Dining-Philosophers:</strong><ul><li><em>Đặc điểm:</em> 5 triết gia chia sẻ 5 chiếc đũa, mỗi người cần 2 đũa kề cạnh để ăn.</li><li><em>Yêu cầu:</em> Loại trừ tương hỗ khi dùng đũa và tránh Deadlock (chờ vòng tròn). Starvation là thuộc tính liveness riêng; không được mặc định rằng mọi lời giải đều bảo đảm starvation-freedom.</li></ul></li></ol>
 
 <p><strong>REQUIRED KEY POINTS:</strong></p>
 
@@ -261,7 +263,7 @@
 
 <p><strong>FULL EXPLANATION:</strong></p>
 
-<ul><li><em>Bounded-Buffer:</em> Dùng 3 Semaphore (<code>mutex=1</code>, <code>empty=N</code>, <code>full=0</code>).</li><li><em>Readers-Writers:</em> Dùng <code>rw_mutex=1</code>, <code>mutex=1</code>, biến đếm <code>read_count=0</code> (kỹ thuật Reader đầu tiên khóa Writer, Reader cuối cùng nhả khóa).</li><li><em>Dining-Philosophers:</em> Dùng mảng <code>chopstick[5]</code>, áp dụng các giải pháp phi đối xứng, giới hạn 4 người, hoặc Monitor để tránh Deadlock.</li></ul>
+<ul><li><em>Bounded-Buffer:</em> Dùng 3 Semaphore (<code>mutex=1</code>, <code>empty=N</code>, <code>full=0</code>).</li><li><em>Readers-Writers:</em> Dùng <code>rw_mutex=1</code>, <code>mutex=1</code>, biến đếm <code>read_count=0</code> (kỹ thuật Reader đầu tiên khóa Writer, Reader cuối cùng nhả khóa).</li><li><em>Dining-Philosophers:</em> Dùng mảng <code>chopstick[5]</code>, áp dụng các giải pháp phi đối xứng, giới hạn 4 người, hoặc Monitor để tránh Deadlock. Theo slide UIT (trang 70), Monitor không bao giờ deadlock nhưng starvation vẫn có thể xảy ra; cần một lập luận fairness riêng nếu muốn bảo đảm starvation-freedom.</li></ul>
 
 <p><strong>COMMON MISSING POINTS:</strong> Thiếu 1 trong 3 bài toán; không nêu được yêu cầu đồng bộ cốt lõi của từng bài.</p>
 

@@ -101,6 +101,23 @@ def validate_ch05_content():
     if any(phrase in combined_text for phrase in bad_monitor_phrases):
         failures.append("Monitor semantics are incorrectly attributed to compiler alone")
 
+    # Guard the three Chapter 5 source-fidelity hotfixes against regression.
+    strict_alt_match = re.search(r"### 3\.1.*?(?=### 3\.2)", theory_text, re.IGNORECASE | re.DOTALL)
+    strict_alt = strict_alt_match.group(0).lower() if strict_alt_match else ""
+    if "bounded waiting" not in strict_alt or "không đảm bảo" not in strict_alt or "chờ vô hạn" not in strict_alt:
+        failures.append("Strict alternation must mark Bounded Waiting as not guaranteed with an infinite-wait counterexample")
+    if re.search(r"bounded waiting[^\n]{0,100}thỏa mãn", strict_alt):
+        failures.append("Strict alternation must not claim Bounded Waiting is satisfied")
+    if "urgent queue" not in combined_text or "condition queue" not in combined_text:
+        failures.append("Monitor source model must name condition queue and urgent queue")
+    if "slide không chọn một mô hình cụ thể" in combined_text:
+        failures.append("Obsolete monitor model-neutral wording remains")
+
+    dining_match = re.search(r"## 11\..*?(?=## Tóm tắt)", theory_text, re.IGNORECASE | re.DOTALL)
+    dining_text = dining_match.group(0).lower() if dining_match else ""
+    if "starvation vẫn có thể xảy ra" not in dining_text:
+        failures.append("Dining monitor solution must warn that starvation may still occur")
+
     # 2. Check Slide Coverage YAML Mapping and Anchors
     decks = parse_slide_coverage(COVERAGE_PATH)
     deck_by_id = {d.get("source_id"): d for d in decks}
@@ -210,6 +227,12 @@ def validate_ch05_content():
         for ex_kw in ["dekker", "turn = i", "swap", "na", "nb", "t1", "t4", "x == 20", "a1", "b1", "100", "x1 * x2"]:
             if ex_kw not in qbank_lower:
                 failures.append(f"Chapter 5 QBank missing exercise topic keyword: '{ex_kw}'")
+        q9_match = re.search(r"### câu 9.*?(?=### câu 10)", qbank_text, re.IGNORECASE | re.DOTALL)
+        q9_text = q9_match.group(0).lower() if q9_match else ""
+        if "triệt tiêu hoàn toàn nguy cơ deadlock (chờ vòng tròn) và starvation" in q9_text:
+            failures.append("QBank unit 9 must not claim every Dining solution eliminates starvation")
+        if "starvation là thuộc tính liveness riêng" not in q9_text:
+            failures.append("QBank unit 9 must distinguish deadlock avoidance from starvation-freedom")
 
     if failures:
         print("FAIL: Chapter 5 content validation failed:")
