@@ -214,12 +214,13 @@ sources:
     title: "Slide Bài giảng Tuần 11 - Chương 6: Bế tắc (Deadlock)"
     exact_filename: "Week11-Chapter6 2024.pdf"
     sha256: "e55bf22554028859fc30747a39e72d97ca6e1e3c37e5a1bdcdc5ab94a7c3b56e"
+    byte_size: 5816540
     page_count: 67
     year: "2024"
     author: "Khoa Kỹ thuật Máy tính - UIT"
     public_url: "https://courses.uit.edu.vn"
     status: "VERIFIED_LOCAL"
-    notes: "Slide chính thức Chương 6 (67 trang)."
+    notes: "Canonical local source binary verified from the supplied IT007 corpus: 5,816,540 bytes, 67 physical pages."
 
   - id: "UIT-SLIDE-CH07-2024"
     tier: "A"
@@ -337,11 +338,12 @@ sources:
     title: "Bộ bài tập ôn tập Chương 6: Deadlock"
     exact_filename: "Bai tap chuong 6 HDH.docx"
     sha256: "f8f82cc2a29641fbe7545d172485356dfdd78d7a398c01e1f784afca06a25803"
+    byte_size: 101550
     year: "2024"
     author: "Khoa KTMT - UIT"
     public_url: "https://courses.uit.edu.vn"
     status: "VERIFIED_LOCAL"
-    notes: "560 đoạn bài tập thuật toán Banker và Deadlock."
+    notes: "Canonical local source binary verified from the supplied IT007 corpus: 101,550 bytes, 582 XML paragraphs (560 non-empty)."
 
   - id: "UIT-QBANK-CH07-2024"
     tier: "A"

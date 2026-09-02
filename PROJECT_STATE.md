@@ -2,13 +2,14 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH2_CH5_LOCKED_READY_FOR_CH6_SOURCE_MAPPING`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_INDEPENDENT_CHECK`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
+**Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `MAPPED — PENDING INDEPENDENT CHECK`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — 131 canonical content pages verified with 0 missing pages; 18/18 QBank units verified under the established SHA-256 provenance chain.  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5`  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Luna Ultra performs the canonical Chapter 6 source-map audit before any Chapter 6 authoring.  
+**Hành động tiếp theo chính xác (Exact Next Action):** Independent canonical Chapter 6 source-map review before any Chapter 6 authoring.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-09-02
 
@@ -51,6 +52,7 @@ Một kho dữ liệu nguồn duy nhất (**Single Source of Truth** tại thư 
 | [`research/data/exam_evidence.yaml`](research/data/exam_evidence.yaml) | Dữ liệu cấu trúc 20 hồ sơ đề thi: 1 `RECONSTRUCTED_PRACTICE`, 19 `UNVERIFIED_REFERENCE`, 0 `VERIFIED_ARCHIVE`; có đối soát mã băm/tệp khi khả dụng. | `EVIDENCE-AWARE` |
 | [`content/sources/registry.yaml`](content/sources/registry.yaml) | Sổ đăng ký 66 mã định danh, tách canonical user attachments Ch4 74/59, Midterm 17-slide PPTX và Ch5 tương lai khỏi mọi local variants. | `SOURCE-FIDELITY PASS` |
 | [`research/GLM_V2_ARCHITECTURE_AUDIT.md`](research/GLM_V2_ARCHITECTURE_AUDIT.md) | Nhật ký xử lý 100% các phát hiện kiểm toán GLM (8 Blockers, 7 Majors). | `RESOLVED` |
+| [`research/LUNA_CH6_SOURCE_MAP_REPORT.md`](research/LUNA_CH6_SOURCE_MAP_REPORT.md) | Bản đồ nguồn chính tắc Chương 6: 67 trang, locators thuật toán, QBank và đối soát outline. | `PASS — PENDING INDEPENDENT CHECK` |
 
 ---
 

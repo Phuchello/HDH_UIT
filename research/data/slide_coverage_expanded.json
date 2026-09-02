@@ -7476,10 +7476,10 @@
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 1,
-      "heading": "Trang bìa & mục tiêu",
+      "heading": "Trang bìa, mục tiêu và nội dung",
       "subheading": "",
       "bullet_clusters": [
-        "Trang bìa & mục tiêu"
+        "Trang bìa, mục tiêu và nội dung"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7492,10 +7492,10 @@
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 2,
-      "heading": "Trang bìa & mục tiêu",
+      "heading": "Trang bìa, mục tiêu và nội dung",
       "subheading": "",
       "bullet_clusters": [
-        "Trang bìa & mục tiêu"
+        "Trang bìa, mục tiêu và nội dung"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7508,10 +7508,10 @@
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 3,
-      "heading": "Trang bìa & mục tiêu",
+      "heading": "Trang bìa, mục tiêu và nội dung",
       "subheading": "",
       "bullet_clusters": [
-        "Trang bìa & mục tiêu"
+        "Trang bìa, mục tiêu và nội dung"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7524,10 +7524,10 @@
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 4,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.1.1 Vấn đề deadlock: section, semaphore interleaving và tình huống deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.1.1 Vấn đề deadlock: section, semaphore interleaving và tình huống deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7535,15 +7535,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "4-7"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 5,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.1.1 Vấn đề deadlock: section, semaphore interleaving và tình huống deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.1.1 Vấn đề deadlock: section, semaphore interleaving và tình huống deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7551,15 +7551,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "4-7"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 6,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.1.1 Vấn đề deadlock: section, semaphore interleaving và tình huống deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.1.1 Vấn đề deadlock: section, semaphore interleaving và tình huống deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7567,15 +7567,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "4-7"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 7,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.1.1 Vấn đề deadlock: section, semaphore interleaving và tình huống deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.1.1 Vấn đề deadlock: section, semaphore interleaving và tình huống deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7583,15 +7583,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "4-7"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 8,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.1.2 Định nghĩa deadlock và trì hoãn vô hạn định",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.1.2 Định nghĩa deadlock và trì hoãn vô hạn định"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7599,15 +7599,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "8-9"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 9,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.1.2 Định nghĩa deadlock và trì hoãn vô hạn định",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.1.2 Định nghĩa deadlock và trì hoãn vô hạn định"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7615,15 +7615,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "8-9"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 10,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.1.3 Bốn điều kiện Coffman: mutual exclusion, hold and wait, no preemption, circular wait",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.1.3 Bốn điều kiện Coffman: mutual exclusion, hold and wait, no preemption, circular wait"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7631,15 +7631,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "10-12"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 11,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.1.3 Bốn điều kiện Coffman: mutual exclusion, hold and wait, no preemption, circular wait",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.1.3 Bốn điều kiện Coffman: mutual exclusion, hold and wait, no preemption, circular wait"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7647,15 +7647,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "10-12"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 12,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.1.3 Bốn điều kiện Coffman: mutual exclusion, hold and wait, no preemption, circular wait",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.1.3 Bốn điều kiện Coffman: mutual exclusion, hold and wait, no preemption, circular wait"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7663,15 +7663,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "10-12"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 13,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2 Mô hình hóa hệ thống: loại tài nguyên và số thực thể",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2 Mô hình hóa hệ thống: loại tài nguyên và số thực thể"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7679,15 +7679,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "13-14"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 14,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2 Mô hình hóa hệ thống: loại tài nguyên và số thực thể",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2 Mô hình hóa hệ thống: loại tài nguyên và số thực thể"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7695,15 +7695,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "13-14"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 15,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2.1 Đồ thị cấp phát tài nguyên RAG: đỉnh, cạnh và ký hiệu thực thể",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2.1 Đồ thị cấp phát tài nguyên RAG: đỉnh, cạnh và ký hiệu thực thể"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7711,15 +7711,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "15-17"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 16,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2.1 Đồ thị cấp phát tài nguyên RAG: đỉnh, cạnh và ký hiệu thực thể",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2.1 Đồ thị cấp phát tài nguyên RAG: đỉnh, cạnh và ký hiệu thực thể"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7727,15 +7727,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "15-17"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 17,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2.1 Đồ thị cấp phát tài nguyên RAG: đỉnh, cạnh và ký hiệu thực thể",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2.1 Đồ thị cấp phát tài nguyên RAG: đỉnh, cạnh và ký hiệu thực thể"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7743,15 +7743,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "15-17"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 18,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2.2 Các ví dụ RAG: đồ thị có deadlock và chu trình không deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2.2 Các ví dụ RAG: đồ thị có deadlock và chu trình không deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7759,15 +7759,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "18-21"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 19,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2.2 Các ví dụ RAG: đồ thị có deadlock và chu trình không deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2.2 Các ví dụ RAG: đồ thị có deadlock và chu trình không deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7775,15 +7775,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "18-21"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 20,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2.2 Các ví dụ RAG: đồ thị có deadlock và chu trình không deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2.2 Các ví dụ RAG: đồ thị có deadlock và chu trình không deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7791,15 +7791,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "18-21"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 21,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2.2 Các ví dụ RAG: đồ thị có deadlock và chu trình không deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2.2 Các ví dụ RAG: đồ thị có deadlock và chu trình không deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7807,15 +7807,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "18-21"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 22,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2.3 RAG và deadlock: single/multiple instances, tiêu chí chu trình và Bài tập 1",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2.3 RAG và deadlock: single/multiple instances, tiêu chí chu trình và Bài tập 1"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7823,15 +7823,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "22-24"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 23,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2.3 RAG và deadlock: single/multiple instances, tiêu chí chu trình và Bài tập 1",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2.3 RAG và deadlock: single/multiple instances, tiêu chí chu trình và Bài tập 1"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7839,15 +7839,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "22-24"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 24,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.2.3 RAG và deadlock: single/multiple instances, tiêu chí chu trình và Bài tập 1",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.2.3 RAG và deadlock: single/multiple instances, tiêu chí chu trình và Bài tập 1"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7855,15 +7855,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "22-24"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 25,
-      "heading": "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock",
+      "heading": "6.3 Phương pháp giải quyết deadlock: prevention, avoidance, detection và recovery",
       "subheading": "",
       "bullet_clusters": [
-        "4 điều kiện Coffman, Đồ thị cấp phát tài nguyên RAG & Phòng ngừa Deadlock"
+        "6.3 Phương pháp giải quyết deadlock: prevention, avoidance, detection và recovery"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7871,111 +7871,111 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "4-25"
+      "range": "25-26"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 26,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3 Phương pháp giải quyết deadlock: prevention, avoidance, detection và recovery",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3 Phương pháp giải quyết deadlock: prevention, avoidance, detection và recovery"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
+      "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "25-26"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 27,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.1 Ngăn deadlock: mutual exclusion, hold-and-wait, no preemption và thứ tự tài nguyên",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.1 Ngăn deadlock: mutual exclusion, hold-and-wait, no preemption và thứ tự tài nguyên"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
+      "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "27-31"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 28,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.1 Ngăn deadlock: mutual exclusion, hold-and-wait, no preemption và thứ tự tài nguyên",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.1 Ngăn deadlock: mutual exclusion, hold-and-wait, no preemption và thứ tự tài nguyên"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
+      "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "27-31"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 29,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.1 Ngăn deadlock: mutual exclusion, hold-and-wait, no preemption và thứ tự tài nguyên",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.1 Ngăn deadlock: mutual exclusion, hold-and-wait, no preemption và thứ tự tài nguyên"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
+      "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "27-31"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 30,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.1 Ngăn deadlock: mutual exclusion, hold-and-wait, no preemption và thứ tự tài nguyên",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.1 Ngăn deadlock: mutual exclusion, hold-and-wait, no preemption và thứ tự tài nguyên"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
+      "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "27-31"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 31,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.1 Ngăn deadlock: mutual exclusion, hold-and-wait, no preemption và thứ tự tài nguyên",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.1 Ngăn deadlock: mutual exclusion, hold-and-wait, no preemption và thứ tự tài nguyên"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
+      "v2_destination": "content/theory/ch06-deadlock.md#1-coffman-rag",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "27-31"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 32,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.2 Tránh deadlock: yêu cầu thông tin Max và cấp phát thích hợp",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.2 Tránh deadlock: yêu cầu thông tin Max và cấp phát thích hợp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7983,15 +7983,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "32-33"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 33,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.2 Tránh deadlock: yêu cầu thông tin Max và cấp phát thích hợp",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.2 Tránh deadlock: yêu cầu thông tin Max và cấp phát thích hợp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -7999,15 +7999,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "32-33"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 34,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.2.1–6.3.2.2 Safe/unsafe state và quan hệ với deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.2.1–6.3.2.2 Safe/unsafe state và quan hệ với deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8015,15 +8015,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "34-37"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 35,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.2.1–6.3.2.2 Safe/unsafe state và quan hệ với deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.2.1–6.3.2.2 Safe/unsafe state và quan hệ với deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8031,15 +8031,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "34-37"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 36,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.2.1–6.3.2.2 Safe/unsafe state và quan hệ với deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.2.1–6.3.2.2 Safe/unsafe state và quan hệ với deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8047,15 +8047,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "34-37"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 37,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.2.1–6.3.2.2 Safe/unsafe state và quan hệ với deadlock",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.2.1–6.3.2.2 Safe/unsafe state và quan hệ với deadlock"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8063,15 +8063,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "34-37"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 38,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.2.3 Thuật toán tránh deadlock: RAG single-instance và Banker multiple-instance",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.2.3 Thuật toán tránh deadlock: RAG single-instance và Banker multiple-instance"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8079,15 +8079,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "38-40"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 39,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.2.3 Thuật toán tránh deadlock: RAG single-instance và Banker multiple-instance",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.2.3 Thuật toán tránh deadlock: RAG single-instance và Banker multiple-instance"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8095,15 +8095,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "38-40"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 40,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.2.3 Thuật toán tránh deadlock: RAG single-instance và Banker multiple-instance",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.2.3 Thuật toán tránh deadlock: RAG single-instance và Banker multiple-instance"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8111,15 +8111,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "38-40"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 41,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "Banker Safety: Available, Max, Allocation, Need, Work, Finish và ví dụ T0",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "Banker Safety: Available, Max, Allocation, Need, Work, Finish và ví dụ T0"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8127,15 +8127,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "41-44"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 42,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "Banker Safety: Available, Max, Allocation, Need, Work, Finish và ví dụ T0",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "Banker Safety: Available, Max, Allocation, Need, Work, Finish và ví dụ T0"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8143,15 +8143,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "41-44"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 43,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "Banker Safety: Available, Max, Allocation, Need, Work, Finish và ví dụ T0",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "Banker Safety: Available, Max, Allocation, Need, Work, Finish và ví dụ T0"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8159,15 +8159,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "41-44"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 44,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "Banker Safety: Available, Max, Allocation, Need, Work, Finish và ví dụ T0",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "Banker Safety: Available, Max, Allocation, Need, Work, Finish và ví dụ T0"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8175,15 +8175,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "41-44"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 45,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "Banker Resource-request: Request ≤ Need/Available, giả lập cấp phát và safe sequence",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "Banker Resource-request: Request ≤ Need/Available, giả lập cấp phát và safe sequence"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8191,15 +8191,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "45-49"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 46,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "Banker Resource-request: Request ≤ Need/Available, giả lập cấp phát và safe sequence",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "Banker Resource-request: Request ≤ Need/Available, giả lập cấp phát và safe sequence"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8207,15 +8207,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "45-49"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 47,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "Banker Resource-request: Request ≤ Need/Available, giả lập cấp phát và safe sequence",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "Banker Resource-request: Request ≤ Need/Available, giả lập cấp phát và safe sequence"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8223,15 +8223,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "45-49"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 48,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "Banker Resource-request: Request ≤ Need/Available, giả lập cấp phát và safe sequence",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "Banker Resource-request: Request ≤ Need/Available, giả lập cấp phát và safe sequence"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8239,15 +8239,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "45-49"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 49,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "Banker Resource-request: Request ≤ Need/Available, giả lập cấp phát và safe sequence",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "Banker Resource-request: Request ≤ Need/Available, giả lập cấp phát và safe sequence"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8255,95 +8255,239 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "45-49"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 50,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.3 Detection: Wait-for graph, RAG tương ứng và Allocation/Request/Available",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.3 Detection: Wait-for graph, RAG tương ứng và Allocation/Request/Available"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "50-54"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 51,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.3 Detection: Wait-for graph, RAG tương ứng và Allocation/Request/Available",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.3 Detection: Wait-for graph, RAG tương ứng và Allocation/Request/Available"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "50-54"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 52,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.3 Detection: Wait-for graph, RAG tương ứng và Allocation/Request/Available",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.3 Detection: Wait-for graph, RAG tương ứng và Allocation/Request/Available"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "50-54"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 53,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.3 Detection: Wait-for graph, RAG tương ứng và Allocation/Request/Available",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.3 Detection: Wait-for graph, RAG tương ứng và Allocation/Request/Available"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "50-54"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 54,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.3 Detection: Wait-for graph, RAG tương ứng và Allocation/Request/Available",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.3 Detection: Wait-for graph, RAG tương ứng và Allocation/Request/Available"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
+      "range": "50-54"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 55,
-      "heading": "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)",
+      "heading": "6.3.3.1 Detection algorithm và ví dụ: Work, Finish, Allocation, Request, Available",
       "subheading": "",
       "bullet_clusters": [
-        "Tránh Deadlock: Safe State & Thuật toán Banker (Safety + Request)"
+        "6.3.3.1 Detection algorithm và ví dụ: Work, Finish, Allocation, Request, Available"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
+      "content_status": "NOT_WRITTEN",
+      "range": "55-58"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH06-2024",
+      "page": 56,
+      "heading": "6.3.3.1 Detection algorithm và ví dụ: Work, Finish, Allocation, Request, Available",
+      "subheading": "",
+      "bullet_clusters": [
+        "6.3.3.1 Detection algorithm và ví dụ: Work, Finish, Allocation, Request, Available"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
+      "content_status": "NOT_WRITTEN",
+      "range": "55-58"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH06-2024",
+      "page": 57,
+      "heading": "6.3.3.1 Detection algorithm và ví dụ: Work, Finish, Allocation, Request, Available",
+      "subheading": "",
+      "bullet_clusters": [
+        "6.3.3.1 Detection algorithm và ví dụ: Work, Finish, Allocation, Request, Available"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
+      "content_status": "NOT_WRITTEN",
+      "range": "55-58"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH06-2024",
+      "page": 58,
+      "heading": "6.3.3.1 Detection algorithm và ví dụ: Work, Finish, Allocation, Request, Available",
+      "subheading": "",
+      "bullet_clusters": [
+        "6.3.3.1 Detection algorithm và ví dụ: Work, Finish, Allocation, Request, Available"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
+      "content_status": "NOT_WRITTEN",
+      "range": "55-58"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH06-2024",
+      "page": 59,
+      "heading": "6.3.3.2 Recovery: termination, resource preemption, victim selection và rollback",
+      "subheading": "",
+      "bullet_clusters": [
+        "6.3.3.2 Recovery: termination, resource preemption, victim selection và rollback"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
+      "content_status": "NOT_WRITTEN",
+      "range": "59-62"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH06-2024",
+      "page": 60,
+      "heading": "6.3.3.2 Recovery: termination, resource preemption, victim selection và rollback",
+      "subheading": "",
+      "bullet_clusters": [
+        "6.3.3.2 Recovery: termination, resource preemption, victim selection và rollback"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
+      "content_status": "NOT_WRITTEN",
+      "range": "59-62"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH06-2024",
+      "page": 61,
+      "heading": "6.3.3.2 Recovery: termination, resource preemption, victim selection và rollback",
+      "subheading": "",
+      "bullet_clusters": [
+        "6.3.3.2 Recovery: termination, resource preemption, victim selection và rollback"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
+      "content_status": "NOT_WRITTEN",
+      "range": "59-62"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH06-2024",
+      "page": 62,
+      "heading": "6.3.3.2 Recovery: termination, resource preemption, victim selection và rollback",
+      "subheading": "",
+      "bullet_clusters": [
+        "6.3.3.2 Recovery: termination, resource preemption, victim selection và rollback"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
+      "content_status": "NOT_WRITTEN",
+      "range": "59-62"
+    },
+    {
+      "source_id": "UIT-SLIDE-CH06-2024",
+      "page": 63,
+      "heading": "Tóm tắt nội dung Chương 6",
+      "subheading": "",
+      "bullet_clusters": [
+        "Tóm tắt nội dung Chương 6"
+      ],
+      "terms": [],
+      "questionable_or_exam_relevant_properties": [],
+      "classification": "CONTENT",
+      "mapping_status": "MAPPED",
+      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
+      "content_status": "NOT_WRITTEN",
+      "range": 63
+    },
+    {
+      "source_id": "UIT-SLIDE-CH06-2024",
+      "page": 64,
+      "heading": "6.6 Bài tập 2–4: Need, Safe State, Banker requests và chuỗi an toàn",
+      "subheading": "",
+      "bullet_clusters": [
+        "6.6 Bài tập 2–4: Need, Safe State, Banker requests và chuỗi an toàn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8351,191 +8495,47 @@
       "mapping_status": "MAPPED",
       "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "26-55"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH06-2024",
-      "page": 56,
-      "heading": "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock",
-      "subheading": "",
-      "bullet_clusters": [
-        "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
-      "content_status": "NOT_WRITTEN",
-      "range": "56-65"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH06-2024",
-      "page": 57,
-      "heading": "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock",
-      "subheading": "",
-      "bullet_clusters": [
-        "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
-      "content_status": "NOT_WRITTEN",
-      "range": "56-65"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH06-2024",
-      "page": 58,
-      "heading": "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock",
-      "subheading": "",
-      "bullet_clusters": [
-        "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
-      "content_status": "NOT_WRITTEN",
-      "range": "56-65"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH06-2024",
-      "page": 59,
-      "heading": "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock",
-      "subheading": "",
-      "bullet_clusters": [
-        "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
-      "content_status": "NOT_WRITTEN",
-      "range": "56-65"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH06-2024",
-      "page": 60,
-      "heading": "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock",
-      "subheading": "",
-      "bullet_clusters": [
-        "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
-      "content_status": "NOT_WRITTEN",
-      "range": "56-65"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH06-2024",
-      "page": 61,
-      "heading": "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock",
-      "subheading": "",
-      "bullet_clusters": [
-        "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
-      "content_status": "NOT_WRITTEN",
-      "range": "56-65"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH06-2024",
-      "page": 62,
-      "heading": "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock",
-      "subheading": "",
-      "bullet_clusters": [
-        "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
-      "content_status": "NOT_WRITTEN",
-      "range": "56-65"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH06-2024",
-      "page": 63,
-      "heading": "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock",
-      "subheading": "",
-      "bullet_clusters": [
-        "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
-      "content_status": "NOT_WRITTEN",
-      "range": "56-65"
-    },
-    {
-      "source_id": "UIT-SLIDE-CH06-2024",
-      "page": 64,
-      "heading": "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock",
-      "subheading": "",
-      "bullet_clusters": [
-        "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock"
-      ],
-      "terms": [],
-      "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
-      "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
-      "content_status": "NOT_WRITTEN",
-      "range": "56-65"
+      "range": "64-66"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 65,
-      "heading": "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock",
+      "heading": "6.6 Bài tập 2–4: Need, Safe State, Banker requests và chuỗi an toàn",
       "subheading": "",
       "bullet_clusters": [
-        "Phát hiện Deadlock (Wait-for graph) & Phục hồi Deadlock"
+        "6.6 Bài tập 2–4: Need, Safe State, Banker requests và chuỗi an toàn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch06-deadlock.md#3-detection-recovery",
+      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "56-65"
+      "range": "64-66"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 66,
-      "heading": "Tổng kết Chương 6",
+      "heading": "6.6 Bài tập 2–4: Need, Safe State, Banker requests và chuỗi an toàn",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng kết Chương 6"
+        "6.6 Bài tập 2–4: Need, Safe State, Banker requests và chuỗi an toàn"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
-      "classification": "NON_CONTENT",
+      "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "None (Meta)",
+      "v2_destination": "content/theory/ch06-deadlock.md#2-banker",
       "content_status": "NOT_WRITTEN",
-      "range": "66-67"
+      "range": "64-66"
     },
     {
       "source_id": "UIT-SLIDE-CH06-2024",
       "page": 67,
-      "heading": "Tổng kết Chương 6",
+      "heading": "Thảo luận / kết thúc",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng kết Chương 6"
+        "Thảo luận / kết thúc"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8543,7 +8543,7 @@
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
       "content_status": "NOT_WRITTEN",
-      "range": "66-67"
+      "range": 67
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
