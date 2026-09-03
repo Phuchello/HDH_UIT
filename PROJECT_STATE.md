@@ -2,16 +2,17 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_INDEPENDENT_CHECK`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_INDEPENDENT_RECHECK`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
-**Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `MAPPED — PENDING INDEPENDENT CHECK`  
+**Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `MAPPED — PENDING FINAL INDEPENDENT RECHECK`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — 131 canonical content pages verified with 0 missing pages; 18/18 QBank units verified under the established SHA-256 provenance chain.  
+**Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `NOT_STARTED`  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — Repaired canonical Chapter 6 source map ready for independent check; all 4 independent findings resolved.  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5`  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Independent canonical Chapter 6 source-map review before any Chapter 6 authoring.  
+**Hành động tiếp theo chính xác (Exact Next Action):** Independent recheck of the repaired canonical Chapter 6 source map.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
-**Thời gian cập nhật:** 2026-09-02
+**Thời gian cập nhật:** 2026-09-03
 
 ---
 

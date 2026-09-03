@@ -12,6 +12,7 @@
     "validate:research": "python scripts/verify_research_gates.py",
     "validate:ch05": "python scripts/validate_ch05_source_map.py",
     "validate:ch05-content": "python scripts/validate_ch05_content.py",
+    "validate:ch06": "python scripts/validate_ch06_source_map.py",
     "validate:routes": "python scripts/validate_site_routes.py",
     "validate:negative": "python scripts/run_negative_tests.py",
     "validate:renderer": "python scripts/stress_test_web_renderer.py",

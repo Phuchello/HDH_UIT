@@ -34,6 +34,7 @@ jobs:
           python scripts/validate_batch1_canonical.py
           python scripts/validate_ch05_source_map.py
           python scripts/validate_ch05_content.py
+          python scripts/validate_ch06_source_map.py
           python scripts/check_batch1_numeric.py
           python scripts/validate.py
           python scripts/validate_final.py

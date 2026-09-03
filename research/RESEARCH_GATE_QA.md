@@ -1,6 +1,6 @@
 # RESEARCH GATE QUALITY ASSURANCE REPORT (HDH_UIT V2)
 
-**Thời gian thẩm định:** 2026-09-02
+**Thời gian thẩm định:** 2026-09-03
 **Chế độ:** `REPO_ONLY`
 **GATE STATUS:** **PASS**
 
@@ -8,7 +8,7 @@ All totals below are computed from registry records, expanded slide-page records
 
 | Metric | Actual | Requirement | Result |
 |---|---:|---|:---:|
-| Registered sources | 67 | unique IDs and required schema | **PASS** |
+| Registered sources | 72 | unique IDs and required schema | **PASS** |
 | Tier-A local files / hash checks | 0 / 0 | REPO_ONLY is informational; LOCAL requires all hashes | **PASS** |
 | Physical slide pages | 713 | sum of referenced deck registry page/slide counts | **PASS** |
 | Expanded coverage records | 713 | exactly physical-page total | **PASS** |
@@ -16,8 +16,8 @@ All totals below are computed from registry records, expanded slide-page records
 | Coverage gaps / duplicates / schema errors | 0 / 0 / 0 | zero | **PASS** |
 | Unmapped content pages | 0 | zero | **PASS** |
 | Verified content pages | 438 | informational current verified set | **INFO** |
-| Official question records | 95 | count of structured records | **PASS** |
-| Mapped / unmapped questions | 95 / 0 | zero unmapped; required fields | **PASS** |
+| Official question records | 104 | count of structured records | **PASS** |
+| Mapped / unmapped questions | 104 / 0 | zero unmapped; required fields | **PASS** |
 | Drafted questions | 0 | informational current authored set | **INFO** |
 | Exam evidence records | 20 | valid record schema | **PASS** |
 | Public hygiene | — | no forbidden paths | **PASS** |

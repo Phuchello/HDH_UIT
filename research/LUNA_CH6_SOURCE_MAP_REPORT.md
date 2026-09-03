@@ -1,154 +1,277 @@
-# LUNA CH6 SOURCE MAP REPORT
+# LUNA CH6 SOURCE MAP REPORT (INDEPENDENT SOURCE-FIDELITY REPAIR)
 
 **Scope:** Chapter 6 canonical source mapping only (no Chapter 6 authoring, no renderer/build changes).  
 **Repository:** `Phuchello/HDH_UIT`  
 **Branch:** `v2/complete-theory-labs`  
-**Reviewed HEAD:** `06e4b34ef14d60398e462e437470bb6a37157996` (`docs(v2): finalize chapter5 verified state`)  
-**Audit date:** 2026-09-02  
-**Chapter 6 authoring state:** `NOT_STARTED`
+**Reviewed HEAD:** `fc7d110bd5c9a94f2182c017e09488afd1c7c127` (`research(v2): map canonical chapter6 sources`)  
+**Audit date:** 2026-09-03  
+**Auditor / Role:** Codex Luna Ultra / Independent Source-Fidelity Auditor  
+**Current Phase:** `V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_INDEPENDENT_RECHECK`  
+**Chapter 6 Source Mapping:** `MAPPED — PENDING FINAL INDEPENDENT RECHECK`  
+**Chapter 6 Authoring state:** `NOT_STARTED`  
+
+---
 
 ## REVIEWED HEAD
 
-The locked Chapters 1–5 baseline was inspected at the reviewed HEAD. No Chapter 1–5 theory, question, review, renderer, or build files were changed by this audit. The only source-map changes are the Chapter 6 registry evidence fields, Chapter 6 semantic coverage ranges, this report, and the deterministic validator.
+The locked Chapters 1–5 baseline was inspected at the reviewed HEAD (`fc7d110`). No Chapter 1–5 theory, question, review, renderer, or build files were changed by this repair audit. The only files modified are:
+- `PROJECT_STATE.md`: Updated to `V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_INDEPENDENT_RECHECK`.
+- `content/sources/registry.yaml`: Canonical 2024 outline updated, outline variant separated, student DOCX and PDF variants registered.
+- `research/data/official_review_questions.yaml`: Chapter 6 QBank records expanded from 6 to the complete 15 source units derived from the canonical binary.
+- `research/LUNA_CH6_SOURCE_MAP_REPORT.md`: This comprehensive independent repair report.
+- `scripts/validate_ch06_source_map.py`: Validator hardened to enforce all 4 resolved findings.
+
+---
 
 ## SOURCE BINARIES DISCOVERED
 
-The supplied IT007 source corpus was available in the adjacent local `IT003_DSA_BOOK` extraction workspace. Exact filenames were located and hashed directly; no binary was copied into the handbook repository.
+All source corpora in user attachment directories, local drive extractions, and OneDrive course archives were physically discovered, independently hashed, and verified.
 
-| Classification | Exact filename | Local evidence | Size | Structural count | Result |
-|---|---|---|---:|---:|---|
-| `official_slide` | `Week11-Chapter6 2024.pdf` | supplied IT007 corpus | 5,816,540 bytes | 67 PDF pages | discovered and verified |
-| `official_qbank` | `Bai tap chuong 6 HDH.docx` | supplied IT007 corpus | 101,550 bytes | 582 XML paragraphs / 560 non-empty | discovered and verified |
-| `course_outline` | `De cuong.pdf` | supplied IT007 corpus | recorded registry identity | 19 PDF pages | discovered and verified |
+| Classification | Source ID | Exact filename | Size (bytes) | Structural count | SHA-256 Digest | Status & Provenance |
+|---|---|---|---:|---|---|---|
+| `official_outline` | `UIT-OUTLINE-2024` | `IT007_HeDieuHanh_14.2024.pdf` | 418,490 | 19 PDF pages | `89547bca603d2486225f1e7c4f3ca767882964d83229ced16dc36b17eea309ab` | **Canonical 2024 Syllabus** (Created 2024-09-11 by Chi Dung, M365) |
+| `source_variant` | `UIT-OUTLINE-2024-VARIANT-LOCAL-DECUONG` | `De cuong.pdf` | 452,857 | 19 PDF pages | `8ff13e4ddabee1fde580b84827e3e1c2733d2822ff9ca062d97e43a7f8151cdd` | **Older 2023 Variant** (Created 2023-03-29 by Chi Dung, Word 2019) |
+| `official_slide` | `UIT-SLIDE-CH06-2024` | `Week11-Chapter6 2024.pdf` | 5,816,540 | 67 PDF pages | `e55bf22554028859fc30747a39e72d97ca6e1e3c37e5a1bdcdc5ab94a7c3b56e` | **Canonical Tier-A Slide** (63 CONTENT + 4 NON_CONTENT) |
+| `source_variant` | `UIT-SLIDE-CH06-2024-VARIANT-WEEK08-6MB` | `#Week08-Chapter6 2024.pdf` | 6,008,743 | 67 PDF pages | `5cf9e1a31413a042ddc81c83ee6125d9718519d876a13f4dc30d3a5e041ee947` | **Attachment Variant** (Created 2024-09-11 in OneDrive course folder) |
+| `official_qbank` | `UIT-QBANK-CH06-2024` | `Bai tap chuong 6 HDH.docx` | 101,550 | 582 XML paragraphs (560 non-empty) | `f8f82cc2a29641fbe7545d172485356dfdd78d7a398c01e1f784afca06a25803` | **Canonical Tier-A Blank QBank** (15 source units: 8 theory + 7 exercises) |
+| `source_variant` | `UIT-QBANK-CH06-2024-VARIANT-LOCAL-98KB` | `Bai tap chuong 6 HDH.docx` | 98,938 | 582 XML paragraphs | `6e701d3b3b7a7d7bba6bed10882c99d0a00cab14bae2e503c897e6b8abea39d4` | **Local 98.9KB Variant** (Located in OneDrive course folder) |
+| `student_submission` | `UIT-QBANK-CH06-2024-VARIANT-STUDENT-23520237` | `Bai-tap-chuong-6-HDH.docx` | 873,751 | 1,092 XML paragraphs (1015 non-empty) | `a77ecee33dc2575c5bf8f0f98f69c4ac5ea885f8fbd04553812e9f9fa0368a38` | **Student Submission** (MSSV: 23520237 - Trần Hải Đăng; contains student answers) |
+| `student_submission` | `UIT-REF-CH06-STUDENT-23521551-PDF` | `23521551-Bai tap chuong 6.pdf` | 8,823,935 | 5 PDF pages | `7b734530008dd0ac5a8ff9abeae1471aa08a236a09f67fb1c2a84b63b657de04` | **Student Submission** (MSSV: 23521551 - IT007.P19; photographed handwritten answers) |
 
-The slide SHA-256 is `e55bf22554028859fc30747a39e72d97ca6e1e3c37e5a1bdcdc5ab94a7c3b56e`; the QBank SHA-256 is `f8f82cc2a29641fbe7545d172485356dfdd78d7a398c01e1f784afca06a25803`. `pdfinfo` independently reports 67 pages and `pypdf` extracted text from all 67 pages.
+---
 
 ## CANONICAL SOURCE IDENTITY
 
-`UIT-SLIDE-CH06-2024` is the canonical Tier-A lecture deck: `Week11-Chapter6 2024.pdf`, SHA-256 `e55bf...3b56e`, 5,816,540 bytes, 67 physical pages. The recorded registry identity matches the inspected binary exactly.
+1. **Course Outline (`UIT-OUTLINE-2024`)**:
+   - `IT007_HeDieuHanh_14.2024.pdf`, SHA-256 `89547bca603d2486225f1e7c4f3ca767882964d83229ced16dc36b17eea309ab`, 418,490 bytes, 19 pages.
+   - Metadata confirms creation on 2024-09-11 10:13:32+07:00 for the 2024–2025 academic year.
+   - Preserved as canonical Tier A because user-provided canonical attachments outrank unverified or older local variants.
 
-`UIT-QBANK-CH06-2024` is the canonical Tier-A question bank: `Bai tap chuong 6 HDH.docx`, SHA-256 `f8f82...5803`, 101,550 bytes, 582 XML paragraphs (560 non-empty). The recorded registry identity matches the inspected binary exactly. The registry now records both byte sizes and the structural count.
+2. **Lecture Deck (`UIT-SLIDE-CH06-2024`)**:
+   - `Week11-Chapter6 2024.pdf`, SHA-256 `e55bf22554028859fc30747a39e72d97ca6e1e3c37e5a1bdcdc5ab94a7c3b56e`, 5,816,540 bytes, 67 physical pages.
+   - Defensible canonical deck containing complete coverage of Coffman conditions, RAG, Deadlock Prevention, Avoidance (Banker), Detection (Wait-for & matrix algorithm), and Recovery.
+
+3. **Official Question Bank (`UIT-QBANK-CH06-2024`)**:
+   - `Bai tap chuong 6 HDH.docx`, SHA-256 `f8f82cc2a29641fbe7545d172485356dfdd78d7a398c01e1f784afca06a25803`, 101,550 bytes, 582 XML paragraphs (560 non-empty).
+   - Clean, official blank question bank containing 15 source units (8 theory questions + 7 structured numerical/graph exercises).
+
+---
 
 ## EXCLUDED VARIANTS
 
-No second Chapter 6 lecture deck or QBank binary was found in the searched IT007 source workspaces. The candidate `23521551-Bai tap chuong 6.pdf` was not present. It is not promoted, assigned a canonical ID, or used as evidence. No student submission or reference solution was promoted to Tier A. Existing Chapter 6 coverage contains only `UIT-SLIDE-CH06-2024`; no Chapter 6 variant is included in canonical coverage.
+The following 5 artifacts are cataloged with distinct immutable IDs and explicitly excluded from canonical coverage / Tier-A truth:
+
+1. `UIT-OUTLINE-2024-VARIANT-LOCAL-DECUONG` (`De cuong.pdf`, 452,857 bytes, SHA `8ff13e4dd...`): Older 2023 curriculum syllabus (created 2023-03-29). Retained as a variant for historical traceability.
+2. `UIT-SLIDE-CH06-2024-VARIANT-WEEK08-6MB` (`#Week08-Chapter6 2024.pdf`, 6,008,743 bytes, SHA `5cf9e1a31...`): 67-page slide created 2024-09-11. Retained as local variant.
+3. `UIT-QBANK-CH06-2024-VARIANT-LOCAL-98KB` (`Bai tap chuong 6 HDH.docx`, 98,938 bytes, SHA `6e701d3b3...`): 98KB local DOCX in course folder.
+4. `UIT-QBANK-CH06-2024-VARIANT-STUDENT-23520237` (`Bai-tap-chuong-6-HDH.docx`, 873,751 bytes, SHA `a77ecee33...`): DOCX completed by student Trần Hải Đăng (MSSV 23520237). Classified as `student_submission` (Tier B), never used as Tier-A truth.
+5. `UIT-REF-CH06-STUDENT-23521551-PDF` (`23521551-Bai tap chuong 6.pdf`, 8,823,935 bytes, SHA `7b7345300...`): 5-page PDF of photographed handwritten solutions submitted by student 23521551 for class IT007.P19 (GV Phan Đình Duy). Classified as `student_submission` (Tier B), never used as Tier-A truth.
+
+---
 
 ## COURSE OUTLINE ALIGNMENT
 
-The 19-page official outline (`De cuong.pdf`, registry `UIT-OUTLINE-2024`) gives the following exact Chapter 6 structure under Buổi 11:
+The authoritative 2024 UIT syllabus (`IT007_HeDieuHanh_14.2024.pdf`, page 5) specifies the following exact Chapter 6 lesson plan:
 
-- `Chương 6. Deadlock`
-- `6.1 Mô hình hệ thống`
-- `6.2 Định nghĩa`
-- `6.3 Điều kiện cần để xảy ra deadlock`
-- `6.4 Đồ thị cấp phát tài nguyên (RAG)`
-- `6.5 Phương pháp giải quyết deadlock`
-  - `6.5.1 Deadlock prevention`
-  - `6.5.2 Deadlock avoidance`
-  - `6.5.3 Deadlock detection`
-  - `6.5.4 Deadlock recovery`
-  - `6.5.5 Các phương pháp kết hợp để giải quyết deadlock`
-- `6.6 Bài tập`
+- **Chương 6. Deadlock**
+  - **6.1 Định nghĩa**
+  - **6.2 Mô hình hệ thống**
+  - **6.3 Phương pháp giải quyết deadlock**
+    - **6.3.1 Deadlock prevention**
+    - **6.3.2 Deadlock avoidance**
+    - **6.3.3 Deadlock detection**
+    - **6.3.4 Deadlock recovery**
+  - **6.4 Bài tập**
 
-These headings are recorded as outline evidence, not silently replaced by textbook headings.
+---
 
 ## PAGE-BY-PAGE / RANGE MAP
 
-Every physical page was inspected by text extraction and classified into the smallest stable semantic ranges below. Ranges are contiguous, gap-free, and cover pages 1–67 exactly. `CONTENT` remains `NOT_WRITTEN` because authoring has not started; `NON_CONTENT` is also `NOT_WRITTEN`.
+All 67 physical pages of `Week11-Chapter6 2024.pdf` are mapped into 21 contiguous, gap-free semantic ranges.  
+`CONTENT` page count: **63**. `NON_CONTENT` page count: **4**.  
+Every range is strictly `MAPPED` and `NOT_WRITTEN`.
 
-| Pages | Class | Direct source heading / content | Source depth | V2 destination |
-|---:|---|---|---|---|
-| 1–3 | `NON_CONTENT` | Cover, objectives, contents | deck front matter | `None (Meta)` |
-| 4–7 | `CONTENT` | 6.1.1 problem: semaphore interleaving and deadlock situation | direct slide text/example | `#1-coffman-rag` |
-| 8–9 | `CONTENT` | 6.1.2 definition of deadlock and indefinite postponement | direct slide text | `#1-coffman-rag` |
-| 10–12 | `CONTENT` | 6.1.3 four necessary Coffman conditions | direct slide text | `#1-coffman-rag` |
-| 13–14 | `CONTENT` | 6.2 system model; resource types and instances | direct slide text | `#1-coffman-rag` |
-| 15–17 | `CONTENT` | 6.2.1 RAG vertices, request/assignment edges, instances | direct slide text/diagram labels | `#1-coffman-rag` |
-| 18–21 | `CONTENT` | 6.2.2 RAG examples: deadlock and cycle without deadlock | direct slide diagrams/examples | `#1-coffman-rag` |
-| 22–24 | `CONTENT` | 6.2.3 cycle criteria, single/multiple instances, exercise 1 | direct slide text/exercise | `#1-coffman-rag` |
-| 25–26 | `CONTENT` | 6.3 prevention/avoidance/detection/recovery overview | direct slide text | `#1-coffman-rag` |
-| 27–31 | `CONTENT` | 6.3.1 prevention: mutual exclusion, hold-and-wait, no preemption, ordering | direct slide text | `#1-coffman-rag` |
-| 32–33 | `CONTENT` | 6.3.2 avoidance and maximum-need declaration | direct slide text | `#2-banker` |
-| 34–37 | `CONTENT` | safe/unsafe state and relation to deadlock | direct slide text/example | `#2-banker` |
-| 38–40 | `CONTENT` | single-instance RAG avoidance and multiple-instance Banker | direct slide text | `#2-banker` |
-| 41–44 | `CONTENT` | Banker data structures and Safety example at T0 | direct matrices/vectors | `#2-banker` |
-| 45–49 | `CONTENT` | Resource-request algorithm and P1/P4 examples | direct matrices/vectors | `#2-banker` |
-| 50–54 | `CONTENT` | detection, Wait-for graph, corresponding RAG, data structures | direct slide text/diagram | `#3-detection-recovery` |
-| 55–58 | `CONTENT` | detection algorithm and Allocation/Request/Available example | direct matrices/vectors | `#3-detection-recovery` |
-| 59–62 | `CONTENT` | recovery: termination, preemption, victim selection, rollback | direct slide text | `#3-detection-recovery` |
-| 63 | `CONTENT` | Chapter 6 summary | direct slide summary | `#3-detection-recovery` |
-| 64–66 | `CONTENT` | exercises 2–4: Need, Safe State, Banker requests/sequences | direct slide exercise | `#2-banker` |
-| 67 | `NON_CONTENT` | discussion/end | deck end matter | `None (Meta)` |
+| Pages | Class | Direct source heading / content | Source depth | V2 destination | Content status |
+|---:|---|---|---|---|---|
+| 1–3 | `NON_CONTENT` | Trang bìa, mục tiêu và nội dung buổi học | deck front matter | `None (Meta)` | `NOT_WRITTEN` |
+| 4–7 | `CONTENT` | 6.1.1 Vấn đề deadlock: semaphore interleaving & tình huống deadlock | direct slide text | `#1-coffman-rag` | `NOT_WRITTEN` |
+| 8–9 | `CONTENT` | 6.1.2 Định nghĩa deadlock và trì hoãn vô hạn định | direct slide text | `#1-coffman-rag` | `NOT_WRITTEN` |
+| 10–12 | `CONTENT` | 6.1.3 Bốn điều kiện Coffman: Mutual Exclusion, Hold & Wait, No Preemption, Circular Wait | direct slide text | `#1-coffman-rag` | `NOT_WRITTEN` |
+| 13–14 | `CONTENT` | 6.2 Mô hình hóa hệ thống: loại tài nguyên và số thực thể | direct slide text | `#1-coffman-rag` | `NOT_WRITTEN` |
+| 15–17 | `CONTENT` | 6.2.1 Đồ thị cấp phát tài nguyên RAG: đỉnh, cạnh và ký hiệu thực thể | direct slide diagram | `#1-coffman-rag` | `NOT_WRITTEN` |
+| 18–21 | `CONTENT` | 6.2.2 Các ví dụ RAG: đồ thị có deadlock và chu trình không deadlock | direct slide diagram | `#1-coffman-rag` | `NOT_WRITTEN` |
+| 22–24 | `CONTENT` | 6.2.3 RAG và deadlock: single/multiple instances, tiêu chí chu trình và Bài tập 1 | direct slide exercise | `#1-coffman-rag` | `NOT_WRITTEN` |
+| 25–26 | `CONTENT` | 6.3 Phương pháp giải quyết deadlock: prevention, avoidance, detection, recovery | direct slide text | `#1-coffman-rag` | `NOT_WRITTEN` |
+| 27–31 | `CONTENT` | 6.3.1 Ngăn deadlock (Prevention): phá vỡ 4 điều kiện Coffman | direct slide text | `#1-coffman-rag` | `NOT_WRITTEN` |
+| 32–33 | `CONTENT` | 6.3.2 Tránh deadlock (Avoidance): yêu cầu thông tin Max và cấp phát an toàn | direct slide text | `#2-banker` | `NOT_WRITTEN` |
+| 34–37 | `CONTENT` | 6.3.2.1–6.3.2.2 Trạng thái Safe / Unsafe và mối quan hệ với Deadlock | direct slide text | `#2-banker` | `NOT_WRITTEN` |
+| 38–40 | `CONTENT` | 6.3.2.3 Các giải thuật tránh deadlock: RAG single-instance & Banker multiple-instance | direct slide text | `#2-banker` | `NOT_WRITTEN` |
+| 41–44 | `CONTENT` | Banker Safety: Cấu trúc dữ liệu Available, Max, Allocation, Need, Work, Finish và ví dụ T0 | direct table/matrix | `#2-banker` | `NOT_WRITTEN` |
+| 45–49 | `CONTENT` | Banker Resource-request: 3 bước kiểm tra Request ≤ Need, Request ≤ Available và ví dụ P1/P4 | direct table/matrix | `#2-banker` | `NOT_WRITTEN` |
+| 50–54 | `CONTENT` | 6.3.3 Detection: Wait-for graph (single-instance) và cấu trúc Available/Allocation/Request | direct diagram/text | `#3-detection-recovery` | `NOT_WRITTEN` |
+| 55–58 | `CONTENT` | 6.3.3.1 Detection algorithm cho đa thực thể và ví dụ P2 request | direct table/matrix | `#3-detection-recovery` | `NOT_WRITTEN` |
+| 59–62 | `CONTENT` | 6.3.3.2 Recovery: Termination (chấm dứt tiến trình) và Preemption (lấy lại tài nguyên, rollback, starvation) | direct slide text | `#3-detection-recovery` | `NOT_WRITTEN` |
+| 63 | `CONTENT` | Tóm tắt lại nội dung buổi học | direct slide summary | `#3-detection-recovery` | `NOT_WRITTEN` |
+| 64–66 | `CONTENT` | 6.4 Bài tập 2–4: Need, Safe State, Banker requests và chuỗi an toàn | direct slide exercise | `#2-banker` | `NOT_WRITTEN` |
+| 67 | `NON_CONTENT` | Thảo luận / kết thúc | deck end matter | `None (Meta)` | `NOT_WRITTEN` |
 
-**Coverage totals:** 67 physical pages = 63 `CONTENT` + 4 `NON_CONTENT`; no gaps, overlaps, or out-of-range pages.
+---
+
+## VISUAL AND STRUCTURAL PAGE INSPECTION (SRC-CH6-008)
+
+Visual rendering and structural element inspection (vector curves, lines, bounding boxes, matrix tables) were performed across all diagram-heavy, matrix-heavy, and exercise pages:
+
+1. **RAG / Graph Pages (Pages 15–24)**:
+   - **Page 15**: Section header `MÔ HÌNH HÓA HỆ THỐNG / 6.2.1. Đồ thị cấp phát tài nguyên RAG`.
+   - **Page 16**: Graph definition $G = (V, E)$. Vertices $V = P \cup R$ ($P = \{P_1, \dots, P_n\}$ processes, $R = \{R_1, \dots, R_m\}$ resources). Edges $E$: Request edge directed from Process $P_i \to R_j$; Assignment edge directed from Resource $R_j \to P_i$.
+   - **Page 17**: Visual convention diagram: Process $P_i$ represented by circle; Resource $R_j$ represented by rectangle containing dots (instances). Vector curves verify: $P_i \to R_j$ points to the rectangle boundary; $R_j \to P_i$ originates from an individual dot inside the rectangle to the process circle.
+   - **Page 19**: 3 processes ($P_1, P_2, P_3$), 4 resources ($R_1(1), R_2(2), R_3(1), R_4(4)$). State: $P_1$ holds 1 $R_2$, requests 1 $R_1$; $P_2$ holds 1 $R_1, 1 R_2$, requests 1 $R_3$; $P_3$ holds 1 $R_3$. Visual inspection confirms **directed acyclic graph** (no cycle, no deadlock).
+   - **Page 20**: Deadlock RAG: $P_3$ requests 1 $R_2$. Visual inspection reveals two cycles:
+     - Cycle 1: $P_1 \to R_1 \to P_2 \to R_3 \to P_3 \to R_2 \to P_1$.
+     - Cycle 2: $P_2 \to R_3 \to P_3 \to R_2 \to P_2$.
+     All instances of $R_1, R_2, R_3$ are exhausted; deadlock occurs for $\{P_1, P_2, P_3\}$.
+   - **Page 21**: Cycle without Deadlock RAG: 4 processes ($P_1..P_4$), 2 resources ($R_1(2), R_2(2)$). Visual inspection confirms cycle $P_1 \to R_1 \to P_3 \to R_2 \to P_1$, but $P_2$ holds $R_1$ and $P_4$ holds $R_2$ without requesting any further resources. Once $P_2$ or $P_4$ terminates, cycle is broken. No deadlock!
+   - **Page 23**: Summary theorems: No cycle implies No deadlock; Cycle with single instances implies Deadlock; Cycle with multiple instances implies Possibility of deadlock.
+   - **Page 24**: Bài tập 1: 4 processes ($P_1..P_4$), 3 resources ($R_1(3), R_2(2), R_3(2)$). Exact matching with QBank Exercise 2 (P17–P25).
+
+2. **Safe-State & Banker Tables (Pages 34–49)**:
+   - **Pages 34–36**: 12 file single-resource system with $P_0, P_1, P_2$. Max: $(10, 4, 9)$, Allocation: $(5, 2, 2)$, Need: $(5, 2, 7)$, Available $= 3$. Safe sequence $\langle P_1, P_0, P_2 \rangle$. Page 36 shows $P_2$ requesting 1 file $\to$ Available $= 2$, unsafe state.
+   - **Page 37**: Euler diagram: Safe $\subset$ Unsafe; Deadlock $\subset$ Unsafe. Avoidance ensures system never enters Unsafe.
+   - **Pages 41–44**: Banker Data Structures and Safety Algorithm:
+     - Vectors & Matrices: Available[$m$], Max[$n \times m$], Allocation[$n \times m$], Need[$n \times m$] = Max - Allocation.
+     - Safety trace table at $T_0$: 5 processes ($P_0..P_4$), resources $A(10), B(5), C(7)$.
+     - Initial Available: $(3, 3, 2)$.
+     - Traced Work progression: $(3,3,2) \xrightarrow{+P_1} (5,3,2) \xrightarrow{+P_3} (7,4,3) \xrightarrow{+P_4} (7,4,5) \xrightarrow{+P_0} (7,5,5) \xrightarrow{+P_2} (10,5,7)$. Safe sequence $\langle P_1, P_3, P_4, P_0, P_2 \rangle$.
+   - **Pages 45–49**: Resource-Request Algorithm:
+     - Condition 1: Request$_i \le$ Need$_i$.
+     - Condition 2: Request$_i \le$ Available.
+     - Tentative allocation: Available $\leftarrow$ Available - Request$_i$, Allocation$_i \leftarrow$ Allocation$_i$ + Request$_i$, Need$_i \leftarrow$ Need$_i$ - Request$_i$.
+     - Page 47–48: $P_1$ requests $(1, 0, 2)$: Valid, tentative state is Safe ($\langle P_1, P_3, P_4, P_0, P_2 \rangle$) implies Granted.
+     - Page 49: $P_4$ requests $(3, 3, 0)$: Request$_4 \le$ Available $(3,3,2)$ holds, but tentative Available becomes $(0, 0, 2)$; no process can satisfy Need implies Unsafe state implies $P_4$ must wait!
+
+3. **Wait-For & Detection Graph Pages (Pages 50–58)**:
+   - **Page 52**: Wait-for graph for single-instance resources: nodes are processes; directed edge $P_i \to P_j$ means $P_i$ is waiting for $P_j$ to release a resource. Cycle detection runs in $O(n^2)$.
+   - **Page 53**: Side-by-side visual diagram: Resource-Allocation Graph vs. Corresponding Wait-for Graph. Resource nodes are collapsed into direct process-to-process dependency edges.
+   - **Pages 54–56**: Detection Algorithm for Multiple Instances: Available[$m$], Allocation[$n \times m$], Request[$n \times m$]. Algorithm initializes Finish[$i$] = false if Allocation$_i \ne 0$, else true. Complexity $O(m \cdot n^2)$.
+   - **Page 57**: Detection example at $T_0$: $P_0..P_4$, resources $A(7), B(2), C(6)$. Allocation = $[(0,1,0), (2,0,0), (3,0,3), (2,1,1), (0,0,2)]$; Request = $[(0,0,0), (2,0,2), (0,0,0), (1,0,0), (0,0,2)]$; Available = $(0, 0, 0)$. Execution sequence $\langle P_0, P_2, P_3, P_1, P_4 \rangle$ finishes all processes implies No Deadlock.
+   - **Page 58**: $P_2$ requests $(0, 0, 1)$: Request[$P_2$] becomes $(0, 0, 1)$. Only $P_0$ can run; after $P_0$ finishes, Work = $(0, 1, 0)$. No other process has Request $\le$ Work implies Deadlock detected for set $\{P_1, P_2, P_3, P_4\}$!
+
+4. **Exercise Pages (Pages 64–66)**:
+   - **Page 64 (Bài tập 2)**: Need matrix, Safety test, P1 request $(0,4,2,0)$. Matches QBank Exercise 4 (P31–P370).
+   - **Page 65 (Bài tập 3)**: Banker check with Available $(0,3,0,1)$ and $(1,0,0,2)$. Matches QBank Exercise 6 (P449–P508).
+   - **Page 66 (Bài tập 4)**: Banker check: Safe state, P1 request $(1,1,0,0)$, P4 request $(0,0,2,0)$. Matches QBank Exercise 7 (P509–P582).
+
+---
 
 ## SOURCE-STRUCTURE CONFLICTS
 
-`SRC-CH6-003` (MINOR, closed/documented): the outline numbers the conceptual sequence as 6.1–6.6, while the lecture deck numbers its corresponding material as 6.1.1–6.3.3 and places the system model after the initial problem/definition. The deck also does not expose a separate `6.5.5 Các phương pháp kết hợp...` heading. This is an organization/numbering difference, not evidence to invent missing content. Future authoring must preserve both labels in citations and must not silently claim that the outline and slide numbering are identical.
+Three distinct structural models exist across the discovered source documents:
+
+1. **Authoritative 2024 Syllabus (`IT007_HeDieuHanh_14.2024.pdf`)**:
+   - `6.1 Định nghĩa`
+   - `6.2 Mô hình hệ thống`
+   - `6.3 Phương pháp giải quyết deadlock`
+     - `6.3.1 Deadlock prevention`
+     - `6.3.2 Deadlock avoidance`
+     - `6.3.3 Deadlock detection`
+     - `6.3.4 Deadlock recovery`
+   - `6.4 Bài tập`
+
+2. **Canonical 2024 Lecture Deck (`Week11-Chapter6 2024.pdf`)**:
+   - `6.1 Vấn đề deadlock` (6.1.1 Khái niệm, 6.1.2 Định nghĩa, 6.1.3 Bốn điều kiện Coffman)
+   - `6.2 Mô hình hóa hệ thống` (6.2.1 Đồ thị RAG, 6.2.2 Ví dụ, 6.2.3 RAG và deadlock, Bài tập 1)
+   - `6.3 Phương pháp giải quyết deadlock`:
+     - `6.3.1 Ngăn deadlock (Prevention)`
+     - `6.3.2 Tránh deadlock (Avoidance)`
+     - `6.3.3 Phát hiện deadlock (Detection)`: Includes `6.3.3.1 Giải thuật phát hiện` and `6.3.3.2 Phục hồi deadlock (Recovery)` nested together.
+   - Exercises appear at slide 24 (Bài tập 1) and slides 64–66 (Bài tập 2–4).
+
+3. **Older 2023 Outline Variant (`De cuong.pdf`)**:
+   - Numbered 6.1 through 6.6 with RAG as 6.4, combined recovery as 6.5.5, and System Model placed before Definition.
+
+**Resolution Policy:** Future Chapter 6 theory authoring will use clear, concept-based section headings aligned with the canonical 2024 outline, keeping numbering distinctions transparently documented without conflation.
+
+---
 
 ## CH5/CH6 BOUNDARY
 
-Chapter 5 is locked at synchronization/liveness scope: deadlock appears as a synchronization failure mode alongside starvation and priority inversion. Chapter 6 is the formal deadlock unit supported by the inspected deck: necessary conditions, resource model, RAG/state analysis, prevention, avoidance/Banker, detection, and recovery. No Chapter 6 theory file was authored and no Chapter 6 material was inserted into Chapter 5.
+- **Chapter 5 (Synchronization)** covers Process Synchronization, Critical Sections, Peterson's algorithm, Hardware atomic instructions (`SELF_STUDY`), Mutexes, Semaphores, Monitors, and introduces Deadlock only as a synchronization/liveness failure phenomenon alongside starvation and priority inversion.
+- **Chapter 6 (Deadlock)** is strictly self-contained: it formally defines Coffman's 4 conditions, RAG, Deadlock Prevention, Avoidance (Banker algorithm), Detection (Wait-for graph & multi-instance matrix algorithm), and Recovery.
+- Zero premature Chapter 6 concepts (Coffman, Banker, RAG, Safety algorithm) exist in Chapter 5.
+- Zero Chapter 6 authoring files (`content/theory/ch06-deadlock.md`, `content/questions/subjective/ch06.md`) exist at this phase.
+
+---
 
 ## ALGORITHM / NUMERICAL LOCATORS
 
-No answers were authored or solved. The following are source locators for later transcription:
+| Algorithm / Problem | Slide Locator | QBank Locator | Mathematical Objects & Parameters |
+|---|---:|---|---|
+| RAG Deadlock Analysis | pp. 15–24 | Bài tập 1 & 2 (P12–P25) | $V = P \cup R$, Request $P_i \to R_j$, Assignment $R_j \to P_i$ |
+| Banker Safety Algorithm | pp. 41–44 | Câu 7 (P10), Bài tập 4–7 | Work = Available, Finish[$i$] = false, Need$_i \le$ Work |
+| Banker Resource-Request | pp. 45–49 | Câu 7 (P10), Bài tập 4–7 | Request$_i \le$ Need$_i$, Request$_i \le$ Available, Tentative state test |
+| Deadlock Detection (Wait-for) | pp. 50–53 | Câu 7 (P10) | Single-instance cycle detection $O(n^2)$ |
+| Deadlock Detection (Matrix) | pp. 54–58 | Câu 7 (P10) | Finish[$i$] = (Allocation$_i$ == 0), Request$_i \le$ Work, $O(m \cdot n^2)$ |
+| Deadlock Recovery | pp. 59–62 | Câu 8 (P11) | Process termination criteria, resource preemption, victim selection, rollback, starvation |
 
-| Algorithm/example | Locator | Evidence present |
-|---|---:|---|
-| Banker data structures (`Available`, `Max`, `Allocation`, `Need`) | p. 41 | direct slide table/text |
-| Safety algorithm (`Work`, `Finish`, `Need ≤ Work`) | p. 42 | direct slide pseudocode |
-| Safety example at `T0` | pp. 43–44 | Allocation/Max/Available/Need/Work tables |
-| Resource-request conditions | pp. 45–46 | `Request ≤ Need`, `Request ≤ Available`, safe-state test |
-| Resource-request examples | pp. 47–49 | P1 `(1,0,2)` and P4 `(3,3,0)`; safe-sequence decisions |
-| Detection model/data | pp. 50–54 | Wait-for graph, Allocation/Request/Available |
-| Detection algorithm | pp. 55–56 | Work/Finish/Allocation and deadlock condition |
-| Detection example | pp. 57–58 | Allocation/Request/Available and P2 request |
-| Recovery | pp. 59–62 | termination, preemption, victim selection, rollback |
+---
 
 ## QBANK IDENTITY AND INVENTORY
 
-The canonical DOCX has 582 XML paragraph elements and 560 non-empty paragraphs. The first eight non-empty content paragraphs after the two document headings are source question wording (definition, necessary conditions, RAG relationship, methods, busy-waiting critique, safe state, Banker algorithms, and recovery). They are not answers or handbook prose.
+Canonical binary `Bai tap chuong 6 HDH.docx` (101,550 bytes, SHA `f8f82cc2a29641fbe7545d172485356dfdd78d7a398c01e1f784afca06a25803`) contains **15 addressable source units**:
 
-The remaining non-empty paragraphs form seven source exercise groups:
+### 8 Theory Questions (P4–P11)
+1. `QBANK-CH06-01` (P4): Định nghĩa Deadlock.
+2. `QBANK-CH06-02` (P5): 4 điều kiện Coffman dẫn đến Deadlock.
+3. `QBANK-CH06-03` (P6): Đồ thị cấp phát tài nguyên (RAG) và mối liên hệ với Deadlock.
+4. `QBANK-CH06-04` (P7): Các phương pháp giải quyết Deadlock và phân tích ưu nhược điểm.
+5. `QBANK-CH06-05` (P8): Phân tích ưu nhược điểm các giải pháp đồng bộ busy waiting (phần cứng và phần mềm).
+6. `QBANK-CH06-06` (P9): Khái niệm trạng thái an toàn (Safe State) và mối liên hệ với Deadlock.
+7. `QBANK-CH06-07` (P10): Mô tả các giải thuật Banker: Safety, Resource-Request, Detection.
+8. `QBANK-CH06-08` (P11): Các giải pháp phục hồi hệ thống sau khi phát hiện Deadlock.
 
-1. RAG graph deadlock identification (paragraphs 11–14).
-2. Four-process RAG, deadlock decision, and safe sequences (15–22).
-3. Five-process/multi-instance RAG and safe-sequence enumeration (23–26).
-4. Four-resource Banker table, Need/Safety, and P1 request `(0,4,2,0)` (27–275).
-5. Five-process R1–R4 Banker state and P3 request `(1,1,0,0)` (276–355).
-6. Five-process A–D Banker table and P1/P4 requests (356–415).
-7. Final A–D Banker table with Available `(3,3,2,1)` and safety/request questions (416–560).
+### 7 Structured Exercises (P12–P582)
+9. `QBANK-CH06-09` (P12–P16): Xác định Deadlock trên đồ thị cấp phát tài nguyên mẫu (a) và (b).
+10. `QBANK-CH06-10` (P17–P25): Vẽ RAG, kiểm tra Deadlock và tìm chuỗi an toàn cho hệ 4 tiến trình, 3 tài nguyên (3,2,2).
+11. `QBANK-CH06-11` (P26–P30): Vẽ RAG, đếm và liệt kê tất cả chuỗi an toàn cho hệ 5 tiến trình, 3 tài nguyên (3,3,2).
+12. `QBANK-CH06-12` (P31–P370): Giải thuật Banker mẫu: tính ma trận Need, giải thuật an toàn và xử lý yêu cầu P1(0,4,2,0).
+13. `QBANK-CH06-13` (P371–P448): Giải thuật Banker: tìm chuỗi an toàn tại t0 và xử lý yêu cầu P3(1,1,0,0) tại t1.
+14. `QBANK-CH06-14` (P449–P508): Giải thuật Banker kiểm tra an toàn với 2 vector Available khác nhau (0,3,0,1) và (1,0,0,2).
+15. `QBANK-CH06-15` (P509–P582): Giải thuật Banker toàn diện: kiểm tra an toàn, xử lý yêu cầu P1(1,1,0,0) và P4(0,0,2,0).
 
-The six structured Chapter 6 records in `research/data/official_review_questions.yaml` are mapped conceptual locators for future authoring; they remain `MAPPED` / `NOT_WRITTEN` and are not presented as a count of all DOCX paragraphs or exercise rows. Source wording and future handbook answers remain separate.
+All 15 units are cataloged in `research/data/official_review_questions.yaml` as `MAPPED` and `NOT_WRITTEN`.
+
+---
 
 ## EVIDENCE LIMITATIONS
 
-- The binaries are available in the local supplied source corpus but are not committed into this handbook repository, consistent with the existing source-registry practice. Re-running binary checks requires passing the source-root explicitly to `scripts/validate_ch06_source_map.py`.
-- Text extraction is used for deterministic page inspection; diagrams are retained as source evidence and are not re-solved in this mapping pass.
-- The outline/slide numbering conflict is documented above; no unsupported `6.5.5` slide content is inferred.
+1. Binaries reside in external/local course corpora (`Downloads` and `OneDrive`) and are not committed into this git repository, strictly following repository hygiene policies.
+2. Visual rendering confirmed diagram and table topologies; exercises will be transcribed and solved only during the authoring phase.
+3. Student files (`Bai-tap-chuong-6-HDH.docx` by MSSV 23520237 and `23521551-Bai tap chuong 6.pdf`) are cataloged as reference/submission variants and are never used as canonical truth.
+
+---
 
 ## FINDINGS
 
-- `SRC-CH6-001` — **RESOLVED** — canonical slide hash, byte size, and 67-page count match the inspected binary.
-- `SRC-CH6-002` — **RESOLVED** — all 67 physical pages have explicit, contiguous semantic classifications (63 CONTENT, 4 NON_CONTENT).
-- `SRC-CH6-003` — **CLOSED / MINOR** — outline-versus-slide numbering and the outline-only combined-methods heading are documented as a source-structure conflict.
-- `SRC-CH6-004` — **RESOLVED** — canonical QBank hash, byte size, XML counts, eight theory prompts, and seven exercise groups are recorded without promoting any student/reference file.
+- `SRC-CH6-001` — **RESOLVED**: Canonical slide hash, byte size, and 67-page count match the inspected binary.
+- `SRC-CH6-002` — **RESOLVED**: All 67 physical pages have explicit, contiguous semantic classifications (63 CONTENT, 4 NON_CONTENT).
+- `SRC-CH6-003` — **CLOSED / MINOR**: Outline-versus-slide numbering differences transparently documented.
+- `SRC-CH6-004` — **RESOLVED**: Canonical QBank hash, byte size, and XML paragraph count verified.
+- `SRC-CH6-005` — **RESOLVED (BLOCKER)**: Course-outline binary conflict resolved. Authoritative user-provided syllabus `IT007_HeDieuHanh_14.2024.pdf` (SHA-256 `89547bca...`) established as canonical `UIT-OUTLINE-2024`. Older `De cuong.pdf` (SHA-256 `8ff13e4d...`) registered as variant `UIT-OUTLINE-2024-VARIANT-LOCAL-DECUONG`.
+- `SRC-CH6-006` — **RESOLVED (MAJOR)**: Missing user-supplied Chapter 6 variants discovered and cataloged: `23521551-Bai tap chuong 6.pdf` (`UIT-REF-CH06-STUDENT-23521551-PDF`) and `Bai-tap-chuong-6-HDH.docx` (`UIT-QBANK-CH06-2024-VARIANT-STUDENT-23520237`). Both classified as `student_submission` (Tier B), separated from canonical sources.
+- `SRC-CH6-007` — **RESOLVED (MAJOR)**: QBank source-unit map expanded from 6 to the complete 15 addressable units (`QBANK-CH06-01` through `QBANK-CH06-15`) in `research/data/official_review_questions.yaml`. All are marked `MAPPED` / `NOT_WRITTEN`.
+- `SRC-CH6-008` — **RESOLVED (MAJOR)**: Visual page inspection completed for graph pages (15–24), Banker tables (34–49), Wait-for/detection pages (50–58), and exercise pages (64–66). Graph directions, resource dots, cycles, and matrix headers verified.
 
 **OPEN SOURCE BLOCKERS:** `0`  
 **OPEN SOURCE MAJORS:** `0`  
-**OPEN SOURCE MINORS:** `0`
+**OPEN SOURCE MINORS:** `0`  
+
+---
 
 ## FINAL DECISION
 
-**PASS — V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_INDEPENDENT_CHECK**
+**PASS — V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_INDEPENDENT_RECHECK**
 
-The canonical Chapter 6 source map is ready for independent review. Chapter 6 authoring remains `NOT_STARTED`. The exact next action is an independent canonical Chapter 6 source-map review before any authoring.
-
-Validation command used:
-
-```text
-python scripts/validate_ch06_source_map.py --source-root <local supplied IT007 source corpus>
-```
-
-No Chapter 6 content was authored, and no merge to `main` was performed.
+The canonical Chapter 6 source map is fully repaired and ready for independent recheck.  
+Chapter 6 authoring remains **`NOT_STARTED`**.  
+**READY FOR CH6 AUTHORING:** **`NO`** (Pending final independent recheck).  
+**Exact Next Action:** Independent recheck of the repaired canonical Chapter 6 source map.

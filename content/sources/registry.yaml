@@ -8,15 +8,30 @@ sources:
   - id: "UIT-OUTLINE-2024"
     tier: "A"
     type: "official_outline"
-    title: "Đề cương chi tiết môn Hệ điều hành IT007 (Năm học 2024–2025)"
-    exact_filename: "De cuong.pdf"
-    sha256: "8ff13e4ddabee1fde580b84827e3e1c2733d2822ff9ca062d97e43a7f8151cdd"
+    title: "Đề cương chi tiết môn Hệ điều hành IT007 (Bản chính thức 2024–2025)"
+    exact_filename: "IT007_HeDieuHanh_14.2024.pdf"
+    sha256: "89547bca603d2486225f1e7c4f3ca767882964d83229ced16dc36b17eea309ab"
+    byte_size: 418490
     page_count: 19
     year: "2024"
     author: "Khoa Kỹ thuật Máy tính - UIT"
     public_url: "https://courses.uit.edu.vn"
-    status: "VERIFIED_LOCAL"
-    notes: "Đề cương chính thức quy định chuẩn đầu ra môn học và nội dung 9 chương học phần."
+    status: "USER_ATTACHMENT_VERIFIED"
+    notes: "Đề cương chính thức do người dùng cung cấp (tạo ngày 2024-09-11). Chương 6 gồm: 6.1 Định nghĩa, 6.2 Mô hình hệ thống, 6.3 Phương pháp giải quyết deadlock (6.3.1 Prevention, 6.3.2 Avoidance, 6.3.3 Detection, 6.3.4 Recovery), 6.4 Bài tập."
+
+  - id: "UIT-OUTLINE-2024-VARIANT-LOCAL-DECUONG"
+    tier: "A"
+    type: "source_variant"
+    title: "Đề cương chi tiết môn Hệ điều hành IT007 (Biến thể cũ 2023 - De cuong.pdf)"
+    exact_filename: "De cuong.pdf"
+    sha256: "8ff13e4ddabee1fde580b84827e3e1c2733d2822ff9ca062d97e43a7f8151cdd"
+    byte_size: 452857
+    page_count: 19
+    year: "2023"
+    author: "Khoa Kỹ thuật Máy tính - UIT"
+    public_url: "https://courses.uit.edu.vn"
+    status: "VERIFIED_LOCAL_VARIANT"
+    notes: "Biến thể đề cương cũ (tạo ngày 2023-03-29); phân mục Chương 6 gồm 6.1 Mô hình hệ thống, 6.2 Định nghĩa, 6.3 Điều kiện cần, 6.4 RAG, 6.5 Phương pháp, 6.6 Bài tập. Phân loại biến thể để không làm lẫn lộn bản chính tắc."
 
   - id: "UIT-SLIDE-CH01-2024"
     tier: "A"
@@ -222,6 +237,20 @@ sources:
     status: "VERIFIED_LOCAL"
     notes: "Canonical local source binary verified from the supplied IT007 corpus: 5,816,540 bytes, 67 physical pages."
 
+  - id: "UIT-SLIDE-CH06-2024-VARIANT-WEEK08-6MB"
+    tier: "A"
+    type: "source_variant"
+    title: "Slide Bài giảng Chương 6: Bế tắc — Biến thể Week08 (#Week08-Chapter6 2024.pdf)"
+    exact_filename: "#Week08-Chapter6 2024.pdf"
+    sha256: "5cf9e1a31413a042ddc81c83ee6125d9718519d876a13f4dc30d3a5e041ee947"
+    byte_size: 6008743
+    page_count: 67
+    year: "2024"
+    author: "Khoa Kỹ thuật Máy tính - UIT"
+    public_url: "https://courses.uit.edu.vn"
+    status: "VERIFIED_LOCAL_VARIANT"
+    notes: "Tệp slide 67 trang trong thư mục Tài liệu học tập-20240912 (tạo ngày 2024-09-11); lưu giữ dưới dạng biến thể độc lập."
+
   - id: "UIT-SLIDE-CH07-2024"
     tier: "A"
     type: "official_slide"
@@ -343,7 +372,45 @@ sources:
     author: "Khoa KTMT - UIT"
     public_url: "https://courses.uit.edu.vn"
     status: "VERIFIED_LOCAL"
-    notes: "Canonical local source binary verified from the supplied IT007 corpus: 101,550 bytes, 582 XML paragraphs (560 non-empty)."
+    notes: "Canonical local source binary verified from the supplied IT007 corpus: 101,550 bytes, 582 XML paragraphs (560 non-empty). Gồm 15 đơn vị nguồn: 8 câu hỏi lý thuyết và 7 bài tập đồ thị/Banker."
+
+  - id: "UIT-QBANK-CH06-2024-VARIANT-LOCAL-98KB"
+    tier: "A"
+    type: "source_variant"
+    title: "Bộ bài tập Chương 6 (Biến thể cục bộ 98.9KB)"
+    exact_filename: "Bai tap chuong 6 HDH.docx"
+    sha256: "6e701d3b3b7a7d7bba6bed10882c99d0a00cab14bae2e503c897e6b8abea39d4"
+    byte_size: 98938
+    year: "2024"
+    author: "Khoa KTMT - UIT"
+    public_url: "https://courses.uit.edu.vn"
+    status: "VERIFIED_LOCAL_VARIANT"
+    notes: "Tệp DOCX 98,938 bytes trong thư mục Tài liệu học tập-20240912; lưu giữ dưới dạng biến thể độc lập."
+
+  - id: "UIT-QBANK-CH06-2024-VARIANT-STUDENT-23520237"
+    tier: "B"
+    type: "student_submission"
+    title: "Bài tập chương 6 HĐH — Bài làm sinh viên (MSSV 23520237 - Trần Hải Đăng)"
+    exact_filename: "Bai-tap-chuong-6-HDH.docx"
+    sha256: "a77ecee33dc2575c5bf8f0f98f69c4ac5ea885f8fbd04553812e9f9fa0368a38"
+    byte_size: 873751
+    year: "2024"
+    author: "Trần Hải Đăng (MSSV: 23520237)"
+    status: "VERIFIED_LOCAL_VARIANT"
+    notes: "Tệp DOCX 873,751 bytes chứa bài giải của sinh viên Trần Hải Đăng (1092 đoạn XML, 1015 đoạn có nội dung). Phân loại student_submission, không dùng làm chân lý Tier A."
+
+  - id: "UIT-REF-CH06-STUDENT-23521551-PDF"
+    tier: "B"
+    type: "student_submission"
+    title: "Bài tập chương 6 HĐH — Bài nộp sinh viên (MSSV 23521551 - IT007.P19)"
+    exact_filename: "23521551-Bai tap chuong 6.pdf"
+    sha256: "7b734530008dd0ac5a8ff9abeae1471aa08a236a09f67fb1c2a84b63b657de04"
+    byte_size: 8823935
+    page_count: 5
+    year: "2024"
+    author: "Thuận Nguyễn Lê Như (MSSV: 23521551)"
+    status: "VERIFIED_LOCAL_VARIANT"
+    notes: "Tệp PDF 5 trang nộp bài tập lớp IT007.P19 (HK1 2024-2025, GV Phan Đình Duy) chứa ảnh chụp/viết tay lời giải. Phân loại student_submission, không dùng làm chân lý Tier A."
 
   - id: "UIT-QBANK-CH07-2024"
     tier: "A"

@@ -8,13 +8,17 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+if sys.stdout.encoding != "utf-8":
+    sys.stdout.reconfigure(encoding="utf-8")
+
 ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / "research/V2_FOUNDATION_GATE.md"
 
 
 def run(name, command):
-    result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
-    return {"name": name, "ok": result.returncode == 0, "output": (result.stdout + "\n" + result.stderr).strip()}
+    result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    out = (result.stdout or "") + "\n" + (result.stderr or "")
+    return {"name": name, "ok": result.returncode == 0, "output": out.strip()}
 
 
 def main():
@@ -31,6 +35,7 @@ def main():
         run("batch1_canonical_source", [py, "scripts/validate_batch1_canonical.py"]),
         run("validate_ch05_source_map", [py, "scripts/validate_ch05_source_map.py"]),
         run("validate_ch05_content", [py, "scripts/validate_ch05_content.py"]),
+        run("validate_ch06_source_map", [py, "scripts/validate_ch06_source_map.py"]),
         run("verify_research_gates", [py, "scripts/verify_research_gates.py"]),
     ]
     passed = all(step["ok"] for step in steps)
