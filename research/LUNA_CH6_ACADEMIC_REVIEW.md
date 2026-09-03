@@ -212,17 +212,68 @@ Tất cả 15 đơn vị câu hỏi đều sử dụng nhãn trung lập: `#### 
 
 ---
 
-## 12. FINAL ACADEMIC DECISION
+## 12. FINAL ACADEMIC DECISION (PRE-RECHECK BASELINE)
 
 $$\mathbf{CH6\ ACADEMIC\ REPAIR:\ COMPLETED\ —\ PENDING\ INDEPENDENT\ RECHECK}$$
 
 Toàn bộ các khiếm khuyết được ghi nhận trong đợt kiểm tra học thuật độc lập và phát hiện bổ sung (`ACAD-CH6-003`, `ACAD-CH6-004`, `ACAD-CH6-005`, `ENG-CH6-007`, `VALIDATOR-CH6-002`) đã được sửa chữa phẫu thuật chính xác.
 
-Chương 6 chuyển sang giai đoạn:
-$$\mathbf{V2\_BATCH3\_CH6\_ACADEMIC\_REPAIR\_COMPLETED\_PENDING\_RECHECK}$$
+---
 
+## 13. FINAL FOCUSED INDEPENDENT RECHECK
+
+Đợt tái thẩm định học thuật độc lập tập trung (Final Focused Independent Recheck) đã được thực hiện đối với toàn bộ các phát hiện đã được khắc phục:
+
+### 1. `ACAD-CH6-003 — RECHECK PASS`
+- **Kiểm tra hình học không gian trạng thái:** Tại `content/theory/ch06-deadlock.md` §6.5.1, sơ đồ ASCII phân hoạch không gian trạng thái thể hiện cấu trúc hình học chuẩn:
+  ```
+  ALL STATES
+  ├── SAFE
+  └── UNSAFE
+      └── DEADLOCK
+  ```
+- Hai miền Safe State và Unsafe State là hai khối hộp anh em rời nhau hoàn toàn ($\text{Safe} \cap \text{Unsafe} = \emptyset$).
+- Miền Deadlock State nằm gọn hoàn toàn bên trong hộp Unsafe State ($\text{Deadlock} \subset \text{Unsafe}$).
+- Tuyệt đối không còn tình trạng `SAFE STATE` bị vẽ lọt bên trong hộp `UNSAFE STATE`.
+- Hộp lưu ý `> [!IMPORTANT]` xác nhận đầy đủ 5 mệnh đề nền tảng: Safe và Unsafe rời nhau; Safe suy ra không có Deadlock; Deadlock là tập con thực sự của Unsafe; Unsafe không đồng nghĩa với Deadlock; Bản chất của Avoidance là duy trì trạng thái luôn ở Safe.
+
+### 2. `ACAD-CH6-004 — RECHECK PASS`
+- **Kiểm tra liên kết điều hướng:** Cuối tệp `content/theory/ch06-deadlock.md` sử dụng chính xác liên kết tương đối chuẩn sạch `../questions/subjective/ch06.md`.
+- **Phân giải HTML:** Bộ sinh web biên dịch thành công liên kết `<a href="../questions/subjective/ch06.html">Ngân hàng Câu hỏi Tự luận &amp; Bài tập Chương 6</a>`. Trang đích `public/site/questions/subjective/ch06.html` tồn tại thực tế và liên kết TOC phân giải hoàn hảo (0 dead links).
+
+### 3. `ACAD-CH6-005 — RECHECK PASS`
+- **Kiểm tra tuyên bố thời gian vô điều kiện:** Đã thẩm tra kỹ lưỡng toàn văn vùng SAFE STATE trong sơ đồ ASCII và đoạn văn giải thích đi kèm trong §6.5.1.
+- Không còn bất kỳ cụm từ tuyên bố thời gian vô điều kiện thái quá nào như `100% KHÔNG BAO GIỜ xảy ra bế tắc`, `never deadlocks`, hay `deadlock can never occur`.
+- Nội dung vùng Safe được định nghĩa chính xác:
+  - Tồn tại ít nhất một chuỗi an toàn: $\langle P_1, P_2, \dots, P_n \rangle$.
+  - Trạng thái hiện tại không bế tắc và có thứ tự cấp phát bảo đảm mọi tiến trình đều có thể hoàn tất theo nhu cầu tối đa.
+  - Hộp lưu ý nhấn mạnh rõ ràng: Trạng thái hiện tại an toàn không bảo đảm hệ thống vĩnh viễn không bế tắc nếu các cấp phát tiếp theo trong tương lai không được kiểm soát; việc tránh bế tắc phụ thuộc vào việc chính sách Avoidance liên tục từ chối các yêu cầu đưa hệ thống sang Unsafe.
+
+### 4. `ENG-CH6-007 — RECHECK PASS`
+- **Kiểm tra vệ sinh mã nguồn công khai (Public Hygiene):** Kiểm tra toàn bộ 148 tệp được quản lý bởi git.
+- Báo cáo thẩm định không chứa bất kỳ đường dẫn máy trạm tuyệt đối nào (zero local workstation absolute paths). Toàn bộ đã được chuẩn hóa bằng ký hiệu corpus di động `<verified-ch6-source-corpus>`.
+- `python scripts/check_public_hygiene.py` đạt kết quả: `PUBLIC HYGIENE AUDIT PASS: Zero local paths or AI tool paths leaked.`
+
+### 5. `VALIDATOR-CH6-002 — RECHECK PASS`
+- **Kiểm tra bộ giám sát tự động:** `scripts/validate_ch06_content.py` đã tích hợp thành công rào chắn ngữ nghĩa `VALIDATOR-CH6-002`:
+  - Khoanh vùng cục bộ đúng phạm vi Section 6.5.1, không gây ảnh hưởng sai lệch đến các mục khác (như Prevention).
+  - Tự động từ chối mọi cụm từ thời gian thái quá trong ngữ cảnh Safe State.
+  - Kiểm tra bắt buộc sự hiện diện của định nghĩa chuỗi an toàn và tính liên tục của giải thuật tránh bế tắc.
+  - Kiểm thử âm bản (negative mutation test) đã chứng minh validator phát hiện và chặn đứng vi phạm với exit code `1`.
+
+---
+
+## 14. FINAL RECHECK DECISION
+
+$$\mathbf{CH6\ ACADEMIC\ VERIFICATION:\ PASS\ —\ READY\ FOR\ LIFECYCLE\ CLOSEOUT}$$
+
+- **TỔNG KẾT VẤN ĐỀ TỒN ĐỌNG:**
+  - **OPEN BLOCKERS:** 0
+  - **OPEN MAJORS:** 0
+  - **OPEN MINORS:** 0
+- **Trạng thái vòng đời nội dung (Content Lifecycle):** `CONTENT_DRAFTED` (Giữ nguyên theo quy trình, không tự ý nâng cấp trong phiên review).
 - **Chapter 6 Source Mapping:** `VERIFIED`
-- **Chapter 6 Authoring:** `CONTENT_DRAFTED` (Giữ nguyên, không tự ý chuyển thành `CONTENT_VERIFIED` trong phiên sửa lỗi).
-- **Academic Verification:** `PASS — BATCH 1 + CH5` (CH6 — REPAIR COMPLETED, PENDING INDEPENDENT RECHECK).
-- **Engineering Verification:** `PASS — CH5 + CH6`.
-- **Hành động tiếp theo chính xác (Exact Next Action):** Focused independent Chapter 6 academic recheck before lifecycle closeout.
+- **Chapter 6 Authoring:** `CONTENT_DRAFTED`
+- **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5 + CH6 REVIEW`
+- **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6`
+- **Hành động tiếp theo chính xác (Exact Next Action):** Independent lifecycle closeout from CONTENT_DRAFTED to CONTENT_VERIFIED.
