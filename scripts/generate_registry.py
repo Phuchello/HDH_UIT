@@ -100,6 +100,36 @@ CANONICAL_GROUND_TRUTH: dict[str, dict[str, str | int]] = {
         "sha256": "f8f82cc2a29641fbe7545d172485356dfdd78d7a398c01e1f784afca06a25803",
         "byte_size": 101550,
     },
+    "UIT-SLIDE-CH07-2024": {
+        "tier": "A",
+        "type": "official_slide",
+        "exact_filename": "#Week09-Chapter7 2024.pdf",
+        "sha256": "86e6260cdc2fd1461277434fa74ee0a325c945ba9cb5d1b0d4ba46a76045c5a9",
+        "byte_size": 7462286,
+        "page_count": 72,
+    },
+    "UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72": {
+        "tier": "B",
+        "type": "source_variant",
+        "exact_filename": "Week12-Chapter7 2024.pdf",
+        "sha256": "4b622457cd5592dc83afce32f8ca5ddf1c9e9bca6defdbed36150e80f0717177",
+        "byte_size": 7459415,
+        "page_count": 72,
+    },
+    "UIT-QBANK-CH07-2024": {
+        "tier": "A",
+        "type": "official_qbank",
+        "exact_filename": "Bai tap chuong 7 HDH.docx",
+        "sha256": "5b03f4e0691855f38d43872f79ba61a21378fea3ec5ee2551be5321a29b88e40",
+        "byte_size": 23960,
+    },
+    "UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P": {
+        "tier": "B",
+        "type": "source_variant",
+        "exact_filename": "Bai tap chuong 7 HDH.docx",
+        "sha256": "f8e523d10b0c75a18f5551f3f1f59c5827830ec56c095e92d68e4bfb50ec0b77",
+        "byte_size": 22871,
+    },
 }
 
 # Stale legacy IDs that must never be reintroduced
@@ -160,6 +190,8 @@ def check_source_ledger_consistency(registry_rows: list[dict]) -> list[str]:
         ("A-08", "UIT-SLIDE-CH05-1-2024"),
         ("A-10", "UIT-SLIDE-CH05-2-2024"),
         ("A-12", "UIT-SLIDE-CH06-2024"),
+        ("A-13", "UIT-SLIDE-CH07-2024"),
+        ("A-22", "UIT-QBANK-CH07-2024"),
     ]
 
     for ledger_id, reg_id in canonical_checks:
@@ -177,6 +209,7 @@ def check_source_ledger_consistency(registry_rows: list[dict]) -> list[str]:
     # Disallow known local variants in canonical authority rows
     disallowed_in_canonical = [
         ("A-01", "De cuong.pdf"),
+        ("A-13", "Week12-Chapter7 2024.pdf"),
         ("A-05", "Week04-Chapter4-1 2024.pdf"),
         ("A-06", "Week05-Chapter4-2 2024.pdf"),
         ("A-08", "Week07-Chapter5-1 2024.pdf"),

@@ -8548,10 +8548,10 @@
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 1,
-      "heading": "Trang bìa & mục tiêu",
+      "heading": "Trang bìa, ôn tập chương trước, mục tiêu bài học và nội dung chính",
       "subheading": "",
       "bullet_clusters": [
-        "Trang bìa & mục tiêu"
+        "Trang bìa, ôn tập chương trước, mục tiêu bài học và nội dung chính"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8559,15 +8559,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
       "content_status": "NOT_WRITTEN",
-      "range": "1-3"
+      "range": "1-4"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 2,
-      "heading": "Trang bìa & mục tiêu",
+      "heading": "Trang bìa, ôn tập chương trước, mục tiêu bài học và nội dung chính",
       "subheading": "",
       "bullet_clusters": [
-        "Trang bìa & mục tiêu"
+        "Trang bìa, ôn tập chương trước, mục tiêu bài học và nội dung chính"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8575,15 +8575,15 @@
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
       "content_status": "NOT_WRITTEN",
-      "range": "1-3"
+      "range": "1-4"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 3,
-      "heading": "Trang bìa & mục tiêu",
+      "heading": "Trang bìa, ôn tập chương trước, mục tiêu bài học và nội dung chính",
       "subheading": "",
       "bullet_clusters": [
-        "Trang bìa & mục tiêu"
+        "Trang bìa, ôn tập chương trước, mục tiêu bài học và nội dung chính"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -8591,1103 +8591,1103 @@
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
       "content_status": "NOT_WRITTEN",
-      "range": "1-3"
+      "range": "1-4"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 4,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "Trang bìa, ôn tập chương trước, mục tiêu bài học và nội dung chính",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "Trang bìa, ôn tập chương trước, mục tiêu bài học và nội dung chính"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
-      "classification": "CONTENT",
+      "classification": "NON_CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "None (Meta)",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "1-4"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 5,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "5-10"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 6,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "5-10"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 7,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "5-10"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 8,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "5-10"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 9,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "5-10"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 10,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.1 Khái niệm cơ sở: vai trò quản lý bộ nhớ, không gian địa chỉ, cấu trúc phân cấp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "5-10"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 11,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "11-16"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 12,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "11-16"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 13,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "11-16"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 14,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "11-16"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 15,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "11-16"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 16,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.2 Các kiểu địa chỉ nhớ: symbolic, relocatable, absolute; logical vs physical; Linker và Loader"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "11-16"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 17,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "17-22"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 18,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "17-22"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 19,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "17-22"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 20,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "17-22"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 21,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "17-22"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 22,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.3.1 Chuyển đổi địa chỉ: compile time, load time, execution time; MMU và relocation register"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "17-22"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 23,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.3.2 Dynamic linking: liên kết động và thư viện liên kết động (stub, shared library)",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.3.2 Dynamic linking: liên kết động và thư viện liên kết động (stub, shared library)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "23-25"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 24,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.3.2 Dynamic linking: liên kết động và thư viện liên kết động (stub, shared library)",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.3.2 Dynamic linking: liên kết động và thư viện liên kết động (stub, shared library)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "23-25"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 25,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.3.2 Dynamic linking: liên kết động và thư viện liên kết động (stub, shared library)",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.3.2 Dynamic linking: liên kết động và thư viện liên kết động (stub, shared library)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "23-25"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 26,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.3.3 Dynamic loading: nạp động theo nhu cầu gọi thủ tục",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.3.3 Dynamic loading: nạp động theo nhu cầu gọi thủ tục"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "26-27"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 27,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.3.3 Dynamic loading: nạp động theo nhu cầu gọi thủ tục",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.3.3 Dynamic loading: nạp động theo nhu cầu gọi thủ tục"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#1-khai-niem-dia-chi",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "26-27"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 28,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.4 Mô hình quản lý bộ nhớ cấp phát liên tục: đơn phân vùng và đa phân vùng",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.4 Mô hình quản lý bộ nhớ cấp phát liên tục: đơn phân vùng và đa phân vùng"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "28-32"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 29,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.4 Mô hình quản lý bộ nhớ cấp phát liên tục: đơn phân vùng và đa phân vùng",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.4 Mô hình quản lý bộ nhớ cấp phát liên tục: đơn phân vùng và đa phân vùng"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "28-32"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 30,
-      "heading": "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping",
+      "heading": "7.4 Mô hình quản lý bộ nhớ cấp phát liên tục: đơn phân vùng và đa phân vùng",
       "subheading": "",
       "bullet_clusters": [
-        "Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst fit), Phân mảnh & Swapping"
+        "7.4 Mô hình quản lý bộ nhớ cấp phát liên tục: đơn phân vùng và đa phân vùng"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#1-contiguous-swapping",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "4-30"
+      "range": "28-32"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 31,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.4 Mô hình quản lý bộ nhớ cấp phát liên tục: đơn phân vùng và đa phân vùng",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.4 Mô hình quản lý bộ nhớ cấp phát liên tục: đơn phân vùng và đa phân vùng"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "28-32"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 32,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.4 Mô hình quản lý bộ nhớ cấp phát liên tục: đơn phân vùng và đa phân vùng",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.4 Mô hình quản lý bộ nhớ cấp phát liên tục: đơn phân vùng và đa phân vùng"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "28-32"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 33,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.4.1 Phân vùng cố định (Fixed partitioning): cơ chế phân vùng tĩnh và phân mảnh nội (internal fragmentation)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.4.1 Phân vùng cố định (Fixed partitioning): cơ chế phân vùng tĩnh và phân mảnh nội (internal fragmentation)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "33-36"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 34,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.4.1 Phân vùng cố định (Fixed partitioning): cơ chế phân vùng tĩnh và phân mảnh nội (internal fragmentation)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.4.1 Phân vùng cố định (Fixed partitioning): cơ chế phân vùng tĩnh và phân mảnh nội (internal fragmentation)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "33-36"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 35,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.4.1 Phân vùng cố định (Fixed partitioning): cơ chế phân vùng tĩnh và phân mảnh nội (internal fragmentation)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.4.1 Phân vùng cố định (Fixed partitioning): cơ chế phân vùng tĩnh và phân mảnh nội (internal fragmentation)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "33-36"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 36,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.4.1 Phân vùng cố định (Fixed partitioning): cơ chế phân vùng tĩnh và phân mảnh nội (internal fragmentation)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.4.1 Phân vùng cố định (Fixed partitioning): cơ chế phân vùng tĩnh và phân mảnh nội (internal fragmentation)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "33-36"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 37,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.4.2 Phân vùng động (Dynamic partitioning): phân mảnh ngoại, thuật toán First/Best/Worst/Next fit và gom cụm (compaction)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.4.2 Phân vùng động (Dynamic partitioning): phân mảnh ngoại, thuật toán First/Best/Worst/Next fit và gom cụm (compaction)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "37-39"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 38,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.4.2 Phân vùng động (Dynamic partitioning): phân mảnh ngoại, thuật toán First/Best/Worst/Next fit và gom cụm (compaction)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.4.2 Phân vùng động (Dynamic partitioning): phân mảnh ngoại, thuật toán First/Best/Worst/Next fit và gom cụm (compaction)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "37-39"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 39,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.4.2 Phân vùng động (Dynamic partitioning): phân mảnh ngoại, thuật toán First/Best/Worst/Next fit và gom cụm (compaction)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.4.2 Phân vùng động (Dynamic partitioning): phân mảnh ngoại, thuật toán First/Best/Worst/Next fit và gom cụm (compaction)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#2-cap-phat-lien-tuc",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "37-39"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 40,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5 Cơ chế phân trang (Paging): cấp phát không liên tục, khái niệm trang (page), khung trang (frame) và ánh xạ",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5 Cơ chế phân trang (Paging): cấp phát không liên tục, khái niệm trang (page), khung trang (frame) và ánh xạ"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "40-42"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 41,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5 Cơ chế phân trang (Paging): cấp phát không liên tục, khái niệm trang (page), khung trang (frame) và ánh xạ",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5 Cơ chế phân trang (Paging): cấp phát không liên tục, khái niệm trang (page), khung trang (frame) và ánh xạ"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "40-42"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 42,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5 Cơ chế phân trang (Paging): cấp phát không liên tục, khái niệm trang (page), khung trang (frame) và ánh xạ",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5 Cơ chế phân trang (Paging): cấp phát không liên tục, khái niệm trang (page), khung trang (frame) và ánh xạ"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "40-42"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 43,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.1 Chuyển đổi địa chỉ trong phân trang: cấu trúc (p, d) sang (f, d) và kiến trúc bảng trang",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.1 Chuyển đổi địa chỉ trong phân trang: cấu trúc (p, d) sang (f, d) và kiến trúc bảng trang"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "43-47"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 44,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.1 Chuyển đổi địa chỉ trong phân trang: cấu trúc (p, d) sang (f, d) và kiến trúc bảng trang",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.1 Chuyển đổi địa chỉ trong phân trang: cấu trúc (p, d) sang (f, d) và kiến trúc bảng trang"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "43-47"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 45,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.1 Chuyển đổi địa chỉ trong phân trang: cấu trúc (p, d) sang (f, d) và kiến trúc bảng trang",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.1 Chuyển đổi địa chỉ trong phân trang: cấu trúc (p, d) sang (f, d) và kiến trúc bảng trang"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "43-47"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 46,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.1 Chuyển đổi địa chỉ trong phân trang: cấu trúc (p, d) sang (f, d) và kiến trúc bảng trang",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.1 Chuyển đổi địa chỉ trong phân trang: cấu trúc (p, d) sang (f, d) và kiến trúc bảng trang"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "43-47"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 47,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.1 Chuyển đổi địa chỉ trong phân trang: cấu trúc (p, d) sang (f, d) và kiến trúc bảng trang",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.1 Chuyển đổi địa chỉ trong phân trang: cấu trúc (p, d) sang (f, d) và kiến trúc bảng trang"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "43-47"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 48,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.2 Cài đặt bảng trang: thanh ghi phần cứng PTBR, bộ đệm Translation Lookaside Buffer (TLB), TLB hit/miss",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.2 Cài đặt bảng trang: thanh ghi phần cứng PTBR, bộ đệm Translation Lookaside Buffer (TLB), TLB hit/miss"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "48-51"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 49,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.2 Cài đặt bảng trang: thanh ghi phần cứng PTBR, bộ đệm Translation Lookaside Buffer (TLB), TLB hit/miss",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.2 Cài đặt bảng trang: thanh ghi phần cứng PTBR, bộ đệm Translation Lookaside Buffer (TLB), TLB hit/miss"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "48-51"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 50,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.2 Cài đặt bảng trang: thanh ghi phần cứng PTBR, bộ đệm Translation Lookaside Buffer (TLB), TLB hit/miss",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.2 Cài đặt bảng trang: thanh ghi phần cứng PTBR, bộ đệm Translation Lookaside Buffer (TLB), TLB hit/miss"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "48-51"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 51,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.2 Cài đặt bảng trang: thanh ghi phần cứng PTBR, bộ đệm Translation Lookaside Buffer (TLB), TLB hit/miss",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.2 Cài đặt bảng trang: thanh ghi phần cứng PTBR, bộ đệm Translation Lookaside Buffer (TLB), TLB hit/miss"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "48-51"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 52,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.3 Effective Access Time (EAT): tỷ lệ hit ratio, công thức thời gian truy xuất hiệu dụng và ví dụ tính toán",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.3 Effective Access Time (EAT): tỷ lệ hit ratio, công thức thời gian truy xuất hiệu dụng và ví dụ tính toán"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "52-54"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 53,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.3 Effective Access Time (EAT): tỷ lệ hit ratio, công thức thời gian truy xuất hiệu dụng và ví dụ tính toán",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.3 Effective Access Time (EAT): tỷ lệ hit ratio, công thức thời gian truy xuất hiệu dụng và ví dụ tính toán"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "52-54"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 54,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.3 Effective Access Time (EAT): tỷ lệ hit ratio, công thức thời gian truy xuất hiệu dụng và ví dụ tính toán",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.3 Effective Access Time (EAT): tỷ lệ hit ratio, công thức thời gian truy xuất hiệu dụng và ví dụ tính toán"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#3-phan-trang-tlb",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "52-54"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 55,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.4 Tổ chức bảng trang nâng cao: phân trang 2 cấp (hierarchical), bảng trang băm (hashed) và bảng trang nghịch đảo (inverted)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.4 Tổ chức bảng trang nâng cao: phân trang 2 cấp (hierarchical), bảng trang băm (hashed) và bảng trang nghịch đảo (inverted)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#4-cau-truc-bang-trang-nang-cao",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "55-58"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 56,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.4 Tổ chức bảng trang nâng cao: phân trang 2 cấp (hierarchical), bảng trang băm (hashed) và bảng trang nghịch đảo (inverted)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.4 Tổ chức bảng trang nâng cao: phân trang 2 cấp (hierarchical), bảng trang băm (hashed) và bảng trang nghịch đảo (inverted)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#4-cau-truc-bang-trang-nang-cao",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "55-58"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 57,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.4 Tổ chức bảng trang nâng cao: phân trang 2 cấp (hierarchical), bảng trang băm (hashed) và bảng trang nghịch đảo (inverted)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.4 Tổ chức bảng trang nâng cao: phân trang 2 cấp (hierarchical), bảng trang băm (hashed) và bảng trang nghịch đảo (inverted)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#4-cau-truc-bang-trang-nang-cao",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "55-58"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 58,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.4 Tổ chức bảng trang nâng cao: phân trang 2 cấp (hierarchical), bảng trang băm (hashed) và bảng trang nghịch đảo (inverted)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.4 Tổ chức bảng trang nâng cao: phân trang 2 cấp (hierarchical), bảng trang băm (hashed) và bảng trang nghịch đảo (inverted)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#4-cau-truc-bang-trang-nang-cao",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "55-58"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 59,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.5 Bảo vệ bộ nhớ và chia sẻ trang: protection bits, valid/invalid bit, chia sẻ mã trang (shared pages)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.5 Bảo vệ bộ nhớ và chia sẻ trang: protection bits, valid/invalid bit, chia sẻ mã trang (shared pages)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#4-cau-truc-bang-trang-nang-cao",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "59-62"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 60,
-      "heading": "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT",
+      "heading": "7.5.5 Bảo vệ bộ nhớ và chia sẻ trang: protection bits, valid/invalid bit, chia sẻ mã trang (shared pages)",
       "subheading": "",
       "bullet_clusters": [
-        "Kỹ thuật Phân trang (Paging), Ánh xạ địa chỉ, Bảng trang, TLB & EAT"
+        "7.5.5 Bảo vệ bộ nhớ và chia sẻ trang: protection bits, valid/invalid bit, chia sẻ mã trang (shared pages)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#2-paging-tlb",
+      "v2_destination": "content/theory/ch07-memory-management.md#4-cau-truc-bang-trang-nang-cao",
       "content_status": "NOT_WRITTEN",
-      "range": "31-60"
+      "range": "59-62"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 61,
-      "heading": "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)",
+      "heading": "7.5.5 Bảo vệ bộ nhớ và chia sẻ trang: protection bits, valid/invalid bit, chia sẻ mã trang (shared pages)",
       "subheading": "",
       "bullet_clusters": [
-        "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)"
+        "7.5.5 Bảo vệ bộ nhớ và chia sẻ trang: protection bits, valid/invalid bit, chia sẻ mã trang (shared pages)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#3-page-structures",
+      "v2_destination": "content/theory/ch07-memory-management.md#4-cau-truc-bang-trang-nang-cao",
       "content_status": "NOT_WRITTEN",
-      "range": "61-70"
+      "range": "59-62"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 62,
-      "heading": "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)",
+      "heading": "7.5.5 Bảo vệ bộ nhớ và chia sẻ trang: protection bits, valid/invalid bit, chia sẻ mã trang (shared pages)",
       "subheading": "",
       "bullet_clusters": [
-        "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)"
+        "7.5.5 Bảo vệ bộ nhớ và chia sẻ trang: protection bits, valid/invalid bit, chia sẻ mã trang (shared pages)"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#3-page-structures",
+      "v2_destination": "content/theory/ch07-memory-management.md#4-cau-truc-bang-trang-nang-cao",
       "content_status": "NOT_WRITTEN",
-      "range": "61-70"
+      "range": "59-62"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 63,
-      "heading": "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)",
+      "heading": "7.6 Cơ chế hoán vị (Swapping): hoán vị tiến trình giữa RAM và backing store, chi phí context switch",
       "subheading": "",
       "bullet_clusters": [
-        "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)"
+        "7.6 Cơ chế hoán vị (Swapping): hoán vị tiến trình giữa RAM và backing store, chi phí context switch"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#3-page-structures",
+      "v2_destination": "content/theory/ch07-memory-management.md#5-swapping",
       "content_status": "NOT_WRITTEN",
-      "range": "61-70"
+      "range": "63-65"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 64,
-      "heading": "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)",
+      "heading": "7.6 Cơ chế hoán vị (Swapping): hoán vị tiến trình giữa RAM và backing store, chi phí context switch",
       "subheading": "",
       "bullet_clusters": [
-        "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)"
+        "7.6 Cơ chế hoán vị (Swapping): hoán vị tiến trình giữa RAM và backing store, chi phí context switch"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#3-page-structures",
+      "v2_destination": "content/theory/ch07-memory-management.md#5-swapping",
       "content_status": "NOT_WRITTEN",
-      "range": "61-70"
+      "range": "63-65"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 65,
-      "heading": "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)",
+      "heading": "7.6 Cơ chế hoán vị (Swapping): hoán vị tiến trình giữa RAM và backing store, chi phí context switch",
       "subheading": "",
       "bullet_clusters": [
-        "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)"
+        "7.6 Cơ chế hoán vị (Swapping): hoán vị tiến trình giữa RAM và backing store, chi phí context switch"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#3-page-structures",
+      "v2_destination": "content/theory/ch07-memory-management.md#5-swapping",
       "content_status": "NOT_WRITTEN",
-      "range": "61-70"
+      "range": "63-65"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 66,
-      "heading": "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)",
+      "heading": "Tóm tắt nội dung cốt lõi Chương 7",
       "subheading": "",
       "bullet_clusters": [
-        "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)"
+        "Tóm tắt nội dung cốt lõi Chương 7"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#3-page-structures",
+      "v2_destination": "content/theory/ch07-memory-management.md#5-swapping",
       "content_status": "NOT_WRITTEN",
-      "range": "61-70"
+      "range": 66
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 67,
-      "heading": "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)",
+      "heading": "7.7 Bài tập slide (Bài 1–5): phân vùng liên tục, tính số bit địa chỉ logic/vật lý, tính EAT, bảng trang 2 cấp và 3 cấp",
       "subheading": "",
       "bullet_clusters": [
-        "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)"
+        "7.7 Bài tập slide (Bài 1–5): phân vùng liên tục, tính số bit địa chỉ logic/vật lý, tính EAT, bảng trang 2 cấp và 3 cấp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#3-page-structures",
+      "v2_destination": "content/theory/ch07-memory-management.md#6-bai-tap-slide",
       "content_status": "NOT_WRITTEN",
-      "range": "61-70"
+      "range": "67-71"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 68,
-      "heading": "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)",
+      "heading": "7.7 Bài tập slide (Bài 1–5): phân vùng liên tục, tính số bit địa chỉ logic/vật lý, tính EAT, bảng trang 2 cấp và 3 cấp",
       "subheading": "",
       "bullet_clusters": [
-        "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)"
+        "7.7 Bài tập slide (Bài 1–5): phân vùng liên tục, tính số bit địa chỉ logic/vật lý, tính EAT, bảng trang 2 cấp và 3 cấp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#3-page-structures",
+      "v2_destination": "content/theory/ch07-memory-management.md#6-bai-tap-slide",
       "content_status": "NOT_WRITTEN",
-      "range": "61-70"
+      "range": "67-71"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 69,
-      "heading": "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)",
+      "heading": "7.7 Bài tập slide (Bài 1–5): phân vùng liên tục, tính số bit địa chỉ logic/vật lý, tính EAT, bảng trang 2 cấp và 3 cấp",
       "subheading": "",
       "bullet_clusters": [
-        "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)"
+        "7.7 Bài tập slide (Bài 1–5): phân vùng liên tục, tính số bit địa chỉ logic/vật lý, tính EAT, bảng trang 2 cấp và 3 cấp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#3-page-structures",
+      "v2_destination": "content/theory/ch07-memory-management.md#6-bai-tap-slide",
       "content_status": "NOT_WRITTEN",
-      "range": "61-70"
+      "range": "67-71"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 70,
-      "heading": "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)",
+      "heading": "7.7 Bài tập slide (Bài 1–5): phân vùng liên tục, tính số bit địa chỉ logic/vật lý, tính EAT, bảng trang 2 cấp và 3 cấp",
       "subheading": "",
       "bullet_clusters": [
-        "Cấu trúc Bảng trang nâng cao (Phân cấp, Hashed, Inverted) & Phân đoạn (Segmentation)"
+        "7.7 Bài tập slide (Bài 1–5): phân vùng liên tục, tính số bit địa chỉ logic/vật lý, tính EAT, bảng trang 2 cấp và 3 cấp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
       "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "content/theory/ch07-memory-management.md#3-page-structures",
+      "v2_destination": "content/theory/ch07-memory-management.md#6-bai-tap-slide",
       "content_status": "NOT_WRITTEN",
-      "range": "61-70"
+      "range": "67-71"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 71,
-      "heading": "Tổng kết Chương 7",
+      "heading": "7.7 Bài tập slide (Bài 1–5): phân vùng liên tục, tính số bit địa chỉ logic/vật lý, tính EAT, bảng trang 2 cấp và 3 cấp",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng kết Chương 7"
+        "7.7 Bài tập slide (Bài 1–5): phân vùng liên tục, tính số bit địa chỉ logic/vật lý, tính EAT, bảng trang 2 cấp và 3 cấp"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
-      "classification": "NON_CONTENT",
+      "classification": "CONTENT",
       "mapping_status": "MAPPED",
-      "v2_destination": "None (Meta)",
+      "v2_destination": "content/theory/ch07-memory-management.md#6-bai-tap-slide",
       "content_status": "NOT_WRITTEN",
-      "range": "71-72"
+      "range": "67-71"
     },
     {
       "source_id": "UIT-SLIDE-CH07-2024",
       "page": 72,
-      "heading": "Tổng kết Chương 7",
+      "heading": "Thảo luận và kết thúc buổi học",
       "subheading": "",
       "bullet_clusters": [
-        "Tổng kết Chương 7"
+        "Thảo luận và kết thúc buổi học"
       ],
       "terms": [],
       "questionable_or_exam_relevant_properties": [],
@@ -9695,7 +9695,7 @@
       "mapping_status": "MAPPED",
       "v2_destination": "None (Meta)",
       "content_status": "NOT_WRITTEN",
-      "range": "71-72"
+      "range": 72
     },
     {
       "source_id": "UIT-SLIDE-CH08-2024",

@@ -2,15 +2,17 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH3_CH6_CONTENT_VERIFIED_LOCKED`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH4_CH7_SOURCE_MAP_READY_FOR_INDEPENDENT_CHECK`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `VERIFIED`  
+**Bản đồ nguồn Chương 7 (Chapter 7 Source Mapping):** `MAPPED — PENDING INDEPENDENT CHECK`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `CONTENT_VERIFIED`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASSED` — All 14 foundation gates passing, ENG-CH6-003..006 resolved.  
+**Soạn thảo nội dung Chương 7 (Chapter 7 Authoring):** `NOT_STARTED`  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASSED` — All 15 foundation gates passing, Ch7 source map integrated.  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5 + CH6`  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Chapter 6 locked. Start the next independently scoped V2 milestone only after this exact-head closeout is independently checked.  
+**Hành động tiếp theo chính xác (Exact Next Action):** Independent Chapter 7 source-map verification before authoring.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-09-03
 
