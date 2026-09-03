@@ -149,12 +149,38 @@ def validate_ch06_content() -> int:
     if "request" not in t_lower or "need" not in t_lower:
         errors.append("Theory content must explicitly distinguish Request from Need in Detection vs Banker")
 
-    # 8. Unsafe != Deadlock protection in Theory
+    # 8. Unsafe != Deadlock & State-Space Invariant Guard (ACAD-CH6-003)
     unsafe_deadlock_distinction = (
-        "không đồng nghĩa" in t_lower or "không phải" in t_lower or "không an toàn" in t_lower
+        ("không đồng nghĩa" in t_lower or "không phải" in t_lower or "tiềm ẩn rủi ro" in t_lower)
+        and ("không an toàn" in t_lower or "unsafe" in t_lower)
     )
     if not unsafe_deadlock_distinction:
         errors.append("Theory content must maintain explicit distinction that Unsafe != necessarily Deadlock")
+
+    # Semantic invariants adjacent to state-space diagram
+    has_disjoint_invariant = (
+        ("safe" in t_lower and "unsafe" in t_lower)
+        and ("\\cap" in theory_text or "rời nhau" in t_lower or "disjoint" in t_lower)
+        and ("\\emptyset" in theory_text or "loại trừ lẫn nhau" in t_lower or "rời nhau hoàn toàn" in t_lower)
+    )
+    if not has_disjoint_invariant:
+        errors.append("Theory content missing mandatory Safe cap Unsafe = empty / disjoint state-space invariant")
+
+    has_subset_invariant = (
+        ("\\subset" in theory_text or "tập con" in t_lower)
+        and ("deadlock" in t_lower and "unsafe" in t_lower)
+    )
+    if not has_subset_invariant:
+        errors.append("Theory content missing mandatory Deadlock subset of Unsafe state-space invariant")
+
+    # Reject flawed diagram pattern where an outer UNSAFE box encloses SAFE STATE
+    for block in re.findall(r"(?m)^```[^\n]*\n(.*?\n)```", theory_text, re.DOTALL):
+        b_low = block.lower()
+        if "unsafe" in b_low and "safe" in b_low:
+            if re.search(r"trạng thái không an toàn \(unsafe state\).*?trạng thái an toàn \(safe", b_low, re.DOTALL):
+                errors.append("Theory content contains invalid state-space diagram (ACAD-CH6-003): outer UNSAFE box must NOT enclose SAFE STATE")
+            if re.search(r"┌─+┐\s*│\s*trạng thái không an toàn.*?safe", b_low, re.DOTALL):
+                errors.append("Theory content contains invalid state-space diagram (ACAD-CH6-003): outer box labeled UNSAFE encloses SAFE")
 
     # 9. QBank All 15 Questions Mapped in Content
     for i in range(1, 16):

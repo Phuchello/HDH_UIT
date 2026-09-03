@@ -18,7 +18,7 @@
 
 ## 2. CANONICAL BINARY VERIFICATION (Thẩm Định Vật Lý Nhị Phân Nguồn Gốc)
 
-Đã xác định vị trí thực tế và thẩm định bằng thuật toán băm mã hóa SHA-256 đối với toàn bộ 3 tệp nhị phân nguồn chính quy tại thư mục lưu trữ cục bộ `C:\Users\lyle3\Downloads\hdh_uit_ch6_corpus`:
+Đã xác định vị trí thực tế và thẩm định bằng thuật toán băm mã hóa SHA-256 đối với toàn bộ 3 tệp nhị phân nguồn chính quy tại thư mục lưu trữ nguồn cục bộ (verified local canonical Chapter 6 source corpus):
 
 1. **Đề cương môn học chính quy 2024:**
    - Định danh: `UIT-OUTLINE-2024`
@@ -45,7 +45,7 @@
    - Kết quả: **PASS (Trùng khớp 100%)**
 
 *Lệnh kiểm tra Evidence Mode thực thi thành công:*
-`python scripts/validate_ch06_source_map.py --source-root "C:\Users\lyle3\Downloads\hdh_uit_ch6_corpus"` $\implies$ **PASS**.
+`python scripts/validate_ch06_source_map.py --source-root <verified-ch6-source-corpus>` $\implies$ **PASS**.
 
 ---
 
@@ -199,21 +199,26 @@ Tất cả 15 đơn vị câu hỏi đều sử dụng nhãn trung lập: `#### 
 ### BLOCKERS: 0
 - Tất cả các tệp nhị phân nguồn chính quy đều hiện diện thực tế và vượt qua kiểm tra mã băm vật lý trong Evidence Mode.
 
-### MAJORS: 1 (CẦN SỬA ĐỔI)
-- **`ACAD-CH6-003 — MAJOR — CONFIRMED`**: Sơ đồ ASCII không gian trạng thái trong `content/theory/ch06-deadlock.md` mục 6.5.1 hiển thị `SAFE STATE` nằm lọt bên trong khung `UNSAFE STATE`, gây hiểu sai rằng Safe là tập con của Unsafe. Sơ đồ cần được chỉnh sửa lại để thể hiện hai miền Safe và Unsafe tách biệt (disjoint), trong đó Deadlock nằm gọn bên trong Unsafe.
+### MAJORS: 0 OPEN (1 REPAIRED — PENDING INDEPENDENT RECHECK)
+- **`ACAD-CH6-003 — MAJOR — CONFIRMED -> REPAIRED — PENDING INDEPENDENT RECHECK`**: Sơ đồ ASCII không gian trạng thái trong `content/theory/ch06-deadlock.md` mục 6.5.1 hiển thị `SAFE STATE` nằm lọt bên trong khung `UNSAFE STATE` đã được sửa đổi hình học thành hai miền Safe và Unsafe tách biệt rời nhau ($\text{Safe} \cap \text{Unsafe} = \emptyset$), trong đó Deadlock nằm gọn bên trong miền Unsafe ($\text{Deadlock} \subset \text{Unsafe}$). Đã bổ sung regression guard trong `scripts/validate_ch06_content.py`. Đang chờ thẩm định độc lập xác nhận.
+- **`ENG-CH6-007 — MAJOR — OPEN -> RESOLVED`**: Khắc phục triệt để lỗi rò rỉ đường dẫn tuyệt đối máy trạm cục bộ trong báo cáo học thuật. Đã chuẩn hóa bằng ký hiệu corpus di động độc lập phần cứng `<verified-ch6-source-corpus>`, tuân thủ tuyệt đối cổng chất lượng `scripts/check_public_hygiene.py`.
 
-### MINORS: 1 (KHUYẾN NGHỊ)
-- **`ACAD-CH6-004 — MINOR — OPEN`**: Tại dòng 438 của `content/theory/ch06-deadlock.md`, liên kết tương đối trỏ về `../../questions/subjective/ch06.md` dư một cấp `../`. Dù bộ sinh web đã tự động chuẩn hóa thành công, việc sửa lại thành `../questions/subjective/ch06.md` trong mã nguồn Markdown sẽ giúp đường dẫn sạch sẽ và chuẩn xác hơn.
+### MINORS: 0 OPEN (1 RESOLVED)
+- **`ACAD-CH6-004 — MINOR — OPEN -> RESOLVED`**: Đã chuẩn hóa liên kết tương đối trỏ về ngân hàng câu hỏi tự luận tại cuối tệp `content/theory/ch06-deadlock.md` thành `../questions/subjective/ch06.md`. Bộ sinh web biên dịch chính xác thành `../questions/subjective/ch06.html`.
 
 ---
 
 ## 12. FINAL ACADEMIC DECISION
 
-$$\mathbf{CH6\ ACADEMIC\ VERIFICATION:\ REPAIR\ REQUIRED\ (1\ MAJOR\ CONFIRMED)}$$
+$$\mathbf{CH6\ ACADEMIC\ REPAIR:\ COMPLETED\ —\ PENDING\ INDEPENDENT\ RECHECK}$$
 
-Vì tồn tại khiếm khuyết học thuật mức Major được xác nhận độc lập (**`ACAD-CH6-003`**), Chương 6 chưa thể đánh dấu `CONTENT_VERIFIED` hay hoàn tất nghiệm thu học thuật. 
+Toàn bộ các khiếm khuyết được ghi nhận trong đợt kiểm tra học thuật độc lập (`ACAD-CH6-003`, `ACAD-CH6-004`, `ENG-CH6-007`) đã được sửa chữa phẫu thuật chính xác.
 
 Chương 6 chuyển sang giai đoạn:
-$$\mathbf{V2\_BATCH3\_CH6\_ACADEMIC\_REPAIR\_REQUIRED}$$
+$$\mathbf{V2\_BATCH3\_CH6\_ACADEMIC\_REPAIR\_COMPLETED\_PENDING\_RECHECK}$$
 
-**Hành động tiếp theo chính xác:** Tiến hành sửa đổi sơ đồ ASCII không gian trạng thái trong `content/theory/ch06-deadlock.md` để giải quyết dứt điểm `ACAD-CH6-003`, sau đó tiến hành nghiệm thu vòng cuối.
+- **Chapter 6 Source Mapping:** `VERIFIED`
+- **Chapter 6 Authoring:** `CONTENT_DRAFTED` (Giữ nguyên, không tự ý chuyển thành `CONTENT_VERIFIED` trong phiên sửa lỗi).
+- **Academic Verification:** `PASS — BATCH 1 + CH5` (CH6 — REPAIR COMPLETED, PENDING INDEPENDENT RECHECK).
+- **Engineering Verification:** `PASS — CH5 + CH6`.
+- **Hành động tiếp theo chính xác (Exact Next Action):** Focused independent Chapter 6 academic recheck before lifecycle closeout.

@@ -2,15 +2,15 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH3_CH6_ACADEMIC_REPAIR_REQUIRED`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH3_CH6_ACADEMIC_REPAIR_COMPLETED_PENDING_RECHECK`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `VERIFIED`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `CONTENT_DRAFTED`  
 **Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASSED` — All 14 foundation gates passing, ENG-CH6-003..006 resolved.  
-**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5` (CH6 — ACADEMIC REPAIR REQUIRED: ACAD-CH6-003)  
+**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5` (CH6 — REPAIR COMPLETED, PENDING INDEPENDENT RECHECK)  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Repair only independently confirmed Chapter 6 academic findings.  
+**Hành động tiếp theo chính xác (Exact Next Action):** Focused independent Chapter 6 academic recheck before lifecycle closeout.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-09-03
 

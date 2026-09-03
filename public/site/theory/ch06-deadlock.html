@@ -251,22 +251,32 @@ Triệt tiêu ít nhất 1 trong     Duy trì hệ thống luôn          Để 
 
 <p>Sao cho đối với mỗi tiến trình $P_i$, số tài nguyên tối đa mà nó còn có thể yêu cầu thêm ($\text{Need}_i = \text{Max}_i - \text{Allocation}_i$) hoàn toàn có thể được đáp ứng bởi:<br>$$\text{Need}_i \le \text{Available} + \sum_{k=1}^{i-1} \text{Allocation}_k$$<br><em>(Tức là bằng số tài nguyên hiện đang rảnh rỗi cộng với toàn bộ tài nguyên sẽ được hoàn trả bởi các tiến trình $P_k$ đứng trước nó sau khi chúng hoàn thành).</em></p>
 
-<pre><code class="language-">                          KHÔNG GIAN TRẠNG THÁI HỆ THỐNG
-       ┌─────────────────────────────────────────────────────────────┐
-       │ TRẠNG THÁI KHÔNG AN TOÀN (UNSAFE STATE)                     │
-       │                                                             │
-       │         ┌─────────────────────────────────────────┐         │
-       │         │ TRẠNG THÁI BẾ TẮC (DEADLOCK STATE)      │         │
-       │         │                                         │         │
-       │         └─────────────────────────────────────────┘         │
-       │                                                             │
-       │  ┌───────────────────────────────────────────────────────┐  │
-       │  │ TRẠNG THÁI AN TOÀN (SAFE STATE)                       │  │
-       │  │ (Tồn tại chuỗi an toàn -&gt; Chắc chắn KHÔNG deadlock)   │  │
-       │  └───────────────────────────────────────────────────────┘  │
-       └─────────────────────────────────────────────────────────────┘</code></pre>
+<pre><code class="language-">                       TOÀN BỘ KHÔNG GIAN TRẠNG THÁI HỆ THỐNG
+     ┌───────────────────────────────────────────────────────────────────┐
+     │                                                                   │
+     │  ┌────────────────── TRẠNG THÁI AN TOÀN (SAFE) ────────────────┐  │
+     │  │                                                             │  │
+     │  │   Tồn tại ít nhất một chuỗi an toàn: ⟨P₁, P₂, ..., Pₙ⟩      │  │
+     │  │   Hệ thống bảo đảm 100% KHÔNG BAO GIỜ xảy ra bế tắc.        │  │
+     │  │                                                             │  │
+     │  └─────────────────────────────────────────────────────────────┘  │
+     │                                                                   │
+     │  ┌──────────────── TRẠNG THÁI KHÔNG AN TOÀN (UNSAFE) ──────────┐  │
+     │  │                                                             │  │
+     │  │   Tiềm ẩn nguy cơ bế tắc (vulnerable state).                │  │
+     │  │                                                             │  │
+     │  │        ┌──────── TRẠNG THÁI BẾ TẮC (DEADLOCK) ───────┐      │  │
+     │  │        │                                             │      │  │
+     │  │        │   Các tiến trình bị khóa cứng lẫn nhau      │      │  │
+     │  │        │   (Tập con nguy hiểm nhất bên trong Unsafe) │      │  │
+     │  │        │                                             │      │  │
+     │  │        └─────────────────────────────────────────────┘      │  │
+     │  │                                                             │  │
+     │  └─────────────────────────────────────────────────────────────┘  │
+     │                                                                   │
+     └───────────────────────────────────────────────────────────────────┘</code></pre>
 
-<div class="callout important"><div class="callout-title">YÊU CẦU QUAN TRỌNG</div><p><br><strong>Mối liên hệ bản chất giữa Safe, Unsafe và Deadlock:</strong><br>1. $\text{Safe State} \implies \text{Hệ thống KHÔNG CÓ Deadlock}$.<br>2. $\text{Deadlock State} \implies \text{Hệ thống đang ở trạng thái Unsafe}$.<br>3. $\text{Unsafe State} \not\implies \text{Chắc chắn Deadlock}$. Trạng thái Unsafe chỉ là trạng thái <strong>tiềm ẩn rủi ro bế tắc</strong> (vulnerable state). Nếu các tiến trình không đồng thời yêu cầu đạt mức tối đa (<code>Max</code>), hệ thống vẫn có thể may mắn hoàn thành mà không xảy ra bế tắc.<br>4. <strong>Bản chất của Giải thuật Tránh bế tắc:</strong> Đảm bảo hệ thống <strong>luôn luôn duy trì trong trạng thái An toàn (Safe State)</strong>. Nếu một yêu cầu cấp phát đẩy hệ thống vào trạng thái Unsafe, hệ thống sẽ tạm hoãn yêu cầu đó lại dù tài nguyên hiện đang có sẵn.</p></div>
+<div class="callout important"><div class="callout-title">YÊU CẦU QUAN TRỌNG</div><p><br><strong>Mối liên hệ bản chất giữa Safe, Unsafe và Deadlock:</strong><br>1. <strong>Phân hoạch không gian trạng thái:</strong> Không gian trạng thái hệ thống được phân hoạch thành hai miền rời nhau hoàn toàn: $\text{Safe State} \cap \text{Unsafe State} = \emptyset$. Trạng thái Safe và Unsafe loại trừ lẫn nhau (Disjoint).<br>2. $\text{Safe State} \implies \text{Hệ thống KHÔNG CÓ Deadlock}$.<br>3. $\text{Deadlock State} \subset \text{Unsafe State}$ ($\text{Deadlock State} \implies \text{Hệ thống đang ở trạng thái Unsafe}$). Bế tắc là tập con thực sự bên trong miền Unsafe.<br>4. $\text{Unsafe State} \not\implies \text{Chắc chắn Deadlock}$. Trạng thái Unsafe chỉ là trạng thái <strong>tiềm ẩn rủi ro bế tắc</strong> (vulnerable state). Nếu các tiến trình không đồng thời yêu cầu đạt mức tối đa (<code>Max</code>), hệ thống vẫn có thể may mắn hoàn thành mà không xảy ra bế tắc.<br>5. <strong>Bản chất của Giải thuật Tránh bế tắc:</strong> Đảm bảo hệ thống <strong>luôn luôn duy trì trong trạng thái An toàn (Safe State)</strong>. Nếu một yêu cầu cấp phát đẩy hệ thống vào trạng thái Unsafe, hệ thống sẽ tạm hoãn yêu cầu đó lại dù tài nguyên hiện đang có sẵn.</p></div>
 
 <hr>
 
