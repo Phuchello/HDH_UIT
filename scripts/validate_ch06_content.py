@@ -182,6 +182,49 @@ def validate_ch06_content() -> int:
             if re.search(r"┌─+┐\s*│\s*trạng thái không an toàn.*?safe", b_low, re.DOTALL):
                 errors.append("Theory content contains invalid state-space diagram (ACAD-CH6-003): outer box labeled UNSAFE encloses SAFE")
 
+    # VALIDATOR-CH6-002: Safe-State Temporal Overclaim & Invariant Guard (ACAD-CH6-005)
+    sec_651 = ""
+    if "### 6.5.1" in theory_text:
+        sec_651 = theory_text.split("### 6.5.1")[1].split("### 6.5.2")[0]
+    sec_651_lower = sec_651.lower()
+
+    # Reject unconditional temporal overclaims in Safe-State context
+    forbidden_safe_temporal_overclaims = [
+        "100% không bao giờ",
+        "không bao giờ xảy ra bế tắc",
+        "không bao giờ xảy ra deadlock",
+        "never deadlock",
+        "deadlock can never occur",
+        "deadlock is impossible forever",
+        "vĩnh viễn không bao giờ bế tắc",
+    ]
+    for phrase in forbidden_safe_temporal_overclaims:
+        if phrase in sec_651_lower:
+            errors.append(
+                f"Theory Section 6.5.1 contains invalid unconditional temporal overclaim (VALIDATOR-CH6-002 / ACAD-CH6-005): '{phrase}'"
+            )
+
+    # Positive invariant 1: Safe State defined via existence of at least one Safe Sequence
+    has_safe_sequence_definition = (
+        ("chuỗi an toàn" in sec_651_lower or "safe sequence" in sec_651_lower)
+        and ("tồn tại" in sec_651_lower or "exists" in sec_651_lower)
+    )
+    if not has_safe_sequence_definition:
+        errors.append(
+            "Theory Section 6.5.1 missing positive invariant (VALIDATOR-CH6-002): Safe State must be defined by existence of at least one Safe Sequence"
+        )
+
+    # Positive invariant 2: Future avoidance depends on keeping subsequent allocations Safe
+    has_avoidance_continuity_invariant = (
+        ("tránh bế tắc" in sec_651_lower or "avoidance" in sec_651_lower)
+        and ("duy trì" in sec_651_lower or "bảo toàn" in sec_651_lower or "kiểm soát" in sec_651_lower)
+        and ("safe" in sec_651_lower or "an toàn" in sec_651_lower)
+    )
+    if not has_avoidance_continuity_invariant:
+        errors.append(
+            "Theory Section 6.5.1 missing positive invariant (VALIDATOR-CH6-002): future avoidance depends on continuously maintaining Safe allocations"
+        )
+
     # 9. QBank All 15 Questions Mapped in Content
     for i in range(1, 16):
         qid = f"QBANK-CH06-{i:02d}"

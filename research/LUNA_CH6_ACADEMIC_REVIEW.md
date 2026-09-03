@@ -199,8 +199,12 @@ Tất cả 15 đơn vị câu hỏi đều sử dụng nhãn trung lập: `#### 
 ### BLOCKERS: 0
 - Tất cả các tệp nhị phân nguồn chính quy đều hiện diện thực tế và vượt qua kiểm tra mã băm vật lý trong Evidence Mode.
 
-### MAJORS: 0 OPEN (1 REPAIRED — PENDING INDEPENDENT RECHECK)
+### MAJORS: 0 OPEN (2 REPAIRED — PENDING INDEPENDENT RECHECK)
 - **`ACAD-CH6-003 — MAJOR — CONFIRMED -> REPAIRED — PENDING INDEPENDENT RECHECK`**: Sơ đồ ASCII không gian trạng thái trong `content/theory/ch06-deadlock.md` mục 6.5.1 hiển thị `SAFE STATE` nằm lọt bên trong khung `UNSAFE STATE` đã được sửa đổi hình học thành hai miền Safe và Unsafe tách biệt rời nhau ($\text{Safe} \cap \text{Unsafe} = \emptyset$), trong đó Deadlock nằm gọn bên trong miền Unsafe ($\text{Deadlock} \subset \text{Unsafe}$). Đã bổ sung regression guard trong `scripts/validate_ch06_content.py`. Đang chờ thẩm định độc lập xác nhận.
+- **`ACAD-CH6-005 — MAJOR — OPEN -> REPAIRED — PENDING FOCUSED RECHECK`**:
+  - *Lý do:* Sơ đồ trạng thái sau khi sửa chữa hình học đã vô tình đưa vào tuyên bố thời gian vô điều kiện thái quá: "Hệ thống bảo đảm 100% KHÔNG BAO GIỜ xảy ra bế tắc" bên trong vùng SAFE STATE. Bản chất học thuật của Safe State là trạng thái hiện tại an toàn và tồn tại ít nhất một chuỗi an toàn; nó không bảo đảm hệ thống vĩnh viễn không bế tắc nếu các cấp phát tiếp theo trong tương lai không được kiểm soát chặt chẽ.
+  - *Khắc phục:* Vùng Safe trong sơ đồ ASCII và hộp lưu ý §6.5.1 đã được chuẩn hóa câu chữ học thuật chính xác: chỉ xác nhận hiện tại không bế tắc, tồn tại chuỗi an toàn, và nhấn mạnh tránh bế tắc trong tương lai phụ thuộc vào việc chính sách Avoidance liên tục kiểm soát cấp phát.
+- **`VALIDATOR-CH6-002 — RESOLVED`**: Đã bổ sung semantic guard trong `scripts/validate_ch06_content.py` khoanh vùng kiểm tra mục 6.5.1, cấm tuyệt đối các tuyên bố thời gian vô điều kiện thái quá trong ngữ cảnh Safe State (`100% không bao giờ`, `không bao giờ xảy ra bế tắc`, `never deadlock`), đồng thời kiểm tra bắt buộc các bất biến tích cực về chuỗi an toàn và tính liên tục của thuật toán Avoidance.
 - **`ENG-CH6-007 — MAJOR — OPEN -> RESOLVED`**: Khắc phục triệt để lỗi rò rỉ đường dẫn tuyệt đối máy trạm cục bộ trong báo cáo học thuật. Đã chuẩn hóa bằng ký hiệu corpus di động độc lập phần cứng `<verified-ch6-source-corpus>`, tuân thủ tuyệt đối cổng chất lượng `scripts/check_public_hygiene.py`.
 
 ### MINORS: 0 OPEN (1 RESOLVED)
@@ -212,7 +216,7 @@ Tất cả 15 đơn vị câu hỏi đều sử dụng nhãn trung lập: `#### 
 
 $$\mathbf{CH6\ ACADEMIC\ REPAIR:\ COMPLETED\ —\ PENDING\ INDEPENDENT\ RECHECK}$$
 
-Toàn bộ các khiếm khuyết được ghi nhận trong đợt kiểm tra học thuật độc lập (`ACAD-CH6-003`, `ACAD-CH6-004`, `ENG-CH6-007`) đã được sửa chữa phẫu thuật chính xác.
+Toàn bộ các khiếm khuyết được ghi nhận trong đợt kiểm tra học thuật độc lập và phát hiện bổ sung (`ACAD-CH6-003`, `ACAD-CH6-004`, `ACAD-CH6-005`, `ENG-CH6-007`, `VALIDATOR-CH6-002`) đã được sửa chữa phẫu thuật chính xác.
 
 Chương 6 chuyển sang giai đoạn:
 $$\mathbf{V2\_BATCH3\_CH6\_ACADEMIC\_REPAIR\_COMPLETED\_PENDING\_RECHECK}$$

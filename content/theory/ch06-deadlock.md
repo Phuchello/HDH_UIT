@@ -282,7 +282,7 @@ $$\text{Need}_i \le \text{Available} + \sum_{k=1}^{i-1} \text{Allocation}_k$$
      │  ┌────────────────── TRẠNG THÁI AN TOÀN (SAFE) ────────────────┐  │
      │  │                                                             │  │
      │  │   Tồn tại ít nhất một chuỗi an toàn: ⟨P₁, P₂, ..., Pₙ⟩      │  │
-     │  │   Hệ thống bảo đảm 100% KHÔNG BAO GIỜ xảy ra bế tắc.        │  │
+     │  │   Hiện tại không bế tắc; có cách để mọi tiến trình hoàn tất │  │
      │  │                                                             │  │
      │  └─────────────────────────────────────────────────────────────┘  │
      │                                                                   │
@@ -305,10 +305,10 @@ $$\text{Need}_i \le \text{Available} + \sum_{k=1}^{i-1} \text{Allocation}_k$$
 > [!IMPORTANT]
 > **Mối liên hệ bản chất giữa Safe, Unsafe và Deadlock:**
 > 1. **Phân hoạch không gian trạng thái:** Không gian trạng thái hệ thống được phân hoạch thành hai miền rời nhau hoàn toàn: $\text{Safe State} \cap \text{Unsafe State} = \emptyset$. Trạng thái Safe và Unsafe loại trừ lẫn nhau (Disjoint).
-> 2. $\text{Safe State} \implies \text{Hệ thống KHÔNG CÓ Deadlock}$.
+> 2. $\text{Safe State} \implies \text{Hệ thống hiện tại KHÔNG CÓ Deadlock}$. Luôn tồn tại ít nhất một chuỗi an toàn (Safe Sequence) cho phép mọi tiến trình hoàn tất theo nhu cầu tối đa. Trạng thái hiện tại an toàn không có nghĩa hệ thống vĩnh viễn không bế tắc nếu các cấp phát tiếp theo không được kiểm soát.
 > 3. $\text{Deadlock State} \subset \text{Unsafe State}$ ($\text{Deadlock State} \implies \text{Hệ thống đang ở trạng thái Unsafe}$). Bế tắc là tập con thực sự bên trong miền Unsafe.
 > 4. $\text{Unsafe State} \not\implies \text{Chắc chắn Deadlock}$. Trạng thái Unsafe chỉ là trạng thái **tiềm ẩn rủi ro bế tắc** (vulnerable state). Nếu các tiến trình không đồng thời yêu cầu đạt mức tối đa (`Max`), hệ thống vẫn có thể may mắn hoàn thành mà không xảy ra bế tắc.
-> 5. **Bản chất của Giải thuật Tránh bế tắc:** Đảm bảo hệ thống **luôn luôn duy trì trong trạng thái An toàn (Safe State)**. Nếu một yêu cầu cấp phát đẩy hệ thống vào trạng thái Unsafe, hệ thống sẽ tạm hoãn yêu cầu đó lại dù tài nguyên hiện đang có sẵn.
+> 5. **Bản chất của Giải thuật Tránh bế tắc:** Đảm bảo hệ thống **luôn luôn duy trì trong trạng thái An toàn (Safe State)** qua từng yêu cầu cấp phát. Nếu một yêu cầu cấp phát đẩy hệ thống vào trạng thái Unsafe, hệ thống sẽ tạm hoãn yêu cầu đó lại dù tài nguyên hiện đang có sẵn. Khả năng tránh bế tắc trong tương lai phụ thuộc vào việc chính sách tránh bế tắc liên tục kiểm soát và chỉ phê duyệt những yêu cầu bảo toàn trạng thái Safe.
 
 ---
 
