@@ -86,13 +86,13 @@ int main() {
 
 <h2 id="phan-3-bai-toan-inh-thoi-cpu">PHẦN 3: BÀI TOÁN ĐỊNH THỜI CPU</h2>
 
-<h3 id="e-bai">Đề bài:</h3>
+<h3 id="e-bai-2">Đề bài:</h3>
 
 <p>Xét hệ thống có 4 tiến trình với thời điểm đến và thời gian bùng nổ CPU như sau:</p>
 
 <table><thead><tr><th>Tiến trình</th><th>Thời điểm đến ($AT$)</th><th>Thời gian thực thi ($BT$)</th></tr></thead><tbody><tr><td><strong>$P_1$</strong></td><td>0</td><td>7</td></tr><tr><td><strong>$P_2$</strong></td><td>2</td><td>4</td></tr><tr><td><strong>$P_3$</strong></td><td>4</td><td>1</td></tr><tr><td><strong>$P_4$</strong></td><td>5</td><td>4</td></tr></tbody></table>
 
-<h4 id="yeu-cau">Yêu cầu:</h4>
+<h4 id="yeu-cau-2">Yêu cầu:</h4>
 
 <p>Vẽ sơ đồ Gantt và tính thời gian chờ trung bình ($WT_{avg}$), thời gian lưu lại trung bình ($TAT_{avg}$) cho giải thuật <strong>SJF Trưng dụng (Preemptive SJF / SRTF)</strong>.</p>
 
@@ -109,5 +109,5 @@ int main() {
 
 <ul><li>$P_1$: $CT = 16, TAT = 16 - 0 = 16, WT = 16 - 7 = 9$</li><li>$P_2$: $CT = 7, TAT = 7 - 2 = 5, WT = 5 - 4 = 1$</li><li>$P_3$: $CT = 5, TAT = 5 - 4 = 1, WT = 1 - 1 = 0$</li><li>$P_4$: $CT = 11, TAT = 11 - 5 = 6, WT = 6 - 4 = 2$</li></ul>
 
-<p>$$\mathbf{TAT_{avg}} = \frac{16 + 5 + 1 + 6}{4} = \mathbf{7.0}\text{ ms}$$<br>$$\mathbf{WT_{avg}} = \frac{9 + 1 + 0 + 2}{4} = \mathbf{3.0}\text{ ms}$$</p><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#phan-1-cau-hoi-trac-nghiem-ien-tu">PHẦN 1: CÂU HỎI TRẮC NGHIỆM &amp;amp; ĐIỀN TỪ</a></li><li class="toc-item"><a class="toc-link" href="#cau-1-xac-inh-ung-sai">Câu 1: Xác định Đúng / Sai</a></li><li class="toc-item"><a class="toc-link" href="#cau-2-ien-thuat-ngu-tieng-anh-ngan-gon">Câu 2: Điền thuật ngữ tiếng Anh ngắn gọn</a></li><li class="toc-item"><a class="toc-link" href="#phan-2-bai-toan-lan-vet-tien-trinh-cay-fork">PHẦN 2: BÀI TOÁN LẦN VẾT TIẾN TRÌNH &amp;amp; CÂY FORK</a></li><li class="toc-item"><a class="toc-link" href="#e-bai">Đề bài:</a></li><li class="toc-item"><a class="toc-link" href="#phan-3-bai-toan-inh-thoi-cpu">PHẦN 3: BÀI TOÁN ĐỊNH THỜI CPU</a></li><li class="toc-item"><a class="toc-link" href="#e-bai">Đề bài:</a></li></ul></div></aside></div>
+<p>$$\mathbf{TAT_{avg}} = \frac{16 + 5 + 1 + 6}{4} = \mathbf{7.0}\text{ ms}$$<br>$$\mathbf{WT_{avg}} = \frac{9 + 1 + 0 + 2}{4} = \mathbf{3.0}\text{ ms}$$</p><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#phan-1-cau-hoi-trac-nghiem-ien-tu">PHẦN 1: CÂU HỎI TRẮC NGHIỆM &amp; ĐIỀN TỪ</a></li><li class="toc-item"><a class="toc-link" href="#cau-1-xac-inh-ung-sai">Câu 1: Xác định Đúng / Sai</a></li><li class="toc-item"><a class="toc-link" href="#cau-2-ien-thuat-ngu-tieng-anh-ngan-gon">Câu 2: Điền thuật ngữ tiếng Anh ngắn gọn</a></li><li class="toc-item"><a class="toc-link" href="#phan-2-bai-toan-lan-vet-tien-trinh-cay-fork">PHẦN 2: BÀI TOÁN LẦN VẾT TIẾN TRÌNH &amp; CÂY FORK</a></li><li class="toc-item"><a class="toc-link" href="#e-bai">Đề bài:</a></li><li class="toc-item"><a class="toc-link" href="#phan-3-bai-toan-inh-thoi-cpu">PHẦN 3: BÀI TOÁN ĐỊNH THỜI CPU</a></li><li class="toc-item"><a class="toc-link" href="#e-bai-2">Đề bài:</a></li></ul></div></aside></div>
 <div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../../assets/js/app.js"></script></body></html>

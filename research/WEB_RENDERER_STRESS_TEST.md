@@ -27,7 +27,11 @@
 - PASS — fixture no orphan li
 - PASS — fixture valid nested-list relationships
 - PASS — callout survives
-- PASS — StudyCard survives
+- PASS — fixture HTML IDs are strictly unique
+- PASS — fixture repeated subsection slug disambiguation
+- PASS — fixture nested bold link renders anchor
+- PASS — fixture TOC ampersand single escaping
+- PASS — fixture callout adjacent to fence renders as callout
 - PASS — real Chapter 5 theory exists
 - PASS — real Chapter 5 theory balanced HTML
 - PASS — real Chapter 5 theory no orphan li
@@ -42,6 +46,20 @@
 - PASS — real Chapter 5 QBank has no raw fence leak
 - PASS — real Chapter 5 QBank has no escaped quote marker leak
 - PASS — real Chapter 5 QBank has no paragraph horizontal-rule leak
+- PASS — real Chapter 6 theory exists
+- PASS — real Chapter 6 theory balanced HTML
+- PASS — real Chapter 6 theory no orphan li
+- PASS — real Chapter 6 theory valid nested-list relationships
+- PASS — real Chapter 6 theory has no raw fence leak
+- PASS — real Chapter 6 theory has no escaped quote marker leak
+- PASS — real Chapter 6 theory has no paragraph horizontal-rule leak
+- PASS — real Chapter 6 QBank exists
+- PASS — real Chapter 6 QBank balanced HTML
+- PASS — real Chapter 6 QBank no orphan li
+- PASS — real Chapter 6 QBank valid nested-list relationships
+- PASS — real Chapter 6 QBank has no raw fence leak
+- PASS — real Chapter 6 QBank has no escaped quote marker leak
+- PASS — real Chapter 6 QBank has no paragraph horizontal-rule leak
 - PASS — real Chapter 5 condition-variable list relationship
 - PASS — real Chapter 5 Producer/Consumer and exercise code render
 - PASS — real Chapter 5 standalone rules render as hr
@@ -51,6 +69,12 @@
 - PASS — real Chapter 5 QBank ordered-list semantics
 - PASS — real Chapter 5 QBank exercise code renders
 - PASS — real Chapter 5 QBank standalone rules render as hr
+- PASS — real Chapter 6 theory nested bold link renders anchor
+- PASS — real Chapter 6 theory TOC single escaping
+- PASS — real Chapter 6 theory callout note adjacent to fence renders
+- PASS — real Chapter 6 QBank HTML IDs are strictly unique
+- PASS — real Chapter 6 QBank repeated subsection slug disambiguation
+- PASS — real Chapter 6 QBank TOC single escaping
 - PASS — consecutive clean builds are deterministic
 - PASS — rebuild after source deletion exits zero
 - PASS — stale deleted route is removed

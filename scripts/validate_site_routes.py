@@ -22,11 +22,15 @@ class LinkParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.links = []
         self.ids = set()
+        self.duplicate_ids = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
         if "id" in attrs:
-            self.ids.add(attrs["id"])
+            tag_id = attrs["id"]
+            if tag_id in self.ids:
+                self.duplicate_ids.append(tag_id)
+            self.ids.add(tag_id)
         if "name" in attrs:
             self.ids.add(attrs["name"])
         for key in ("href", "src"):
@@ -52,6 +56,9 @@ def crawl(site: Path):
         except Exception as exc:
             broken.append({"page": page.relative_to(site).as_posix(), "target": "<parse>", "reason": str(exc)})
             continue
+        if parser.duplicate_ids:
+            for dup_id in sorted(set(parser.duplicate_ids)):
+                broken.append({"page": page.relative_to(site).as_posix(), "target": f"#{dup_id}", "reason": f"duplicate HTML id '{dup_id}'"})
         for tag, attr, raw_url in parser.links:
             if _is_external(raw_url):
                 if attr == "src" or tag == "link":

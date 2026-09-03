@@ -100,6 +100,43 @@ def inline(text, routes, current_rel):
             return f'<a class="wikilink" href="{href}">{html.escape(label)}</a>'
         return f'<a class="wikilink" href="#{html.escape(target)}">{html.escape(label)}</a>'
     text = re.sub(r"\[\[([^\]]+)\]\]", wikilink, text)
+
+    def mdlink(match):
+        label = match.group(1)
+        target = match.group(2).strip()
+        href = target
+        fragment = ""
+        clean_target = target
+        if "#" in target:
+            clean_target, fragment = target.split("#", 1)
+            fragment = "#" + fragment
+
+        if not target.startswith(("http://", "https://", "mailto:", "#")):
+            base_dir = Path(current_rel).parent.as_posix() or "."
+            stem_or_id = clean_target
+            if stem_or_id.endswith(".md") or stem_or_id.endswith(".html"):
+                stem_or_id = os.path.splitext(stem_or_id)[0]
+
+            norm_path = os.path.normpath(os.path.join(base_dir, stem_or_id)).replace("\\", "/")
+            while norm_path.startswith("../"):
+                norm_path = norm_path[3:]
+
+            candidate_id = None
+            if stem_or_id in routes:
+                candidate_id = stem_or_id
+            elif norm_path in routes:
+                candidate_id = norm_path
+            elif Path(stem_or_id).stem in routes:
+                candidate_id = Path(stem_or_id).stem
+
+            if candidate_id and candidate_id in routes:
+                dest_route = routes[candidate_id]
+                href = os.path.relpath(dest_route, base_dir).replace("\\", "/") + fragment
+            elif clean_target.endswith(".md"):
+                href = clean_target[:-3] + ".html" + fragment
+        return f'<a href="{html.escape(href, quote=True)}">{label}</a>'
+
+    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", mdlink, text)
     text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
     text = re.sub(r"\*(.+?)\*", r"<em>\1</em>", text)
     for key, value in placeholders.items():
@@ -296,6 +333,7 @@ def parse_indented_paragraph(lines, start, parent_indent, routes, current_rel):
 def markdown_to_html(text, doc_id, routes, current_rel):
     lines = text.replace("\r\n", "\n").split("\n")
     output, index = [], 0
+    seen_slugs = {}
     while index < len(lines):
         line = lines[index]
         if line.startswith("```"):
@@ -315,7 +353,20 @@ def markdown_to_html(text, doc_id, routes, current_rel):
         heading = re.match(r"^(#{1,6})\s+(.+?)\s*#*$", line)
         if heading:
             title, level = heading.group(2).strip(), len(heading.group(1))
-            output.append(f'<h{level} id="{slugify(title)}">{inline(title, routes, current_rel)}</h{level}>')
+            base_slug = slugify(title)
+            count = seen_slugs.get(base_slug, 0)
+            if count == 0:
+                heading_id = base_slug
+                seen_slugs[base_slug] = 1
+            else:
+                count += 1
+                heading_id = f"{base_slug}-{count}"
+                while heading_id in seen_slugs:
+                    count += 1
+                    heading_id = f"{base_slug}-{count}"
+                seen_slugs[base_slug] = count
+                seen_slugs[heading_id] = 1
+            output.append(f'<h{level} id="{heading_id}">{inline(title, routes, current_rel)}</h{level}>')
             index += 1
             continue
         callout = re.match(r"^>\s*\[!([A-Za-z0-9_-]+)\].*$", line)
@@ -539,7 +590,12 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
         if backlink_docs:
             links = "".join(f'<li><a href="{relative_link(route, source["route"])}">{html.escape(str(source["title"]))}</a></li>' for source in backlink_docs)
             backlinks = f'<section class="backlinks" aria-label="Liên kết từ các trang khác"><h2>LIÊN KẾT TỪ CÁC TRANG KHÁC</h2><ul>{links}</ul></section>'
-        toc = "".join(f'<li class="toc-item"><a class="toc-link" href="#{m.group(1)}">{html.escape(m.group(2))}</a></li>' for m in re.finditer(r'<h[23] id="([^"]+)">(.+?)</h[23]>', rendered))
+
+        def format_toc_label(raw_html):
+            clean_text = html.unescape(re.sub(r"<[^>]+>", "", raw_html))
+            return html.escape(clean_text)
+
+        toc = "".join(f'<li class="toc-item"><a class="toc-link" href="#{m.group(1)}">{format_toc_label(m.group(2))}</a></li>' for m in re.finditer(r'<h[23] id="([^"]+)">(.+?)</h[23]>', rendered))
         title = html.escape(str(doc["title"]))
         return f'''<!DOCTYPE html>
 <html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>{title} — IT007 UIT</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><script src="{prefix}assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>

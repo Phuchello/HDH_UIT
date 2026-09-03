@@ -231,6 +231,28 @@ $$\\sum_{i=1}^{n} i = n(n+1)/2$$
 
 > [!NOTE]
 > Callout có tiếng Việt và [[fixture-questions|liên kết bí danh]].
+
+## Nghiên cứu & Phát triển
+
+👉 **[Ngân hàng liên kết đậm](../questions/fixture-questions.md)**
+
+### Đề bài gốc
+Nội dung đề bài phân nhánh thứ nhất.
+
+#### Bước giải chi tiết
+Bước tính toán mẫu một.
+
+### Đề bài gốc
+Nội dung đề bài phân nhánh thứ hai.
+
+#### Bước giải chi tiết
+Bước tính toán mẫu hai.
+
+```c
+int adjacent_fence = 1;
+```
+> [!NOTE]
+> Ghi chú kỹ thuật nằm sát cạnh fenced code block không bị nuốt.
 """,
     "questions/fixture-questions.md": """---
 id: \"fixture-questions\"
@@ -305,12 +327,21 @@ def main():
         _, fixture_structure = structure_quality(theory)
         checks.extend((f"fixture {label}", ok) for label, ok in fixture_structure.items())
         checks.append(("callout survives", '<div class="callout note">' in theory))
-        questions_html = (output / "questions/fixture-questions.html").read_text(encoding="utf-8") if (output / "questions/fixture-questions.html").is_file() else ""
-        checks.append(("StudyCard survives", 'class="study-card"' in questions_html))
+        # ENG-CH6-004..006 regression checks on fixture
+        theory_parser = StructureParser()
+        theory_parser.feed(theory)
+        fixture_ids = [node["attrs"]["id"] for node in walk(theory_parser.root) if node["attrs"].get("id")]
+        checks.append(("fixture HTML IDs are strictly unique", len(fixture_ids) == len(set(fixture_ids))))
+        checks.append(("fixture repeated subsection slug disambiguation", "e-bai-goc" in fixture_ids and "e-bai-goc-2" in fixture_ids and "buoc-giai-chi-tiet" in fixture_ids and "buoc-giai-chi-tiet-2" in fixture_ids))
+        checks.append(("fixture nested bold link renders anchor", '<strong><a href="../questions/fixture-questions.html">Ngân hàng liên kết đậm</a></strong>' in theory))
+        checks.append(("fixture TOC ampersand single escaping", "Nghiên cứu &amp; Phát triển" in theory and "&amp;amp;" not in theory))
+        checks.append(("fixture callout adjacent to fence renders as callout", '<div class="callout note">' in theory and "adjacent_fence" in theory))
 
         real_outputs = {
             "real Chapter 5 theory": ROOT / "public/site/theory/ch05-synchronization.html",
             "real Chapter 5 QBank": ROOT / "public/site/questions/subjective/ch05.html",
+            "real Chapter 6 theory": ROOT / "public/site/theory/ch06-deadlock.html",
+            "real Chapter 6 QBank": ROOT / "public/site/questions/subjective/ch06.html",
         }
         real_text = {}
         for label, path in real_outputs.items():
@@ -345,6 +376,20 @@ def main():
         if real_qbank:
             checks.append(("real Chapter 5 QBank exercise code renders", 'class="language-c"' in real_qbank))
             checks.append(("real Chapter 5 QBank standalone rules render as hr", real_qbank.count("<hr>") >= 10))
+
+        real_ch6_theory = real_text.get("real Chapter 6 theory", "")
+        real_ch6_qbank = real_text.get("real Chapter 6 QBank", "")
+        if real_ch6_theory:
+            checks.append(("real Chapter 6 theory nested bold link renders anchor", '<strong><a href="../questions/subjective/ch06.html">Ngân hàng Câu hỏi Tự luận &amp; Bài tập Chương 6</a></strong>' in real_ch6_theory))
+            checks.append(("real Chapter 6 theory TOC single escaping", "&amp;amp;" not in real_ch6_theory))
+            checks.append(("real Chapter 6 theory callout note adjacent to fence renders", '<div class="callout note">' in real_ch6_theory))
+        if real_ch6_qbank:
+            q6_parser = StructureParser()
+            q6_parser.feed(real_ch6_qbank)
+            q6_ids = [node["attrs"]["id"] for node in walk(q6_parser.root) if node["attrs"].get("id")]
+            checks.append(("real Chapter 6 QBank HTML IDs are strictly unique", len(q6_ids) == len(set(q6_ids))))
+            checks.append(("real Chapter 6 QBank repeated subsection slug disambiguation", "1-e-bai-goc-source-question" in q6_ids and "1-e-bai-goc-source-question-2" in q6_ids))
+            checks.append(("real Chapter 6 QBank TOC single escaping", "&amp;amp;" not in real_ch6_qbank))
 
         deterministic_output = root / "site-deterministic"
         deterministic_result = run_build(deterministic_output)
