@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_PATH = ROOT / "content/sources/registry.yaml"
 sys.path.insert(0, str(Path(__file__).parent))
 from research_utils import parse_registry
-from generate_registry import check_registry_drift
+from generate_registry import check_registry_drift, check_source_ledger_consistency
 
 
 def validate_sources():
@@ -23,6 +23,10 @@ def validate_sources():
     # Check for canonical SSOT drift
     drift_errors = check_registry_drift(sources)
     errors.extend(drift_errors)
+
+    # Check for SOURCE_LEDGER.md consistency against canonical registry
+    ledger_errors = check_source_ledger_consistency(sources)
+    errors.extend(ledger_errors)
 
     if len(ids) != len(set(ids)):
         errors.append("Duplicate source ID in registry")

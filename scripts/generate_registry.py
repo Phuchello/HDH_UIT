@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Global Source Registry Manager & Validator (SSOT Protection).
+"""Global Source Registry SSOT Canonical Drift Checker (Check-only).
 
-This tool manages content/sources/registry.yaml with strict SSOT guarantees:
+This tool validates content/sources/registry.yaml with strict SSOT guarantees:
 - content/sources/registry.yaml is the Single Source of Truth (SSOT).
-- In --check mode (default): validates canonical source identities against ground truth without modifying any files.
-- Accidental execution never regresses or overwrites locked canonical source IDs.
-- In --write mode: updates registry entries while preserving immutable canonical IDs and structure.
+- Operates in check-only mode: validates canonical source identities and Source Ledger
+  against ground truth without modifying any files.
+- Zero mutation: no destructive overwrites of locked canonical source IDs.
 """
 from __future__ import annotations
 
 import argparse
-import hashlib
+import re
 import sys
 from pathlib import Path
 
@@ -20,6 +20,7 @@ if sys.stdout.encoding != "utf-8":
 
 ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_PATH = ROOT / "content/sources/registry.yaml"
+SOURCE_LEDGER_PATH = ROOT / "research/SOURCE_LEDGER.md"
 
 sys.path.insert(0, str(ROOT / "scripts"))
 from research_utils import parse_registry  # noqa: E402
@@ -142,20 +143,67 @@ def check_registry_drift(registry_rows: list[dict]) -> list[str]:
     return failures
 
 
+def check_source_ledger_consistency(registry_rows: list[dict]) -> list[str]:
+    """Verify that research/SOURCE_LEDGER.md canonical rows agree with registry."""
+    failures: list[str] = []
+    if not SOURCE_LEDGER_PATH.exists():
+        return ["research/SOURCE_LEDGER.md missing"]
+
+    ledger_text = SOURCE_LEDGER_PATH.read_text(encoding="utf-8")
+    reg_by_id = {r.get("id"): r for r in registry_rows}
+
+    # Expected canonical pairings: (Source Ledger Row ID, Registry ID)
+    canonical_checks = [
+        ("A-01", "UIT-OUTLINE-2024"),
+        ("A-05", "UIT-SLIDE-CH04-1-2024"),
+        ("A-06", "UIT-SLIDE-CH04-2-2024"),
+        ("A-08", "UIT-SLIDE-CH05-1-2024"),
+        ("A-10", "UIT-SLIDE-CH05-2-2024"),
+        ("A-12", "UIT-SLIDE-CH06-2024"),
+    ]
+
+    for ledger_id, reg_id in canonical_checks:
+        reg_entry = reg_by_id.get(reg_id)
+        if not reg_entry:
+            failures.append(f"Registry missing expected canonical ID '{reg_id}'")
+            continue
+        expected_filename = reg_entry.get("exact_filename")
+        pattern = rf"\|\s*\*\*{re.escape(ledger_id)}\*\*\s*\|\s*`{re.escape(expected_filename)}`"
+        if not re.search(pattern, ledger_text):
+            failures.append(
+                f"SOURCE_LEDGER.md canonical row '{ledger_id}' does not match registry canonical filename '{expected_filename}'"
+            )
+
+    # Disallow known local variants in canonical authority rows
+    disallowed_in_canonical = [
+        ("A-01", "De cuong.pdf"),
+        ("A-05", "Week04-Chapter4-1 2024.pdf"),
+        ("A-06", "Week05-Chapter4-2 2024.pdf"),
+        ("A-08", "Week07-Chapter5-1 2024.pdf"),
+        ("A-10", "Week09-Chapter5-2 2024.pdf"),
+        ("A-11", "Week10-Chapter5-3 2024.pdf"),
+        ("A-12", "Week11-Chapter6 2024.pdf"),
+    ]
+
+    for ledger_id, variant_filename in disallowed_in_canonical:
+        pattern = rf"\|\s*\*\*{re.escape(ledger_id)}\*\*\s*\|\s*`{re.escape(variant_filename)}`"
+        if re.search(pattern, ledger_text):
+            failures.append(
+                f"SOURCE_LEDGER.md canonical row '{ledger_id}' contains variant '{variant_filename}' (must be variant row only)"
+            )
+
+    return failures
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Global Source Registry SSOT Manager & Canonical Drift Checker"
+        description="Global Source Registry SSOT Canonical Drift Checker (Check-only)"
     )
     parser.add_argument(
         "--check",
         action="store_true",
         default=True,
         help="Perform dry-run verification against SSOT ground truth (default; no writes)",
-    )
-    parser.add_argument(
-        "--write",
-        action="store_true",
-        help="Explicitly re-serialize registry.yaml (requires explicit confirmation)",
     )
     args = parser.parse_args()
 
@@ -167,19 +215,26 @@ def main() -> int:
 
     rows = parse_registry(REGISTRY_PATH)
     drift_errors = check_registry_drift(rows)
+    ledger_errors = check_source_ledger_consistency(rows)
+    all_errors = drift_errors + ledger_errors
 
-    if drift_errors:
-        print("REGISTRY SSOT DRIFT DETECTED:")
-        for err in drift_errors:
+    if all_errors:
+        print("REGISTRY / SOURCE LEDGER SSOT DRIFT DETECTED:")
+        for err in all_errors:
             print(f"  - {err}")
         return 1
 
     print(f"REGISTRY SSOT CHECK PASS: Verified {len(rows)} registered sources.")
     print("  [OK] UIT-OUTLINE-2024 -> IT007_HeDieuHanh_14.2024.pdf (418,490 bytes)")
     print("  [OK] UIT-OUTLINE-2024-VARIANT-LOCAL-DECUONG -> De cuong.pdf (variant)")
+    print("  [OK] UIT-SLIDE-CH04-1-2024 -> #Week04-Chapter4-1 2024.pdf (74 pages)")
+    print("  [OK] UIT-SLIDE-CH04-2-2024 -> #Week05-Chapter4-2 2024.pdf (59 pages)")
+    print("  [OK] UIT-SLIDE-CH05-1-2024 -> #Week06-Chapter5-1 2024.pdf (67 pages)")
+    print("  [OK] UIT-SLIDE-CH05-2-2024 -> #Week07-Chapter5-2 2024.pdf (72 pages)")
     print("  [OK] UIT-SLIDE-CH06-2024 -> #Week08-Chapter6 2024.pdf (6,008,743 bytes)")
     print("  [OK] UIT-SLIDE-CH06-2024-VARIANT-WEEK11-5MB -> Week11-Chapter6 2024.pdf (variant)")
     print("  [OK] Zero stale legacy IDs detected (CH05 CANONICAL-USER correctly absent)")
+    print("  [OK] SOURCE_LEDGER.md Tier-A canonical rows match registry SSOT")
     print("  [OK] Zero mutations performed (check/dry-run mode)")
     return 0
 

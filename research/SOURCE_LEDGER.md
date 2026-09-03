@@ -38,14 +38,20 @@ Tài liệu này quản lý, phân cấp và ghi nhận toàn bộ các nguồn 
 | **A-02** | `Week01-Chapter1 2024.pdf` (57 slides) | Giảng viên IT007 UIT | 2024 | Slide | Tổng quan HDH, Kiến trúc máy tính, Ngắt, Phân cấp bộ nhớ, Cấu trúc bộ xử lý, Dual Mode, Đơn chương/Đa chương/Đa nhiệm, Real-time. |
 | **A-03** | `Week02-Chapter2 2024.pdf` (57 slides) | Giảng viên IT007 UIT | 2024 | Slide | Thành phần HDH, Dịch vụ HDH, System Calls, Truyền tham số, System Programs (6 nhóm), Kiến trúc HDH (Monolithic, Layered, Microkernel, Modules). |
 | **A-04** | `Week03-Chapter3 2024.pdf` (64 slides) | Giảng viên IT007 UIT | 2024 | Slide | Khái niệm tiến trình, Memory layout, 5 trạng thái & luồng chuyển, PCB, Hàng đợi định thời, Scheduler, Context switch, `fork()`, `exec()`, `wait()`, IPC (Shared Memory, Message Passing), Luồng (Threads). |
-| **A-05** | `Week04-Chapter4-1 2024.pdf` (56 slides) | Giảng viên IT007 UIT | 2024 | Slide | Động cơ định thời, CPU-I/O Burst Cycle, CPU Scheduler, Dispatcher, Tiêu chuẩn định thời ($TAT, WT, RT$), Giải thuật FCFS, SJF, SRTF, Priority. |
-| **A-06** | `Week05-Chapter4-2 2024.pdf` (34 slides) | Giảng viên IT007 UIT | 2024 | Slide | Giải thuật Round Robin (Quantum), HRRN, Multilevel Queue (MQ), Multilevel Feedback Queue (MLFQ). |
-| **A-07-VARIANT** | `Week06-Chapter4-3 2024.pdf` (46 slides) | Giảng viên IT007 UIT | 2024 | Local source variant | Không phải canonical Chương 4; retained only as `UIT-SLIDE-CH04-3-2024-VARIANT-LOCAL-46`, excluded from official coverage. |
-| **A-08** | `Week07-Chapter5-1 2024.pdf` (58 slides) | Giảng viên IT007 UIT | 2024 | Slide | Vấn đề tranh chấp (Race condition), Vùng tranh chấp (Critical Section), 3 điều kiện đúng, Giải pháp phần mềm: Peterson, Khóa phần cứng: TestAndSet, CompareAndSwap, Memory Barrier. |
-| **A-09** | `#Week08-Midterm Review.pptx` (17 slides) | Khoa KTMT – UIT | 2024 | Canonical user attachment | Khung ma trận ôn tập giữa kỳ Ch1–Ch4, state/fork exercises và scheduling; SHA256 được ghi trong registry. |
-| **A-10** | `Week09-Chapter5-2 2024.pdf` (55 slides) | Giảng viên IT007 UIT | 2024 | Slide | Mutex Locks, Semaphore (Định nghĩa nguyên tử, Counting vs Binary, Implementation), Bounded Buffer (Producer-Consumer), Readers-Writers. |
-| **A-11** | `Week10-Chapter5-3 2024.pdf` (32 slides) | Giảng viên IT007 UIT | 2024 | Slide | Bài toán Triết gia ăn tối (Dining Philosophers), Giám sát viên (Monitors), Biến điều kiện (`x.wait()`, `x.signal()`), Hoare vs Mesa semantics. |
-| **A-12** | `#Week08-Chapter6 2024.pdf` (67 slides) | Giảng viên IT007 UIT (Trần Hoàng Lộc & Nguyễn Thanh Thiện) | 2024 | Canonical Slide | Mô hình tài nguyên, 4 điều kiện Coffman, Đồ thị RAG, Phòng tránh Deadlock (Prevention), Tránh Deadlock (Avoidance), Trạng thái an toàn, Thuật toán Banker, Phát hiện & Phục hồi Deadlock. (Biến thể cũ: `Week11-Chapter6 2024.pdf`). |
+| **A-05** | `#Week04-Chapter4-1 2024.pdf` (74 slides) | Giảng viên IT007 UIT | 2024 | Canonical Slide | Động cơ định thời, CPU-I/O Burst Cycle, CPU Scheduler, Dispatcher, Tiêu chuẩn định thời ($TAT, WT, RT$), Giải thuật FCFS, SJF, SRTF, Priority. (`UIT-SLIDE-CH04-1-2024`). |
+| **A-05-VARIANT-56** | `Week04-Chapter4-1 2024.pdf` (56 slides) | Giảng viên IT007 UIT | 2024 | Local source variant | Biến thể cục bộ cũ 56 trang (`UIT-SLIDE-CH04-1-2024-VARIANT-LOCAL-56`), loại khỏi phạm vi chính thức. |
+| **A-06** | `#Week05-Chapter4-2 2024.pdf` (59 slides) | Giảng viên IT007 UIT | 2024 | Canonical Slide | Giải thuật Round Robin (Quantum), HRRN, Multilevel Queue (MQ), Multilevel Feedback Queue (MLFQ), định thời đa xử lý, realtime. (`UIT-SLIDE-CH04-2-2024`). |
+| **A-06-VARIANT-34** | `Week05-Chapter4-2 2024.pdf` (34 slides) | Giảng viên IT007 UIT | 2024 | Local source variant | Biến thể cục bộ cũ 34 trang (`UIT-SLIDE-CH04-2-2024-VARIANT-LOCAL-34`), loại khỏi phạm vi chính thức. |
+| **A-07-VARIANT** | `Week06-Chapter4-3 2024.pdf` (46 slides) | Giảng viên IT007 UIT | 2024 | Local source variant | Biến thể cục bộ cũ 46 trang (`UIT-SLIDE-CH04-3-2024-VARIANT-LOCAL-46`), loại khỏi phạm vi chính thức. |
+| **A-08** | `#Week06-Chapter5-1 2024.pdf` (67 slides) | Giảng viên IT007 UIT | 2024 | Canonical Slide | Vấn đề tranh chấp (Race condition), Vùng tranh chấp (Critical Section), 3 điều kiện đúng, Giải pháp phần mềm: Peterson, Khóa phần cứng: TestAndSet, CompareAndSwap, Memory Barrier (Self-study p.56), Mutex Locks, Semaphores. (`UIT-SLIDE-CH05-1-2024`). |
+| **A-08-VARIANT-58** | `Week07-Chapter5-1 2024.pdf` (58 slides) | Giảng viên IT007 UIT | 2024 | Local source variant | Biến thể cục bộ cũ 58 trang (`UIT-SLIDE-CH05-1-2024-VARIANT-LOCAL-58`), loại khỏi phạm vi chính thức. |
+| **A-09** | `#Week08-Midterm Review.pptx` (17 slides) | Khoa KTMT – UIT | 2024 | Canonical user attachment | Khung ma trận ôn tập giữa kỳ Ch1–Ch4, state/fork exercises và scheduling; SHA256 được ghi trong registry (`UIT-SLIDE-MIDTERM-REVIEW-2024`). |
+| **A-09-VARIANT-16** | `Week08-Midterm Review.pdf` (16 slides) | Khoa KTMT – UIT | 2024 | Local source variant | Biến thể PDF 16 trang cũ (`UIT-SLIDE-MIDTERM-REVIEW-2024-VARIANT-LOCAL-16PDF`), không thay thế bản PPTX 17 slide. |
+| **A-10** | `#Week07-Chapter5-2 2024.pdf` (72 slides) | Giảng viên IT007 UIT | 2024 | Canonical Slide | Bài toán Bounded Buffer, Readers-Writers, Dining Philosophers, Giám sát viên (Monitors), Liveness, Deadlock/Starvation trong đồng bộ, Priority Inversion & Priority Inheritance protocol. (`UIT-SLIDE-CH05-2-2024`). |
+| **A-10-VARIANT-55** | `Week09-Chapter5-2 2024.pdf` (55 slides) | Giảng viên IT007 UIT | 2024 | Local source variant | Biến thể cục bộ cũ 55 trang (`UIT-SLIDE-CH05-2-2024-VARIANT-LOCAL-55`), loại khỏi phạm vi chính thức. |
+| **A-11-VARIANT-32** | `Week10-Chapter5-3 2024.pdf` (32 slides) | Giảng viên IT007 UIT | 2024 | Local source variant | Biến thể cục bộ cũ 32 trang (`UIT-SLIDE-CH05-3-2024-VARIANT-LOCAL-32`), loại khỏi phạm vi chính thức vì bản canonical Part 2 (72 trang) đã bao hàm Monitors và bài toán kinh điển. |
+| **A-12** | `#Week08-Chapter6 2024.pdf` (67 slides) | Giảng viên IT007 UIT (Trần Hoàng Lộc & Nguyễn Thanh Thiện) | 2024 | Canonical Slide | Mô hình tài nguyên, 4 điều kiện Coffman, Đồ thị RAG, Phòng tránh Deadlock (Prevention), Tránh Deadlock (Avoidance), Trạng thái an toàn, Thuật toán Banker, Phát hiện & Phục hồi Deadlock. (`UIT-SLIDE-CH06-2024`). |
+| **A-12-VARIANT-WEEK11** | `Week11-Chapter6 2024.pdf` (67 slides) | Giảng viên IT007 UIT (Trần Hoàng Lộc & Nguyễn Thanh Thiện) | 2024 | Local source variant | Biến thể Tuần 11 cũ từ học kỳ trước (`UIT-SLIDE-CH06-2024-VARIANT-WEEK11-5MB`). |
 | **A-13** | `Week12-Chapter7 2024.pdf` (72 slides) | Giảng viên IT007 UIT | 2024 | Slide | Không gian địa chỉ Logic vs Vật lý, Ràng buộc địa chỉ, MMU, Cấp phát liên tục (First/Best/Worst/Next fit), Phân mảnh nội/ngoại, Phân trang (Paging), Bảng trang, TLB, EAT, Hoán đổi (Swapping). |
 | **A-14** | `Week13-Chapter8 2024.pdf` (50 slides) | Giảng viên IT007 UIT | 2024 | Slide | Bộ nhớ ảo, Nạp trang theo yêu cầu (Demand Paging), Xử lý lỗi trang (Page Fault), Thuật toán thay thế trang (FIFO, OPT, LRU), Cấp phát khung trang, Nghẽn bộ nhớ (Thrashing), Mô hình Working Set, Belady Anomaly. |
 | **A-15** | `Week14-Chapter9 2024.pdf` (57 slides) | Giảng viên IT007 UIT | 2024 | Slide | Nghiên cứu điển hình: Kiến trúc Linux (Lịch sử, Thiết kế, Task struct, CFS, VFS, Buddy allocator) & Kiến trúc Windows (Win32 API, HAL, Kernel, Executive, Process/Thread, VMM). |
@@ -98,3 +104,19 @@ Tài liệu này quản lý, phân cấp và ghi nhận toàn bộ các nguồn 
 | **C-15** | `[BHTCNPM] HDH 2024-2025 CK1` | BHT CNPM – UIT | HK1 2024-2025 | Cuối kỳ | Đề thi cuối kỳ mới nhất. |
 | **C-16** | *Duong Computing IT007 Exam Solution Series* | Kênh Duong Computing | 2020–2024 | Video | Bằng chứng về phương pháp giảng giải và các bẫy đề thi sinh viên hay mắc phải. |
 | **C-17** | *Tài liệu Lập trình Shell & Ubuntu Reference* | BHT CNPM – UIT | 2020 | Hướng dẫn | Tổng hợp lệnh Linux thực hành và mẫu bài tập Shell. |
+
+---
+
+## 5. Nhật Ký Đồng Bộ & Khắc Phục Bất Đồng Nhất (Audit & SSOT Sync Log)
+
+- `GLOBAL-SRC-001` — **RESOLVED (MAJOR)**: Đồng bộ danh mục nguồn Tier A với sổ đăng ký bất biến `content/sources/registry.yaml`:
+  - **Lý do (Reason):** Bảng Tier A trong Sổ tay nguồn ban đầu lưu các biến thể cục bộ cũ của Chương 4 và Chương 5 (56/34/46 trang cho Ch4 và 58/55/32 trang cho Ch5) sau khi các bản đính kèm chính thức người dùng (`#Week04`, `#Week05`, `#Week06`, `#Week07`) đã được xác lập làm chuẩn bất biến.
+  - **Khắc phục (Resolution):**
+    - Cập nhật **A-05** thành `#Week04-Chapter4-1 2024.pdf` (74 trang) — `UIT-SLIDE-CH04-1-2024`.
+    - Cập nhật **A-06** thành `#Week05-Chapter4-2 2024.pdf` (59 trang) — `UIT-SLIDE-CH04-2-2024`.
+    - Phân loại rõ các tệp 56, 34, 46 trang thành biến thể cục bộ (`A-05-VARIANT-56`, `A-06-VARIANT-34`, `A-07-VARIANT-46`).
+    - Cập nhật **A-08** thành `#Week06-Chapter5-1 2024.pdf` (67 trang) — `UIT-SLIDE-CH05-1-2024`.
+    - Cập nhật **A-10** thành `#Week07-Chapter5-2 2024.pdf` (72 trang) — `UIT-SLIDE-CH05-2-2024`.
+    - Phân loại rõ các tệp 58, 55, 32 trang thành biến thể cục bộ (`A-08-VARIANT-58`, `A-10-VARIANT-55`, `A-11-VARIANT-32`), trong đó tệp 32 trang được loại khỏi phạm vi chính thức vì phần 2 chính thức (72 trang) đã bao hàm toàn bộ nội dung Monitors và bài toán kinh điển.
+    - Bổ sung bộ kiểm tra tự động trong `scripts/validate_sources.py` bảo đảm bảng Tier A luôn đồng nhất 100% với `content/sources/registry.yaml`.
+
