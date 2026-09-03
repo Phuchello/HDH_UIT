@@ -226,30 +226,30 @@ sources:
   - id: "UIT-SLIDE-CH06-2024"
     tier: "A"
     type: "official_slide"
-    title: "Slide Bài giảng Tuần 11 - Chương 6: Bế tắc (Deadlock)"
-    exact_filename: "Week11-Chapter6 2024.pdf"
-    sha256: "e55bf22554028859fc30747a39e72d97ca6e1e3c37e5a1bdcdc5ab94a7c3b56e"
-    byte_size: 5816540
-    page_count: 67
-    year: "2024"
-    author: "Khoa Kỹ thuật Máy tính - UIT"
-    public_url: "https://courses.uit.edu.vn"
-    status: "VERIFIED_LOCAL"
-    notes: "Canonical local source binary verified from the supplied IT007 corpus: 5,816,540 bytes, 67 physical pages."
-
-  - id: "UIT-SLIDE-CH06-2024-VARIANT-WEEK08-6MB"
-    tier: "A"
-    type: "source_variant"
-    title: "Slide Bài giảng Chương 6: Bế tắc — Biến thể Week08 (#Week08-Chapter6 2024.pdf)"
+    title: "Slide Bài giảng Tuần 8 - Chương 6: Bế tắc (Deadlock)"
     exact_filename: "#Week08-Chapter6 2024.pdf"
     sha256: "5cf9e1a31413a042ddc81c83ee6125d9718519d876a13f4dc30d3a5e041ee947"
     byte_size: 6008743
     page_count: 67
     year: "2024"
-    author: "Khoa Kỹ thuật Máy tính - UIT"
+    author: "Trần Hoàng Lộc;Nguyễn Thanh Thiện"
+    public_url: "https://courses.uit.edu.vn"
+    status: "USER_ATTACHMENT_VERIFIED"
+    notes: "Tệp slide chính thức Tuần 8 được phân phối trong thư mục Tài liệu học tập-20240912, khớp hoàn toàn với đề cương 2024 (Buổi 8, bộ slide week 8 do giáo viên cung cấp). Tạo ngày 2024-09-11 10:37:41+07:00 bởi PowerPoint Microsoft 365. 67 trang."
+
+  - id: "UIT-SLIDE-CH06-2024-VARIANT-WEEK11-5MB"
+    tier: "A"
+    type: "source_variant"
+    title: "Slide Bài giảng Chương 6: Bế tắc — Biến thể Week11 (Week11-Chapter6 2024.pdf)"
+    exact_filename: "Week11-Chapter6 2024.pdf"
+    sha256: "e55bf22554028859fc30747a39e72d97ca6e1e3c37e5a1bdcdc5ab94a7c3b56e"
+    byte_size: 5816540
+    page_count: 67
+    year: "2024"
+    author: "Trần Hoàng Lộc;Nguyễn Thanh Thiện"
     public_url: "https://courses.uit.edu.vn"
     status: "VERIFIED_LOCAL_VARIANT"
-    notes: "Tệp slide 67 trang trong thư mục Tài liệu học tập-20240912 (tạo ngày 2024-09-11); lưu giữ dưới dạng biến thể độc lập."
+    notes: "Tệp slide 67 trang xuất ngày 2024-02-15 17:52:03+07:00 với ký hiệu Tuần 11 từ học kỳ trước; nội dung 67 trang tương đương với bản Week08 chính thức nhưng là bản xuất cũ hơn."
 
   - id: "UIT-SLIDE-CH07-2024"
     tier: "A"

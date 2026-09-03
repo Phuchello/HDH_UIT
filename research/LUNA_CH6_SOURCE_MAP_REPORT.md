@@ -3,23 +3,26 @@
 **Scope:** Chapter 6 canonical source mapping only (no Chapter 6 authoring, no renderer/build changes).  
 **Repository:** `Phuchello/HDH_UIT`  
 **Branch:** `v2/complete-theory-labs`  
-**Reviewed HEAD:** `fc7d110bd5c9a94f2182c017e09488afd1c7c127` (`research(v2): map canonical chapter6 sources`)  
+**Reviewed HEAD:** `24add9b3703472ace8869738e39991d3748f5305` (`fix(v2): repair chapter6 source fidelity map`)  
 **Audit date:** 2026-09-03  
 **Auditor / Role:** Codex Luna Ultra / Independent Source-Fidelity Auditor  
-**Current Phase:** `V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_INDEPENDENT_RECHECK`  
-**Chapter 6 Source Mapping:** `MAPPED — PENDING FINAL INDEPENDENT RECHECK`  
+**Current Phase:** `V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_FINAL_INDEPENDENT_CHECK`  
+**Chapter 6 Source Mapping:** `MAPPED — PENDING FINAL INDEPENDENT CHECK`  
 **Chapter 6 Authoring state:** `NOT_STARTED`  
 
 ---
 
 ## REVIEWED HEAD
 
-The locked Chapters 1–5 baseline was inspected at the reviewed HEAD (`fc7d110`). No Chapter 1–5 theory, question, review, renderer, or build files were changed by this repair audit. The only files modified are:
-- `PROJECT_STATE.md`: Updated to `V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_INDEPENDENT_RECHECK`.
-- `content/sources/registry.yaml`: Canonical 2024 outline updated, outline variant separated, student DOCX and PDF variants registered.
-- `research/data/official_review_questions.yaml`: Chapter 6 QBank records expanded from 6 to the complete 15 source units derived from the canonical binary.
-- `research/LUNA_CH6_SOURCE_MAP_REPORT.md`: This comprehensive independent repair report.
-- `scripts/validate_ch06_source_map.py`: Validator hardened to enforce all 4 resolved findings.
+The locked Chapters 1–5 baseline was inspected at the locked commit checkpoint `06e4b34ef14d60398e462e437470bb6a37157996` (`docs(v2): finalize chapter5 verified state`) and reviewed HEAD `24add9b`. Committed git history since `06e4b34` confirms ZERO changes to any Chapter 1–5 theory, question bank, or midterm review content files.
+
+The only files modified by this final source-identity and CI gate repair are:
+- `PROJECT_STATE.md`: Updated to `V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_FINAL_INDEPENDENT_CHECK`.
+- `content/sources/registry.yaml`: `#Week08-Chapter6 2024.pdf` promoted to canonical `UIT-SLIDE-CH06-2024`; `Week11-Chapter6 2024.pdf` demoted to immutable variant `UIT-SLIDE-CH06-2024-VARIANT-WEEK11-5MB`.
+- `research/data/source_verification.json`: Variant source ID synchronized.
+- `.github/workflows/validate.yml`: Added `fetch-depth: 0` to checkout action to supply full committed history for locked-chapter checks.
+- `scripts/validate_ch06_source_map.py`: Hardened with dual-mode validation (CI/Repository Mode vs Evidence Mode) and committed-history diff inspection against locked baseline `06e4b34`.
+- `research/LUNA_CH6_SOURCE_MAP_REPORT.md`: This comprehensive independent repair report with complete audit history and resolutions.
 
 ---
 
@@ -29,10 +32,10 @@ All source corpora in user attachment directories, local drive extractions, and 
 
 | Classification | Source ID | Exact filename | Size (bytes) | Structural count | SHA-256 Digest | Status & Provenance |
 |---|---|---|---:|---|---|---|
-| `official_outline` | `UIT-OUTLINE-2024` | `IT007_HeDieuHanh_14.2024.pdf` | 418,490 | 19 PDF pages | `89547bca603d2486225f1e7c4f3ca767882964d83229ced16dc36b17eea309ab` | **Canonical 2024 Syllabus** (Created 2024-09-11 by Chi Dung, M365) |
+| `official_outline` | `UIT-OUTLINE-2024` | `IT007_HeDieuHanh_14.2024.pdf` | 418,490 | 19 PDF pages | `89547bca603d2486225f1e7c4f3ca767882964d83229ced16dc36b17eea309ab` | **Canonical 2024 Syllabus** (Created 2024-09-11 10:13:32+07:00 by Chi Dung, M365) |
 | `source_variant` | `UIT-OUTLINE-2024-VARIANT-LOCAL-DECUONG` | `De cuong.pdf` | 452,857 | 19 PDF pages | `8ff13e4ddabee1fde580b84827e3e1c2733d2822ff9ca062d97e43a7f8151cdd` | **Older 2023 Variant** (Created 2023-03-29 by Chi Dung, Word 2019) |
-| `official_slide` | `UIT-SLIDE-CH06-2024` | `Week11-Chapter6 2024.pdf` | 5,816,540 | 67 PDF pages | `e55bf22554028859fc30747a39e72d97ca6e1e3c37e5a1bdcdc5ab94a7c3b56e` | **Canonical Tier-A Slide** (63 CONTENT + 4 NON_CONTENT) |
-| `source_variant` | `UIT-SLIDE-CH06-2024-VARIANT-WEEK08-6MB` | `#Week08-Chapter6 2024.pdf` | 6,008,743 | 67 PDF pages | `5cf9e1a31413a042ddc81c83ee6125d9718519d876a13f4dc30d3a5e041ee947` | **Attachment Variant** (Created 2024-09-11 in OneDrive course folder) |
+| `official_slide` | `UIT-SLIDE-CH06-2024` | `#Week08-Chapter6 2024.pdf` | 6,008,743 | 67 PDF pages | `5cf9e1a31413a042ddc81c83ee6125d9718519d876a13f4dc30d3a5e041ee947` | **Canonical 2024 Slide** (Created 2024-09-11 10:37:41+07:00; official course material matching syllabus) |
+| `source_variant` | `UIT-SLIDE-CH06-2024-VARIANT-WEEK11-5MB` | `Week11-Chapter6 2024.pdf` | 5,816,540 | 67 PDF pages | `e55bf22554028859fc30747a39e72d97ca6e1e3c37e5a1bdcdc5ab94a7c3b56e` | **Older Semester Variant** (Created 2024-02-15 17:52:03+07:00; content-equivalent earlier export) |
 | `official_qbank` | `UIT-QBANK-CH06-2024` | `Bai tap chuong 6 HDH.docx` | 101,550 | 582 XML paragraphs (560 non-empty) | `f8f82cc2a29641fbe7545d172485356dfdd78d7a398c01e1f784afca06a25803` | **Canonical Tier-A Blank QBank** (15 source units: 8 theory + 7 exercises) |
 | `source_variant` | `UIT-QBANK-CH06-2024-VARIANT-LOCAL-98KB` | `Bai tap chuong 6 HDH.docx` | 98,938 | 582 XML paragraphs | `6e701d3b3b7a7d7bba6bed10882c99d0a00cab14bae2e503c897e6b8abea39d4` | **Local 98.9KB Variant** (Located in OneDrive course folder) |
 | `student_submission` | `UIT-QBANK-CH06-2024-VARIANT-STUDENT-23520237` | `Bai-tap-chuong-6-HDH.docx` | 873,751 | 1,092 XML paragraphs (1015 non-empty) | `a77ecee33dc2575c5bf8f0f98f69c4ac5ea885f8fbd04553812e9f9fa0368a38` | **Student Submission** (MSSV: 23520237 - Trần Hải Đăng; contains student answers) |
@@ -45,11 +48,12 @@ All source corpora in user attachment directories, local drive extractions, and 
 1. **Course Outline (`UIT-OUTLINE-2024`)**:
    - `IT007_HeDieuHanh_14.2024.pdf`, SHA-256 `89547bca603d2486225f1e7c4f3ca767882964d83229ced16dc36b17eea309ab`, 418,490 bytes, 19 pages.
    - Metadata confirms creation on 2024-09-11 10:13:32+07:00 for the 2024–2025 academic year.
-   - Preserved as canonical Tier A because user-provided canonical attachments outrank unverified or older local variants.
+   - Explicitly schedules: `Buổi 8: Chương 6. Deadlock` and instructs students to read `bộ slide week 8 do giáo viên cung cấp`.
 
 2. **Lecture Deck (`UIT-SLIDE-CH06-2024`)**:
-   - `Week11-Chapter6 2024.pdf`, SHA-256 `e55bf22554028859fc30747a39e72d97ca6e1e3c37e5a1bdcdc5ab94a7c3b56e`, 5,816,540 bytes, 67 physical pages.
-   - Defensible canonical deck containing complete coverage of Coffman conditions, RAG, Deadlock Prevention, Avoidance (Banker), Detection (Wait-for & matrix algorithm), and Recovery.
+   - `#Week08-Chapter6 2024.pdf`, SHA-256 `5cf9e1a31413a042ddc81c83ee6125d9718519d876a13f4dc30d3a5e041ee947`, 6,008,743 bytes, 67 physical pages.
+   - Metadata confirms creation on 2024-09-11 10:37:41+07:00 (exported 24 minutes after the syllabus) by PowerPoint for Microsoft 365, authored by Trần Hoàng Lộc & Nguyễn Thanh Thiện.
+   - Distributed in official course materials folder `Tài liệu học tập-20240912`, matching the 2024 syllabus "week 8" designation.
 
 3. **Official Question Bank (`UIT-QBANK-CH06-2024`)**:
    - `Bai tap chuong 6 HDH.docx`, SHA-256 `f8f82cc2a29641fbe7545d172485356dfdd78d7a398c01e1f784afca06a25803`, 101,550 bytes, 582 XML paragraphs (560 non-empty).
@@ -61,8 +65,8 @@ All source corpora in user attachment directories, local drive extractions, and 
 
 The following 5 artifacts are cataloged with distinct immutable IDs and explicitly excluded from canonical coverage / Tier-A truth:
 
-1. `UIT-OUTLINE-2024-VARIANT-LOCAL-DECUONG` (`De cuong.pdf`, 452,857 bytes, SHA `8ff13e4dd...`): Older 2023 curriculum syllabus (created 2023-03-29). Retained as a variant for historical traceability.
-2. `UIT-SLIDE-CH06-2024-VARIANT-WEEK08-6MB` (`#Week08-Chapter6 2024.pdf`, 6,008,743 bytes, SHA `5cf9e1a31...`): 67-page slide created 2024-09-11. Retained as local variant.
+1. `UIT-OUTLINE-2024-VARIANT-LOCAL-DECUONG` (`De cuong.pdf`, 452,857 bytes, SHA `8ff13e4dd...`): Older 2023 curriculum syllabus (created 2023-03-29). Retained as an immutable variant for historical traceability.
+2. `UIT-SLIDE-CH06-2024-VARIANT-WEEK11-5MB` (`Week11-Chapter6 2024.pdf`, 5,816,540 bytes, SHA `e55bf2255...`): 67-page slide created 2024-02-15 17:52:03+07:00 with Week 11 numbering from the prior academic semester. Content-equivalent earlier export; demoted to variant.
 3. `UIT-QBANK-CH06-2024-VARIANT-LOCAL-98KB` (`Bai tap chuong 6 HDH.docx`, 98,938 bytes, SHA `6e701d3b3...`): 98KB local DOCX in course folder.
 4. `UIT-QBANK-CH06-2024-VARIANT-STUDENT-23520237` (`Bai-tap-chuong-6-HDH.docx`, 873,751 bytes, SHA `a77ecee33...`): DOCX completed by student Trần Hải Đăng (MSSV 23520237). Classified as `student_submission` (Tier B), never used as Tier-A truth.
 5. `UIT-REF-CH06-STUDENT-23521551-PDF` (`23521551-Bai tap chuong 6.pdf`, 8,823,935 bytes, SHA `7b7345300...`): 5-page PDF of photographed handwritten solutions submitted by student 23521551 for class IT007.P19 (GV Phan Đình Duy). Classified as `student_submission` (Tier B), never used as Tier-A truth.
@@ -87,7 +91,7 @@ The authoritative 2024 UIT syllabus (`IT007_HeDieuHanh_14.2024.pdf`, page 5) spe
 
 ## PAGE-BY-PAGE / RANGE MAP
 
-All 67 physical pages of `Week11-Chapter6 2024.pdf` are mapped into 21 contiguous, gap-free semantic ranges.  
+All 67 physical pages of canonical `#Week08-Chapter6 2024.pdf` are mapped into 21 contiguous, gap-free semantic ranges.  
 `CONTENT` page count: **63**. `NON_CONTENT` page count: **4**.  
 Every range is strictly `MAPPED` and `NOT_WRITTEN`.
 
@@ -177,7 +181,7 @@ Three distinct structural models exist across the discovered source documents:
      - `6.3.4 Deadlock recovery`
    - `6.4 Bài tập`
 
-2. **Canonical 2024 Lecture Deck (`Week11-Chapter6 2024.pdf`)**:
+2. **Canonical 2024 Lecture Deck (`#Week08-Chapter6 2024.pdf`)**:
    - `6.1 Vấn đề deadlock` (6.1.1 Khái niệm, 6.1.2 Định nghĩa, 6.1.3 Bốn điều kiện Coffman)
    - `6.2 Mô hình hóa hệ thống` (6.2.1 Đồ thị RAG, 6.2.2 Ví dụ, 6.2.3 RAG và deadlock, Bài tập 1)
    - `6.3 Phương pháp giải quyết deadlock`:
@@ -245,8 +249,9 @@ All 15 units are cataloged in `research/data/official_review_questions.yaml` as 
 ## EVIDENCE LIMITATIONS
 
 1. Binaries reside in external/local course corpora (`Downloads` and `OneDrive`) and are not committed into this git repository, strictly following repository hygiene policies.
-2. Visual rendering confirmed diagram and table topologies; exercises will be transcribed and solved only during the authoring phase.
-3. Student files (`Bai-tap-chuong-6-HDH.docx` by MSSV 23520237 and `23521551-Bai tap chuong 6.pdf`) are cataloged as reference/submission variants and are never used as canonical truth.
+2. The validator supports two modes: CI/Repository Mode (verifying metadata, structural invariants, and committed locked-file diffs) and Evidence Mode (`--source-root`, performing direct physical re-hashing of external binary files).
+3. Visual rendering confirmed diagram and table topologies; exercises will be transcribed and solved only during the authoring phase.
+4. Student files (`Bai-tap-chuong-6-HDH.docx` by MSSV 23520237 and `23521551-Bai tap chuong 6.pdf`) are cataloged as reference/submission variants and are never used as canonical truth.
 
 ---
 
@@ -260,18 +265,31 @@ All 15 units are cataloged in `research/data/official_review_questions.yaml` as 
 - `SRC-CH6-006` — **RESOLVED (MAJOR)**: Missing user-supplied Chapter 6 variants discovered and cataloged: `23521551-Bai tap chuong 6.pdf` (`UIT-REF-CH06-STUDENT-23521551-PDF`) and `Bai-tap-chuong-6-HDH.docx` (`UIT-QBANK-CH06-2024-VARIANT-STUDENT-23520237`). Both classified as `student_submission` (Tier B), separated from canonical sources.
 - `SRC-CH6-007` — **RESOLVED (MAJOR)**: QBank source-unit map expanded from 6 to the complete 15 addressable units (`QBANK-CH06-01` through `QBANK-CH06-15`) in `research/data/official_review_questions.yaml`. All are marked `MAPPED` / `NOT_WRITTEN`.
 - `SRC-CH6-008` — **RESOLVED (MAJOR)**: Visual page inspection completed for graph pages (15–24), Banker tables (34–49), Wait-for/detection pages (50–58), and exercise pages (64–66). Graph directions, resource dots, cycles, and matrix headers verified.
+- `SRC-CH6-009` — **RESOLVED (MAJOR)**: Week08 vs Week11 canonical slide identity investigated and resolved with direct physical lineage analysis:
+  - Binary comparison between `#Week08-Chapter6 2024.pdf` (6,008,743 bytes, SHA-256 `5cf9e1a3...`) and `Week11-Chapter6 2024.pdf` (5,816,540 bytes, SHA-256 `e55bf225...`):
+    - Metadata reveals `#Week08` was created on 2024-09-11 10:37:41+07:00 (PowerPoint Microsoft 365, authors Trần Hoàng Lộc & Nguyễn Thanh Thiện) in the official course folder `Tài liệu học tập-20240912`.
+    - In contrast, `Week11` was created 7 months earlier on 2024-02-15 17:52:03+07:00 with Week 11 numbering from the prior semester.
+    - Authoritative 2024 course outline (`IT007_HeDieuHanh_14.2024.pdf`, created 2024-09-11 10:13:32+07:00) explicitly dictates: `Buổi 8: Chương 6. Deadlock` and `bộ slide week 8 do giáo viên cung cấp`.
+    - Deep page-by-page text and element analysis across all 67 pages confirms both PDFs are content-equivalent (identical headings, definitions, Coffman conditions, RAG models, Banker tables, detection algorithms, and exercises; differences are restricted to Unicode normalization NFC vs NFD and letter-spacing).
+    - Resolution: Promoted `#Week08-Chapter6 2024.pdf` to canonical `UIT-SLIDE-CH06-2024`; demoted `Week11-Chapter6 2024.pdf` to immutable variant `UIT-SLIDE-CH06-2024-VARIANT-WEEK11-5MB`. Canonical 67-page semantic range map is verified and preserved.
+- `ENG-CH6-001` — **RESOLVED (MAJOR)**: False-positive locked-chapter CI guard resolved:
+  - Root cause: `scripts/validate_ch06_source_map.py` previously called `git diff --name-only` against the working tree, which was dirtied by transient test artifacts generated by preceding test suites in GitHub Actions CI run #44.
+  - Fix: Hardened validator to inspect committed git history between the locked Chapter 5 baseline commit `06e4b34ef14d60398e462e437470bb6a37157996` and `HEAD` (`git diff --name-only 06e4b34..HEAD --`), strictly filtering for locked paths (`content/theory/ch01*..ch05*`, `content/questions/subjective/ch01*..ch05*`, `content/reviews/midterm*`).
+  - Added `fetch-depth: 0` to `.github/workflows/validate.yml` to guarantee complete commit history is available in CI.
+  - Verification: `git diff --name-only 06e4b34..HEAD` contains ZERO modified files under Chapters 1–5.
 
 **OPEN SOURCE BLOCKERS:** `0`  
 **OPEN SOURCE MAJORS:** `0`  
-**OPEN SOURCE MINORS:** `0`  
+**OPEN ENGINEERING MAJORS:** `0`  
+**OPEN MINORS:** `0`  
 
 ---
 
 ## FINAL DECISION
 
-**PASS — V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_INDEPENDENT_RECHECK**
+**PASS — V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_FINAL_INDEPENDENT_CHECK**
 
-The canonical Chapter 6 source map is fully repaired and ready for independent recheck.  
+The canonical Chapter 6 source map is fully verified, with Week08 established as canonical slide, Week11 demoted to variant, dual-mode validation enabled, and CI locked-chapter protection repaired.  
 Chapter 6 authoring remains **`NOT_STARTED`**.  
-**READY FOR CH6 AUTHORING:** **`NO`** (Pending final independent recheck).  
-**Exact Next Action:** Independent recheck of the repaired canonical Chapter 6 source map.
+**READY FOR CH6 AUTHORING:** **`NO`** (Pending final independent check).  
+**Exact Next Action:** Push repair and verify exact-head GitHub Actions before authoring.
