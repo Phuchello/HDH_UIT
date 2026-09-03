@@ -6,9 +6,9 @@ Deterministic content-fidelity and authoring validator for Chapter 6 (Deadlock).
 Verifies:
 1. Presence of content/theory/ch06-deadlock.md and content/questions/subjective/ch06.md.
 2. Canonical source references (UIT-OUTLINE-2024, UIT-SLIDE-CH06-2024, UIT-QBANK-CH06-2024).
-3. All 63 CONTENT pages in slide_coverage.yaml are marked CONTENT_DRAFTED.
+3. All 63 CONTENT pages in slide_coverage.yaml are marked CONTENT_VERIFIED.
 4. All 4 NON_CONTENT pages remain NOT_WRITTEN.
-5. All 15 QBank units in official_review_questions.yaml are marked CONTENT_DRAFTED.
+5. All 15 QBank units in official_review_questions.yaml are marked CONTENT_VERIFIED.
 6. Core conceptual invariants in Theory:
    - 4 Coffman conditions (Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait).
    - RAG single-instance (cycle <=> deadlock) vs multi-instance (cycle is necessary, not sufficient).
@@ -106,16 +106,19 @@ def validate_ch06_content() -> int:
         errors.append("UIT-SLIDE-CH06-2024 not found in slide_coverage.yaml")
     else:
         sections = ch6_deck.get("sections", [])
-        content_drafted_pages = sum(
+        unmapped = [s for s in sections if s.get("mapping_status") != "MAPPED"]
+        if unmapped:
+            errors.append(f"Found unmapped sections in Chapter 6 deck: {unmapped}")
+        content_verified_pages = sum(
             s.get("page_count", 0) for s in sections
-            if s.get("classification") == "CONTENT" and s.get("content_status") == "CONTENT_DRAFTED"
+            if s.get("classification") == "CONTENT" and s.get("content_status") == "CONTENT_VERIFIED"
         )
         non_content_unwritten_pages = sum(
             s.get("page_count", 0) for s in sections
             if s.get("classification") == "NON_CONTENT" and s.get("content_status") == "NOT_WRITTEN"
         )
-        if content_drafted_pages != 63:
-            errors.append(f"Expected exactly 63 CONTENT pages marked CONTENT_DRAFTED, got {content_drafted_pages}")
+        if content_verified_pages != 63:
+            errors.append(f"Expected exactly 63 CONTENT pages marked CONTENT_VERIFIED, got {content_verified_pages}")
         if non_content_unwritten_pages != 4:
             errors.append(f"Expected exactly 4 NON_CONTENT pages marked NOT_WRITTEN, got {non_content_unwritten_pages}")
 
@@ -123,9 +126,9 @@ def validate_ch06_content() -> int:
     qrows = [q for q in parse_questions(QUESTIONS_PATH) if q.get("source_id") == "UIT-QBANK-CH06-2024"]
     if len(qrows) != 15:
         errors.append(f"Expected exactly 15 QBank questions for Chapter 6, got {len(qrows)}")
-    drafted_q_count = sum(1 for q in qrows if q.get("content_status") == "CONTENT_DRAFTED")
-    if drafted_q_count != 15:
-        errors.append(f"Expected all 15 QBank questions marked CONTENT_DRAFTED, got {drafted_q_count}")
+    verified_q_count = sum(1 for q in qrows if q.get("content_status") == "CONTENT_VERIFIED")
+    if verified_q_count != 15:
+        errors.append(f"Expected all 15 QBank questions marked CONTENT_VERIFIED, got {verified_q_count}")
 
     # 6. Theory Content Key Invariant Checks
     required_theory_concepts = [
@@ -333,8 +336,8 @@ def validate_ch06_content() -> int:
     print("  [OK] content/theory/ch06-deadlock.md exists and covers all 63 content pages")
     print("  [OK] content/questions/subjective/ch06.md covers all 15 QBank units (8 theory + 7 exercises)")
     print("  [OK] Canonical source IDs cited in theory and QBank frontmatter")
-    print("  [OK] 63 CONTENT pages marked CONTENT_DRAFTED; 4 NON_CONTENT remain NOT_WRITTEN")
-    print("  [OK] 15 QBank units marked CONTENT_DRAFTED in official_review_questions.yaml")
+    print("  [OK] 63 CONTENT pages marked CONTENT_VERIFIED; 4 NON_CONTENT remain NOT_WRITTEN")
+    print("  [OK] 15 QBank units marked CONTENT_VERIFIED in official_review_questions.yaml")
     print("  [OK] Core invariants present: Coffman 4, RAG single/multi, Safe/Unsafe/Deadlock, Banker, Detection, Recovery")
     print("  [OK] Detection distinguishes Request from Need")
     print("  [OK] Unsafe != Deadlock distinction maintained across theory and QBank (Q13, Q14, Q15)")

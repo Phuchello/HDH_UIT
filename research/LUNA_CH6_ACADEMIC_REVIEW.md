@@ -277,3 +277,20 @@ $$\mathbf{CH6\ ACADEMIC\ VERIFICATION:\ PASS\ —\ READY\ FOR\ LIFECYCLE\ CLOSEO
 - **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5 + CH6 REVIEW`
 - **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6`
 - **Hành động tiếp theo chính xác (Exact Next Action):** Independent lifecycle closeout from CONTENT_DRAFTED to CONTENT_VERIFIED.
+
+---
+
+## 15. LIFECYCLE CLOSEOUT (Thực Hiện Cơ Chế Bởi Terra)
+
+- **Academic review:** PASS (Thực hiện độc lập bởi Codex Luna Ultra)
+- **Focused independent recheck:** PASS (Thực hiện độc lập bởi Codex Luna Ultra)
+- **Lifecycle promotion (Chuyển đổi trạng thái vòng đời có cấu trúc):**
+  - 63 / 63 Ch6 CONTENT slide pages: `CONTENT_DRAFTED -> CONTENT_VERIFIED`
+  - 4 / 4 Ch6 NON_CONTENT slide pages: `NOT_WRITTEN` (Bảo toàn nguyên vẹn, không nâng cấp tùy tiện)
+  - 15 / 15 Ch6 QBank units: `CONTENT_DRAFTED -> CONTENT_VERIFIED`
+- **Open findings:**
+  - Open blockers: 0
+  - Open majors: 0
+  - Open minors: 0
+- **Trạng thái vòng đời khóa học thuật (Authoring):** `CONTENT_VERIFIED`
+- **Giai đoạn dự án (Project Phase):** `V2_BATCH3_CH6_CONTENT_VERIFIED_LOCKED`
