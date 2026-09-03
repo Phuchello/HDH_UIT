@@ -2,15 +2,15 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH3_CH6_SOURCE_MAP_LOCKED_READY_FOR_AUTHORING`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH3_CH6_CONTENT_DRAFTED_READY_FOR_ENGINEERING_QA`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `VERIFIED`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
-**Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `NOT_STARTED`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — SRC-CH6-009..011 & ENG-CH6-001..002 resolved; generator & ledger SSOT guarded.  
-**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5`  
-**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Chapter 6 source-grounded authoring from the locked canonical map.  
+**Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `CONTENT_DRAFTED`  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — Chapter 6 theory & 15 QBank units drafted, content validator PASS.  
+**Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5` (CH6 — PENDING INDEPENDENT REVIEW)  
+**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5` (CH6 — PENDING ENGINEERING QA)  
+**Hành động tiếp theo chính xác (Exact Next Action):** Independent Chapter 6 engineering QA before academic verification.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-09-03
 

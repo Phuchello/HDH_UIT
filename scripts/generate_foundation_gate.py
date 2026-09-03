@@ -36,6 +36,7 @@ def main():
         run("validate_ch05_source_map", [py, "scripts/validate_ch05_source_map.py"]),
         run("validate_ch05_content", [py, "scripts/validate_ch05_content.py"]),
         run("validate_ch06_source_map", [py, "scripts/validate_ch06_source_map.py"]),
+        run("validate_ch06_content", [py, "scripts/validate_ch06_content.py"]),
         run("verify_research_gates", [py, "scripts/verify_research_gates.py"]),
     ]
     passed = all(step["ok"] for step in steps)

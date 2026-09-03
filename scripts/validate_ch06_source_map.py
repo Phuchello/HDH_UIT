@@ -274,8 +274,9 @@ def main() -> int:
             failures.append("Chapter 6 CONTENT page count is not 63")
         if sum(s.get("classification") == "NON_CONTENT" for s in sections for _ in parse_page_range(s.get("page_range"))) != 4:
             failures.append("Chapter 6 NON_CONTENT page count is not 4")
+        valid_status = ("NOT_WRITTEN", "CONTENT_DRAFTED", "CONTENT_VERIFIED")
         for section in sections:
-            if section.get("mapping_status") != "MAPPED" or section.get("content_status") != "NOT_WRITTEN":
+            if section.get("mapping_status") != "MAPPED" or section.get("content_status") not in valid_status:
                 failures.append(f"Chapter 6 lifecycle status invalid at {section.get('page_range')}")
         topics = " ".join(str(s.get("topic", "")).lower() for s in sections)
         missing_topics = [term for term in REQUIRED_TOPICS if term not in topics]
@@ -291,16 +292,22 @@ def main() -> int:
 
     for q in qrows:
         qid = q.get("question_id", "<missing>")
-        if q.get("mapping_status") != "MAPPED" or q.get("content_status") != "NOT_WRITTEN":
-            failures.append(f"Chapter 6 question {qid} is not MAPPED / NOT_WRITTEN")
+        if q.get("mapping_status") != "MAPPED" or q.get("content_status") not in valid_status:
+            failures.append(f"Chapter 6 question {qid} is not MAPPED / valid content_status")
         if not q.get("source_locator") or not q.get("topic"):
             failures.append(f"Chapter 6 question {qid} missing source_locator or topic")
 
-    # 5. Premature Authoring Check
-    if (ROOT / "content/theory/ch06-deadlock.md").exists():
-        failures.append("content/theory/ch06-deadlock.md exists before source-map verification approval")
-    if (ROOT / "content/questions/subjective/ch06.md").exists():
-        failures.append("content/questions/subjective/ch06.md exists before source-map verification approval")
+    # 5. Authoring File Check (Post source-map approval)
+    theory_file = ROOT / "content/theory/ch06-deadlock.md"
+    if theory_file.exists():
+        t_content = theory_file.read_text(encoding="utf-8")
+        if SLIDE_ID not in t_content:
+            failures.append(f"content/theory/ch06-deadlock.md missing canonical source reference {SLIDE_ID}")
+    q_file = ROOT / "content/questions/subjective/ch06.md"
+    if q_file.exists():
+        q_content = q_file.read_text(encoding="utf-8")
+        if QBANK_ID not in q_content:
+            failures.append(f"content/questions/subjective/ch06.md missing canonical source reference {QBANK_ID}")
 
     # 6. Committed Locked Chapters 1-5 Check (ENG-CH6-001)
     try:

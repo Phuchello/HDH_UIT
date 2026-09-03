@@ -149,8 +149,8 @@ def _coverage_metrics(decks, registry):
 
 
 def _run(cmd):
-    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-    return result.returncode == 0, (result.stdout + "\n" + result.stderr).strip()
+    result = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    return result.returncode == 0, ((result.stdout or "") + "\n" + (result.stderr or "")).strip()
 
 
 def verify_gates(source_root=None):

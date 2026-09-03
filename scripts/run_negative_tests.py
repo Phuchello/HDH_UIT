@@ -23,8 +23,8 @@ def run_case(name, mutate, command, expected):
     changed = []
     try:
         changed = mutate()
-        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
-        output = (result.stdout + "\n" + result.stderr).strip()
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace")
+        output = ((result.stdout or "") + "\n" + (result.stderr or "")).strip()
         passed = result.returncode != 0 and expected.lower() in output.lower()
         return {"name": name, "passed": passed, "exit_code": result.returncode, "evidence": safe_evidence(output)}
     finally:
