@@ -214,6 +214,8 @@ Về mặt lý thuyết và thực tiễn thiết kế hệ điều hành, có 4
 Triệt tiêu ít nhất 1 trong     Duy trì hệ thống luôn          Để deadlock xảy ra,
 4 điều kiện Coffman.           nằm trong Safe State           định kỳ quét tìm và
                                (Giải thuật Banker).           thu hồi / hủy tiến trình.
+```
+
 > [!NOTE]
 > **Ghi chú kỹ thuật Tier-B (Chiến lược thứ tư — Bỏ qua bế tắc):**
 > Bên cạnh 3 chiến lược chủ động được nêu trong giáo trình chính quy, tài liệu chuẩn học thuật (Silberschatz et al., Tanenbaum) ghi nhận chiến lược thứ tư là **Bỏ qua bế tắc (The Ostrich Algorithm)**: xem như vấn đề không bao giờ phát sinh. Trong thực tế kỹ thuật, nhiều hệ điều hành đa nhiệm thông dụng lựa chọn không chạy các giải thuật tránh hay phát hiện bế tắc tốn kém trong không gian nhân (kernel) đối với tài nguyên dùng chung nhằm tối ưu hóa thông lượng và độ trễ, thay vào đó dựa vào sự can thiệp từ quản trị viên hoặc tiến trình giám sát khi xảy ra sự cố.

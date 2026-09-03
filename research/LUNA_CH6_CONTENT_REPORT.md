@@ -188,6 +188,10 @@ Tất cả các bài tập định lượng đã được lần vết độc l�
 - **Vấn đề:** Bộ kiểm tra `validate_ch06_content.py` chỉ quét từ khóa chung trong file lý thuyết mà không phát hiện được sự mâu thuẫn ngữ nghĩa trong các bài tập QBank hoặc việc gán ghép barem điểm chính thức.
 - **Khắc phục:** Tăng cường bộ kiểm tra `scripts/validate_ch06_content.py` với các hàm kiểm tra ngữ nghĩa theo phạm vi từng câu hỏi (section-scoped guards cho QBANK-CH06-02, 13, 14, 15), loại trừ các cụm từ bế tắc sai lệch, bắt buộc sự hiện diện của phân biệt học thuật Unsafe vs Deadlock, và kiểm tra tính toàn vẹn nguồn gốc (Provenance Guard).
 
+### ENG-CH6-003 — MAJOR — OPEN -> RESOLVED
+- **Vấn đề:** Trong `content/theory/ch06-deadlock.md` mục 6.3, sơ đồ ASCII chiến lược xử lý bế tắc bị thiếu dấu đóng khối code fence (triple backticks) sau khi chèn ghi chú Tier-B, khiến phần lớn nội dung lý thuyết phía sau bị nuốt vào khối code `<pre><code>`.
+- **Khắc phục:** Đóng khối fenced code block bằng ` ``` ` ngay sau sơ đồ ASCII và trước `> [!NOTE]`, khôi phục định dạng render chuẩn mực cho toàn bộ các tiêu đề H2/H3 và nội dung phía sau; đồng thời bổ sung chốt chặn kiểm tra cân bằng dấu code fence trong `scripts/validate_ch06_content.py`.
+
 - **OPEN BLOCKERS:** `0`
 - **OPEN MAJORS:** `0`
 - **OPEN MINORS:** `0`

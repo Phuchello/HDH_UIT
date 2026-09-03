@@ -77,6 +77,14 @@ def validate_ch06_content() -> int:
     theory_text = THEORY_PATH.read_text(encoding="utf-8")
     qbank_text = QBANK_PATH.read_text(encoding="utf-8")
 
+    # Balanced code fences guard (ENG-CH6-003)
+    t_fences = [i for i, line in enumerate(theory_text.splitlines(), 1) if line.strip().startswith("```")]
+    if len(t_fences) % 2 != 0:
+        errors.append(f"Theory file has unbalanced fenced code blocks (found {len(t_fences)} triple-backtick lines: {t_fences})")
+    q_fences = [i for i, line in enumerate(qbank_text.splitlines(), 1) if line.strip().startswith("```")]
+    if len(q_fences) % 2 != 0:
+        errors.append(f"QBank file has unbalanced fenced code blocks (found {len(q_fences)} triple-backtick lines: {q_fences})")
+
     # 2. Canonical source ID citations
     for sid in CANONICAL_SOURCE_IDS:
         if sid not in theory_text:
