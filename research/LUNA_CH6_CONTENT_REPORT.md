@@ -170,7 +170,24 @@ Tất cả các bài tập định lượng đã được lần vết độc l�
 
 ---
 
-## 9. Open Findings (Tình Trạng Vấn Đề Tồn Đọng)
+## 9. Findings & Semantic Hotfix Record
+
+### ACAD-CH6-001 — MAJOR — OPEN -> RESOLVED
+- **Vấn đề:** Trong lời giải bài tập Banker (QBANK-CH06-13, 14, 15c), trạng thái Unsafe khi giải thuật An toàn không tìm ra chuỗi an toàn bị đánh đồng không chính xác với việc các tiến trình bị bế tắc ngay lập tức hoặc bị chặn vĩnh viễn.
+- **Khắc phục:** Loại bỏ hoàn toàn các nhận định sai lệch ("bế tắc ngay lập tức", "chứng minh bế tắc", "bị chặn vĩnh viễn"). Bổ sung phân tích và lưu ý học thuật chuẩn xác: Ma trận Need chỉ đại diện cho nhu cầu tiềm năng tối đa, không phải yêu cầu Request thực tế đang bị chặn; việc không tìm ra chuỗi an toàn chỉ chứng minh trạng thái là Unsafe (tiềm ẩn nguy cơ bế tắc nên Banker phải từ chối cấp phát), chứ không chứng minh hệ thống hiện tại đã bị Deadlock.
+
+### ACAD-CH6-002 — MAJOR — OPEN -> RESOLVED
+- **Vấn đề:** Trong QBANK-CH06-02, 4 điều kiện Coffman bị phát biểu theo mệnh đề tương đương "khi và chỉ khi" (iff), vi phạm nguyên lý học thuật vì 4 điều kiện Coffman chỉ là điều kiện cần (necessary conditions), không phải điều kiện đủ đối với tài nguyên đa thực thể.
+- **Khắc phục:** Loại bỏ hoàn toàn cụm từ "khi và chỉ khi". Hiệu chỉnh lời giải chuẩn mực: Bế tắc chỉ có thể xảy ra khi đồng thời tồn tại cả 4 điều kiện cần (nếu bế tắc xảy ra thì cả 4 điều kiện bắt buộc đồng thời xuất hiện; nhưng sự hiện diện của 4 điều kiện chưa đủ để khẳng định hệ thống đa thực thể đã bị bế tắc).
+
+### PROV-CH6-001 — MAJOR — OPEN -> RESOLVED
+- **Vấn đề:** Bản nháp QBank sử dụng tiêu đề "Barem điểm & Tiêu chí chấm thi" và các mức điểm số cụ thể ("0.25 đ", "0.50 đ", v.v.), vô tình tạo cảm tưởng đây là barem chấm điểm chính thức của UIT dù chưa có tài liệu nguồn chứng minh.
+- **Khắc phục:** Chuẩn hóa toàn bộ 15 đơn vị câu hỏi sang định dạng trung lập "Rubric tự kiểm tra của handbook (Self-Check Rubric)", kèm khuyến cáo rõ ràng: *(Trọng số gợi ý của handbook nhằm phục vụ tự đánh giá ôn tập — không phải barem chấm thi chính thức của UIT)*. Chuyển đổi các điểm số tuyệt đối sang tỷ lệ phần trăm gợi ý (Gợi ý: 25%, 50%...).
+
+### VALIDATOR-CH6-001 — MAJOR — OPEN -> RESOLVED
+- **Vấn đề:** Bộ kiểm tra `validate_ch06_content.py` chỉ quét từ khóa chung trong file lý thuyết mà không phát hiện được sự mâu thuẫn ngữ nghĩa trong các bài tập QBank hoặc việc gán ghép barem điểm chính thức.
+- **Khắc phục:** Tăng cường bộ kiểm tra `scripts/validate_ch06_content.py` với các hàm kiểm tra ngữ nghĩa theo phạm vi từng câu hỏi (section-scoped guards cho QBANK-CH06-02, 13, 14, 15), loại trừ các cụm từ bế tắc sai lệch, bắt buộc sự hiện diện của phân biệt học thuật Unsafe vs Deadlock, và kiểm tra tính toàn vẹn nguồn gốc (Provenance Guard).
+
 - **OPEN BLOCKERS:** `0`
 - **OPEN MAJORS:** `0`
 - **OPEN MINORS:** `0`

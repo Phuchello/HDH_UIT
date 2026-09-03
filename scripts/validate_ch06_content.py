@@ -9,15 +9,22 @@ Verifies:
 3. All 63 CONTENT pages in slide_coverage.yaml are marked CONTENT_DRAFTED.
 4. All 4 NON_CONTENT pages remain NOT_WRITTEN.
 5. All 15 QBank units in official_review_questions.yaml are marked CONTENT_DRAFTED.
-6. Core conceptual invariants:
+6. Core conceptual invariants in Theory:
    - 4 Coffman conditions (Mutual Exclusion, Hold and Wait, No Preemption, Circular Wait).
    - RAG single-instance (cycle <=> deadlock) vs multi-instance (cycle is necessary, not sufficient).
    - Safe State vs Unsafe State vs Deadlock (Unsafe != necessarily Deadlock).
    - Banker's Algorithm (Available, Max, Allocation, Need, Work, Finish, Safe Sequence, Resource-Request).
    - Deadlock Detection matrix (distinguishing actual Request from potential Need).
    - Deadlock Recovery (termination, preemption, victim selection, rollback, starvation).
-7. Student submissions are never cited as Tier A authoritative sources.
-8. Zero modifications to locked Chapters 1-5 academic content since baseline 06e4b34.
+7. QBank Section-Scoped Semantic Invariants (ACAD-CH6-001 & ACAD-CH6-002 & VALIDATOR-CH6-001):
+   - QBANK-CH06-02: Coffman conditions must not be asserted with bare 'if and only if' / 'khi và chỉ khi'.
+   - QBANK-CH06-13, 14, 15: Failed Banker Safety result must not claim immediate deadlock or permanent blocking.
+     Must positively distinguish that failure to find a safe sequence proves Unsafe, which is NOT proof of current Deadlock.
+8. Provenance Integrity (PROV-CH6-001):
+   - Rejects fabricated official scoring rubric claims (e.g. 'barem chấm điểm IT007 UIT', 'điểm chuẩn UIT').
+   - Ensures rubrics are framed as neutral self-check criteria with appropriate disclaimers.
+9. Student submissions are never cited as Tier A authoritative sources.
+10. Zero modifications to locked Chapters 1-5 academic content since baseline 06e4b34.
 """
 from __future__ import annotations
 
@@ -134,7 +141,7 @@ def validate_ch06_content() -> int:
     if "request" not in t_lower or "need" not in t_lower:
         errors.append("Theory content must explicitly distinguish Request from Need in Detection vs Banker")
 
-    # 8. Unsafe != Deadlock protection
+    # 8. Unsafe != Deadlock protection in Theory
     unsafe_deadlock_distinction = (
         "không đồng nghĩa" in t_lower or "không phải" in t_lower or "không an toàn" in t_lower
     )
@@ -147,7 +154,77 @@ def validate_ch06_content() -> int:
         if qid not in qbank_text:
             errors.append(f"QBank file missing unit header / locator for '{qid}'")
 
-    # 10. Committed Locked Chapters 1-5 Check
+    # 10. QBank Section-Scoped Semantic Regression Guards (ACAD-CH6-001 & ACAD-CH6-002 & VALIDATOR-CH6-001)
+    qbank_units: dict[str, str] = {}
+    for part in qbank_text.split("### QBANK-CH06-")[1:]:
+        qid = f"QBANK-CH06-{part[:2]}"
+        qbank_units[qid] = part
+
+    # A. QBANK-CH06-02: Coffman iff guard
+    q2_text = qbank_units.get("QBANK-CH06-02", "")
+    q2_lower = q2_text.lower()
+    if "khi và chỉ khi" in q2_lower or "if and only if" in q2_lower:
+        errors.append("QBANK-CH06-02 invalidly uses 'khi và chỉ khi' / 'if and only if' for 4 Coffman necessary conditions")
+
+    # B. QBANK-CH06-13: Banker Safety Result vs Deadlock
+    q13_text = qbank_units.get("QBANK-CH06-13", "")
+    q13_lower = q13_text.lower()
+    for term in ["bế tắc ngay lập tức", "chứng minh bế tắc", "bị tắc vĩnh viễn", "bị chặn vĩnh viễn"]:
+        if term in q13_lower:
+            errors.append(f"QBANK-CH06-13 contains invalid deadlock claim '{term}' in Banker Safety result context")
+    has_q13_positive_guard = (
+        ("không tồn tại chuỗi an toàn" in q13_lower or "không có chuỗi an toàn" in q13_lower)
+        and ("unsafe" in q13_lower or "không an toàn" in q13_lower)
+        and ("không đồng nghĩa" in q13_lower or "không chứng minh" in q13_lower or "không nhất thiết" in q13_lower)
+    )
+    if not has_q13_positive_guard:
+        errors.append("QBANK-CH06-13 missing positive distinction: no safe sequence => unsafe != proof of current deadlock")
+
+    # C. QBANK-CH06-14: Banker Safety Result vs Deadlock
+    q14_text = qbank_units.get("QBANK-CH06-14", "")
+    q14_lower = q14_text.lower()
+    for term in ["bị chặn vĩnh viễn vì thiếu tài nguyên", "bế tắc ngay lập tức", "chứng minh bế tắc"]:
+        if term in q14_lower:
+            errors.append(f"QBANK-CH06-14 contains invalid deadlock claim '{term}' in Banker Safety result context")
+    has_q14_positive_guard = (
+        ("unsafe" in q14_lower or "không an toàn" in q14_lower)
+        and ("không suy diễn" in q14_lower or "không đồng nghĩa" in q14_lower or "không chứng minh" in q14_lower)
+    )
+    if not has_q14_positive_guard:
+        errors.append("QBANK-CH06-14 missing positive distinction: unsafe != proof of current deadlock")
+
+    # D. QBANK-CH06-15: Banker Safety Result vs Deadlock
+    q15_text = qbank_units.get("QBANK-CH06-15", "")
+    q15_lower = q15_text.lower()
+    for term in ["bế tắc ngay lập tức", "chứng minh bế tắc", "bị tắc vĩnh viễn"]:
+        if term in q15_lower:
+            errors.append(f"QBANK-CH06-15 contains invalid deadlock claim '{term}' in Banker Safety result context")
+    has_q15_positive_guard = (
+        ("không tồn tại chuỗi an toàn" in q15_lower or "không có chuỗi an toàn" in q15_lower)
+        and ("unsafe" in q15_lower or "không an toàn" in q15_lower)
+        and ("không chứng minh" in q15_lower or "không đồng nghĩa" in q15_lower or "không nhất thiết" in q15_lower)
+    )
+    if not has_q15_positive_guard:
+        errors.append("QBANK-CH06-15 missing positive distinction: no safe sequence => unsafe != proof of current deadlock")
+
+    # 11. Provenance Integrity Guard (PROV-CH6-001)
+    forbidden_provenance_terms = [
+        "barem chấm điểm it007 uit",
+        "official marking scheme",
+        "điểm chuẩn uit",
+    ]
+    q_all_lower = qbank_text.lower()
+    for term in forbidden_provenance_terms:
+        if term in q_all_lower:
+            errors.append(f"QBank contains fabricated official scoring provenance '{term}'")
+
+    if "| Điểm chuẩn |" in qbank_text:
+        errors.append("QBank rubric table contains unproven 'Điểm chuẩn' header (must use neutral self-check label)")
+
+    if "Rubric tự kiểm tra của handbook" not in qbank_text:
+        errors.append("QBank missing required neutral self-check rubric heading")
+
+    # 12. Committed Locked Chapters 1-5 Check
     try:
         git_check = subprocess.run(
             ["git", "diff", "--name-only", f"{LOCKED_BASELINE}..HEAD", "--"],
@@ -155,6 +232,8 @@ def validate_ch06_content() -> int:
             capture_output=True,
             text=True,
             check=False,
+            encoding="utf-8",
+            errors="replace",
         )
         if git_check.returncode == 0:
             changed_files = [f.strip() for f in git_check.stdout.splitlines() if f.strip()]
@@ -181,7 +260,9 @@ def validate_ch06_content() -> int:
     print("  [OK] 15 QBank units marked CONTENT_DRAFTED in official_review_questions.yaml")
     print("  [OK] Core invariants present: Coffman 4, RAG single/multi, Safe/Unsafe/Deadlock, Banker, Detection, Recovery")
     print("  [OK] Detection distinguishes Request from Need")
-    print("  [OK] Unsafe != Deadlock distinction maintained")
+    print("  [OK] Unsafe != Deadlock distinction maintained across theory and QBank (Q13, Q14, Q15)")
+    print("  [OK] Coffman 4 conditions logical wording verified (Q02: necessary only, zero invalid iff claims)")
+    print("  [OK] Provenance integrity verified (neutral self-check rubrics, zero fabricated UIT marking keys)")
     print("  [OK] Student submission variants excluded from Tier A authority")
     print("  [OK] Zero changes to locked Chapters 1-5 academic content")
     return 0

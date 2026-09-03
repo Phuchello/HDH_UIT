@@ -9,8 +9,8 @@ summary:
   mapped_questions: 104
   unmapped_questions: 0
   content_verified_questions: 66  # 31 Batch-1 qbank + 33 concrete Midterm + 2 explicit external-set references
-  drafted_questions: 0
-  not_written_questions: 38 # Chapters 5–9
+  drafted_questions: 15  # Chapter 6 QBank units (QBANK-CH06-01..15)
+  not_written_questions: 23 # Remaining unwritten units
   dedicated_official_qbank_questions: 69
   batch1_qbank_questions: 31
   midterm_concrete_occurrences: 33

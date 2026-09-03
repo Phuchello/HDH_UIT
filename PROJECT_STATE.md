@@ -7,7 +7,7 @@
 **Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `VERIFIED`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `CONTENT_DRAFTED`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — Chapter 6 theory & 15 QBank units drafted, content validator PASS.  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — Chapter 6 draft semantics repaired, content validator PASS.  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5` (CH6 — PENDING INDEPENDENT REVIEW)  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5` (CH6 — PENDING ENGINEERING QA)  
 **Hành động tiếp theo chính xác (Exact Next Action):** Independent Chapter 6 engineering QA before academic verification.  

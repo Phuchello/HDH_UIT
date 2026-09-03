@@ -18,7 +18,7 @@ All totals below are computed from registry records, expanded slide-page records
 | Verified content pages | 438 | informational current verified set | **INFO** |
 | Official question records | 104 | count of structured records | **PASS** |
 | Mapped / unmapped questions | 104 / 0 | zero unmapped; required fields | **PASS** |
-| Drafted questions | 0 | informational current authored set | **INFO** |
+| Drafted questions | 15 | informational current authored set | **INFO** |
 | Exam evidence records | 20 | valid record schema | **PASS** |
 | Public hygiene | — | no forbidden paths | **PASS** |
 | Canonical content validation | — | schema/rubric/wikilink checks | **PASS** |

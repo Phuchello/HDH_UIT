@@ -170,7 +170,7 @@ def verify_gates(source_root=None):
     question_id_ok = len(question_ids) == len(set(question_ids))
     mapped_questions = sum(q.get("mapping_status") == "MAPPED" for q in questions)
     unmapped_questions = len(questions) - mapped_questions
-    drafted_questions = sum(q.get("content_status") == "DRAFTED" for q in questions)
+    drafted_questions = sum(q.get("content_status") in ("DRAFTED", "CONTENT_DRAFTED") for q in questions)
 
     exams = parse_exams(DATA_DIR / "exam_evidence.yaml")
     exam_schema_ok = bool(exams) and all(e.get("exam_id") and e.get("source_id") and e.get("classification") for e in exams)
