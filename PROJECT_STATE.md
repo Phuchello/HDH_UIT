@@ -2,15 +2,15 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_FINAL_INDEPENDENT_CHECK`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH3_CH6_SOURCE_MAP_LOCKED_READY_FOR_AUTHORING`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
-**Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `MAPPED — PENDING FINAL INDEPENDENT CHECK`  
+**Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `VERIFIED`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `NOT_STARTED`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — SRC-CH6-009, SRC-CH6-010 & ENG-CH6-001 resolved; ready for exact-head GitHub Actions check.  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — SRC-CH6-009..011 & ENG-CH6-001..002 resolved; generator & ledger SSOT guarded.  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5`  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Push repair and verify exact-head GitHub Actions before authoring.  
+**Hành động tiếp theo chính xác (Exact Next Action):** Chapter 6 source-grounded authoring from the locked canonical map.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-09-03
 

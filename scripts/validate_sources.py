@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 REGISTRY_PATH = ROOT / "content/sources/registry.yaml"
 sys.path.insert(0, str(Path(__file__).parent))
 from research_utils import parse_registry
+from generate_registry import check_registry_drift
 
 
 def validate_sources():
@@ -18,6 +19,11 @@ def validate_sources():
     sources = parse_registry(REGISTRY_PATH)
     ids = [source.get("id") for source in sources]
     errors = []
+
+    # Check for canonical SSOT drift
+    drift_errors = check_registry_drift(sources)
+    errors.extend(drift_errors)
+
     if len(ids) != len(set(ids)):
         errors.append("Duplicate source ID in registry")
     for source in sources:

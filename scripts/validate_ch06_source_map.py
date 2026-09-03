@@ -357,9 +357,30 @@ def main() -> int:
             failures.append(f"source-map report missing section: {heading}")
 
     # Verify report records all resolved findings
-    for find_id in ["SRC-CH6-005", "SRC-CH6-006", "SRC-CH6-007", "SRC-CH6-008", "SRC-CH6-009", "SRC-CH6-010", "ENG-CH6-001"]:
+    for find_id in ["SRC-CH6-005", "SRC-CH6-006", "SRC-CH6-007", "SRC-CH6-008", "SRC-CH6-009", "SRC-CH6-010", "SRC-CH6-011", "ENG-CH6-001", "ENG-CH6-002"]:
         if find_id not in report_text:
             failures.append(f"source-map report missing finding: {find_id}")
+
+    # 8. Source Ledger & Cross-File Consistency Guard (SRC-CH6-011, ENG-CH6-002)
+    ledger_path = ROOT / "research/SOURCE_LEDGER.md"
+    if not ledger_path.exists():
+        failures.append("research/SOURCE_LEDGER.md missing")
+    else:
+        ledger_text = ledger_path.read_text(encoding="utf-8")
+        if not re.search(r"\|\s*\*\*A-01\*\*\s*\|\s*`IT007_HeDieuHanh_14\.2024\.pdf`", ledger_text):
+            failures.append("SOURCE_LEDGER A-01 must be canonical IT007_HeDieuHanh_14.2024.pdf")
+        if not re.search(r"\|\s*\*\*A-12\*\*\s*\|\s*`#Week08-Chapter6 2024\.pdf`", ledger_text):
+            failures.append("SOURCE_LEDGER A-12 must be canonical #Week08-Chapter6 2024.pdf")
+        if re.search(r"\|\s*\*\*A-01\*\*\s*\|\s*`De cuong\.pdf`", ledger_text):
+            failures.append("SOURCE_LEDGER A-01 must NOT be De cuong.pdf (must be variant only)")
+        if re.search(r"\|\s*\*\*A-12\*\*\s*\|\s*`Week11-Chapter6 2024\.pdf`", ledger_text):
+            failures.append("SOURCE_LEDGER A-12 must NOT be Week11-Chapter6 2024.pdf (must be variant only)")
+
+    # 9. Generator Canonical Drift Guard
+    from generate_registry import check_registry_drift
+    gen_drift = check_registry_drift(list(registry.values()))
+    if gen_drift:
+        failures.extend([f"generate_registry SSOT drift: {d}" for d in gen_drift])
 
     if failures:
         print("CHAPTER 6 SOURCE MAP: FAIL")
@@ -371,6 +392,8 @@ def main() -> int:
     print("  [OK] Canonical 2024 outline (IT007_HeDieuHanh_14.2024.pdf, 418KB) & 2023 variant separated")
     print("  [OK] Canonical slide: #Week08-Chapter6 2024.pdf (67 pages / 6,008,743 bytes / SHA verified) promoted over Week11 variant")
     print("  [OK] Coverage SSOT: exact_filename matches canonical registry (#Week08-Chapter6 2024.pdf)")
+    print("  [OK] Source Ledger SSOT: A-01 outline and A-12 slide strictly match canonical identities")
+    print("  [OK] Generator SSOT: generate_registry.py dry-run check verified with zero canonical drift")
     print("  [OK] Canonical blank QBank: 15 source units (8 theory + 7 exercises) / 101,550 bytes / SHA verified")
     print("  [OK] Student variants (Bai-tap-chuong-6-HDH.docx & 23521551 PDF) classified as student_submission (Tier B)")
     print("  [OK] Coverage: 63 CONTENT + 4 NON_CONTENT = 67 pages, gap-free, all NOT_WRITTEN")

@@ -280,6 +280,12 @@ All 15 units are cataloged in `research/data/official_review_questions.yaml` as 
 - `SRC-CH6-010` — **RESOLVED (MAJOR)**: Canonical coverage identity SSOT sync:
   - Reason: Canonical source promotion (Week11 -> Week08) in `SRC-CH6-009` updated `content/sources/registry.yaml` and the report, but left `research/data/slide_coverage.yaml` exact_filename pointing at the demoted `Week11-Chapter6 2024.pdf` variant.
   - Resolution: Synchronized `research/data/slide_coverage.yaml` under `UIT-SLIDE-CH06-2024` to `#Week08-Chapter6 2024.pdf`. Hardened `scripts/validate_ch06_source_map.py` to assert strict SSOT equality between `slide_coverage.yaml` and `registry.yaml` (`coverage.exact_filename == registry[SLIDE_ID].exact_filename` and `coverage.physical_pages == registry[SLIDE_ID].page_count`).
+- `SRC-CH6-011` — **RESOLVED (MAJOR)**: Course outline provenance synchronization in `research/SOURCE_LEDGER.md`:
+  - Reason: `research/SOURCE_LEDGER.md` still listed `De cuong.pdf` as authoritative Tier-A source `A-01` despite `content/sources/registry.yaml` establishing `IT007_HeDieuHanh_14.2024.pdf` as canonical `UIT-OUTLINE-2024`.
+  - Resolution: Updated `A-01` in `SOURCE_LEDGER.md` to canonical `IT007_HeDieuHanh_14.2024.pdf` (19 pages, created 2024-09-11, Khoa KTMT UIT 2024–2025). Reclassified `De cuong.pdf` as explicit historical variant `A-01-VARIANT` (`UIT-OUTLINE-2024-VARIANT-LOCAL-DECUONG`, created 2023-03-29). Added an executable cross-file guard in `scripts/validate_ch06_source_map.py` verifying that `SOURCE_LEDGER.md` never lists variants as canonical authority.
+- `ENG-CH6-002` — **RESOLVED (MAJOR)**: Registry generator destructive overwrite & drift vulnerability resolved:
+  - Reason: `scripts/generate_registry.py` maintained stale hard-coded canonical identities (e.g. `UIT-OUTLINE-2024` mapped to `De cuong.pdf`, and legacy `CANONICAL-USER` IDs) and unconditionally overwrote `content/sources/registry.yaml` upon execution, posing an active regression risk.
+  - Resolution: Redesigned `scripts/generate_registry.py` with SSOT protection: `content/sources/registry.yaml` is the authoritative SSOT. Added `--check` mode (executed by default) which asserts canonical ground truth invariants, detects drift, and prohibits destructive writes. Integrated `check_registry_drift()` into both `scripts/validate_sources.py` and `scripts/validate_ch06_source_map.py`.
 
 **OPEN SOURCE BLOCKERS:** `0`  
 **OPEN SOURCE MAJORS:** `0`  
@@ -290,9 +296,9 @@ All 15 units are cataloged in `research/data/official_review_questions.yaml` as 
 
 ## FINAL DECISION
 
-**PASS — V2_BATCH3_CH6_SOURCE_MAP_READY_FOR_FINAL_INDEPENDENT_CHECK**
+**PASS — V2_BATCH3_CH6_SOURCE_MAP_LOCKED_READY_FOR_AUTHORING**
 
-The canonical Chapter 6 source map is fully verified, with Week08 established as canonical slide, Week11 demoted to variant, dual-mode validation enabled, and CI locked-chapter protection repaired.  
+The canonical Chapter 6 source map is fully verified and locked, with Week08 established as canonical slide, Week11 demoted to variant, dual-mode validation enabled, course outline synchronized in registry and Source Ledger, and generator/ledger SSOT protections strictly enforced.  
 Chapter 6 authoring remains **`NOT_STARTED`**.  
-**READY FOR CH6 AUTHORING:** **`NO`** (Pending final independent check).  
-**Exact Next Action:** Push repair and verify exact-head GitHub Actions before authoring.
+**READY FOR CH6 AUTHORING:** **`YES — LOCKED READY FOR AUTHORING`** (Pending authoring directive).  
+**Exact Next Action:** Chapter 6 source-grounded authoring from the locked canonical map.
