@@ -192,6 +192,60 @@ def qbank_detailed_metrics(path: Path) -> dict[str, int]:
     }
 
 
+def check_report_table_consistency(report_text: str, expected_ranges: list[tuple[str, str]]) -> list[str]:
+    """Parse Markdown table in Section 10 of report and verify 100% agreement with structured SSOT."""
+    errs: list[str] = []
+    m = re.search(r"## 10\.\s*PAGE-BY-PAGE\s*/\s*RANGE COVERAGE\s*\n+(.*?)(?=\n##|\Z)", report_text, re.DOTALL)
+    if not m:
+        errs.append("Report missing '## 10. PAGE-BY-PAGE / RANGE COVERAGE' section")
+        return errs
+
+    section_text = m.group(1)
+    table_rows: list[tuple[str, str, int, str]] = []
+    for line in section_text.splitlines():
+        line = line.strip()
+        if not line.startswith("|"):
+            continue
+        parts = [col.strip() for col in line.split("|")[1:-1]]
+        if len(parts) >= 4 and parts[0].isdigit():
+            stt = parts[0]
+            rng = parts[1].replace("`", "").strip()
+            try:
+                cnt = int(parts[2].replace("`", "").strip())
+            except ValueError:
+                cnt = 0
+            cls = parts[3].replace("`", "").strip()
+            table_rows.append((stt, rng, cnt, cls))
+
+    if len(table_rows) != len(expected_ranges):
+        errs.append(f"SRC-CH7-003: Report coverage table has {len(table_rows)} rows, expected {len(expected_ranges)}")
+        return errs
+
+    report_content_pages = 0
+    report_non_content_pages = 0
+    for idx, (expected_rng, expected_cls) in enumerate(expected_ranges):
+        stt, r_rng, r_cnt, r_cls = table_rows[idx]
+        if r_rng != expected_rng:
+            errs.append(f"SRC-CH7-003: Report row {stt} range '{r_rng}' does not match expected '{expected_rng}'")
+        if r_cls != expected_cls:
+            errs.append(f"SRC-CH7-003: Report row {stt} classification '{r_cls}' does not match expected '{expected_cls}'")
+        if r_cls == "CONTENT":
+            report_content_pages += r_cnt
+        elif r_cls == "NON_CONTENT":
+            report_non_content_pages += r_cnt
+        else:
+            errs.append(f"Report row {stt} has unknown classification: {r_cls}")
+
+    if report_content_pages != 67:
+        errs.append(f"SRC-CH7-003: Report coverage table yields {report_content_pages} CONTENT pages, expected 67")
+    if report_non_content_pages != 5:
+        errs.append(f"SRC-CH7-003: Report coverage table yields {report_non_content_pages} NON_CONTENT pages, expected 5")
+    if report_content_pages + report_non_content_pages != 72:
+        errs.append(f"SRC-CH7-003: Report coverage table yields {report_content_pages + report_non_content_pages} total pages, expected 72")
+
+    return errs
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--source-root", help="Directory or paths (delimited by ';' or ',') containing physical binaries")
@@ -500,6 +554,15 @@ def main() -> int:
         for heading in required_report_headings:
             if heading not in report_text:
                 failures.append(f"Report missing required section: {heading}")
+
+        # DOC-CH7-001: Check for unexpected C0 control characters (reject all except TAB, LF, CR)
+        bad_controls = re.findall(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", report_text)
+        if bad_controls:
+            failures.append(f"DOC-CH7-001: Chapter 7 report contains {len(bad_controls)} unexpected control characters")
+
+        # SRC-CH7-003: Deterministic report-table consistency guard against slide_coverage SSOT
+        report_table_errs = check_report_table_consistency(report_text, EXPECTED_RANGES)
+        failures.extend(report_table_errs)
 
     if failures:
         print("CHAPTER 7 SOURCE MAP: FAIL")

@@ -9,6 +9,7 @@
 
 - **Starting Remote HEAD:** `1855fd7c8958ba18b99db3de3092cd96c3ff6b3a`
 - **Recheck Repair Starting HEAD:** `048c2af10a2ebaa36df064e847eb33178069eaed`
+- **Report Closeout Starting HEAD:** `f06fd3e7c99ad916c228b61ad7fa34fadbe719da`
 - **Locked Base:** Chapters 1–6 are fully locked, verified, and passing all regression gates.
 - **Scope Directives:** Source mapping, physical evidence discovery, and provenance resolution only. Zero Chapter 7 authoring. Chapters 1–6 academic content completely untouched.
 
@@ -85,7 +86,7 @@ So sánh đối chiếu toàn diện 72 trang vật lý giữa `#Week09-Chapter7
 
 1. **Cấu trúc slide và nội dung học thuật:**
    - 72/72 trang có cấu trúc đề mục, sơ đồ, bảng biểu và số liệu hoàn toàn tương đồng.
-   - Trình tự các phần 7.1 $	o$ 7.7 và 5 bài tập cuối chương hoàn toàn khớp nhau.
+   - Trình tự các phần 7.1 $\to$ 7.7 và 5 bài tập cuối chương hoàn toàn khớp nhau.
 2. **Khác biệt văn bản (Text extraction diff):**
    - Khác biệt xuất hiện tại 11 trang: Trang 1, 18, 19, 22, 53, 58, 60, 61, 68, 69, 70.
    - Toàn bộ 11 điểm khác biệt đều là **lỗi dính từ / lỗi kerning khoảng trắng** trong bản xuất sớm (Week 12).
@@ -122,7 +123,7 @@ Khảo sát tệp tài liệu câu hỏi ôn tập Chương 7 phát hiện hai b
 | **Dung lượng** | 23,960 bytes | 22,871 bytes |
 | **Mã băm SHA-256** | `5b03f4e0691855f38d43872f79ba61a21378fea3ec5ee2551be5321a29b88e40` | `f8e523d10b0c75a18f5551f3f1f59c5827830ec56c095e92d68e4bfb50ec0b77` |
 | **Đoạn thân văn bản** | 88 đoạn thân (84 phi rỗng) | 85 đoạn thân (80 phi rỗng) |
-| **Số bảng biểu** | 1 bảng (6 dòng $	imes$ 2 cột = 12 đoạn ô) | 1 bảng (6 dòng $	imes$ 2 cột = 12 đoạn ô) |
+| **Số bảng biểu** | 1 bảng (6 dòng $\times$ 2 cột = 12 đoạn ô) | 1 bảng (6 dòng $\times$ 2 cột = 12 đoạn ô) |
 | **Tổng nút XML w:p** | 100 nút (96 phi rỗng) | 97 nút (92 phi rỗng) |
 | **Tình trạng văn bản** | **Đầy đủ 20 câu hỏi** (9 lý thuyết + 11 bài tập) | Bị cắt ngắn ở đoạn 80, thiếu bài 19 và 20 |
 
@@ -150,14 +151,14 @@ Bộ bài tập Chương 7 chính thức bao gồm chính xác **20 đơn vị n
 ### B. Bài tập Tự luận & Tính toán (11 đơn vị):
 10. **`QBANK-CH07-10`** (P12–P55): Bài tập mẫu 1 về cấp phát bộ nhớ phân vùng cố định và phân vùng động cho 4 tiến trình (212K, 417K, 112K, 426K) vào 4 phân vùng (600K, 500K, 200K, 300K) theo 4 thuật toán First fit, Best fit, Next fit, Worst fit.
 11. **`QBANK-CH07-11`** (P56–P61): Bài tập mẫu 2 về không gian địa chỉ ảo 12 trang (kích thước trang 2K), ánh xạ vào bộ nhớ vật lý 32 khung trang; xác định số bit của địa chỉ logic và địa chỉ vật lý.
-12. **`QBANK-CH07-12`** (P62–P67): Bài tập mẫu 3 về hệ thống phân trang có bảng trang trong RAM; tính thời gian truy xuất phân trang thông thường ($2 	imes 200	ext{ns} = 400	ext{ns}$) và tính EAT với TLB hit-ratio 75% (thời gian tra TLB xem như bằng 0).
+12. **`QBANK-CH07-12`** (P62–P67): Bài tập mẫu 3 về hệ thống phân trang có bảng trang trong RAM; tính thời gian truy xuất phân trang thông thường ($2 \times 200\text{ns} = 400\text{ns}$) và tính EAT với TLB hit-ratio 75% (thời gian tra TLB xem như bằng 0).
 13. **`QBANK-CH07-13`** (P68): Bài tập 4 về máy tính địa chỉ 32-bit dùng bảng trang 2 cấp (9 bit cấp 1, 11 bit cấp 2, còn lại offset); tính kích thước trang và tổng số trang ảo.
 14. **`QBANK-CH07-14`** (P69): Bài tập 5 về địa chỉ ảo 32-bit phân tách thành 4 trường $a, b, c, d$ (3 cấp bảng trang và offset); phân tích ảnh hưởng của các trường đến số lượng trang ảo.
 15. **`QBANK-CH07-15`** (P70–P75): Bài tập mẫu 6 chuyển đổi địa chỉ vật lý 6568 sang địa chỉ ảo (với frame 1KB) và địa chỉ ảo 3254 sang địa chỉ vật lý (với frame 2KB) dựa trên bảng phân trang mẫu.
 16. **`QBANK-CH07-16`** (P76–P78): Bài tập 7 tính thời gian truy xuất thông thường và thời gian truy xuất hiệu dụng (EAT) với truy xuất bộ nhớ 124ns, TLB hit-ratio 95%, thời gian tìm TLB 34ns.
 17. **`QBANK-CH07-17`** (P79): Bài tập 8 tính ngược thời gian truy xuất bộ nhớ bình thường khi biết EAT = 175ns, TLB hit-ratio 87% và thời gian tra cứu TLB 24ns.
-18. **`QBANK-CH07-18`** (P80): Bài tập 9 tính xác suất tìm thấy trong TLB (hit-ratio $lpha$) khi biết thời gian truy xuất bình thường 250ns, tìm kiếm TLB 26ns và EAT = 182ns.
-19. **`QBANK-CH07-19`** (P81–P82): Bài tập mẫu 10 tính dung lượng bảng phân trang cho bộ vi xử lý không gian ảo 32-bit có $2^{19}$ mục, kích thước mỗi mục là 8 bit ($512	ext{ KB}$).
+18. **`QBANK-CH07-18`** (P80): Bài tập 9 tính xác suất tìm thấy trong TLB (hit-ratio $\alpha$) khi biết thời gian truy xuất bình thường 250ns, tìm kiếm TLB 26ns và EAT = 182ns.
+19. **`QBANK-CH07-19`** (P81–P82): Bài tập mẫu 10 tính dung lượng bảng phân trang cho bộ vi xử lý không gian ảo 32-bit có $2^{19}$ mục, kích thước mỗi mục là 8 bit ($512\text{ KB}$).
 20. **`QBANK-CH07-20`** (P83–P88): Bài tập mẫu 11 tính số bit tối thiểu cho mỗi mục bảng trang (6 bit cho 64 khung) và tổng số mục (45 mục cho 45 trang) trong không gian ảo có 45 trang 2048 bytes.
 
 ---
@@ -187,7 +188,7 @@ Toàn bộ 19 phân đoạn ngữ nghĩa liên tục, không khe hở, không ch
 | 16 | `63-65` | 3 | CONTENT | 7.6 Cơ chế hoán vị (Swapping): hoán vị tiến trình giữa RAM và backing store, chi phí context switch | `ch07-memory-management.md#5-swapping` | `NOT_WRITTEN` |
 | 17 | `66` | 1 | CONTENT | Tóm tắt nội dung cốt lõi Chương 7 | `ch07-memory-management.md#5-swapping` | `NOT_WRITTEN` |
 | 18 | `67-71` | 5 | CONTENT | 7.7 Bài tập slide (Bài 1–5): phân vùng liên tục, tính số bit địa chỉ logic/vật lý, tính EAT, bảng trang 2 cấp và 3 cấp | `ch07-memory-management.md#6-bai-tap-slide` | `NOT_WRITTEN` |
-| 19 | `72` | 1 | CONTENT | Thảo luận và kết thúc buổi học | `None (Meta)` | `NOT_WRITTEN` |
+| 19 | `72` | 1 | NON_CONTENT | Thảo luận và kết thúc buổi học | `None (Meta)` | `NOT_WRITTEN` |
 
 ---
 
@@ -243,22 +244,28 @@ Toàn bộ 19 phân đoạn ngữ nghĩa liên tục, không khe hở, không ch
 ## 14. SOURCE FINDINGS
 
 ### BLOCKERS: 0 OPEN (1 RESOLVED)
-- **`SRC-CH7-001 — BLOCKER — OPEN $	o$ RESOLVED`**:
+- **`SRC-CH7-001 — BLOCKER — OPEN $\to$ RESOLVED`**:
   - *Vấn đề:* Sổ đăng ký ban đầu ghi nhận `Week12-Chapter7 2024.pdf` làm nguồn chính ngạch, mâu thuẫn trực tiếp với Đề cương chính thức 2024–2025 quy định Chương 7 tại Buổi 9 học qua `slide week 9`.
   - *Giải quyết:* Phát hiện bản nhị phân chuẩn `#Week09-Chapter7 2024.pdf` (7,462,286 bytes, SHA-256 `86e6260c...`) trong gói học liệu chính khóa 20240912. Đối chiếu toàn diện chứng minh bản Week 09 là bản hoàn thiện khắc phục các lỗi font của bản Week 12 và khớp chuẩn Đề cương. Đã thăng hạng `#Week09-Chapter7 2024.pdf` thành `UIT-SLIDE-CH07-2024` và lưu giữ bản Week 12 thành biến thể lịch sử bất biến.
 
-### MAJORS: 0 OPEN (3 RESOLVED)
-- **`PROV-CH7-001 — MAJOR — OPEN $	o$ RESOLVED`**:
+### MAJORS: 0 OPEN (4 RESOLVED)
+- **`PROV-CH7-001 — MAJOR — OPEN $\to$ RESOLVED`**:
   - *Vấn đề:* Sổ đăng ký ban đầu phân loại hai biến thể học liệu chính thức của UIT (`UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72` và `UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P`) là Tier B, vi phạm quy ước hệ thống (học liệu chính thức UIT luôn thuộc Tier A, phân biệt tính phi chuẩn qua `type: source_variant` và `status: VERIFIED_LOCAL_VARIANT`).
   - *Giải quyết:* Đã chuẩn hóa phân loại của hai biến thể về đúng `tier: "A"` với `type: "source_variant"`.
-- **`SRC-CH7-002 — MAJOR — OPEN $	o$ RESOLVED`**:
+- **`SRC-CH7-002 — MAJOR — OPEN $\to$ RESOLVED`**:
   - *Vấn đề:* Bất đồng nhất giữa số lượng 88 đoạn văn bản và 100 nút XML w:p trong tài liệu câu hỏi ôn tập Chương 7.
-  - *Giải quyết:* Phân tách và định danh tường minh toàn bộ các chỉ số đo lường: 88 đoạn thân văn bản (84 phi rỗng), 1 bảng 6 dòng $	imes$ 2 cột (12 ô / 12 đoạn ô phi rỗng), tổng cộng 100 nút XML `<w:p>` (96 phi rỗng). Cập nhật đồng bộ sổ đăng ký, sổ nguồn và bộ kiểm định.
-- **`ENG-CH7-001 — MAJOR — OPEN $	o$ RESOLVED`**:
+  - *Giải quyết:* Phân tách và định danh tường minh toàn bộ các chỉ số đo lường: 88 đoạn thân văn bản (84 phi rỗng), 1 bảng 6 dòng $\times$ 2 cột (12 ô / 12 đoạn ô phi rỗng), tổng cộng 100 nút XML `<w:p>` (96 phi rỗng). Cập nhật đồng bộ sổ đăng ký, sổ nguồn và bộ kiểm định.
+- **`ENG-CH7-001 — MAJOR — OPEN $\to$ RESOLVED`**:
   - *Vấn đề:* Trình tìm kiếm `find_file` trong chế độ Evidence Mode chỉ trả về tệp đầu tiên tìm thấy, không thể xử lý độc lập thứ tự duyệt khi kho lưu trữ có hai tệp trùng tên `Bai tap chuong 7 HDH.docx`.
   - *Giải quyết:* Thay thế bằng `find_all_files` kết hợp `resolve_candidate_by_hash`, đảm bảo nhận diện chính xác bản canonical (23,960 B / `5b03f4e0...`) và bản variant (22,871 B / `f8e523d1...`) bất kể thứ tự duyệt hệ thống tệp.
+- **`SRC-CH7-003 — MAJOR — OPEN $\to$ RESOLVED`**:
+  - *Lý do (Reason):* Bảng phân bổ trang trong báo cáo (Mục 10) ghi nhận dòng 19 (trang 72: Thảo luận và kết thúc buổi học) là CONTENT, mâu thuẫn trực tiếp với nguồn chân lý cấu trúc (SSOT) `research/data/slide_coverage.yaml` vốn phân loại trang 72 là NON_CONTENT (`None (Meta)` / `NOT_WRITTEN`).
+  - *Khắc phục (Resolution):* Sửa dòng 19 trong bảng báo cáo từ CONTENT sang NON_CONTENT; bổ sung bộ kiểm định đối soát tự động `check_report_consistency` trong `scripts/validate_ch07_source_map.py` ngăn ngừa mọi nguy cơ trôi lệch (drift) giữa báo cáo tường thuật và SSOT cấu trúc. Tổng số trang trên báo cáo khớp tuyệt đối: 67 CONTENT + 5 NON_CONTENT = 72 trang vật lý.
 
-### MINORS: 0 OPEN
+### MINORS: 0 OPEN (1 RESOLVED)
+- **`DOC-CH7-001 — MINOR — OPEN $\to$ RESOLVED`**:
+  - *Lý do (Reason):* Ký tự điều khiển ẩn BEL (`\x07`) làm sai lệch ký hiệu toán học LaTeX `\alpha` thành `$ lpha$` trong phần mô tả `QBANK-CH07-18`.
+  - *Khắc phục (Resolution):* Thay thế bằng mã LaTeX chuẩn xác `$\alpha$` và bổ sung chốt chặn kiểm tra ký tự điều khiển C0 trong `scripts/validate_ch07_source_map.py`.
 
 ---
 
@@ -267,7 +274,7 @@ Toàn bộ 19 phân đoạn ngữ nghĩa liên tục, không khe hở, không ch
 Đã thực thi toàn bộ hệ thống kiểm tra tự động và các cổng chất lượng:
 - `python scripts/generate_registry.py --check` $\implies$ **PASS** (74 nguồn đã đăng ký, 0 drift).
 - `python scripts/validate_sources.py` $\implies$ **PASS** (74 nguồn, 60 tham chiếu nội dung hợp lệ).
-- `python scripts/validate_ch07_source_map.py` $\implies$ **PASS** (Cả chế độ REPOSITORY MODE và EVIDENCE MODE với multi-candidate discovery).
+- `python scripts/validate_ch07_source_map.py` $\implies$ **PASS** (Cả chế độ REPOSITORY MODE và EVIDENCE MODE với multi-candidate discovery và report consistency guard).
 - `python scripts/validate_ch06_source_map.py` & `validate_ch06_content.py` $\implies$ **PASS**.
 - `python scripts/validate_ch05_source_map.py` & `validate_ch05_content.py` $\implies$ **PASS**.
 - `python scripts/validate_batch1_canonical.py` & `check_batch1_numeric.py` $\implies$ **PASS**.
@@ -295,7 +302,7 @@ $$\mathbf{CH7\ SOURCE\ MAPPING:\ PASS\ —\ READY\ FOR\ FINAL\ INDEPENDENT\ CHEC
 
 ## 17. INDEPENDENT RECHECK REPAIR
 
-Phần này ghi nhận chi tiết quá trình xử lý 3 phát hiện độc lập tại vòng tái kiểm tra (Independent Recheck):
+Phần này ghi nhận chi tiết quá trình xử lý các phát hiện độc lập tại vòng tái kiểm tra (Independent Recheck Closeout):
 
 ### 17.1. PROV-CH7-001 — Chuẩn hóa cấp độ nguồn biến thể (Official Variant Tier Semantics)
 - **Bản chất vấn đề:** `UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72` và `UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P` ban đầu bị gắn nhãn `tier: "B"`. Quy ước hệ thống của kho lưu trữ xác định rằng toàn bộ các tài liệu có nguồn gốc chính quy từ Trường ĐH Công nghệ Thông tin (kể cả bản xuất cũ từ học kỳ trước hay bản Drive tải về) đều mang thẩm quyền xuất xứ Tier A. Tính chất phi chuẩn (non-canonical) được kiểm soát nghiêm ngặt qua:
@@ -331,3 +338,15 @@ Phần này ghi nhận chi tiết quá trình xử lý 3 phát hiện độc l�
   - Triển khai `resolve_candidate_by_hash(candidates, expected_sha, expected_bytes, label)`: băm SHA-256 từng ứng viên và lọc theo mã băm chuẩn của bản canonical, xác nhận tính duy nhất (duy nhất 1 tệp khớp mã băm chuẩn).
   - Tự động nhận diện và thẩm định cấu trúc của bản biến thể `f8e523d1...` khi tệp này xuất hiện trong cây thư mục.
   - Ngăn chặn và báo lỗi nếu xuất hiện bất kỳ tệp trùng tên nào khác có mã băm không nằm trong danh mục đã đăng ký.
+
+### 17.4. SRC-CH7-003 — Khắc phục trôi lệch phân loại trang trên báo cáo (Report Coverage Classification Drift)
+- **Bản chất vấn đề:** Tại bảng dải trang Mục 10 của báo cáo nguồn, dòng 19 (trang 72: Thảo luận và kết thúc buổi học) vô tình ghi phân loại là CONTENT, trong khi nguồn chân lý cấu trúc `slide_coverage.yaml` phân loại chuẩn xác là NON_CONTENT (`None (Meta)` / `NOT_WRITTEN`). Mặc dù tổng số trang ở phần giới thiệu ghi 67 CONTENT + 5 NON_CONTENT = 72 trang, sự sai khác ở dòng 19 gây ra mâu thuẫn nội tại giữa bảng biểu tường thuật và SSOT.
+- **Khắc phục:**
+  - Chuẩn hóa dòng 19 của bảng trong báo cáo thành `NON_CONTENT`.
+  - Bổ sung hàm kiểm định `check_report_consistency` trong `scripts/validate_ch07_source_map.py` tự động phân tích cú pháp bảng Markdown tại Mục 10, đối chiếu từng dòng trong 19 dòng với `slide_coverage.yaml` và kiểm tra phép cộng toán học ($67 + 5 = 72$).
+
+### 17.5. DOC-CH7-001 — Loại bỏ ký tự điều khiển ẩn và bổ sung chốt chặn kiểm tra (Remove Hidden Control Characters)
+- **Bản chất vấn đề:** Tại mục mô tả câu hỏi `QBANK-CH07-18`, ký tự điều khiển ẩn BEL (`\x07`) phát sinh do lỗi escape chuỗi Python trong quá trình khởi tạo báo cáo, khiến chuỗi LaTeX hiển thị thành `$ lpha$`.
+- **Khắc phục:**
+  - Sửa chuỗi LaTeX thành `$\alpha$`.
+  - Tích hợp chốt chặn kiểm tra ký tự điều khiển bất thường `[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]` vào bộ kiểm định `scripts/validate_ch07_source_map.py` để bảo đảm độ sạch và tính toàn vẹn 100% của tệp báo cáo.
