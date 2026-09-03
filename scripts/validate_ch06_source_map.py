@@ -253,6 +253,16 @@ def main() -> int:
     if not deck or deck.get("physical_pages") != SLIDE_PAGES:
         failures.append("Chapter 6 coverage deck missing or page count is not 67")
     else:
+        # SSOT Assertion (SRC-CH6-010): Coverage identity must strictly match canonical registry identity
+        canonical_filename = slide.get("exact_filename") if slide else "#Week08-Chapter6 2024.pdf"
+        canonical_pages = slide.get("page_count") if slide else SLIDE_PAGES
+        if deck.get("exact_filename") != canonical_filename:
+            failures.append(f"Chapter 6 coverage filename mismatch (SSOT error): coverage has '{deck.get('exact_filename')}', expected canonical registry filename '{canonical_filename}'")
+        if deck.get("exact_filename") != "#Week08-Chapter6 2024.pdf":
+            failures.append(f"Chapter 6 coverage filename must be '#Week08-Chapter6 2024.pdf', found '{deck.get('exact_filename')}'")
+        if deck.get("physical_pages") != canonical_pages:
+            failures.append(f"Chapter 6 coverage physical_pages mismatch: coverage has {deck.get('physical_pages')}, registry has {canonical_pages}")
+
         sections = deck.get("sections", [])
         signature = [(str(s.get("page_range")), s.get("classification")) for s in sections]
         if signature != EXPECTED_RANGES:
@@ -347,7 +357,7 @@ def main() -> int:
             failures.append(f"source-map report missing section: {heading}")
 
     # Verify report records all resolved findings
-    for find_id in ["SRC-CH6-005", "SRC-CH6-006", "SRC-CH6-007", "SRC-CH6-008", "SRC-CH6-009", "ENG-CH6-001"]:
+    for find_id in ["SRC-CH6-005", "SRC-CH6-006", "SRC-CH6-007", "SRC-CH6-008", "SRC-CH6-009", "SRC-CH6-010", "ENG-CH6-001"]:
         if find_id not in report_text:
             failures.append(f"source-map report missing finding: {find_id}")
 
@@ -360,6 +370,7 @@ def main() -> int:
     print("CHAPTER 6 SOURCE MAP: PASS")
     print("  [OK] Canonical 2024 outline (IT007_HeDieuHanh_14.2024.pdf, 418KB) & 2023 variant separated")
     print("  [OK] Canonical slide: #Week08-Chapter6 2024.pdf (67 pages / 6,008,743 bytes / SHA verified) promoted over Week11 variant")
+    print("  [OK] Coverage SSOT: exact_filename matches canonical registry (#Week08-Chapter6 2024.pdf)")
     print("  [OK] Canonical blank QBank: 15 source units (8 theory + 7 exercises) / 101,550 bytes / SHA verified")
     print("  [OK] Student variants (Bai-tap-chuong-6-HDH.docx & 23521551 PDF) classified as student_submission (Tier B)")
     print("  [OK] Coverage: 63 CONTENT + 4 NON_CONTENT = 67 pages, gap-free, all NOT_WRITTEN")

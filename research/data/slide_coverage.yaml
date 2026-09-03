@@ -767,7 +767,7 @@ decks:
         content_status: "NOT_WRITTEN"
 
   - source_id: "UIT-SLIDE-CH06-2024"
-    exact_filename: "Week11-Chapter6 2024.pdf"
+    exact_filename: "#Week08-Chapter6 2024.pdf"
     title: "Chương 6: Bế tắc (Deadlock)"
     physical_pages: 67
     sections:

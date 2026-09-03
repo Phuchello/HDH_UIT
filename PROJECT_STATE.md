@@ -7,7 +7,7 @@
 **Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `MAPPED — PENDING FINAL INDEPENDENT CHECK`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `NOT_STARTED`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — SRC-CH6-009 & ENG-CH6-001 resolved; ready for exact-head GitHub Actions check.  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `YES` — SRC-CH6-009, SRC-CH6-010 & ENG-CH6-001 resolved; ready for exact-head GitHub Actions check.  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5`  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5`  
 **Hành động tiếp theo chính xác (Exact Next Action):** Push repair and verify exact-head GitHub Actions before authoring.  

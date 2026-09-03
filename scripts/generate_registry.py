@@ -251,14 +251,27 @@ sources = [
         'id': 'UIT-SLIDE-CH06-2024',
         'tier': 'A',
         'type': 'official_slide',
-        'title': 'Slide Bài giảng Tuần 11 - Chương 6: Bế tắc (Deadlock)',
+        'title': 'Slide Bài giảng Tuần 8 - Chương 6: Bế tắc (Deadlock)',
+        'exact_filename': '#Week08-Chapter6 2024.pdf',
+        'path': os.path.join(slides_dir, '#Week08-Chapter6 2024.pdf'),
+        'year': '2024',
+        'author': 'Trần Hoàng Lộc;Nguyễn Thanh Thiện',
+        'public_url': 'https://courses.uit.edu.vn',
+        'status': 'USER_ATTACHMENT_VERIFIED',
+        'notes': 'Slide chính thức Tuần 8 (67 trang), khớp hoàn toàn với đề cương 2024.'
+    },
+    {
+        'id': 'UIT-SLIDE-CH06-2024-VARIANT-WEEK11-5MB',
+        'tier': 'A',
+        'type': 'source_variant',
+        'title': 'Slide Bài giảng Chương 6: Bế tắc — Biến thể Week11 (Week11-Chapter6 2024.pdf)',
         'exact_filename': 'Week11-Chapter6 2024.pdf',
         'path': os.path.join(slides_dir, 'Week11-Chapter6 2024.pdf'),
         'year': '2024',
-        'author': 'Khoa Kỹ thuật Máy tính - UIT',
+        'author': 'Trần Hoàng Lộc;Nguyễn Thanh Thiện',
         'public_url': 'https://courses.uit.edu.vn',
-        'status': 'VERIFIED_LOCAL',
-        'notes': 'Slide chính thức Chương 6 (67 trang).'
+        'status': 'VERIFIED_LOCAL_VARIANT',
+        'notes': 'Tệp slide 67 trang xuất ngày 2024-02-15 với ký hiệu Tuần 11 từ học kỳ trước; biến thể nội dung tương đương.'
     },
     {
         'id': 'UIT-SLIDE-CH07-2024',

@@ -277,6 +277,9 @@ All 15 units are cataloged in `research/data/official_review_questions.yaml` as 
   - Fix: Hardened validator to inspect committed git history between the locked Chapter 5 baseline commit `06e4b34ef14d60398e462e437470bb6a37157996` and `HEAD` (`git diff --name-only 06e4b34..HEAD --`), strictly filtering for locked paths (`content/theory/ch01*..ch05*`, `content/questions/subjective/ch01*..ch05*`, `content/reviews/midterm*`).
   - Added `fetch-depth: 0` to `.github/workflows/validate.yml` to guarantee complete commit history is available in CI.
   - Verification: `git diff --name-only 06e4b34..HEAD` contains ZERO modified files under Chapters 1–5.
+- `SRC-CH6-010` — **RESOLVED (MAJOR)**: Canonical coverage identity SSOT sync:
+  - Reason: Canonical source promotion (Week11 -> Week08) in `SRC-CH6-009` updated `content/sources/registry.yaml` and the report, but left `research/data/slide_coverage.yaml` exact_filename pointing at the demoted `Week11-Chapter6 2024.pdf` variant.
+  - Resolution: Synchronized `research/data/slide_coverage.yaml` under `UIT-SLIDE-CH06-2024` to `#Week08-Chapter6 2024.pdf`. Hardened `scripts/validate_ch06_source_map.py` to assert strict SSOT equality between `slide_coverage.yaml` and `registry.yaml` (`coverage.exact_filename == registry[SLIDE_ID].exact_filename` and `coverage.physical_pages == registry[SLIDE_ID].page_count`).
 
 **OPEN SOURCE BLOCKERS:** `0`  
 **OPEN SOURCE MAJORS:** `0`  
