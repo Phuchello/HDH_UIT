@@ -8,6 +8,7 @@
 ## 1. STARTING HEAD
 
 - **Starting Remote HEAD:** `1855fd7c8958ba18b99db3de3092cd96c3ff6b3a`
+- **Recheck Repair Starting HEAD:** `048c2af10a2ebaa36df064e847eb33178069eaed`
 - **Locked Base:** Chapters 1–6 are fully locked, verified, and passing all regression gates.
 - **Scope Directives:** Source mapping, physical evidence discovery, and provenance resolution only. Zero Chapter 7 authoring. Chapters 1–6 academic content completely untouched.
 
@@ -105,9 +106,9 @@ So sánh đối chiếu toàn diện 72 trang vật lý giữa `#Week09-Chapter7
   - **`UIT-SLIDE-CH07-2024`** được chuyển đổi và xác lập chính thức cho:
     `#Week09-Chapter7 2024.pdf` (7,462,286 bytes, SHA-256 `86e6260cdc2fd1461277434fa74ee0a325c945ba9cb5d1b0d4ba46a76045c5a9`).
   - **Lý do:** Khớp chuẩn chỉ định `slide week 9` của Đề cương 2024–2025; là bản xuất hoàn thiện mới nhất khắc phục triệt để lỗi dính từ của bản xuất cũ.
-- **Biến thể lưu trữ:**
+- **Biến thể lưu trữ (PROV-CH7-001):**
   - `Week12-Chapter7 2024.pdf` được đăng ký dưới dạng biến thể lịch sử bất biến:
-    `UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72` (Tier B, role `source_variant`).
+    `UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72` (`tier: "A"`, `type: "source_variant"`, `status: "VERIFIED_LOCAL_VARIANT"`).
 
 ---
 
@@ -120,14 +121,14 @@ Khảo sát tệp tài liệu câu hỏi ôn tập Chương 7 phát hiện hai b
 | **Tên tệp** | `Bai tap chuong 7 HDH.docx` | `Bai tap chuong 7 HDH.docx` |
 | **Dung lượng** | 23,960 bytes | 22,871 bytes |
 | **Mã băm SHA-256** | `5b03f4e0691855f38d43872f79ba61a21378fea3ec5ee2551be5321a29b88e40` | `f8e523d10b0c75a18f5551f3f1f59c5827830ec56c095e92d68e4bfb50ec0b77` |
-| **Đoạn XML tổng** | 88 đoạn | 85 đoạn |
-| **Đoạn phi rỗng** | 84 đoạn | 80 đoạn |
-| **Số bảng biểu** | 1 bảng (Bảng phân trang 6 dòng) | 1 bảng |
+| **Đoạn thân văn bản** | 88 đoạn thân (84 phi rỗng) | 85 đoạn thân (80 phi rỗng) |
+| **Số bảng biểu** | 1 bảng (6 dòng $	imes$ 2 cột = 12 đoạn ô) | 1 bảng (6 dòng $	imes$ 2 cột = 12 đoạn ô) |
+| **Tổng nút XML w:p** | 100 nút (96 phi rỗng) | 97 nút (92 phi rỗng) |
 | **Tình trạng văn bản** | **Đầy đủ 20 câu hỏi** (9 lý thuyết + 11 bài tập) | Bị cắt ngắn ở đoạn 80, thiếu bài 19 và 20 |
 
 - **Xác lập quyền thẩm quyền QBank:**
   - `UIT-QBANK-CH07-2024` được gắn định danh bất biến với bản đầy đủ 23,960 bytes (SHA-256 `5b03f4e0...`).
-  - Bản Drive cũ bị thiếu nội dung được phân loại thành biến thể `UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P`.
+  - Bản Drive cũ bị thiếu nội dung được phân loại thành biến thể `UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P` (`tier: "A"`, `type: "source_variant"`, `status: "VERIFIED_LOCAL_VARIANT"`).
 
 ---
 
@@ -230,11 +231,11 @@ Toàn bộ 19 phân đoạn ngữ nghĩa liên tục, không khe hở, không ch
 
 1. **`UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72`**:
    - Tệp tin: `Week12-Chapter7 2024.pdf` (7,459,415 bytes, 72 trang, SHA-256 `4b622457...`).
-   - Phân loại: `Tier B` / `source_variant`.
+   - Phân loại: `Tier A` / `source_variant` / `VERIFIED_LOCAL_VARIANT` (PROV-CH7-001).
    - Ghi chú: Bản xuất sớm tháng 2/2024 mang tên Week 12 từ học kỳ cũ; mắc lỗi kerning/dính khoảng trắng tại 11 trang.
 2. **`UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P`**:
-   - Tệp tin: `Bai tap chuong 7 HDH.docx` (22,871 bytes, 85 đoạn XML, SHA-256 `f8e523d1...`).
-   - Phân loại: `Tier B` / `source_variant`.
+   - Tệp tin: `Bai tap chuong 7 HDH.docx` (22,871 bytes; 85 đoạn thân / 80 phi rỗng; 1 bảng 6x2 gồm 12 đoạn ô; 97 nút XML w:p / 92 phi rỗng, SHA-256 `f8e523d1...`).
+   - Phân loại: `Tier A` / `source_variant` / `VERIFIED_LOCAL_VARIANT` (PROV-CH7-001).
    - Ghi chú: Bản tải từ Drive bị cắt ngắn ở đoạn 80 (thiếu 2 bài tập mẫu tính kích thước và số mục bảng trang).
 
 ---
@@ -246,10 +247,16 @@ Toàn bộ 19 phân đoạn ngữ nghĩa liên tục, không khe hở, không ch
   - *Vấn đề:* Sổ đăng ký ban đầu ghi nhận `Week12-Chapter7 2024.pdf` làm nguồn chính ngạch, mâu thuẫn trực tiếp với Đề cương chính thức 2024–2025 quy định Chương 7 tại Buổi 9 học qua `slide week 9`.
   - *Giải quyết:* Phát hiện bản nhị phân chuẩn `#Week09-Chapter7 2024.pdf` (7,462,286 bytes, SHA-256 `86e6260c...`) trong gói học liệu chính khóa 20240912. Đối chiếu toàn diện chứng minh bản Week 09 là bản hoàn thiện khắc phục các lỗi font của bản Week 12 và khớp chuẩn Đề cương. Đã thăng hạng `#Week09-Chapter7 2024.pdf` thành `UIT-SLIDE-CH07-2024` và lưu giữ bản Week 12 thành biến thể lịch sử bất biến.
 
-### MAJORS: 0 OPEN (1 RESOLVED)
+### MAJORS: 0 OPEN (3 RESOLVED)
+- **`PROV-CH7-001 — MAJOR — OPEN $	o$ RESOLVED`**:
+  - *Vấn đề:* Sổ đăng ký ban đầu phân loại hai biến thể học liệu chính thức của UIT (`UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72` và `UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P`) là Tier B, vi phạm quy ước hệ thống (học liệu chính thức UIT luôn thuộc Tier A, phân biệt tính phi chuẩn qua `type: source_variant` và `status: VERIFIED_LOCAL_VARIANT`).
+  - *Giải quyết:* Đã chuẩn hóa phân loại của hai biến thể về đúng `tier: "A"` với `type: "source_variant"`.
 - **`SRC-CH7-002 — MAJOR — OPEN $	o$ RESOLVED`**:
-  - *Vấn đề:* Sổ đăng ký cũ chỉ ghi nhận 6 đơn vị câu hỏi thô sơ và liên kết với bản DOCX 22,871 bytes (bị cắt cụt ở đoạn 80).
-  - *Giải quyết:* Khảo sát bản DOCX chính khóa đầy đủ 23,960 bytes (SHA-256 `5b03f4e0...`) phát hiện chính xác 20 đơn vị nguồn nguyên tử (9 lý thuyết + 11 bài tập). Đã mở rộng bảng dữ liệu `official_review_questions.yaml` đầy đủ 20 đơn vị và cập nhật sổ đăng ký bất biến.
+  - *Vấn đề:* Bất đồng nhất giữa số lượng 88 đoạn văn bản và 100 nút XML w:p trong tài liệu câu hỏi ôn tập Chương 7.
+  - *Giải quyết:* Phân tách và định danh tường minh toàn bộ các chỉ số đo lường: 88 đoạn thân văn bản (84 phi rỗng), 1 bảng 6 dòng $	imes$ 2 cột (12 ô / 12 đoạn ô phi rỗng), tổng cộng 100 nút XML `<w:p>` (96 phi rỗng). Cập nhật đồng bộ sổ đăng ký, sổ nguồn và bộ kiểm định.
+- **`ENG-CH7-001 — MAJOR — OPEN $	o$ RESOLVED`**:
+  - *Vấn đề:* Trình tìm kiếm `find_file` trong chế độ Evidence Mode chỉ trả về tệp đầu tiên tìm thấy, không thể xử lý độc lập thứ tự duyệt khi kho lưu trữ có hai tệp trùng tên `Bai tap chuong 7 HDH.docx`.
+  - *Giải quyết:* Thay thế bằng `find_all_files` kết hợp `resolve_candidate_by_hash`, đảm bảo nhận diện chính xác bản canonical (23,960 B / `5b03f4e0...`) và bản variant (22,871 B / `f8e523d1...`) bất kể thứ tự duyệt hệ thống tệp.
 
 ### MINORS: 0 OPEN
 
@@ -260,26 +267,67 @@ Toàn bộ 19 phân đoạn ngữ nghĩa liên tục, không khe hở, không ch
 Đã thực thi toàn bộ hệ thống kiểm tra tự động và các cổng chất lượng:
 - `python scripts/generate_registry.py --check` $\implies$ **PASS** (74 nguồn đã đăng ký, 0 drift).
 - `python scripts/validate_sources.py` $\implies$ **PASS** (74 nguồn, 60 tham chiếu nội dung hợp lệ).
-- `python scripts/validate_ch07_source_map.py` $\implies$ **PASS** (Cả chế độ REPOSITORY MODE và EVIDENCE MODE).
+- `python scripts/validate_ch07_source_map.py` $\implies$ **PASS** (Cả chế độ REPOSITORY MODE và EVIDENCE MODE với multi-candidate discovery).
 - `python scripts/validate_ch06_source_map.py` & `validate_ch06_content.py` $\implies$ **PASS**.
 - `python scripts/validate_ch05_source_map.py` & `validate_ch05_content.py` $\implies$ **PASS**.
 - `python scripts/validate_batch1_canonical.py` & `check_batch1_numeric.py` $\implies$ **PASS**.
 - `python scripts/check_public_hygiene.py` $\implies$ **PASS** (100% sạch đường dẫn cục bộ).
-- `npm test` $\implies$ **PASS** (Toàn bộ 14 foundation gates đạt chuẩn).
+- `npm test` $\implies$ **PASS** (Toàn bộ 15 foundation gates đạt chuẩn).
 - `npm run web:build` $\implies$ **PASS** (Biên dịch tĩnh 18 trang thành công).
 
 ---
 
 ## 16. FINAL DECISION
 
-$$\mathbf{CH7\ SOURCE\ MAPPING:\ PASS\ —\ READY\ FOR\ INDEPENDENT\ CHECK}$$
+$$\mathbf{CH7\ SOURCE\ MAPPING:\ PASS\ —\ READY\ FOR\ FINAL\ INDEPENDENT\ CHECK}$$
 
 - **TỔNG KẾT VẤN ĐỀ TỒN ĐỌNG:**
   - **OPEN BLOCKERS:** 0
   - **OPEN MAJORS:** 0
   - **OPEN MINORS:** 0
-- **Chapter 7 Source Mapping:** `MAPPED — PENDING INDEPENDENT CHECK`
+- **Chapter 7 Source Mapping:** `MAPPED — PENDING FINAL INDEPENDENT CHECK`
 - **Chapter 7 Authoring:** `NOT_STARTED`
 - **Academic Verification:** `PASS — BATCH 1 + CH5 + CH6`
 - **Engineering Verification:** `PASS — CH5 + CH6`
-- **Hành động tiếp theo chính xác (Exact Next Action):** Independent Chapter 7 source-map verification before authoring.
+- **Hành động tiếp theo chính xác (Exact Next Action):** Final independent Chapter 7 source-map verification before authoring.
+
+---
+
+## 17. INDEPENDENT RECHECK REPAIR
+
+Phần này ghi nhận chi tiết quá trình xử lý 3 phát hiện độc lập tại vòng tái kiểm tra (Independent Recheck):
+
+### 17.1. PROV-CH7-001 — Chuẩn hóa cấp độ nguồn biến thể (Official Variant Tier Semantics)
+- **Bản chất vấn đề:** `UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72` và `UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P` ban đầu bị gắn nhãn `tier: "B"`. Quy ước hệ thống của kho lưu trữ xác định rằng toàn bộ các tài liệu có nguồn gốc chính quy từ Trường ĐH Công nghệ Thông tin (kể cả bản xuất cũ từ học kỳ trước hay bản Drive tải về) đều mang thẩm quyền xuất xứ Tier A. Tính chất phi chuẩn (non-canonical) được kiểm soát nghiêm ngặt qua:
+  - `type: "source_variant"`
+  - `status: "VERIFIED_LOCAL_VARIANT"`
+  - Hậu tố định danh `-VARIANT-`
+  - Loại trừ tuyệt đối khỏi bảng phân bổ trang học thuật (`slide_coverage.yaml`) và bảng câu hỏi (`official_review_questions.yaml`).
+- **Khắc phục:** Đã chuẩn hóa cả 2 bản ghi thành `tier: "A"`, cập nhật đồng bộ `registry.yaml`, `generate_registry.py`, `SOURCE_LEDGER.md` và `validate_ch07_source_map.py`.
+
+### 17.2. SRC-CH7-002 — Bảng đối soát chỉ số cấu trúc QBank (Paragraph Metric Reconciliation)
+Đã tái thẩm định vi mô trực tiếp trên cấu trúc nhị phân DOCX của cả hai tệp `Bai tap chuong 7 HDH.docx`:
+
+| Chỉ số cấu trúc đo lường | Bản chuẩn 2024 (`5b03f4e0...`, 23,960 B) | Biến thể Drive (`f8e523d1...`, 22,871 B) | Định nghĩa kỹ thuật & Phương pháp trích xuất |
+| :--- | :---: | :---: | :--- |
+| `body_paragraph_count` | **88** | **85** | Số đoạn văn bản thuộc thân tài liệu (`doc.paragraphs` hoặc `./w:body/w:p`) |
+| `body_nonempty_paragraph_count` | **84** | **80** | Số đoạn thân văn bản chứa nội dung hiển thị thực tế (bỏ qua rỗng) |
+| `table_count` | **1** | **1** | Số lượng bảng biểu trong tài liệu (`doc.tables` hoặc `.//w:tbl`) |
+| `table_rows` | **6** | **6** | Số hàng của bảng (`w:tr`) |
+| `table_cols` | **2** | **2** | Số cột của bảng |
+| `table_cells` | **12** | **12** | Tổng số ô trong bảng (`w:tc`) |
+| `table_cell_paragraph_count` | **12** | **12** | Số đoạn văn bản nằm trong các ô của bảng (`table.cell.paragraphs`) |
+| `table_cell_nonempty_paragraph_count` | **12** | **12** | Số đoạn văn bản phi rỗng trong các ô của bảng |
+| `xml_w_p_count` | **100** | **97** | Tổng số nút thẻ `<w:p>` trong toàn bộ tệp XML `word/document.xml` ($88 + 12 = 100$) |
+| `xml_nonempty_w_p_count` | **96** | **92** | Tổng số nút thẻ `<w:p>` phi rỗng trong toàn bộ tệp XML ($84 + 12 = 96$) |
+| `question_unit_count` | **20** | **18** | Số đơn vị câu hỏi nguyên tử (9 lý thuyết + 11 bài tập; bản Drive thiếu bài 19-20) |
+
+- **Kết luận:** Sự khác biệt giữa số 88 và 100 là do phương thức đo lường: **88 là số đoạn thân văn bản (Body Paragraphs)**, còn **100 là tổng số nút XML `<w:p>` (bao gồm cả 12 đoạn trong các ô bảng)**. Không có sự mâu thuẫn thực tế nào sau khi danh tính kỹ thuật được chuẩn hóa tường minh.
+
+### 17.3. ENG-CH7-001 — Nhận diện ứng viên trùng tên không phụ thuộc thứ tự duyệt (Duplicate-Filename Discovery)
+- **Bản chất vấn đề:** Trong kho học liệu `<verified-it007-source-corpus>`, có hai tệp tin vật lý cùng mang tên chính xác `Bai tap chuong 7 HDH.docx` (một bản 23,960 B trong thư mục chính khóa 20240912 và một bản 22,871 B trong thư mục Drive tải về). Hàm `find_file` cũ dừng lại ở tệp đầu tiên tìm thấy trên cây thư mục, dẫn đến nguy cơ sai lệch kết quả phụ thuộc vào thứ tự duyệt của hệ điều hành.
+- **Khắc phục:**
+  - Triển khai `find_all_files(directories, filename)` quét toàn bộ các cây thư mục nguồn để thu thập tất cả các ứng viên.
+  - Triển khai `resolve_candidate_by_hash(candidates, expected_sha, expected_bytes, label)`: băm SHA-256 từng ứng viên và lọc theo mã băm chuẩn của bản canonical, xác nhận tính duy nhất (duy nhất 1 tệp khớp mã băm chuẩn).
+  - Tự động nhận diện và thẩm định cấu trúc của bản biến thể `f8e523d1...` khi tệp này xuất hiện trong cây thư mục.
+  - Ngăn chặn và báo lỗi nếu xuất hiện bất kỳ tệp trùng tên nào khác có mã băm không nằm trong danh mục đã đăng ký.

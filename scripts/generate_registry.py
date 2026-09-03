@@ -109,7 +109,7 @@ CANONICAL_GROUND_TRUTH: dict[str, dict[str, str | int]] = {
         "page_count": 72,
     },
     "UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72": {
-        "tier": "B",
+        "tier": "A",
         "type": "source_variant",
         "exact_filename": "Week12-Chapter7 2024.pdf",
         "sha256": "4b622457cd5592dc83afce32f8ca5ddf1c9e9bca6defdbed36150e80f0717177",
@@ -124,7 +124,7 @@ CANONICAL_GROUND_TRUTH: dict[str, dict[str, str | int]] = {
         "byte_size": 23960,
     },
     "UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P": {
-        "tier": "B",
+        "tier": "A",
         "type": "source_variant",
         "exact_filename": "Bai tap chuong 7 HDH.docx",
         "sha256": "f8e523d10b0c75a18f5551f3f1f59c5827830ec56c095e92d68e4bfb50ec0b77",

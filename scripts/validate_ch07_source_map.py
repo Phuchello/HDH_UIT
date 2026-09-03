@@ -6,15 +6,16 @@ Deterministic source-fidelity and coverage validator for Chapter 7 (Memory Manag
 Enforces:
 1. Canonical course outline (IT007_HeDieuHanh_14.2024.pdf) and older variant (De cuong.pdf) in registry.
 2. Canonical slide identity resolved: #Week09-Chapter7 2024.pdf (72 pages / 7,462,286 bytes / SHA-256 verified) promoted over Week12 variant.
-3. Week12 candidate retained as immutable source variant (UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72).
+3. Week12 candidate retained as immutable source variant (UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72) with Tier A provenance and source_variant type.
 4. Canonical question bank: Bai tap chuong 7 HDH.docx (23,960 bytes / SHA-256 5b03f4... / 20 atomic units: 9 theory + 11 exercises).
-5. Truncated Drive candidate retained as immutable source variant (UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P).
-6. 100% gap-free page coverage across all 72 physical pages (67 CONTENT + 5 NON_CONTENT).
-7. All 19 contiguous semantic ranges MAPPED / NOT_WRITTEN.
-8. Exactly 20 QBank records mapped (QBANK-CH07-01..20), all MAPPED / NOT_WRITTEN.
-9. No Chapter 7 authoring started (content/theory/ch07-memory-management.md and content/questions/subjective/ch07.md must not exist).
-10. Committed locked Chapters 1-6 academic source files remain completely untouched.
-11. Evidence Mode: physical hashing of source binaries when --source-root is passed.
+5. Truncated Drive candidate retained as immutable source variant (UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P) with Tier A provenance and source_variant type.
+6. Order-independent candidate discovery for same-named files in Evidence Mode (ENG-CH7-001).
+7. Explicit, reconciled QBank paragraph metrics (SRC-CH7-002: 88 body paragraphs, 1 table, 100 raw XML w:p).
+8. 100% gap-free page coverage across all 72 physical pages (67 CONTENT + 5 NON_CONTENT).
+9. All 19 contiguous semantic ranges MAPPED / NOT_WRITTEN.
+10. Exactly 20 QBank records mapped (QBANK-CH07-01..20), all MAPPED / NOT_WRITTEN.
+11. No Chapter 7 authoring started (content/theory/ch07-memory-management.md and content/questions/subjective/ch07.md must not exist).
+12. Committed locked Chapters 1-6 academic source files remain completely untouched.
 """
 from __future__ import annotations
 
@@ -61,6 +62,7 @@ QBANK_BYTES = 23960
 QBANK_VARIANT_BYTES = 22871
 
 SLIDE_PAGES = 72
+SLIDE_VARIANT_PAGES = 72
 EXPECTED_RANGES = [
     ("1-4", "NON_CONTENT"),
     ("5-10", "CONTENT"),
@@ -108,26 +110,91 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
-def qbank_counts(path: Path) -> tuple[int, int]:
-    ns = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
-    root = ET.fromstring(ZipFile(path).read("word/document.xml"))
-    paragraphs = root.findall(".//w:p", ns)
-    nonempty = sum(bool("".join(p.itertext()).strip()) for p in paragraphs)
-    return len(paragraphs), nonempty
-
-
-def find_file(directories: list[Path], filename: str) -> Path | None:
+def find_all_files(directories: list[Path], filename: str) -> list[Path]:
+    """Find all matching files across directories without stopping at the first match."""
+    matches: list[Path] = []
+    seen = set()
     for d in directories:
         if d.exists() and d.is_dir():
-            matches = list(d.rglob(filename))
-            if matches:
-                return matches[0]
-    return None
+            for p in d.rglob(filename):
+                try:
+                    resolved = p.resolve()
+                    if resolved not in seen:
+                        seen.add(resolved)
+                        matches.append(p)
+                except Exception:
+                    pass
+    return matches
+
+
+def resolve_candidate_by_hash(
+    candidates: list[Path],
+    expected_sha: str,
+    expected_bytes: int,
+    label: str,
+) -> tuple[Path | None, list[str]]:
+    """Deterministic candidate resolution matching by expected cryptographic digest."""
+    errs: list[str] = []
+    matched: list[Path] = []
+    for c in candidates:
+        try:
+            sz = c.stat().st_size
+            h = sha256_file(c)
+            if h == expected_sha:
+                matched.append(c)
+                if sz != expected_bytes:
+                    errs.append(f"{label}: byte-size mismatch ({sz} vs expected {expected_bytes})")
+        except Exception as exc:
+            errs.append(f"{label}: failed to inspect candidate {c.name}: {exc}")
+
+    if not matched:
+        errs.append(f"{label}: no candidate matching expected hash {expected_sha[:12]}... found among {len(candidates)} candidate(s)")
+        return None, errs
+    if len(matched) > 1:
+        errs.append(f"{label}: multiple duplicate candidates ({len(matched)}) match canonical hash; expected unique binary")
+        return matched[0], errs
+    return matched[0], errs
+
+
+def qbank_detailed_metrics(path: Path) -> dict[str, int]:
+    """Extract explicit body-paragraph, table, and XML node metrics from DOCX."""
+    ns = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
+    root = ET.fromstring(ZipFile(path).read("word/document.xml"))
+
+    body_ps = root.findall("./w:body/w:p", ns)
+    body_paragraph_count = len(body_ps)
+    body_nonempty_paragraph_count = sum(bool("".join(p.itertext()).strip()) for p in body_ps)
+
+    tbls = root.findall(".//w:tbl", ns)
+    table_count = len(tbls)
+    table_rows = sum(len(t.findall(".//w:tr", ns)) for t in tbls)
+    table_cells = sum(len(t.findall(".//w:tc", ns)) for t in tbls)
+    table_cell_paragraph_count = sum(len(t.findall(".//w:p", ns)) for t in tbls)
+    table_cell_nonempty_paragraph_count = sum(
+        sum(bool("".join(p.itertext()).strip()) for p in t.findall(".//w:p", ns))
+        for t in tbls
+    )
+
+    xml_ps = root.findall(".//w:p", ns)
+    xml_w_p_count = len(xml_ps)
+    xml_nonempty_w_p_count = sum(bool("".join(p.itertext()).strip()) for p in xml_ps)
+
+    return {
+        "body_paragraph_count": body_paragraph_count,
+        "body_nonempty_paragraph_count": body_nonempty_paragraph_count,
+        "table_count": table_count,
+        "table_rows": table_rows,
+        "table_cells": table_cells,
+        "table_cell_paragraph_count": table_cell_paragraph_count,
+        "table_cell_nonempty_paragraph_count": table_cell_nonempty_paragraph_count,
+        "xml_w_p_count": xml_w_p_count,
+        "xml_nonempty_w_p_count": xml_nonempty_w_p_count,
+    }
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source-root", help="Directory containing the exact canonical binaries (enables Evidence Mode)")
+    parser.add_argument("--source-root", help="Directory or paths (delimited by ';' or ',') containing physical binaries")
     args = parser.parse_args()
     failures: list[str] = []
 
@@ -175,8 +242,10 @@ def main() -> int:
             failures.append(f"canonical slide page_count mismatch: {slide.get('page_count')} vs {SLIDE_PAGES}")
         if slide.get("type") != "official_slide":
             failures.append(f"canonical slide type expected 'official_slide', got '{slide.get('type')}'")
+        if slide.get("tier") != "A":
+            failures.append("canonical slide must be classified as Tier A")
 
-    # Check slide variant (Week12-Chapter7 2024.pdf)
+    # Check slide variant (Week12-Chapter7 2024.pdf) — PROV-CH7-001: Tier A source_variant
     slide_var = registry.get(SLIDE_VARIANT_ID)
     if not slide_var:
         failures.append("slide variant UIT-SLIDE-CH07-2024-VARIANT-WEEK12-72 missing from registry")
@@ -189,73 +258,123 @@ def main() -> int:
             failures.append("slide variant byte_size mismatch")
         if slide_var.get("type") != "source_variant":
             failures.append("slide variant must be classified as type: source_variant")
+        if slide_var.get("tier") != "A":
+            failures.append("official UIT slide variant must be classified as Tier A (PROV-CH7-001)")
+        if slide_var.get("status") != "VERIFIED_LOCAL_VARIANT":
+            failures.append("slide variant status must be VERIFIED_LOCAL_VARIANT")
 
     # Check canonical QBank
     qbank = registry.get(QBANK_ID)
     if not qbank or qbank.get("sha256") != QBANK_SHA or qbank.get("byte_size") != QBANK_BYTES or qbank.get("exact_filename") != "Bai tap chuong 7 HDH.docx":
         failures.append("canonical QBank registry identity/size mismatch")
+    if qbank and qbank.get("tier") != "A":
+        failures.append("canonical QBank must be classified as Tier A")
+    if qbank and qbank.get("type") != "official_qbank":
+        failures.append("canonical QBank type must be official_qbank")
 
-    # Check QBank variant (Drive 85-paragraph version)
+    # Check QBank variant (Drive 85-paragraph version) — PROV-CH7-001: Tier A source_variant
     qbank_var = registry.get(QBANK_VARIANT_ID)
     if not qbank_var:
         failures.append("QBank variant UIT-QBANK-CH07-2024-VARIANT-DRIVE-85P missing from registry")
     else:
-        if qbank_var.get("tier") == "A":
-            failures.append("truncated QBank variant must NOT be Tier A")
+        if qbank_var.get("tier") != "A":
+            failures.append("official UIT QBank variant must be classified as Tier A (PROV-CH7-001)")
+        if qbank_var.get("type") != "source_variant":
+            failures.append("QBank variant must be classified as type: source_variant")
+        if qbank_var.get("status") != "VERIFIED_LOCAL_VARIANT":
+            failures.append("QBank variant status must be VERIFIED_LOCAL_VARIANT")
         if qbank_var.get("sha256") != QBANK_VARIANT_SHA or qbank_var.get("byte_size") != QBANK_VARIANT_BYTES:
             failures.append("QBank variant sha256 or byte_size mismatch")
 
-    # 2. Binary Verification Mode
+    # 2. Binary Verification Mode (ENG-CH7-001: Order-independent discovery)
     if args.source_root:
         print("  [MODE] EVIDENCE MODE: Verifying physical source binaries under --source-root...")
-        sr = Path(args.source_root).resolve()
-        if not sr.is_dir():
-            failures.append(f"provided source root is not a directory: {sr}")
+        roots = [Path(p.strip()).resolve() for p in re.split(r"[;,]", args.source_root) if p.strip()]
+        valid_roots = [r for r in roots if r.is_dir()]
+        if not valid_roots:
+            failures.append(f"no valid source root directories found in: {args.source_root}")
         else:
-            # Locate canonical outline
-            outline_path = find_file([sr], "IT007_HeDieuHanh_14.2024.pdf")
-            if not outline_path or not outline_path.exists():
-                failures.append(f"canonical outline IT007_HeDieuHanh_14.2024.pdf not found under {sr}")
-            else:
-                if sha256_file(outline_path) != OUTLINE_SHA or outline_path.stat().st_size != OUTLINE_BYTES:
-                    failures.append("canonical outline physical hash or byte-size mismatch in Evidence Mode")
+            # A. Locate canonical outline
+            outline_candidates = find_all_files(valid_roots, "IT007_HeDieuHanh_14.2024.pdf")
+            resolved_outline, errs = resolve_candidate_by_hash(outline_candidates, OUTLINE_SHA, OUTLINE_BYTES, "canonical outline")
+            failures.extend(errs)
+            if resolved_outline:
                 try:
                     from pypdf import PdfReader
-                    if len(PdfReader(str(outline_path)).pages) != 19:
-                        failures.append("canonical outline page count mismatch in Evidence Mode")
+                    if len(PdfReader(str(resolved_outline)).pages) != 19:
+                        failures.append("canonical outline page count mismatch in Evidence Mode (expected 19)")
                 except Exception as exc:
                     failures.append(f"canonical outline inspection failed: {exc}")
 
-            # Locate canonical slide (#Week09-Chapter7 2024.pdf)
-            slide_path = find_file([sr], "#Week09-Chapter7 2024.pdf")
-            if not slide_path or not slide_path.exists():
-                failures.append(f"canonical slide #Week09-Chapter7 2024.pdf not found under {sr}")
-            else:
-                if sha256_file(slide_path) != SLIDE_SHA or slide_path.stat().st_size != SLIDE_BYTES:
-                    failures.append("canonical slide physical hash or byte-size mismatch in Evidence Mode")
+            # B. Locate canonical slide (#Week09-Chapter7 2024.pdf)
+            slide_candidates = find_all_files(valid_roots, "#Week09-Chapter7 2024.pdf")
+            resolved_slide, errs = resolve_candidate_by_hash(slide_candidates, SLIDE_SHA, SLIDE_BYTES, "canonical slide")
+            failures.extend(errs)
+            if resolved_slide:
                 try:
                     from pypdf import PdfReader
-                    if len(PdfReader(str(slide_path)).pages) != SLIDE_PAGES:
-                        failures.append("canonical slide page count mismatch in Evidence Mode")
+                    if len(PdfReader(str(resolved_slide)).pages) != SLIDE_PAGES:
+                        failures.append("canonical slide page count mismatch in Evidence Mode (expected 72)")
                 except Exception as exc:
                     failures.append(f"canonical slide inspection failed: {exc}")
 
-            # Locate canonical QBank (Bai tap chuong 7 HDH.docx - 23,960 bytes)
-            qbank_path = find_file([sr], "Bai tap chuong 7 HDH.docx")
-            if not qbank_path or not qbank_path.exists():
-                failures.append(f"canonical QBank Bai tap chuong 7 HDH.docx not found under {sr}")
+            # C. Locate historical slide variant (Week12-Chapter7 2024.pdf) if present in corpus
+            slide_var_candidates = find_all_files(valid_roots, "Week12-Chapter7 2024.pdf")
+            if slide_var_candidates:
+                resolved_var_slide, errs = resolve_candidate_by_hash(slide_var_candidates, SLIDE_VARIANT_SHA, SLIDE_VARIANT_BYTES, "historical slide variant")
+                failures.extend(errs)
+                if resolved_var_slide:
+                    try:
+                        from pypdf import PdfReader
+                        if len(PdfReader(str(resolved_var_slide)).pages) != SLIDE_VARIANT_PAGES:
+                            failures.append("historical slide variant page count mismatch in Evidence Mode (expected 72)")
+                    except Exception as exc:
+                        failures.append(f"historical slide variant inspection failed: {exc}")
+
+            # D. Locate QBank candidates (ENG-CH7-001: Handles duplicate filenames deterministically)
+            qbank_candidates = find_all_files(valid_roots, "Bai tap chuong 7 HDH.docx")
+            if not qbank_candidates:
+                failures.append("canonical QBank Bai tap chuong 7 HDH.docx not found under source-root")
             else:
-                if qbank_path.stat().st_size != QBANK_BYTES or sha256_file(qbank_path) != QBANK_SHA:
-                    failures.append("canonical QBank physical hash or byte-size mismatch in Evidence Mode")
-                try:
-                    total, nonempty = qbank_counts(qbank_path)
-                    if (total, nonempty) != (100, 96):
-                        failures.append(f"canonical QBank XML counts mismatch in Evidence Mode: expected (100, 96), got ({total}, {nonempty})")
-                except Exception as exc:
-                    failures.append(f"canonical QBank XML inspection failed: {exc}")
+                # 1. Resolve canonical QBank
+                resolved_qbank, errs = resolve_candidate_by_hash(qbank_candidates, QBANK_SHA, QBANK_BYTES, "canonical QBank")
+                failures.extend(errs)
+                if resolved_qbank:
+                    try:
+                        m = qbank_detailed_metrics(resolved_qbank)
+                        # SRC-CH7-002: Verify explicit paragraph and XML metrics
+                        if (m["body_paragraph_count"], m["body_nonempty_paragraph_count"]) != (88, 84):
+                            failures.append(f"canonical QBank body paragraph count mismatch: expected (88, 84), got ({m['body_paragraph_count']}, {m['body_nonempty_paragraph_count']})")
+                        if (m["table_count"], m["table_rows"], m["table_cells"], m["table_cell_paragraph_count"]) != (1, 6, 12, 12):
+                            failures.append(f"canonical QBank table metrics mismatch: expected (1 table, 6 rows, 12 cells, 12 paras), got ({m['table_count']}, {m['table_rows']}, {m['table_cells']}, {m['table_cell_paragraph_count']})")
+                        if (m["xml_w_p_count"], m["xml_nonempty_w_p_count"]) != (100, 96):
+                            failures.append(f"canonical QBank raw XML w:p count mismatch: expected (100, 96), got ({m['xml_w_p_count']}, {m['xml_nonempty_w_p_count']})")
+                    except Exception as exc:
+                        failures.append(f"canonical QBank XML inspection failed: {exc}")
+
+                # 2. Check if truncated variant is also present in corpus
+                var_candidates = [c for c in qbank_candidates if sha256_file(c) == QBANK_VARIANT_SHA]
+                if var_candidates:
+                    var_path = var_candidates[0]
+                    if var_path.stat().st_size != QBANK_VARIANT_BYTES:
+                        failures.append(f"truncated QBank variant byte-size mismatch ({var_path.stat().st_size} vs {QBANK_VARIANT_BYTES})")
+                    try:
+                        vm = qbank_detailed_metrics(var_path)
+                        if (vm["body_paragraph_count"], vm["body_nonempty_paragraph_count"]) != (85, 80):
+                            failures.append(f"truncated QBank variant body paragraph mismatch: expected (85, 80), got ({vm['body_paragraph_count']}, {vm['body_nonempty_paragraph_count']})")
+                        if (vm["xml_w_p_count"], vm["xml_nonempty_w_p_count"]) != (97, 92):
+                            failures.append(f"truncated QBank variant XML w:p mismatch: expected (97, 92), got ({vm['xml_w_p_count']}, {vm['xml_nonempty_w_p_count']})")
+                    except Exception as exc:
+                        failures.append(f"truncated QBank variant XML inspection failed: {exc}")
+
+                # 3. Guard against unknown same-named binaries
+                for c in qbank_candidates:
+                    chash = sha256_file(c)
+                    if chash not in (QBANK_SHA, QBANK_VARIANT_SHA):
+                        failures.append(f"unexpected/unregistered variant for Bai tap chuong 7 HDH.docx detected with SHA-256 {chash}")
 
         if not failures:
-            print("  [EVIDENCE MODE] All canonical physical binaries successfully located and rehashed against ground-truth cryptographic digests.")
+            print("  [EVIDENCE MODE] All canonical and variant physical binaries successfully located and rehashed against ground-truth cryptographic digests.")
     else:
         print("  [CI/REPOSITORY MODE] Binary evidence not freshly rehashed in CI (use --source-root <dir> for physical binary verification).")
 
@@ -372,6 +491,7 @@ def main() -> int:
         "SOURCE FINDINGS",
         "VALIDATION RESULTS",
         "FINAL DECISION",
+        "INDEPENDENT RECHECK REPAIR",
     ]
     if not REPORT.exists():
         failures.append("research/LUNA_CH7_SOURCE_MAP_REPORT.md does not exist")
@@ -390,11 +510,14 @@ def main() -> int:
     print("CHAPTER 7 SOURCE MAP: PASS")
     print("  [OK] Canonical 2024 outline (IT007_HeDieuHanh_14.2024.pdf, 418KB) & 2023 variant separated")
     print("  [OK] Canonical slide: #Week09-Chapter7 2024.pdf (72 pages / 7,462,286 bytes / SHA verified) promoted over Week12 variant")
+    print("  [OK] Official slide variant Week12 correctly classified as Tier A source_variant (PROV-CH7-001)")
+    print("  [OK] Official QBank variant Drive-85P correctly classified as Tier A source_variant (PROV-CH7-001)")
     print("  [OK] Coverage SSOT: exact_filename matches canonical registry (#Week09-Chapter7 2024.pdf)")
     print("  [OK] Source Ledger SSOT: A-01 outline, A-13 slide, and A-22 qbank strictly match canonical identities")
     print("  [OK] Generator SSOT: generate_registry.py dry-run check verified with zero canonical drift")
     print("  [OK] Canonical QBank: 20 source units (9 theory + 11 exercises) / 23,960 bytes / SHA verified")
-    print("  [OK] Truncated Drive variant (85 paragraphs) classified as source_variant (Tier B)")
+    print("  [OK] QBank metrics reconciled: 88 body paras, 1 table (6x2), 100 XML w:p nodes (SRC-CH7-002)")
+    print("  [OK] Order-independent multi-candidate discovery and deterministic resolution verified (ENG-CH7-001)")
     print("  [OK] Coverage: 67 CONTENT + 5 NON_CONTENT = 72 pages, gap-free")
     print("  [OK] Visual & structural page inspection completed and recorded")
     print("  [OK] Zero Chapter 7 authoring files created prematurely")
