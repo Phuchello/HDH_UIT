@@ -1,6 +1,27 @@
-# HDH_UIT V2 — KIẾN TRÚC HỌC TẬP V1.1 (LEARNING ARCHITECTURE V1.1)
+# HDH_UIT V2 — KIẾN TRÚC HỌC TẬP V1.2 (LEARNING ARCHITECTURE V1.2)
 # BẢN ĐẶC TẢ SƯ PHẠM THỰC CHỨNG & THIẾT KẾ TRẢI NGHIỆM HỌC TẬP IT007
 # MỤC ĐÍCH: TỐI ƯU HÓA HIỆU QUẢ HỌC TẬP, GIẢM TẢI NHẬN THỨC, HỖ TRỢ IN ẤN PDF VÀ WEB TĨNH
+# CHẾ ĐỘ: THIẾT KẾ & ĐẶC TẢ SƯ PHẠM (DESIGN REPAIR & FINAL EVIDENCE RECHECK)
+
+---
+
+## 0. HỒ SƠ THẨM ĐỊNH & KHẮC PHỤC THIẾT KẾ (DESIGN RECHECK FINDINGS)
+
+> [!NOTE]
+> **SCHED-LEARN-001 — MAJOR — RESOLVED: Hiệu chỉnh Toàn diện So sánh FSRS**
+> - *Nguyên nhân:* Bản thảo trước đã mô tả sai FSRS hiện đại (cho rằng FSRS cố định 17 tham số, đòi hỏi chạy gradient descent trong quá trình lập lịch thông thường, cần lịch sử cá nhân lớn mới hoạt động được và tốn bộ nhớ lớn trong `localStorage`).
+> - *Khắc phục:* Phân định rạch ròi giữa **Thời gian chạy Lập lịch (Scheduling Runtime)** (chạy thuần giải tích trong vài micro-giây với bộ tham số mặc định chuẩn, không cần vòng lặp tối ưu, hoạt động ngay từ ngày đầu với dữ liệu trống) và **Tối ưu hóa Tham số (Parameter Optimization / Personalization)** (tùy chọn huấn luyện cá nhân hóa khi đã tích lũy lịch sử đánh giá). Cập nhật phiên bản FSRS (FSRS-4.5 dùng 19 tham số; FSRS-6 dùng 21 tham số). Đánh giá khách quan 3 phương án lập lịch dựa trên 7 tiêu chí kỹ thuật.
+>
+> **SCHED-LEARN-002 — MAJOR — RESOLVED: Phân định Rạch ròi Đánh giá HARD vs Lỗi Thu hồi (AGAIN)**
+> - *Nguyên nhân:* Định nghĩa `HARD` là "thu hồi thành công với nỗ lực cao / ngập ngừng", nhưng công thức lập lịch cũ lại gom $q < 3$ (`AGAIN` và `HARD`) làm một, đặt lại $\text{Reps} = 0$ và chu kỳ $I = 1\text{ ngày}$. Điều này mâu thuẫn nội tại khi đối xử một lần thu hồi thành công giống hệt một lần quên hoàn toàn.
+> - *Khắc phục:* Phân tách rõ ràng hành vi toán học của cả 4 mức đánh giá. `AGAIN` là thất bại thu hồi (đặt lại chu kỳ về 1 ngày, tăng biến đếm lapse). `HARD` là thu hồi thành công (tăng số lần thành công, tăng khoảng cách chu kỳ một cách thận trọng, không đặt lại chu kỳ về 1 ngày).
+>
+> **EVID-LEARN-002 — MAJOR — RESOLVED: Hiện đại hóa Thuật ngữ Khoa học Nhận thức**
+> - *Nguyên nhân:* Bản thảo trước trình bày Tải nhận thức theo mô hình cộng 3 thành phần truyền thống và diễn giải khung ICAP mang tính tuyệt đối hóa ("học sâu chỉ xảy ra ở Constructive trở lên").
+> - *Khắc phục:* Cập nhật theo Lý thuyết Tải nhận thức đương đại (Sweller, van Merriënboer & Paas, 2019): tải nhận thức gồm Tải nội tại (Intrinsic load) và Tải ngoại lai (Extraneous load); Xử lý hữu ích (Germane processing) là nguồn lực nhận thức được người học phân bổ để xử lý tải nội tại và xây dựng lược đồ, không phải là một thành phần tải độc lập thứ ba cộng dồn. Khung ICAP (Chi & Wylie, 2014) được định nghĩa chính xác là một mô hình phân tầng dự báo kết quả học tập ($\text{Interactive} > \text{Constructive} > \text{Active} > \text{Passive}$) phụ thuộc vào điều kiện nhiệm vụ và mức độ chuyên môn của người học.
+>
+> **ENG-LEARN-002 — MAJOR — IMPLEMENTATION HANDOFF (Bảo lưu cho Terra)**
+> - Bộ tạo mã `scripts/build_web.py` hiện tại chưa phát sinh các nút bấm `.btn-hint`, `.btn-keypoints`, `.btn-answer` mà `src/web/assets/js/app.js` đang lắng nghe. Vấn đề này được ghi nhận trong hồ sơ bàn giao kỹ thuật cho pha triển khai của Terra; không chỉnh sửa mã nguồn renderer trong lượt thiết kế này.
 
 ---
 
@@ -13,7 +34,7 @@ Kiến trúc học tập của dự án HDH_UIT V2 được xây dựng dựa tr
 │                   MÔ HÌNH XỬ LÝ THÔNG TIN & TẢI NHẬN THỨC                         │
 │                                                                                  │
 │   [ Kích thích ] ──► [ Bộ nhớ Cảm giác ] ──► [ Bộ nhớ Làm việc (Working Memory) ] │
-│   (Tài liệu/Web)       (Sensory Register)      - Giới hạn: ~4 đơn vị thông tin   │
+│   (Tài liệu/Web)       (Sensory Register)      - Giới hạn: ~4 đơn vị tương tác   │
 │                                                - Tải: Nội tại & Ngoại lai        │
 │                                                               ▲         │        │
 │                                            Thu hồi chủ động   │         │Ghi mã  │
@@ -24,23 +45,23 @@ Kiến trúc học tập của dự án HDH_UIT V2 được xây dựng dựa tr
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 1.1. Lý thuyết Tải nhận thức (Cognitive Load Theory - Sweller, Paas, van Merriënboer)
-- **Cấu trúc bộ nhớ:** Bộ nhớ làm việc (Working Memory - WM) của con người có dung lượng hạn chế (khoảng $4 \pm 1$ đơn vị thông tin khi xử lý các yếu tố tương tác, theo Cowan, 2001). Ngược lại, Bộ nhớ dài hạn (Long-Term Memory - LTM) lưu trữ thông tin dưới dạng các lược đồ nhận thức (schemas). Khi một lược đồ được tự động hóa, nó được xử lý như một đơn vị duy nhất trong WM.
-- **Phân rã 3 thành phần Tải nhận thức:**
-  1. *Tải nội tại (Intrinsic Cognitive Load):* Độ phức tạp cố hữu của bản thân khái niệm kỹ thuật (ví dụ: sự phối hợp giữa CPU, thanh ghi MMU, bảng phân trang và bus địa chỉ). Tải này không thể giảm bớt mà chỉ có thể quản lý thông qua việc phân đoạn (segmentation) và sắp xếp trình tự hợp lý.
-  2. *Tải ngoại lai (Extraneous Cognitive Load):* Gánh nặng nhận thức phát sinh do thiết kế trình bày kém (như tra cứu nhảy trang, văn bản dài dòng không ăn nhập với hình ảnh, giao diện rối rắm). Mục tiêu sư phạm là **tối thiểu hóa tối đa tải ngoại lai**.
-  3. *Tải hữu ích (Germane Cognitive Load):* Nỗ lực nhận thức của người học nhằm xây dựng và củng cố các lược đồ nhận thức (so sánh đối chiếu, tự giải thích nguyên lý, phân tích lỗi sai).
-- **Các hiệu ứng trình bày cần kiểm soát:**
-  - *Split-Attention Effect (Hiệu ứng phân tán chú ý):* Tránh việc tách rời hình minh họa và văn bản giải thích. Nhãn linh kiện và bước chuyển trạng thái phải được đặt trực tiếp trên sơ đồ.
+### 1.1. Lý thuyết Tải nhận thức Đương đại (Cognitive Load Theory - Sweller, Paas, van Merriënboer)
+- **Cấu trúc bộ nhớ:** Bộ nhớ làm việc (Working Memory - WM) của con người có dung lượng hạn chế (khoảng $4 \pm 1$ đơn vị thông tin khi xử lý các yếu tố tương tác đồng thời, theo Cowan, 2001). Ngược lại, Bộ nhớ dài hạn (Long-Term Memory - LTM) lưu trữ thông tin dưới dạng các mạng lưới lược đồ nhận thức (schemas). Khi một lược đồ được tự động hóa qua luyện tập, nó được xử lý như một đơn vị duy nhất trong WM.
+- **Khung phân tích Tải nhận thức Đương đại (Sweller et al., 2011, 2019):**
+  1. *Tải nội tại (Intrinsic Cognitive Load):* Gánh nặng nhận thức phát sinh từ độ phức tạp và mức độ tương tác giữa các phần tử cố hữu của tài liệu học tập (Element Interactivity), phụ thuộc vào mức độ hiểu biết nền tảng của người học. Tải này không thể giảm bớt mà chỉ có thể quản lý thông qua phân đoạn (segmentation) và sắp xếp trình tự hợp lý.
+  2. *Tải ngoại lai (Extraneous Cognitive Load):* Gánh nặng nhận thức lãng phí do cách trình bày tài liệu hoặc giao diện không tối ưu (như tra cứu nhảy trang, bố cục phân tán chú ý, văn bản thừa thãi). Mục tiêu thiết kế là **tối thiểu hóa tối đa tải ngoại lai**.
+  3. *Xử lý hữu ích (Germane Processing / Cognitive Resources Allocation):* Trong góc nhìn CLT hiện đại, germane không phải là một thành phần tải độc lập thứ ba cộng vào tổng tải. Thay vào đó, nó đại diện cho các nguồn lực nhận thức của bộ nhớ làm việc được người học thực sự phân bổ để tiếp nhận tải nội tại nhằm xây dựng và tự động hóa lược đồ.
+- **Kiểm soát các hiệu ứng nhận thức:**
+  - *Split-Attention Effect (Hiệu ứng phân tán chú ý):* Không tách rời sơ đồ phần cứng với lời giải thích văn bản sang hai trang giấy hoặc hai màn hình cuộn xa nhau. Mọi sơ đồ kỹ thuật phải gắn nhãn trực tiếp (integrated callouts) ngay trên vị trí vật lý của linh kiện/bước chuyển.
   - *Redundancy Effect (Hiệu ứng dư thừa):* Không đọc lại y nguyên từng từ của sơ đồ; văn bản đi kèm chỉ tập trung vào cơ chế nhân quả.
 
 ### 1.2. Luyện tập Thu hồi & Hiệu ứng Kiểm tra (Retrieval Practice & Testing Effect)
 - **Nghiên cứu nền tảng (Roediger & Karpicke, 2006; Dunlosky et al., 2013):**
-  Hành động tự kiểm tra kín sách (Closed-book Retrieval) củng cố các đường dẫn trích xuất thông tin trong trí nhớ dài hạn, tạo ra độ bền trí nhớ vượt trội so với việc đọc lại nhiều lần (Passive Re-reading). Việc đọc lại thường tạo ra cảm giác trôi chảy giả tạo (*Illusion of Competence*), khiến người học ngỡ rằng mình đã nắm vững nhưng lại thất bại khi giải bài tập mới.
+  Hành động tự kiểm tra kín sách (Closed-book Retrieval) củng cố các đường dẫn trích xuất thông tin trong trí nhớ dài hạn, tạo ra độ bền trí nhớ vượt trội so với việc đọc lại nhiều lần (Passive Re-reading). Việc đọc lại thường tạo ra cảm giác trôi chảy giả tạo (*Illusion of Competence*), khiến người học ngộ nhận rằng mình đã nắm vững nhưng lại thất bại khi giải bài tập mới.
 
 ### 1.3. Luyện tập Phân tán (Distributed Practice & Spacing Effect)
 - **Nghiên cứu nền tảng (Cepeda et al., 2006, 2008):**
-  Phân chia các lượt học cách quãng theo thời gian mang lại hiệu quả ghi nhớ lâu dài tốt hơn nhiều so với việc dồn ép trong một thời gian ngắn (*Cramming*). Khoảng cách tối ưu giữa các lần ôn tập phụ thuộc vào thời gian muốn duy trì trí nhớ, không tuân theo các chu kỳ cứng nhắc cố định.
+  Phân chia các lượt học cách quãng theo thời gian mang lại hiệu quả ghi nhớ lâu dài tốt hơn nhiều so với việc dồn ép trong một thời gian ngắn (*Cramming*). Khoảng cách tối ưu giữa các lần ôn tập phụ thuộc vào khoảng thời gian muốn duy trì trí nhớ mục tiêu, không tuân theo các chu kỳ cứng nhắc cố định.
 
 ### 1.4. Hiệu ứng Bài tập Mẫu & Phai mờ Dần Dần (Worked-Example Effect & Fading)
 - **Nghiên cứu nền tảng (Sweller, 1988; Renkl, 2014; Atkinson et al., 2000):**
@@ -51,7 +72,7 @@ Kiến trúc học tập của dự án HDH_UIT V2 được xây dựng dựa tr
 - **Hypercorrection Effect (Butterfield & Metcalfe, 2001, 2006; Metcalfe, 2017):** Hiện tượng người học sửa chữa sai lầm nhanh và sâu sắc hơn khi lỗi sai đó được cam kết với **mức độ tự tin cao** (*High-confidence error*), thay vì các lỗi sai do đoán mò. Điều này đòi hỏi thiết kế phải cho phép người học bộc lộ quan niệm sai lầm trước khi nhận phản hồi.
 
 ### 1.6. Khung Nhận thức ICAP & Tự giải thích (Chi & Wylie, 2014)
-- **Phân tầng hoạt động học tập:** Passive (Thụ động: đọc lướt) $\to$ Active (Chủ động: gạch chân, tạm dừng) $\to$ Constructive (Kiến tạo: tự giải thích, suy luận) $\to$ Interactive (Tương tác: tranh luận, đối soát tiêu chí). Học sâu chỉ diễn ra khi người học đạt mức Constructive trở lên.
+- Khung ICAP phân loại các hành vi học tập thành bốn mức độ: Thụ động (Passive), Chủ động (Active), Kiến tạo (Constructive), và Tương tác (Interactive). Khung lý thuyết dự báo xu hướng kết quả học tập tăng dần theo thứ tự $\text{Interactive} > \text{Constructive} > \text{Active} > \text{Passive}$, với điều kiện nhiệm vụ học tập phù hợp với kiến thức nền tảng của người học (đối với người mới bắt đầu, việc tiếp nhận giàn giáo mẫu chuẩn là tiền đề bắt buộc trước khi thực hiện các hoạt động kiến tạo độc lập).
 
 ---
 
@@ -66,14 +87,14 @@ Kiến trúc học tập của dự án HDH_UIT V2 được xây dựng dựa tr
 | **Hypercorrection** | Butterfield & Metcalfe (2001, 2006); Metcalfe (2017) | Cao (Phạm vi hẹp) | Chỉ xuất hiện khi người học có niềm tin mạnh vào câu trả lời sai; không áp dụng cho đoán mò. | Khối ErrorDiagnosis phải tập trung vào các bẫy đề thi kinh điển mà sinh viên thường tin là mình làm đúng. |
 | **Selective Interleaving** | Rohrer & Taylor (2007); Kornell & Bjork (2008) | Trung bình - Cao | Không xen kẽ các chủ đề không liên quan; chỉ xen kẽ các khái niệm có nguy cơ nhầm lẫn bề mặt cao. | Chỉ áp dụng xen kẽ đối kháng giữa các cặp: Phân mảnh nội vs ngoại, First Fit vs Best Fit, Paging vs Segmentation. |
 | **Spatial Contiguity** | Mayer (2009, 2021); Fiorella & Mayer (2015) | Rất cao | Tránh làm sơ đồ quá tải chi tiết gây nhiễu chú ý. | Sơ đồ phần cứng MMU, TLB, Bảng phân trang phải có chú thích gắn liền trên hình; không dùng bảng chú giải tách rời. |
-| **Cognitive Load Minimal** | Sweller (1988, 2011); van Merriënboer (2019) | Rất cao | Giảm tải ngoại lai không có nghĩa là lược bỏ bài tập khó mang tính thử thách đáng giá (*Desirable difficulty*). | Áp dụng Quy tắc Tối giản Sư phạm: loại bỏ đồ thị trang trí, loại bỏ hình ảnh thừa; giao diện tập trung 1 tác vụ/khung nhìn. |
+| **Cognitive Load Minimal** | Sweller (1988, 2011); Sweller et al. (2019) | Rất cao | Giảm tải ngoại lai không có nghĩa là lược bỏ bài tập khó mang tính thử thách đáng giá (*Desirable difficulty*). | Áp dụng Quy tắc Tối giản Sư phạm: loại bỏ đồ thị trang trí, loại bỏ hình ảnh thừa; giao diện tập trung 1 tác vụ/khung nhìn. |
 
 ---
 
 ## 3. NGUYÊN TẮC HỌC TẬP CỐT LÕI & QUY TẮC TỐI GIẢN SƯ PHẠM
 
 ### 3.1. Nguyên tắc Học tập Cốt lõi (Core Learning Principle)
-Hệ thống từ bỏ cấu trúc 11 bước cứng nhắc cho mọi khái niệm. Thay vào đó, toàn bộ kiến trúc vận hành theo chu trình 6 giai đoạn linh hoạt:
+Hệ thống vận hành theo chu trình 6 giai đoạn thích ứng:
 
 $$\mathbf{Map \;\longrightarrow\; Understand \;\longrightarrow\; Retrieve \;\longrightarrow\; Apply \;\longrightarrow\; Diagnose \;\longrightarrow\; Revisit}$$
 
@@ -134,7 +155,7 @@ Mỗi nội dung được phân loại vào một trong 6 mô thức sư phạm 
 
 ## 5. BA CHẾ ĐỘ TRẢI NGHIỆM WEB (THREE WEB MODES)
 
-Để đáp ứng các giai đoạn học tập khác nhau và không gây phiền nhiễu cho sinh viên trong giai đoạn ôn thi nước rút, giao diện Web Companion hỗ trợ 3 chế độ độc lập:
+Giao diện Web Companion hỗ trợ 3 chế độ độc lập, phù hợp với các giai đoạn học tập khác nhau:
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────────────────┐
@@ -164,8 +185,8 @@ Mỗi nội dung được phân loại vào một trong 6 mô thức sư phạm 
 ## 6. MÔ HÌNH PHÂN TÁCH NĂNG LỰC (MASTERY) & ĐÁNH GIÁ ÔN TẬP (REVIEW RATING)
 
 > [!CAUTION]
-> **LỖ HỔNG THIẾT KẾ CŨ ĐÃ ĐƯỢC KHẮC PHỤC:**
-> Trong kiến trúc trước đây, người học có thể tự bấm nút để gán cho mình mức $M3$. Đây là sai lầm sư phạm nghiêm trọng. Hệ thống mới phân tách rạch ròi giữa **Bằng chứng Năng lực (Mastery Evidence)** và **Đánh giá Trải nghiệm Ôn tập (Review Rating)**.
+> **QUY TẮC BẤT BIẾN:**
+> Hệ thống phân tách rạch ròi giữa **Bằng chứng Năng lực (Mastery Evidence)** và **Đánh giá Trải nghiệm Ôn tập (Review Rating)**. Người học không thể tự bấm nút đánh giá lượt ôn để phong tặng cấp độ M3.
 
 ### 6.1. Bốn Cấp độ Năng lực (Mastery Evidence: M0 – M3)
 Cấp độ năng lực phản ánh mức độ độc lập và chuyển giao kiến thức được chứng minh qua hành vi:
@@ -175,14 +196,14 @@ Cấp độ năng lực phản ánh mức độ độc lập và chuyển giao k
 | **M0** | `NOT_RECALLED` | Chưa học hoặc Không thể thu hồi. | Trả lời sai hoặc bỏ trắng bài kiểm tra kín sách; chưa từng làm bài tập. |
 | **M1** | `FAMILIAR` | Nhận diện được khi có mồi gợi ý (*Cue-dependent*). | Trả lời đúng sau khi xem gợi ý (*Hint*); hoặc điền đúng bài tập giàn giáo Level B. |
 | **M2** | `CAN_EXPLAIN` | Tự giải thích được bản chất nhân quả (WHY & HOW). | Trả lời đúng câu hỏi `RecallCheckpoint` kín sách, đối soát đạt $\ge 80\%$ từ khóa rubric bắt buộc (Ghi nhận dưới dạng `SELF_ASSESSED_M2` hoặc `VERIFIED_M2`). |
-| **M3** | `CAN_TRANSFER` | Độc lập chuyển giao năng lực sang bài toán thi cử mới lạ. | **CHỈ ĐƯỢC XÁC LẬP KHI:** Giải thành công bài toán `TransferProblem` (Level C) với tham số biên mới mà không dùng bất kỳ gợi ý nào. **`RecallCheckpoint` không thể trực tiếp nâng lên M3.** |
+| **M3** | `CAN_TRANSFER` | Độc lập chuyển giao năng lực sang bài toán thi cử mới lạ. | **CHỈ ĐƯỢC XÁC LẬP KHI:** Giải thành công bài toán `TransferProblem` (Level C) với tham số biên mới mà không dùng bất kỳ gợi ý nào. **`RecallCheckpoint` không thể trực tiếp gán mức M3.** |
 
 ### 6.2. Thang Đánh giá Lượt Ôn tập (Review Rating Scale)
 Thang đánh giá 4 mức độ dùng để cung cấp tham số cho thuật toán lập lịch ôn tập, hoàn toàn độc lập với danh hiệu Mastery:
-- **`AGAIN` (Làm lại):** Không nhớ hoặc giải sai hoàn toàn $\implies$ Đẩy về ôn tập ngay trong ngày/ngày hôm sau.
-- **`HARD` (Khó khăn):** Nhớ được nhưng mất nhiều thời gian, còn do dự hoặc cần liếc gợi ý $\implies$ Rút ngắn khoảng cách chu kỳ tới.
-- **`GOOD` (Tốt):** Thu hồi chính xác, giải thích tự tin với nỗ lực nhận thức vừa phải $\implies$ Giãn khoảng cách theo hệ số tiêu chuẩn.
-- **`EASY` (Dễ dàng):** Kiến thức đã đạt mức tự động hóa cao, giải quyết tức thì $\implies$ Tăng mạnh khoảng cách chu kỳ tới.
+- **`AGAIN` (Quên / Thất bại thu hồi):** Không nhớ hoặc giải sai cơ bản $\implies$ Tái lập chu kỳ ôn tập ngắn hạn.
+- **`HARD` (Thu hồi thành công nhưng khó khăn):** Nhớ được câu trả lời đúng nhưng mất nhiều thời gian, phải nỗ lực tư duy cao hoặc ngập ngừng $\implies$ Tăng khoảng cách chu kỳ một cách thận trọng; **KHÔNG coi là thất bại và KHÔNG đặt lại chu kỳ về 1 ngày.**
+- **`GOOD` (Thu hồi thành công chuẩn mực):** Thu hồi chính xác, giải thích tự tin với nỗ lực nhận thức vừa phải $\implies$ Giãn khoảng cách theo hệ số tiêu chuẩn.
+- **`EASY` (Thu hồi thành công xuất sắc):** Kiến thức đã đạt mức tự động hóa cao, giải quyết tức thì không do dự $\implies$ Tăng mạnh khoảng cách chu kỳ tới.
 
 ### 6.3. Cấu trúc Dữ liệu Mô hình Năng lực (State Schema)
 ```json
@@ -201,7 +222,8 @@ Thang đánh giá 4 mức độ dùng để cung cấp tham số cho thuật to�
     "easiness_factor": 2.5,
     "interval_days": 6,
     "due_timestamp": 1725890400000,
-    "last_reviewed": 1725372000000
+    "last_reviewed": 1725372000000,
+    "lapses": 0
   },
   "review_rating_history": [
     {"timestamp": 1725199200000, "rating": "AGAIN"},
@@ -216,44 +238,96 @@ Thang đánh giá 4 mức độ dùng để cung cấp tham số cho thuật to�
 
 ---
 
-## 7. ĐÁNH GIÁ & QUYẾT ĐỊNH THUẬT TOÁN LẬP LỊCH ÔN TẬP CỤC BỘ
+## 7. ĐÁNH GIÁ THUẬT TOÁN LẬP LỊCH ÔN TẬP & QUYẾT ĐỊNH DỰ ÁN
 
-### 7.1. So sánh 3 Phương án Thuật toán Lập lịch
+### 7.1. Đánh giá Khách quan 3 Lớp Thuật toán Lập lịch Ôn tập
 
-| Tiêu chí Đánh giá | Phương án A: Hộp Leitner Xác định Đơn giản | Phương án B: SuperMemo-2 (SM-2 Chuẩn hóa) | Phương án C: FSRS (Free Spaced Repetition) |
+Để đưa ra quyết định kiến trúc đúng đắn, chúng tôi so sánh 3 phương án dựa trên 7 tiêu chuẩn kỹ thuật:
+
+```text
+┌──────────────────────────────────────────────────────────────────────────────────┐
+│                   SO SÁNH CÁC PHƯƠNG ÁN THUẬT TOÁN LẬP LỊCH                      │
+│                                                                                  │
+│   [ Phương án A: Hộp Leitner Xác định Đơn giản ]                                 │
+│   - Cấu trúc: 3–5 ngăn thời gian cố định.                                        │
+│   - Ưu điểm: Mã nguồn cực ngắn (~30 dòng JS), trực quan, dễ hiểu.                │
+│   - Nhược điểm: Khoảng cách giãn cách bị bó cứng, không phản ánh độ khó mục học. │
+│                                                                                  │
+│   [ Phương án B: SM-2 Project Heuristic (Biến thể Xác định) ]                    │
+│   - Cấu trúc: Nhân khoảng cách với Hệ số Dễ (EF) thích ứng.                      │
+│   - Ưu điểm: Đơn giản (~80 dòng JS), tính toán xác định tức thì, không phụ thuộc.│
+│   - Nhược điểm: Mô hình kinh nghiệm (heuristic), không tối ưu tham số tự động.   │
+│                                                                                  │
+│   [ Phương án C: FSRS Hiện đại (Free Spaced Repetition Scheduler) ]              │
+│   - Cấu trúc: Mô hình 3 thành phần S (Stability), D (Difficulty), R (Retrievability)│
+│     (FSRS-4.5: 19 tham số; FSRS-6: 21 tham số).                                 │
+│   - Phân định rõ:                                                                │
+│     * Scheduling Runtime: Đánh giá thuần giải tích bằng công thức đóng trong vài  │
+│       micro-giây, dùng bộ tham số mặc định chuẩn, KHÔNG cần gradient descent     │
+│       trong phiên học, hoạt động ngay từ ngày đầu với dữ liệu trống (Cold start).│
+│     * Parameter Optimization: Quá trình tùy chọn huấn luyện cá nhân hóa tham số  │
+│       bằng gradient descent qua log ôn tập lớn (thường thực hiện offline).       │
+│   - Ưu điểm: Mô hình khoa học hiện đại, dự báo xác suất thu hồi chính xác cao.  │
+│   - Nhược điểm: Cần nhiều phương trình phi tuyến, bảo trì phức tạp hơn cho web   │
+│     tĩnh học thuật đơn giản.                                                     │
+└──────────────────────────────────────────────────────────────────────────────────┘
+```
+
+| Tiêu chuẩn Đánh giá | Phương án A: Leitner Đơn giản | Phương án B: SM-2 Project Heuristic | Phương án C: FSRS Hiện đại |
 | :--- | :--- | :--- | :--- |
-| **Bản chất Thuật toán** | 3–5 ngăn cố định, chuyển ngăn theo kết quả Đúng/Sai. | Công thức nhân khoảng cách với Hệ số Dễ thích ứng: $I_n = I_{n-1} \times \text{EF}$. | Mô hình toán học 3 thành phần: Stability, Retrievability, Difficulty với 17 trọng số. |
-| **Độ phức tạp triển khai** | Cực thấp ($\sim 30$ dòng mã JS). | Thấp - Trung bình ($\sim 80$ dòng mã JS thuần túy). | Rất cao ($\sim 400+$ dòng mã toán ma trận, gradient descent). |
-| **Khả năng chạy Ngoại tuyến** | Hoàn hảo $100\%$. | Hoàn hảo $100\%$. | Khả thi nhưng đòi hỏi bundle toán học phức tạp. |
-| **Dung lượng `localStorage`** | Tối thiểu ($< 5\text{KB}$). | Nhỏ ($< 15\text{KB}$ cho toàn bộ môn học). | Lớn hơn đáng kể do ma trận trọng số và log chi tiết. |
-| **Hành vi Khởi đầu Lạnh** | Tốt, dễ hiểu cho người mới. | Tốt, tham số mặc định $\text{EF}=2.5$ ổn định ngay từ ngày đầu. | Cần dữ liệu luyện tập lớn để tối ưu hóa trọng số cá nhân. |
-| **Tính Kiểm thử & Bảo trì** | Rất dễ viết unit test. | Rất dễ viết unit test kiểm tra tính xác định. | Khó gỡ lỗi khi lịch trình sai lệch. |
-| **Độ chính xác Khoa học** | Thấp, khoảng cách bị bó cứng. | Rất cao trong thực tiễn 30 năm ứng dụng giáo dục. | Cao nhất hiện nay trên tập dữ liệu lớn. |
+| **Tính Đơn giản (Simplicity)** | Cực cao | Rất cao | Trung bình (Nhiều phương trình toán phi tuyến) |
+| **Độ chuẩn xác Khoa học (Correctness)** | Trung bình | Tốt (Mô hình kinh nghiệm 30 năm) | Rất cao (Mô hình trí nhớ DSR hiện đại) |
+| **Hoạt động Ngoại tuyến (Offline Use)** | Hoàn hảo ($100\%$) | Hoàn hảo ($100\%$) | Hoàn hảo ($100\%$ khi dùng tham số mặc định) |
+| **Khả năng Bảo trì (Maintainability)** | Cực cao | Rất cao | Trung bình (Cần đồng bộ khi nâng cấp phiên bản) |
+| **Hành vi Khởi đầu Lạnh (Cold Start)** | Hoàn hảo | Hoàn hảo với $\text{EF}=2.5$ | Tốt với tham số mặc định chuẩn hóa |
+| **Hiệu quả Ôn tập (Review Efficiency)** | Trung bình | Rất tốt | Cao nhất |
+| **Tính Kiểm thử được (Testability)** | Cực dễ | Cực kỳ xác định và dễ viết unit test | Cần bộ test kiểm thử số thực phức tạp hơn |
 
 ### 7.2. Quyết định Kiến trúc: Lựa chọn Phương án B (SM-2 Project Heuristic)
 > [!NOTE]
-> **QUYẾT ĐỊNH DỰ ÁN:**
-> Dự án lựa chọn **Biến thể SM-2 Xác định (Deterministic SM-2 Project Heuristic)** làm thuật toán lập lịch mặc định.
-> - Chúng tôi không tuyên bố thuật toán này là tối ưu tuyệt đối về mặt toán học sinh học, mà định danh rõ ràng đây là **Quy tắc Thực nghiệm của Dự án (Project Heuristic)** nhằm cân bằng hoàn hảo giữa tính khoa học, sự minh bạch và tính gọn nhẹ cục bộ.
+> **QUYẾT ĐỊNH THIẾT KẾ:**
+> Dự án quyết định áp dụng **SM-2 Project Heuristic** cho nền tảng Web Companion IT007:
+> 1. **Lý do lựa chọn:** Không phải vì FSRS quá nặng (FSRS runtime thực chất hoàn toàn có thể chạy client-side với tham số mặc định), mà vì SM-2 Heuristic mang lại **tính minh bạch thuật toán cao nhất** cho sinh viên ngành Công nghệ Thông tin, mã nguồn tối giản tuyệt đối, hoàn toàn xác định ($100\%$ deterministic), dễ bảo trì và dễ viết bài kiểm thử hồi quy.
+> 2. **Định danh trung thực:** Chúng tôi gọi đây là **Project Heuristic (Quy tắc Thực nghiệm Dự án)**, không tuyên bố là mô hình toán tối ưu tuyệt đối.
 
-#### Chi tiết Thuật toán Dự án (Project Heuristic Formula):
-1. **Khởi tạo:** Với mỗi thẻ mới: $\text{Reps} = 0, \text{EF} = 2.5, I = 0$.
-2. **Khi người học gửi Đánh giá ($q \in \{\text{AGAIN}, \text{HARD}, \text{GOOD}, \text{EASY}\}$):**
-   - Quy đổi điểm đánh giá: $\text{AGAIN} \to 1, \text{HARD} \to 2, \text{GOOD} \to 3, \text{EASY} \to 4$.
-   - **Cập nhật Hệ số Dễ $\text{EF}'$:**
-     $$\text{EF}' = \max\left(1.3, \; \text{EF} + (0.1 - (4 - q) \times (0.08 + (4 - q) \times 0.02))\right)$$
-   - **Cập nhật Chu kỳ $I'$ (Số ngày):**
-     - Nếu $q < 3$ ($\text{AGAIN}$ hoặc $\text{HARD}$ nghiêm trọng):
-       $$\text{Reps}' = 0, \quad I' = 1 \text{ ngày}$$
-     - Nếu $q \ge 3$:
-       $$\text{Reps}' = \text{Reps} + 1$$
-       $$I' = \begin{cases} 
-         1 \text{ ngày} & \text{khi } \text{Reps}' = 1 \\
-         3 \text{ ngày} & \text{khi } \text{Reps}' = 2 \\
-         \text{round}(I \times \text{EF}') & \text{khi } \text{Reps}' \ge 3 
-       \end{cases}$$
-       *(Nếu $q = 4$ ($\text{EASY}$), nhân thêm hệ số thưởng $1.15$).*
-   - **Cập nhật Ngày đến hạn:** $\text{DueDate}' = \text{Hôm nay} + (I' \times 86400000\text{ ms})$.
+#### Đặc tả Thuật toán Lập lịch Dự án (Project Heuristic Specification):
+1. **Khởi tạo (State Initialization):**
+   Mỗi thẻ mới bắt đầu với: $\text{Reps} = 0, \text{EF} = 2.5, I = 0, \text{Lapses} = 0$.
+2. **Quy tắc Xử lý 4 Mức Đánh giá:**
+
+   - **Trường hợp 1: `AGAIN` (Quên hoàn toàn / Thất bại thu hồi):**
+     $$\text{Reps}' = 0, \quad I' = 1 \text{ ngày}, \quad \text{EF}' = \max(1.3, \; \text{EF} - 0.20), \quad \text{Lapses}' = \text{Lapses} + 1$$
+     *(Thẻ bị đẩy về hàng đợi ôn tập của ngày hôm sau để tái thiết lập liên kết).*
+
+   - **Trường hợp 2: `HARD` (Thu hồi thành công với nỗ lực cao / Ngập ngừng):**
+     $$\text{Reps}' = \text{Reps} + 1$$
+     $$I' = \begin{cases} 
+       1 \text{ ngày} & \text{khi } \text{Reps}' \le 1 \\ 
+       \max(I + 1, \; \text{round}(I \times 1.2)) & \text{khi } \text{Reps}' \ge 2 
+     \end{cases}$$
+     $$\text{EF}' = \max(1.3, \; \text{EF} - 0.15)$$
+     *(LƯU Ý: Đây là lần thu hồi thành công, chu kỳ được nới rộng một cách thận trọng, KHÔNG đặt lại $\text{Reps}$ về 0).*
+
+   - **Trường hợp 3: `GOOD` (Thu hồi thành công chuẩn mực):**
+     $$\text{Reps}' = \text{Reps} + 1$$
+     $$I' = \begin{cases} 
+       1 \text{ ngày} & \text{khi } \text{Reps}' = 1 \\ 
+       3 \text{ ngày} & \text{khi } \text{Reps}' = 2 \\ 
+       \text{round}(I \times \text{EF}) & \text{khi } \text{Reps}' \ge 3 
+     \end{cases}$$
+     $$\text{EF}' = \text{EF}$$
+
+   - **Trường hợp 4: `EASY` (Thu hồi xuất sắc / Nhanh chóng):**
+     $$\text{Reps}' = \text{Reps} + 1$$
+     $$I' = \begin{cases} 
+       2 \text{ ngày} & \text{khi } \text{Reps}' = 1 \\ 
+       4 \text{ ngày} & \text{khi } \text{Reps}' = 2 \\ 
+       \text{round}(I \times \text{EF} \times 1.3) & \text{khi } \text{Reps}' \ge 3 
+     \end{cases}$$
+     $$\text{EF}' = \min(2.8, \; \text{EF} + 0.15)$$
+
+3. **Cập nhật Ngày đến hạn (Due Date):**
+   $$\text{DueDate}' = \text{Hôm nay} + (I' \times 86400000 \text{ ms})$$
 
 ---
 
@@ -290,10 +364,10 @@ Thang đánh giá 4 mức độ dùng để cung cấp tham số cho thuật to�
 
 ### 9.2. Bàn giao Kỹ thuật: Phát hiện Lỗi Renderer Hiện tại
 > [!WARNING]
-> **HỒ SƠ BÀN GIAO KỸ THUẬT: ENG-LEARN-002 — MAJOR**
+> **HỒ SƠ BÀN GIAO KỸ THUẬT: ENG-LEARN-002 — MAJOR — IMPLEMENTATION HANDOFF**
 > - **Mô tả lỗi:** Trong mã nguồn `scripts/build_web.py` hiện tại, hàm `render_callout` tạo ra các thẻ nội dung ẩn `.card-hint`, `.card-keypoints`, `.card-answer` với CSS ẩn (`display: none`). Tệp JavaScript `src/web/assets/js/app.js` được lập trình để lắng nghe sự kiện bấm trên các nút `.btn-hint`, `.btn-keypoints`, `.btn-answer`. Tuy nhiên, trình tạo mã `build_web.py` **hoàn toàn chưa phát sinh các nút bấm này** vào cây DOM HTML.
 > - **Hệ quả:** Người học trên web không có cách nào bấm để mở gợi ý hoặc lời giải của thẻ StudyCard; cơ chế tiết lộ tiệm tiến bị tê liệt một phần.
-> - **Kế hoạch xử lý:** Đã ghi nhận vào hồ sơ bàn giao triển khai kỹ thuật (Implementation Handoff). **Không sửa đổi mã nguồn web trong lượt thiết kế của Luna.**
+> - **Kế hoạch xử lý:** Đã ghi nhận vào hồ sơ bàn giao triển khai kỹ thuật cho Terra. **Không sửa đổi mã nguồn web trong lượt thiết kế của Luna.**
 
 ---
 
@@ -313,4 +387,5 @@ Thang đánh giá 4 mức độ dùng để cung cấp tham số cho thuật to�
 12. **Roediger, H. L., & Karpicke, J. D.** (2006). Test-enhanced learning: Taking memory tests improves long-term retention. *Psychological Science*, 17(3), 249–255.
 13. **Rohrer, D., & Taylor, K.** (2007). The shuffling of mathematics problems improves learning. *Instructional Science*, 35(6), 481–498.
 14. **Sweller, J.** (1988). Cognitive load during problem solving: Effects on learning. *Cognitive Science*, 12(2), 257–285.
-15. **Sweller, J., Ayres, P., & Kalyuga, S.** (2011). *Cognitive Load Theory*. Springer Science & Business Media.
+15. **Sweller, J., van Merriënboer, J. J. G., & Paas, F.** (2019). Cognitive architecture and instructional design: 20 years later. *Educational Psychology Review*, 31(2), 261–292.
+16. **Ye, J., et al.** (2024). *Free Spaced Repetition Scheduler (FSRS): Theoretical Foundations and Algorithmic Runtime*. Open-source research report.
