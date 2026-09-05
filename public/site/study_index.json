@@ -53,5 +53,93 @@
     "question": "Câu hỏi Vấn đáp: Phân biệt Hard Link và Symbolic Link (Soft Link) trong Linux. Điều gì xảy ra khi ta xóa file gốc?",
     "url": "labs/lab01-linux-basics.html",
     "anchor": "viva-lab01-hardlink-symlink"
+  },
+  {
+    "id": "rc-ch07-logical-vs-physical",
+    "concept_id": "ch07-address-binding",
+    "type": "recallcheckpoint",
+    "chapter": "7",
+    "doc_id": "ch07-memory-management",
+    "doc_title": "Chương 7: Quản Lý Bộ Nhớ (Memory Management)",
+    "question": "Nhiệm vụ thu hồi kín sách (Closed-book Recall):\n1. Nêu sự khác nhau bản chất giữa địa chỉ logic và địa chỉ vật lý.\n2. Thành phần phần cứng nào thực hiện ánh xạ ",
+    "url": "theory/ch07-memory-management.html",
+    "anchor": "rc-ch07-logical-vs-physical"
+  },
+  {
+    "id": "rc-ch07-fragmentation",
+    "concept_id": "ch07-fragmentation",
+    "type": "recallcheckpoint",
+    "chapter": "7",
+    "doc_id": "ch07-memory-management",
+    "doc_title": "Chương 7: Quản Lý Bộ Nhớ (Memory Management)",
+    "question": "Nhiệm vụ thu hồi kín sách (Closed-book Recall):\n1. Phân biệt sự khác nhau căn bản về vị trí và nguyên nhân giữa phân mảnh nội và phân mảnh ngoại.\n2. Phân vùng c",
+    "url": "theory/ch07-memory-management.html",
+    "anchor": "rc-ch07-fragmentation"
+  },
+  {
+    "id": "rc-ch07-fit-algorithms",
+    "concept_id": "ch07-fit-algorithms",
+    "type": "recallcheckpoint",
+    "chapter": "7",
+    "doc_id": "ch07-memory-management",
+    "doc_title": "Chương 7: Quản Lý Bộ Nhớ (Memory Management)",
+    "question": "Nhiệm vụ thu hồi kín sách (Closed-book Recall):\n1. Trình bày sự khác biệt giữa First Fit và Next Fit về điểm bắt đầu duyệt danh sách.\n2. Vì sao Best Fit có xu h",
+    "url": "theory/ch07-memory-management.html",
+    "anchor": "rc-ch07-fit-algorithms"
+  },
+  {
+    "id": "rc-ch07-paging-translation",
+    "concept_id": "ch07-paging-translation",
+    "type": "recallcheckpoint",
+    "chapter": "7",
+    "doc_id": "ch07-memory-management",
+    "doc_title": "Chương 7: Quản Lý Bộ Nhớ (Memory Management)",
+    "question": "Nhiệm vụ thu hồi kín sách (Closed-book Recall):\n1. Trình bày công thức tính số trang $p$, độ dời $d$ và địa chỉ vật lý từ địa chỉ logic $L$ và kích thước trang ",
+    "url": "theory/ch07-memory-management.html",
+    "anchor": "rc-ch07-paging-translation"
+  },
+  {
+    "id": "rc-ch07-eat-derivation",
+    "concept_id": "ch07-eat-calculation",
+    "type": "recallcheckpoint",
+    "chapter": "7",
+    "doc_id": "ch07-memory-management",
+    "doc_title": "Chương 7: Quản Lý Bộ Nhớ (Memory Management)",
+    "question": "Nhiệm vụ thu hồi kín sách (Closed-book Recall):\n1. Viết công thức tổng quát tính EAT khi có xét đến thời gian tra TLB $\\epsilon$ và thời gian RAM $t_{\\text{RAM}",
+    "url": "theory/ch07-memory-management.html",
+    "anchor": "rc-ch07-eat-derivation"
+  },
+  {
+    "id": "rc-ch07-swapping",
+    "concept_id": "ch07-swapping",
+    "type": "recallcheckpoint",
+    "chapter": "7",
+    "doc_id": "ch07-memory-management",
+    "doc_title": "Chương 7: Quản Lý Bộ Nhớ (Memory Management)",
+    "question": "Nhiệm vụ thu hồi kín sách (Closed-book Recall):\n1. Trình bày mục đích và cơ chế cơ bản của kỹ thuật Hoán vị (Swapping).\n2. Trong tổng thời gian hoán vị một tiến",
+    "url": "theory/ch07-memory-management.html",
+    "anchor": "rc-ch07-swapping"
+  },
+  {
+    "id": "tp-ch07-fit-allocation",
+    "concept_id": "ch07-fit-algorithms",
+    "type": "transferproblem",
+    "chapter": "7",
+    "doc_id": "ch07-memory-management",
+    "doc_title": "Chương 7: Quản Lý Bộ Nhớ (Memory Management)",
+    "question": "Bài toán chuyển giao độc lập (Transfer Challenge):\nCho hệ thống có 4 phân vùng trống ban đầu theo thứ tự: $400\\text{KB}, 700\\text{KB}, 300\\text{KB}, 500\\text{KB",
+    "url": "theory/ch07-memory-management.html",
+    "anchor": "tp-ch07-fit-allocation"
+  },
+  {
+    "id": "tp-ch07-paging-hex",
+    "concept_id": "ch07-paging-translation",
+    "type": "transferproblem",
+    "chapter": "7",
+    "doc_id": "ch07-memory-management",
+    "doc_title": "Chương 7: Quản Lý Bộ Nhớ (Memory Management)",
+    "question": "Bài toán chuyển giao Hex trực tiếp (Transfer Challenge):\nMột hệ thống phân trang sử dụng địa chỉ 32-bit với kích thước trang $4\\text{KB} = 2^{12}\\text{ bytes} =",
+    "url": "theory/ch07-memory-management.html",
+    "anchor": "tp-ch07-paging-hex"
   }
 ]

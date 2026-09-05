@@ -2,19 +2,19 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH4_LEARNING_SYSTEM_READY_FOR_FINAL_INDEPENDENT_CHECK`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH4_CH7_AUTHORING_READY_FOR_ENGINEERING_QA`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 7 (Chapter 7 Source Mapping):** `VERIFIED`  
 **Kiến trúc học tập (Learning Architecture):** `VERIFIED — V1.2`  
-**Triển khai Hệ thống Học tập (Learning System Implementation):** `ENGINEERING_COMPLETE — PENDING FINAL INDEPENDENT CHECK`  
+**Triển khai Hệ thống Học tập (Learning System Implementation):** `VERIFIED — LOCKED`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `CONTENT_VERIFIED`  
-**Soạn thảo nội dung Chương 7 (Chapter 7 Authoring):** `NOT_STARTED`  
+**Soạn thảo nội dung Chương 7 (Chapter 7 Authoring):** `DRAFT_COMPLETE — PENDING ENGINEERING QA`  
 **Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASSED — All 16 foundation gates passing, deterministic learning system integrated, Playwright browser suite (12/12) passing.`  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5 + CH6`  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6 + LEARNING_SYSTEM_FINAL_QA_CLOSED`  
-**Hành động tiếp theo chính xác (Exact Next Action):** `Final independent learning-system verification before Chapter 7 authoring.`  
+**Hành động tiếp theo chính xác (Exact Next Action):** `Terra engineering QA of Chapter 7 rendering, learning primitives, numeric integrity, routes and PDF/web compatibility.`  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-09-05
 
@@ -57,7 +57,8 @@ Một kho dữ liệu nguồn duy nhất (**Single Source of Truth** tại thư 
 | [`research/data/exam_evidence.yaml`](research/data/exam_evidence.yaml) | Dữ liệu cấu trúc 20 hồ sơ đề thi: 1 `RECONSTRUCTED_PRACTICE`, 19 `UNVERIFIED_REFERENCE`, 0 `VERIFIED_ARCHIVE`; có đối soát mã băm/tệp khi khả dụng. | `EVIDENCE-AWARE` |
 | [`content/sources/registry.yaml`](content/sources/registry.yaml) | Sổ đăng ký 66 mã định danh, tách canonical user attachments Ch4 74/59, Midterm 17-slide PPTX và Ch5 tương lai khỏi mọi local variants. | `SOURCE-FIDELITY PASS` |
 | [`research/GLM_V2_ARCHITECTURE_AUDIT.md`](research/GLM_V2_ARCHITECTURE_AUDIT.md) | Nhật ký xử lý 100% các phát hiện kiểm toán GLM (8 Blockers, 7 Majors). | `RESOLVED` |
-| [`research/LUNA_CH6_SOURCE_MAP_REPORT.md`](research/LUNA_CH6_SOURCE_MAP_REPORT.md) | Bản đồ nguồn chính tắc Chương 6: 67 trang, locators thuật toán, QBank và đối soát outline. | `PASS — PENDING INDEPENDENT CHECK` |
+| [`research/LUNA_CH6_SOURCE_MAP_REPORT.md`](research/LUNA_CH6_SOURCE_MAP_REPORT.md) | Bản đồ nguồn chính tắc Chương 6: 67 trang, locators thuật toán, QBank và đối soát outline. | `PASS — INDEPENDENT QA PASSED` |
+| [`research/LUNA_CH7_SOURCE_MAP_REPORT.md`](research/LUNA_CH7_SOURCE_MAP_REPORT.md) | Bản đồ nguồn chính tắc Chương 7: 72 trang, 20 đơn vị QBank, bài toán phân vùng/phân trang/TLB/EAT. | `PASS — INDEPENDENT QA PASSED` |
 
 ---
 

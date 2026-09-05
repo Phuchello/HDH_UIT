@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light" data-ui-mode="learn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Ngân hàng Tự luận &amp; Bài tập Chương 7: Quản Lý Bộ Nhớ (Memory Management) — IT007 UIT</title><link rel="stylesheet" href="../../assets/css/style.css"><script src="../../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><div class="mode-switcher" role="group" aria-label="Chế độ học tập"><button type="button" class="mode-btn" data-mode="learn" aria-pressed="false">📚 Học</button><button type="button" class="mode-btn" data-mode="review" aria-pressed="false">🔄 Ôn</button><button type="button" class="mode-btn" data-mode="reference" aria-pressed="false">🔎 Tra</button><a class="review-hub-shortcut" id="review-hub-shortcut" href="../../review/index.html" style="display: none;">Hàng đợi toàn môn ↗</a></div><button type="button" class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button type="button" class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch05-synchronization.html">Chương 5: Đồng bộ Tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch06-deadlock.html">Chương 6: Bế tắc (Deadlock)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../theory/ch07-memory-management.html">Chương 7: Quản Lý Bộ Nhớ (Memory Management)</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch05.html">Ngân hàng tự luận — Chương 5: Đồng bộ Tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch06.html">Ngân hàng Tự luận &amp; Bài tập Chương 6: Bế tắc (Deadlock)</a></li>
+<li class="nav-tree-item"><a class="nav-link active" href="ch07.html">Ngân hàng Tự luận &amp; Bài tập Chương 7: Quản Lý Bộ Nhớ (Memory Management)</a></li>
+</ul>
+<div class="nav-section-title">ÔN TẬP</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../review/index.html">Hàng đợi ôn tập (Review Hub)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../reviews/midterm.html">Ôn tập Giữa kỳ IT007 — Chương 1–4</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../../index.html">Trang chủ</a> <span>/</span> <span>Ngân hàng Tự luận &amp; Bài tập Chương 7: Quản Lý Bộ Nhớ (Memory Management)</span></div><article class="article-body"><h1 id="ngan-hang-cau-hoi-tu-luan-bai-tap-chuong-7-quan-ly-bo-nho-memory-management">Ngân hàng Câu hỏi Tự luận &amp; Bài tập Chương 7: Quản Lý Bộ Nhớ (Memory Management)</h1>
+
+<blockquote><strong>Căn cứ nguồn học liệu chính thống:</strong><br>- Tài liệu gốc: <code>UIT-QBANK-CH07-2024</code> (<code>Bai tap chuong 7 HDH.docx</code> – 23,960 bytes, Khoa Kỹ thuật Máy tính, Trường Đại học Công nghệ Thông tin – ĐHQG-HCM).<br>- Đồng bộ cấu trúc bài giảng: <code>UIT-SLIDE-CH07-2024</code> (<code>#Week09-Chapter7 2024.pdf</code>, 72 trang).<br>- Chuẩn đầu ra môn học: <code>UIT-OUTLINE-2024</code> (<code>IT007_HeDieuHanh_14.2024.pdf</code>).</blockquote>
+
+<hr>
+
+<h2 id="phan-1-cau-hoi-ly-thuyet-nen-tang-units-01-09">PHẦN 1: CÂU HỎI LÝ THUYẾT NỀN TẢNG (UNITS 01 – 09)</h2>
+
+<hr>
+
+<h3 id="qbank-ch07-01-khai-niem-cac-yeu-cau-oi-voi-quan-ly-bo-nho">QBANK-CH07-01: Khái niệm &amp; Các Yêu Cầu Đối Với Quản Lý Bộ Nhớ</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-01</code></li><li><strong>Vị trí nguồn:</strong> Câu 1 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 1, P3)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Nêu khái niệm bộ nhớ và các yêu cầu đối với việc quản lý bộ nhớ trong hệ điều hành?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p>Trong hệ thống máy tính, <strong>Bộ nhớ chính (RAM)</strong> là một mảng lớn gồm các từ nhớ (words) hoặc bytes, mỗi vị trí có một địa chỉ vật lý duy nhất. Đây là phương tiện lưu trữ duy nhất mà CPU có thể tương tác và nạp lệnh trực tiếp (bên cạnh các thanh ghi nội bộ).</p>
+
+<p>Để đảm bảo khả năng đa nhiệm và an toàn hệ thống, hệ điều hành phải đáp ứng <strong>5 yêu cầu quản lý bộ nhớ kinh điển</strong>:</p>
+
+<ol><li><strong>Tái định vị (Relocation):</strong> Trong môi trường đa chương, một chương trình có thể bị hoán vị ra đĩa và khi nạp lại có thể nằm ở một vị trí vật lý hoàn toàn khác trong RAM. Hệ thống phải cho phép chương trình thực thi chính xác mà không cần biên dịch lại.</li><li><strong>Bảo vệ (Protection):</strong> Ngăn chặn việc một tiến trình truy cập trái phép hoặc ghi đè lên không gian nhớ của tiến trình khác hoặc vùng nhớ của hệ điều hành (Kernel). Mỗi tiến trình chỉ được phép truy xuất trong phạm vi không gian địa chỉ được cấp phát.</li><li><strong>Chia sẻ (Sharing):</strong> Cho phép nhiều tiến trình cùng truy cập an toàn vào một vùng nhớ chung mà không vi phạm tính toàn vẹn (ví dụ: chia sẻ mã lệnh chỉ đọc của thư viện hệ thống <code>libc</code>, vùng nhớ dùng chung IPC).</li><li><strong>Tổ chức logic (Logical Organization):</strong> Phản ánh cấu trúc logic của chương trình người dùng (các module hàm, mảng dữ liệu, stack, heap) để hỗ trợ chia sẻ và bảo vệ linh hoạt theo từng module.</li><li><strong>Tổ chức vật lý (Physical Organization):</strong> Quản lý luân chuyển thông tin giữa bộ nhớ chính (RAM) có tốc độ nhanh nhưng dung lượng hạn chế và bộ nhớ phụ (Ổ đĩa) có tốc độ chậm nhưng dung lượng lớn.</li></ol>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<p><em>(Trọng số gợi ý của handbook nhằm phục vụ tự đánh giá ôn tập — không phải barem chấm thi chính thức của UIT).</em></p>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Nêu được định nghĩa bộ nhớ chính và vai trò với CPU</td><td>Gợi ý: 20%</td></tr><tr><td>Trình bày rõ yêu cầu Tái định vị (Relocation) và Bảo vệ (Protection)</td><td>Gợi ý: 30%</td></tr><tr><td>Trình bày rõ yêu cầu Chia sẻ (Sharing)</td><td>Gợi ý: 20%</td></tr><tr><td>Trình bày rõ yêu cầu Tổ chức logic và Tổ chức vật lý</td><td>Gợi ý: 30%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lỗi phổ biến:</em> Chỉ nêu các yêu cầu quản lý mà quên định nghĩa bộ nhớ. Hoặc chỉ nêu "quản lý bộ nhớ là giải phóng RAM khi đầy" mà không nêu đủ 5 yêu cầu kinh điển.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-02-ac-iem-cac-loai-ia-chi-nho">QBANK-CH07-02: Đặc Điểm Các Loại Địa Chỉ Nhớ</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-02</code></li><li><strong>Vị trí nguồn:</strong> Câu 2 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 1, P4)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-2">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Nêu đặc điểm các loại địa chỉ nhớ: Địa chỉ tượng trưng (Symbolic address), Địa chỉ tái định vị (Relocatable address), Địa chỉ tuyệt đối (Absolute address). Phân biệt địa chỉ logic và địa chỉ vật lý?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-2">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p>Trong chu trình từ mã nguồn đến thực thi, lệnh và dữ liệu được biểu diễn qua 3 loại địa chỉ:</p>
+
+<ol><li><strong>Địa chỉ tượng trưng (Symbolic address):</strong> Xuất hiện trong mã nguồn do lập trình viên đặt (ví dụ: tên biến <code>sum</code>, <code>total</code>, nhãn lệnh <code>loop_1</code>).</li><li><strong>Địa chỉ tái định vị (Relocatable address):</strong> Do trình biên dịch (Compiler) sinh ra trong tệp đối tượng (<code>.o</code>, <code>.obj</code>). Đây là địa chỉ tương đối tính từ điểm bắt đầu của module (ví dụ: "cách đầu module 16 bytes").</li><li><strong>Địa chỉ tuyệt đối (Absolute address):</strong> Do trình nạp (Loader) hoặc phần cứng MMU chuyển đổi khi nạp vào RAM. Đây là vị trí vật lý cụ thể, xác thực trên thanh RAM (ví dụ: byte thứ <code>0x00401000</code>).</li></ol>
+
+<p><strong>Phân biệt Địa chỉ Logic vs Địa chỉ Vật lý:</strong></p>
+
+<ul><li><strong>Địa chỉ Logic (Địa chỉ ảo):</strong> Là địa chỉ do CPU phát sinh khi thực thi lệnh. Không gian các địa chỉ logic mà tiến trình nhìn thấy gọi là không gian địa chỉ logic.</li><li><strong>Địa chỉ Vật lý:</strong> Là địa chỉ thực tế xuất hiện trên các đường bus địa chỉ của phần cứng để đọc/ghi thanh RAM.</li><li><em>Chuyển đổi:</em> Khi dùng cơ chế Execution-time binding, địa chỉ logic được phần cứng MMU cộng với thanh ghi Base (Relocation) để trở thành địa chỉ vật lý: $	ext{Địa chỉ Vật lý} = 	ext{Địa chỉ Logic} + 	ext{Base}$.</li></ul>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-2">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Nêu đúng đặc điểm của 3 loại địa chỉ: Ký hiệu, Tái định vị, Tuyệt đối</td><td>Gợi ý: 50%</td></tr><tr><td>Định nghĩa chính xác Địa chỉ Logic (do CPU phát sinh)</td><td>Gợi ý: 25%</td></tr><tr><td>Định nghĩa chính xác Địa chỉ Vật lý (vị trí thực tế trên bus RAM)</td><td>Gợi ý: 25%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-2">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lỗi phổ biến:</em> Đồng nhất địa chỉ logic và địa chỉ vật lý trong mọi trường hợp. Cần nhớ: trong Compile-time và Load-time binding cơ bản, địa chỉ logic có thể bằng địa chỉ vật lý; nhưng trong Execution-time binding (chuẩn hiện đại), chúng hoàn toàn tách biệt.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-03-cac-thoi-iem-chuyen-oi-ia-chi-lenh-va-du-lieu">QBANK-CH07-03: Các Thời Điểm Chuyển Đổi Địa Chỉ Lệnh Và Dữ Liệu</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-03</code></li><li><strong>Vị trí nguồn:</strong> Câu 3 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 1, P5)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-3">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Trình bày các thời điểm chuyển đổi địa chỉ lệnh và dữ liệu thành địa chỉ thực tế trong bộ nhớ (Address binding)?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-3">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p>Quá trình ánh xạ từ địa chỉ logic/tái định vị sang địa chỉ vật lý (Address Binding) có thể diễn ra tại 3 thời điểm:</p>
+
+<ol><li><strong>Thời điểm biên dịch (Compile time):</strong><ul><li>Nếu đã biết trước vị trí bộ nhớ mà tiến trình sẽ cư trú trong RAM ngay khi viết mã.</li><li>Trình biên dịch sinh trực tiếp mã tuyệt đối (Absolute code).</li><li><em>Hạn chế:</em> Nếu vị trí nạp thay đổi, bắt buộc phải biên dịch lại toàn bộ mã nguồn từ đầu (rất cứng nhắc, chỉ dùng cho hệ thống chuyên dụng như vi điều khiển nhúng đơn giản).</li></ul></li><li><strong>Thời điểm nạp (Load time):</strong><ul><li>Nếu chưa biết vị trí nạp khi biên dịch, trình biên dịch sinh mã tái định vị (Relocatable code).</li><li>Khi chương trình được nạp vào RAM, Trình nạp (Loader) tính toán và cộng địa chỉ cơ sở vào toàn bộ các tham chiếu địa chỉ để biến chúng thành địa chỉ tuyệt đối.</li><li><em>Hạn chế:</em> Một khi đã nạp vào RAM, tiến trình không thể di dời sang vị trí khác trong suốt quá trình chạy.</li></ul></li><li><strong>Thời điểm thực thi (Execution time / Run time):</strong><ul><li>Việc ánh xạ địa chỉ bị trì hoãn cho đến khi chỉ thị lệnh thực sự được CPU thực thi.</li><li>Tiến trình có thể được di chuyển linh hoạt từ vùng nhớ này sang vùng nhớ khác trong quá trình chạy (hỗ trợ Swapping và phân trang).</li><li><em>Yêu cầu:</em> Bắt buộc phải có sự hỗ trợ của phần cứng đặc biệt là <strong>MMU (Memory Management Unit)</strong> với thanh ghi Relocation (Base Register).</li></ul></li></ol>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-3">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Trình bày đúng cơ chế và hạn chế của Compile time</td><td>Gợi ý: 30%</td></tr><tr><td>Trình bày đúng cơ chế và hạn chế của Load time</td><td>Gợi ý: 30%</td></tr><tr><td>Trình bày đúng Execution time và yêu cầu phần cứng MMU</td><td>Gợi ý: 40%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-3">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lưu ý quan trọng:</em> Thi tự luận thường hỏi "Điều kiện để một tiến trình có thể di chuyển vùng nhớ khi đang thực thi là gì?". Câu trả lời bắt buộc là: Phải dùng <strong>Execution-time binding</strong> với sự hỗ trợ của <strong>phần cứng MMU</strong>.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-04-khai-niem-co-che-lien-ket-ong-dynamic-linking">QBANK-CH07-04: Khái Niệm &amp; Cơ Chế Liên Kết Động (Dynamic Linking)</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-04</code></li><li><strong>Vị trí nguồn:</strong> Câu 4 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 1, P6)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-4">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Khái niệm và cơ chế hoạt động của liên kết động (Dynamic linking)? So sánh với liên kết tĩnh?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-4">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>Khái niệm:</strong> Liên kết động là cơ chế trong đó việc liên kết các module hàm thư viện hệ thống với chương trình người dùng được trì hoãn cho đến khi chương trình thực sự chạy (Execution time).</p>
+
+<p><strong>Cơ chế hoạt động (Stub mechanism):</strong></p>
+
+<ol><li>Trong mã nhị phân của chương trình thực thi, trình liên kết không sao chép toàn bộ mã hàm thư viện vào, mà chỉ chèn một đoạn mã đại diện ngắn gọi là <strong>Stub</strong>.</li><li>Khi hàm thư viện được gọi lần đầu tiên, Stub được kích hoạt: Nó kiểm tra xem thư viện tương ứng đã được nạp vào bộ nhớ RAM chưa.</li><li>Nếu chưa có trong RAM, Stub yêu cầu hệ điều hành nạp thư viện từ đĩa vào RAM.</li><li>Sau khi thư viện đã có trong RAM, Stub tự thay thế chính nó bằng địa chỉ thực của hàm thư viện và thực thi hàm. Các lần gọi tiếp theo sẽ nhảy trực tiếp đến mã thư viện mà không qua Stub nữa.</li></ol>
+
+<p><strong>So sánh Liên kết tĩnh (Static Linking) vs Liên kết động (Dynamic Linking):</strong></p>
+
+<ul><li><strong>Dung lượng đĩa và RAM:</strong><ul><li><em>Tĩnh:</em> Mỗi tệp <code>.exe</code> đều chứa một bản sao đầy đủ của thư viện $\implies$ lãng phí dung lượng đĩa và RAM khổng lồ khi nhiều chương trình cùng chạy.</li><li><em>Động:</em> Thư viện chia sẻ (Shared Libraries: <code>.so</code> trên Linux, <code>.dll</code> trên Windows) chỉ cần nạp <strong>MỘT bản sao duy nhất vào RAM</strong>, tất cả các tiến trình cùng dùng chung.</li></ul></li><li><strong>Nâng cấp và bảo trì:</strong><ul><li><em>Tĩnh:</em> Khi thư viện sửa lỗi, phải biên dịch và liên kết lại toàn bộ các ứng dụng.</li><li><em>Động:</em> Chỉ cần thay thế tệp <code>.so</code> / <code>.dll</code> mới, mọi ứng dụng tự động nhận bản vá mà không cần biên dịch lại.</li></ul></li></ul>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-4">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Nêu đúng định nghĩa liên kết động</td><td>Gợi ý: 25%</td></tr><tr><td>Giải thích chính xác cơ chế hoạt động của Stub</td><td>Gợi ý: 40%</td></tr><tr><td>So sánh ưu điểm về dung lượng RAM và nâng cấp so với liên kết tĩnh</td><td>Gợi ý: 35%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-4">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lưu ý:</em> Phân biệt <strong>Dynamic Loading</strong> (nạp hàm của chính chương trình khi cần) và <strong>Dynamic Linking</strong> (liên kết với thư viện hệ thống bên ngoài dùng chung).</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-05-phan-manh-ngoai-vs-phan-manh-noi">QBANK-CH07-05: Phân Mảnh Ngoại vs Phân Mảnh Nội</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-05</code></li><li><strong>Vị trí nguồn:</strong> Câu 5 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 1, P7)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-5">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Nêu khái niệm và phân biệt phân mảnh ngoại (External fragmentation) và phân mảnh nội (Internal fragmentation)?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-5">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>1. Phân mảnh nội (Internal Fragmentation):</strong></p>
+
+<ul><li><em>Khái niệm:</em> Là hiện tượng vùng nhớ trống nằm <strong>bên trong</strong> một phân vùng hoặc một khối nhớ đã được cấp phát cho tiến trình, nhưng tiến trình không dùng hết.</li><li><em>Đặc điểm:</em> Phần dư thừa này thuộc quyền sở hữu của tiến trình nên hệ điều hành <strong>không thể cấp phát cho bất kỳ tiến trình nào khác</strong>.</li><li><em>Nguyên nhân:</em> Do đơn vị cấp phát bộ nhớ có kích thước cố định (ví dụ phân vùng cố định hoặc kích thước khung trang trong phân trang) lớn hơn kích thước thực tế tiến trình yêu cầu.</li></ul>
+
+<p><strong>2. Phân mảnh ngoại (External Fragmentation):</strong></p>
+
+<ul><li><em>Khái niệm:</em> Là hiện tượng tổng dung lượng bộ nhớ trống trong hệ thống là <strong>đủ</strong> để thỏa mãn yêu cầu của tiến trình mới, nhưng các vùng trống này bị phân tán thành nhiều mảnh nhỏ rời rạc nằm <strong>bên ngoài</strong> các tiến trình, không liên tục nhau.</li><li><em>Đặc điểm:</em> Không thể cấp phát được cho tiến trình đòi hỏi bộ nhớ liên tục.</li><li><em>Nguyên nhân:</em> Do tiến trình liên tục nạp vào và giải phóng trong cơ chế phân vùng động, để lại các lỗ trống kích thước khác nhau xen kẽ giữa các vùng nhớ đang sử dụng.</li></ul>
+
+<p><strong>Bảng so sánh đối kháng:</strong></p>
+
+<table><thead><tr><th>Tiêu chí</th><th>Phân mảnh nội (Internal)</th><th>Phân mảnh ngoại (External)</th></tr></thead><tbody><tr><td><strong>Vị trí vùng lãng phí</strong></td><td>Nằm BÊN TRONG phân vùng được cấp</td><td>Nằm BÊN NGOÀI, rải rác giữa các phân vùng</td></tr><tr><td><strong>Tổng dung lượng trống</strong></td><td>Nhỏ (phần lẻ dư thừa)</td><td>Lớn (tổng các mảnh có thể rất lớn)</td></tr><tr><td><strong>Mô hình xuất hiện</strong></td><td>Phân vùng cố định, Phân trang (trang cuối)</td><td>Phân vùng động, Phân đoạn</td></tr><tr><td><strong>Giải pháp khắc phục</strong></td><td>Giảm kích thước khối cấp phát (trang nhỏ)</td><td>Gom cụm (Compaction), Chuyển sang Phân trang</td></tr></tbody></table>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-5">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Nêu đúng định nghĩa và vị trí của phân mảnh nội</td><td>Gợi ý: 35%</td></tr><tr><td>Nêu đúng định nghĩa và nguyên nhân phân mảnh ngoại</td><td>Gợi ý: 35%</td></tr><tr><td>Lập bảng so sánh hoặc đối chiếu rõ ràng giữa hai loại</td><td>Gợi ý: 30%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-5">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Bẫy trắc nghiệm/tự luận:</em> Câu hỏi "Cơ chế phân trang có bị phân mảnh không?". Câu trả lời chuẩn: Phân trang <strong>loại bỏ 100% phân mảnh ngoại</strong>, nhưng <strong>vẫn còn phân mảnh nội</strong> ở trang cuối cùng của tiến trình.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-06-phan-vung-ong-vs-phan-vung-co-inh-cac-chien-luoc-placement">QBANK-CH07-06: Phân Vùng Động vs Phân Vùng Cố Định &amp; Các Chiến Lược Placement</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-06</code></li><li><strong>Vị trí nguồn:</strong> Câu 6 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 1, P8)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-6">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>So sánh phân vùng động và phân vùng cố định? Nêu nguyên tắc hoạt động của các chiến lược chọn lỗ trống: First-fit, Best-fit, Next-fit, Worst-fit?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-6">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>1. So sánh Phân vùng cố định vs Phân vùng động:</strong></p>
+
+<ul><li><strong>Phân vùng cố định (Static Partitioning):</strong><ul><li>Bộ nhớ được chia thành các phân vùng có kích thước cố định ngay từ đầu.</li><li>Số lượng tiến trình tối đa bị giới hạn bởi số phân vùng.</li><li>Gây ra <strong>phân mảnh nội</strong> nặng nề. Quản lý đơn giản.</li></ul></li><li><strong>Phân vùng động (Dynamic Partitioning):</strong><ul><li>Bộ nhớ được cấp phát linh hoạt theo đúng kích thước tiến trình yêu cầu.</li><li>Không bị phân mảnh nội ban đầu, nhưng sau một thời gian vận hành sẽ gây ra <strong>phân mảnh ngoại</strong>.</li></ul></li></ul>
+
+<p><strong>2. Nguyên tắc hoạt động của 4 chiến lược chọn lỗ trống:</strong></p>
+
+<ol><li><strong>First Fit (Khớp đầu tiên):</strong> Quét danh sách lỗ trống từ đầu, chọn lỗ trống đầu tiên có kích thước đủ lớn ($	ext{Size} \ge 	ext{Process}$). Tốc độ tìm kiếm nhanh nhất.</li><li><strong>Best Fit (Khớp tốt nhất):</strong> Quét toàn bộ danh sách, chọn lỗ trống nhỏ nhất trong số các lỗ đủ lớn. Để lại lỗ trống dư thừa nhỏ nhất, nhưng tạo ra nhiều mảnh vụn li ti khó sử dụng.</li><li><strong>Next Fit (Khớp kế tiếp):</strong> Bắt đầu quét từ vị trí con trỏ cấp phát của lượt trước đó (có quay vòng về đầu nếu chạm đáy). Phân bổ các tiến trình đều hơn khắp bộ nhớ.</li><li><strong>Worst Fit (Khớp tồi nhất):</strong> Quét toàn bộ danh sách, chọn lỗ trống lớn nhất hiện có. Để lại phần dư thừa có kích thước lớn nhất, hy vọng có thể cấp phát tiếp cho tiến trình khác.</li></ol>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-6">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>So sánh đúng ưu/nhược điểm giữa phân vùng cố định và động</td><td>Gợi ý: 40%</td></tr><tr><td>Trình bày chính xác nguyên tắc của First Fit và Best Fit</td><td>Gợi ý: 30%</td></tr><tr><td>Trình bày chính xác nguyên tắc của Next Fit và Worst Fit</td><td>Gợi ý: 30%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-6">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lỗi Next Fit:</em> Nhớ rằng Next Fit không quét lại từ đầu sau mỗi lần cấp phát! Phải ghi nhớ con trỏ đang dừng ở phân vùng nào để quét tiếp.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-07-co-che-phan-trang-paging-quy-trinh-dich-ia-chi">QBANK-CH07-07: Cơ Chế Phân Trang (Paging) &amp; Quy Trình Dịch Địa Chỉ</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-07</code></li><li><strong>Vị trí nguồn:</strong> Câu 7 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 1, P9)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-7">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Trình bày cơ chế phân trang (Paging) và quy trình chuyển đổi từ địa chỉ logic $(p, d)$ sang địa chỉ vật lý $(f, d)$?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-7">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>1. Cơ chế phân trang:</strong></p>
+
+<ul><li>Không gian địa chỉ logic của tiến trình được chia thành các phần bằng nhau gọi là <strong>Trang (Pages)</strong>.</li><li>Bộ nhớ vật lý (RAM) được chia thành các phần có cùng kích thước với trang, gọi là <strong>Khung trang (Frames)</strong>.</li><li>Khi nạp tiến trình, các trang có thể được đặt vào <strong>bất kỳ khung trang trống nào</strong> trong RAM (không cần liên tục).</li><li>Hệ điều hành duy trì một <strong>Bảng phân trang (Page Table)</strong> cho mỗi tiến trình để lưu ánh xạ từ số trang $p$ sang số khung $f$.</li></ul>
+
+<p><strong>2. Quy trình chuyển đổi địa chỉ:</strong></p>
+
+<ul><li>CPU phát sinh địa chỉ logic gồm 2 thành phần: $[p \mid d]$<ul><li>$p$ (Page number): Chỉ số trang logic.</li><li>$d$ (Offset): Độ dời trong trang.</li></ul></li><li>Các bước phần cứng thực hiện:<ol><li>Dùng $p$ làm chỉ số tra vào Bảng phân trang của tiến trình.</li><li>Lấy ra số khung trang vật lý tương ứng là $f$.</li><li>Giữ nguyên độ dời $d$.</li><li>Ghép $f$ và $d$ tạo thành địa chỉ vật lý: $[f \mid d]$.</li></ol></li><li>Về mặt toán học (với kích thước trang $S$):<p>$$p = \lfloor 	ext{Địa chỉ logic} / S </p></li></ul>
+
+<p>floor, \quad d = 	ext{Địa chỉ logic} \pmod S$$<br>  $$	ext{Địa chỉ vật lý} = f 	imes S + d$$</p>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-7">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Nêu đúng khái niệm Trang (Page), Khung trang (Frame) và Bảng phân trang</td><td>Gợi ý: 40%</td></tr><tr><td>Trình bày rõ các bước chuyển đổi từ $(p, d)$ sang $(f, d)$</td><td>Gợi ý: 40%</td></tr><tr><td>Nêu công thức toán học và giải thích vì sao độ dời $d$ không đổi</td><td>Gợi ý: 20%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-7">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lưu ý sống còn:</em> Tuyệt đối không cộng $d$ vào $f$ theo kiểu $f + d$. Phải nhân $f$ với kích thước trang $S$ rồi mới cộng $d$: $f 	imes S + d$ (hoặc ghép bit $[f \mid d]$).</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-08-cai-at-bang-trang-phan-cung-tlb-thoi-gian-hieu-dung-eat">QBANK-CH07-08: Cài Đặt Bảng Trang Phần Cứng &amp; TLB, Thời Gian Hiệu Dụng EAT</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-08</code></li><li><strong>Vị trí nguồn:</strong> Câu 8 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 1, P10)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-8">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Trình bày cách cài đặt bảng phân trang trong phần cứng (PTBR, TLB)? Định nghĩa và công thức tính Thời gian truy xuất hiệu dụng (EAT)?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-8">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>1. Cài đặt bảng phân trang phần cứng:</strong></p>
+
+<ul><li><strong>PTBR (Page-Table Base Register):</strong> Thanh ghi trỏ đến vị trí bắt đầu của Bảng phân trang trong RAM. Khi chuyển ngữ cảnh (Context switch), hệ điều hành chỉ cần nạp lại giá trị PTBR.</li><li><strong>Vấn đề:</strong> Bảng trang lưu trong RAM đòi hỏi <strong>2 lần truy xuất RAM</strong> cho mỗi thao tác đọc/ghi dữ liệu (1 lần đọc bảng trang, 1 lần đọc dữ liệu).</li><li><strong>Giải pháp TLB (Translation Lookaside Buffer):</strong> Trang bị bộ nhớ đệm phần cứng kết hợp tốc độ cao (Associative Cache), lưu các mục ánh xạ $(p, f)$ hay dùng nhất.<ul><li>Khi tra địa chỉ: CPU tìm song song trong TLB.</li><li>Nếu <strong>TLB Hit</strong>: Lấy ngay $f$, chỉ tốn 1 lần đọc RAM.</li><li>Nếu <strong>TLB Miss</strong>: Đọc bảng trang trong RAM lấy $f$, cập nhật vào TLB rồi mới đọc dữ liệu (tốn 2 lần đọc RAM).</li></ul></li></ul>
+
+<p><strong>2. Thời gian truy xuất hiệu dụng (EAT - Effective Access Time):</strong></p>
+
+<ul><li>Định nghĩa: EAT là thời gian kỳ vọng trung bình để hoàn thành một thao tác truy xuất bộ nhớ, có tính đến xác suất trúng TLB.</li><li>Công thức:<p>$$	ext{EAT} = lpha 	imes T_{	ext{Hit}} + (1 - lpha) 	imes T_{	ext{Miss}}$$<br>Trong đó:</p><ul><li>$lpha$: Tỷ lệ trúng TLB (Hit ratio).</li><li>$\epsilon$: Thời gian tra cứu bảng TLB.</li><li>$t_{	ext{RAM}}$: Thời gian một chu kỳ truy xuất RAM.</li><li>$T_{	ext{Hit}} = \epsilon + t_{	ext{RAM}}$.</li><li>$T_{	ext{Miss}} = \epsilon + 2 	imes t_{	ext{RAM}}$.</li></ul><p>$$\implies 	ext{EAT} = \epsilon + (2 - lpha) 	imes t_{	ext{RAM}}$$</p></li></ul>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-8">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Nêu rõ vai trò của PTBR và vấn đề 2 lần đọc RAM</td><td>Gợi ý: 25%</td></tr><tr><td>Trình bày cơ chế TLB Hit và TLB Miss</td><td>Gợi ý: 35%</td></tr><tr><td>Nêu đúng định nghĩa và công thức dẫn xuất EAT</td><td>Gợi ý: 40%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-8">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lưu ý:</em> Khi đề bài cho "Thời gian tìm trong TLB coi như không đáng kể", công thức rút gọn là $	ext{EAT} = (2 - lpha) 	imes t_{	ext{RAM}}$.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-09-khai-niem-co-che-hoan-vi-swapping">QBANK-CH07-09: Khái Niệm &amp; Cơ Chế Hoán Vị (Swapping)</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-09</code></li><li><strong>Vị trí nguồn:</strong> Câu 9 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 1, P11)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-9">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Nêu khái niệm và cơ chế hoạt động của kỹ thuật hoán vị (Swapping)? Phân tích chi phí thời gian của swapping?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-9">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>1. Khái niệm &amp; Cơ chế hoạt động:</strong></p>
+
+<ul><li>Hoán vị (Swapping) là cơ chế tạm thời đưa toàn bộ một tiến trình không hoạt động từ bộ nhớ chính (RAM) ra một vùng nhớ thứ cấp trên đĩa cứng gọi là <strong>Backing Store (Swap space)</strong>, và sau đó nạp lại vào RAM khi tiến trình cần chạy tiếp.</li><li><em>Mục đích:</em> Tăng mức độ đa chương (Degree of Multiprogramming), cho phép tổng dung lượng không gian địa chỉ của các tiến trình vượt quá dung lượng RAM vật lý của máy tính.</li><li><em>Quy trình:</em><ul><li><strong>Swap-out:</strong> Khi RAM cạn kiệt, hệ điều hành chọn một tiến trình đang chờ (Waiting) hoặc ưu tiên thấp để ghi toàn bộ không gian nhớ của nó ra đĩa.</li><li><strong>Swap-in:</strong> Khi tiến trình có tín hiệu sẵn sàng hoặc đến lượt chạy, hệ điều hành tìm vùng trống trong RAM để nạp nó trở lại.</li></ul></li></ul>
+
+<p><strong>2. Phân tích chi phí thời gian của Swapping:</strong></p>
+
+<ul><li>Tổng thời gian hoán vị gồm: Thời gian tìm kiếm trên đĩa (Seek time) + Thời gian trễ quay (Rotational latency) + Thời gian truyền dữ liệu (Transfer time).</li><li><strong>Đặc điểm mấu chốt:</strong> Thời gian truyền dữ liệu chiếm tới <strong>hơn 99%</strong> tổng chi phí thời gian vì dung lượng tiến trình rất lớn (hàng chục đến hàng trăm MB).</li><li><em>Ví dụ:</em> Một tiến trình $100	ext{MB}$ chuyển qua kênh truyền đĩa tốc độ $50	ext{MB/s}$ sẽ tốn $100/50 = 2	ext{ giây}$. Hoán vị cả chiều ra và chiều vào tốn tới hơn $4	ext{ giây}$! Do đó swapping toàn bộ tiến trình gây độ trễ hệ thống cực lớn, thúc đẩy sự ra đời của cơ chế hoán vị từng trang (Paging Swap) trong bộ nhớ ảo.</li></ul>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-9">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Nêu đúng định nghĩa Swap-out, Swap-in và mục đích tăng mức đa chương</td><td>Gợi ý: 40%</td></tr><tr><td>Phân tích rõ các thành phần thời gian của hoán vị</td><td>Gợi ý: 30%</td></tr><tr><td>Khẳng định thời gian truyền (Transfer time) chiếm tỷ trọng áp đảo và tính toán ví dụ</td><td>Gợi ý: 30%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-9">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lỗi phổ biến:</em> Nghĩ rằng thời gian tìm kiếm đầu đọc (Seek time) là nguyên nhân chính gây chậm. Cần nhấn mạnh thời gian truyền dữ liệu (Transfer time) mới là yếu tố quyết định độ trễ của swapping.</li></ul>
+
+<hr>
+
+<h2 id="phan-2-bai-tap-tu-luan-tinh-toan-inh-luong-units-10-20">PHẦN 2: BÀI TẬP TỰ LUẬN &amp; TÍNH TOÁN ĐỊNH LƯỢNG (UNITS 10 – 20)</h2>
+
+<hr>
+
+<h3 id="qbank-ch07-10-bai-tap-mau-1-cap-phat-phan-vung-ong-voi-4-thuat-toan-fit">QBANK-CH07-10: Bài Tập Mẫu 1 — Cấp Phát Phân Vùng Động Với 4 Thuật Toán Fit</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-10</code></li><li><strong>Vị trí nguồn:</strong> Bài tập 1 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 2–3, P12–P55; đồng bộ Slide 67)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-10">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Cho 4 phân vùng bộ nhớ trống có kích thước lần lượt là: <strong>600KB, 500KB, 200KB, 300KB</strong> (theo thứ tự địa chỉ tăng dần).<br>Có 4 tiến trình cần cấp phát bộ nhớ theo thứ tự đến là: <strong>P1 (212KB), P2 (417KB), P3 (112KB), P4 (426KB)</strong>.<br>Hãy cho biết kết quả cấp phát bộ nhớ cho các tiến trình trên theo từng chiến lược:<br>a) First-fit  <br>b) Best-fit  <br>c) Next-fit  <br>d) Worst-fit  <br>Thuật toán nào sử dụng bộ nhớ hiệu quả nhất trong trường hợp này?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-10">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p>Tổng dung lượng 4 phân vùng: $600 + 500 + 200 + 300 = 1600	ext{KB}$.  <br>Tổng dung lượng 4 tiến trình: $212 + 417 + 112 + 426 = 1167	ext{KB} &lt; 1600	ext{KB}$.</p>
+
+<h5 id="a-first-fit">a) First-fit:</h5>
+
+<ul><li>Ban đầu: $[	ext{H}_1: 600	ext{K}, 	ext{H}_2: 500	ext{K}, 	ext{H}_3: 200	ext{K}, 	ext{H}_4: 300	ext{K}]$.</li><li>$P_1(212	ext{K})$: Quét từ đầu $\implies 	ext{H}_1(600	ext{K})$ đủ chứa. Cấp vào $	ext{H}_1$, còn lại $600 - 212 = 388	ext{K}$.<ul><li>Danh sách: $[388	ext{K}, 500	ext{K}, 200	ext{K}, 300	ext{K}]$.</li></ul></li><li>$P_2(417	ext{K})$: Quét từ đầu: $388	ext{K} &lt; 417	ext{K}$ (bỏ qua) $\implies 	ext{H}_2(500	ext{K})$ đủ chứa. Cấp vào $	ext{H}_2$, còn lại $500 - 417 = 83	ext{K}$.<ul><li>Danh sách: $[388	ext{K}, 83	ext{K}, 200	ext{K}, 300	ext{K}]$.</li></ul></li><li>$P_3(112	ext{K})$: Quét từ đầu $\implies 	ext{H}_1(388	ext{K})$ đủ chứa. Cấp vào $	ext{H}_1$, còn lại $388 - 112 = 276	ext{K}$.<ul><li>Danh sách: $[276	ext{K}, 83	ext{K}, 200	ext{K}, 300	ext{K}]$.</li></ul></li><li>$P_4(426	ext{K})$: Quét từ đầu: $276	ext{K}, 83	ext{K}, 200	ext{K}, 300	ext{K}$ đều $&lt; 426	ext{K} \implies$ <strong>Không cấp phát được, $P_4$ phải chờ</strong>.</li></ul>
+
+<h5 id="b-best-fit">b) Best-fit:</h5>
+
+<ul><li>Ban đầu: $[	ext{H}_1: 600	ext{K}, 	ext{H}_2: 500	ext{K}, 	ext{H}_3: 200	ext{K}, 	ext{H}_4: 300	ext{K}]$.</li><li>$P_1(212	ext{K})$: Lỗ nhỏ nhất đủ chứa là $	ext{H}_4(300	ext{K})$. Cấp vào $	ext{H}_4$, còn lại $300 - 212 = 88	ext{K}$.<ul><li>Danh sách: $[600	ext{K}, 500	ext{K}, 200	ext{K}, 88	ext{K}]$.</li></ul></li><li>$P_2(417	ext{K})$: Lỗ nhỏ nhất đủ chứa là $	ext{H}_2(500	ext{K})$. Cấp vào $	ext{H}_2$, còn lại $500 - 417 = 83	ext{K}$.<ul><li>Danh sách: $[600	ext{K}, 83	ext{K}, 200	ext{K}, 88	ext{K}]$.</li></ul></li><li>$P_3(112	ext{K})$: Lỗ nhỏ nhất đủ chứa là $	ext{H}_3(200	ext{K})$. Cấp vào $	ext{H}_3$, còn lại $200 - 112 = 88	ext{K}$.<ul><li>Danh sách: $[600	ext{K}, 83	ext{K}, 88	ext{K}, 88	ext{K}]$.</li></ul></li><li>$P_4(426	ext{K})$: Lỗ duy nhất đủ chứa là $	ext{H}_1(600	ext{K})$. Cấp vào $	ext{H}_1$, còn lại $600 - 426 = 174	ext{K}$.<ul><li>Danh sách: $[174	ext{K}, 83	ext{K}, 88	ext{K}, 88	ext{K}]$.</li></ul></li><li>$\implies$ <strong>Cả 4 tiến trình đều được cấp phát thành công!</strong></li></ul>
+
+<h5 id="c-next-fit">c) Next-fit:</h5>
+
+<ul><li>Ban đầu con trỏ tại $	ext{H}_1$.</li><li>$P_1(212	ext{K})$: Cấp vào $	ext{H}_1(600	ext{K})$, còn $388	ext{K}$. Con trỏ dừng tại $	ext{H}_1$.</li><li>$P_2(417	ext{K})$: Quét tiếp từ sau $	ext{H}_1 \implies 	ext{H}_2(500	ext{K})$ đủ chứa. Cấp vào $	ext{H}_2$, còn $83	ext{K}$. Con trỏ dừng tại $	ext{H}_2$.</li><li>$P_3(112	ext{K})$: Quét tiếp từ sau $	ext{H}_2 \implies 	ext{H}_3(200	ext{K})$ đủ chứa. Cấp vào $	ext{H}_3$, còn $88	ext{K}$. Con trỏ dừng tại $	ext{H}_3$.</li><li>$P_4(426	ext{K})$: Quét tiếp từ sau $	ext{H}_3 \implies 	ext{H}_4(300	ext{K}) &lt; 426	ext{K}$, quay vòng kiểm tra $	ext{H}_1(388	ext{K}) &lt; 426	ext{K}$, $	ext{H}_2(83	ext{K}) &lt; 426	ext{K}$, $	ext{H}_3(88	ext{K}) &lt; 426	ext{K} \implies$ <strong>Không có lỗ đủ, $P_4$ phải chờ</strong>.</li></ul>
+
+<h5 id="d-worst-fit">d) Worst-fit:</h5>
+
+<ul><li>$P_1(212	ext{K})$: Lỗ lớn nhất là $	ext{H}_1(600	ext{K})$. Cấp vào $	ext{H}_1$, còn $388	ext{K}$.<ul><li>Danh sách: $[388	ext{K}, 500	ext{K}, 200	ext{K}, 300	ext{K}]$.</li></ul></li><li>$P_2(417	ext{K})$: Lỗ lớn nhất là $	ext{H}_2(500	ext{K})$. Cấp vào $	ext{H}_2$, còn $83	ext{K}$.<ul><li>Danh sách: $[388	ext{K}, 83	ext{K}, 200	ext{K}, 300	ext{K}]$.</li></ul></li><li>$P_3(112	ext{K})$: Lỗ lớn nhất là $	ext{H}_1(388	ext{K})$. Cấp vào $	ext{H}_1$, còn $388 - 112 = 276	ext{K}$.<ul><li>Danh sách: $[276	ext{K}, 83	ext{K}, 200	ext{K}, 300	ext{K}]$.</li></ul></li><li>$P_4(426	ext{K})$: Lỗ lớn nhất là $	ext{H}_4(300	ext{K}) &lt; 426	ext{K} \implies$ <strong>Không cấp phát được, $P_4$ phải chờ</strong>.</li></ul>
+
+<p><strong>Đánh giá:</strong> Chiến lược <strong>Best-fit</strong> sử dụng bộ nhớ hiệu quả nhất trong trường hợp này vì là thuật toán duy nhất cấp phát thành công cho cả 4 tiến trình.</p>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-10">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Lập đúng vết và kết luận cho First-fit (P4 chờ)</td><td>Gợi ý: 25%</td></tr><tr><td>Lập đúng vết và kết luận cho Best-fit (cả 4 thành công)</td><td>Gợi ý: 25%</td></tr><tr><td>Lập đúng vết Next-fit có thể hiện vị trí con trỏ (P4 chờ)</td><td>Gợi ý: 25%</td></tr><tr><td>Lập đúng vết Worst-fit và đưa ra kết luận so sánh thuật toán tối ưu</td><td>Gợi ý: 25%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-10">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lưu ý:</em> Luôn ghi kèm kích thước lỗ trống còn lại sau mỗi lượt cấp phát để người chấm thấy rõ vết thực thi số học chính xác.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-11-bai-tap-mau-2-tinh-so-bit-ia-chi-logic-vat-ly">QBANK-CH07-11: Bài Tập Mẫu 2 — Tính Số Bit Địa Chỉ Logic &amp; Vật Lý</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-11</code></li><li><strong>Vị trí nguồn:</strong> Bài tập 2 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 3, P56–P61; đồng bộ Slide 68)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-11">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Xét một không gian địa chỉ có 12 trang, mỗi trang có kích thước 2K, ánh xạ vào bộ nhớ vật lý có 32 khung trang.<br>a) Cho biết kích thước của địa chỉ logic?  <br>b) Cho biết kích thước của địa chỉ vật lý?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-11">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>a) Xác định kích thước địa chỉ logic:</strong></p>
+
+<ul><li>Kích thước một trang: $S = 2	ext{KB} = 2 	imes 2^{10}	ext{ bytes} = 2048	ext{ bytes} = 2^{11}	ext{ bytes}$.<ul><li>$\implies$ Số bit dành cho độ dời (Offset): $d = 11	ext{ bit}$.</li></ul></li><li>Không gian địa chỉ logic có 12 trang:<ul><li>Để biểu diễn 12 trang cần số bit $p$ thỏa mãn: $2^{p-1} &lt; 12 \le 2^p \implies p = \lceil \log_2(12) </li></ul></li></ul>
+
+<p>ceil = 4	ext{ bit}$.</p>
+
+<ul><li>Kích thước địa chỉ logic:<p>$$	ext{Số bit địa chỉ logic} = p + d = 4 + 11 = 15	ext{ bit}$$</p></li></ul>
+
+<p><strong>b) Xác định kích thước địa chỉ vật lý:</strong></p>
+
+<ul><li>Bộ nhớ vật lý có 32 khung trang:<ul><li>Để biểu diễn 32 khung trang cần số bit $f$ thỏa mãn: $2^f = 32 \implies f = \log_2(32) = 5	ext{ bit}$.</li></ul></li><li>Kích thước khung trang bằng kích thước trang $\implies$ độ dời $d = 11	ext{ bit}$.</li><li>Kích thước địa chỉ vật lý:<p>$$	ext{Số bit địa chỉ vật lý} = f + d = 5 + 11 = 16	ext{ bit}$$</p></li></ul>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-11">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Tính đúng số bit độ dời $d = 11	ext{ bit}$ từ kích thước 2KB</td><td>Gợi ý: 30%</td></tr><tr><td>Tính đúng số bit trang logic $p = 4	ext{ bit}$ và tổng địa chỉ logic $15	ext{ bit}$</td><td>Gợi ý: 35%</td></tr><tr><td>Tính đúng số bit khung $f = 5	ext{ bit}$ và tổng địa chỉ vật lý $16	ext{ bit}$</td><td>Gợi ý: 35%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-11">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lỗi phổ biến:</em> Lấy $\log_2(12)$ ra số lẻ rồi làm tròn xuống 3 bit. Cần nhớ: $2^3 = 8 &lt; 12$ nên 3 bit không đủ đánh số 12 trang, bắt buộc phải dùng 4 bit ($2^4 = 16$).</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-12-bai-tap-mau-3-tinh-thoi-gian-truy-xuat-phan-trang-eat">QBANK-CH07-12: Bài Tập Mẫu 3 — Tính Thời Gian Truy Xuất Phân Trang &amp; EAT</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-12</code></li><li><strong>Vị trí nguồn:</strong> Bài tập 3 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 3, P62–P67; đồng bộ Slide 69)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-12">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Giả sử bảng phân trang được lưu trữ trong bộ nhớ chính.<br>a) Nếu thời gian một lần truy xuất bộ nhớ chính là 200ns thì mất bao nhiêu thời gian cho một lần truy xuất dữ liệu theo cơ chế phân trang thông thường?  <br>b) Nếu hệ thống sử dụng thêm bộ nhớ TLBs với xác suất tìm thấy là 75% (thời gian tìm kiếm trong TLBs xem như bằng 0) thì thời gian truy xuất bộ nhớ hiệu dụng là bao nhiêu?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-12">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>a) Thời gian truy xuất phân trang thông thường (không có TLB):</strong><br>Khi không có TLB, mỗi thao tác đọc/ghi dữ liệu của CPU đòi hỏi 2 lần truy xuất RAM:</p>
+
+<ol><li>Lần 1: Truy xuất Bảng phân trang trong RAM để lấy địa chỉ khung trang.</li><li>Lần 2: Truy xuất ô nhớ thực tế trong RAM để đọc/ghi dữ liệu.</li></ol>
+
+<p>$$	ext{Thời gian truy xuất thông thường} = 2 	imes t_{	ext{RAM}} = 2 	imes 200	ext{ns} = 400	ext{ns}$$</p>
+
+<p><strong>b) Thời gian truy xuất hiệu dụng (EAT) khi có TLB:</strong></p>
+
+<ul><li>Tỷ lệ tìm thấy trong TLB: $lpha = 75\% = 0.75$.</li><li>Tỷ lệ trượt TLB: $1 - lpha = 25\% = 0.25$.</li><li>Thời gian khi trúng TLB (1 lần đọc RAM): $T_{	ext{Hit}} = 200	ext{ns}$.</li><li>Thời gian khi trượt TLB (2 lần đọc RAM): $T_{	ext{Miss}} = 400	ext{ns}$.</li><li>Thời gian truy xuất hiệu dụng:<p>$$	ext{EAT} = lpha 	imes T_{	ext{Hit}} + (1 - lpha) 	imes T_{	ext{Miss}}$$<br>$$	ext{EAT} = 0.75 	imes 200 + 0.25 	imes 400 = 150 + 100 = 250	ext{ns}$$</p></li></ul>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-12">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Nêu rõ lý do 2 lần đọc RAM và tính đúng $400	ext{ns}$ ở câu a</td><td>Gợi ý: 40%</td></tr><tr><td>Thiết lập đúng công thức EAT với 2 nhánh Hit và Miss ở câu b</td><td>Gợi ý: 30%</td></tr><tr><td>Tính chính xác kết quả $	ext{EAT} = 250	ext{ns}$</td><td>Gợi ý: 30%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-12">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lưu ý:</em> Luôn giải thích rõ vì sao có hệ số 2 trong trường hợp không dùng TLB hoặc khi trượt TLB.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-13-bai-tap-4-bang-phan-trang-2-cap-32-bit">QBANK-CH07-13: Bài Tập 4 — Bảng Phân Trang 2 Cấp (32-Bit)</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-13</code></li><li><strong>Vị trí nguồn:</strong> Bài tập 4 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 3, P68; đồng bộ Slide 70)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-13">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Một máy tính có địa chỉ 32 bit, sử dụng bảng phân trang hai cấp. Trường địa chỉ trang cấp một có 9 bit, cấp hai có 11 bit, phần còn lại là độ dời.<br>a) Kích thước một trang là bao nhiêu?  <br>b) Tổng số trang ảo là bao nhiêu?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-13">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p>Cấu trúc địa chỉ logic 32-bit gồm 3 trường: $[p_1 \mid p_2 \mid d]$</p>
+
+<ul><li>$p_1 = 9	ext{ bit}$ (Chỉ số bảng trang Cấp 1).</li><li>$p_2 = 11	ext{ bit}$ (Chỉ số bảng trang Cấp 2).</li><li>$d$: Độ dời trong trang.</li></ul>
+
+<p><strong>a) Kích thước một trang:</strong></p>
+
+<ul><li>Số bit dành cho độ dời:<p>$$d = 32 - (p_1 + p_2) = 32 - (9 + 11) = 32 - 20 = 12	ext{ bit}$$</p></li><li>Kích thước một trang:<p>$$	ext{Page Size} = 2^d = 2^{12}	ext{ bytes} = 4096	ext{ bytes} = 4	ext{KB}$$</p></li></ul>
+
+<p><strong>b) Tổng số trang ảo tối đa:</strong></p>
+
+<ul><li>Tổng số bit dùng để đánh số trang logic:<p>$$p_{	ext{total}} = p_1 + p_2 = 9 + 11 = 20	ext{ bit}$$</p></li><li>Tổng số trang ảo tối đa mà không gian địa chỉ 32-bit có thể có:<p>$$	ext{Số trang ảo} = 2^{p_{	ext{total}}} = 2^{20} = 1,048,576	ext{ trang (khoảng 1 triệu trang)}$$</p></li></ul>
+
+<p><em>(Bổ sung chi tiết cấu trúc: Bảng Cấp 1 có $2^9 = 512	ext{ mục}$; mỗi bảng Cấp 2 có $2^{11} = 2048	ext{ mục}$).</em></p>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-13">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Tính đúng số bit offset $d = 12	ext{ bit}$ và kích thước trang $4	ext{KB}$</td><td>Gợi ý: 50%</td></tr><tr><td>Tính đúng tổng số bit trang $20	ext{ bit}$ và số trang ảo $2^{20} = 1,048,576$</td><td>Gợi ý: 50%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-13">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lỗi phổ biến:</em> Quên trừ tổng 32 bit, dẫn đến tính nhầm số bit offset.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-14-bai-tap-5-phan-tich-ia-chi-ao-4-truong">QBANK-CH07-14: Bài Tập 5 — Phân Tích Địa Chỉ Ảo 4 Trường</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-14</code></li><li><strong>Vị trí nguồn:</strong> Bài tập 5 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 3, P69; đồng bộ Slide 71)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-14">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Giả sử một địa chỉ ảo 32-bit được phân chia thành 4 trường: $a, b, c, d$. Hãy cho biết số lượng trang phụ thuộc vào những trường nào?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-14">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p>Trong kiến trúc phân trang đa cấp, một địa chỉ ảo $m$ bit được phân tách thành các trường chỉ số trang của từng cấp và trường độ dời cuối cùng. Với địa chỉ 32-bit phân chia thành 4 trường $a, b, c, d$:</p>
+
+<ul><li>Giả sử trường cuối cùng $d$ là độ dời (Offset trong trang), còn 3 trường $a, b, c$ là chỉ số bảng phân trang 3 cấp tương ứng.</li><li>Khi đó, tổng số trang ảo trong không gian địa chỉ phụ thuộc vào <strong>cả 3 trường $a, b, c$</strong>:<p>$$	ext{Tổng số trang ảo} = 2^{a + b + c} = 2^{32 - d}$$</p></li><li><strong>Phân tích chi tiết sự phụ thuộc từng cấp:</strong><ol><li>Số lượng mục trong Bảng trang Cấp 1 (bảng ngoài cùng) phụ thuộc vào trường $a$: có $2^a$ mục.</li><li>Số lượng mục trong mỗi Bảng trang Cấp 2 phụ thuộc vào trường $b$: có $2^b$ mục.</li><li>Số lượng mục trong mỗi Bảng trang Cấp 3 phụ thuộc vào trường $c$: có $2^c$ mục.</li><li>Nếu xét gián tiếp: Do tổng số bit là cố định 32 bit ($a + b + c + d = 32$), số lượng trang ảo cũng tỷ lệ nghịch trực tiếp với kích thước trang được xác định bởi trường độ dời $d$.</li></ol></li></ul>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-14">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Chỉ ra số trang phụ thuộc trực tiếp vào các trường chỉ số trang $a, b, c$</td><td>Gợi ý: 50%</td></tr><tr><td>Phân tích sự phụ thuộc của bảng trang từng cấp và mối liên hệ với $d$</td><td>Gợi ý: 50%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-14">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lưu ý:</em> Phải nói rõ vai trò giả định của $d$ là trường offset và $a, b, c$ là các trường chỉ số trang đa cấp.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-15-bai-tap-mau-6-chuyen-oi-ia-chi-phan-trang-2-chieu">QBANK-CH07-15: Bài Tập Mẫu 6 — Chuyển Đổi Địa Chỉ Phân Trang 2 Chiều</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-15</code></li><li><strong>Vị trí nguồn:</strong> Bài tập 6 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 3–4, P70–P75)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-15">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Cho bảng phân trang mẫu và các thông số kích thước:<br>a) Cho kích thước khung trang là 1KB. Hãy chuyển đổi địa chỉ vật lý 6568 sang địa chỉ ảo tương ứng (biết khung trang chứa địa chỉ này ánh xạ từ trang 3)?  <br>b) Cho kích thước trang là 2KB. Hãy chuyển đổi địa chỉ logic 3254 sang địa chỉ vật lý tương ứng nếu trang tương ứng được nạp vào khung trang 4?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-15">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<h5 id="a-chuyen-oi-ia-chi-vat-ly-6568-sang-ia-chi-ao">a) Chuyển đổi địa chỉ vật lý 6568 sang địa chỉ ảo:</h5>
+
+<ul><li>Kích thước khung trang $S = 1	ext{KB} = 1024	ext{ bytes}$.</li><li>Địa chỉ vật lý: $	ext{PA} = 6568$.</li><li>Tìm số khung trang $f$ và độ dời $d$:<p>$$f = \lfloor 6568 / 1024 </p></li></ul>
+
+<p>floor = 6$$<br>  $$d = 6568 \pmod{1024} = 6568 - (6 	imes 1024) = 6568 - 6144 = 424$$</p>
+
+<ul><li>Theo đề bài, khung trang $f = 6$ đang chứa nội dung của trang logic $p = 3$.</li><li>Độ dời $d$ được bảo toàn giữa không gian vật lý và không gian ảo $\implies d = 424$.</li><li>Địa chỉ ảo (logic) tương ứng:<p>$$	ext{Địa chỉ ảo} = p 	imes S + d = 3 	imes 1024 + 424 = 3072 + 424 = 3496$$</p></li></ul>
+
+<h5 id="b-chuyen-oi-ia-chi-logic-3254-sang-ia-chi-vat-ly">b) Chuyển đổi địa chỉ logic 3254 sang địa chỉ vật lý:</h5>
+
+<ul><li>Kích thước trang $S = 2	ext{KB} = 2048	ext{ bytes}$.</li><li>Địa chỉ logic: $L = 3254$.</li><li>Tìm số trang $p$ và độ dời $d$:<p>$$p = \lfloor 3254 / 2048 </p></li></ul>
+
+<p>floor = 1$$<br>  $$d = 3254 \pmod{2048} = 3254 - 2048 = 1206$$</p>
+
+<ul><li>Theo đề bài, trang $p = 1$ được nạp vào khung trang vật lý $f = 4$.</li><li>Độ dời $d = 1206$ giữ nguyên không đổi.</li><li>Địa chỉ vật lý tương ứng:<p>$$	ext{Địa chỉ vật lý} = f 	imes S + d = 4 	imes 2048 + 1206 = 8192 + 1206 = 9398$$</p></li></ul>
+
+<p><em>(Kết quả đơn vị duy nhất: Câu a ra 3496, Câu b ra 9398).</em></p>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-15">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Giải đúng câu a: Tìm $f=6, d=424$, tính ra địa chỉ ảo 3496</td><td>Gợi ý: 50%</td></tr><tr><td>Giải đúng câu b: Tìm $p=1, d=1206$, tính ra địa chỉ vật lý 9398</td><td>Gợi ý: 50%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-15">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lỗi tính toán:</em> Khi lấy phần dư $d$, chú ý tính cẩn thận phép nhân $4 	imes 2048 = 8192$. Không nhầm $2	ext{KB}$ thành $2000	ext{ bytes}$.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-16-bai-tap-7-tinh-eat-co-xet-thoi-gian-tra-tlb">QBANK-CH07-16: Bài Tập 7 — Tính EAT Có Xét Thời Gian Tra TLB</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-16</code></li><li><strong>Vị trí nguồn:</strong> Bài tập 7 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 4, P76–P78)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-16">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Giả sử bảng phân trang được lưu trữ trong bộ nhớ chính. Cho thời gian một lần truy xuất bộ nhớ chính là 124ns, thời gian tìm kiếm trong TLBs là 34ns, xác suất tìm thấy trong TLBs là 95%.<br>a) Tính thời gian truy xuất thông thường?  <br>b) Tính thời gian truy xuất hiệu dụng (EAT)?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-16">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>Thông số đề bài:</strong></p>
+
+<ul><li>Thời gian một chu kỳ RAM: $t_{	ext{RAM}} = 124	ext{ns}$.</li><li>Thời gian tìm trong TLB: $\epsilon = 34	ext{ns}$.</li><li>Tỷ lệ tìm thấy trong TLB: $lpha = 95\% = 0.95$.</li></ul>
+
+<p><strong>a) Thời gian truy xuất thông thường (không dùng TLB):</strong><br>Khi không sử dụng TLB, mỗi thao tác cần 2 lần đọc RAM (1 lần đọc bảng trang, 1 lần đọc dữ liệu):<br>$$T_{	ext{normal}} = 2 	imes t_{	ext{RAM}} = 2 	imes 124 = 248	ext{ns}$$</p>
+
+<p><strong>b) Thời gian truy xuất hiệu dụng (EAT):</strong></p>
+
+<ul><li>Khi TLB Hit: Tốn thời gian tra TLB + 1 lần đọc RAM:<p>$$T_{	ext{Hit}} = \epsilon + t_{	ext{RAM}} = 34 + 124 = 158	ext{ns}$$</p></li><li>Khi TLB Miss: Tốn thời gian tra TLB + 2 lần đọc RAM (1 đọc bảng trang + 1 đọc dữ liệu):<p>$$T_{	ext{Miss}} = \epsilon + 2 	imes t_{	ext{RAM}} = 34 + (2 	imes 124) = 34 + 248 = 282	ext{ns}$$</p></li><li>Thời gian hiệu dụng EAT:<p>$$	ext{EAT} = lpha 	imes T_{	ext{Hit}} + (1 - lpha) 	imes T_{	ext{Miss}}$$<br>$$	ext{EAT} = 0.95 	imes 158 + 0.05 	imes 282 = 150.1 + 14.1 = 164.2	ext{ns}$$</p></li></ul>
+
+<p><em>(Hoặc áp dụng trực tiếp công thức rút gọn: $	ext{EAT} = \epsilon + (2 - lpha) 	imes t_{	ext{RAM}} = 34 + (2 - 0.95) 	imes 124 = 34 + 1.05 	imes 124 = 34 + 130.2 = 164.2	ext{ns}$).</em></p>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-16">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Tính đúng thời gian truy xuất thông thường $248	ext{ns}$</td><td>Gợi ý: 30%</td></tr><tr><td>Xác định đúng thời gian nhánh Hit ($158	ext{ns}$) và nhánh Miss ($282	ext{ns}$)</td><td>Gợi ý: 40%</td></tr><tr><td>Tính chính xác kết quả cuối cùng $	ext{EAT} = 164.2	ext{ns}$</td><td>Gợi ý: 30%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-16">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lỗi phổ biến:</em> Quên không cộng thời gian tìm trong TLB ($\epsilon = 34	ext{ns}$) vào nhánh Miss. Nhớ rằng dù Miss thì phần cứng vẫn phải tốn 34ns để tìm trong TLB trước khi nhận ra là Miss!</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-17-bai-tap-8-tinh-nguoc-thoi-gian-truy-xuat-ram-tu-eat">QBANK-CH07-17: Bài Tập 8 — Tính Ngược Thời Gian Truy Xuất RAM Từ EAT</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-17</code></li><li><strong>Vị trí nguồn:</strong> Bài tập 8 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 4, P79)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-17">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Giả sử bảng phân trang được lưu trữ trong bộ nhớ chính. Cho biết thời gian truy xuất hiệu dụng (EAT) là 175ns, xác suất tìm thấy trong TLBs là 87%, thời gian tìm kiếm trong TLBs là 24ns. Hãy tính thời gian truy xuất bộ nhớ chính thông thường?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-17">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>Thông số đề bài:</strong></p>
+
+<ul><li>$	ext{EAT} = 175	ext{ns}$.</li><li>$lpha = 87\% = 0.87$.</li><li>$\epsilon = 24	ext{ns}$.</li><li>Cần tìm: Thời gian truy xuất bộ nhớ bình thường.</li></ul>
+
+<p><strong>Các bước giải:</strong></p>
+
+<ol><li>Áp dụng công thức EAT tổng quát:<p>$$	ext{EAT} = \epsilon + (2 - lpha) 	imes t_{	ext{RAM}}$$</p></li><li>Thay các giá trị đã biết vào phương trình:<p>$$175 = 24 + (2 - 0.87) 	imes t_{	ext{RAM}}$$<br>$$175 - 24 = 1.13 	imes t_{	ext{RAM}}$$<br>$$151 = 1.13 	imes t_{	ext{RAM}}$$</p></li><li>Suy ra thời gian một chu kỳ truy xuất RAM:<p>$$t_{	ext{RAM}} = rac{151}{1.13} pprox 133.63	ext{ns}$$</p></li><li>Thời gian truy xuất bộ nhớ chính thông thường khi không dùng TLB (2 lần truy xuất RAM):<p>$$T_{	ext{normal}} = 2 	imes t_{	ext{RAM}} = 2 	imes rac{151}{1.13} = rac{302}{1.13} pprox 267.26	ext{ns}$$</p></li></ol>
+
+<p><em>(Ghi chú học thuật: Nếu câu hỏi hỏi thời gian của 1 chu kỳ đọc RAM $t_{	ext{RAM}}$ thì kết quả là $133.63	ext{ns}$; nếu hỏi chu trình truy xuất dữ liệu phân trang thông thường $2 	imes t_{	ext{RAM}}$ thì kết quả là $267.26	ext{ns}$. Bài làm nên trình bày cả hai chỉ số để đạt điểm tuyệt đối).</em></p>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-17">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Thiết lập đúng phương trình liên hệ giữa EAT, $\epsilon$, $lpha$ và $t_{	ext{RAM}}$</td><td>Gợi ý: 40%</td></tr><tr><td>Giải đúng $t_{	ext{RAM}} pprox 133.63	ext{ns}$</td><td>Gợi ý: 30%</td></tr><tr><td>Nêu rõ thời gian truy xuất thông thường $2 	imes t_{	ext{RAM}} pprox 267.26	ext{ns}$</td><td>Gợi ý: 30%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-17">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lưu ý:</em> Phép chia lẻ $151 / 1.13$ hãy giữ 2 chữ số thập phân ($133.63	ext{ns}$).</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-18-bai-tap-9-tinh-xac-suat-tim-thay-trong-tlb-hit-ratio">QBANK-CH07-18: Bài Tập 9 — Tính Xác Suất Tìm Thấy Trong TLB (Hit Ratio)</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-18</code></li><li><strong>Vị trí nguồn:</strong> Bài tập 9 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 4, P80)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-18">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Biết thời gian truy xuất trong bộ nhớ thường không sử dụng TLBs là 250ns. Thời gian tìm kiếm trong bảng TLBs là 26ns. Hỏi xác suất tìm thấy trong TLBs bằng bao nhiêu nếu thời gian truy xuất trong bộ nhớ chính là 182ns?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-18">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>Phân tích ngữ nghĩa đề bài UIT:</strong></p>
+
+<ul><li><em>"Thời gian truy xuất trong bộ nhớ thường không sử dụng TLBs là 250ns":</em> Đây là chu kỳ truy xuất phân trang thông thường gồm 2 lần đọc RAM $\implies 2 	imes t_{	ext{RAM}} = 250	ext{ns} \implies t_{	ext{RAM}} = 125	ext{ns}$.</li><li><em>"Thời gian tìm kiếm trong bảng TLBs là 26ns":</em> $\epsilon = 26	ext{ns}$.</li><li><em>"Thời gian truy xuất trong bộ nhớ chính là 182ns":</em> Đây chính là Thời gian truy xuất hiệu dụng khi có TLB $\implies 	ext{EAT} = 182	ext{ns}$.</li></ul>
+
+<p><strong>Các bước giải chi tiết:</strong></p>
+
+<ol><li>Tính thời gian một lần đọc RAM:<p>$$t_{	ext{RAM}} = rac{250	ext{ns}}{2} = 125	ext{ns}$$</p></li><li>Áp dụng công thức tính EAT:<p>$$	ext{EAT} = \epsilon + (2 - lpha) 	imes t_{	ext{RAM}}$$</p></li><li>Thay số vào phương trình:<p>$$182 = 26 + (2 - lpha) 	imes 125$$<br>$$182 - 26 = (2 - lpha) 	imes 125$$<br>$$156 = (2 - lpha) 	imes 125$$</p></li><li>Giải tìm hệ số $(2 - lpha)$:<p>$$2 - lpha = rac{156}{125} = 1.248$$</p></li><li>Tính tỷ lệ trúng TLB $lpha$:<p>$$lpha = 2 - 1.248 = 0.752$$<br>$$lpha = 75.2\%$$</p></li></ol>
+
+<p><strong>Kết luận:</strong> Xác suất tìm thấy trong TLB (Hit ratio) bằng <strong>$75.2\%$</strong>.</p>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-18">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Suy luận đúng $t_{	ext{RAM}} = 250 / 2 = 125	ext{ns}$ từ thời gian không dùng TLB</td><td>Gợi ý: 35%</td></tr><tr><td>Thiết lập đúng phương trình EAT: $182 = 26 + (2 - lpha) 	imes 125$</td><td>Gợi ý: 35%</td></tr><tr><td>Giải chính xác kết quả $lpha = 0.752 = 75.2\%$</td><td>Gợi ý: 30%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-18">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Bẫy kinh điển (NUM-CH7-002):</em> Rất nhiều sinh viên lấy trực tiếp $250	ext{ns}$ làm $t_{	ext{RAM}}$, dẫn đến phương trình: $182 = 26 + (2 - lpha) 	imes 250 \implies 2 - lpha = 156/250 = 0.624 \implies lpha = 1.376 &gt; 100\%$ (vô lý!). Nhớ rằng $250	ext{ns}$ là tổng 2 lần đọc RAM.</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-19-bai-tap-mau-10-tinh-dung-luong-bang-phan-trang">QBANK-CH07-19: Bài Tập Mẫu 10 — Tính Dung Lượng Bảng Phân Trang</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-19</code></li><li><strong>Vị trí nguồn:</strong> Bài tập 10 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 4, P81–P82)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-19">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Tính kích thước bảng phân trang cho một bộ vi xử lý có không gian địa chỉ ảo 32-bit, biết bảng phân trang có $2^{19}$ mục và kích thước mỗi mục trong bảng phân trang là 8 bit?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-19">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>Thông số đề bài:</strong></p>
+
+<ul><li>Không gian địa chỉ ảo: 32-bit.</li><li>Số lượng mục trong bảng phân trang (Number of Page Table Entries - PTE): $N = 2^{19}	ext{ mục}$.</li><li>Kích thước mỗi mục (Entry size): $E = 8	ext{ bit} = 1	ext{ byte}$.</li></ul>
+
+<p><strong>Tính toán kích thước bảng phân trang:</strong><br>$$	ext{Dung lượng Bảng phân trang} = N 	imes E$$<br>$$	ext{Dung lượng Bảng phân trang} = 2^{19}	ext{ mục} 	imes 1	ext{ byte} = 2^{19}	ext{ bytes}$$</p>
+
+<p>Đổi đơn vị sang Kilobytes:<br>$$2^{19}	ext{ bytes} = 2^9 	imes 2^{10}	ext{ bytes} = 512	ext{ KB} = 524,288	ext{ bytes}$$</p>
+
+<p><em>(Phân tích mở rộng: Vì bảng phân trang có $2^{19}$ mục $\implies$ số bit địa chỉ trang $p = 19	ext{ bit}$. Do không gian địa chỉ là 32-bit, số bit độ dời là $d = 32 - 19 = 13	ext{ bit} \implies$ kích thước một trang của hệ thống này là $2^{13}	ext{ bytes} = 8	ext{KB}$).</em></p>
+
+<p><strong>Kết luận:</strong> Kích thước bảng phân trang là <strong>$512	ext{KB}$</strong> (hoặc $524,288	ext{ bytes}$).</p>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-19">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Đổi đúng kích thước mỗi mục $8	ext{ bit} = 1	ext{ byte}$</td><td>Gợi ý: 30%</td></tr><tr><td>Thiết lập đúng công thức: Số mục $	imes$ Kích thước mục</td><td>Gợi ý: 30%</td></tr><tr><td>Tính chính xác kết quả $2^{19}	ext{ bytes} = 512	ext{KB}$</td><td>Gợi ý: 40%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-19">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lỗi đơn vị:</em> Nhầm $8	ext{ bit}$ thành $8	ext{ bytes}$ khiến kết quả bị phóng đại lên gấp 8 lần ($4	ext{MB}$).</li></ul>
+
+<hr>
+
+<h3 id="qbank-ch07-20-bai-tap-mau-11-tinh-so-bit-cho-muc-bang-trang-so-muc">QBANK-CH07-20: Bài Tập Mẫu 11 — Tính Số Bit Cho Mục Bảng Trang &amp; Số Mục</h3>
+
+<ul><li><strong>Mã câu hỏi:</strong> <code>QBANK-CH07-20</code></li><li><strong>Vị trí nguồn:</strong> Bài tập 11 / Mục 7 (<code>Bai tap chuong 7 HDH.docx</code>, trang 4, P83–P88)</li></ul>
+
+<h4 id="1-e-bai-goc-source-question-20">1. Đề bài gốc (Source Question)</h4>
+
+<blockquote>Giả sử không gian địa chỉ ảo có 45 trang, kích thước mỗi trang là 2048 bytes, được ánh xạ vào bộ nhớ vật lý có 64 khung trang.<br>a) Cần tối thiểu bao nhiêu bit cho mỗi mục trong bảng phân trang?  <br>b) Bảng phân trang cần có bao nhiêu mục?</blockquote>
+
+<h4 id="2-loi-giai-chuan-muc-handbook-solution-20">2. Lời giải chuẩn mực (Handbook Solution)</h4>
+
+<p><strong>Thông số đề bài:</strong></p>
+
+<ul><li>Số trang ảo: 45 trang.</li><li>Kích thước trang: $S = 2048	ext{ bytes} = 2	ext{KB} = 2^{11}	ext{ bytes}$.</li><li>Số khung trang vật lý: 64 khung trang.</li></ul>
+
+<p><strong>a) Số bit tối thiểu cho mỗi mục trong bảng phân trang:</strong></p>
+
+<ul><li>Mỗi mục trong bảng phân trang có nhiệm vụ lưu chỉ số khung trang vật lý (Frame number) tương ứng mà trang logic đó đang cư trú.</li><li>Hệ thống có 64 khung trang vật lý. Số bit tối thiểu để đánh số và phân biệt 64 khung trang là:<p>$$f = \log_2(64) = 6	ext{ bit}$$</p></li><li>Do đó, phần địa chỉ khung trang trong mỗi mục bảng trang cần tối thiểu <strong>6 bit</strong>.</li></ul>
+
+<p><em>(Ghi chú: Trong thực tế, mỗi mục có thể có thêm các bit trạng thái như Valid/Invalid bit, Dirty bit, Protection bits... nhưng xét về trường địa chỉ khung bắt buộc theo yêu cầu đề bài thì cần tối thiểu 6 bit).</em></p>
+
+<p><strong>b) Số lượng mục trong bảng phân trang:</strong></p>
+
+<ul><li>Mỗi trang logic của tiến trình cần đúng một mục tương ứng trong bảng phân trang để lưu thông tin ánh xạ.</li><li>Không gian địa chỉ ảo có 45 trang $\implies$ Bảng phân trang cần có tối thiểu <strong>45 mục</strong>.</li></ul>
+
+<p><em>(Nếu cấu trúc thanh ghi phần cứng yêu cầu số lượng mục làm tròn lên lũy thừa 2 nhỏ nhất có thể chứa đủ 45 trang: $2^5 = 32 &lt; 45 \le 2^6 = 64	ext{ mục}$. Tuy nhiên, đáp án chuẩn theo số lượng trang thực tế của tiến trình là 45 mục).</em></p>
+
+<h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-20">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
+
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Tính đúng số bit tối thiểu cho mỗi mục $f = \log_2(64) = 6	ext{ bit}$</td><td>Gợi ý: 50%</td></tr><tr><td>Xác định đúng số lượng mục trong bảng trang là 45 mục</td><td>Gợi ý: 50%</td></tr></tbody></table>
+
+<h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-20">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
+
+<ul><li><em>Lỗi phổ biến:</em> Lấy $\log_2(45)$ để tính số bit cho mỗi mục. Cần nhớ: Mỗi mục lưu <strong>SỐ KHUNG TRANG VẬT LÝ</strong>, nên số bit của mục phải tính theo số khung trang ($64$ khung $\implies 6$ bit), chứ không phải số trang ảo!</li></ul><section class="backlinks" aria-label="Liên kết từ các trang khác"><h2>LIÊN KẾT TỪ CÁC TRANG KHÁC</h2><ul><li><a href="../../theory/ch07-memory-management.html">Chương 7: Quản Lý Bộ Nhớ (Memory Management)</a></li></ul></section><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#phan-1-cau-hoi-ly-thuyet-nen-tang-units-01-09">PHẦN 1: CÂU HỎI LÝ THUYẾT NỀN TẢNG (UNITS 01 – 09)</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-01-khai-niem-cac-yeu-cau-oi-voi-quan-ly-bo-nho">QBANK-CH07-01: Khái niệm &amp; Các Yêu Cầu Đối Với Quản Lý Bộ Nhớ</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-02-ac-iem-cac-loai-ia-chi-nho">QBANK-CH07-02: Đặc Điểm Các Loại Địa Chỉ Nhớ</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-03-cac-thoi-iem-chuyen-oi-ia-chi-lenh-va-du-lieu">QBANK-CH07-03: Các Thời Điểm Chuyển Đổi Địa Chỉ Lệnh Và Dữ Liệu</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-04-khai-niem-co-che-lien-ket-ong-dynamic-linking">QBANK-CH07-04: Khái Niệm &amp; Cơ Chế Liên Kết Động (Dynamic Linking)</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-05-phan-manh-ngoai-vs-phan-manh-noi">QBANK-CH07-05: Phân Mảnh Ngoại vs Phân Mảnh Nội</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-06-phan-vung-ong-vs-phan-vung-co-inh-cac-chien-luoc-placement">QBANK-CH07-06: Phân Vùng Động vs Phân Vùng Cố Định &amp; Các Chiến Lược Placement</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-07-co-che-phan-trang-paging-quy-trinh-dich-ia-chi">QBANK-CH07-07: Cơ Chế Phân Trang (Paging) &amp; Quy Trình Dịch Địa Chỉ</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-08-cai-at-bang-trang-phan-cung-tlb-thoi-gian-hieu-dung-eat">QBANK-CH07-08: Cài Đặt Bảng Trang Phần Cứng &amp; TLB, Thời Gian Hiệu Dụng EAT</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-09-khai-niem-co-che-hoan-vi-swapping">QBANK-CH07-09: Khái Niệm &amp; Cơ Chế Hoán Vị (Swapping)</a></li><li class="toc-item"><a class="toc-link" href="#phan-2-bai-tap-tu-luan-tinh-toan-inh-luong-units-10-20">PHẦN 2: BÀI TẬP TỰ LUẬN &amp; TÍNH TOÁN ĐỊNH LƯỢNG (UNITS 10 – 20)</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-10-bai-tap-mau-1-cap-phat-phan-vung-ong-voi-4-thuat-toan-fit">QBANK-CH07-10: Bài Tập Mẫu 1 — Cấp Phát Phân Vùng Động Với 4 Thuật Toán Fit</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-11-bai-tap-mau-2-tinh-so-bit-ia-chi-logic-vat-ly">QBANK-CH07-11: Bài Tập Mẫu 2 — Tính Số Bit Địa Chỉ Logic &amp; Vật Lý</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-12-bai-tap-mau-3-tinh-thoi-gian-truy-xuat-phan-trang-eat">QBANK-CH07-12: Bài Tập Mẫu 3 — Tính Thời Gian Truy Xuất Phân Trang &amp; EAT</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-13-bai-tap-4-bang-phan-trang-2-cap-32-bit">QBANK-CH07-13: Bài Tập 4 — Bảng Phân Trang 2 Cấp (32-Bit)</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-14-bai-tap-5-phan-tich-ia-chi-ao-4-truong">QBANK-CH07-14: Bài Tập 5 — Phân Tích Địa Chỉ Ảo 4 Trường</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-15-bai-tap-mau-6-chuyen-oi-ia-chi-phan-trang-2-chieu">QBANK-CH07-15: Bài Tập Mẫu 6 — Chuyển Đổi Địa Chỉ Phân Trang 2 Chiều</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-16-bai-tap-7-tinh-eat-co-xet-thoi-gian-tra-tlb">QBANK-CH07-16: Bài Tập 7 — Tính EAT Có Xét Thời Gian Tra TLB</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-17-bai-tap-8-tinh-nguoc-thoi-gian-truy-xuat-ram-tu-eat">QBANK-CH07-17: Bài Tập 8 — Tính Ngược Thời Gian Truy Xuất RAM Từ EAT</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-18-bai-tap-9-tinh-xac-suat-tim-thay-trong-tlb-hit-ratio">QBANK-CH07-18: Bài Tập 9 — Tính Xác Suất Tìm Thấy Trong TLB (Hit Ratio)</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-19-bai-tap-mau-10-tinh-dung-luong-bang-phan-trang">QBANK-CH07-19: Bài Tập Mẫu 10 — Tính Dung Lượng Bảng Phân Trang</a></li><li class="toc-item"><a class="toc-link" href="#qbank-ch07-20-bai-tap-mau-11-tinh-so-bit-cho-muc-bang-trang-so-muc">QBANK-CH07-20: Bài Tập Mẫu 11 — Tính Số Bit Cho Mục Bảng Trang &amp; Số Mục</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../../assets/js/app.js"></script></body></html>

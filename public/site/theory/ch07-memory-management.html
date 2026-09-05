@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light" data-ui-mode="learn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Chương 7: Quản Lý Bộ Nhớ (Memory Management) — IT007 UIT</title><link rel="stylesheet" href="../assets/css/style.css"><script src="../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><div class="mode-switcher" role="group" aria-label="Chế độ học tập"><button type="button" class="mode-btn" data-mode="learn" aria-pressed="false">📚 Học</button><button type="button" class="mode-btn" data-mode="review" aria-pressed="false">🔄 Ôn</button><button type="button" class="mode-btn" data-mode="reference" aria-pressed="false">🔎 Tra</button><a class="review-hub-shortcut" id="review-hub-shortcut" href="../review/index.html" style="display: none;">Hàng đợi toàn môn ↗</a></div><button type="button" class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button type="button" class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<div class="workspace-layout"><aside class="sidebar-left"><div class="nav-section-title">LÝ THUYẾT</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="ch01-overview.html">Chương 1: Tổng quan về Hệ điều hành và Kiến trúc máy tính</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch02-structure.html">Chương 2: Cấu trúc và dịch vụ Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch03-process.html">Chương 3: Tiến trình và Tiểu trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch04-scheduling.html">Chương 4: Định thời CPU</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch05-synchronization.html">Chương 5: Đồng bộ Tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="ch06-deadlock.html">Chương 6: Bế tắc (Deadlock)</a></li>
+<li class="nav-tree-item"><a class="nav-link active" href="ch07-memory-management.html">Chương 7: Quản Lý Bộ Nhớ (Memory Management)</a></li>
+</ul>
+<div class="nav-section-title">NGÂN HÀNG CÂU HỎI</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch01.html">Ngân hàng tự luận — Chương 1: Tổng quan hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch02.html">Ngân hàng tự luận — Chương 2: Cấu trúc Hệ điều hành</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch03.html">Ngân hàng tự luận — Chương 3: Quản lý tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch04.html">Ngân hàng tự luận — Chương 4: Định thời CPU</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch05.html">Ngân hàng tự luận — Chương 5: Đồng bộ Tiến trình</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch06.html">Ngân hàng Tự luận &amp; Bài tập Chương 6: Bế tắc (Deadlock)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../questions/subjective/ch07.html">Ngân hàng Tự luận &amp; Bài tập Chương 7: Quản Lý Bộ Nhớ (Memory Management)</a></li>
+</ul>
+<div class="nav-section-title">ÔN TẬP</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../review/index.html">Hàng đợi ôn tập (Review Hub)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../reviews/midterm.html">Ôn tập Giữa kỳ IT007 — Chương 1–4</a></li>
+</ul>
+<div class="nav-section-title">THỰC HÀNH</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../labs/lab01-linux-basics.html">Lab 1: Giới thiệu Linux, Quản trị Tệp tin &amp; Lệnh Cơ Bản</a></li>
+</ul>
+<div class="nav-section-title">ĐỀ THI & TRA CỨU</div><ul class="nav-tree">
+<li class="nav-tree-item"><a class="nav-link" href="../exams/midterm/2023-2024-hk1.html">Bài Tập Thực Luyện Dựa Trên Đề Giữa Kỳ IT007 (HK1 2023–2024)</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../flashcards/ch01-cards.html">Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH</a></li>
+<li class="nav-tree-item"><a class="nav-link" href="../glossary/terms.html">Từ Điển Thuật Ngữ Hệ Điều Hành Song Ngữ (IT007 Glossary)</a></li>
+</ul></aside><main class="content-center"><div class="breadcrumbs"><a href="../index.html">Trang chủ</a> <span>/</span> <span>Chương 7: Quản Lý Bộ Nhớ (Memory Management)</span></div><article class="article-body"><h1 id="chuong-7-quan-ly-bo-nho-memory-management">Chương 7: Quản Lý Bộ Nhớ (Memory Management)</h1>
+
+<blockquote><strong>Mục tiêu học tập (CLO Alignment):</strong><br>1. Phân biệt được sự khác nhau bản chất giữa địa chỉ logic (địa chỉ ảo) và địa chỉ vật lý; giải thích được cơ chế phần cứng MMU (Memory Management Unit) với cặp thanh ghi Base/Limit.<br>2. Đánh giá được 3 thời điểm ràng buộc địa chỉ (Compile time, Load time, Execution time) cùng các kỹ thuật nạp động (Dynamic Loading) và liên kết động (Dynamic Linking).<br>3. Phân biệt sâu sắc giữa phân mảnh nội (Internal fragmentation) và phân mảnh ngoại (External fragmentation); nắm vững điều kiện tiên quyết của kỹ thuật Gom cụm (Compaction).<br>4. Thực thi chính xác vết thực thi của 4 chiến lược cấp phát lỗ trống liên tục: First Fit, Best Fit, Next Fit, Worst Fit trên chuỗi yêu cầu thực tế.<br>5. Nắm vững cơ chế phân trang (Paging): giải thích được tại sao độ dời $d$ không đổi qua bảng trang; quy tắc phân tách trường bit nhị phân của $(p, d)$ sang $(f, d)$.<br>6. Phân tích được vai trò của bộ nhớ đệm TLB (Translation Lookaside Buffer); dẫn xuất và tính toán thành thạo Thời gian truy xuất hiệu dụng (EAT) cho cả chiều xuôi lẫn chiều giải ngược hit-ratio $\alpha$.<br>7. Khảo sát các cấu trúc bảng trang nâng cao (Bảng trang 2 cấp, Bảng băm, Bảng trang nghịch đảo), cơ chế bảo vệ và chia sẻ mã tái nhập (Reentrant code).<br>8. Trình bày được nguyên lý và phân tích chi phí trễ I/O của cơ chế Hoán vị (Swapping).</blockquote>
+
+<hr>
+
+<h2 id="0-ban-o-nhan-thuc-80-20-chapter-entry-map">0. Bản Đồ Nhận Thức 80/20 (Chapter Entry Map)</h2>
+
+<p>Quản lý bộ nhớ là một trong những nhiệm vụ phức tạp và quan trọng nhất của hệ điều hành. Trong kiến trúc máy tính Von Neumann, CPU chỉ có thể nạp lệnh và thao tác trực tiếp với các thanh ghi nội bộ và bộ nhớ chính (RAM). Mọi chương trình muốn thực thi đều bắt buộc phải được đưa vào RAM.</p>
+
+<pre><code class="language-">                  ┌────────────────────────────────────────────────────────┐
+                  │          BÀI TOÁN CỐT LÕI CỦA QUẢN LÝ BỘ NHỚ           │
+                  │  RAM vật lý có hạn và cố định, nhưng nhiều tiến trình  │
+                  │  cần chạy đồng thời, địa chỉ thay đổi và cần an toàn.   │
+                  └───────────────────────────┬────────────────────────────┘
+                                              │
+         ┌────────────────────────────────────┼────────────────────────────────────┐
+         ▼                                    ▼                                    ▼
+┌───────────────────┐               ┌───────────────────┐                ┌───────────────────┐
+│ 1. ĐỊA CHỈ &amp; MMU  │               │ 2. CẤP PHÁT       │                │ 3. PHÂN TRANG     │
+│ - Logic vs Vật lý │               │    LIÊN TỤC       │                │ - Trang &amp; Khung   │
+│ - 3 thời điểm bind│               │ - Phân vùng tĩnh  │                │ - Ánh xạ (p,d)-&gt;  │
+│ - Cặp Base/Limit  │               │ - Phân vùng động  │                │          (f,d)    │
+└─────────┬─────────┘               │ - 4 thuật toán Fit│                └─────────┬─────────┘
+          │                         │ - Phân mảnh       │                          │
+          │                         └───────────────────┘                          │
+          ▼                                                                        ▼
+┌───────────────────┐                                                    ┌───────────────────┐
+│ 4. HOÁN VỊ        │                                                    │ 5. TLB &amp; EAT      │
+│ - Swapping ra đĩa │                                                    │ - Cache bảng trang│
+│ - Chi phí trễ I/O │                                                    │ - Dẫn xuất EAT    │
+└───────────────────┘                                                    │ - Bảng đa cấp     │
+                                                                         └───────────────────┘</code></pre>
+
+<h3 id="20-kien-thuc-cot-loi-mo-khoa-80-bai-toan-thuc-chien">20% Kiến thức cốt lõi mở khóa 80% bài toán thực chiến:</h3>
+
+<ol><li><strong>Mô hình ánh xạ địa chỉ phân trang:</strong> Khắc sâu quy tắc chuyển đổi $[p \mid d] \to [f \mid d]$; độ dời $d$ được giữ nguyên tuyệt đối.</li><li><strong>Vết thực thi 4 giải thuật Fit:</strong> Hiểu rõ vị trí con trỏ của Next Fit (quét tiếp từ vị trí trước) và tiêu chuẩn tối ưu cục bộ của Best Fit vs Worst Fit.</li><li><strong>Dẫn xuất công thức EAT:</strong> Tách bạch 2 nhánh xác suất Hit và Miss; không học vẹt công thức mà hiểu rõ số lần truy xuất RAM thực tế.</li></ol>
+
+<hr>
+
+<h2 id="1-khai-niem-ia-chi">1. Khái niệm địa chỉ</h2>
+
+<h3 id="7-1-khai-niem-co-so-yeu-cau-quan-ly-bo-nho">7.1. Khái niệm cơ sở &amp; Yêu cầu quản lý bộ nhớ</h3>
+
+<p><em>(Căn cứ: Slide pp. 5–10; Đề cương mục 7.1; QBank <code>QBANK-CH07-01</code>)</em></p>
+
+<p>Bộ nhớ chính (RAM) là một mảng lớn gồm các từ nhớ (words) hoặc bytes, mỗi vị trí có một địa chỉ vật lý duy nhất. Trong hệ điều hành đa nhiệm (Multitasking), nhiều tiến trình cùng cư trú đồng thời trong bộ nhớ. Để hệ thống vận hành ổn định và hiệu quả, hệ điều hành phải đáp ứng <strong>5 yêu cầu quản lý bộ nhớ kinh điển</strong>:</p>
+
+<ol><li><strong>Tái định vị (Relocation):</strong> Khi một tiến trình bị hoán vị ra đĩa rồi nạp lại vào RAM, nó có thể không được đặt vào đúng vị trí bộ nhớ vật lý ban đầu. Hệ thống phải cho phép mã lệnh và dữ liệu của tiến trình tham chiếu chính xác dù tiến trình nằm ở bất kỳ đâu trong RAM.</li><li><strong>Bảo vệ (Protection):</strong> Mỗi tiến trình phải được bảo vệ để không bị các tiến trình khác cố ý hoặc vô ý đọc/ghi đè lên không gian nhớ của mình. Tiến trình người dùng tuyệt đối không được truy cập trái phép vào vùng nhớ của Kernel.</li><li><strong>Chia sẻ (Sharing):</strong> Mặc dù phải bảo vệ không gian riêng, hệ điều hành vẫn phải cho phép nhiều tiến trình cùng truy cập an toàn vào một vùng nhớ chung (ví dụ: chia sẻ thư viện dùng chung <code>libc</code>, chia sẻ bộ nhớ dùng chung Shared Memory trong giao tiếp liên tiến trình IPC).</li><li><strong>Tổ chức logic (Logical Organization):</strong> Chương trình của con người được cấu trúc thành các module logic (hàm, mảng dữ liệu, ngăn xếp Stack, vùng nhớ Heap). Hệ điều hành và phần cứng nên hỗ trợ tổ chức bộ nhớ phản ánh đúng cấu trúc logic này (tiền đề cho cơ chế phân đoạn và phân trang).</li><li><strong>Tổ chức vật lý (Physical Organization):</strong> Bộ nhớ máy tính phân cấp thành RAM (tốc độ cao, đắt tiền, mất dữ liệu khi mất điện) và bộ nhớ phụ / Đĩa (tốc độ chậm, dung lượng lớn, lưu trữ bền vững). Hệ điều hành phải đảm nhận việc luân chuyển dữ liệu và mã lệnh nhịp nhàng giữa hai tầng lưu trữ này.</li></ol>
+
+<hr>
+
+<h3 id="7-2-cac-loai-ia-chi-nho-co-che-phan-cung-mmu">7.2. Các loại địa chỉ nhớ &amp; Cơ chế phần cứng MMU</h3>
+
+<p><em>(Căn cứ: Slide pp. 11–16; Đề cương mục 7.2; QBank <code>QBANK-CH07-02</code>)</em></p>
+
+<p>Trong vòng đời từ mã nguồn đến khi thực thi, lệnh và dữ liệu trải qua 3 dạng biểu diễn địa chỉ:</p>
+
+<table><thead><tr><th>Loại địa chỉ</th><th>Giai đoạn xuất hiện</th><th>Bản chất &amp; Ví dụ</th></tr></thead><tbody><tr><td><strong>Địa chỉ ký hiệu (Symbolic Address)</strong></td><td>Mã nguồn (Source code)</td><td>Tên biến, nhãn hàm do lập trình viên đặt: <code>int count;</code>, <code>goto loop_start;</code>.</td></tr><tr><td><strong>Địa chỉ tái định vị (Relocatable Address)</strong></td><td>Tệp đối tượng sau biên dịch (Object module)</td><td>Vị trí tương đối tính từ điểm bắt đầu module: "cách đầu module 14 bytes" (<code>offset 0x000E</code>).</td></tr><tr><td><strong>Địa chỉ tuyệt đối (Absolute Address)</strong></td><td>Bộ nhớ thực thi (Loaded in RAM)</td><td>Vị trí vật lý chính xác trên thanh RAM: <code>0x7FFF0014</code>.</td></tr></tbody></table>
+
+<pre><code class="language-">Mã nguồn (.c) ──[Trình biên dịch/Compiler]──&gt; Tệp Object (.o, địa chỉ tái định vị)
+                                                         │
+                                               [Trình liên kết/Linker]
+                                                         ▼
+                                              Chương trình thực thi (.exe)
+                                                         │
+                                                [Trình nạp/Loader]
+                                                         ▼
+                                                 Bộ nhớ RAM vật lý</code></pre>
+
+<h4 id="phan-biet-ban-chat-ia-chi-logic-vs-ia-chi-vat-ly">Phân biệt bản chất: Địa chỉ Logic vs Địa chỉ Vật lý</h4>
+
+<ul><li><strong>Địa chỉ Logic (Logical Address / Virtual Address):</strong> Là địa chỉ do CPU phát sinh khi đang thực thi chỉ thị lệnh. Tập hợp tất cả các địa chỉ logic mà một chương trình tạo ra hợp thành <strong>Không gian địa chỉ logic (Logical Address Space)</strong>.</li><li><strong>Địa chỉ Vật lý (Physical Address):</strong> Là địa chỉ thực tế mà bộ điều khiển bộ nhớ (Memory Controller) nhìn thấy và đặt lên các đường bus địa chỉ của thanh RAM. Tập hợp tất cả các địa chỉ vật lý tương ứng hợp thành <strong>Không gian địa chỉ vật lý (Physical Address Space)</strong>.</li></ul>
+
+<div class="callout mentalmodel"><div class="callout-title">🧠 MÔ HÌNH TƯ DUY</div><p><br><strong>Ẩn dụ Mô hình Khách sạn:</strong><br>- <strong>Địa chỉ logic</strong> giống như <em>Số phòng khách sạn</em> (Phòng 301, Tầng 3, phòng số 1 tính từ cầu thang). Khi khách đi lại trong khách sạn, họ chỉ cần nhớ số phòng tương đối này.<br>- <strong>Địa chỉ vật lý</strong> giống như <em>Tọa độ GPS mặt đất</em> (Kinh độ $10.8700^\circ\text{N}$, Vĩ độ $106.8030^\circ\text{E}$).<br>- <strong>Bộ chuyển đổi MMU</strong> đóng vai trò như viên lễ tân: Khi nhận yêu cầu "Vào phòng 301", lễ tân lấy tọa độ móng của tòa nhà (Base Register) cộng với độ dời của phòng để chỉ đến vị trí vật lý chính xác.</p></div>
+
+<h4 id="co-che-phan-cung-mmu-cap-thanh-ghi-base-limit">Cơ chế phần cứng MMU &amp; Cặp thanh ghi Base / Limit</h4>
+
+<p>Việc chuyển đổi từ địa chỉ logic sang địa chỉ vật lý trong thời gian thực thi được thực hiện hoàn toàn bởi thiết bị phần cứng chuyên trách gọi là <strong>MMU (Memory Management Unit)</strong>.</p>
+
+<p>Trong mô hình cấp phát liên tục cơ bản, MMU sử dụng hai thanh ghi phần cứng:</p>
+
+<ul><li><strong>Thanh ghi Cơ sở (Base Register hay Relocation Register):</strong> Chứa địa chỉ vật lý nhỏ nhất bắt đầu vùng nhớ của tiến trình.</li><li><strong>Thanh ghi Giới hạn (Limit Register):</strong> Chứa kích thước không gian địa chỉ logic của tiến trình (phạm vi hợp lệ).</li></ul>
+
+<pre><code class="language-">                      ĐỊA CHỈ LOGIC
+                         [ CPU ]
+                            │
+                            ▼
+                     ┌─────────────┐
+                     │ Địa chỉ &lt;   │      KHÔNG (Trap: Lỗi truy cập bộ nhớ)
+                     │   Limit?    │ ───────────&gt; [ BẪY NGẮT SEGFAULT ]
+                     └──────┬──────┘
+                            │ ĐÚNG
+                            ▼
+                         [  +  ] &lt;──── Thanh ghi Base (Relocation Register)
+                            │
+                            ▼
+                      ĐỊA CHỈ VẬT LÝ
+                         [ RAM ]</code></pre>
+
+<div class="callout executiontrace"><div class="callout-title">🔍 VẾT THỰC THI HỆ THỐNG</div><p><br><strong>Vết thực thi an toàn của phần cứng MMU:</strong><br>1. CPU phát sinh địa chỉ logic $L$.<br>2. Phần cứng so sánh: Kiểm tra điều kiện $0 \le L &lt; \text{Limit}$.<br>3. Nếu $L \ge \text{Limit}$: CPU lập tức kích hoạt bẫy ngắt lỗi định địa chỉ (Trap Addressing Error / Segmentation Fault), hệ điều hành can thiệp và tiêu diệt tiến trình vi phạm.<br>4. Nếu $L &lt; \text{Limit}$: Bộ cộng phần cứng tính:<br>   $$\text{Địa chỉ vật lý} = L + \text{Base}$$<br>   Địa chỉ này được gửi lên bus địa chỉ để đọc/ghi thanh RAM.</p></div>
+
+<div class="recall-checkpoint" id="rc-ch07-logical-vs-physical" data-item-id="rc-ch07-logical-vs-physical" data-concept-id="ch07-address-binding" role="region" aria-label="Trạm thu hồi: ch07-address-binding"><div class="checkpoint-header"><span class="card-tag">Recall Checkpoint</span><span class="card-mastery-badge" aria-label="Cấp độ thành thạo">M0</span><span class="checkpoint-status" aria-live="polite">Chưa tự kiểm tra</span></div><div class="checkpoint-prompt"><strong>Nhiệm vụ thu hồi kín sách (Closed-book Recall):</strong>
+1. Nêu sự khác nhau bản chất giữa địa chỉ logic và địa chỉ vật lý.
+2. Thành phần phần cứng nào thực hiện ánh xạ địa chỉ khi tiến trình đang chạy?
+3. Trình bày điều kiện kiểm tra an toàn của cặp thanh ghi Base và Limit trong MMU.</div><textarea id="rc-ch07-logical-vs-physical__scratchpad" class="checkpoint-scratchpad" aria-label="Nháp câu trả lời kín sách" placeholder="Tự thu hồi câu trả lời kín sách trước khi xem rubric..."></textarea><div class="checkpoint-actions"><button type="button" class="btn-card primary btn-reveal-rubric" aria-expanded="false" aria-controls="rc-ch07-logical-vs-physical__rubric">🔍 Mở Rubric Đối soát</button></div><div id="rc-ch07-logical-vs-physical__rubric" class="rubric-container card-section" aria-hidden="true" style="display: none;"><div class="rubric-title"><strong>Tiêu chí đối soát tự đánh giá:</strong></div><div class="rubric-items"><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.3"> Nêu rõ địa chỉ logic do CPU phát sinh; địa chỉ vật lý là vị trí thực tế trên bus phần cứng RAM. (0.3đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.3"> Chỉ định chính xác MMU (Memory Management Unit) thực hiện chuyển đổi phần cứng trong thời gian thực thi. (0.3đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.4"> Trình bày đúng điều kiện an toàn: Địa chỉ logic &lt; Limit thì Physical = Logical + Base; ngược lại phát sinh ngắt bẫy lỗi (Trap / Segfault). (0.4đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> -&gt; (0.5đ)</label></div></div><div class="rubric-evaluation"><button type="button" class="btn-card success btn-submit-recall">Xác nhận Tự đánh giá (Đạt M2 nếu ≥80%)</button><span class="recall-feedback" id="rc-ch07-logical-vs-physical__feedback" aria-live="polite"></span></div></div></div>
+
+<hr>
+
+<h3 id="7-3-rang-buoc-ia-chi-address-binding">7.3. Ràng buộc địa chỉ (Address Binding)</h3>
+
+<p><em>(Căn cứ: Slide pp. 17–22; Đề cương mục 7.3; QBank <code>QBANK-CH07-03</code>)</em></p>
+
+<p>Ràng buộc địa chỉ (Address Binding) là quá trình ánh xạ không gian địa chỉ của chương trình từ dạng này sang dạng khác (từ logic sang vật lý). Quá trình này có thể diễn ra tại một trong 3 thời điểm:</p>
+
+<pre><code class="language-">+──────────────────────+─────────────────────────────────────────+──────────────────────────────────────+
+| Thời điểm ràng buộc  | Cơ chế hoạt động                        | Đánh giá &amp; Điều kiện phần cứng       |
++──────────────────────+─────────────────────────────────────────+──────────────────────────────────────+
+| 1. Compile Time      | Trình biên dịch sinh mã trực tiếp gắn   | Rất cứng nhắc. Nếu vùng nhớ nạp thay |
+| (Thời điểm biên dịch)| với địa chỉ vật lý tuyệt đối trong RAM. | đổi, bắt buộc phải biên dịch lại toàn|
+|                      |                                         | bộ mã nguồn.                         |
++──────────────────────+─────────────────────────────────────────+──────────────────────────────────────+
+| 2. Load Time         | Trình biên dịch giữ địa chỉ tái định vị | Linh hoạt hơn: có thể nạp vào bất kỳ |
+| (Thời điểm nạp)      | (bắt đầu từ 0). Trình nạp (Loader) ánh  | đâu trong RAM. Nhưng một khi đã nạp  |
+|                      | xạ sang địa chỉ vật lý khi nạp vào RAM. | thì KHÔNG THỂ di chuyển tiến trình.  |
++──────────────────────+─────────────────────────────────────────+──────────────────────────────────────+
+| 3. Execution Time    | Ràng buộc bị trì hoãn cho đến khi chỉ thị| Tối ưu nhất: tiến trình có thể di    |
+| (Thời điểm thực thi) | thực sự chạy trên CPU. Địa chỉ được MMU | dời giữa các vùng nhớ khi đang chạy. |
+|                      | cộng Base Register trong từng chu kỳ.   | Bắt buộc phải có hỗ trợ phần cứng MMU.|
++──────────────────────+─────────────────────────────────────────+──────────────────────────────────────+</code></pre>
+
+<hr>
+
+<h3 id="7-3-1-nap-ong-va-lien-ket-ong-dynamic-loading-dynamic-linking">7.3.1. Nạp động và Liên kết động (Dynamic Loading &amp; Dynamic Linking)</h3>
+
+<p><em>(Căn cứ: Slide pp. 23–27; Đề cương mục 7.3; QBank <code>QBANK-CH07-04</code>)</em></p>
+
+<ul><li><strong>Nạp động (Dynamic Loading):</strong> Một thủ tục (routine/function) chỉ được nạp vào RAM khi nó thực sự được gọi trong quá trình chạy. Toàn bộ các thủ tục chưa dùng tới vẫn nằm trên đĩa cứng ở định dạng tái định vị.<ul><li><em>Lợi ích:</em> Tiết kiệm không gian bộ nhớ khi chương trình chứa nhiều đoạn mã xử lý lỗi hiếm khi xảy ra hoặc các tính năng tùy chọn. Không đòi hỏi sự hỗ trợ đặc biệt từ hệ điều hành (do lập trình viên thiết kế qua cấu trúc chương trình).</li></ul></li><li><strong>Liên kết động (Dynamic Linking):</strong> Việc liên kết thư viện hệ thống bị trì hoãn cho đến thời điểm thực thi chương trình.<ul><li><em>Cơ chế hoạt động:</em> Trong mã nhị phân của chương trình, trình liên kết chèn một đoạn mã ngắn gọi là <strong>Stub</strong>. Khi hàm thư viện được gọi lần đầu, Stub kiểm tra xem hàm đó đã có trong RAM chưa. Nếu chưa, nó yêu cầu hệ điều hành nạp thư viện vào RAM. Sau đó Stub tự thay thế chính nó bằng địa chỉ thực của hàm thư viện.</li><li><em>Lợi ích vượt trội:</em> Hàng trăm tiến trình cùng gọi thư viện chuẩn <code>printf()</code> chỉ cần dùng chung <strong>MỘT bản sao duy nhất</strong> của thư viện trong RAM (Shared Libraries / <code>.so</code> trên Linux, <code>.dll</code> trên Windows). Dễ dàng nâng cấp bản vá thư viện mà không cần biên dịch lại ứng dụng.</li></ul></li></ul>
+
+<hr>
+
+<h2 id="2-cap-phat-lien-tuc">2. Cấp phát liên tục</h2>
+
+<h3 id="7-4-cac-mo-hinh-cap-phat-lien-tuc-contiguous-allocation">7.4. Các mô hình cấp phát liên tục (Contiguous Allocation)</h3>
+
+<p><em>(Căn cứ: Slide pp. 28–32; Đề cương mục 7.4)</em></p>
+
+<p>Trong cơ chế cấp phát liên tục, mỗi tiến trình được cấp phát một khối bộ nhớ đơn nhất, liên tục không đứt quãng trong không gian địa chỉ vật lý.</p>
+
+<hr>
+
+<h3 id="7-4-1-phan-vung-co-inh-static-partitioning-phan-manh-noi">7.4.1. Phân vùng cố định (Static Partitioning) &amp; Phân mảnh nội</h3>
+
+<p><em>(Căn cứ: Slide pp. 33–36; Đề cương mục 7.4.1; QBank <code>QBANK-CH07-06</code>)</em></p>
+
+<p>Bộ nhớ được chia thành các phân vùng có kích thước xác định trước ngay khi khởi động hệ thống (các phân vùng có thể bằng nhau hoặc khác nhau). Mỗi phân vùng chỉ chứa đúng một tiến trình tại một thời điểm.</p>
+
+<pre><code class="language-">+─────────────────────── Bộ nhớ RAM ───────────────────────+
+| Vùng HĐH | Phân vùng 1 (100K) | Phân vùng 2 (300K)       |
+| (Kernel) | [Tiến trình P1: 80K] [Tiến trình P2: 210K]    |
+|          | (Lãng phí: 20K)     | (Lãng phí: 90K)         |
+|          | &lt;--- Mảnh nội ----&gt; | &lt;--- Mảnh nội --------&gt; |
++──────────────────────────────────────────────────────────+</code></pre>
+
+<div class="callout important"><div class="callout-title">YÊU CẦU QUAN TRỌNG</div><p><br><strong>Định nghĩa Phân mảnh nội (Internal Fragmentation):</strong><br>Phân mảnh nội là hiện tượng vùng nhớ trống nằm <strong>bên trong</strong> một phân vùng đã được cấp phát cho tiến trình nhưng tiến trình không sử dụng hết, và phần dư thừa này <strong>không thể</strong> được cấp phát cho bất kỳ tiến trình nào khác.<br>- <em>Nguyên nhân:</em> Kích thước phân vùng cấp phát lớn hơn kích thước thực tế mà tiến trình yêu cầu.</p></div>
+
+<hr>
+
+<h3 id="7-4-2-phan-vung-ong-dynamic-partitioning-phan-manh-ngoai">7.4.2. Phân vùng động (Dynamic Partitioning) &amp; Phân mảnh ngoại</h3>
+
+<p><em>(Căn cứ: Slide pp. 37–39; Đề cương mục 7.4.2 chuẩn hóa từ lỗi typo 7.4.1 nguồn; QBank <code>QBANK-CH07-05</code>)</em></p>
+
+<p>Hệ điều hành không chia trước bộ nhớ. Khi một tiến trình được nạp, hệ điều hành tìm một khối nhớ trống vừa khít với kích thước của tiến trình để cấp phát. Sau một thời gian hoạt động với các tiến trình nạp vào và kết thúc giải phóng, bộ nhớ bị phân tách thành các vùng nhớ bị chiếm giữ xen kẽ với các khối nhớ trống gọi là các <strong>Lỗ trống (Holes)</strong>.</p>
+
+<pre><code class="language-">+────────────────────────── Bộ nhớ RAM ──────────────────────────+
+| P1 (200K) | Lỗ trống 1 (50K) | P2 (300K) | Lỗ trống 2 (70K)    |
+| (Đang chạy)| (Chưa dùng)      | (Đang chạy)| (Chưa dùng)         |
++────────────────────────────────────────────────────────────────+
+  Yêu cầu P3 (100K) tới -&gt; TỔNG TRỐNG = 50K + 70K = 120K &gt; 100K
+  NHƯNG P3 VẪN BỊ TỪ CHỐI VÌ KHÔNG CÓ KHỐI LIÊN TỤC NÀO ĐỦ 100K!</code></pre>
+
+<div class="callout important"><div class="callout-title">YÊU CẦU QUAN TRỌNG</div><p><br><strong>Định nghĩa Phân mảnh ngoại (External Fragmentation):</strong><br>Phân mảnh ngoại là hiện tượng tổng dung lượng bộ nhớ còn trống trong hệ thống là <strong>đủ</strong> để thỏa mãn yêu cầu của tiến trình mới, nhưng các vùng trống này bị phân tán thành các mảnh nhỏ rời rạc, <strong>không liên tục</strong>, khiến hệ thống không thể cấp phát cho tiến trình.<br>- <em>Nguyên nhân:</em> Các tiến trình vào/ra hệ thống động tạo ra các lỗ trống kích thước khác nhau xen kẽ giữa các vùng bộ nhớ đang bị chiếm giữ.</p></div>
+
+<div class="callout note"><div class="callout-title">LƯU Ý QUAN TRỌNG</div><p><br><strong>Quy tắc 50% (50-Percent Rule) [TIER_B_ENRICHMENT]:</strong><br>Phân tích thống kê kinh điển của Donald Knuth chứng minh rằng: với chiến lược First Fit, trong điều kiện hệ thống dừng ổn định, cứ mỗi $N$ khối bộ nhớ được cấp phát sẽ có khoảng $0.5 N$ khối nhớ bị phân mảnh ngoại lãng phí. Nghĩa là khoảng một phần ba (khoảng 33%) tổng bộ nhớ có thể không sử dụng được!</p></div>
+
+<div class="recall-checkpoint" id="rc-ch07-fragmentation" data-item-id="rc-ch07-fragmentation" data-concept-id="ch07-fragmentation" role="region" aria-label="Trạm thu hồi: ch07-fragmentation"><div class="checkpoint-header"><span class="card-tag">Recall Checkpoint</span><span class="card-mastery-badge" aria-label="Cấp độ thành thạo">M0</span><span class="checkpoint-status" aria-live="polite">Chưa tự kiểm tra</span></div><div class="checkpoint-prompt"><strong>Nhiệm vụ thu hồi kín sách (Closed-book Recall):</strong>
+1. Phân biệt sự khác nhau căn bản về vị trí và nguyên nhân giữa phân mảnh nội và phân mảnh ngoại.
+2. Phân vùng cố định gây ra loại phân mảnh nào? Phân vùng động gây ra loại phân mảnh nào?</div><textarea id="rc-ch07-fragmentation__scratchpad" class="checkpoint-scratchpad" aria-label="Nháp câu trả lời kín sách" placeholder="Tự thu hồi câu trả lời kín sách trước khi xem rubric..."></textarea><div class="checkpoint-actions"><button type="button" class="btn-card primary btn-reveal-rubric" aria-expanded="false" aria-controls="rc-ch07-fragmentation__rubric">🔍 Mở Rubric Đối soát</button></div><div id="rc-ch07-fragmentation__rubric" class="rubric-container card-section" aria-hidden="true" style="display: none;"><div class="rubric-title"><strong>Tiêu chí đối soát tự đánh giá:</strong></div><div class="rubric-items"><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> Nêu rõ phân mảnh nội nằm bên trong phân vùng do cấp phát dư; phân mảnh ngoại nằm rải rác ngoài các phân vùng do các lỗ trống không liên tục. (0.5đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> Khẳng định chính xác: Phân vùng cố định sinh ra phân mảnh nội; phân vùng động sinh ra phân mảnh ngoại. (0.5đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> -&gt; (0.5đ)</label></div></div><div class="rubric-evaluation"><button type="button" class="btn-card success btn-submit-recall">Xác nhận Tự đánh giá (Đạt M2 nếu ≥80%)</button><span class="recall-feedback" id="rc-ch07-fragmentation__feedback" aria-live="polite"></span></div></div></div>
+
+<hr>
+
+<h3 id="7-4-3-bon-chien-luoc-cap-phat-lo-trong-placement-strategies">7.4.3. Bốn chiến lược cấp phát lỗ trống (Placement Strategies)</h3>
+
+<p><em>(Căn cứ: Slide pp. 37–39, 67; Đề cương mục 7.4.2; QBank <code>QBANK-CH07-06</code>, <code>QBANK-CH07-10</code>)</em></p>
+
+<p>Khi có một danh sách các lỗ trống tự do (Free Hole List), hệ điều hành có thể chọn một trong 4 thuật toán sau để chọn lỗ trống cấp cho tiến trình:</p>
+
+<ol><li><strong>First Fit (Khớp đầu tiên):</strong> Quét danh sách lỗ trống từ đầu, cấp phát lỗ trống <strong>đầu tiên</strong> tìm thấy có kích thước đủ lớn ($\text{Hole Size} \ge \text{Process Size}$).</li><li><strong>Best Fit (Khớp tốt nhất):</strong> Quét toàn bộ danh sách, chọn lỗ trống <strong>nhỏ nhất</strong> trong số các lỗ đủ lớn (lỗ có kích thước gần nhất với yêu cầu của tiến trình).<ul><li><em>Đặc điểm:</em> Để lại lỗ trống dư thừa nhỏ nhất có thể, nhưng dễ tạo ra vô số mảnh vụn li ti vô dụng.</li></ul></li><li><strong>Worst Fit (Khớp tồi nhất):</strong> Quét toàn bộ danh sách, chọn lỗ trống <strong>lớn nhất</strong> có trong hệ thống.<ul><li><em>Ý tưởng:</em> Lỗ trống còn lại sau khi cấp phát vẫn có kích thước tương đối lớn, hy vọng có thể tái sử dụng cho tiến trình khác.</li></ul></li><li><strong>Next Fit (Khớp kế tiếp):</strong> Giống First Fit, nhưng không quét lại từ đầu danh sách mà <strong>bắt đầu quét từ vị trí con trỏ cấp phát của lượt trước</strong>, quay vòng (wrap-around) về đầu danh sách nếu chạm đáy.</li></ol>
+
+<hr>
+
+<h4 id="vet-thuc-thi-chuan-muc-bai-tap-mau-slide-67-qbank-ch07-10">Vết thực thi chuẩn mực: Bài tập mẫu Slide 67 &amp; QBANK-CH07-10</h4>
+
+<p><em>(Bảo toàn số liệu chính thức UIT: 4 phân vùng trống $600\text{KB}, 500\text{KB}, 200\text{KB}, 300\text{KB}$; chuỗi tiến trình $P_1(212\text{KB}), P_2(417\text{KB}), P_3(112\text{KB}), P_4(426\text{KB})$).</em></p>
+
+<h5 id="1-chien-luoc-first-fit">1. Chiến lược First Fit:</h5>
+
+<ul><li>Trạng thái ban đầu: $[\text{H}_1: 600\text{K}, \text{H}_2: 500\text{K}, \text{H}_3: 200\text{K}, \text{H}_4: 300\text{K}]$.</li><li>$P_1(212\text{K})$: Quét từ đầu $\implies$ gặp $\text{H}_1(600\text{K})$ đủ lớn. Cấp vào $\text{H}_1$. Còn lại $\text{H}_1 = 600 - 212 = 388\text{K}$.<ul><li>Danh sách lỗ: $[388\text{K}, 500\text{K}, 200\text{K}, 300\text{K}]$.</li></ul></li><li>$P_2(417\text{K})$: Quét từ đầu: $388\text{K} &lt; 417\text{K}$ (bỏ qua) $\implies$ gặp $\text{H}_2(500\text{K})$ đủ lớn. Cấp vào $\text{H}_2$. Còn lại $\text{H}_2 = 500 - 417 = 83\text{K}$.<ul><li>Danh sách lỗ: $[388\text{K}, 83\text{K}, 200\text{K}, 300\text{K}]$.</li></ul></li><li>$P_3(112\text{K})$: Quét từ đầu $\implies$ gặp $\text{H}_1(388\text{K})$ đủ lớn. Cấp vào $\text{H}_1$. Còn lại $\text{H}_1 = 388 - 112 = 276\text{K}$.<ul><li>Danh sách lỗ: $[276\text{K}, 83\text{K}, 200\text{K}, 300\text{K}]$.</li></ul></li><li>$P_4(426\text{K})$: Quét từ đầu: $276\text{K} &lt; 426\text{K}$, $83\text{K} &lt; 426\text{K}$, $200\text{K} &lt; 426\text{K}$, $300\text{K} &lt; 426\text{K}$. Không có lỗ nào đủ lớn!</li><li><strong>Kết luận First Fit:</strong> $P_1 \to \text{Phân vùng 1}$, $P_2 \to \text{Phân vùng 2}$, $P_3 \to \text{Phân vùng 1}$. $P_4$ phải chờ.</li></ul>
+
+<h5 id="2-chien-luoc-best-fit">2. Chiến lược Best Fit:</h5>
+
+<ul><li>Trạng thái ban đầu: $[\text{H}_1: 600\text{K}, \text{H}_2: 500\text{K}, \text{H}_3: 200\text{K}, \text{H}_4: 300\text{K}]$.</li><li>$P_1(212\text{K})$: Các lỗ đủ lớn gồm $600\text{K}, 500\text{K}, 300\text{K}$. Nhỏ nhất là $\text{H}_4(300\text{K})$. Cấp vào $\text{H}_4$. Còn lại $\text{H}_4 = 300 - 212 = 88\text{K}$.<ul><li>Danh sách lỗ: $[600\text{K}, 500\text{K}, 200\text{K}, 88\text{K}]$.</li></ul></li><li>$P_2(417\text{K})$: Các lỗ đủ lớn gồm $600\text{K}, 500\text{K}$. Nhỏ nhất là $\text{H}_2(500\text{K})$. Cấp vào $\text{H}_2$. Còn lại $\text{H}_2 = 500 - 417 = 83\text{K}$.<ul><li>Danh sách lỗ: $[600\text{K}, 83\text{K}, 200\text{K}, 88\text{K}]$.</li></ul></li><li>$P_3(112\text{K})$: Các lỗ đủ lớn gồm $600\text{K}, 200\text{K}$. Nhỏ nhất là $\text{H}_3(200\text{K})$. Cấp vào $\text{H}_3$. Còn lại $\text{H}_3 = 200 - 112 = 88\text{K}$.<ul><li>Danh sách lỗ: $[600\text{K}, 83\text{K}, 88\text{K}, 88\text{K}]$.</li></ul></li><li>$P_4(426\text{K})$: Lỗ đủ lớn duy nhất là $\text{H}_1(600\text{K})$. Cấp vào $\text{H}_1$. Còn lại $\text{H}_1 = 600 - 426 = 174\text{K}$.<ul><li>Danh sách lỗ cuối: $[174\text{K}, 83\text{K}, 88\text{K}, 88\text{K}]$.</li></ul></li><li><strong>Kết luận Best Fit:</strong> Cả 4 tiến trình được cấp phát thành công! ($P_1 \to 300\text{K}, P_2 \to 500\text{K}, P_3 \to 200\text{K}, P_4 \to 600\text{K}$).</li></ul>
+
+<h5 id="3-chien-luoc-next-fit">3. Chiến lược Next Fit:</h5>
+
+<ul><li>Trạng thái ban đầu: $[\text{H}_1: 600\text{K}, \text{H}_2: 500\text{K}, \text{H}_3: 200\text{K}, \text{H}_4: 300\text{K}]$. Con trỏ tại $\text{H}_1$.</li><li>$P_1(212\text{K})$: Bắt đầu tại $\text{H}_1(600\text{K}) \implies$ đủ lớn, cấp vào $\text{H}_1$. Còn $\text{H}_1 = 388\text{K}$. Con trỏ dừng tại $\text{H}_1$.</li><li>$P_2(417\text{K})$: Quét tiếp từ sau $\text{H}_1 \implies$ gặp $\text{H}_2(500\text{K})$ đủ lớn, cấp vào $\text{H}_2$. Còn $\text{H}_2 = 83\text{K}$. Con trỏ dừng tại $\text{H}_2$.</li><li>$P_3(112\text{K})$: Quét tiếp từ sau $\text{H}_2 \implies$ gặp $\text{H}_3(200\text{K})$ đủ lớn, cấp vào $\text{H}_3$. Còn $\text{H}_3 = 88\text{K}$. Con trỏ dừng tại $\text{H}_3$.</li><li>$P_4(426\text{K})$: Quét tiếp từ sau $\text{H}_3 \implies$ kiểm tra $\text{H}_4(300\text{K}) &lt; 426\text{K}$, quay vòng kiểm tra $\text{H}_1(388\text{K}) &lt; 426\text{K}$, $\text{H}_2(83\text{K}) &lt; 426\text{K}$, $\text{H}_3(88\text{K}) &lt; 426\text{K}$. Không có lỗ nào đủ lớn!</li><li><strong>Kết luận Next Fit:</strong> $P_1 \to \text{Phân vùng 1}$, $P_2 \to \text{Phân vùng 2}$, $P_3 \to \text{Phân vùng 3}$. $P_4$ phải chờ.</li></ul>
+
+<h5 id="4-chien-luoc-worst-fit">4. Chiến lược Worst Fit:</h5>
+
+<ul><li>Trạng thái ban đầu: $[\text{H}_1: 600\text{K}, \text{H}_2: 500\text{K}, \text{H}_3: 200\text{K}, \text{H}_4: 300\text{K}]$.</li><li>$P_1(212\text{K})$: Lỗ lớn nhất là $\text{H}_1(600\text{K})$. Cấp vào $\text{H}_1$. Còn $\text{H}_1 = 388\text{K}$.<ul><li>Danh sách lỗ: $[388\text{K}, 500\text{K}, 200\text{K}, 300\text{K}]$.</li></ul></li><li>$P_2(417\text{K})$: Lỗ lớn nhất là $\text{H}_2(500\text{K})$. Cấp vào $\text{H}_2$. Còn $\text{H}_2 = 83\text{K}$.<ul><li>Danh sách lỗ: $[388\text{K}, 83\text{K}, 200\text{K}, 300\text{K}]$.</li></ul></li><li>$P_3(112\text{K})$: Lỗ lớn nhất hiện tại là $\text{H}_1(388\text{K})$. Cấp vào $\text{H}_1$. Còn $\text{H}_1 = 388 - 112 = 276\text{K}$.<ul><li>Danh sách lỗ: $[276\text{K}, 83\text{K}, 200\text{K}, 300\text{K}]$.</li></ul></li><li>$P_4(426\text{K})$: Lỗ lớn nhất hiện tại là $\text{H}_4(300\text{K}) &lt; 426\text{K}$. Không cấp phát được!</li><li><strong>Kết luận Worst Fit:</strong> $P_1 \to \text{Phân vùng 1}$, $P_2 \to \text{Phân vùng 2}$, $P_3 \to \text{Phân vùng 1}$. $P_4$ phải chờ.</li></ul>
+
+<div class="callout errordiagnosis"><div class="callout-title">⚠️ CHẨN ĐOÁN & SỬA SAI</div><p><br><strong>Các lỗi sai kinh điển khi thi giải thuật Fit:</strong><br>1. <strong>Quên cập nhật kích thước lỗ trống:</strong> Sau khi cấp phát cho $P_1$, kích thước lỗ $\text{H}_1$ giảm xuống. Nhiều sinh viên vẫn lấy số liệu $600\text{K}$ ban đầu để xét cho các tiến trình sau.<br>2. <strong>Quên con trỏ Next Fit:</strong> Nhầm Next Fit thành First Fit (quay lại đầu danh sách sau mỗi tiến trình). Cần nhớ: Next Fit chỉ quay đầu khi đã chạm đáy danh sách.<br>3. <strong>Nhầm tưởng Best Fit luôn tốt nhất:</strong> Best Fit tối ưu cho kịch bản tĩnh, nhưng trong hệ thống động liên tục giải phóng, Best Fit tạo ra vô số mảnh vụn nhỏ không thể dùng được, trong khi Worst Fit để lại mảnh dư lớn hơn.</p></div>
+
+<div class="recall-checkpoint" id="rc-ch07-fit-algorithms" data-item-id="rc-ch07-fit-algorithms" data-concept-id="ch07-fit-algorithms" role="region" aria-label="Trạm thu hồi: ch07-fit-algorithms"><div class="checkpoint-header"><span class="card-tag">Recall Checkpoint</span><span class="card-mastery-badge" aria-label="Cấp độ thành thạo">M0</span><span class="checkpoint-status" aria-live="polite">Chưa tự kiểm tra</span></div><div class="checkpoint-prompt"><strong>Nhiệm vụ thu hồi kín sách (Closed-book Recall):</strong>
+1. Trình bày sự khác biệt giữa First Fit và Next Fit về điểm bắt đầu duyệt danh sách.
+2. Vì sao Best Fit có xu hướng tạo ra nhiều mảnh vụn nhỏ hơn Worst Fit?</div><textarea id="rc-ch07-fit-algorithms__scratchpad" class="checkpoint-scratchpad" aria-label="Nháp câu trả lời kín sách" placeholder="Tự thu hồi câu trả lời kín sách trước khi xem rubric..."></textarea><div class="checkpoint-actions"><button type="button" class="btn-card primary btn-reveal-rubric" aria-expanded="false" aria-controls="rc-ch07-fit-algorithms__rubric">🔍 Mở Rubric Đối soát</button></div><div id="rc-ch07-fit-algorithms__rubric" class="rubric-container card-section" aria-hidden="true" style="display: none;"><div class="rubric-title"><strong>Tiêu chí đối soát tự đánh giá:</strong></div><div class="rubric-items"><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> First Fit luôn bắt đầu quét từ đầu danh sách lỗ trống; Next Fit quét tiếp từ vị trí con trỏ cấp phát của lượt trước đó. (0.5đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> Best Fit chọn lỗ nhỏ nhất vừa khít nên phần dư thừa để lại có kích thước tối thiểu, tạo thành các mảnh vụn nhỏ li ti khó tái sử dụng. (0.5đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> -&gt; (0.5đ)</label></div></div><div class="rubric-evaluation"><button type="button" class="btn-card success btn-submit-recall">Xác nhận Tự đánh giá (Đạt M2 nếu ≥80%)</button><span class="recall-feedback" id="rc-ch07-fit-algorithms__feedback" aria-live="polite"></span></div></div></div>
+
+<div class="transfer-problem" id="tp-ch07-fit-allocation" data-item-id="tp-ch07-fit-allocation" data-concept-id="ch07-fit-algorithms" role="region" aria-label="Bài toán chuyển giao: ch07-fit-algorithms"><div class="problem-header"><span class="card-tag">Transfer Problem (Level C)</span><span class="card-mastery-badge" aria-label="Cấp độ thành thạo">M0</span><span class="transfer-gate-status" aria-live="polite">Cần hoàn thành M2 trước</span></div><div class="problem-prompt"><strong>Bài toán chuyển giao độc lập (Transfer Challenge):</strong>
+Cho hệ thống có 4 phân vùng trống ban đầu theo thứ tự: $400\text{KB}, 700\text{KB}, 300\text{KB}, 500\text{KB}$.
+Chuỗi sự kiện diễn ra như sau:
+1. Cấp phát lần lượt cho $P_1(280\text{KB})$ và $P_2(350\text{KB})$.
+2. Ngay sau đó, tiến trình $P_1$ kết thúc và giải phóng toàn bộ bộ nhớ của mình.
+3. Hệ thống tiếp tục nhận yêu cầu cấp phát cho $P_3(380\text{KB})$.
+<strong>Yêu cầu:</strong> Xác định vị trí phân vùng được cấp phát cho $P_3$ theo hai giải thuật: <strong>First Fit</strong> và <strong>Best Fit</strong>.</div><textarea id="tp-ch07-fit-allocation__scratchpad" class="transfer-scratchpad" aria-label="Bài làm chuyển giao độc lập" placeholder="Độc lập giải quyết bài toán với tham số mới không dùng gợi ý..."></textarea><div class="problem-actions"><button type="button" class="btn-card primary btn-reveal-transfer-solution" aria-expanded="false" aria-controls="tp-ch07-fit-allocation__solution">📖 Xem Lời giải & Đối soát</button></div><div id="tp-ch07-fit-allocation__solution" class="transfer-solution-container card-section" aria-hidden="true" style="display: none;"><div class="solution-content"><strong>Lời giải chi tiết:</strong>
+- Ban đầu: $[\text{H}_1: 400\text{K}, \text{H}_2: 700\text{K}, \text{H}_3: 300\text{K}, \text{H}_4: 500\text{K}]$.
+
+<em>Với First Fit:</em>
+- $P_1(280\text{K})$: Cấp vào $\text{H}_1(400\text{K})$, còn $120\text{K}$. Trạng thái: $[\text{P}_1(280\text{K}), 120\text{K}, 700\text{K}, 300\text{K}, 500\text{K}]$.
+- $P_2(350\text{K})$: Quét từ đầu: $120\text{K} &lt; 350\text{K}$, gặp $\text{H}_2(700\text{K})$ cấp vào $\text{H}_2$, còn $350\text{K}$.
+- $P_1$ giải phóng: Phân vùng 1 khôi phục thành lỗ trống $400\text{K}$.
+  - Danh sách lỗ hiện tại: $[\text{H}_1: 400\text{K}, \text{H}_2: 350\text{K}, \text{H}_3: 300\text{K}, \text{H}_4: 500\text{K}]$.
+- $P_3(380\text{K})$: Quét từ đầu $\implies$ gặp ngay $\text{H}_1(400\text{K})$ đủ lớn!
+  - <strong>Kết quả First Fit:</strong> $P_3$ được nạp vào Phân vùng 1 (còn dư $20\text{K}$).
+
+<em>Với Best Fit:</em>
+- $P_1(280\text{K})$: Lỗ nhỏ nhất đủ chứa là $\text{H}_3(300\text{K})$. Cấp vào $\text{H}_3$, còn $20\text{K}$.
+- $P_2(350\text{K})$: Lỗ nhỏ nhất đủ chứa là $\text{H}_1(400\text{K})$. Cấp vào $\text{H}_1$, còn $50\text{K}$.
+- $P_1$ giải phóng: Lỗ tại $\text{H}_3$ khôi phục thành $300\text{K}$.
+  - Danh sách lỗ hiện tại: $[50\text{K}, 700\text{K}, 300\text{K}, 500\text{K}]$.
+- $P_3(380\text{K})$: Các lỗ đủ lớn gồm $700\text{K}$ và $500\text{K}$. Nhỏ nhất là $\text{H}_4(500\text{K})$.
+  - <strong>Kết quả Best Fit:</strong> $P_3$ được nạp vào Phân vùng 4 (còn dư $120\text{K}$).
+--&gt;</div><div class="transfer-evaluation"><span class="eval-label">Đánh giá kết quả chuyển giao độc lập:</span><button type="button" class="btn-card success btn-transfer-pass" aria-label="Đạt yêu cầu chuyển giao">✅ Đạt (Độc lập giải đúng)</button><button type="button" class="btn-card danger btn-transfer-fail" aria-label="Chưa đạt yêu cầu chuyển giao">❌ Chưa đạt</button><span class="transfer-feedback" id="tp-ch07-fit-allocation__feedback" aria-live="polite"></span></div></div></div>
+
+<hr>
+
+<h3 id="7-4-4-ky-thuat-gom-cum-compaction">7.4.4. Kỹ thuật Gom cụm (Compaction)</h3>
+
+<p><em>(Căn cứ: Slide p. 39; Đề cương mục 7.4.2)</em></p>
+
+<p>Gom cụm là giải pháp duy nhất trong cấp phát liên tục để khắc phục phân mảnh ngoại: Hệ thống di dời tất cả các tiến trình đang chiếm giữ bộ nhớ dồn về một đầu (ví dụ dồn về đáy RAM), gom tất cả các lỗ trống nhỏ rải rác lại thành một khối bộ nhớ tự do khổng lồ duy nhất.</p>
+
+<div class="callout important"><div class="callout-title">YÊU CẦU QUAN TRỌNG</div><p><br><strong>Điều kiện tiên quyết của Gom cụm:</strong><br>Gom cụm <strong>CHỈ KHẢ THI</strong> nếu hệ thống áp dụng cơ chế <strong>Ràng buộc địa chỉ tại thời điểm thực thi (Execution-time binding)</strong> có hỗ trợ phần cứng thanh ghi tái định vị (Relocation Register). Khi di chuyển tiến trình, hệ điều hành chỉ cần cập nhật giá trị mới vào thanh ghi Base của tiến trình đó. Nếu dùng Compile-time hoặc Load-time binding, việc di chuyển tiến trình sẽ phá hủy toàn bộ con trỏ tuyệt đối bên trong mã máy.<br>- <em>Hạn chế:</em> Chi phí đọc/ghi toàn bộ nội dung bộ nhớ cực kỳ tốn thời gian (I/O latency), làm hệ thống tạm ngừng phản hồi trong quá trình gom dồn.</p></div>
+
+<hr>
+
+<h2 id="3-phan-trang-tlb">3. Phân trang &amp; TLB</h2>
+
+<h3 id="7-5-co-che-phan-trang-cot-loi-paging-fundamentals">7.5. Cơ chế phân trang cốt lõi (Paging Fundamentals)</h3>
+
+<p><em>(Căn cứ: Slide pp. 40–47; Đề cương mục 7.5; QBank <code>QBANK-CH07-07</code>)</em></p>
+
+<p>Phân trang là giải pháp đột phá loại bỏ hoàn toàn cơ chế cấp phát liên tục:</p>
+
+<ul><li><strong>Không gian địa chỉ logic</strong> của tiến trình được chia thành các khối cố định bằng nhau gọi là <strong>Trang (Pages)</strong>.</li><li><strong>Bộ nhớ vật lý (RAM)</strong> được chia thành các khối có kích thước hoàn toàn bằng kích thước của trang, gọi là <strong>Khung trang (Frames)</strong>.</li><li>Hệ điều hành duy trì một <strong>Bảng phân trang (Page Table)</strong> cho mỗi tiến trình để theo dõi trang logic nào của tiến trình đang nằm ở khung trang vật lý nào trong RAM.</li></ul>
+
+<pre><code class="language-">TIẾN TRÌNH (Địa chỉ Logic)               BẢNG PHÂN TRANG               BỘ NHỚ VẬT LÝ (RAM)
+┌────────────────────────┐              ┌───────────────┐              ┌────────────────────────┐
+│ Trang 0 (Page 0)       │              │ Trang │ Khung │              │ Khung 0 (Frame 0)      │
+├────────────────────────┤              ├───────┼───────┤              ├────────────────────────┤
+│ Trang 1 (Page 1)       │              │   0   │   2   │              │ Khung 1 (Trang 2)      │
+├────────────────────────┤              │   1   │   4   │              ├────────────────────────┤
+│ Trang 2 (Page 2)       │              │   2   │   1   │              │ Khung 2 (Trang 0)      │
+├────────────────────────┤              │   3   │   5   │              ├────────────────────────┤
+│ Trang 3 (Page 3)       │              └───────┴───────┘              │ Khung 3 (Trống)        │
+└────────────────────────┘                                             ├────────────────────────┤
+                                                                       │ Khung 4 (Trang 1)      │
+                                                                       ├────────────────────────┤
+                                                                       │ Khung 5 (Trang 3)      │
+                                                                       └────────────────────────┘</code></pre>
+
+<h4 id="mo-hinh-nhan-thuc-vi-sao-o-doi-d-khong-oi">Mô hình nhận thức: Vì sao độ dời $d$ không đổi?</h4>
+
+<p>Địa chỉ do CPU phát sinh được chia thành 2 phần:</p>
+
+<ul><li><strong>Số trang ($p$ - Page number):</strong> Dùng làm chỉ số để tra vào Bảng phân trang nhằm tìm ra số khung trang vật lý ($f$ - Frame number).</li><li><strong>Độ dời ($d$ - Offset):</strong> Vị trí tương đối của byte cần truy xuất tính từ đầu trang.</li></ul>
+
+<p>$$\text{Địa chỉ Logic: } [p \mid d] \xrightarrow{\text{Tra bảng trang } p \to f} \text{Địa chỉ Vật lý: } [f \mid d]$$</p>
+
+<div class="callout note"><div class="callout-title">LƯU Ý QUAN TRỌNG</div><p><br><strong>Bản chất của việc độ dời $d$ không đổi:</strong><br>Vì kích thước trang $S$ <strong>hoàn toàn bằng</strong> kích thước khung trang $S$, khoảng cách từ byte dữ liệu tới byte đầu tiên của trang trong không gian logic chính là khoảng cách từ byte đó tới byte đầu tiên của khung trang trong không gian vật lý. Do đó, phần cứng chỉ cần thay thế số trang $p$ bằng số khung $f$, còn trường độ dời $d$ được giữ nguyên vẹn 100%!</p></div>
+
+<h4 id="quy-tac-phan-tach-bit-nhi-phan">Quy tắc phân tách bit nhị phân</h4>
+
+<p>Trong các hệ thống kiến trúc nhị phân, kích thước trang luôn được chọn là <strong>lũy thừa của 2</strong> (ví dụ $4\text{KB} = 2^{12}\text{ bytes}$).</p>
+
+<ul><li>Nếu không gian địa chỉ logic có kích thước $2^m$ bytes và kích thước trang là $2^n$ bytes:<ul><li>$n$ bit thấp nhất biểu diễn độ dời $d$ ($d = n\text{ bit}$).</li><li>$m - n$ bit cao biểu diễn số trang $p$ ($p = m - n\text{ bit}$).</li></ul></li><li><em>Ý nghĩa kiến trúc:</em> Phần cứng trích xuất số trang và độ dời trực tiếp bằng thao tác dịch bit (bit-shift) và mặt nạ bit (bit-mask), hoàn toàn không tốn một chu kỳ tính toán số học chia/lấy dư nào của ALU.</li></ul>
+
+<h4 id="phan-manh-trong-co-che-phan-trang">Phân mảnh trong cơ chế phân trang</h4>
+
+<ul><li><strong>Phân mảnh ngoại:</strong> Bị <strong>LOẠI BỎ HOÀN TOÀN</strong>! Vì bất kỳ khung trang trống nào trong RAM cũng có thể được cấp cho bất kỳ trang nào của tiến trình.</li><li><strong>Phân mảnh nội:</strong> <strong>VẪN TỒN TẠI</strong>, nhưng chỉ xảy ra ở trang cuối cùng của tiến trình nếu kích thước tiến trình không chia hết cho kích thước trang. Vùng lãng phí trung bình là nửa trang ($S/2$).</li></ul>
+
+<hr>
+
+<h3 id="7-5-3-quy-trinh-chuyen-oi-ia-chi-phan-trang">7.5.3. Quy trình chuyển đổi địa chỉ phân trang</h3>
+
+<p><em>(Căn cứ: Slide pp. 43–47; Đề cương mục 7.5.1; QBank <code>QBANK-CH07-15</code>)</em></p>
+
+<p>Quy trình chuyển đổi toán học tổng quát:</p>
+
+<ol><li>Xác định số trang: $p = \lfloor L / S \rfloor$ (hoặc lấy các bit cao).</li><li>Xác định độ dời: $d = L \pmod S$ (hoặc lấy các bit thấp).</li><li>Tra bảng trang tại mục $p$ để lấy số khung $f$.</li><li>Tính địa chỉ vật lý: $\text{Physical Address} = f \times S + d$.</li></ol>
+
+<div class="callout workedexample"><div class="callout-title">📝 BÀI TOÁN MẪU CHI TIẾT (LEVEL A)</div><p><br><strong>Bài toán mẫu chuẩn đơn trị QBANK-CH07-15 (P76 docx):</strong><br>Cho kích thước trang $S = 2\text{KB} = 2048\text{ bytes}$. Địa chỉ logic cần chuyển đổi là $L = 3254$. Bảng phân trang của tiến trình có mục: Trang 1 được nạp vào Khung 4.<br><br><strong>Các bước giải chi tiết:</strong><br>- Bước 1: Tìm số trang $p$ và độ dời $d$:<br>  $$p = \lfloor 3254 / 2048 \rfloor = 1$$<br>  $$d = 3254 \pmod{2048} = 3254 - 2048 = 1206$$<br>- Bước 2: Tra bảng trang tại mục $p = 1 \implies$ Khung trang $f = 4$.<br>- Bước 3: Tính địa chỉ vật lý:<br>  $$\text{Physical Address} = f \times S + d = 4 \times 2048 + 1206 = 8192 + 1206 = 9398$$<br><em>(Kết quả duy nhất chính xác: 9398).</em></p></div>
+
+<div class="recall-checkpoint" id="rc-ch07-paging-translation" data-item-id="rc-ch07-paging-translation" data-concept-id="ch07-paging-translation" role="region" aria-label="Trạm thu hồi: ch07-paging-translation"><div class="checkpoint-header"><span class="card-tag">Recall Checkpoint</span><span class="card-mastery-badge" aria-label="Cấp độ thành thạo">M0</span><span class="checkpoint-status" aria-live="polite">Chưa tự kiểm tra</span></div><div class="checkpoint-prompt"><strong>Nhiệm vụ thu hồi kín sách (Closed-book Recall):</strong>
+1. Trình bày công thức tính số trang $p$, độ dời $d$ và địa chỉ vật lý từ địa chỉ logic $L$ và kích thước trang $S$.
+2. Tại sao cơ chế phân trang loại bỏ được phân mảnh ngoại nhưng vẫn còn phân mảnh nội?</div><textarea id="rc-ch07-paging-translation__scratchpad" class="checkpoint-scratchpad" aria-label="Nháp câu trả lời kín sách" placeholder="Tự thu hồi câu trả lời kín sách trước khi xem rubric..."></textarea><div class="checkpoint-actions"><button type="button" class="btn-card primary btn-reveal-rubric" aria-expanded="false" aria-controls="rc-ch07-paging-translation__rubric">🔍 Mở Rubric Đối soát</button></div><div id="rc-ch07-paging-translation__rubric" class="rubric-container card-section" aria-hidden="true" style="display: none;"><div class="rubric-title"><strong>Tiêu chí đối soát tự đánh giá:</strong></div><div class="rubric-items"><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> Viết đúng công thức: $p = \lfloor L/S \rfloor$, $d = L \pmod S$, $\text{PA} = f \times S + d$. (0.5đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> Giải thích đúng: loại bỏ phân mảnh ngoại vì trang nạp vào khung bất kỳ; còn phân mảnh nội vì trang cuối không dùng hết. (0.5đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> -&gt; (0.5đ)</label></div></div><div class="rubric-evaluation"><button type="button" class="btn-card success btn-submit-recall">Xác nhận Tự đánh giá (Đạt M2 nếu ≥80%)</button><span class="recall-feedback" id="rc-ch07-paging-translation__feedback" aria-live="polite"></span></div></div></div>
+
+<div class="transfer-problem" id="tp-ch07-paging-hex" data-item-id="tp-ch07-paging-hex" data-concept-id="ch07-paging-translation" role="region" aria-label="Bài toán chuyển giao: ch07-paging-translation"><div class="problem-header"><span class="card-tag">Transfer Problem (Level C)</span><span class="card-mastery-badge" aria-label="Cấp độ thành thạo">M0</span><span class="transfer-gate-status" aria-live="polite">Cần hoàn thành M2 trước</span></div><div class="problem-prompt"><strong>Bài toán chuyển giao Hex trực tiếp (Transfer Challenge):</strong>
+Một hệ thống phân trang sử dụng địa chỉ 32-bit với kích thước trang $4\text{KB} = 2^{12}\text{ bytes} = 0x1000$.
+CPU phát sinh địa chỉ logic dạng thập lục phân: <code>0x0041A7C8</code>.
+Bảng phân trang hiện tại ghi nhận trang tương ứng đang được ánh xạ vào khung trang vật lý có chỉ số $f = 0x000F2$.
+<strong>Yêu cầu:</strong> Xác định số trang $p$, độ dời $d$ và địa chỉ vật lý (dưới dạng Hex) mà không cần đổi sang hệ thập phân.</div><textarea id="tp-ch07-paging-hex__scratchpad" class="transfer-scratchpad" aria-label="Bài làm chuyển giao độc lập" placeholder="Độc lập giải quyết bài toán với tham số mới không dùng gợi ý..."></textarea><div class="problem-actions"><button type="button" class="btn-card primary btn-reveal-transfer-solution" aria-expanded="false" aria-controls="tp-ch07-paging-hex__solution">📖 Xem Lời giải & Đối soát</button></div><div id="tp-ch07-paging-hex__solution" class="transfer-solution-container card-section" aria-hidden="true" style="display: none;"><div class="solution-content"><strong>Lời giải chi tiết:</strong>
+- Kích thước trang $4\text{KB} = 2^{12}\text{ bytes} \implies$ độ dời $d$ chiếm đúng $12\text{ bit} = 3\text{ chữ số Hex}$.
+- Phân tách địa chỉ logic <code>0x0041A7C8</code>:
+  - 3 chữ số Hex cuối cùng là độ dời: $d = \text{0x7C8}$.
+  - Các chữ số Hex còn lại là số trang: $p = \text{0x0041A}$.
+- Tra bảng trang với $p = \text{0x0041A} \implies$ Khung $f = \text{0x000F2}$.
+- Ghép trực tiếp khung $f$ và độ dời $d$:
+  $$\text{Địa chỉ vật lý} = [f \mid d] = \text{0x000F2} \times 0x1000 + 0x7C8 = \text{0x000F27C8}$$
+--&gt;</div><div class="transfer-evaluation"><span class="eval-label">Đánh giá kết quả chuyển giao độc lập:</span><button type="button" class="btn-card success btn-transfer-pass" aria-label="Đạt yêu cầu chuyển giao">✅ Đạt (Độc lập giải đúng)</button><button type="button" class="btn-card danger btn-transfer-fail" aria-label="Chưa đạt yêu cầu chuyển giao">❌ Chưa đạt</button><span class="transfer-feedback" id="tp-ch07-paging-hex__feedback" aria-live="polite"></span></div></div></div>
+
+<hr>
+
+<h3 id="7-5-4-bo-nho-em-chuyen-oi-nhanh-tlb-translation-lookaside-buffer">7.5.4. Bộ nhớ đệm chuyển đổi nhanh (TLB — Translation Lookaside Buffer)</h3>
+
+<p><em>(Căn cứ: Slide pp. 48–51; Đề cương mục 7.5.2; QBank <code>QBANK-CH07-08</code>)</em></p>
+
+<p>Trong hệ thống phân trang cơ bản, bảng phân trang được lưu trong RAM. Điều này dẫn đến <strong>Vấn đề truy xuất bộ nhớ hai lần (Double Memory Access)</strong>:</p>
+
+<ol><li>Lần 1: CPU phải đọc RAM để tra Bảng phân trang nhằm tìm khung $f$.</li><li>Lần 2: CPU đọc RAM lần nữa để lấy dữ liệu thực tế tại địa chỉ $(f, d)$.</li></ol>
+
+<p>$\implies$ Tốc độ truy xuất bộ nhớ của toàn bộ hệ thống bị chậm đi một nửa (50%)!</p>
+
+<p>Để khắc phục, phần cứng trang bị một bộ nhớ đệm tốc độ cực cao gọi là <strong>TLB (Translation Lookaside Buffer)</strong>. TLB là bộ nhớ liên kết (Associative Memory), cho phép tra cứu song song đồng thời tất cả các mục chỉ trong 1 chu kỳ xung nhịp.</p>
+
+<pre><code class="language-">                    ĐỊA CHỈ LOGIC: [ p | d ]
+                              │
+               ┌──────────────┴──────────────┐
+               │ Tra cứu TLB song song       │
+               ▼                             ▼
+       ┌───────────────┐             ┌───────────────┐
+       │    TLB HIT    │             │   TLB MISS    │
+       │ (Tìm thấy p)  │             │(Không thấy p) │
+       └───────┬───────┘             └───────┬───────┘
+               │ Lấy ngay f                  │ Đọc Page Table trong RAM
+               ▼                             ▼
+       ┌───────────────┐             ┌───────────────┐
+       │   Đọc RAM     │             │ Nạp (p,f)     │
+       │  lấy dữ liệu  │             │   vào TLB     │
+       └───────────────┘             └───────┬───────┘
+                                             ▼
+                                     ┌───────────────┐
+                                     │   Đọc RAM     │
+                                     │  lấy dữ liệu  │
+                                     └───────────────┘</code></pre>
+
+<div class="callout executiontrace"><div class="callout-title">🔍 VẾT THỰC THI HỆ THỐNG</div><p><br><strong>Vết thực thi phần cứng qua 2 nhánh:</strong><br>- <strong>Nhánh 1: TLB Hit (Trúng TLB):</strong><br>  CPU gửi $p \to$ TLB tìm thấy ngay mục $(p, f) \to$ lấy $f$ ghép với $d \to$ truy xuất RAM lấy dữ liệu.<br>  <em>Tổng số lần truy xuất RAM:</em> <strong>1 lần</strong>.<br>- <strong>Nhánh 2: TLB Miss (Trượt TLB):</strong><br>  CPU gửi $p \to$ TLB không tìm thấy $\to$ CPU phát tín hiệu truy xuất bảng phân trang trong RAM lấy $f \to$ ghi đè cập nhật mục $(p, f)$ vào TLB $\to$ truy xuất RAM lấy dữ liệu.<br>  <em>Tổng số lần truy xuất RAM:</em> <strong>2 lần</strong>.</p></div>
+
+<div class="callout warning"><div class="callout-title">CẢNH BÁO KỸ THUẬT</div><p><br><strong>Phân biệt bản chất: TLB Miss vs Page Fault [TIER_B_ENRICHMENT]:</strong><br>- <strong>TLB Miss (Trượt TLB):</strong> Là sự kiện trượt bộ nhớ đệm phần cứng (Hardware Cache Miss). Trang $p$ vẫn đang nằm trong RAM, bảng phân trang có sẵn mục này, chỉ là chưa được lưu trong cache TLB. Thời gian xử lý: nano-giây ($\text{ns}$).<br>- <strong>Page Fault (Lỗi trang — Khảo sát ở Chương 8):</strong> Là sự kiện ngắt hệ thống (Software Trap) xảy ra khi trang $p$ hoàn toàn <strong>CHƯA ĐƯỢC NẠP VÀO RAM</strong> (đang nằm trên đĩa). Hệ điều hành phải can thiệp đọc đĩa I/O. Thời gian xử lý: mili-giây ($\text{ms}$), chậm hơn TLB Miss hàng triệu lần!</p></div>
+
+<hr>
+
+<h3 id="7-5-5-thoi-gian-truy-xuat-hieu-dung-eat-effective-access-time">7.5.5. Thời gian truy xuất hiệu dụng (EAT — Effective Access Time)</h3>
+
+<p><em>(Căn cứ: Slide pp. 52–54, 69; Đề cương mục 7.5.3; QBank <code>QBANK-CH07-08</code>, <code>12</code>, <code>16</code>, <code>17</code>, <code>18</code>)</em></p>
+
+<p>Gọi:</p>
+
+<ul><li>$\alpha$: Tỷ lệ tìm thấy trong TLB (Hit ratio, $0 \le \alpha \le 1$).</li><li>$\epsilon$: Thời gian tra cứu bảng TLB.</li><li>$t_{\text{RAM}}$: Thời gian một chu kỳ truy xuất bộ nhớ RAM.</li></ul>
+
+<p>Thời gian truy xuất cho từng trường hợp:</p>
+
+<ul><li>Khi TLB Hit: $T_{\text{Hit}} = \epsilon + t_{\text{RAM}}$.</li><li>Khi TLB Miss: $T_{\text{Miss}} = \epsilon + 2 \times t_{\text{RAM}}$ (1 lần đọc bảng trang + 1 lần đọc dữ liệu).</li></ul>
+
+<p>Vì Hit và Miss là hai biến cố xung khắc toàn phần, thời gian truy xuất kỳ vọng trung bình EAT là:<br>$$\text{EAT} = \alpha \times T_{\text{Hit}} + (1 - \alpha) \times T_{\text{Miss}}$$<br>$$\text{EAT} = \alpha(\epsilon + t_{\text{RAM}}) + (1 - \alpha)(\epsilon + 2 t_{\text{RAM}})$$<br>$$\text{EAT} = \epsilon + (2 - \alpha) \times t_{\text{RAM}}$$</p>
+
+<p><em>(Nếu đề bài giả định thời gian tra TLB không đáng kể, $\epsilon \approx 0$: $\text{EAT} = (2 - \alpha) \times t_{\text{RAM}}$).</em></p>
+
+<div class="callout workedexample"><div class="callout-title">📝 BÀI TOÁN MẪU CHI TIẾT (LEVEL A)</div><p><br><strong>Bài toán mẫu QBANK-CH07-16 (Slide 69 tương tự):</strong><br>Cho thời gian truy xuất RAM $t_{\text{RAM}} = 124\text{ns}$, thời gian tra cứu TLB $\epsilon = 34\text{ns}$, tỷ lệ trúng TLB $\alpha = 95\% = 0.95$.<br><br><strong>Lời giải:</strong><br>- Thời gian truy xuất thông thường (không có TLB): $T_{\text{normal}} = 2 \times 124 = 248\text{ns}$.<br>- Thời gian hiệu dụng khi có TLB:<br>  $$\text{EAT} = 34 + (2 - 0.95) \times 124 = 34 + 1.05 \times 124 = 34 + 130.2 = 164.2\text{ns}$$</p></div>
+
+<div class="callout workedexample"><div class="callout-title">📝 BÀI TOÁN MẪU CHI TIẾT (LEVEL A)</div><p><br><strong>Bài toán giải ngược tìm hit-ratio QBANK-CH07-18 (P80 docx):</strong><br><em>Đề bài:</em> Biết thời gian truy xuất trong bộ nhớ thường không sử dụng TLB là $250\text{ns}$. Thời gian tìm kiếm trong bảng TLB là $26\text{ns}$. Hỏi xác suất tìm thấy trong TLB bằng bao nhiêu nếu thời gian truy xuất hiệu dụng là $182\text{ns}$?<br><br><strong>Phân tích và giải chi tiết:</strong><br>- Thời gian truy xuất thường không dùng TLB gồm 2 lần đọc RAM:<br>  $$T_{\text{no-TLB}} = 2 \times t_{\text{RAM}} = 250\text{ns} \implies t_{\text{RAM}} = 125\text{ns}$$<br>- Áp dụng công thức EAT:<br>  $$\text{EAT} = \epsilon + (2 - \alpha) \times t_{\text{RAM}}$$<br>  $$182 = 26 + (2 - \alpha) \times 125$$<br>  $$156 = (2 - \alpha) \times 125 \implies 2 - \alpha = \frac{156}{125} = 1.248$$<br>  $$\alpha = 2 - 1.248 = 0.752 = 75.2\%$$<br><em>(Kết quả: Xác suất tìm thấy trong TLB là $75.2\%$).</em></p></div>
+
+<div class="recall-checkpoint" id="rc-ch07-eat-derivation" data-item-id="rc-ch07-eat-derivation" data-concept-id="ch07-eat-calculation" role="region" aria-label="Trạm thu hồi: ch07-eat-calculation"><div class="checkpoint-header"><span class="card-tag">Recall Checkpoint</span><span class="card-mastery-badge" aria-label="Cấp độ thành thạo">M0</span><span class="checkpoint-status" aria-live="polite">Chưa tự kiểm tra</span></div><div class="checkpoint-prompt"><strong>Nhiệm vụ thu hồi kín sách (Closed-book Recall):</strong>
+1. Viết công thức tổng quát tính EAT khi có xét đến thời gian tra TLB $\epsilon$ và thời gian RAM $t_{\text{RAM}}$.
+2. Vì sao trong trường hợp TLB Miss, số lần truy xuất RAM lại là 2 lần?</div><textarea id="rc-ch07-eat-derivation__scratchpad" class="checkpoint-scratchpad" aria-label="Nháp câu trả lời kín sách" placeholder="Tự thu hồi câu trả lời kín sách trước khi xem rubric..."></textarea><div class="checkpoint-actions"><button type="button" class="btn-card primary btn-reveal-rubric" aria-expanded="false" aria-controls="rc-ch07-eat-derivation__rubric">🔍 Mở Rubric Đối soát</button></div><div id="rc-ch07-eat-derivation__rubric" class="rubric-container card-section" aria-hidden="true" style="display: none;"><div class="rubric-title"><strong>Tiêu chí đối soát tự đánh giá:</strong></div><div class="rubric-items"><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> Viết đúng công thức: $\text{EAT} = \epsilon + (2 - \alpha) \times t_{\text{RAM}}$ (hoặc triển khai qua hai nhánh Hit/Miss). (0.5đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> Giải thích rõ: 1 lần đọc bảng phân trang trong RAM để lấy frame number, và 1 lần đọc ô nhớ thực sự để lấy dữ liệu. (0.5đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> -&gt; (0.5đ)</label></div></div><div class="rubric-evaluation"><button type="button" class="btn-card success btn-submit-recall">Xác nhận Tự đánh giá (Đạt M2 nếu ≥80%)</button><span class="recall-feedback" id="rc-ch07-eat-derivation__feedback" aria-live="polite"></span></div></div></div>
+
+<hr>
+
+<h2 id="4-cau-truc-bang-trang-nang-cao">4. Cấu trúc bảng trang nâng cao</h2>
+
+<h3 id="7-5-6-bang-trang-phan-cap-hierarchical-paging">7.5.6. Bảng trang phân cấp (Hierarchical Paging)</h3>
+
+<p><em>(Căn cứ: Slide pp. 55–56, 70; Đề cương mục 7.5.4; QBank <code>QBANK-CH07-13</code>, <code>14</code>)</em></p>
+
+<p>Trên các kiến trúc hiện đại có không gian địa chỉ lớn (ví dụ 32-bit):</p>
+
+<ul><li>Với trang $4\text{KB} = 2^{12}\text{ bytes}$, không gian 32-bit có tới $2^{20} \approx 1\text{ triệu trang}$.</li><li>Nếu mỗi mục bảng trang chiếm 4 bytes $\implies$ Bảng phân trang chiếm $4\text{MB}$ bộ nhớ vật lý liên tục cho <strong>mỗi tiến trình</strong>!</li><li>Giải pháp: <strong>Phân trang cho chính bảng phân trang</strong> (Bảng trang 2 cấp - Two-Level Page Table).</li></ul>
+
+<pre><code class="language-">ĐỊA CHỈ LOGIC 32-BIT (Phân trang 2 cấp):
+┌─────────────────────────┬─────────────────────────┬─────────────────────────┐
+│     p1 (Outer Page)     │     p2 (Inner Page)     │       d (Offset)        │
+│          9 bit          │         11 bit          │         12 bit          │
+└─────────────────────────┴─────────────────────────┴─────────────────────────┘</code></pre>
+
+<div class="callout workedexample"><div class="callout-title">📝 BÀI TOÁN MẪU CHI TIẾT (LEVEL A)</div><p><br><strong>Bài toán mẫu Slide 70 &amp; QBANK-CH07-13:</strong><br>Một máy tính có địa chỉ 32-bit, sử dụng bảng trang 2 cấp. Trường địa chỉ cấp 1 có 9 bit, cấp 2 có 11 bit, phần còn lại là độ dời.<br><br><strong>Lời giải:</strong><br>1. Số bit của độ dời: $d = 32 - (9 + 11) = 12\text{ bit}$.<br>2. Kích thước một trang: $S = 2^{12}\text{ bytes} = 4096\text{ bytes} = 4\text{KB}$.<br>3. Tổng số trang ảo tối đa: Số bit chỉ số trang $= 9 + 11 = 20\text{ bit} \implies 2^{20} = 1,048,576\text{ trang}$.<br>4. Bảng trang ngoài (Cấp 1) có $2^9 = 512\text{ mục}$. Mỗi bảng trang Cấp 2 có $2^{11} = 2048\text{ mục}$.</p></div>
+
+<hr>
+
+<h3 id="7-5-7-bang-trang-bam-va-bang-trang-nghich-ao">7.5.7. Bảng trang băm và Bảng trang nghịch đảo</h3>
+
+<p><em>(Căn cứ: Slide pp. 57–58)</em></p>
+
+<pre><code class="language-">+───────────────────────+─────────────────────────────────────────+──────────────────────────────────────+
+| Cấu trúc bảng trang   | Nguyên lý tổ chức                       | Ưu điểm &amp; Nhược điểm chính           |
++───────────────────────+─────────────────────────────────────────+──────────────────────────────────────+
+| 1. Bảng trang phân cấp| Phân trang nhiều tầng (2 cấp, 3 cấp).   | Tiết kiệm RAM cho bảng trang, nhưng  |
+| (Hierarchical)        | Chỉ nạp bảng cấp 2 khi tiến trình dùng. | Miss tốn $k+1$ lần đọc RAM.          |
++───────────────────────+─────────────────────────────────────────+──────────────────────────────────────+
+| 2. Bảng trang băm     | Dùng hàm băm băm số trang $p$. Xử lý    | Thích hợp cho không gian địa chỉ     |
+| (Hashed Page Table)   | xung đột bằng danh sách liên kết.       | lớn (&gt; 32 bit, 64-bit).              |
++───────────────────────+─────────────────────────────────────────+──────────────────────────────────────+
+| 3. Bảng trang nghịch  | Chỉ có số mục bằng số KHUNG TRANG trong | Tiết kiệm RAM tối đa vì bảng không   |
+| đảo (Inverted)        | RAM. Mỗi mục lưu `(PID, Page Number)`.  | phụ thuộc số trang ảo; nhưng tra cứu |
+|                       |                                         | rất chậm (phải quét hoặc dùng băm).  |
++───────────────────────+─────────────────────────────────────────+──────────────────────────────────────+</code></pre>
+
+<hr>
+
+<h3 id="7-5-8-bao-ve-bo-nho-va-chia-se-trang">7.5.8. Bảo vệ bộ nhớ và Chia sẻ trang</h3>
+
+<p><em>(Căn cứ: Slide pp. 59–62; Đề cương mục 7.5.5; QBank <code>QBANK-CH07-01</code>)</em></p>
+
+<ul><li><strong>Bit Hợp lệ / Bất hợp lệ (Valid / Invalid Bit):</strong> Mỗi mục trong bảng phân trang có một bit kiểm soát.<ul><li><code>Valid (1)</code>: Trang thuộc không gian địa chỉ hợp lệ của tiến trình và đang nằm trong RAM.</li><li><code>Invalid (0)</code>: Trang không thuộc không gian địa chỉ của tiến trình, hoặc chưa được cấp phát $\implies$ phát sinh lỗi truy cập.</li></ul></li><li><strong>Các bit quyền (Protection Bits):</strong> Read-only, Read-Write, Execute. Nếu tiến trình cố tình ghi vào vùng chỉ đọc (ví dụ vùng mã lệnh code segment), phần cứng kích hoạt bẫy ngắt bảo vệ.</li><li><strong>Chia sẻ trang (Shared Pages):</strong> Cơ chế chia sẻ mã tái nhập (Reentrant Code / Pure Code). Mã tái nhập là mã không bao giờ tự sửa đổi chính nó trong khi chạy (ví dụ: trình biên dịch C, trình soạn thảo, thư viện chuẩn). Nhiều tiến trình cùng trỏ các mục bảng phân trang của mình vào <strong>cùng một khung trang vật lý</strong> chỉ đọc, trong khi dữ liệu riêng của từng tiến trình nằm ở các khung trang độc lập.</li></ul>
+
+<hr>
+
+<h2 id="5-swapping">5. Swapping</h2>
+
+<h3 id="7-6-co-che-hoan-vi-bo-nho-swapping">7.6. Cơ chế hoán vị bộ nhớ (Swapping)</h3>
+
+<p><em>(Căn cứ: Slide pp. 63–66; Đề cương mục 7.6; QBank <code>QBANK-CH07-09</code>)</em></p>
+
+<p>Khi tổng nhu cầu bộ nhớ của tất cả các tiến trình trong hệ thống vượt quá dung lượng RAM vật lý hiện có, hệ điều hành áp dụng kỹ thuật <strong>Hoán vị (Swapping)</strong>:</p>
+
+<ul><li><strong>Swap-out:</strong> Chuyển toàn bộ một tiến trình tạm thời không hoạt động (đang ở trạng thái <code>WAITING</code> hoặc độ ưu tiên thấp) từ RAM ra vùng lưu trữ thứ cấp trên đĩa gọi là <strong>Backing Store (Swap space)</strong>.</li><li><strong>Swap-in:</strong> Nạp lại tiến trình từ Backing Store vào RAM khi tiến trình sẵn sàng thực thi (<code>READY</code>).</li></ul>
+
+<pre><code class="language-">                    ┌────────────────────────┐
+                    │      BỘ NHỚ RAM        │
+                    │ ┌────────────────────┐ │
+                    │ │  Tiến trình P1     │ │
+                    │ └────────────────────┘ │
+                    │        │ Swap-out      │
+                    │        ▼               │
+                    └────────┼───────────────┘
+                             │
+                             ▼
+                    ┌────────────────────────┐
+                    │     BACKING STORE      │
+                    │      (Ổ đĩa cứng)      │
+                    │ ┌────────────────────┐ │
+                    │ │  Tiến trình P1     │ │
+                    │ └────────────────────┘ │
+                    │        │ Swap-in       │
+                    │        ▼               │
+                    └────────┼───────────────┘
+                             │
+                             ▼
+                    ┌────────────────────────┐
+                    │      BỘ NHỚ RAM        │
+                    │ ┌────────────────────┐ │
+                    │ │  Tiến trình P1     │ │
+                    │ └────────────────────┘ │
+                    └────────────────────────┘</code></pre>
+
+<h4 id="phan-tich-o-tre-i-o-cua-swapping">Phân tích độ trễ I/O của Swapping</h4>
+
+<p>Chi phí thời gian chuyển đổi ngữ cảnh phát sinh do hoán vị chủ yếu nằm ở <strong>thời gian truyền dữ liệu (Transfer time)</strong> qua bus đĩa, chứ không phải thời gian tìm kiếm (Seek time):</p>
+
+<ul><li>Giả sử tiến trình có dung lượng $100\text{MB}$.</li><li>Ổ đĩa có tốc độ truyền dữ liệu thực tế $50\text{MB/s}$, thời gian tìm kiếm trung bình $8\text{ms}$.</li><li>Thời gian truyền: $100\text{MB} / 50\text{MB/s} = 2\text{ giây} = 2000\text{ms}$.</li><li>Tổng thời gian Swap-out: $8\text{ms} + 2000\text{ms} = 2008\text{ms}$.</li><li>Nếu hoán vị 2 chiều (Swap-out tiến trình cũ và Swap-in tiến trình mới): tốn hơn <strong>4 giây</strong>!</li><li><em>Kết luận sư phạm:</em> Hoán vị toàn bộ tiến trình có độ trễ quá lớn. Điều này lý giải tại sao các hệ điều hành hiện đại chuyển sang cơ chế <strong>Hoán vị từng trang (Paging Swap / Virtual Memory)</strong> trong Chương 8.</li></ul>
+
+<div class="callout note"><div class="callout-title">LƯU Ý QUAN TRỌNG</div><p><br><strong>Swapping trên Hệ điều hành di động (iOS / Android) [TIER_B_ENRICHMENT]:</strong><br>Cả Android và iOS đều không sử dụng kỹ thuật Swapping truyền thống ra bộ nhớ flash vì:<br>1. Bộ nhớ Flash (eMMC / UFS) có giới hạn số lần ghi (Write Endurance); swapping liên tục sẽ làm chai và hỏng chip nhớ rất nhanh.<br>2. Băng thông giữa CPU và Flash trên thiết bị di động bị giới hạn công suất tiêu thụ điện.<br>Thay vào đó, khi thiếu RAM, Android dùng cơ chế <em>Low Memory Killer (LMK)</em> để kết liễu các tiến trình nền ít dùng; còn iOS yêu cầu ứng dụng tự giải phóng bộ nhớ (Free up cached objects), nếu không sẽ bị hủy cưỡng bức.</p></div>
+
+<div class="recall-checkpoint" id="rc-ch07-swapping" data-item-id="rc-ch07-swapping" data-concept-id="ch07-swapping" role="region" aria-label="Trạm thu hồi: ch07-swapping"><div class="checkpoint-header"><span class="card-tag">Recall Checkpoint</span><span class="card-mastery-badge" aria-label="Cấp độ thành thạo">M0</span><span class="checkpoint-status" aria-live="polite">Chưa tự kiểm tra</span></div><div class="checkpoint-prompt"><strong>Nhiệm vụ thu hồi kín sách (Closed-book Recall):</strong>
+1. Trình bày mục đích và cơ chế cơ bản của kỹ thuật Hoán vị (Swapping).
+2. Trong tổng thời gian hoán vị một tiến trình, thành phần thời gian nào chiếm tỷ trọng áp đảo?</div><textarea id="rc-ch07-swapping__scratchpad" class="checkpoint-scratchpad" aria-label="Nháp câu trả lời kín sách" placeholder="Tự thu hồi câu trả lời kín sách trước khi xem rubric..."></textarea><div class="checkpoint-actions"><button type="button" class="btn-card primary btn-reveal-rubric" aria-expanded="false" aria-controls="rc-ch07-swapping__rubric">🔍 Mở Rubric Đối soát</button></div><div id="rc-ch07-swapping__rubric" class="rubric-container card-section" aria-hidden="true" style="display: none;"><div class="rubric-title"><strong>Tiêu chí đối soát tự đánh giá:</strong></div><div class="rubric-items"><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> Nêu rõ chuyển tiến trình không hoạt động ra đĩa (Backing Store) và nạp lại khi cần chạy để tăng mức độ đa chương. (0.5đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> Khẳng định thời gian truyền dữ liệu (Transfer time) chiếm tỷ trọng áp đảo (hơn 99%) so với thời gian tìm kiếm (Seek time). (0.5đ)</label></div><div class="rubric-item"><label><input type="checkbox" class="rubric-check" data-weight="0.5"> -&gt; (0.5đ)</label></div></div><div class="rubric-evaluation"><button type="button" class="btn-card success btn-submit-recall">Xác nhận Tự đánh giá (Đạt M2 nếu ≥80%)</button><span class="recall-feedback" id="rc-ch07-swapping__feedback" aria-live="polite"></span></div></div></div>
+
+<hr>
+
+<h2 id="6-bai-tap-slide">6. Bài tập Slide</h2>
+
+<h3 id="7-7-tuyen-tap-bai-tap-slide-chinh-thuc">7.7. Tuyển tập bài tập Slide chính thức</h3>
+
+<p><em>(Căn cứ: Slide pp. 67–71)</em></p>
+
+<p>Phần này tổng hợp 5 bài tập thực hành nằm tại phần kết thúc của Slide chính thức UIT (<code>#Week09-Chapter7 2024.pdf</code>), giúp người học đối soát toàn diện kỹ năng trước khi làm ngân hàng câu hỏi tự luận.</p>
+
+<h4 id="bai-1-slide-67-cap-phat-lien-tuc-voi-4-thuat-toan-fit">Bài 1 (Slide 67): Cấp phát liên tục với 4 thuật toán Fit</h4>
+
+<ul><li>Cho 4 phân vùng: $600\text{KB}, 500\text{KB}, 200\text{KB}, 300\text{KB}$.</li><li>Cấp phát lần lượt cho: $P_1(212\text{KB}), P_2(417\text{KB}), P_3(112\text{KB}), P_4(426\text{KB})$.</li><li><em>Kết quả tóm tắt:</em> Chỉ có <strong>Best Fit</strong> nạp được cả 4 tiến trình. First Fit, Next Fit và Worst Fit đều để $P_4$ phải chờ. Lời giải chi tiết từng bước xem tại mục 7.4.3.</li></ul>
+
+<h4 id="bai-2-slide-68-xac-inh-so-bit-ia-chi">Bài 2 (Slide 68): Xác định số bit địa chỉ</h4>
+
+<ul><li>Hệ thống có 12 trang logic, kích thước trang $2\text{KB}$, bộ nhớ vật lý 32 khung.</li><li>Độ dời: $d = \log_2(2048) = 11\text{ bit}$.</li><li>Số bit trang logic: $p = \lceil \log_2(12) \rceil = 4\text{ bit} \implies$ Địa chỉ logic: $4 + 11 = 15\text{ bit}$.</li><li>Số bit khung vật lý: $f = \log_2(32) = 5\text{ bit} \implies$ Địa chỉ vật lý: $5 + 11 = 16\text{ bit}$.</li></ul>
+
+<h4 id="bai-3-slide-69-tinh-eat-co-ban">Bài 3 (Slide 69): Tính EAT cơ bản</h4>
+
+<ul><li>Thời gian RAM $200\text{ns}$, bảng trang trong RAM. Không có TLB: $2 \times 200 = 400\text{ns}$.</li><li>Có TLB với hit-ratio $75\%$, tra TLB $\approx 0$:<p>$$\text{EAT} = 0.75 \times 200 + 0.25 \times 400 = 150 + 100 = 250\text{ns}$$</p></li></ul>
+
+<h4 id="bai-4-slide-70-bang-phan-trang-2-cap">Bài 4 (Slide 70): Bảng phân trang 2 cấp</h4>
+
+<ul><li>Địa chỉ 32-bit, cấp 1 có 9 bit, cấp 2 có 11 bit.</li><li>Offset $d = 32 - (9 + 11) = 12\text{ bit} \implies$ Kích thước trang $= 2^{12} = 4\text{KB}$.</li><li>Bảng cấp 1 có $2^9 = 512\text{ mục}$. Mỗi bảng cấp 2 có $2^{11} = 2048\text{ mục}$. Tổng số trang ảo tối đa là $2^{20} = 1,048,576\text{ trang}$.</li></ul>
+
+<h4 id="bai-5-slide-71-phan-tich-ia-chi-ao-4-truong">Bài 5 (Slide 71): Phân tích địa chỉ ảo 4 trường</h4>
+
+<ul><li>Địa chỉ ảo 32-bit gồm 4 trường $a, b, c, d$ (3 cấp bảng trang và 1 offset).</li><li>Số lượng trang ảo phụ thuộc vào $a, b, c$ ($2^{a+b+c}$ trang), hoặc tương đương phụ thuộc vào kích thước trang do $d$ quy định ($2^{32-d}$ trang).</li></ul>
+
+<hr>
+
+<h2 id="7-thu-thach-giai-trinh-3-phut-teach-back-challenge">7. Thử thách giải trình 3 phút (Teach-Back Challenge)</h2>
+
+<p>Hãy thử gấp sách vở và giải thích lưu loát 9 câu hỏi then chốt sau cho một người bạn:</p>
+
+<ol><li><strong>Vì sao địa chỉ logic và địa chỉ vật lý lại tách biệt nhau?</strong></li><li><strong>Cơ chế phần cứng MMU thực hiện bảo vệ và dịch địa chỉ như thế nào thông qua cặp Base/Limit?</strong></li><li><strong>Bản chất của phân mảnh nội và phân mảnh ngoại khác nhau ở điểm nào?</strong></li><li><strong>Bốn thuật toán First Fit, Best Fit, Next Fit, Worst Fit khác nhau cơ bản ở chiến lược tìm kiếm ra sao?</strong></li><li><strong>Vì sao cơ chế phân trang loại bỏ triệt để phân mảnh ngoại?</strong></li><li><strong>Bảng phân trang chuyển đổi $(p, d)$ thành $(f, d)$ như thế nào và tại sao độ dời $d$ không đổi?</strong></li><li><strong>Bộ đệm TLB giải quyết bài toán gì và luồng phần cứng khi Hit/Miss diễn ra như thế nào?</strong></li><li><strong>Dẫn xuất công thức tính Thời gian truy xuất hiệu dụng (EAT) từ hai biến cố Hit và Miss?</strong></li><li><strong>Tại sao hoán vị toàn bộ tiến trình (Swapping) lại tốn kém độ trễ I/O nghiêm trọng?</strong></li></ol>
+
+<hr>
+
+<h2 id="8-huong-dan-on-tap-iem-on-tap-ngat-quang-spaced-review-hook">8. Hướng dẫn ôn tập &amp; Điểm ôn tập ngắt quãng (Spaced Review Hook)</h2>
+
+<div class="callout reviewhook"><div class="callout-title">🔄 ĐIỂM ÔN TẬP GẮN KẾT</div><p><br><strong>Kế hoạch ôn tập ngắt quãng khuyến nghị:</strong><br>- <strong>Lần 1 (Ngay sau khi học):</strong> Hoàn thành toàn bộ các trạm thu hồi kín sách (Recall Checkpoints) và bài toán chuyển giao (Transfer Problems) trên trang này.<br>- <strong>Lần 2 (Sau 1 ngày):</strong> Mở <a href="../questions/subjective/ch07.html">Ngân hàng tự luận Chương 7</a> để làm 20 câu hỏi nguồn chính thức UIT.<br>- <strong>Lần 3 (Theo thông báo hàng đợi):</strong> Kích hoạt chế độ <strong>Ôn tập (Review Mode)</strong> trên thanh công cụ hoặc truy cập <a href="../review/index.html">Hàng đợi ôn tập toàn môn (Review Hub)</a> để ôn lại các thẻ nhớ và bài toán đến hạn theo thuật toán thích ứng SM-2.</p></div><section class="backlinks" aria-label="Liên kết từ các trang khác"><h2>LIÊN KẾT TỪ CÁC TRANG KHÁC</h2><ul><li><a href="../questions/subjective/ch07.html">Ngân hàng Tự luận &amp; Bài tập Chương 7: Quản Lý Bộ Nhớ (Memory Management)</a></li></ul></section><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list"><li class="toc-item"><a class="toc-link" href="#0-ban-o-nhan-thuc-80-20-chapter-entry-map">0. Bản Đồ Nhận Thức 80/20 (Chapter Entry Map)</a></li><li class="toc-item"><a class="toc-link" href="#20-kien-thuc-cot-loi-mo-khoa-80-bai-toan-thuc-chien">20% Kiến thức cốt lõi mở khóa 80% bài toán thực chiến:</a></li><li class="toc-item"><a class="toc-link" href="#1-khai-niem-ia-chi">1. Khái niệm địa chỉ</a></li><li class="toc-item"><a class="toc-link" href="#7-1-khai-niem-co-so-yeu-cau-quan-ly-bo-nho">7.1. Khái niệm cơ sở &amp; Yêu cầu quản lý bộ nhớ</a></li><li class="toc-item"><a class="toc-link" href="#7-2-cac-loai-ia-chi-nho-co-che-phan-cung-mmu">7.2. Các loại địa chỉ nhớ &amp; Cơ chế phần cứng MMU</a></li><li class="toc-item"><a class="toc-link" href="#7-3-rang-buoc-ia-chi-address-binding">7.3. Ràng buộc địa chỉ (Address Binding)</a></li><li class="toc-item"><a class="toc-link" href="#7-3-1-nap-ong-va-lien-ket-ong-dynamic-loading-dynamic-linking">7.3.1. Nạp động và Liên kết động (Dynamic Loading &amp; Dynamic Linking)</a></li><li class="toc-item"><a class="toc-link" href="#2-cap-phat-lien-tuc">2. Cấp phát liên tục</a></li><li class="toc-item"><a class="toc-link" href="#7-4-cac-mo-hinh-cap-phat-lien-tuc-contiguous-allocation">7.4. Các mô hình cấp phát liên tục (Contiguous Allocation)</a></li><li class="toc-item"><a class="toc-link" href="#7-4-1-phan-vung-co-inh-static-partitioning-phan-manh-noi">7.4.1. Phân vùng cố định (Static Partitioning) &amp; Phân mảnh nội</a></li><li class="toc-item"><a class="toc-link" href="#7-4-2-phan-vung-ong-dynamic-partitioning-phan-manh-ngoai">7.4.2. Phân vùng động (Dynamic Partitioning) &amp; Phân mảnh ngoại</a></li><li class="toc-item"><a class="toc-link" href="#7-4-3-bon-chien-luoc-cap-phat-lo-trong-placement-strategies">7.4.3. Bốn chiến lược cấp phát lỗ trống (Placement Strategies)</a></li><li class="toc-item"><a class="toc-link" href="#7-4-4-ky-thuat-gom-cum-compaction">7.4.4. Kỹ thuật Gom cụm (Compaction)</a></li><li class="toc-item"><a class="toc-link" href="#3-phan-trang-tlb">3. Phân trang &amp; TLB</a></li><li class="toc-item"><a class="toc-link" href="#7-5-co-che-phan-trang-cot-loi-paging-fundamentals">7.5. Cơ chế phân trang cốt lõi (Paging Fundamentals)</a></li><li class="toc-item"><a class="toc-link" href="#7-5-3-quy-trinh-chuyen-oi-ia-chi-phan-trang">7.5.3. Quy trình chuyển đổi địa chỉ phân trang</a></li><li class="toc-item"><a class="toc-link" href="#7-5-4-bo-nho-em-chuyen-oi-nhanh-tlb-translation-lookaside-buffer">7.5.4. Bộ nhớ đệm chuyển đổi nhanh (TLB — Translation Lookaside Buffer)</a></li><li class="toc-item"><a class="toc-link" href="#7-5-5-thoi-gian-truy-xuat-hieu-dung-eat-effective-access-time">7.5.5. Thời gian truy xuất hiệu dụng (EAT — Effective Access Time)</a></li><li class="toc-item"><a class="toc-link" href="#4-cau-truc-bang-trang-nang-cao">4. Cấu trúc bảng trang nâng cao</a></li><li class="toc-item"><a class="toc-link" href="#7-5-6-bang-trang-phan-cap-hierarchical-paging">7.5.6. Bảng trang phân cấp (Hierarchical Paging)</a></li><li class="toc-item"><a class="toc-link" href="#7-5-7-bang-trang-bam-va-bang-trang-nghich-ao">7.5.7. Bảng trang băm và Bảng trang nghịch đảo</a></li><li class="toc-item"><a class="toc-link" href="#7-5-8-bao-ve-bo-nho-va-chia-se-trang">7.5.8. Bảo vệ bộ nhớ và Chia sẻ trang</a></li><li class="toc-item"><a class="toc-link" href="#5-swapping">5. Swapping</a></li><li class="toc-item"><a class="toc-link" href="#7-6-co-che-hoan-vi-bo-nho-swapping">7.6. Cơ chế hoán vị bộ nhớ (Swapping)</a></li><li class="toc-item"><a class="toc-link" href="#6-bai-tap-slide">6. Bài tập Slide</a></li><li class="toc-item"><a class="toc-link" href="#7-7-tuyen-tap-bai-tap-slide-chinh-thuc">7.7. Tuyển tập bài tập Slide chính thức</a></li><li class="toc-item"><a class="toc-link" href="#7-thu-thach-giai-trinh-3-phut-teach-back-challenge">7. Thử thách giải trình 3 phút (Teach-Back Challenge)</a></li><li class="toc-item"><a class="toc-link" href="#8-huong-dan-on-tap-iem-on-tap-ngat-quang-spaced-review-hook">8. Hướng dẫn ôn tập &amp; Điểm ôn tập ngắt quãng (Spaced Review Hook)</a></li></ul></div></aside></div>
+<div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="../assets/js/app.js"></script></body></html>

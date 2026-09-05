@@ -91,11 +91,20 @@
       "color": "#0969da"
     },
     {
+      "id": "sub-ch07",
+      "label": "Ngân hàng Tự luận & Bài tập Chươ",
+      "link": "questions/subjective/ch07.html",
+      "x": 170,
+      "y": 90,
+      "r": 7,
+      "color": "#0969da"
+    },
+    {
       "id": "review-midterm",
       "label": "Ôn tập Giữa kỳ IT007 — Chương 1–",
       "link": "reviews/midterm.html",
-      "x": 170,
-      "y": 90,
+      "x": 237,
+      "y": 133,
       "r": 7,
       "color": "#0969da"
     },
@@ -103,8 +112,8 @@
       "id": "theory-ch01-overview",
       "label": "Chương 1: Tổng quan về Hệ điều h",
       "link": "theory/ch01-overview.html",
-      "x": 237,
-      "y": 133,
+      "x": 304,
+      "y": 51,
       "r": 7,
       "color": "#0969da"
     },
@@ -112,8 +121,8 @@
       "id": "theory-ch02-structure",
       "label": "Chương 2: Cấu trúc và dịch vụ Hệ",
       "link": "theory/ch02-structure.html",
-      "x": 304,
-      "y": 51,
+      "x": 101,
+      "y": 94,
       "r": 7,
       "color": "#0969da"
     },
@@ -121,8 +130,8 @@
       "id": "theory-ch03-process",
       "label": "Chương 3: Tiến trình và Tiểu trì",
       "link": "theory/ch03-process.html",
-      "x": 101,
-      "y": 94,
+      "x": 168,
+      "y": 137,
       "r": 7,
       "color": "#0969da"
     },
@@ -130,8 +139,8 @@
       "id": "theory-ch04-cpu-scheduling",
       "label": "Chương 4: Định thời CPU",
       "link": "theory/ch04-scheduling.html",
-      "x": 168,
-      "y": 137,
+      "x": 235,
+      "y": 55,
       "r": 7,
       "color": "#0969da"
     },
@@ -139,8 +148,8 @@
       "id": "theory-ch05-synchronization",
       "label": "Chương 5: Đồng bộ Tiến trình",
       "link": "theory/ch05-synchronization.html",
-      "x": 235,
-      "y": 55,
+      "x": 302,
+      "y": 98,
       "r": 7,
       "color": "#0969da"
     },
@@ -148,8 +157,17 @@
       "id": "theory/ch06-deadlock",
       "label": "Chương 6: Bế tắc (Deadlock)",
       "link": "theory/ch06-deadlock.html",
-      "x": 302,
-      "y": 98,
+      "x": 99,
+      "y": 141,
+      "r": 7,
+      "color": "#0969da"
+    },
+    {
+      "id": "ch07-memory-management",
+      "label": "Chương 7: Quản Lý Bộ Nhớ (Memory",
+      "link": "theory/ch07-memory-management.html",
+      "x": 166,
+      "y": 59,
       "r": 7,
       "color": "#0969da"
     }
@@ -190,6 +208,10 @@
     {
       "from": "sub-ch05",
       "to": "theory-ch05-synchronization"
+    },
+    {
+      "from": "sub-ch07",
+      "to": "ch07-memory-management"
     },
     {
       "from": "review-midterm",
@@ -246,6 +268,10 @@
     {
       "from": "theory-ch05-synchronization",
       "to": "sub-ch05"
+    },
+    {
+      "from": "ch07-memory-management",
+      "to": "sub-ch07"
     }
   ]
 }

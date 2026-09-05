@@ -460,11 +460,10 @@ def main() -> int:
         non_content_count = sum(s.get("classification") == "NON_CONTENT" for s in sections for _ in parse_page_range(s.get("page_range")))
         if non_content_count != 5:
             failures.append(f"Chapter 7 NON_CONTENT page count expected 5, got {non_content_count}")
+        valid_status = ("NOT_WRITTEN", "CONTENT_DRAFTED", "CONTENT_VERIFIED")
         for section in sections:
-            if section.get("mapping_status") != "MAPPED":
-                failures.append(f"Chapter 7 mapping_status must be MAPPED at {section.get('page_range')}")
-            if section.get("content_status") != "NOT_WRITTEN":
-                failures.append(f"Chapter 7 authoring must be NOT_WRITTEN at {section.get('page_range')} (no authoring started)")
+            if section.get("mapping_status") != "MAPPED" or section.get("content_status") not in valid_status:
+                failures.append(f"Chapter 7 lifecycle status invalid at {section.get('page_range')}")
         topics = " ".join(str(s.get("topic", "")).lower() for s in sections)
         missing_topics = [term for term in REQUIRED_TOPICS if term not in topics]
         if missing_topics:
@@ -479,22 +478,22 @@ def main() -> int:
 
     for q in qrows:
         qid = q.get("question_id", "<missing>")
-        if q.get("mapping_status") != "MAPPED" or q.get("content_status") != "NOT_WRITTEN":
-            failures.append(f"Chapter 7 question {qid} is not MAPPED / NOT_WRITTEN")
+        if q.get("mapping_status") != "MAPPED" or q.get("content_status") not in valid_status:
+            failures.append(f"Chapter 7 question {qid} is not MAPPED / valid content_status")
         if not q.get("source_locator") or not q.get("topic"):
             failures.append(f"Chapter 7 question {qid} missing source_locator or topic")
 
-    # 5. Authoring Not Started Check
+    # 5. Authoring File Check (Post source-map approval)
     theory_file = ROOT / "content/theory/ch07-memory-management.md"
     if theory_file.exists():
-        t_text = theory_file.read_text(encoding="utf-8").strip()
-        if len(t_text) > 100:
-            failures.append("content/theory/ch07-memory-management.md already exists with authored content (authoring must NOT start before source map acceptance)")
+        t_content = theory_file.read_text(encoding="utf-8")
+        if SLIDE_ID not in t_content:
+            failures.append(f"content/theory/ch07-memory-management.md missing canonical source reference {SLIDE_ID}")
     q_file = ROOT / "content/questions/subjective/ch07.md"
     if q_file.exists():
-        q_text = q_file.read_text(encoding="utf-8").strip()
-        if len(q_text) > 100:
-            failures.append("content/questions/subjective/ch07.md already exists with authored content (authoring must NOT start before source map acceptance)")
+        q_content = q_file.read_text(encoding="utf-8")
+        if QBANK_ID not in q_content:
+            failures.append(f"content/questions/subjective/ch07.md missing canonical source reference {QBANK_ID}")
 
     # 6. Committed Locked Chapters 1-6 Check
     try:

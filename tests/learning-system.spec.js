@@ -353,6 +353,23 @@ test.describe('HDH_UIT V2 Deterministic Learning System Browser Suite', () => {
   // Scenario 9: Review Hub Queue Rendering, Unified Eligibility & Badging (REVIEW-LEARN-003)
   // -------------------------------------------------------------------------
   test('9. Review Hub renders queue with unified eligibility, distinct badges, and deterministic tie ordering (REVIEW-LEARN-003)', async ({ page }) => {
+    // Isolate test fixture A-E from global study_index.json additions
+    const fixtureIds = new Set([
+      'fc-01-mode-bit',
+      'fc-02-storage-criteria',
+      'fc-03-multiprogramming-goal',
+      'fc-04-trap-definition',
+      'viva-lab01-hardlink-symlink'
+    ]);
+    await page.route('**/study_index.json', async route => {
+      const response = await route.fetch();
+      const items = await response.json();
+      await route.fulfill({
+        response,
+        json: items.filter(it => fixtureIds.has(it.id))
+      });
+    });
+
     await page.goto('/index.html');
 
     // Seed test cases A-E:
