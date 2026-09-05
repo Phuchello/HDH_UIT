@@ -2,12 +2,14 @@
 """Deterministic test vectors for the V2 Learning System.
 
 Tests:
-  1. SM-2 Scheduler: all 4 ratings on new (reps=0) and mature (reps=5) cards.
+  1. SPEC MIRROR TESTS (Python Reference) — SM-2 Scheduler: all 4 ratings on new (reps=0) and mature (reps=5) cards.
   2. HARD != AGAIN invariant (reps must NOT be reset on HARD).
   3. EF clamp tests (min=1.3, max=2.8).
   4. StudyCard section parser (ENG-LEARN-003 fix): deterministic single-pass.
-  5. Build-side duplicate ID detection smoke test.
-  6. study_index.json generation smoke test.
+  5. StudyCard marker validation: count <= 1, strict ordering, no leakage.
+  6. DOM ID & ARIA-controls integrity: 0 duplicate IDs, 100% resolved aria-controls.
+  7. Build-side duplicate ID detection smoke test.
+  8. study_index.json generation smoke test.
 """
 
 from __future__ import annotations
@@ -27,7 +29,7 @@ import importlib
 import build_web as _bw  # noqa: E402
 
 # ===========================================================================
-# 1. SM-2 Scheduler Test Vectors (Python mirror of app.js Scheduler logic)
+# 1. SPEC MIRROR TESTS (Python Reference) — SM-2 Scheduler Test Vectors
 # ===========================================================================
 
 def _date_to_ms(s: str) -> int:
@@ -236,6 +238,73 @@ def run_parser_tests() -> list[str]:
 
 
 # ===========================================================================
+# 2b. StudyCard Marker Validation Tests
+# ===========================================================================
+
+def run_parser_validation_tests() -> list[str]:
+    """Test that _parse_studycard_sections strictly rejects:
+    1. Duplicate markers (count > 1).
+    2. Invalid marker ordering (hint after keypoints/answer, keypoints after answer).
+    3. Marker leakage into chunks.
+    """
+    failures = []
+
+    # Test 1: Duplicate marker raises RuntimeError
+    try:
+        _bw._parse_studycard_sections(
+            "Q\n<!-- hint -->\nh1\n<!-- hint -->\nh2\n<!-- answer -->\na",
+            "test-dup",
+            "test.md",
+        )
+        failures.append("PARSER VALIDATION FAIL: Expected RuntimeError for duplicate '<!-- hint -->', but none was raised")
+    except RuntimeError:
+        pass
+    except Exception as e:
+        failures.append(f"PARSER VALIDATION FAIL: Expected RuntimeError for duplicate marker, got {type(e).__name__}: {e}")
+
+    # Test 2: Invalid marker order raises RuntimeError (hint after answer)
+    try:
+        _bw._parse_studycard_sections(
+            "Q\n<!-- answer -->\na\n<!-- hint -->\nh",
+            "test-order-1",
+            "test.md",
+        )
+        failures.append("PARSER VALIDATION FAIL: Expected RuntimeError for hint after answer, but none was raised")
+    except RuntimeError:
+        pass
+    except Exception as e:
+        failures.append(f"PARSER VALIDATION FAIL: Expected RuntimeError for invalid marker order, got {type(e).__name__}: {e}")
+
+    # Test 3: Invalid marker order raises RuntimeError (keypoints after answer)
+    try:
+        _bw._parse_studycard_sections(
+            "Q\n<!-- answer -->\na\n<!-- keypoints -->\nk",
+            "test-order-2",
+            "test.md",
+        )
+        failures.append("PARSER VALIDATION FAIL: Expected RuntimeError for keypoints after answer, but none was raised")
+    except RuntimeError:
+        pass
+    except Exception as e:
+        failures.append(f"PARSER VALIDATION FAIL: Expected RuntimeError for invalid marker order, got {type(e).__name__}: {e}")
+
+    # Test 4: Invalid marker order raises RuntimeError (hint after keypoints)
+    try:
+        _bw._parse_studycard_sections(
+            "Q\n<!-- keypoints -->\nk\n<!-- hint -->\nh\n<!-- answer -->\na",
+            "test-order-3",
+            "test.md",
+        )
+        failures.append("PARSER VALIDATION FAIL: Expected RuntimeError for hint after keypoints, but none was raised")
+    except RuntimeError:
+        pass
+    except Exception as e:
+        failures.append(f"PARSER VALIDATION FAIL: Expected RuntimeError for invalid marker order, got {type(e).__name__}: {e}")
+
+    return failures
+
+
+# ===========================================================================
 # 3. Build Smoke Tests
 # ===========================================================================
 
@@ -432,6 +501,60 @@ def run_review_queue_tests() -> list[str]:
 
 
 # ===========================================================================
+# 6. DOM ID & ARIA-Controls Integrity Tests (A11Y-LEARN-001 Verification)
+# ===========================================================================
+
+def run_dom_id_and_aria_tests() -> list[str]:
+    """Verify that across all HTML pages in public/site:
+    1. Every aria-controls attribute points to an element ID that actually exists on that page.
+    2. There are 0 duplicate HTML id attributes within any single page.
+    """
+    failures = []
+    site = ROOT / "public" / "site"
+    if not site.is_dir():
+        failures.append("DOM INTEGRITY: public/site/ directory missing")
+        return failures
+
+    html_files = sorted(site.rglob("*.html"))
+    if not html_files:
+        failures.append("DOM INTEGRITY: No HTML files found in public/site/")
+        return failures
+
+    id_pattern = re.compile(r'(?:\s|^)id=["\']([^"\']+)["\']')
+    aria_controls_pattern = re.compile(r'(?:\s|^)aria-controls=["\']([^"\']+)["\']')
+
+    for html_path in html_files:
+        rel_path = str(html_path.relative_to(site))
+        content = html_path.read_text(encoding="utf-8")
+
+        # Check duplicate IDs
+        found_ids = id_pattern.findall(content)
+        seen_ids = set()
+        duplicate_ids = set()
+        for dom_id in found_ids:
+            if dom_id in seen_ids:
+                duplicate_ids.add(dom_id)
+            else:
+                seen_ids.add(dom_id)
+
+        if duplicate_ids:
+            failures.append(
+                f"DUPLICATE DOM IDs in {rel_path}: {sorted(duplicate_ids)[:5]} (total {len(duplicate_ids)})"
+            )
+
+        # Check aria-controls resolution
+        aria_controls = aria_controls_pattern.findall(content)
+        for target_id in aria_controls:
+            for single_id in target_id.split():
+                if single_id not in seen_ids:
+                    failures.append(
+                        f"UNRESOLVED aria-controls in {rel_path}: '{single_id}' not found in DOM IDs"
+                    )
+
+    return failures
+
+
+# ===========================================================================
 # MAIN
 # ===========================================================================
 
@@ -444,6 +567,9 @@ def main() -> int:
     parser_failures = run_parser_tests()
     all_failures.extend(parser_failures)
 
+    parser_val_failures = run_parser_validation_tests()
+    all_failures.extend(parser_val_failures)
+
     mastery_failures = run_mastery_tests()
     all_failures.extend(mastery_failures)
 
@@ -453,13 +579,18 @@ def main() -> int:
     smoke_failures = run_build_smoke_tests()
     all_failures.extend(smoke_failures)
 
+    dom_failures = run_dom_id_and_aria_tests()
+    all_failures.extend(dom_failures)
+
     passed = not all_failures
     gate_totals = (
-        f"Scheduler: {len(SCHEDULER_VECTORS) - len(scheduler_failures)}/{len(SCHEDULER_VECTORS)} | "
+        f"Scheduler (Spec Mirror): {len(SCHEDULER_VECTORS) - len(scheduler_failures)}/{len(SCHEDULER_VECTORS)} | "
         f"Parser: {len(PARSER_VECTORS) - len(parser_failures)}/{len(PARSER_VECTORS)} | "
+        f"Parser Validation: {'PASS' if not parser_val_failures else 'FAIL'} | "
         f"Mastery: {'PASS' if not mastery_failures else 'FAIL'} | "
         f"ReviewQueue: {'PASS' if not queue_failures else 'FAIL'} | "
-        f"Build smoke: {len([x for x in smoke_failures if x]) == 0}"
+        f"Build smoke: {len([x for x in smoke_failures if x]) == 0} | "
+        f"DOM & A11y: {'PASS' if not dom_failures else 'FAIL'}"
     )
 
     print(f"LEARNING SYSTEM GATE: {'PASS' if passed else 'FAIL'}")
@@ -472,4 +603,5 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
 

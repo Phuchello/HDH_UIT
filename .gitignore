@@ -56,6 +56,8 @@ scripts/*.json
 *.log
 *.tmp
 node_modules/
+test-results/
+playwright-report/
 
 # Local configuration, agent state, credentials and disposable output
 .env

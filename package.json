@@ -18,10 +18,12 @@
     "validate:renderer": "python scripts/stress_test_web_renderer.py",
     "validate:learning": "python scripts/validate_learning_system.py",
     "validate:v2": "python scripts/generate_foundation_gate.py",
+    "test:learning-browser": "playwright test",
     "validate": "npm run validate:v2",
     "test": "npm run validate:v2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
     "playwright": "1.62.1"
   }
 }

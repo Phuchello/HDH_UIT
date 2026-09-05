@@ -1,17 +1,20 @@
 /**
  * HDH_UIT V2 — Deterministic Local-First Learning Runtime
  * Learning Architecture V1.2 Implementation
+ * Independent QA Hardened Runtime
  *
  * Features implemented:
  *  - SM-2 Project Heuristic scheduler (HARD != AGAIN invariant)
  *  - M0-M3 mastery state machine (M3 only from TransferProblem evidence)
+ *  - End-to-end evidence primitives: RecallCheckpoint (M2) & TransferProblem (M3)
+ *  - Rating controls revealed only after feedback (PED-LEARN-004)
+ *  - Scratchpad persistence in STORAGE_KEYS.drafts (STATE-LEARN-001)
  *  - Learn / Review / Reference mode switch (persisted)
+ *  - Global Review Hub and live queue updates (REVIEW-LEARN-001, REVIEW-LEARN-002)
+ *  - Deterministic DOM IDs for aria-controls (A11Y-LEARN-001)
  *  - Legacy localStorage migration (hdh_card_<id> -> new schema)
  *  - Exception-safe localStorage (quota, JSON, unavailable)
- *  - Progressive disclosure: hint / keypoints / answer reveal buttons
- *  - AGAIN / HARD / GOOD / EASY rating buttons
- *  - Review mode: only due/weak cards visible
- *  - Backup / Restore (export/import versioned JSON)
+ *  - Hardened Backup / Restore schema validation
  *  - ARIA + keyboard navigation
  */
 
@@ -141,11 +144,10 @@
         else if (newReps === 2) newInterval = 4;
         else                    newInterval = Math.round(interval * ef * 1.3);
       } else {
-        // Unknown rating: no-op
         return Object.assign({}, prev);
       }
 
-      // Avoid DST-sensitive drift: compute due date via whole calendar days
+      // Avoid DST-sensitive drift: compute due date via UTC calendar days
       var newDue = this._addDays(today, newInterval);
 
       return {
@@ -171,11 +173,8 @@
     today: function () {
       var now = new Date();
       var y = now.getFullYear();
-      var m = String(now.getMonth() + 1).padStart('0', 2);
-      var d = String(now.getDate()).padStart('0', 2);
-      // Use standard padStart signature
-      m = (now.getMonth() + 1 < 10 ? '0' : '') + (now.getMonth() + 1);
-      d = (now.getDate() < 10 ? '0' : '') + now.getDate();
+      var m = (now.getMonth() + 1 < 10 ? '0' : '') + (now.getMonth() + 1);
+      var d = (now.getDate() < 10 ? '0' : '') + now.getDate();
       return y + '-' + m + '-' + d;
     },
 
@@ -190,6 +189,7 @@
   // M0 -> M1 via first non-AGAIN rating
   // M1 -> M2 via RecallCheckpoint rubric >=80% (SELF_ASSESSED)
   // M2 -> M3 via TransferProblem only (NOT by rating)
+  // Invariant: Review Rating alone CANNOT produce M2 or M3.
   // ============================================================
   var MasteryStore = {
     _cache: null,
@@ -281,7 +281,10 @@
       if (!data[conceptId]) data[conceptId] = this._defaultRecord(conceptId);
       var rec = data[conceptId];
       rec.mastery_evidence.transfer_passed = passed;
-      if (passed && rec.mastery_state === 'M2') rec.mastery_state = 'M3';
+      if (passed && rec.mastery_state === 'M2') {
+        rec.mastery_state = 'M3';
+        rec.mastery_evidence.transfer_timestamp = Date.now();
+      }
       this._save();
       return rec;
     },
@@ -294,6 +297,14 @@
       var s = this.get(conceptId).mastery_state;
       return s === 'M0' || s === 'M1';
     },
+
+    getRecord: function (conceptId) {
+      return this.get(conceptId);
+    },
+
+    getAllRecords: function () {
+      return this._load();
+    },
   };
 
   // ============================================================
@@ -305,19 +316,20 @@
     FLAG: 'hdh_migration_v1_done',
 
     run: function () {
-      if (Store.get(this.FLAG, false)) return;
       var keys = Store.keys();
       for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
         if (key.indexOf('hdh_card_') !== 0) continue;
         try {
           var old = Store.get(key, null);
-          if (!old || typeof old.remembered !== 'boolean') continue;
+          if (!old) continue;
+          var isRemembered = (typeof old.remembered === 'boolean' && old.remembered) ||
+                             (old.rating === 'GOOD' || old.rating === 'EASY');
           var cid = key.replace('hdh_card_', '');
-          var data = Store.get(STORAGE_KEYS.mastery, {});
+          var data = Store.get(STORAGE_KEYS.mastery, {}) || {};
           if (!data[cid]) {
             var rec = MasteryStore._defaultRecord(cid);
-            if (old.remembered) {
+            if (isRemembered) {
               rec.mastery_state = 'M1';
               rec.mastery_evidence.verification_mode = 'LEGACY_SELF_REPORT';
             }
@@ -325,14 +337,20 @@
             Store.set(STORAGE_KEYS.mastery, data);
             MasteryStore._cache = null;
           }
+          Store.remove(key);
         } catch (_) {}
       }
       Store.set(this.FLAG, true);
     },
+
+    migrateLegacyCards: function () {
+      this.run();
+    },
   };
 
   // ============================================================
-  // BACKUP / RESTORE
+  // BACKUP / RESTORE (HARDENED SCHEMA VALIDATION)
+  // API-only / Deferred UI. Performs all validations before write.
   // ============================================================
   var BackupRestore = {
     exportData: function () {
@@ -358,7 +376,22 @@
     importData: function (jsonText) {
       try {
         var payload = JSON.parse(jsonText);
-        if (!payload.backup_version) throw new Error('Invalid backup format');
+        if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+          return { ok: false, error: 'Dữ liệu sao lưu không đúng định dạng đối tượng' };
+        }
+        if (payload.backup_version !== SCHEMA_VERSION) {
+          return { ok: false, error: 'Phiên bản sao lưu không được hỗ trợ (yêu cầu phiên bản ' + SCHEMA_VERSION + ')' };
+        }
+        var stores = ['mastery', 'scheduler', 'drafts', 'mistakes'];
+        for (var i = 0; i < stores.length; i++) {
+          var key = stores[i];
+          if (payload[key] !== undefined) {
+            if (typeof payload[key] !== 'object' || payload[key] === null || Array.isArray(payload[key])) {
+              return { ok: false, error: 'Trường ' + key + ' phải là một đối tượng từ điển hợp lệ' };
+            }
+          }
+        }
+        // All validations passed before writing to storage
         if (payload.mastery)   Store.set(STORAGE_KEYS.mastery, payload.mastery);
         if (payload.scheduler) Store.set(STORAGE_KEYS.scheduler, payload.scheduler);
         if (payload.drafts)    Store.set(STORAGE_KEYS.drafts, payload.drafts);
@@ -441,14 +474,19 @@
         else        btn.classList.remove('mode-btn-active');
       });
 
-      // Reference mode: reveal all hidden sections
+      // Reference mode: reveal all hidden sections, hide ratings
       if (mode === 'reference') {
         document.querySelectorAll('.card-section').forEach(function (sec) {
           sec.classList.add('visible');
           sec.setAttribute('aria-hidden', 'false');
+          sec.style.display = '';
         });
-        document.querySelectorAll('.btn-hint, .btn-keypoints, .btn-answer').forEach(function (btn) {
+        document.querySelectorAll('.btn-hint, .btn-keypoints, .btn-answer, .btn-reveal-rubric, .btn-reveal-transfer-solution').forEach(function (btn) {
           btn.setAttribute('aria-expanded', 'true');
+        });
+        document.querySelectorAll('.card-rating-actions').forEach(function (actions) {
+          actions.style.display = 'none';
+          actions.setAttribute('aria-hidden', 'true');
         });
       } else {
         // Re-hide sections unless user explicitly opened them
@@ -456,40 +494,41 @@
           if (!sec.dataset.userOpened) {
             sec.classList.remove('visible');
             sec.setAttribute('aria-hidden', 'true');
+            if (sec.classList.contains('rubric-container') || sec.classList.contains('transfer-solution-container')) {
+              sec.style.display = 'none';
+            }
           }
         });
-        document.querySelectorAll('.btn-hint, .btn-keypoints, .btn-answer').forEach(function (btn) {
+        document.querySelectorAll('.btn-hint, .btn-keypoints, .btn-answer, .btn-reveal-rubric, .btn-reveal-transfer-solution').forEach(function (btn) {
           if (!btn.dataset.userExpanded) btn.setAttribute('aria-expanded', 'false');
         });
       }
 
-      // Review mode: hide non-due/non-weak cards and reorder by priority
+      // Review mode: filter cards in place without DOM reordering
       if (mode === 'review') {
-        var cards = Array.from(document.querySelectorAll('.study-card'));
-        cards.forEach(function (card) {
-          var cid = card.getAttribute('data-card-id');
-          var show = MasteryStore.isDue(cid) || MasteryStore.isWeak(cid);
-          if (show) card.classList.remove('review-hidden');
-          else      card.classList.add('review-hidden');
-        });
-        if (cards.length > 1 && cards[0].parentNode) {
-          var parent = cards[0].parentNode;
-          var items = cards.map(function (c) {
-            return { el: c, id: c.getAttribute('data-card-id') };
-          });
-          var sorted = ReviewQueue.sortItems(items);
-          sorted.forEach(function (item) {
-            parent.appendChild(item.el);
-          });
-        }
+        this.updateReviewVisibility();
       } else {
-        document.querySelectorAll('.study-card').forEach(function (card) {
+        document.querySelectorAll('.study-card, .recall-checkpoint, .transfer-problem').forEach(function (card) {
           card.classList.remove('review-hidden');
         });
       }
     },
-  };
 
+    updateReviewVisibility: function () {
+      var count = 0;
+      document.querySelectorAll('.study-card, .recall-checkpoint, .transfer-problem').forEach(function (card) {
+        var cid = card.getAttribute('data-concept-id') || card.getAttribute('data-card-id') || card.getAttribute('data-item-id');
+        var show = MasteryStore.isDue(cid) || MasteryStore.isWeak(cid);
+        if (show) {
+          card.classList.remove('review-hidden');
+          count++;
+        } else {
+          card.classList.add('review-hidden');
+        }
+      });
+      return count;
+    },
+  };
 
   // ============================================================
   // STUDY CARD ENGINE V2
@@ -499,17 +538,35 @@
       var self = this;
       document.querySelectorAll('.study-card').forEach(function (card) {
         var cardId = card.getAttribute('data-card-id');
-        self._restoreState(card, cardId);
+        var conceptId = card.getAttribute('data-concept-id') || cardId;
+        self._restoreState(card, cardId, conceptId);
         self._bindRevealButtons(card);
-        self._bindRatingButtons(card, cardId);
+        self._bindRatingButtons(card, conceptId);
         self._bindKeyboard(card);
       });
     },
 
-    _restoreState: function (card, cardId) {
-      if (!cardId) return;
-      var rec = MasteryStore.get(cardId);
+    _restoreState: function (card, cardId, conceptId) {
+      if (!conceptId) return;
+      var rec = MasteryStore.get(conceptId);
       this._applyMasteryUI(card, rec.mastery_state);
+
+      // STATE-LEARN-001: Restore scratchpad text from STORAGE_KEYS.drafts
+      var scratchpad = card.querySelector('.card-scratchpad');
+      if (scratchpad && cardId) {
+        var drafts = Store.get(STORAGE_KEYS.drafts, {});
+        if (drafts && drafts[cardId] && typeof drafts[cardId].text === 'string') {
+          scratchpad.value = drafts[cardId].text;
+        }
+        scratchpad.addEventListener('input', function () {
+          var curDrafts = Store.get(STORAGE_KEYS.drafts, {}) || {};
+          curDrafts[cardId] = {
+            text: scratchpad.value,
+            updated_at: Date.now(),
+          };
+          Store.set(STORAGE_KEYS.drafts, curDrafts);
+        });
+      }
     },
 
     _applyMasteryUI: function (card, state) {
@@ -519,34 +576,60 @@
     },
 
     _bindRevealButtons: function (card) {
-      var pairs = [
-        { btnSel: '.btn-hint',      secSel: '.card-hint' },
-        { btnSel: '.btn-keypoints', secSel: '.card-keypoints' },
-        { btnSel: '.btn-answer',    secSel: '.card-answer' },
-      ];
-      pairs.forEach(function (pair) {
-        var btn = card.querySelector(pair.btnSel);
-        var sec = card.querySelector(pair.secSel);
-        if (!btn || !sec) return;
+      var self = this;
+      var buttons = card.querySelectorAll('.btn-hint, .btn-keypoints, .btn-answer');
+      buttons.forEach(function (btn) {
+        var targetId = btn.getAttribute('aria-controls');
+        if (!targetId) return;
+        var sec = document.getElementById(targetId);
+        if (!sec) return;
+
         btn.addEventListener('click', function () {
           var nowVisible = sec.classList.toggle('visible');
           sec.setAttribute('aria-hidden', String(!nowVisible));
           btn.setAttribute('aria-expanded', String(nowVisible));
           btn.dataset.userExpanded = nowVisible ? '1' : '';
           sec.dataset.userOpened  = nowVisible ? '1' : '';
+
+          // PED-LEARN-004: Unlock rating controls after feedback is revealed
+          if (nowVisible) {
+            self._unlockRatings(card);
+          }
         });
       });
     },
 
-    _bindRatingButtons: function (card, cardId) {
+    _unlockRatings: function (card) {
+      var mode = document.documentElement.getAttribute('data-ui-mode') || 'learn';
+      if (mode === 'reference') return;
+      var ratingActions = card.querySelector('.card-rating-actions');
+      var feedbackStatus = card.querySelector('.card-feedback-status');
+      if (ratingActions) {
+        ratingActions.style.display = '';
+        ratingActions.setAttribute('aria-hidden', 'false');
+      }
+      if (feedbackStatus && !feedbackStatus.textContent) {
+        feedbackStatus.textContent = 'Đã mở đáp án. Bạn có thể đánh giá lượt ôn.';
+      }
+    },
+
+    _bindRatingButtons: function (card, conceptId) {
       var self = this;
       card.querySelectorAll('.btn-rating').forEach(function (btn) {
         btn.addEventListener('click', function () {
-          if (!cardId) return;
+          if (!conceptId) return;
           var rating = btn.getAttribute('data-rating');
-          var rec = MasteryStore.recordRating(cardId, rating);
+          var rec = MasteryStore.recordRating(conceptId, rating);
           self._applyMasteryUI(card, rec.mastery_state);
           self._showRatingFeedback(card, rating, rec);
+
+          // REVIEW-LEARN-002: Live queue update in review mode
+          if (document.documentElement.getAttribute('data-ui-mode') === 'review') {
+            UIModeManager.updateReviewVisibility();
+          }
+          if (window.ReviewHubEngine) {
+            window.ReviewHubEngine.renderQueue();
+          }
         });
       });
     },
@@ -556,9 +639,9 @@
       var color = colors[rating] || '#0969da';
       card.style.transition = 'border-color 0.15s ease';
       card.style.borderLeftColor = color;
-      var scratchpad = card.querySelector('.card-scratchpad');
-      if (scratchpad) {
-        scratchpad.placeholder = 'Ôn lại sau ' + rec.review_schedule.interval_days + ' ngày';
+      var feedbackStatus = card.querySelector('.card-feedback-status');
+      if (feedbackStatus) {
+        feedbackStatus.textContent = 'Đã ghi nhận (' + rating + '). Ôn lại sau ' + rec.review_schedule.interval_days + ' ngày.';
       }
       setTimeout(function () { card.style.borderLeftColor = ''; }, 800);
     },
@@ -580,19 +663,299 @@
   };
 
   // ============================================================
-  // SUBJECTIVE PRACTICE ENGINE (enhanced, preserved)
+  // RECALL CHECKPOINT ENGINE (MASTERY-LEARN-001)
+  // ============================================================
+  var RecallCheckpointEngine = {
+    init: function () {
+      var self = this;
+      document.querySelectorAll('.recall-checkpoint').forEach(function (cp) {
+        var itemId = cp.getAttribute('data-item-id');
+        var conceptId = cp.getAttribute('data-concept-id') || itemId;
+        self._restoreState(cp, itemId, conceptId);
+        self._bindRubric(cp, itemId, conceptId);
+      });
+    },
+
+    _restoreState: function (cp, itemId, conceptId) {
+      var rec = MasteryStore.get(conceptId);
+      var badge = cp.querySelector('.card-mastery-badge');
+      if (badge) badge.textContent = rec.mastery_state;
+      cp.setAttribute('data-mastery', rec.mastery_state);
+
+      var status = cp.querySelector('.checkpoint-status');
+      if (status) {
+        if (rec.mastery_state === 'M2' || rec.mastery_state === 'M3') {
+          status.textContent = 'Đã đạt M2 (Tự giải thích bản chất)';
+        } else {
+          status.textContent = 'Chưa tự kiểm tra';
+        }
+      }
+
+      var scratchpad = cp.querySelector('.checkpoint-scratchpad');
+      if (scratchpad && itemId) {
+        var drafts = Store.get(STORAGE_KEYS.drafts, {});
+        if (drafts && drafts[itemId] && typeof drafts[itemId].text === 'string') {
+          scratchpad.value = drafts[itemId].text;
+        }
+        scratchpad.addEventListener('input', function () {
+          var curDrafts = Store.get(STORAGE_KEYS.drafts, {}) || {};
+          curDrafts[itemId] = { text: scratchpad.value, updated_at: Date.now() };
+          Store.set(STORAGE_KEYS.drafts, curDrafts);
+        });
+      }
+    },
+
+    _bindRubric: function (cp, itemId, conceptId) {
+      var revealBtn = cp.querySelector('.btn-reveal-rubric');
+      var rubricContainer = cp.querySelector('.rubric-container');
+      var submitBtn = cp.querySelector('.btn-submit-recall');
+      var feedback = cp.querySelector('.recall-feedback');
+      var badge = cp.querySelector('.card-mastery-badge');
+      var status = cp.querySelector('.checkpoint-status');
+
+      if (revealBtn && rubricContainer) {
+        revealBtn.addEventListener('click', function () {
+          var isVis = rubricContainer.style.display !== 'none';
+          rubricContainer.style.display = isVis ? 'none' : 'block';
+          rubricContainer.setAttribute('aria-hidden', String(isVis));
+          revealBtn.setAttribute('aria-expanded', String(!isVis));
+        });
+      }
+
+      if (submitBtn && rubricContainer) {
+        submitBtn.addEventListener('click', function () {
+          var checkboxes = rubricContainer.querySelectorAll('.rubric-check');
+          var totalWeight = 0;
+          var earnedWeight = 0;
+          checkboxes.forEach(function (cb) {
+            var w = parseFloat(cb.getAttribute('data-weight') || '1.0');
+            totalWeight += w;
+            if (cb.checked) earnedWeight += w;
+          });
+          var rubricPct = totalWeight > 0 ? (earnedWeight / totalWeight) * 100 : 100;
+          var passed = rubricPct >= 80;
+
+          var rec = MasteryStore.recordRecallEvidence(conceptId, passed, rubricPct);
+          if (badge) badge.textContent = rec.mastery_state;
+          cp.setAttribute('data-mastery', rec.mastery_state);
+
+          if (passed) {
+            if (feedback) feedback.textContent = 'Đạt M2 thành công! (Điểm rubric: ' + Math.round(rubricPct) + '% >= 80%).';
+            if (status) status.textContent = 'Đã đạt M2 (Tự giải thích bản chất)';
+          } else {
+            if (feedback) feedback.textContent = 'Chưa đạt M2 (Điểm rubric: ' + Math.round(rubricPct) + '% < 80%). Cần nắm chắc từ khóa cốt lõi.';
+            if (status) status.textContent = 'Chưa đạt M2';
+          }
+
+          if (document.documentElement.getAttribute('data-ui-mode') === 'review') {
+            UIModeManager.updateReviewVisibility();
+          }
+        });
+      }
+    },
+  };
+
+  // ============================================================
+  // TRANSFER PROBLEM ENGINE (MASTERY-LEARN-001)
+  // ============================================================
+  var TransferProblemEngine = {
+    init: function () {
+      var self = this;
+      document.querySelectorAll('.transfer-problem').forEach(function (tp) {
+        var itemId = tp.getAttribute('data-item-id');
+        var conceptId = tp.getAttribute('data-concept-id') || itemId;
+        self._restoreState(tp, itemId, conceptId);
+        self._bindActions(tp, itemId, conceptId);
+      });
+    },
+
+    _restoreState: function (tp, itemId, conceptId) {
+      var rec = MasteryStore.get(conceptId);
+      var badge = tp.querySelector('.card-mastery-badge');
+      if (badge) badge.textContent = rec.mastery_state;
+      tp.setAttribute('data-mastery', rec.mastery_state);
+
+      var gateStatus = tp.querySelector('.transfer-gate-status');
+      if (gateStatus) {
+        if (rec.mastery_state === 'M3') {
+          gateStatus.textContent = 'Đã xác lập M3 (Chuyển giao độc lập)';
+        } else if (rec.mastery_state === 'M2') {
+          gateStatus.textContent = 'Sẵn sàng kiểm tra M3 (Đã đạt M2)';
+        } else {
+          gateStatus.textContent = 'Cần đạt cấp độ M2 trước khi kiểm tra M3';
+        }
+      }
+
+      var scratchpad = tp.querySelector('.transfer-scratchpad');
+      if (scratchpad && itemId) {
+        var drafts = Store.get(STORAGE_KEYS.drafts, {});
+        if (drafts && drafts[itemId] && typeof drafts[itemId].text === 'string') {
+          scratchpad.value = drafts[itemId].text;
+        }
+        scratchpad.addEventListener('input', function () {
+          var curDrafts = Store.get(STORAGE_KEYS.drafts, {}) || {};
+          curDrafts[itemId] = { text: scratchpad.value, updated_at: Date.now() };
+          Store.set(STORAGE_KEYS.drafts, curDrafts);
+        });
+      }
+    },
+
+    _bindActions: function (tp, itemId, conceptId) {
+      var revealBtn = tp.querySelector('.btn-reveal-transfer-solution');
+      var solContainer = tp.querySelector('.transfer-solution-container');
+      var passBtn = tp.querySelector('.btn-transfer-pass');
+      var failBtn = tp.querySelector('.btn-transfer-fail');
+      var feedback = tp.querySelector('.transfer-feedback');
+      var badge = tp.querySelector('.card-mastery-badge');
+      var gateStatus = tp.querySelector('.transfer-gate-status');
+
+      if (revealBtn && solContainer) {
+        revealBtn.addEventListener('click', function () {
+          var isVis = solContainer.style.display !== 'none';
+          solContainer.style.display = isVis ? 'none' : 'block';
+          solContainer.setAttribute('aria-hidden', String(isVis));
+          revealBtn.setAttribute('aria-expanded', String(!isVis));
+        });
+      }
+
+      if (passBtn) {
+        passBtn.addEventListener('click', function () {
+          var curRec = MasteryStore.get(conceptId);
+          if (curRec.mastery_state !== 'M2' && curRec.mastery_state !== 'M3') {
+            if (feedback) feedback.textContent = 'Không thể cấp M3: Bạn phải hoàn thành M2 trước khi tự đánh giá M3.';
+            return;
+          }
+          var rec = MasteryStore.recordTransferEvidence(conceptId, true);
+          if (badge) badge.textContent = rec.mastery_state;
+          tp.setAttribute('data-mastery', rec.mastery_state);
+          if (feedback) feedback.textContent = 'Đạt chuẩn M3: Năng lực chuyển giao độc lập đã được xác lập!';
+          if (gateStatus) gateStatus.textContent = 'Đã xác lập M3 (Chuyển giao độc lập)';
+          if (document.documentElement.getAttribute('data-ui-mode') === 'review') {
+            UIModeManager.updateReviewVisibility();
+          }
+        });
+      }
+
+      if (failBtn) {
+        failBtn.addEventListener('click', function () {
+          MasteryStore.recordTransferEvidence(conceptId, false);
+          if (feedback) feedback.textContent = 'Chưa đạt chuyển giao. Hãy rà soát lại phương pháp giải.';
+        });
+      }
+    },
+  };
+
+  // ============================================================
+  // REVIEW HUB ENGINE (REVIEW-LEARN-001)
+  // ============================================================
+  var ReviewHubEngine = {
+    init: function () {
+      var queueContainer = document.getElementById('review-hub-queue');
+      if (!queueContainer) return;
+      this.renderQueue();
+
+      var refreshBtn = document.getElementById('btn-refresh-hub');
+      var self = this;
+      if (refreshBtn) {
+        refreshBtn.addEventListener('click', function () {
+          self.renderQueue();
+        });
+      }
+    },
+
+    renderQueue: function () {
+      var queueContainer = document.getElementById('review-hub-queue');
+      if (!queueContainer) return;
+
+      var dueCountEl = document.getElementById('hub-due-count');
+      var weakCountEl = document.getElementById('hub-weak-count');
+      var totalCountEl = document.getElementById('hub-total-count');
+
+      var depth = window.location.pathname.split('/').filter(Boolean).length
+        - (window.location.pathname.endsWith('/') ? 0 : 1);
+      var prefix = Array(Math.max(0, depth) + 1).join('../');
+
+      fetch(prefix + 'study_index.json')
+        .then(function (r) { return r.json(); })
+        .then(function (items) {
+          var total = items.length;
+          var dueItems = [];
+          var weakCount = 0;
+
+          items.forEach(function (item) {
+            var cid = item.concept_id || item.id;
+            var isDue = MasteryStore.isDue(cid);
+            var isWeak = MasteryStore.isWeak(cid);
+            if (isWeak) weakCount++;
+            if (isDue) {
+              dueItems.push(item);
+            }
+          });
+
+          if (totalCountEl) totalCountEl.textContent = total;
+          if (weakCountEl) weakCountEl.textContent = weakCount;
+          if (dueCountEl) dueCountEl.textContent = dueItems.length;
+
+          if (dueItems.length === 0) {
+            queueContainer.innerHTML = '<div class="hub-empty-message">🎉 Xuất sắc! Tất cả các mục ôn tập đã được hoàn thành.</div>';
+            return;
+          }
+
+          var sorted = ReviewQueue.sortItems(dueItems);
+          var html = '<ul class="review-hub-list">';
+          sorted.forEach(function (item) {
+            var cid = item.concept_id || item.id;
+            var rec = MasteryStore.get(cid);
+            var score = ReviewQueue.getPriorityScore(cid);
+            var isDue = MasteryStore.isDue(cid);
+            var statusLabel = isDue ? 'Đến hạn' : 'Cần củng cố';
+            var statusClass = isDue ? 'badge-due' : 'badge-weak';
+            var targetUrl = prefix + item.url + '#' + item.anchor;
+
+            html += '<li class="review-queue-card" data-hub-card-id="' + cid + '" data-priority="' + score + '">'
+              + '<div class="queue-card-meta">'
+              + '<span class="queue-card-doc">' + (item.doc_title || 'Tài liệu') + '</span>'
+              + '<span class="card-mastery-badge">' + rec.mastery_state + '</span>'
+              + '<span class="queue-status-badge ' + statusClass + '">' + statusLabel + '</span>'
+              + '</div>'
+              + '<div class="queue-card-question">' + (item.question || item.id) + '</div>'
+              + '<div class="queue-card-action">'
+              + '<a class="btn-card primary" href="' + targetUrl + '">Ôn tập ngay ↗</a>'
+              + '</div>'
+              + '</li>';
+          });
+          html += '</ul>';
+          queueContainer.innerHTML = html;
+        })
+        .catch(function () {
+          queueContainer.innerHTML = '<div class="queue-error">Không thể tải dữ liệu chỉ mục học tập.</div>';
+        });
+    },
+  };
+
+  // ============================================================
+  // SUBJECTIVE PRACTICE ENGINE
   // ============================================================
   var SubjectivePracticeEngine = {
     init: function () {
       document.querySelectorAll('.subjective-practice').forEach(function (container) {
         var practiceId      = container.getAttribute('data-practice-id');
+        var conceptId       = container.getAttribute('data-concept-id') || practiceId;
         var textarea        = container.querySelector('.practice-textarea');
         var compareBtn      = container.querySelector('.btn-compare');
         var rubricContainer = container.querySelector('.rubric-container');
         var checkboxes      = container.querySelectorAll('.rubric-check');
         var scoreDisplay    = container.querySelector('.current-score');
         var maxScore        = parseFloat(container.getAttribute('data-max-score') || '1.0');
+        var claimM2Btn      = container.querySelector('.btn-practice-claim-m2');
+        var feedback        = container.querySelector('.practice-feedback');
+        var badge           = container.querySelector('.card-mastery-badge');
         var stateKey        = 'hdh_practice_' + practiceId;
+
+        // Restore mastery badge
+        if (conceptId && badge) {
+          badge.textContent = MasteryStore.get(conceptId).mastery_state;
+        }
 
         var saveState = function () {
           if (!practiceId) return;
@@ -612,15 +975,20 @@
             checkboxes.forEach(function (cb, i) {
               cb.checked = !!(saved.checked && saved.checked[i]);
             });
-            if (saved.rubricVisible && rubricContainer) rubricContainer.classList.add('visible');
+            if (saved.rubricVisible && rubricContainer) {
+              rubricContainer.classList.add('visible');
+              rubricContainer.setAttribute('aria-hidden', 'false');
+            }
           }
           textarea.addEventListener('input', saveState);
         }
 
         if (compareBtn && rubricContainer) {
           compareBtn.addEventListener('click', function () {
-            rubricContainer.classList.toggle('visible');
-            compareBtn.textContent = rubricContainer.classList.contains('visible')
+            var nowVisible = rubricContainer.classList.toggle('visible');
+            rubricContainer.setAttribute('aria-hidden', String(!nowVisible));
+            compareBtn.setAttribute('aria-expanded', String(nowVisible));
+            compareBtn.textContent = nowVisible
               ? 'Ẩn Rubric tự kiểm tra'
               : 'So sánh với Rubric tự kiểm tra';
             saveState();
@@ -634,8 +1002,27 @@
           });
           score = Math.min(score, maxScore);
           if (scoreDisplay) scoreDisplay.textContent = score.toFixed(2);
+
+          // Allow claiming M2 if >= 80% rubric score
+          if (claimM2Btn) {
+            if (score >= 0.8 * maxScore) {
+              claimM2Btn.style.display = '';
+            } else {
+              claimM2Btn.style.display = 'none';
+            }
+          }
           saveState();
         };
+
+        if (claimM2Btn) {
+          claimM2Btn.addEventListener('click', function () {
+            var pct = maxScore > 0 ? (parseFloat(scoreDisplay.textContent) / maxScore) * 100 : 100;
+            var rec = MasteryStore.recordRecallEvidence(conceptId, true, pct);
+            if (badge) badge.textContent = rec.mastery_state;
+            if (feedback) feedback.textContent = 'Đã ghi nhận cấp độ M2 qua bài tự luận (Rubric: ' + Math.round(pct) + '% >= 80%).';
+          });
+        }
+
         updateScore();
         checkboxes.forEach(function (cb) { cb.addEventListener('change', updateScore); });
       });
@@ -854,6 +1241,9 @@
     ThemeManager.init();
     UIModeManager.init();
     StudyCardEngine.init();
+    RecallCheckpointEngine.init();
+    TransferProblemEngine.init();
+    ReviewHubEngine.init();
     SubjectivePracticeEngine.init();
     KnowledgeGraph.init();
     SearchEngine.init();
@@ -862,13 +1252,18 @@
 
   // Expose for testing, backup-restore UI, and pedagogical primitives
   window.HDH = {
-    Scheduler:       Scheduler,
-    MasteryStore:    MasteryStore,
-    ReviewQueue:     ReviewQueue,
-    BackupRestore:   BackupRestore,
-    UIModeManager:   UIModeManager,
-    Store:           Store,
-    LegacyMigration: LegacyMigration,
+    Scheduler:                Scheduler,
+    MasteryStore:             MasteryStore,
+    ReviewQueue:              ReviewQueue,
+    BackupRestore:            BackupRestore,
+    UIModeManager:            UIModeManager,
+    Store:                    Store,
+    LegacyMigration:          LegacyMigration,
+    Migration:                LegacyMigration,
+    StudyCardEngine:          StudyCardEngine,
+    RecallCheckpointEngine:   RecallCheckpointEngine,
+    TransferProblemEngine:    TransferProblemEngine,
+    ReviewHubEngine:          ReviewHubEngine,
   };
 
 })();

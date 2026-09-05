@@ -41,3 +41,32 @@ jobs:
           python scripts/validate.py
           python scripts/validate_final.py
           python scripts/technical_checks.py --compile
+
+  validate-browser:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Node Dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Build Web Companion
+        run: python scripts/build_web.py
+
+      - name: Run Learning System Browser Tests
+        run: npm run test:learning-browser

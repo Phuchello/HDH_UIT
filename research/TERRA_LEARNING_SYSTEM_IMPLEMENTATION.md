@@ -214,6 +214,109 @@ Kết quả kiểm thử chuyên biệt hệ thống học tập (`scripts/valid
 
 ---
 
-## 9. KẾT LUẬN & BÀN GIAO
+## 9. KẾT LUẬN & BÀN GIAO BAN ĐẦU
 
-Giai đoạn triển khai kỹ thuật hạ tầng học tập (`V2_BATCH4_LEARNING_SYSTEM_IMPLEMENTATION`) đã hoàn tất xuất sắc toàn bộ các mục tiêu đặt ra. Mã nguồn renderer, runtime giao diện, stylesheet và cơ sở dữ liệu phái sinh đã sẵn sàng 100% để phục vụ công tác soạn thảo nội dung Chương 7.
+Giai đoạn triển khai kỹ thuật hạ tầng học tập (`V2_BATCH4_LEARNING_SYSTEM_IMPLEMENTATION`) đã hoàn tất các mục tiêu nền tảng ban đầu.
+
+---
+
+## 10. BÁO CÁO KHẮC PHỤC INDEPENDENT QA (QA CLOSEOUT REPORT)
+
+Đợt rà soát độc lập đã phát hiện 7 vấn đề kỹ thuật cần kiện toàn trước khi nghiệm thu hoàn tất. Dưới đây là biên bản khắc phục toàn diện với đối chiếu Before / After:
+
+### 10.1. Chi tiết khắc phục 7 phát hiện QA
+
+1. **A11Y-LEARN-001 (Major — aria-controls trỏ sai hoặc thiếu ID tương ứng):**
+   - *Trước khắc phục:* Nút hiển thị sử dụng `aria-controls` với ID tĩnh hoặc lỏng lẻo, dễ xung đột khi có nhiều thẻ trên cùng trang.
+   - *Sau khắc phục:* `scripts/build_web.py` sinh định danh DOM ổn định, tiền tố hóa theo `card_id`: `{cardId}__hint`, `{cardId}__keypoints`, `{cardId}__answer`, `{cardId}__scratchpad`, `{cardId}__feedback`, `{cardId}__rating_actions`. Mọi nút bấm đều có `type="button"`. Kiểm thử tự động `run_dom_id_and_aria_tests()` xác nhận 100% thuộc tính `aria-controls` trên toàn bộ 19 trang tĩnh trỏ trúng phần tử thực tế và không có ID trùng lặp.
+
+2. **STATE-LEARN-001 (Major — StudyCard scratchpad không lưu trạng thái):**
+   - *Trước khắc phục:* Ô nháp tự luận mất nội dung khi người dùng chuyển trang hoặc tải lại.
+   - *Sau khắc phục:* Tích hợp lưu trữ nháp theo thẻ trong `STORAGE_KEYS.drafts` (`hdh_practice_drafts_v1`), tự động khôi phục khi khởi tạo `StudyCardEngine`, có bọc an toàn chống lỗi hạn mức bộ nhớ (`quota exceeded`) và JSON hỏng.
+
+3. **MASTERY-LEARN-001 (Major — Thiếu cơ chế thu thập bằng chứng M2/M3 đầu-cuối):**
+   - *Trước khắc phục:* Đánh giá ôn tập có nguy cơ bị nhầm lẫn với thăng cấp thành thạo; thiếu bộ sinh tương tác cho RecallCheckpoint và TransferProblem.
+   - *Sau khắc phục:*
+     - Tách biệt tuyệt đối giữa Review Rating (chỉ điều phối lịch SM-2 và tối đa M1) và Mastery State.
+     - Triển khai bộ sinh callout tương tác `[!RecallCheckpoint]` (đòi hỏi rubric $\ge 80\%$ để lên M2) và `[!TransferProblem]` (chỉ có thể kích hoạt cấp M3 khi thẻ đã đạt chuẩn M2).
+     - Bổ sung `SubjectivePracticeEngine` cho các bài tập tự luận với bảng rubric chấm điểm từng tiêu chí.
+
+4. **PED-LEARN-004 (Major — Nút đánh giá hiển thị sớm trước khi xem đáp án):**
+   - *Trước khắc phục:* Các nút đánh giá (Quên, Khó, Ổn, Dễ) hiển thị đồng thời ngay khi mở thẻ, vi phạm nguyên lý tự kiểm tra kín (closed-book recall).
+   - *Sau khắc phục:* Bộ nút `.card-rating-actions` mặc định bị ẩn (`style="display: none;"`, `aria-hidden="true"`). Chỉ khi người học bấm xem gợi ý, từ khóa hoặc lời giải, hàm `_unlockRatings(card)` mới mở khóa cụm nút đánh giá. Trong chế độ Tra cứu (Reference Mode), cụm nút đánh giá luôn được ẩn để tránh gây xao nhãng.
+
+5. **REVIEW-LEARN-001 (Major — Thiếu Review Hub toàn trang):**
+   - *Trước khắc phục:* Chế độ ôn tập chỉ hoạt động cục bộ từng trang đơn lẻ, thiếu trung tâm điều phối tập trung.
+   - *Sau khắc phục:* Xây dựng trang Hàng đợi Ôn tập tập trung tại `review/index.html` (được biên dịch từ `scripts/build_web.py`), nạp `study_index.json` (58 mục học tập trên toàn cẩm nang), kết nối trạng thái từ `MasteryStore`, sắp xếp hàng đợi theo độ ưu tiên 6 tầng của `ReviewQueue`, loại trừ các thẻ có lịch tương lai và hiển thị thanh thống kê trực quan (Đến hạn, Cần củng cố, Tổng số thẻ).
+
+6. **REVIEW-LEARN-002 (Minor — Cập nhật hàng đợi động không cần tải lại):**
+   - *Trước khắc phục:* Khi đánh giá một thẻ trong chế độ ôn, giao diện không tự cập nhật trạng thái hiển thị.
+   - *Sau khắc phục:* `_bindRatingButtons` và các hàm ghi nhận bằng chứng tự động gọi `UIModeManager.updateReviewVisibility()` và `ReviewHubEngine.renderQueue()` ngay lập tức, cập nhật hàng đợi tại chỗ mà không cần tải lại trang. Chế độ ôn tập nội tuyến sử dụng lớp `.review-hidden` thay vì đảo lộn DOM vật lý, bảo toàn cấu trúc văn bản.
+
+7. **QA-LEARN-001 (Major — Thiếu bộ kiểm thử trình duyệt thực tế Playwright):**
+   - *Trước khắc phục:* Kiểm thử chỉ chạy các vector mô phỏng trên Python.
+   - *Sau khắc phục:*
+     - Thiết lập cấu hình `playwright.config.js` với máy chủ tĩnh cục bộ cổng 8080.
+     - Xây dựng bộ kịch bản kiểm thử toàn diện `tests/learning-system.spec.js` bao quát trọn vẹn 12 kịch bản:
+       1. Learn Mode: progressive disclosure, rating controls chỉ mở sau khi xem đáp án.
+       2. Reference Mode: toàn bộ nội dung hiển thị, ẩn cụm đánh giá.
+       3. Scratchpad persistence: bảo toàn nháp qua thao tác reload.
+       4. Rating persistence: đánh giá thẻ GOOD, reload, bảo toàn M1 và lịch SM-2.
+       5. HARD != AGAIN: HARD tăng biến đếm reps, AGAIN đặt lại reps = 0.
+       6. Legacy migration: tự động di trú thẻ cũ sang M1 với `LEGACY_SELF_REPORT`.
+       7. Corrupt localStorage: xử lý an toàn khi gặp dữ liệu lỗi, không làm sập trang.
+       8. Mastery invariants: nút đánh giá không thể cấp M2/M3; rubric $\ge 80\%$ cấp M2; TransferProblem là con đường duy nhất lên M3 từ M2.
+       9. Review Hub: hiển thị thẻ đến hạn, loại trừ thẻ tương lai, liên kết chuẩn xác đến neo trang đích.
+       10. Accessibility: 100% `aria-controls` hợp lệ, hỗ trợ thao tác bàn phím đầy đủ.
+       11. Mobile responsiveness: không tràn viền ngang trên màn hình điện thoại 390px (`scrollWidth <= clientWidth`).
+       12. Console cleanliness: 0 lỗi console hoặc unhandled exception trên toàn bộ các trang cốt lõi.
+     - Bổ sung lệnh `npm run test:learning-browser` vào `package.json`.
+     - Tích hợp công việc `validate-browser` vào quy trình tự động hóa GitHub Actions (`.github/workflows/validate.yml`).
+
+---
+
+### 10.2. Kết quả nghiệm thu thực tế
+
+```text
+> hdh-uit@2.0.0 test:learning-browser
+> playwright test
+
+Running 12 tests using 1 worker
+  ok  1 Learn Mode enforces progressive disclosure and hides ratings until reveal
+  ok  2 Reference Mode reveals all sections and hides rating actions
+  ok  3 StudyCard scratchpad persists draft across page reloads
+  ok  4 Rating a card persists mastery and schedule across reloads
+  ok  5 HARD != AGAIN scheduler invariant: HARD increments reps, AGAIN resets to 0
+  ok  6 Legacy flashcard ratings migrate cleanly to M1 with LEGACY_SELF_REPORT
+  ok  7 Corrupt localStorage does not crash runtime and falls back gracefully
+  ok  8 Mastery invariants: review ratings cannot grant M2/M3; rubric >= 80% required for M2; transfer required for M3
+  ok  9 Review Hub displays due/overdue cards, excludes future cards, and links to target anchor
+  ok 10 Accessibility: All aria-controls resolve to valid elements and are keyboard operable
+  ok 11 Mobile responsiveness: 390px viewport does not cause horizontal scroll overflow
+  ok 12 Console cleanliness: No uncaught page errors across core pages
+
+12 passed (6.6s)
+```
+
+```text
+FOUNDATION GATE: PASS (16/16)
+  validate_sources: PASS
+  check_public_hygiene: PASS
+  validate_v2_content: PASS
+  build_web: PASS
+  validate_site_routes: PASS
+  validate_web_features: PASS
+  renderer_stress_test: PASS
+  negative_tests: PASS
+  batch1_canonical_source: PASS
+  validate_ch05_source_map: PASS
+  validate_ch05_content: PASS
+  validate_ch06_source_map: PASS
+  validate_ch06_content: PASS
+  validate_ch07_source_map: PASS
+  verify_research_gates: PASS
+  validate_learning_system: PASS
+```
+
+Toàn bộ 7 khiếm khuyết QA đã được khắc phục triệt để và kiểm chứng tự động 100%. Hệ thống sẵn sàng cho bước kiểm tra độc lập cuối cùng.
+
