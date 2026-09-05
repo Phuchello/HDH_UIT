@@ -227,14 +227,36 @@ def _parse_studycard_sections(body: str, card_id: str = "", source_path: str = "
     return question, hint, keypoints, answer
 
 
+ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
+
+
 def render_callout(kind, body, doc_id, routes, current_rel):
     lower = kind.lower()
     if lower in {"studycard", "subjectivepractice", "recallcheckpoint", "transferproblem"}:
-        identifier = re.search(r'id=["\']([^"\']+)', body)
+        id_match = re.search(r'\bid=(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))', body)
+        if not id_match:
+            snippet = body.strip().splitlines()[0][:80] if body.strip() else "(empty block)"
+            raise RuntimeError(
+                f"ID-LEARN-001 BUILD ERROR: Missing explicit 'id=' in {kind} callout in {current_rel} (doc_id={doc_id}). "
+                f"Context: {snippet!r}. Persistent interactive primitives must have an explicit persistent id."
+            )
+        raw_id = (id_match.group(1) if id_match.group(1) is not None else (id_match.group(2) if id_match.group(2) is not None else id_match.group(3))).strip()
+        if not raw_id:
+            snippet = body.strip().splitlines()[0][:80] if body.strip() else "(empty block)"
+            raise RuntimeError(
+                f"ID-LEARN-001 BUILD ERROR: Missing explicit 'id=' in {kind} callout in {current_rel} (doc_id={doc_id}). "
+                f"Context: {snippet!r}. Persistent interactive primitives must have an explicit persistent id."
+            )
+        if not ID_PATTERN.match(raw_id):
+            raise RuntimeError(
+                f"ID-LEARN-001 BUILD ERROR: Invalid 'id=' format {raw_id!r} in {kind} callout in {current_rel} (doc_id={doc_id}). "
+                f"IDs must match ^[A-Za-z0-9][A-Za-z0-9_-]*$."
+            )
+
+        item_id = raw_id
         concept_match = re.search(r'concept(?:_id)?=["\']([^"\']+)', body)
-        item_id = identifier.group(1) if identifier else f"{lower}-{doc_id}"
         concept_id = concept_match.group(1) if concept_match else item_id
-        body = re.sub(r'^\s*id=["\'][^"\']+["\'][ \t]*\n?', "", body, count=1)
+        body = re.sub(r'^\s*id=(?:"[^"]*"|\'[^\']*\'|[^\s>]+)[ \t]*\n?', "", body, count=1)
         body = re.sub(r'^\s*concept(?:_id)?=["\'][^"\']+["\'][ \t]*\n?', "", body, count=1)
 
         eid = html.escape(item_id)
@@ -989,13 +1011,15 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
             out.append("</ul>")
         return "\n".join(out)
 
-    mode_switcher = (
-        '<div class="mode-switcher" role="group" aria-label="Chế độ học tập">'
-        '<button type="button" class="mode-btn" data-mode="learn" aria-pressed="false">📚 Học</button>'
-        '<button type="button" class="mode-btn" data-mode="review" aria-pressed="false">🔄 Ôn</button>'
-        '<button type="button" class="mode-btn" data-mode="reference" aria-pressed="false">🔎 Tra</button>'
-        '</div>'
-    )
+    def render_mode_switcher(prefix):
+        return (
+            '<div class="mode-switcher" role="group" aria-label="Chế độ học tập">'
+            '<button type="button" class="mode-btn" data-mode="learn" aria-pressed="false">📚 Học</button>'
+            '<button type="button" class="mode-btn" data-mode="review" aria-pressed="false">🔄 Ôn</button>'
+            '<button type="button" class="mode-btn" data-mode="reference" aria-pressed="false">🔎 Tra</button>'
+            f'<a class="review-hub-shortcut" id="review-hub-shortcut" href="{prefix}review/index.html" style="display: none;">Hàng đợi toàn môn ↗</a>'
+            '</div>'
+        )
 
     def page(doc):
         route, depth = doc["route"], len(Path(doc["route"]).parts) - 1
@@ -1017,7 +1041,7 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
         title = html.escape(str(doc["title"]))
         return f'''<!DOCTYPE html>
 <html lang="vi" data-theme="light" data-ui-mode="learn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>{title} — IT007 UIT</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><script src="{prefix}assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
-<body><header class="app-header"><a class="brand-container" href="{prefix}index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions">{mode_switcher}<button type="button" class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button type="button" class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<body><header class="app-header"><a class="brand-container" href="{prefix}index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions">{render_mode_switcher(prefix)}<button type="button" class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button type="button" class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
 <div class="workspace-layout"><aside class="sidebar-left">{nav(route)}</aside><main class="content-center"><div class="breadcrumbs"><a href="{prefix}index.html">Trang chủ</a> <span>/</span> <span>{title}</span></div><article class="article-body">{rendered}{backlinks}<div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list">{toc or '<li class="toc-item">Trang không có tiểu mục</li>'}</ul></div></aside></div>
 <div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="{prefix}assets/js/app.js"></script></body></html>'''
 
@@ -1031,7 +1055,7 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
     # ------------------------------------------------------------------
     review_hub_html = f'''<!DOCTYPE html>
 <html lang="vi" data-theme="light" data-ui-mode="review"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Hàng Đợi Ôn Tập (Review Hub) — IT007 UIT</title><link rel="stylesheet" href="../assets/css/style.css"><script src="../assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
-<body><header class="app-header"><a class="brand-container" href="../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions">{mode_switcher}<button type="button" class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button type="button" class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<body><header class="app-header"><a class="brand-container" href="../index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions">{render_mode_switcher("../")}<button type="button" class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button type="button" class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
 <div class="workspace-layout"><aside class="sidebar-left">{nav("review/index.html")}</aside><main class="content-center"><div class="breadcrumbs"><a href="../index.html">Trang chủ</a> <span>/</span> <a href="../reviews/midterm.html">Ôn tập</a> <span>/</span> <span>Review Hub</span></div><article class="article-body">
 <h1>Hàng Đợi Ôn Tập Toàn Trang (Review Hub)</h1>
 <p>Tổng hợp tất cả các mục Active Recall, Recall Checkpoint và Transfer Problem đến hạn ôn tập trên toàn bộ Cẩm nang Hệ Điều Hành IT007.</p>
@@ -1039,6 +1063,8 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
   <div class="review-stats-bar">
     <span class="stat-badge stat-due">Đến hạn: <strong id="hub-due-count">0</strong></span>
     <span class="stat-badge stat-weak">Cần củng cố: <strong id="hub-weak-count">0</strong></span>
+    <span class="stat-badge stat-pending">Chờ chuyển giao: <strong id="hub-pending-count">0</strong></span>
+    <span class="stat-badge stat-mistake">Có lỗi sai: <strong id="hub-mistake-count">0</strong></span>
     <span class="stat-badge stat-total">Tổng số thẻ: <strong id="hub-total-count">0</strong></span>
   </div>
   <div class="review-hub-actions">
@@ -1057,7 +1083,7 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
     for doc in docs:
         if "theory" in doc["rel"]:
             cards.append(f'<a href="{doc["route"]}"><h3>{html.escape(doc["title"])}</h3><p>{html.escape(str(doc["summary"]))}</p></a>')
-    index = f'''<!DOCTYPE html><html lang="vi" data-theme="light" data-ui-mode="learn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>IT007 · Hệ Điều Hành UIT</title><link rel="stylesheet" href="assets/css/style.css"><script src="assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head><body><header class="app-header"><a class="brand-container" href="index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions">{mode_switcher}<button type="button" class="search-trigger-btn" id="search-trigger-btn">Tìm kiếm <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button type="button" class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header><div class="workspace-layout"><aside class="sidebar-left">{nav("index.html")}</aside><main class="content-center"><article class="article-body"><h1>Hệ Điều Hành</h1><p>IT007 · Lý thuyết · Tự luận · Bài tập · Thực hành · Ôn tập · Đề thi</p><div class="article-meta-bar">Biên soạn: <strong>Võ Trọng Phúc</strong></div><h2>Các Chuyên Đề Cốt Lõi</h2><div class="document-grid">{"".join(cards)}</div><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div></aside></div><div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper"><input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="assets/js/app.js"></script></body></html>'''
+    index = f'''<!DOCTYPE html><html lang="vi" data-theme="light" data-ui-mode="learn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>IT007 · Hệ Điều Hành UIT</title><link rel="stylesheet" href="assets/css/style.css"><script src="assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head><body><header class="app-header"><a class="brand-container" href="index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions">{render_mode_switcher("")}<button type="button" class="search-trigger-btn" id="search-trigger-btn">Tìm kiếm <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button type="button" class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header><div class="workspace-layout"><aside class="sidebar-left">{nav("index.html")}</aside><main class="content-center"><article class="article-body"><h1>Hệ Điều Hành</h1><p>IT007 · Lý thuyết · Tự luận · Bài tập · Thực hành · Ôn tập · Đề thi</p><div class="article-meta-bar">Biên soạn: <strong>Võ Trọng Phúc</strong></div><h2>Các Chuyên Đề Cốt Lõi</h2><div class="document-grid">{"".join(cards)}</div><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div></aside></div><div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper"><input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="assets/js/app.js"></script></body></html>'''
     (output_dir / "index.html").write_text(index, encoding="utf-8")
     print(f"Successfully compiled {len(docs) + 2} static pages into {output_dir}.")
     return docs

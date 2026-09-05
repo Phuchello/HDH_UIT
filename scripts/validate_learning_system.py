@@ -305,6 +305,83 @@ def run_parser_validation_tests() -> list[str]:
 
 
 # ===========================================================================
+# 2c. Interactive Callout ID Validation Tests (ID-LEARN-001)
+# ===========================================================================
+
+def run_id_validation_tests() -> list[str]:
+    """Test that render_callout strictly enforces explicit valid IDs:
+    1. Missing explicit 'id=' raises RuntimeError with ID-LEARN-001.
+    2. Empty id='' raises RuntimeError with ID-LEARN-001.
+    3. Whitespace in id raises RuntimeError with ID-LEARN-001.
+    4. Invalid characters (e.g. '@') raise RuntimeError with ID-LEARN-001.
+    5. Non-alphanumeric first character raises RuntimeError with ID-LEARN-001.
+    6. Valid IDs pass without error.
+    """
+    failures = []
+    routes = {}
+
+    # Case 1: Missing explicit id=
+    try:
+        _bw.render_callout("studycard", "Question\n<!-- answer -->\nAnswer", "test-doc", routes, "test.md")
+        failures.append("ID-LEARN-001 FAIL: Expected RuntimeError for missing explicit 'id=', but none raised")
+    except RuntimeError as e:
+        if "ID-LEARN-001" not in str(e):
+            failures.append(f"ID-LEARN-001 FAIL: RuntimeError raised but missing 'ID-LEARN-001': {e}")
+    except Exception as e:
+        failures.append(f"ID-LEARN-001 FAIL: Expected RuntimeError for missing explicit id, got {type(e).__name__}: {e}")
+
+    # Case 2: Empty id=""
+    try:
+        _bw.render_callout("studycard", 'id=""\nQuestion\n<!-- answer -->\nAnswer', "test-doc", routes, "test.md")
+        failures.append("ID-LEARN-001 FAIL: Expected RuntimeError for empty id='', but none raised")
+    except RuntimeError as e:
+        if "ID-LEARN-001" not in str(e):
+            failures.append(f"ID-LEARN-001 FAIL: RuntimeError raised but missing 'ID-LEARN-001': {e}")
+    except Exception as e:
+        failures.append(f"ID-LEARN-001 FAIL: Expected RuntimeError for empty id, got {type(e).__name__}: {e}")
+
+    # Case 3: Whitespace in id="test id with spaces"
+    try:
+        _bw.render_callout("studycard", 'id="test id with spaces"\nQuestion\n<!-- answer -->\nAnswer', "test-doc", routes, "test.md")
+        failures.append("ID-LEARN-001 FAIL: Expected RuntimeError for id with whitespace, but none raised")
+    except RuntimeError as e:
+        if "ID-LEARN-001" not in str(e):
+            failures.append(f"ID-LEARN-001 FAIL: RuntimeError raised but missing 'ID-LEARN-001': {e}")
+    except Exception as e:
+        failures.append(f"ID-LEARN-001 FAIL: Expected RuntimeError for whitespace in id, got {type(e).__name__}: {e}")
+
+    # Case 4: Invalid characters in id="test@bad"
+    try:
+        _bw.render_callout("studycard", 'id="test@bad"\nQuestion\n<!-- answer -->\nAnswer', "test-doc", routes, "test.md")
+        failures.append("ID-LEARN-001 FAIL: Expected RuntimeError for invalid characters in id, but none raised")
+    except RuntimeError as e:
+        if "ID-LEARN-001" not in str(e):
+            failures.append(f"ID-LEARN-001 FAIL: RuntimeError raised but missing 'ID-LEARN-001': {e}")
+    except Exception as e:
+        failures.append(f"ID-LEARN-001 FAIL: Expected RuntimeError for invalid chars in id, got {type(e).__name__}: {e}")
+
+    # Case 5: Non-alphanumeric leading char id="-bad"
+    try:
+        _bw.render_callout("studycard", 'id="-bad"\nQuestion\n<!-- answer -->\nAnswer', "test-doc", routes, "test.md")
+        failures.append("ID-LEARN-001 FAIL: Expected RuntimeError for leading hyphen in id, but none raised")
+    except RuntimeError as e:
+        if "ID-LEARN-001" not in str(e):
+            failures.append(f"ID-LEARN-001 FAIL: RuntimeError raised but missing 'ID-LEARN-001': {e}")
+    except Exception as e:
+        failures.append(f"ID-LEARN-001 FAIL: Expected RuntimeError for leading hyphen in id, got {type(e).__name__}: {e}")
+
+    # Case 6: Valid ID must succeed
+    try:
+        res = _bw.render_callout("studycard", 'id="valid-id_123"\nQuestion\n<!-- answer -->\nAnswer', "test-doc", routes, "test.md")
+        if 'id="valid-id_123"' not in res:
+            failures.append("ID-LEARN-001 FAIL: Valid ID was not properly rendered in output HTML")
+    except Exception as e:
+        failures.append(f"ID-LEARN-001 FAIL: Expected success for valid id='valid-id_123', got {type(e).__name__}: {e}")
+
+    return failures
+
+
+# ===========================================================================
 # 3. Build Smoke Tests
 # ===========================================================================
 
@@ -570,6 +647,9 @@ def main() -> int:
     parser_val_failures = run_parser_validation_tests()
     all_failures.extend(parser_val_failures)
 
+    id_failures = run_id_validation_tests()
+    all_failures.extend(id_failures)
+
     mastery_failures = run_mastery_tests()
     all_failures.extend(mastery_failures)
 
@@ -587,6 +667,7 @@ def main() -> int:
         f"Scheduler (Spec Mirror): {len(SCHEDULER_VECTORS) - len(scheduler_failures)}/{len(SCHEDULER_VECTORS)} | "
         f"Parser: {len(PARSER_VECTORS) - len(parser_failures)}/{len(PARSER_VECTORS)} | "
         f"Parser Validation: {'PASS' if not parser_val_failures else 'FAIL'} | "
+        f"ID Validation: {'PASS' if not id_failures else 'FAIL'} | "
         f"Mastery: {'PASS' if not mastery_failures else 'FAIL'} | "
         f"ReviewQueue: {'PASS' if not queue_failures else 'FAIL'} | "
         f"Build smoke: {len([x for x in smoke_failures if x]) == 0} | "

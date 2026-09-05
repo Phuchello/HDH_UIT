@@ -1196,7 +1196,29 @@ body {
 
 .stat-due strong { color: var(--danger-color); }
 .stat-weak strong { color: var(--warning-color); }
+.stat-pending strong { color: var(--accent-primary); }
+.stat-mistake strong { color: var(--danger-color); }
 .stat-total strong { color: var(--accent-primary); }
+
+.review-hub-shortcut {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background-color: var(--accent-subtle);
+  border: 1px solid var(--accent-primary);
+  border-radius: 6px;
+  padding: 0.25rem 0.55rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.review-hub-shortcut:hover {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+}
 
 .review-hub-list {
   list-style: none;
@@ -1245,6 +1267,21 @@ body {
 .badge-weak {
   background-color: var(--warning-subtle);
   color: var(--warning-color);
+}
+
+.badge-pending-transfer {
+  background-color: var(--accent-subtle);
+  color: var(--accent-text);
+}
+
+.badge-mistake {
+  background-color: #ffebe9;
+  color: #cf222e;
+}
+
+.badge-review {
+  background-color: var(--bg-tertiary);
+  color: var(--text-secondary);
 }
 
 .queue-card-question {

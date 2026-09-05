@@ -298,6 +298,16 @@
       return s === 'M0' || s === 'M1';
     },
 
+    isEligibleForReview: function (conceptId) {
+      if (!conceptId) return false;
+      var rec = this.get(conceptId);
+      var isDue = Scheduler.isDue(rec.review_schedule.due_timestamp);
+      var isWeak = rec.mastery_state === 'M0' || rec.mastery_state === 'M1';
+      var hasMistakes = !!(rec.mistake_history && rec.mistake_history.length > 0);
+      var isPendingTransfer = rec.mastery_state === 'M2' && !rec.mastery_evidence.transfer_passed;
+      return isDue || isWeak || hasMistakes || isPendingTransfer;
+    },
+
     getRecord: function (conceptId) {
       return this.get(conceptId);
     },
@@ -317,6 +327,7 @@
 
     run: function () {
       var keys = Store.keys();
+      var allSucceeded = true;
       for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
         if (key.indexOf('hdh_card_') !== 0) continue;
@@ -334,13 +345,29 @@
               rec.mastery_evidence.verification_mode = 'LEGACY_SELF_REPORT';
             }
             data[cid] = rec;
-            Store.set(STORAGE_KEYS.mastery, data);
-            MasteryStore._cache = null;
+            var writeOk = Store.set(STORAGE_KEYS.mastery, data);
+            if (writeOk) {
+              var verified = Store.get(STORAGE_KEYS.mastery, null);
+              if (verified && verified[cid] && verified[cid].mastery_state === rec.mastery_state) {
+                MasteryStore._cache = null;
+                Store.remove(key);
+              } else {
+                allSucceeded = false;
+              }
+            } else {
+              allSucceeded = false;
+            }
+          } else {
+            // Already safely in mastery store
+            Store.remove(key);
           }
-          Store.remove(key);
-        } catch (_) {}
+        } catch (_) {
+          allSucceeded = false;
+        }
       }
-      Store.set(this.FLAG, true);
+      if (allSucceeded) {
+        Store.set(this.FLAG, true);
+      }
     },
 
     migrateLegacyCards: function () {
@@ -505,9 +532,12 @@
       }
 
       // Review mode: filter cards in place without DOM reordering
+      var shortcut = document.getElementById('review-hub-shortcut');
       if (mode === 'review') {
+        if (shortcut) shortcut.style.display = 'inline-flex';
         this.updateReviewVisibility();
       } else {
+        if (shortcut) shortcut.style.display = 'none';
         document.querySelectorAll('.study-card, .recall-checkpoint, .transfer-problem').forEach(function (card) {
           card.classList.remove('review-hidden');
         });
@@ -518,7 +548,7 @@
       var count = 0;
       document.querySelectorAll('.study-card, .recall-checkpoint, .transfer-problem').forEach(function (card) {
         var cid = card.getAttribute('data-concept-id') || card.getAttribute('data-card-id') || card.getAttribute('data-item-id');
-        var show = MasteryStore.isDue(cid) || MasteryStore.isWeak(cid);
+        var show = MasteryStore.isEligibleForReview(cid);
         if (show) {
           card.classList.remove('review-hidden');
           count++;
@@ -591,9 +621,23 @@
           btn.dataset.userExpanded = nowVisible ? '1' : '';
           sec.dataset.userOpened  = nowVisible ? '1' : '';
 
-          // PED-LEARN-004: Unlock rating controls after feedback is revealed
+          var isHint = btn.classList.contains('btn-hint');
+          var isKeypoints = btn.classList.contains('btn-keypoints');
+          var isAnswer = btn.classList.contains('btn-answer');
+          var feedbackStatus = card.querySelector('.card-feedback-status');
+
+          // PED-LEARN-005: Hint must not unlock review ratings.
+          // Only keypoints (reveal + unlock) and answer (reveal + unlock) unlock rating controls.
           if (nowVisible) {
-            self._unlockRatings(card);
+            if (isHint) {
+              if (feedbackStatus) feedbackStatus.textContent = 'Đã mở gợi ý. Hãy tiếp tục tự trả lời trước khi đối chiếu.';
+            } else if (isKeypoints) {
+              if (feedbackStatus) feedbackStatus.textContent = 'Đã mở các ý đối soát. Bạn có thể đánh giá lượt ôn.';
+              self._unlockRatings(card);
+            } else if (isAnswer) {
+              if (feedbackStatus) feedbackStatus.textContent = 'Đã mở lời giải. Bạn có thể đánh giá lượt ôn.';
+              self._unlockRatings(card);
+            }
           }
         });
       });
@@ -603,13 +647,9 @@
       var mode = document.documentElement.getAttribute('data-ui-mode') || 'learn';
       if (mode === 'reference') return;
       var ratingActions = card.querySelector('.card-rating-actions');
-      var feedbackStatus = card.querySelector('.card-feedback-status');
       if (ratingActions) {
         ratingActions.style.display = '';
         ratingActions.setAttribute('aria-hidden', 'false');
-      }
-      if (feedbackStatus && !feedbackStatus.textContent) {
-        feedbackStatus.textContent = 'Đã mở đáp án. Bạn có thể đánh giá lượt ôn.';
       }
     },
 
@@ -750,6 +790,9 @@
           if (document.documentElement.getAttribute('data-ui-mode') === 'review') {
             UIModeManager.updateReviewVisibility();
           }
+          if (window.ReviewHubEngine) {
+            window.ReviewHubEngine.renderQueue();
+          }
         });
       }
     },
@@ -833,6 +876,9 @@
           if (document.documentElement.getAttribute('data-ui-mode') === 'review') {
             UIModeManager.updateReviewVisibility();
           }
+          if (window.ReviewHubEngine) {
+            window.ReviewHubEngine.renderQueue();
+          }
         });
       }
 
@@ -840,6 +886,12 @@
         failBtn.addEventListener('click', function () {
           MasteryStore.recordTransferEvidence(conceptId, false);
           if (feedback) feedback.textContent = 'Chưa đạt chuyển giao. Hãy rà soát lại phương pháp giải.';
+          if (document.documentElement.getAttribute('data-ui-mode') === 'review') {
+            UIModeManager.updateReviewVisibility();
+          }
+          if (window.ReviewHubEngine) {
+            window.ReviewHubEngine.renderQueue();
+          }
         });
       }
     },
@@ -870,6 +922,8 @@
       var dueCountEl = document.getElementById('hub-due-count');
       var weakCountEl = document.getElementById('hub-weak-count');
       var totalCountEl = document.getElementById('hub-total-count');
+      var pendingCountEl = document.getElementById('hub-pending-count');
+      var mistakeCountEl = document.getElementById('hub-mistake-count');
 
       var depth = window.location.pathname.split('/').filter(Boolean).length
         - (window.location.pathname.endsWith('/') ? 0 : 1);
@@ -879,37 +933,66 @@
         .then(function (r) { return r.json(); })
         .then(function (items) {
           var total = items.length;
-          var dueItems = [];
+          var dueCount = 0;
           var weakCount = 0;
+          var pendingTransferCount = 0;
+          var mistakeCount = 0;
 
-          items.forEach(function (item) {
+          var eligibleItems = items.filter(function (item) {
             var cid = item.concept_id || item.id;
-            var isDue = MasteryStore.isDue(cid);
-            var isWeak = MasteryStore.isWeak(cid);
-            if (isWeak) weakCount++;
-            if (isDue) {
-              dueItems.push(item);
-            }
+            var rec = MasteryStore.get(cid);
+            var isDue = Scheduler.isDue(rec.review_schedule.due_timestamp);
+            var isWeak = rec.mastery_state === 'M0' || rec.mastery_state === 'M1';
+            var hasMistakes = !!(rec.mistake_history && rec.mistake_history.length > 0);
+            var isPendingTransfer = rec.mastery_state === 'M2' && !rec.mastery_evidence.transfer_passed;
+
+            if (isDue) dueCount++;
+            if (isWeak && !isDue) weakCount++;
+            if (isPendingTransfer) pendingTransferCount++;
+            if (hasMistakes) mistakeCount++;
+
+            return MasteryStore.isEligibleForReview(cid);
           });
 
           if (totalCountEl) totalCountEl.textContent = total;
           if (weakCountEl) weakCountEl.textContent = weakCount;
-          if (dueCountEl) dueCountEl.textContent = dueItems.length;
+          if (dueCountEl) dueCountEl.textContent = dueCount;
+          if (pendingCountEl) pendingCountEl.textContent = pendingTransferCount;
+          if (mistakeCountEl) mistakeCountEl.textContent = mistakeCount;
 
-          if (dueItems.length === 0) {
+          if (eligibleItems.length === 0) {
             queueContainer.innerHTML = '<div class="hub-empty-message">🎉 Xuất sắc! Tất cả các mục ôn tập đã được hoàn thành.</div>';
             return;
           }
 
-          var sorted = ReviewQueue.sortItems(dueItems);
+          var sorted = ReviewQueue.sortItems(eligibleItems);
           var html = '<ul class="review-hub-list">';
           sorted.forEach(function (item) {
             var cid = item.concept_id || item.id;
             var rec = MasteryStore.get(cid);
             var score = ReviewQueue.getPriorityScore(cid);
-            var isDue = MasteryStore.isDue(cid);
-            var statusLabel = isDue ? 'Đến hạn' : 'Cần củng cố';
-            var statusClass = isDue ? 'badge-due' : 'badge-weak';
+            var isDue = Scheduler.isDue(rec.review_schedule.due_timestamp);
+            var hasMistakes = !!(rec.mistake_history && rec.mistake_history.length > 0);
+            var isPendingTransfer = rec.mastery_state === 'M2' && !rec.mastery_evidence.transfer_passed;
+            var isWeak = rec.mastery_state === 'M0' || rec.mastery_state === 'M1';
+
+            var statusLabel = 'Đang ôn';
+            var statusClass = 'badge-review';
+
+            if (isDue) {
+              statusLabel = 'Đến hạn';
+              statusClass = 'badge-due';
+            } else if (hasMistakes) {
+              statusLabel = 'Có lỗi sai';
+              statusClass = 'badge-mistake';
+            } else if (isPendingTransfer) {
+              statusLabel = 'Chờ chuyển giao';
+              statusClass = 'badge-pending-transfer';
+            } else if (isWeak) {
+              statusLabel = 'Cần củng cố';
+              statusClass = 'badge-weak';
+            }
+
             var targetUrl = prefix + item.url + '#' + item.anchor;
 
             html += '<li class="review-queue-card" data-hub-card-id="' + cid + '" data-priority="' + score + '">'

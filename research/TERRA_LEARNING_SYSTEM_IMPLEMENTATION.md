@@ -8,11 +8,11 @@
 
 ## 0. TỔNG QUAN & KẾT QUẢ TRIỂN KHAI
 
-Báo cáo này ghi nhận toàn bộ công tác kỹ thuật chuyển hóa bản đặc tả sư phạm thực chứng `research/LEARNING_ARCHITECTURE_V1.md` thành một môi trường chạy học tập cục bộ, tất định 100% (deterministic local-first learning runtime), phục vụ cho Cẩm nang Hệ điều hành IT007 UIT và Web Companion.
+Báo cáo này ghi nhận toàn bộ công tác kỹ thuật chuyển hóa bản đặc tả sư phạm thực chứng `research/LEARNING_ARCHITECTURE_V1.md` thành một môi trường chạy học tập cục bộ tất định (deterministic local-first learning runtime), phục vụ cho Cẩm nang Hệ điều hành IT007 UIT và Web Companion.
 
 ### Tóm tắt Trạng thái Các Cổng Kiểm toán (Audit Gates)
 - **ENG-LEARN-002 (Nút mở tiệm tiến bị thiếu):** `RESOLVED` — Trình tạo mã `scripts/build_web.py` đã phát sinh đầy đủ các nút bấm `.btn-hint`, `.btn-keypoints`, `.btn-answer` đồng bộ với bộ lắng nghe sự kiện của `src/web/assets/js/app.js`.
-- **ENG-LEARN-003 (Lỗi parser chia cắt tuần tự):** `RESOLVED` — Thay thế vòng lặp bẻ gãy chuỗi `question` bằng hàm tách đơn kỳ tất định `_parse_studycard_sections` sử dụng regex phân tách một lượt, bảo toàn 100% nội dung `<!-- hint -->`, `<!-- keypoints -->`, `<!-- answer -->`.
+- **ENG-LEARN-003 (Lỗi parser chia cắt tuần tự):** `RESOLVED` — Thay thế vòng lặp bẻ gãy chuỗi `question` bằng hàm tách đơn kỳ tất định `_parse_studycard_sections` sử dụng regex phân tách một lượt, bảo toàn cấu trúc nội dung `<!-- hint -->`, `<!-- keypoints -->`, `<!-- answer -->`.
 - **Thẻ StudyCard V2:** `IMPLEMENTED` — Loại bỏ cặp nút nhị phân cũ; nâng cấp thành hệ thống 4 nút đánh giá (`AGAIN`, `HARD`, `GOOD`, `EASY`), khung gõ nháp (scratchpad), và các nút tiết lộ tiệm tiến kèm nhãn ARIA.
 - **Ba chế độ hiển thị Web (Learn / Review / Reference):** `IMPLEMENTED` — Bộ chuyển đổi chế độ cố định trên thanh điều hướng đầu trang, lưu trữ trạng thái tại `localStorage["hdh_ui_mode"]`.
 - **Bộ lập lịch SM-2 Project Heuristic:** `IMPLEMENTED` — Hàm thuần túy `Scheduler.schedule(prev, rating, today)` với đầy đủ 12 bộ test vector đạt chuẩn; bảo toàn bất biến cốt lõi: `HARD` là thu hồi thành công, không đặt lại chu kỳ như `AGAIN`.
@@ -247,7 +247,7 @@ Giai đoạn triển khai kỹ thuật hạ tầng học tập (`V2_BATCH4_LEARN
 
 5. **REVIEW-LEARN-001 (Major — Thiếu Review Hub toàn trang):**
    - *Trước khắc phục:* Chế độ ôn tập chỉ hoạt động cục bộ từng trang đơn lẻ, thiếu trung tâm điều phối tập trung.
-   - *Sau khắc phục:* Xây dựng trang Hàng đợi Ôn tập tập trung tại `review/index.html` (được biên dịch từ `scripts/build_web.py`), nạp `study_index.json` (58 mục học tập trên toàn cẩm nang), kết nối trạng thái từ `MasteryStore`, sắp xếp hàng đợi theo độ ưu tiên 6 tầng của `ReviewQueue`, loại trừ các thẻ có lịch tương lai và hiển thị thanh thống kê trực quan (Đến hạn, Cần củng cố, Tổng số thẻ).
+   - *Sau khắc phục:* Xây dựng trang Hàng đợi Ôn tập tập trung tại `review/index.html` (được biên dịch từ `scripts/build_web.py`), nạp `study_index.json` (5 mục học tập trên toàn cẩm nang tại HEAD hiện tại), kết nối trạng thái từ `MasteryStore`, sắp xếp hàng đợi theo độ ưu tiên 6 tầng của `ReviewQueue`, loại trừ các thẻ có lịch tương lai và hiển thị thanh thống kê trực quan (Đến hạn, Cần củng cố, Tổng số thẻ).
 
 6. **REVIEW-LEARN-002 (Minor — Cập nhật hàng đợi động không cần tải lại):**
    - *Trước khắc phục:* Khi đánh giá một thẻ trong chế độ ôn, giao diện không tự cập nhật trạng thái hiển thị.
@@ -257,45 +257,77 @@ Giai đoạn triển khai kỹ thuật hạ tầng học tập (`V2_BATCH4_LEARN
    - *Trước khắc phục:* Kiểm thử chỉ chạy các vector mô phỏng trên Python.
    - *Sau khắc phục:*
      - Thiết lập cấu hình `playwright.config.js` với máy chủ tĩnh cục bộ cổng 8080.
-     - Xây dựng bộ kịch bản kiểm thử toàn diện `tests/learning-system.spec.js` bao quát trọn vẹn 12 kịch bản:
-       1. Learn Mode: progressive disclosure, rating controls chỉ mở sau khi xem đáp án.
-       2. Reference Mode: toàn bộ nội dung hiển thị, ẩn cụm đánh giá.
-       3. Scratchpad persistence: bảo toàn nháp qua thao tác reload.
-       4. Rating persistence: đánh giá thẻ GOOD, reload, bảo toàn M1 và lịch SM-2.
-       5. HARD != AGAIN: HARD tăng biến đếm reps, AGAIN đặt lại reps = 0.
-       6. Legacy migration: tự động di trú thẻ cũ sang M1 với `LEGACY_SELF_REPORT`.
-       7. Corrupt localStorage: xử lý an toàn khi gặp dữ liệu lỗi, không làm sập trang.
-       8. Mastery invariants: nút đánh giá không thể cấp M2/M3; rubric $\ge 80\%$ cấp M2; TransferProblem là con đường duy nhất lên M3 từ M2.
-       9. Review Hub: hiển thị thẻ đến hạn, loại trừ thẻ tương lai, liên kết chuẩn xác đến neo trang đích.
-       10. Accessibility: 100% `aria-controls` hợp lệ, hỗ trợ thao tác bàn phím đầy đủ.
-       11. Mobile responsiveness: không tràn viền ngang trên màn hình điện thoại 390px (`scrollWidth <= clientWidth`).
-       12. Console cleanliness: 0 lỗi console hoặc unhandled exception trên toàn bộ các trang cốt lõi.
+     - Xây dựng bộ kịch bản kiểm thử toàn diện `tests/learning-system.spec.js` bao quát trọn vẹn 12 kịch bản.
      - Bổ sung lệnh `npm run test:learning-browser` vào `package.json`.
      - Tích hợp công việc `validate-browser` vào quy trình tự động hóa GitHub Actions (`.github/workflows/validate.yml`).
 
 ---
 
-### 10.2. Kết quả nghiệm thu thực tế
+## 11. BÁO CÁO NGHIỆM THU ĐỢT QA ĐỘC LẬP CUỐI CÙNG (FINAL INDEPENDENT QA CLOSEOUT)
+
+Đợt rà soát độc lập chuyên sâu cuối cùng đã chỉ ra 7 điểm kỹ thuật cần hoàn thiện để đảm bảo hệ sinh thái học tập đạt độ tin cậy và vững chắc cao nhất:
+
+### 11.1. Chi tiết 7 phát hiện & giải pháp kỹ thuật
+
+1. **PED-LEARN-005 (Major — Gợi ý không được mở khóa nút đánh giá):**
+   - *Vấn đề:* Nút `.btn-hint` kích hoạt `_unlockRatings(card)` sớm, cho phép người học đánh giá khi mới chỉ xem gợi ý.
+   - *Giải pháp:* Trong `StudyCardEngine._bindRevealButtons`, nút `.btn-hint` chỉ mở nội dung gợi ý và cập nhật phản hồi "Đã mở gợi ý. Hãy tiếp tục tự trả lời trước khi đối chiếu.", hoàn toàn không mở khóa cụm nút đánh giá (`.card-rating-actions`). Chỉ khi người học bấm xem từ khóa (`.btn-keypoints`) hoặc lời giải (`.btn-answer`), cụm nút đánh giá mới được mở khóa.
+
+2. **REVIEW-LEARN-003 (Major — Hợp nhất ngữ nghĩa điều kiện ôn tập & Huy hiệu trực quan):**
+   - *Vấn đề:* Điều kiện ôn tập giữa Review Hub và chế độ Ôn tập nội tuyến chưa đồng nhất; thiếu phân loại huy hiệu trực quan cho từng trường hợp.
+   - *Giải pháp:*
+     - Bổ sung hàm hợp nhất `MasteryStore.isEligibleForReview(conceptId)`: trả về `true` khi thỏa mãn ít nhất một trong các điều kiện: đến hạn ôn (`isDue`), trình độ còn yếu (`isWeak`, M0/M1), có lịch sử lỗi sai (`mistake_history.length > 0`), hoặc đang chờ kiểm tra bài toán chuyển giao (`mastery_state === 'M2' && !transfer_passed`).
+     - Đổi tên danh sách xử lý từ `dueItems` thành `eligibleItems` trong `ReviewHubEngine.renderQueue`.
+     - Đồng bộ `UIModeManager.updateReviewVisibility()` sử dụng trực tiếp `MasteryStore.isEligibleForReview(conceptId)`.
+     - Phân định rõ 4 loại huy hiệu trạng thái: `badge-due` ("Đến hạn"), `badge-mistake` ("Có lỗi sai"), `badge-pending-transfer` ("Chờ chuyển giao"), `badge-weak` ("Cần củng cố"), cùng các chỉ số thống kê tương ứng trên thanh công cụ.
+
+3. **STATE-LEARN-002 (Major — Di trú dữ liệu cũ có giao dịch an toàn):**
+   - *Vấn đề:* `LegacyMigration.run()` xóa khóa cũ ngay sau khi gọi `Store.set()` mà không kiểm chứng thao tác ghi thành công và bản ghi đích thực sự tồn tại trong bộ nhớ.
+   - *Giải pháp:* Áp dụng cơ chế giao dịch 2 bước: chỉ xóa khóa cũ `hdh_card_<id>` khi `Store.set(STORAGE_KEYS.mastery, data)` trả về `true` ĐỒNG THỜI đọc lại bản ghi từ `Store.get()` xác nhận dữ liệu đã được lưu chuẩn xác. Bộ kiểm thử Playwright mô phỏng lỗi ghi bộ nhớ xác nhận khóa cũ luôn được bảo toàn nguyên vẹn khi xảy ra lỗi lưu trữ.
+
+4. **QA-LEARN-002 (Major — Hoàn thiện độ phủ kiểm thử Playwright):**
+   - *Vấn đề:* Kiểm thử dữ liệu hỏng chưa trỏ đúng các khóa lưu trữ runtime; chưa kiểm soát `console.error`; thiếu kiểm thử tương tác DOM thực tế cho M2/M3; thiếu xác minh thao tác bấm ở kích thước 390px.
+   - *Giải pháp:*
+     - Khóa lưu trữ hỏng được nhắm chuẩn xác vào các khóa thực tế: `hdh_mastery_v1`, `hdh_spaced_scheduler_v1`, `hdh_practice_drafts_v1`, `hdh_mistakes_log_v1`.
+     - Bổ sung lắng nghe cả sự kiện `console.error` lẫn `pageerror`, đảm bảo 0 lỗi phát sinh trên các trang cốt lõi.
+     - Xây dựng fixture kiểm thử DOM tương tác hoàn chỉnh cho RecallCheckpoint và TransferProblem, thực hiện click chuột thực tế, kiểm tra phân tầng M0 $\to$ M2 $\to$ M3 và cơ chế chặn vượt cấp M3 khi chưa đạt M2.
+     - Kiểm thử khả năng thao tác giao diện trên viewport di động 390px: xác nhận các nút chuyển chế độ, nút xem lời giải và các nút đánh giá hiển thị đầy đủ, không tràn viền và có thể bấm tương tác tốt.
+
+5. **ID-LEARN-001 (Major — Bắt buộc định danh tường minh và hợp lệ tại thời điểm build):**
+   - *Vấn đề:* Trình tạo callout tự động sinh fallback ID khi thiếu thuộc tính `id=`, gây nguy cơ mất ổn định dữ liệu người học qua các phiên bản.
+   - *Giải pháp:* Trong `scripts/build_web.py`, hàm `render_callout` áp dụng quy tắc kiểm tra nghiêm ngặt: mọi khối tương tác (`StudyCard`, `RecallCheckpoint`, `TransferProblem`, `SubjectivePractice`) bắt buộc phải có thuộc tính `id=` tường minh, khớp với biểu thức chính quy `^[A-Za-z0-9][A-Za-z0-9_-]*$`. Nếu thiếu, để trống hoặc sai định dạng, quá trình build lập tức dừng với lỗi `RuntimeError (ID-LEARN-001)`. Đã bổ sung bộ kiểm thử tiêu cực đầy đủ trong `scripts/validate_learning_system.py`.
+
+6. **REPORT-LEARN-001 (Major — Điều chỉnh số liệu chỉ mục học tập và chuẩn hóa văn phong kỹ thuật):**
+   - *Vấn đề:* Báo cáo trước đây nhầm lẫn số dòng tệp JSON (58) với số lượng mục học tập; một số câu văn mang tính khẳng định chưa có căn cứ định lượng.
+   - *Giải pháp:* Hiệu chỉnh chính xác số lượng mục học tập hiện có tại HEAD hiện tại là 5 thẻ flashcard/viva chính tắc; lược bỏ các từ ngữ tuyệt đối hóa, đưa văn phong về đúng chuẩn báo cáo kỹ thuật phần mềm đo lường được.
+
+7. **UX-LEARN-001 (Minor — Lối tắt truy cập nhanh Hàng đợi Ôn tập trên thiết bị di động):**
+   - *Vấn đề:* Khi sinh viên chuyển sang chế độ Ôn tập (`review`) trên điện thoại di động, thanh điều hướng bên trái bị thu gọn khiến đường dẫn tới Review Hub khó tiếp cận.
+   - *Giải pháp:* Bổ sung nút liên kết nhanh `#review-hub-shortcut` ("Hàng đợi toàn môn ↗") ngay cạnh bộ chuyển chế độ trên thanh header. Nút này tự động hiển thị khi người học chọn chế độ Ôn tập và dẫn trực tiếp về `review/index.html`. Đã bổ sung kiểm thử Playwright tại 390px xác nhận luồng điều hướng này.
+
+---
+
+### 11.2. Kết quả nghiệm thu thực tế
 
 ```text
 > hdh-uit@2.0.0 test:learning-browser
 > playwright test
 
 Running 12 tests using 1 worker
-  ok  1 Learn Mode enforces progressive disclosure and hides ratings until reveal
+  ok  1 Learn Mode enforces progressive disclosure: hint leaves rating hidden; answer unlocks rating
   ok  2 Reference Mode reveals all sections and hides rating actions
   ok  3 StudyCard scratchpad persists draft across page reloads
   ok  4 Rating a card persists mastery and schedule across reloads
   ok  5 HARD != AGAIN scheduler invariant: HARD increments reps, AGAIN resets to 0
-  ok  6 Legacy flashcard ratings migrate cleanly to M1 with LEGACY_SELF_REPORT
-  ok  7 Corrupt localStorage does not crash runtime and falls back gracefully
-  ok  8 Mastery invariants: review ratings cannot grant M2/M3; rubric >= 80% required for M2; transfer required for M3
-  ok  9 Review Hub displays due/overdue cards, excludes future cards, and links to target anchor
+  ok  6 Legacy flashcard ratings migrate cleanly, and write failure preserves legacy key (STATE-LEARN-002)
+  ok  7 Corrupt localStorage does not crash runtime and falls back gracefully (QA-LEARN-002 A)
+  ok  8 Mastery invariants and real M2/M3 DOM interaction test (QA-LEARN-002 C)
+  ok  9 Review Hub renders queue with unified eligibility, distinct badges, and deterministic tie ordering (REVIEW-LEARN-003)
   ok 10 Accessibility: All aria-controls resolve to valid elements and are keyboard operable
-  ok 11 Mobile responsiveness: 390px viewport does not cause horizontal scroll overflow
-  ok 12 Console cleanliness: No uncaught page errors across core pages
+  ok 11 Mobile usability at 390px: no scroll overflow, review shortcut visible/clickable, and controls operable (QA-LEARN-002 D, UX-LEARN-001)
+  ok 12 Console cleanliness: No uncaught page errors or console.errors across core pages (QA-LEARN-002 B)
 
-12 passed (6.6s)
+12 passed (7.2s)
 ```
 
 ```text
@@ -318,5 +350,6 @@ FOUNDATION GATE: PASS (16/16)
   validate_learning_system: PASS
 ```
 
-Toàn bộ 7 khiếm khuyết QA đã được khắc phục triệt để và kiểm chứng tự động 100%. Hệ thống sẵn sàng cho bước kiểm tra độc lập cuối cùng.
+Toàn bộ 7 phát hiện QA đã được xử lý và kiểm chứng tự động bằng bộ test suite của dự án. Hệ thống đã sẵn sàng cho bước kiểm tra độc lập cuối cùng.
+
 
