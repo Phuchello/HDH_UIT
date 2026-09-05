@@ -11,7 +11,7 @@
 
 ## 1. TỔNG QUAN KẾT QUẢ THẨM ĐỊNH (EXECUTIVE SUMMARY)
 
-Đợt thẩm định kỹ thuật cho Chương 7 (Quản lý Bộ nhớ - Memory Management) đã xử lý dứt điểm toàn bộ các khiếm khuyết hiển thị, mã hoá, tính nhất quán dữ liệu và hoàn tất phạm vi kiểm thử tất định (coverage closeout). Toàn bộ 17 cổng nền tảng (Foundation Gates), 15/15 ca kiểm thử phủ định (Negative Mutation Tests), và 14/14 kịch bản kiểm thử trình duyệt Playwright đều đạt trạng thái **PASS tuyệt đối**.
+Đợt thẩm định kỹ thuật cho Chương 7 (Quản lý Bộ nhớ - Memory Management) đã xử lý dứt điểm toàn bộ các khiếm khuyết hiển thị, mã hoá, ràng buộc trường lời giải, triệt tiêu trôi dạt dữ liệu tổng hợp và hoàn tất phạm vi kiểm thử tất định (coverage closeout). Toàn bộ 17 cổng nền tảng (Foundation Gates), 17/17 ca kiểm thử phủ định (Negative Mutation Tests), và 14/14 kịch bản kiểm thử trình duyệt Playwright đều đạt trạng thái **PASS tuyệt đối**.
 
 | Mã định danh | Phân loại | Trọng yếu | Trạng thái | Mô tả khắc phục |
 |---|---|---|---|---|
@@ -23,10 +23,13 @@
 | **QA-CH7-002** | Browser Testing | MAJOR | **RESOLVED** | Bổ sung Scenario 13 trong `tests/learning-system.spec.js` kiểm thử trực tiếp trên trang `/theory/ch07-memory-management.html`: không lỗi console/layout, M2/M3 tương tác thực tế, và study_index.json đủ 8 mục Ch7. |
 | **VAL-CH7-001** | Validator Text | MINOR | **RESOLVED** | Cập nhật docstring và thông điệp đầu ra của `scripts/validate_ch07_source_map.py` phù hợp với vòng đời dự án mà không làm suy yếu kiểm tra định danh nguồn. |
 | **QA-CH7-003** | Numerical Invariants | MAJOR | **RESOLVED** | Hoàn thiện phủ định lượng: Q10 kiểm tra chính xác thứ tự cấp phát và mảng lỗ trống còn lại cho cả 4 thuật toán; Q14 kiểm tra đẳng thức biểu tượng $2^{a+b+c} = 2^{32-d}$; Q20 kiểm tra đồng thời độ rộng trường frame (6 bit) và số mục bảng trang (45 mục). |
-| **QA-CH7-004** | Content Binding | MAJOR | **RESOLVED** | Ràng buộc trực tiếp các tham số nguồn và kết quả tính toán Q10..Q20 vào văn bản Markdown; bổ sung kiểm thử đột biến bắt buộc phát hiện sai lệch số liệu (Q15 9398->9999, Q18 75.2%->57.2%, Q20 45->64). |
+| **QA-CH7-004** | Content Binding | MAJOR | **RESOLVED** | Ràng buộc trực tiếp các tham số nguồn và kết quả tính toán Q10..Q20 vào văn bản Markdown; bổ sung kiểm thử đột biến bắt buộc phát hiện sai lệch số liệu. |
 | **QA-CH7-005** | Per-Unit Schema | MAJOR | **RESOLVED** | Phân đoạn QBank theo từng đơn vị câu hỏi `^### QBANK-CH07-XX:`, kiểm tra độc lập cấu trúc 4 phần chuẩn mực cho từng câu hỏi riêng biệt; kiểm thử đột biến loại bỏ phân đoạn bị chặn ngay lập tức. |
 | **QA-CH7-006** | Browser Test Fidelity| MAJOR | **RESOLVED** | Chuyển đổi kiểm thử Chế độ Tra cứu (Reference Mode) trong Scenario 13 sang bộ chọn chuẩn `button[data-mode="reference"]`, kiểm tra không điều kiện và xác nhận hiển thị toàn diện không cần tương tác đánh giá. |
 | **QA-CH7-007** | Mobile Usability | MAJOR | **RESOLVED** | Bổ sung Scenario 14 trong `tests/learning-system.spec.js` kiểm thử thực tế trên viewport di động 390x844 cho cả trang lý thuyết `/theory/ch07-memory-management.html` và bài tập tự luận `/questions/subjective/ch07.html`. |
+| **QA-CH7-008** | Solution-Field Binding| MAJOR | **RESOLVED** | Tách cấu trúc mỗi đơn vị QBank thành 4 trường riêng biệt (`source_question`, `solution`, `rubric`, `exam_traps`). Toàn bộ kết quả tính toán định lượng được kiểm tra cưỡng chế trong trường `solution`, ngăn chặn triệt để rubric/đề bài che lấp sai sót; chuyển đổi kiểm thử phủ định sang đột biến cục bộ từng trường (Q15 phương trình 9398->9999, Q18 phương trình 75.2%->57.2%, Q20 câu giải 45 mục->64 mục, Q16 kết quả EAT 164.2->146.2). |
+| **DATA-V2-001** | Summary Drift | MAJOR | **RESOLVED** | Đồng bộ triệt để khối `summary:` trong `research/data/slide_coverage.yaml` theo số liệu thực tế từ bản ghi deck (713 trang vật lý, 665 trang nội dung, 48 trang phi nội dung, 568 trang đã soạn, 97 trang chưa soạn); bổ sung cổng kiểm tra cưỡng chế trong `scripts/verify_research_gates.py` từ chối bất kỳ sự trôi dạt nào giữa summary và bản ghi chi tiết (NEG-17). |
+| **STATE-V2-001** | State Consistency | MAJOR | **RESOLVED** | Loại bỏ các số liệu đếm biến động khỏi `PROJECT_STATE.md`, chuyển sang tham chiếu trực tiếp báo cáo tự động `research/RESEARCH_GATE_QA.md` do máy tính toán độc lập. |
 | **PUB-CH7-001** | Neutral Reporting | MINOR | **RESOLVED** | Loại bỏ hoàn toàn định danh mô hình/agent khỏi báo cáo và trạng thái dự án, sử dụng chức danh vai trò kỹ thuật chuẩn mực. |
 
 ---
@@ -50,29 +53,45 @@
   1. Thay thế cơ học chính xác toàn bộ 25 vị trí `\x07lpha` -> `\alpha`, `\x07pprox` -> `\approx`, và 4 vị trí `\x0crac` -> `\frac` trong `content/questions/subjective/ch07.md`.
   2. Tích hợp thuật toán quét nhị phân cưỡng chế vào `scripts/check_public_hygiene.py`, phát hiện và từ chối mọi file mã nguồn/tài liệu chứa byte C0 (`0x00–0x08`, `0x0B`, `0x0C`, `0x0E–0x1F`, `0x7F`).
 
-### 2.3. Khôi Phục Tính Nhất Quán Khối Dữ Liệu Tổng Hợp (DATA-CH7-001)
-- Cập nhật trường `summary` trong `research/data/official_review_questions.yaml`:
-  - `content_verified_questions: 81`
-  - `drafted_questions: 20`
-  - `not_written_questions: 17`
-  - Tổng: `81 + 20 + 17 = 118` (bảo toàn định lý bất biến).
-- Cập nhật trường `summary` trong `research/data/slide_coverage.yaml`:
-  - `drafted_content_pages: 568` (Chương 1–4: 307, Ch5: 131, Ch6: 63, Ch7: 67)
-  - `not_written_content_pages: 96` (Chương 8: 52, Chương 9: 44)
-  - Tổng: `568 + 96 = 664` trang nội dung.
+### 2.3. Ràng Buộc Kết Quả Tính Toán Vào Trường Lời Giải & Kiểm Thử Đột Biến Cục Bộ (QA-CH7-008)
+- **Cơ chế phân tách trường:** Hàm `segment_qbank_units()` bóc tách mỗi câu hỏi thành cấu trúc từ điển có định danh trường tường minh:
+  ```python
+  units[qid] = {
+      "source_question": ...,
+      "solution": ...,
+      "rubric": ...,
+      "exam_traps": ...
+  }
+  ```
+- **Ràng buộc trường lời giải:** Tất cả các kiểm tra kết quả tính toán định lượng (Q10..Q20) được chuyển sang kiểm tra trường `solution`. Trường `rubric` hoặc `source_question` tuyệt đối không thể thay thế hoặc che lấp một kết quả tính toán sai trong lời giải.
+- **Kiểm thử đột biến cục bộ trường:**
+  - `NEG-12`: Đột biến duy nhất phương trình Part B của Q15 (`8192 + 1206 = 9398` -> `8192 + 1206 = 9999`), giữ nguyên kết luận và rubric chứa `9398`. Validator bắt lỗi chính xác và từ chối.
+  - `NEG-13`: Đột biến duy nhất phương trình trúng TLB của Q18 (`\alpha = 75.2\%` -> `\alpha = 57.2\%`), giữ nguyên rubric chứa `75.2%`. Validator bắt lỗi chính xác và từ chối.
+  - `NEG-14`: Đột biến duy nhất kết luận số mục bảng trang của Q20 (`Bảng phân trang cần có tối thiểu **45 mục**` -> `**64 mục**`), giữ nguyên đề bài và rubric chứa `45`. Validator bắt lỗi chính xác và từ chối.
+  - `NEG-16`: Đột biến duy nhất kết quả tính EAT của Q16 (`150.1 + 14.1 = 164.2` -> `146.2`), giữ nguyên rubric chứa `164.2`. Validator bắt lỗi chính xác và từ chối.
+
+### 2.4. Triệt Tiêu Trôi Dạt Dữ Liệu Slide Coverage & Khóa Cổng Tự Động (DATA-V2-001, STATE-V2-001)
+- **Đồng bộ hóa Slide Coverage:** Khối `summary:` trong `research/data/slide_coverage.yaml` được đồng bộ chính xác tuyệt đối với tổng hợp từ bản ghi:
+  - 12 slide decks
+  - 713 trang vật lý (665 trang nội dung, 48 trang phi nội dung)
+  - 665 trang đã ánh xạ (0 trang chưa ánh xạ)
+  - 568 trang nội dung đã biên soạn (Chapters 1–7)
+  - 97 trang nội dung chưa biên soạn (Chapters 8–9: Ch8 có 45 trang, Ch9 có 52 trang)
+- **Khóa cổng tự động:** Hàm `verify_gates()` trong `scripts/verify_research_gates.py` đối chiếu tự động toàn bộ 8 trường trong `summary:` với các giá trị tính toán được từ danh sách deck records. Mọi sự sai lệch dù chỉ 1 đơn vị sẽ kích hoạt lỗi `Slide coverage summary drift` và đánh rớt cổng (đã kiểm chứng qua ca kiểm thử đột biến `NEG-17`).
+- **Làm sạch trạng thái dự án:** Loại bỏ toàn bộ các con số thống kê đếm thủ công dễ bị lỗi thời khỏi `PROJECT_STATE.md`, chuẩn hóa sang tham chiếu các báo cáo do máy kiểm toán độc lập (`research/RESEARCH_GATE_QA.md`).
 
 ---
 
-## 3. TÁI TÍNH TOÁN ĐỘC LẬP & RÀNG BUỘC VĂN BẢN 13 BÀI TOÁN KINH ĐIỂN CHƯƠNG 7 (QA-CH7-001, QA-CH7-003, QA-CH7-004)
+## 3. TÁI TÍNH TOÁN ĐỘC LẬP & RÀNG BUỘC VĂN BẢN 13 BÀI TOÁN KINH ĐIỂN CHƯƠNG 7 (QA-CH7-001, QA-CH7-003, QA-CH7-008)
 
-Công cụ kiểm tra tự động `scripts/validate_ch07_content.py` đã xác nhận cả thuật toán độc lập và nội dung Markdown đã xuất bản cho tất cả 13 bài toán:
+Toàn bộ 13 bài toán định lượng đã được tái tính toán độc lập và ràng buộc trực tiếp vào trường `solution` của Markdown:
 
 1. **QBANK-CH07-10 (Chiến lược cấp phát bộ nhớ liên tục):**
    - Lỗ trống ban đầu: `[600, 500, 200, 300]` KB; Tiến trình: `[212, 417, 112, 426]` KB.
-   - *First Fit:* Thứ tự cấp phát `[0, 1, 0, None]`, lỗ trống cuối cùng `[276, 83, 200, 300]`. P4 thất bại.
-   - *Best Fit:* Thứ tự cấp phát `[3, 1, 2, 0]`, lỗ trống cuối cùng `[174, 83, 88, 88]`. Thành công 100%.
-   - *Next Fit:* Thứ tự cấp phát `[0, 1, 2, None]`, lỗ trống cuối cùng `[388, 83, 88, 300]`. P4 thất bại.
-   - *Worst Fit:* Thứ tự cấp phát `[0, 1, 0, None]`, lỗ trống cuối cùng `[276, 83, 200, 300]`. P4 thất bại.
+   - *First Fit:* Lỗ trung gian `388K`, lỗ cuối cùng `[276, 83, 200, 300]` KB; $P_4$ thất bại.
+   - *Best Fit:* Lỗ cuối cùng `[174, 83, 88, 88]` KB; cả 4 tiến trình thành công 100%.
+   - *Next Fit:* Lỗ cuối cùng `[388, 83, 88, 300]` KB; $P_4$ thất bại.
+   - *Worst Fit:* Lỗ cuối cùng `[276, 83, 200, 300]` KB; $P_4$ thất bại.
 2. **QBANK-CH07-11 (Độ rộng địa chỉ phân trang):**
    - $S = 2048 = 2^{11} \implies d = 11\text{ bit}$. 12 trang logic $\implies p = 4\text{ bit} \implies$ Logic $= 15\text{ bit}$.
    - 32 khung vật lý $\implies f = 5\text{ bit} \implies$ Vật lý $= 16\text{ bit}$.
@@ -81,7 +100,7 @@ Công cụ kiểm tra tự động `scripts/validate_ch07_content.py` đã xác 
 4. **QBANK-CH07-13 (Phân trang hai cấp):**
    - 32-bit: $p_1 = 9, p_2 = 11 \implies d = 12\text{ bit}, S = 4096\text{ bytes} = 4\text{KB}$, số trang $= 2^{20}$.
 5. **QBANK-CH07-14 (Công thức số trang biểu tượng):**
-   - Phân rã $a \mid b \mid c \mid d$: số trang $= 2^{a+b+c} = 2^{32-d}$. Đã kiểm tra tính bất biến đại số.
+   - Phân rã $a \mid b \mid c \mid d$: số trang $= 2^{a+b+c} = 2^{32-d}$ dưới điều kiện $a+b+c+d=32$.
 6. **QBANK-CH07-15 (Chuyển đổi địa chỉ):**
    - Phần A: $\text{PA} = 6568, S = 1024 \implies f = 6, d = 424 \implies \text{LA} = 3496$.
    - Phần B: $S = 2048, \text{LA} = 3254 \implies p = 1, d = 1206 \implies \text{PA} = 9398$.
@@ -94,7 +113,7 @@ Công cụ kiểm tra tự động `scripts/validate_ch07_content.py` đã xác 
 10. **QBANK-CH07-19 (Dung lượng bảng phân trang):**
     - 32-bit, trang $8\text{KB} \implies 2^{19}$ mục; 1 byte/mục $\implies$ Dung lượng $= 512\text{ KiB}$ ($524,288\text{ bytes}$).
 11. **QBANK-CH07-20 (Độ rộng mục bảng trang & số lượng mục):**
-    - 64 khung $\implies 6\text{ bit}$ tối thiểu cho trường frame. 45 trang $\implies 45\text{ mục}$ bảng trang.
+    - 64 khung $\implies 6\text{ bit}$ tối thiểu cho trường frame. 45 trang $\implies$ Bảng phân trang cần tối thiểu $45\text{ mục}$.
 12. **Synthetic Transfer 1 (Ánh xạ địa chỉ Hex):**
     - $\text{LA} = \text{0x0041A7C8}, S = 4\text{KB} \implies p = \text{0x0041A}, d = \text{0x7C8}, f = \text{0x000F2} \implies \text{PA} = \text{0x000F27C8}$.
 13. **Synthetic Transfer 2 (Độ trễ Swapping):**
@@ -124,7 +143,7 @@ Tuân thủ nguyên tắc khoá nội dung học thuật trong pha Engineering Q
 ## 5. KẾT LUẬN & BÀN GIAO
 
 - Toàn bộ 17 cổng kiểm tra nền tảng (`scripts/generate_foundation_gate.py`) đều đạt **PASS**.
-- Toàn bộ 15 ca kiểm thử phủ định (`scripts/run_negative_tests.py`) đều đạt **PASS**.
+- Toàn bộ 17 ca kiểm thử phủ định (`scripts/run_negative_tests.py`) đều đạt **PASS** (bao gồm 4 ca đột biến trường cục bộ và 1 ca đột biến summary drift).
 - Bộ kiểm thử trình duyệt thực tế Chromium Playwright (`tests/learning-system.spec.js`) đạt **14/14 test PASS** (bao gồm Scenario 13 Reference Mode và Scenario 14 Mobile 390px cho Chương 7).
-- Bản thảo Chương 7 đã sạch sẽ 100% về mặt markup, encoding, tương thích route, độ chính xác tính toán và độ bền bỉ kiểm thử.
+- Bản thảo Chương 7 đã sạch sẽ 100% về mặt markup, encoding, ràng buộc trường lời giải, độ chính xác tính toán và độ bền bỉ kiểm thử.
 - Trạng thái sẵn sàng: **BÀN GIAO TIẾN HÀNH ĐỘC LẬP ACADEMIC / SOURCE-FIDELITY REVIEW.**

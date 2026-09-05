@@ -20,7 +20,15 @@ EXPANDED_COVERAGE_JSON = DATA_DIR / "slide_coverage_expanded.json"
 
 sys.stdout.reconfigure(encoding="utf-8")
 
-from research_utils import expand_coverage, parse_exams, parse_page_range, parse_questions, parse_registry, parse_slide_coverage
+from research_utils import (
+    expand_coverage,
+    parse_exams,
+    parse_page_range,
+    parse_questions,
+    parse_registry,
+    parse_slide_coverage,
+    parse_slide_coverage_summary,
+)
 
 
 def _page_count(path: Path):
@@ -126,6 +134,18 @@ def _coverage_metrics(decks, registry):
         if p.get("classification") == "CONTENT"
         and p.get("content_status") == "CONTENT_VERIFIED"
     )
+    drafted = sum(
+        1
+        for p in expanded
+        if p.get("classification") == "CONTENT"
+        and p.get("content_status") in ("CONTENT_VERIFIED", "CONTENT_DRAFTED", "DRAFTED", "VERIFIED")
+    )
+    not_written = sum(
+        1
+        for p in expanded
+        if p.get("classification") == "CONTENT"
+        and p.get("content_status") == "NOT_WRITTEN"
+    )
     EXPANDED_COVERAGE_JSON.write_text(json.dumps({
         "schema": "one-record-per-physical-page",
         "records": expanded,
@@ -141,6 +161,8 @@ def _coverage_metrics(decks, registry):
         "mapped_content_pages": mapped,
         "unmapped_content_pages": unmapped,
         "verified_content_pages": verified,
+        "drafted_content_pages": drafted,
+        "not_written_content_pages": not_written,
         "coverage_gaps": gaps,
         "duplicate_pages": duplicate_pages,
         "schema_errors": schema_errors,
@@ -177,11 +199,34 @@ def verify_gates(source_root=None):
     hygiene_ok, _ = _run([sys.executable, "scripts/check_public_hygiene.py"])
     content_ok, _ = _run([sys.executable, "scripts/validate_v2_content.py"])
 
+    summary = parse_slide_coverage_summary(DATA_DIR / "slide_coverage.yaml")
+    summary_errors = []
+    if summary:
+        if summary.get("total_slide_decks") != len(decks):
+            summary_errors.append(f"total_slide_decks: declared {summary.get('total_slide_decks')}, computed {len(decks)}")
+        if summary.get("physical_pages_total") != slides["physical_pages_total"]:
+            summary_errors.append(f"physical_pages_total: declared {summary.get('physical_pages_total')}, computed {slides['physical_pages_total']}")
+        if summary.get("content_pages_total") != slides["content_pages_total"]:
+            summary_errors.append(f"content_pages_total: declared {summary.get('content_pages_total')}, computed {slides['content_pages_total']}")
+        if summary.get("non_content_pages_total") != slides["non_content_pages_total"]:
+            summary_errors.append(f"non_content_pages_total: declared {summary.get('non_content_pages_total')}, computed {slides['non_content_pages_total']}")
+        if summary.get("mapped_content_pages") != slides["mapped_content_pages"]:
+            summary_errors.append(f"mapped_content_pages: declared {summary.get('mapped_content_pages')}, computed {slides['mapped_content_pages']}")
+        if summary.get("unmapped_content_pages") != slides["unmapped_content_pages"]:
+            summary_errors.append(f"unmapped_content_pages: declared {summary.get('unmapped_content_pages')}, computed {slides['unmapped_content_pages']}")
+        if summary.get("drafted_content_pages") != slides["drafted_content_pages"]:
+            summary_errors.append(f"drafted_content_pages: declared {summary.get('drafted_content_pages')}, computed {slides['drafted_content_pages']}")
+        if summary.get("not_written_content_pages") != slides["not_written_content_pages"]:
+            summary_errors.append(f"not_written_content_pages: declared {summary.get('not_written_content_pages')}, computed {slides['not_written_content_pages']}")
+    for serr in summary_errors:
+        print(f"  [FAIL] Slide coverage summary drift: {serr}")
+
     slide_invariants_ok = (
         bool(decks)
         and not slides["coverage_gaps"]
         and not slides["duplicate_pages"]
         and not slides["schema_errors"]
+        and not summary_errors
         and slides["physical_pages_total"] == slides["coverage_pages_total"]
         and slides["content_pages_total"] + slides["non_content_pages_total"] == slides["physical_pages_total"]
         and slides["unmapped_content_pages"] == 0
@@ -205,6 +250,7 @@ All totals below are computed from registry records, expanded slide-page records
 | Physical slide pages | {slides['physical_pages_total']} | sum of referenced deck registry page/slide counts | **PASS** |
 | Expanded coverage records | {slides['coverage_pages_total']} | exactly physical-page total | **{status(slides['coverage_pages_total'] == slides['physical_pages_total'])}** |
 | Content / non-content pages | {slides['content_pages_total']} / {slides['non_content_pages_total']} | sum equals physical total | **{status(slides['content_pages_total'] + slides['non_content_pages_total'] == slides['physical_pages_total'])}** |
+| Slide coverage summary consistency | {len(summary_errors)} errors | zero summary drift vs computed records | **{status(not summary_errors)}** |
 | Coverage gaps / duplicates / schema errors | {len(slides['coverage_gaps'])} / {len(slides['duplicate_pages'])} / {len(slides['schema_errors'])} | zero | **{status(not slides['coverage_gaps'] and not slides['duplicate_pages'] and not slides['schema_errors'])}** |
 | Unmapped content pages | {slides['unmapped_content_pages']} | zero | **{status(slides['unmapped_content_pages'] == 0)}** |
 | Verified content pages | {slides['verified_content_pages']} | informational current verified set | **INFO** |

@@ -4,15 +4,15 @@
 # ==============================================================================
 
 summary:
-  # Informational snapshot only; the verifier computes these from deck records.
+  # Machine-computed summary derived deterministically from deck records.
   total_slide_decks: 12
   physical_pages_total: 713
-  content_pages_total: 664
-  non_content_pages_total: 49
-  mapped_content_pages: 664
+  content_pages_total: 665
+  non_content_pages_total: 48
+  mapped_content_pages: 665
   unmapped_content_pages: 0
-  drafted_content_pages: 568  # Chapters 1–4 (307) + Ch5 (131) + Ch6 (63) + Ch7 (67) (informational snapshot)
-  not_written_content_pages: 96 # Chapters 8–9 (verifier computes authoritative totals)
+  drafted_content_pages: 568  # Chapters 1–4 (307) + Ch5 (131) + Ch6 (63) + Ch7 (67)
+  not_written_content_pages: 97 # Chapters 8–9 (Ch8: 45, Ch9: 52)
 
 decks:
   - source_id: "UIT-SLIDE-CH01-2024"

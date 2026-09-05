@@ -13,6 +13,7 @@ All totals below are computed from registry records, expanded slide-page records
 | Physical slide pages | 713 | sum of referenced deck registry page/slide counts | **PASS** |
 | Expanded coverage records | 713 | exactly physical-page total | **PASS** |
 | Content / non-content pages | 665 / 48 | sum equals physical total | **PASS** |
+| Slide coverage summary consistency | 0 errors | zero summary drift vs computed records | **PASS** |
 | Coverage gaps / duplicates / schema errors | 0 / 0 / 0 | zero | **PASS** |
 | Unmapped content pages | 0 | zero | **PASS** |
 | Verified content pages | 501 | informational current verified set | **INFO** |

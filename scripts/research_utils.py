@@ -160,3 +160,27 @@ def expand_coverage(decks):
                     "range": section.get("page_range"),
                 })
     return expanded
+
+
+def parse_slide_coverage_summary(path: Path) -> dict[str, int]:
+    """Parse the top-level summary mapping from slide_coverage.yaml."""
+    summary = {}
+    if not path.exists():
+        return summary
+    in_summary = False
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        stripped = raw.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        indent = len(raw) - len(raw.lstrip())
+        if indent == 0:
+            if stripped.startswith("summary:"):
+                in_summary = True
+                continue
+            elif in_summary:
+                break
+        if in_summary and indent >= 2 and ":" in stripped:
+            key, val = stripped.split(":", 1)
+            summary[key.strip()] = scalar(val)
+    return summary
+

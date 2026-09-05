@@ -277,8 +277,8 @@ def recompute_all_calculations() -> list[str]:
     return calc_errs
 
 
-def segment_qbank_units(qbank_text: str) -> tuple[dict[str, str], list[str]]:
-    """Segment QBank Markdown into canonical units and enforce strict heading schema."""
+def segment_qbank_units(qbank_text: str) -> tuple[dict[str, dict[str, str]], list[str]]:
+    """Segment QBank Markdown into canonical units and enforce strict 4-part field schema."""
     errors = []
     # Match unit headings: ^### QBANK-CH07-XX:
     unit_matches = list(re.finditer(r"^###\s+(QBANK-CH07-\d+):\s*(.*)$", qbank_text, re.MULTILINE))
@@ -290,57 +290,169 @@ def segment_qbank_units(qbank_text: str) -> tuple[dict[str, str], list[str]]:
     if found_ids != expected_ids:
         errors.append(f"Unit headings do not match expected canonical 01..20 sequence: {found_ids}")
 
-    units_map: dict[str, str] = {}
+    h1, h2, h3, h4 = REQUIRED_SUBSECTIONS
+    units_map: dict[str, dict[str, str]] = {}
     for idx, m in enumerate(unit_matches):
         qid = m.group(1)
         start = m.start()
         end = unit_matches[idx + 1].start() if idx + 1 < len(unit_matches) else len(qbank_text)
         chunk = qbank_text[start:end]
-        units_map[qid] = chunk
 
-    # Enforce QA-CH7-005: Exactly one of each of the 4 required subsections per unit
-    for qid in expected_ids:
-        if qid not in units_map:
-            continue
-        chunk = units_map[qid]
-        for sub in REQUIRED_SUBSECTIONS:
-            count = chunk.count(sub)
+        # Enforce QA-CH7-005: Exactly one of each of the 4 required subsections per unit
+        sub_counts = {sub: chunk.count(sub) for sub in REQUIRED_SUBSECTIONS}
+        for sub, count in sub_counts.items():
             if count != 1:
                 errors.append(f"Unit {qid} must contain exactly ONE occurrence of '{sub}', found {count}")
+
+        p1, p2, p3, p4 = chunk.find(h1), chunk.find(h2), chunk.find(h3), chunk.find(h4)
+        if not (0 <= p1 < p2 < p3 < p4):
+            errors.append(f"Unit {qid} has invalid subsection ordering: p1={p1}, p2={p2}, p3={p3}, p4={p4}")
+            units_map[qid] = {
+                "raw": chunk,
+                "source_question": "",
+                "solution": "",
+                "rubric": "",
+                "exam_traps": "",
+            }
+        else:
+            units_map[qid] = {
+                "raw": chunk,
+                "source_question": chunk[p1 + len(h1):p2].strip(),
+                "solution": chunk[p2 + len(h2):p3].strip(),
+                "rubric": chunk[p3 + len(h3):p4].strip(),
+                "exam_traps": chunk[p4 + len(h4):].strip(),
+            }
 
     return units_map, errors
 
 
-def verify_authored_numerical_bindings(units_map: dict[str, str]) -> list[str]:
-    """QA-CH7-004: Bind calculations directly to authored section text."""
+def verify_authored_numerical_bindings(units_map: dict[str, dict[str, str]]) -> list[str]:
+    """QA-CH7-008: Bind canonical calculations strictly to the solution field of each QBank unit."""
     errors = []
 
-    # Map of required terms per numerical unit Q10..Q20
-    expected_bindings = {
-        "QBANK-CH07-10": ["600", "500", "200", "300", "212", "417", "112", "426", "174", "83", "88", "Best-fit"],
-        "QBANK-CH07-11": ["2048", "12", "32", "15", "16"],
-        "QBANK-CH07-12": ["200", "400", "75%", "250"],
-        "QBANK-CH07-13": ["9", "11", "12", "4096", "2^{20}"],
-        "QBANK-CH07-14": ["32 - d", "2^{32-d}"],
-        "QBANK-CH07-15": ["6568", "1024", "3496", "3254", "2048", "9398"],
-        "QBANK-CH07-16": ["124", "34", "95%", "248", "158", "282", "164.2"],
-        "QBANK-CH07-17": ["175", "87%", "24", "133.63", "267.26"],
-        "QBANK-CH07-18": ["250", "26", "182", "125", "75.2%"],
-        "QBANK-CH07-19": ["2^{19}", "8", "524", "512"],
-        "QBANK-CH07-20": ["45", "2048", "64", "6", "45"],
-    }
+    def norm(t: str) -> str:
+        t = t.replace("\\%", "%")
+        t = re.sub(r"\{([^}]+)\}", lambda m: "{" + m.group(1).replace(" ", "") + "}", t)
+        return t
 
-    for qid, required_terms in expected_bindings.items():
-        if qid not in units_map:
-            errors.append(f"Missing unit {qid} for numerical binding check")
-            continue
-        text = units_map[qid]
-        normalized_text = text.replace("\\%", "%")
-        normalized_compact = re.sub(r"\{([^}]+)\}", lambda m: "{" + m.group(1).replace(" ", "") + "}", normalized_text)
-        for term in required_terms:
-            compact_term = re.sub(r"\{([^}]+)\}", lambda m: "{" + m.group(1).replace(" ", "") + "}", term)
-            if term not in text and term not in normalized_text and compact_term not in normalized_compact:
-                errors.append(f"Authored unit {qid} missing required canonical term/result: {term!r}")
+    def assert_in(field_text: str, term: str, desc: str, qid: str):
+        n_text = norm(field_text)
+        n_term = norm(term)
+        if term not in field_text and n_term not in n_text:
+            errors.append(f"Unit {qid} [{desc}] missing expected term: {term!r}")
+
+    # QBANK-CH07-10:
+    u10 = units_map.get("QBANK-CH07-10")
+    if u10:
+        for inp in ["600", "500", "200", "300", "212", "417", "112", "426"]:
+            assert_in(u10["source_question"] + u10["solution"], inp, f"Input {inp}", "QBANK-CH07-10")
+        sol10 = u10["solution"]
+        assert_in(sol10, "388", "First-fit intermediate hole 388K", "QBANK-CH07-10")
+        assert_in(sol10, "276", "First-fit final hole 276K", "QBANK-CH07-10")
+        assert_in(sol10, "83", "First-fit final hole 83K", "QBANK-CH07-10")
+        assert_in(sol10, "P_4", "First-fit P4 failure", "QBANK-CH07-10")
+        assert_in(sol10, "174", "Best-fit final hole 174K", "QBANK-CH07-10")
+        assert_in(sol10, "88", "Best-fit final hole 88K", "QBANK-CH07-10")
+        assert_in(sol10, "Cả 4 tiến trình đều được cấp phát thành công", "Best-fit all succeed", "QBANK-CH07-10")
+        assert_in(sol10, "Không có lỗ đủ", "Next-fit failure", "QBANK-CH07-10")
+        assert_in(sol10, "Best-fit", "Evaluation Best-fit optimal", "QBANK-CH07-10")
+
+    # QBANK-CH07-11:
+    u11 = units_map.get("QBANK-CH07-11")
+    if u11:
+        for inp in ["2048", "12", "32"]:
+            assert_in(u11["source_question"] + u11["solution"], inp, f"Input {inp}", "QBANK-CH07-11")
+        sol11 = u11["solution"]
+        assert_in(sol11, "d = 11", "Offset width 11 bit", "QBANK-CH07-11")
+        assert_in(sol11, "15", "Logical address width 15 bit", "QBANK-CH07-11")
+        assert_in(sol11, "16", "Physical address width 16 bit", "QBANK-CH07-11")
+
+    # QBANK-CH07-12:
+    u12 = units_map.get("QBANK-CH07-12")
+    if u12:
+        for inp in ["200", "75%"]:
+            assert_in(u12["source_question"] + u12["solution"], inp, f"Input {inp}", "QBANK-CH07-12")
+        sol12 = u12["solution"]
+        assert_in(sol12, "400", "Normal access 400 ns", "QBANK-CH07-12")
+        assert_in(sol12, "250", "Final EAT 250 ns", "QBANK-CH07-12")
+
+    # QBANK-CH07-13:
+    u13 = units_map.get("QBANK-CH07-13")
+    if u13:
+        for inp in ["9", "11"]:
+            assert_in(u13["source_question"] + u13["solution"], inp, f"Input {inp}", "QBANK-CH07-13")
+        sol13 = u13["solution"]
+        assert_in(sol13, "d = 32 - (p_1 + p_2)", "Offset formula", "QBANK-CH07-13")
+        assert_in(sol13, "12", "Offset width 12 bit", "QBANK-CH07-13")
+        assert_in(sol13, "4096", "Page size 4096 bytes", "QBANK-CH07-13")
+        assert_in(sol13, "2^{20}", "Total virtual pages 2^20", "QBANK-CH07-13")
+
+    # QBANK-CH07-14:
+    u14 = units_map.get("QBANK-CH07-14")
+    if u14:
+        sol14 = u14["solution"]
+        assert_in(sol14, "2^{a + b + c} = 2^{32 - d}", "Symbolic identity 2^(a+b+c) = 2^(32-d)", "QBANK-CH07-14")
+        assert_in(sol14, "a + b + c + d = 32", "Constraint sum 32-bit", "QBANK-CH07-14")
+
+    # QBANK-CH07-15:
+    u15 = units_map.get("QBANK-CH07-15")
+    if u15:
+        for inp in ["6568", "1024", "3254", "2048"]:
+            assert_in(u15["source_question"] + u15["solution"], inp, f"Input {inp}", "QBANK-CH07-15")
+        sol15 = u15["solution"]
+        assert_in(sol15, "3072 + 424 = 3496", "Part A final LA 3496", "QBANK-CH07-15")
+        assert_in(sol15, "8192 + 1206 = 9398", "Part B final PA 9398", "QBANK-CH07-15")
+        assert_in(sol15, "Câu a ra 3496, Câu b ra 9398", "Summary of results", "QBANK-CH07-15")
+
+    # QBANK-CH07-16:
+    u16 = units_map.get("QBANK-CH07-16")
+    if u16:
+        for inp in ["124", "34", "95%"]:
+            assert_in(u16["source_question"] + u16["solution"], inp, f"Input {inp}", "QBANK-CH07-16")
+        sol16 = u16["solution"]
+        assert_in(sol16, "248", "Normal access 248 ns", "QBANK-CH07-16")
+        assert_in(sol16, "158", "TLB Hit access 158 ns", "QBANK-CH07-16")
+        assert_in(sol16, "282", "TLB Miss access 282 ns", "QBANK-CH07-16")
+        assert_in(sol16, "150.1 + 14.1 = 164.2", "Final EAT equation 164.2 ns", "QBANK-CH07-16")
+        assert_in(sol16, "164.2", "Final EAT value 164.2 ns", "QBANK-CH07-16")
+
+    # QBANK-CH07-17:
+    u17 = units_map.get("QBANK-CH07-17")
+    if u17:
+        for inp in ["175", "87%", "24"]:
+            assert_in(u17["source_question"] + u17["solution"], inp, f"Input {inp}", "QBANK-CH07-17")
+        sol17 = u17["solution"]
+        assert_in(sol17, "133.63", "Single RAM cycle 133.63 ns", "QBANK-CH07-17")
+        assert_in(sol17, "267.26", "Normal access 267.26 ns", "QBANK-CH07-17")
+
+    # QBANK-CH07-18:
+    u18 = units_map.get("QBANK-CH07-18")
+    if u18:
+        for inp in ["250", "26", "182"]:
+            assert_in(u18["source_question"] + u18["solution"], inp, f"Input {inp}", "QBANK-CH07-18")
+        sol18 = u18["solution"]
+        assert_in(sol18, "125", "RAM access 125 ns", "QBANK-CH07-18")
+        assert_in(sol18, "0.752", "Hit ratio 0.752", "QBANK-CH07-18")
+        assert_in(sol18, r"\alpha = 75.2%", "Hit ratio alpha = 75.2%", "QBANK-CH07-18")
+
+    # QBANK-CH07-19:
+    u19 = units_map.get("QBANK-CH07-19")
+    if u19:
+        for inp in ["32", "8"]:
+            assert_in(u19["source_question"] + u19["solution"], inp, f"Input {inp}", "QBANK-CH07-19")
+        sol19 = u19["solution"]
+        assert_in(sol19, "2^{19}", "Entry count 2^19", "QBANK-CH07-19")
+        assert_in(sol19, "524,288", "Page table size 524,288 bytes", "QBANK-CH07-19")
+        assert_in(sol19, "512", "Page table size 512 KB", "QBANK-CH07-19")
+
+    # QBANK-CH07-20:
+    u20 = units_map.get("QBANK-CH07-20")
+    if u20:
+        for inp in ["45", "2048", "64"]:
+            assert_in(u20["source_question"] + u20["solution"], inp, f"Input {inp}", "QBANK-CH07-20")
+        sol20 = u20["solution"]
+        assert_in(sol20, "6", "Minimum frame field width 6 bit", "QBANK-CH07-20")
+        assert_in(sol20, "Bảng phân trang cần có tối thiểu **45 mục**", "Page table entry count 45 items", "QBANK-CH07-20")
 
     return errors
 

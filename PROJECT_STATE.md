@@ -11,7 +11,7 @@
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 7 (Chapter 7 Authoring):** `DRAFT_COMPLETE — ENGINEERING_QA_IMPLEMENTED — PENDING FINAL INDEPENDENT CHECK`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASS — Numerical validation, content bindings, negative tests, and browser test fidelity closed.`  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASS — Solution-field numerical bindings, field-specific mutations, and zero slide summary drift closed.`  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5 + CH6`  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6 + LEARNING_SYSTEM_FINAL_QA_CLOSED; CH7 ENGINEERING QA READY FOR FINAL INDEPENDENT CHECK`  
 **Hành động tiếp theo chính xác (Exact Next Action):** `Final independent engineering verification; if passed, proceed to Chapter 7 academic/source-fidelity review.`  
@@ -50,12 +50,12 @@ Một kho dữ liệu nguồn duy nhất (**Single Source of Truth** tại thư 
 | :--- | :--- | :---: |
 | [`research/V2_FOUNDATION_GATE.md`](research/V2_FOUNDATION_GATE.md) | Báo cáo chốt khóa toàn bộ cổng nền tảng sinh tự động bởi script. | `LOCKED` |
 | [`research/RESEARCH_GATE_QA.md`](research/RESEARCH_GATE_QA.md) | Báo cáo kiểm toán nghiên cứu định lượng tự động tính toán 100% từ cấu trúc dữ liệu. | `PASS` |
-| [`research/GATE_NEGATIVE_TESTS.md`](research/GATE_NEGATIVE_TESTS.md) | Báo cáo kiểm thử phủ định 15 kịch bản lỗi cố ý (15/15 phát hiện chính xác). | `PASS` |
+| [`research/GATE_NEGATIVE_TESTS.md`](research/GATE_NEGATIVE_TESTS.md) | Báo cáo kiểm thử phủ định 17 kịch bản lỗi cố ý (17/17 phát hiện chính xác). | `PASS` |
 | [`research/SSOT_BUILD_PROOF.md`](research/SSOT_BUILD_PROOF.md) | Báo cáo thực nghiệm chứng minh cơ chế nguồn đơn nhất tất định. | `PASS` |
-| [`research/data/slide_coverage.yaml`](research/data/slide_coverage.yaml) | Dữ liệu cấu trúc 13 deck hiện được khai báo (719 trang vật lý: 665 content, 54 non-content); Ch4 canonical là 74/59 với map đã xác minh, không còn Ch4 Part 3. | `SOURCE-FIDELITY PASS` |
-| [`research/data/official_review_questions.yaml`](research/data/official_review_questions.yaml) | Dữ liệu 95 records: 60 qbank + 33 concrete Midterm occurrences + 2 external-set references; source families được phân biệt. | `VERIFIED STRUCTURE` |
-| [`research/data/exam_evidence.yaml`](research/data/exam_evidence.yaml) | Dữ liệu cấu trúc 20 hồ sơ đề thi: 1 `RECONSTRUCTED_PRACTICE`, 19 `UNVERIFIED_REFERENCE`, 0 `VERIFIED_ARCHIVE`; có đối soát mã băm/tệp khi khả dụng. | `EVIDENCE-AWARE` |
-| [`content/sources/registry.yaml`](content/sources/registry.yaml) | Sổ đăng ký 66 mã định danh, tách canonical user attachments Ch4 74/59, Midterm 17-slide PPTX và Ch5 tương lai khỏi mọi local variants. | `SOURCE-FIDELITY PASS` |
+| [`research/data/slide_coverage.yaml`](research/data/slide_coverage.yaml) | Dữ liệu cấu trúc slide coverage; các số liệu tổng hợp định lượng được dẫn xuất và kiểm soát bởi RESEARCH_GATE_QA (xem [`research/RESEARCH_GATE_QA.md`](research/RESEARCH_GATE_QA.md)). | `SOURCE-FIDELITY PASS` |
+| [`research/data/official_review_questions.yaml`](research/data/official_review_questions.yaml) | Dữ liệu kiểm kê câu hỏi ôn tập cấu trúc; số lượng bản ghi và phân loại được dẫn xuất tự động bằng máy (xem [`research/RESEARCH_GATE_QA.md`](research/RESEARCH_GATE_QA.md)). | `VERIFIED STRUCTURE` |
+| [`research/data/exam_evidence.yaml`](research/data/exam_evidence.yaml) | Dữ liệu cấu trúc hồ sơ đề thi; kiểm soát bằng chứng và mã băm độc lập (xem [`research/RESEARCH_GATE_QA.md`](research/RESEARCH_GATE_QA.md)). | `EVIDENCE-AWARE` |
+| [`content/sources/registry.yaml`](content/sources/registry.yaml) | Sổ đăng ký nguồn chính tắc; các mã định danh và số lượng được dẫn xuất tự động bằng máy (xem [`research/RESEARCH_GATE_QA.md`](research/RESEARCH_GATE_QA.md)). | `SOURCE-FIDELITY PASS` |
 | [`research/GLM_V2_ARCHITECTURE_AUDIT.md`](research/GLM_V2_ARCHITECTURE_AUDIT.md) | Nhật ký xử lý 100% các phát hiện kiểm toán GLM (8 Blockers, 7 Majors). | `RESOLVED` |
 | [`research/LUNA_CH6_SOURCE_MAP_REPORT.md`](research/LUNA_CH6_SOURCE_MAP_REPORT.md) | Bản đồ nguồn chính tắc Chương 6: 67 trang, locators thuật toán, QBank và đối soát outline. | `PASS — INDEPENDENT QA PASSED` |
 | [`research/LUNA_CH7_SOURCE_MAP_REPORT.md`](research/LUNA_CH7_SOURCE_MAP_REPORT.md) | Bản đồ nguồn chính tắc Chương 7: 72 trang, 20 đơn vị QBank, bài toán phân vùng/phân trang/TLB/EAT. | `PASS — INDEPENDENT QA PASSED` |

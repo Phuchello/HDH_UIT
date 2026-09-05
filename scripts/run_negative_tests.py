@@ -106,10 +106,12 @@ def main():
     cases.append(run_case("NEG-11 missing slide page", lambda: replace(slides, 'page_range: "56-57"\n        page_count: 2', 'page_range: "57"\n        page_count: 1'), [py, "scripts/verify_research_gates.py"], "status: FAIL"))
 
     ch07_qbank = ROOT / "content/questions/subjective/ch07.md"
-    cases.append(run_case("NEG-12 corrupted Q15 calculation (9398 -> 9999)", lambda: replace_all(ch07_qbank, "9398", "9999"), [py, "scripts/validate_ch07_content.py"], "9398"))
-    cases.append(run_case("NEG-13 corrupted Q18 calculation (75.2% -> 57.2%)", lambda: replace_all(ch07_qbank, "75.2", "57.2"), [py, "scripts/validate_ch07_content.py"], "75.2%"))
-    cases.append(run_case("NEG-14 corrupted Q20 calculation (45 entries -> 64 entries)", lambda: replace_all(ch07_qbank, "45", "64"), [py, "scripts/validate_ch07_content.py"], "45"))
+    cases.append(run_case("NEG-12 corrupted Q15 solution equation (9398 -> 9999)", lambda: replace(ch07_qbank, "8192 + 1206 = 9398", "8192 + 1206 = 9999"), [py, "scripts/validate_ch07_content.py"], "9398"))
+    cases.append(run_case("NEG-13 corrupted Q18 solution hit ratio (75.2% -> 57.2%)", lambda: replace(ch07_qbank, r"\alpha = 75.2\%", r"\alpha = 57.2\%"), [py, "scripts/validate_ch07_content.py"], "75.2%"))
+    cases.append(run_case("NEG-14 corrupted Q20 solution entry count (45 entries -> 64 entries)", lambda: replace(ch07_qbank, "Bảng phân trang cần có tối thiểu **45 mục**", "Bảng phân trang cần có tối thiểu **64 mục**"), [py, "scripts/validate_ch07_content.py"], "45 mục"))
     cases.append(run_case("NEG-15 missing required subsection in QBank unit", lambda: replace(ch07_qbank, "#### 4. Bẫy đề thi & Lưu ý thực chiến (Exam Traps)", "#### 4. Subsection bị xoá"), [py, "scripts/validate_ch07_content.py"], "must contain exactly one occurrence"))
+    cases.append(run_case("NEG-16 corrupted Q16 solution EAT (164.2 -> 146.2)", lambda: replace(ch07_qbank, "150.1 + 14.1 = 164.2", "150.1 + 14.1 = 146.2"), [py, "scripts/validate_ch07_content.py"], "164.2"))
+    cases.append(run_case("NEG-17 slide coverage summary drift (665 -> 999)", lambda: replace(slides, "content_pages_total: 665", "content_pages_total: 999"), [py, "scripts/verify_research_gates.py"], "status: FAIL"))
 
     passed = all(case["passed"] for case in cases)
     rows = "\n".join(f"| {case['name']} | exit {case['exit_code']} | {'PASS' if case['passed'] else 'FAIL'} | {case['evidence']} |" for case in cases)
