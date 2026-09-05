@@ -2,18 +2,19 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH4_LEARNING_ARCHITECTURE_VERIFIED_READY_FOR_IMPLEMENTATION`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH4_LEARNING_SYSTEM_READY_FOR_INDEPENDENT_QA`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 7 (Chapter 7 Source Mapping):** `VERIFIED`  
 **Kiến trúc học tập (Learning Architecture):** `VERIFIED — V1.2`  
+**Triển khai Hệ thống Học tập (Learning System Implementation):** `ENGINEERING_COMPLETE — PENDING INDEPENDENT QA`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 7 (Chapter 7 Authoring):** `NOT_STARTED`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASSED` — All 15 foundation gates passing, Ch7 source map integrated.  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASSED` — All 16 foundation gates passing, deterministic learning system integrated.  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5 + CH6`  
-**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Terra implementation of deterministic learning primitives and Learn/Review/Reference modes before Chapter 7 authoring.  
+**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6 + LEARNING_SYSTEM`  
+**Hành động tiếp theo chính xác (Exact Next Action):** Independent QA verification of deterministic learning runtime, followed by Chapter 7 authoring.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-09-05
 

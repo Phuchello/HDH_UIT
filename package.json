@@ -16,6 +16,7 @@
     "validate:routes": "python scripts/validate_site_routes.py",
     "validate:negative": "python scripts/run_negative_tests.py",
     "validate:renderer": "python scripts/stress_test_web_renderer.py",
+    "validate:learning": "python scripts/validate_learning_system.py",
     "validate:v2": "python scripts/generate_foundation_gate.py",
     "validate": "npm run validate:v2",
     "test": "npm run validate:v2"

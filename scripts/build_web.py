@@ -159,34 +159,124 @@ def render_table(lines, routes, current_rel):
     return "<table><thead><tr>" + "".join(cells) + "</tr></thead><tbody>" + "".join(rows) + "</tbody></table>"
 
 
+def _parse_studycard_sections(body: str) -> tuple[str, str, str, str]:
+    """Deterministic single-pass StudyCard section parser.
+
+    ENG-LEARN-003 FIX: The old loop mutated ``question`` after each split,
+    causing later markers (<!-- keypoints -->, <!-- answer -->) that appeared
+    *after* <!-- hint --> in the source to be lost because they were no longer
+    in the shrinking ``question`` string.
+
+    This parser splits the source once on all three markers in document order,
+    then assigns each chunk to the correct slot.
+    """
+    MARKERS = ("<!-- hint -->", "<!-- keypoints -->", "<!-- answer -->")
+    # Build a pattern that matches any of the three markers and captures the
+    # marker text so we can identify which slot the following chunk belongs to.
+    pattern = "(" + "|".join(re.escape(m) for m in MARKERS) + ")"
+    parts = re.split(pattern, body)
+    # parts alternates:  [text, marker, text, marker, text, ...]
+    question = parts[0]
+    hint = keypoints = answer = ""
+    i = 1
+    while i < len(parts) - 1:
+        marker = parts[i]
+        chunk = parts[i + 1]
+        if marker == "<!-- hint -->":
+            hint = chunk
+        elif marker == "<!-- keypoints -->":
+            keypoints = chunk
+        elif marker == "<!-- answer -->":
+            answer = chunk
+        i += 2
+    return question, hint, keypoints, answer
+
+
 def render_callout(kind, body, doc_id, routes, current_rel):
     lower = kind.lower()
     if lower in {"studycard", "subjectivepractice"}:
         identifier = re.search(r'id=["\']([^"\']+)', body)
         item_id = identifier.group(1) if identifier else f"{lower}-{doc_id}"
-        body = re.sub(r'^\s*id=["\'][^"\']+["\']\s*\n?', "", body, count=1)
+        body = re.sub(r'^\s*id=["\'][^"\']+["\'][ \t]*\n?', "", body, count=1)
         if lower == "studycard":
-            question, hint, keypoints, answer = body, "", "", ""
-            for marker, field in (("<!-- hint -->", "hint"), ("<!-- keypoints -->", "keypoints"), ("<!-- answer -->", "answer")):
-                if marker in question:
-                    before, question = question.split(marker, 1)
-                    if field == "hint":
-                        hint = question
-                    elif field == "keypoints":
-                        keypoints = question
-                    else:
-                        answer = question
-                    question = before
-            parts = [f'<div class="study-card" data-card-id="{html.escape(item_id)}"><div class="card-header"><span class="card-tag">Active Recall</span><span class="card-stats">Tự học tương tác</span></div>', f'<div class="card-question">{inline(question.strip(), routes, current_rel)}</div>']
+            # ENG-LEARN-003 FIX: use deterministic single-pass parser.
+            question, hint, keypoints, answer = _parse_studycard_sections(body)
+            eid = html.escape(item_id)
+            parts = [
+                f'<div class="study-card" data-card-id="{eid}" data-mastery="M0"'
+                f' role="region" aria-label="Thẻ học tập: {eid}">',
+                f'<div class="card-header">',
+                f'<span class="card-tag">Active Recall</span>',
+                f'<span class="card-mastery-badge" aria-label="Cấp độ thành thạo">M0</span>',
+                f'</div>',
+                f'<div class="card-question">{inline(question.strip(), routes, current_rel)}</div>',
+                # Scratchpad for the learner to write before revealing
+                f'<textarea class="card-scratchpad" aria-label="Nháp câu trả lời của bạn"'
+                f' placeholder="Viết câu trả lời của bạn vào đây trước khi xem gợi ý…"></textarea>',
+            ]
+            # ENG-LEARN-002 FIX: emit reveal buttons that app.js binds to.
+            reveal_btns = []
             if hint:
-                parts.append(f'<div class="card-section card-hint"><strong>💡 Gợi ý:</strong> {inline(hint.strip(), routes, current_rel)}</div>')
+                parts.append(
+                    f'<div class="card-section card-hint" aria-hidden="true">'
+                    f'<strong>💡 Gợi ý:</strong> {inline(hint.strip(), routes, current_rel)}'
+                    f'</div>'
+                )
+                reveal_btns.append(
+                    '<button class="btn-card btn-hint" aria-expanded="false"'
+                    ' aria-controls="card-hint">💡 Xem Gợi ý</button>'
+                )
             if keypoints:
-                items = [f"<li>{inline(line.lstrip('- ').strip(), routes, current_rel)}</li>" for line in keypoints.splitlines() if line.strip().startswith("-")]
-                parts.append('<div class="card-section card-keypoints"><strong>🔑 Từ khóa bắt buộc:</strong><ul>' + "".join(items) + "</ul></div>")
+                kp_items = [
+                    f"<li>{inline(line.lstrip('- ').strip(), routes, current_rel)}</li>"
+                    for line in keypoints.splitlines()
+                    if line.strip().startswith("-")
+                ]
+                parts.append(
+                    '<div class="card-section card-keypoints" aria-hidden="true">'
+                    '<strong>🔑 Từ khóa bắt buộc:</strong><ul>'
+                    + "".join(kp_items)
+                    + '</ul></div>'
+                )
+                reveal_btns.append(
+                    '<button class="btn-card btn-keypoints" aria-expanded="false"'
+                    ' aria-controls="card-keypoints">🔑 Xem Từ khóa</button>'
+                )
             if answer:
-                parts.append(f'<div class="card-section card-answer"><strong>📖 Lời giải hoàn chỉnh:</strong><p>{inline(answer.strip(), routes, current_rel)}</p></div>')
-            parts.append('<div class="card-actions"><button class="btn-card success btn-remember">✅ Đã Thuộc</button><button class="btn-card danger btn-forgot">❌ Chưa Nhớ</button></div></div>')
+                parts.append(
+                    f'<div class="card-section card-answer" aria-hidden="true">'
+                    f'<strong>📖 Lời giải hoàn chỉnh:</strong>'
+                    f'<div class="card-answer-body">{inline(answer.strip(), routes, current_rel)}</div>'
+                    f'</div>'
+                )
+                reveal_btns.append(
+                    '<button class="btn-card btn-answer" aria-expanded="false"'
+                    ' aria-controls="card-answer">📖 Xem Lời giải</button>'
+                )
+            # Reveal buttons section
+            if reveal_btns:
+                parts.append(
+                    '<div class="card-reveal-actions">'
+                    + "".join(reveal_btns)
+                    + '</div>'
+                )
+            # Rating buttons (AGAIN / HARD / GOOD / EASY) — replaces old binary pair
+            parts.append(
+                '<div class="card-actions">'
+                '<span class="card-actions-label">Đánh giá lượt ôn:</span>'
+                '<button class="btn-card btn-rating btn-again" data-rating="AGAIN"'
+                ' aria-label="Đánh giá: Quên hoàn toàn">🔴 Quên</button>'
+                '<button class="btn-card btn-rating btn-hard" data-rating="HARD"'
+                ' aria-label="Đánh giá: Nhớ nhưng khó">🟠 Khó</button>'
+                '<button class="btn-card btn-rating btn-good" data-rating="GOOD"'
+                ' aria-label="Đánh giá: Nhớ chuẩn mực">🟢 Ổn</button>'
+                '<button class="btn-card btn-rating btn-easy" data-rating="EASY"'
+                ' aria-label="Đánh giá: Nhớ xuất sắc">⭐ Dễ</button>'
+                '</div>'
+                '</div>'
+            )
             return "".join(parts)
+        # --- subjectivepractice ---
         score = re.search(r'max_score=([0-9.]+)', body)
         prompt, rubric = body.split("<!-- rubric", 1) if "<!-- rubric" in body else (body, "")
         rubric = rubric.split("-->", 1)[-1]
@@ -194,9 +284,48 @@ def render_callout(kind, body, doc_id, routes, current_rel):
         for line in rubric.splitlines():
             if line.strip().startswith("-"):
                 weight = re.search(r"\[([0-9.]+)\s*điểm\]", line)
-                rows.append(f'<div class="rubric-item"><input type="checkbox" class="rubric-check" data-weight="{weight.group(1) if weight else "0.5"}"><div>{inline(line.lstrip("- ").strip(), routes, current_rel)}</div></div>')
-        return f'<div class="subjective-practice" data-practice-id="{html.escape(item_id)}" data-max-score="{score.group(1) if score else "1.0"}"><div class="practice-header"><h3>Luyện Tập Viết Tự Luận</h3><span class="card-tag">Tự đánh giá</span></div><div>{inline(prompt.strip(), routes, current_rel)}</div><textarea class="practice-textarea" aria-label="Bài làm tự luận"></textarea><button class="btn-card primary btn-compare">So sánh với Rubric tự kiểm tra</button><div class="rubric-container" aria-label="Rubric tự kiểm tra">{''.join(rows)}<p class="self-check-score">Tự kiểm tra: <output class="current-score">0.00</output> / {score.group(1) if score else "1.0"}</p></div></div>'
-    title = {"characteristics": "ĐẶC TÍNH KỸ THUẬT", "note": "LƯU Ý QUAN TRỌNG", "important": "YÊU CẦU QUAN TRỌNG", "warning": "CẢNH BÁO KỸ THUẬT", "tip": "KHUYẾN NGHỊ THỰC HÀNH"}.get(lower, lower.upper())
+                w = weight.group(1) if weight else "0.5"
+                rows.append(
+                    f'<div class="rubric-item">'
+                    f'<input type="checkbox" class="rubric-check" data-weight="{w}">'
+                    f'<div>{inline(line.lstrip("- ").strip(), routes, current_rel)}</div>'
+                    f'</div>'
+                )
+        max_score_val = score.group(1) if score else "1.0"
+        rows_html = "".join(rows)
+        return (
+            f'<div class="subjective-practice" data-practice-id="{html.escape(item_id)}"'
+            f' data-max-score="{max_score_val}">'
+            f'<div class="practice-header"><h3>Luyện Tập Viết Tự Luận</h3>'
+            f'<span class="card-tag">Tự đánh giá</span></div>'
+            f'<div>{inline(prompt.strip(), routes, current_rel)}</div>'
+            f'<textarea class="practice-textarea" aria-label="Bài làm tự luận"></textarea>'
+            f'<button class="btn-card primary btn-compare">So sánh với Rubric tự kiểm tra</button>'
+            f'<div class="rubric-container" aria-label="Rubric tự kiểm tra">{rows_html}'
+            f'<p class="self-check-score">Tự kiểm tra: '
+            f'<output class="current-score">0.00</output> / {max_score_val}</p>'
+            f'</div></div>'
+        )
+    title = {
+        "characteristics": "ĐẶC TÍNH KỸ THUẬT",
+        "note": "LƯU Ý QUAN TRỌNG",
+        "important": "YÊU CẦU QUAN TRỌNG",
+        "warning": "CẢNH BÁO KỸ THUẬT",
+        "tip": "KHUYẾN NGHỊ THỰC HÀNH",
+        # 12 Pedagogical Primitives contracts
+        "conceptmap": "🗺️ BẢN ĐỒ KHÁI NIỆM",
+        "problemhook": "❓ VẤN ĐỀ DẪN NHẬP",
+        "mentalmodel": "🧠 MÔ HÌNH TƯ DUY",
+        "predictioncheckpoint": "🔮 DỰ ĐOÁN HIỆN TƯỢNG (PREDICT)",
+        "executiontrace": "🔍 VẾT THỰC THI HỆ THỐNG",
+        "recallcheckpoint": "🎯 TRẠM THU HỒI CHỦ ĐỘNG",
+        "workedexample": "📝 BÀI TOÁN MẪU CHI TIẾT (LEVEL A)",
+        "fadedexample": "🧩 BÀI TẬP KHUYẾT BƯỚC (LEVEL B)",
+        "transferproblem": "🚀 BÀI TOÁN CHUYỂN GIAO (LEVEL C)",
+        "errordiagnosis": "⚠️ CHẨN ĐOÁN & SỬA SAI",
+        "reviewhook": "🔄 ĐIỂM ÔN TẬP GẮN KẾT",
+        "masterycheck": "🏆 ĐÁNH GIÁ NĂNG LỰC TOÀN DIỆN",
+    }.get(lower, lower.upper())
     body_html = inline(body, routes, current_rel).replace("\n", "<br>")
     return f'<div class="callout {html.escape(lower)}"><div class="callout-title">{title}</div><p>{body_html}</p></div>'
 
@@ -558,6 +687,30 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
     routes = {doc["id"]: doc["route"] for doc in docs}
     routes.update({Path(doc["route"]).stem: doc["route"] for doc in docs})
 
+    # ------------------------------------------------------------------
+    # Stable-ID duplicate detection: fail fast at build time.
+    # ------------------------------------------------------------------
+    CARD_ID_RE = re.compile(r'data-card-id="([^"]+)"')
+    all_card_ids: list[str] = []
+    for doc in docs:
+        # We must render once to detect IDs that come from the actual HTML
+        # output.  We render a temporary version of the body for scanning only.
+        temp_html = markdown_to_html(doc["body"], doc["id"], routes, doc["route"])
+        for cid in CARD_ID_RE.findall(temp_html):
+            all_card_ids.append(cid)
+    seen_ids: dict[str, int] = {}
+    duplicate_ids: list[str] = []
+    for cid in all_card_ids:
+        seen_ids[cid] = seen_ids.get(cid, 0) + 1
+    for cid, count in seen_ids.items():
+        if count > 1:
+            duplicate_ids.append(cid)
+    if duplicate_ids:
+        raise RuntimeError(
+            f"BUILD FAIL — Duplicate StudyCard IDs detected: {duplicate_ids}\n"
+            "Each StudyCard must have a globally unique id='' attribute."
+        )
+
     for doc in docs:
         doc["headings"] = re.findall(r"^#{1,6}\s+(.+?)\s*$", doc["body"], flags=re.MULTILINE)
         doc["searchable_text"] = search_text(doc["body"])
@@ -566,6 +719,33 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
     graph_nodes = [{"id": doc["id"], "label": doc["title"][:32], "link": doc["route"], "x": 40 + (i * 67) % 270, "y": 35 + (i * 43) % 125, "r": 7, "color": "#0969da"} for i, doc in enumerate(docs)]
     graph_edges = [{"from": doc["id"], "to": rel} for doc in docs for rel in (doc["meta"].get("related", []) if isinstance(doc["meta"].get("related", []), list) else []) if rel in routes]
     (output_dir / "graph_data.json").write_text(json.dumps({"nodes": graph_nodes, "edges": graph_edges}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+    # ------------------------------------------------------------------
+    # study_index.json — derived artifact for the client-side learning
+    # runtime.  Generated from canonical Markdown; never manually
+    # maintained.  Each StudyCard encountered in the content tree gets
+    # one entry with its concept_id, source doc, and display title.
+    # ------------------------------------------------------------------
+    STUDY_CARD_META_RE = re.compile(
+        r'data-card-id="(?P<cid>[^"]+)".*?<div class="card-question">(?P<q>.*?)</div>',
+        re.DOTALL,
+    )
+    study_items = []
+    for doc in docs:
+        # Re-use the already-rendered HTML that will be written to disk.
+        temp_html = markdown_to_html(doc["body"], doc["id"], routes, doc["route"])
+        for m in STUDY_CARD_META_RE.finditer(temp_html):
+            raw_q = re.sub(r"<[^>]+>", "", m.group("q")).strip()
+            study_items.append({
+                "concept_id": m.group("cid"),
+                "doc_id": doc["id"],
+                "doc_title": doc["title"],
+                "question_preview": raw_q[:120],
+                "url": doc["route"],
+            })
+    (output_dir / "study_index.json").write_text(
+        json.dumps(study_items, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
 
     def nav(current):
         groups = [("LÝ THUYẾT", "theory"), ("NGÂN HÀNG CÂU HỎI", "questions"), ("ÔN TẬP", "reviews"), ("THỰC HÀNH", "labs"), ("ĐỀ THI & TRA CỨU", ("exams", "glossary", "flashcards"))]
@@ -598,10 +778,18 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
         toc = "".join(f'<li class="toc-item"><a class="toc-link" href="#{m.group(1)}">{format_toc_label(m.group(2))}</a></li>' for m in re.finditer(r'<h[23] id="([^"]+)">(.+?)</h[23]>', rendered))
         title = html.escape(str(doc["title"]))
         return f'''<!DOCTYPE html>
-<html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>{title} — IT007 UIT</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><script src="{prefix}assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
-<body><header class="app-header"><a class="brand-container" href="{prefix}index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
+<html lang="vi" data-theme="light" data-ui-mode="learn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>{title} — IT007 UIT</title><link rel="stylesheet" href="{prefix}assets/css/style.css"><script src="{prefix}assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head>
+<body><header class="app-header"><a class="brand-container" href="{prefix}index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions">{mode_switcher}<button class="search-trigger-btn" id="search-trigger-btn">🔍 Tìm kiếm nhanh... <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header>
 <div class="workspace-layout"><aside class="sidebar-left">{nav(route)}</aside><main class="content-center"><div class="breadcrumbs"><a href="{prefix}index.html">Trang chủ</a> <span>/</span> <span>{title}</span></div><article class="article-body">{rendered}{backlinks}<div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div><div class="toc-container"><div class="toc-title">MỤC LỤC TRANG</div><ul class="toc-list">{toc or '<li class="toc-item">Trang không có tiểu mục</li>'}</ul></div></aside></div>
 <div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper">🔍<input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="{prefix}assets/js/app.js"></script></body></html>'''
+
+    mode_switcher = (
+        '<div class="mode-switcher" role="group" aria-label="Chế độ học tập">'
+        '<button class="mode-btn" data-mode="learn" aria-pressed="false">📚 Học</button>'
+        '<button class="mode-btn" data-mode="review" aria-pressed="false">🔄 Ôn</button>'
+        '<button class="mode-btn" data-mode="reference" aria-pressed="false">🔎 Tra</button>'
+        '</div>'
+    )
 
     for doc in docs:
         target = output_dir / doc["route"]
@@ -612,10 +800,11 @@ def build_site(content_root=DEFAULT_CONTENT, output_dir=DEFAULT_OUTPUT):
     for doc in docs:
         if "theory" in doc["rel"]:
             cards.append(f'<a href="{doc["route"]}"><h3>{html.escape(doc["title"])}</h3><p>{html.escape(str(doc["summary"]))}</p></a>')
-    index = f'''<!DOCTYPE html><html lang="vi" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>IT007 · Hệ Điều Hành UIT</title><link rel="stylesheet" href="assets/css/style.css"><script src="assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head><body><header class="app-header"><a class="brand-container" href="index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions"><button class="search-trigger-btn" id="search-trigger-btn">Tìm kiếm <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header><div class="workspace-layout"><aside class="sidebar-left">{nav("index.html")}</aside><main class="content-center"><article class="article-body"><h1>Hệ Điều Hành</h1><p>IT007 · Lý thuyết · Tự luận · Bài tập · Thực hành · Ôn tập · Đề thi</p><div class="article-meta-bar">Biên soạn: <strong>Võ Trọng Phúc</strong></div><h2>Các Chuyên Đề Cốt Lõi</h2><div class="document-grid">{"".join(cards)}</div><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div></aside></div><div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper"><input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="assets/js/app.js"></script></body></html>'''
+    index = f'''<!DOCTYPE html><html lang="vi" data-theme="light" data-ui-mode="learn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>IT007 · Hệ Điều Hành UIT</title><link rel="stylesheet" href="assets/css/style.css"><script src="assets/vendor/mathjax/es5/tex-mml-chtml.js"></script></head><body><header class="app-header"><a class="brand-container" href="index.html"><span class="brand-badge">IT007</span><span class="brand-title">Hệ Điều Hành · IT007 UIT</span></a><div class="header-actions">{mode_switcher}<button class="search-trigger-btn" id="search-trigger-btn">Tìm kiếm <kbd class="kbd-shortcut">Ctrl+K</kbd></button><button class="theme-toggle-btn" id="theme-toggle-btn"><span id="theme-icon">🌙</span></button></div></header><div class="workspace-layout"><aside class="sidebar-left">{nav("index.html")}</aside><main class="content-center"><article class="article-body"><h1>Hệ Điều Hành</h1><p>IT007 · Lý thuyết · Tự luận · Bài tập · Thực hành · Ôn tập · Đề thi</p><div class="article-meta-bar">Biên soạn: <strong>Võ Trọng Phúc</strong></div><h2>Các Chuyên Đề Cốt Lõi</h2><div class="document-grid">{"".join(cards)}</div><div class="article-footer">Tài liệu học tập độc lập dành cho môn IT007. Không phải ấn phẩm chính thức của UIT.</div></article></main><aside class="sidebar-right"><div class="graph-container"><div class="graph-header">Đồ Thị Tri Thức</div><canvas class="graph-canvas" id="knowledge-graph-canvas"></canvas></div></aside></div><div class="search-modal-overlay" id="search-modal-overlay"><div class="search-modal"><div class="search-input-wrapper"><input type="text" class="search-input" id="search-input" placeholder="Tìm kiếm..."><kbd class="kbd-shortcut">ESC</kbd></div><ul class="search-results-list" id="search-results-list"></ul></div></div><script src="assets/js/app.js"></script></body></html>'''
     (output_dir / "index.html").write_text(index, encoding="utf-8")
     print(f"Successfully compiled {len(docs) + 1} static pages into {output_dir}.")
     return docs
+
 
 
 if __name__ == "__main__":

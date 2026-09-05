@@ -451,6 +451,44 @@ body {
   background-color: var(--danger-subtle);
 }
 
+.callout.tip {
+  border-left-color: var(--success-color);
+  background-color: var(--success-subtle);
+}
+
+/* Pedagogical Primitives Semantic Styles */
+.callout.conceptmap,
+.callout.mentalmodel,
+.callout.workedexample,
+.callout.fadedexample {
+  border-left-color: var(--teal-primary);
+  background-color: var(--teal-subtle);
+}
+
+.callout.problemhook,
+.callout.errordiagnosis {
+  border-left-color: var(--warning-color);
+  background-color: var(--warning-subtle);
+}
+
+.callout.predictioncheckpoint,
+.callout.transferproblem,
+.callout.reviewhook,
+.callout.masterycheck {
+  border-left-color: var(--accent-primary);
+  background-color: var(--accent-subtle);
+}
+
+.callout.recallcheckpoint {
+  border-left-color: var(--success-color);
+  background-color: var(--success-subtle);
+}
+
+.callout.executiontrace {
+  border-left-color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+}
+
 /* Semantic Wikilinks */
 .wikilink {
   color: var(--accent-text);
@@ -841,3 +879,198 @@ body {
     padding: 1.5rem 1rem;
   }
 }
+
+/* ==========================================================================
+   LEARNING SYSTEM V2 — New primitives
+   ========================================================================== */
+
+/* --- Mode Switcher -------------------------------------------------------- */
+.mode-switcher {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.mode-btn {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.mode-btn:hover,
+.mode-btn.mode-btn-active {
+  background-color: var(--accent-subtle);
+  color: var(--accent-text);
+  border-color: var(--accent-primary);
+}
+
+/* --- StudyCard V2 — Scratchpad ------------------------------------------- */
+.card-scratchpad {
+  width: 100%;
+  min-height: 72px;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  border: 1px dashed var(--border-color);
+  border-radius: 6px;
+  resize: vertical;
+  margin: 0.75rem 0;
+  transition: border-color 0.15s ease;
+}
+
+.card-scratchpad:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  border-style: solid;
+}
+
+/* --- StudyCard V2 — Reveal Actions group --------------------------------- */
+.card-reveal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+/* --- StudyCard V2 — Mastery Badge ---------------------------------------- */
+.card-mastery-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--border-color);
+}
+
+.study-card[data-mastery="M0"] .card-mastery-badge {
+  background-color: var(--danger-subtle);
+  color: var(--danger-color);
+}
+
+.study-card[data-mastery="M1"] .card-mastery-badge {
+  background-color: var(--warning-subtle);
+  color: var(--warning-color);
+}
+
+.study-card[data-mastery="M2"] .card-mastery-badge {
+  background-color: var(--success-subtle);
+  color: var(--success-color);
+}
+
+.study-card[data-mastery="M3"] .card-mastery-badge {
+  background-color: var(--accent-subtle);
+  color: var(--accent-text);
+}
+
+/* Mastery-state border overrides */
+.study-card[data-mastery="M0"] { border-left: 4px solid var(--danger-color); }
+.study-card[data-mastery="M1"] { border-left: 4px solid var(--warning-color); }
+.study-card[data-mastery="M2"] { border-left: 4px solid var(--success-color); }
+.study-card[data-mastery="M3"] { border-left: 4px solid var(--accent-primary); }
+
+/* --- StudyCard V2 — Rating Buttons --------------------------------------- */
+.card-actions-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  align-self: center;
+  white-space: nowrap;
+}
+
+.btn-rating {
+  min-width: 64px;
+  text-align: center;
+}
+
+.btn-again {
+  background-color: var(--danger-subtle);
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.btn-again:hover {
+  background-color: var(--danger-color);
+  color: #ffffff;
+}
+
+.btn-hard {
+  background-color: var(--warning-subtle);
+  color: var(--warning-color);
+  border-color: var(--warning-color);
+}
+
+.btn-hard:hover {
+  background-color: var(--warning-color);
+  color: #ffffff;
+}
+
+.btn-good {
+  background-color: var(--success-subtle);
+  color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.btn-good:hover {
+  background-color: var(--success-color);
+  color: #ffffff;
+}
+
+.btn-easy {
+  background-color: var(--accent-subtle);
+  color: var(--accent-text);
+  border-color: var(--accent-primary);
+}
+
+.btn-easy:hover {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+}
+
+.btn-rating:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* --- Review Mode — hide non-due cards ------------------------------------ */
+.study-card.review-hidden {
+  display: none;
+}
+
+/* --- Card Answer Body ---------------------------------------------------- */
+.card-answer-body {
+  margin-top: 0.5rem;
+}
+
+/* --- Reference Mode — all sections visible immediately ------------------- */
+[data-ui-mode="reference"] .card-scratchpad {
+  display: none; /* No forced prediction in reference mode */
+}
+
+[data-ui-mode="reference"] .card-reveal-actions {
+  display: none; /* Sections already open */
+}
+
+/* --- Responsive: mode switcher on small screens -------------------------- */
+@media (max-width: 640px) {
+  .mode-btn {
+    padding: 0.25rem 0.45rem;
+    font-size: 0.72rem;
+  }
+  .card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-rating {
+    width: 100%;
+  }
+}
+

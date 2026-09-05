@@ -1,0 +1,37 @@
+[
+  {
+    "concept_id": "fc-01-mode-bit",
+    "doc_id": "flashcards-ch01",
+    "doc_title": "Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH",
+    "question_preview": "Mặt trước (Câu hỏi): Mode bit trong CPU mang giá trị gì ở User Mode và Kernel Mode?",
+    "url": "flashcards/ch01-cards.html"
+  },
+  {
+    "concept_id": "fc-02-storage-criteria",
+    "doc_id": "flashcards-ch01",
+    "doc_title": "Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH",
+    "question_preview": "Mặt trước (Câu hỏi): Nêu 3 tiêu chí phân cấp hệ thống lưu trữ (Storage Hierarchy).",
+    "url": "flashcards/ch01-cards.html"
+  },
+  {
+    "concept_id": "fc-03-multiprogramming-goal",
+    "doc_id": "flashcards-ch01",
+    "doc_title": "Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH",
+    "question_preview": "Mặt trước (Câu hỏi): Mục tiêu thiết kế tối thượng của Hệ thống Đa chương (Multiprogramming) là gì?",
+    "url": "flashcards/ch01-cards.html"
+  },
+  {
+    "concept_id": "fc-04-trap-definition",
+    "doc_id": "flashcards-ch01",
+    "doc_title": "Thẻ Nhớ Flashcards — Chương 1: Tổng Quan HDH",
+    "question_preview": "Mặt trước (Câu hỏi): Bẫy ngắt (Trap) khác Ngắt phần cứng (Hardware Interrupt) ở điểm cốt lõi nào?",
+    "url": "flashcards/ch01-cards.html"
+  },
+  {
+    "concept_id": "viva-lab01-hardlink-symlink",
+    "doc_id": "lab01-linux-basics",
+    "doc_title": "Lab 1: Giới thiệu Linux, Quản trị Tệp tin & Lệnh Cơ Bản",
+    "question_preview": "Câu hỏi Vấn đáp: Phân biệt Hard Link và Symbolic Link (Soft Link) trong Linux. Điều gì xảy ra khi ta xóa file gốc?",
+    "url": "labs/lab01-linux-basics.html"
+  }
+]
