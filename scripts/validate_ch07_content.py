@@ -58,6 +58,17 @@ DISALLOWED_OVERCLAIMS = [
     "barem chính thức uit",
     "official_rubric",
     "đáp án chính thức của uit",
+    "đạt điểm tuyệt đối",
+    "chắc chắn được",
+    "giảng viên sẽ chấm",
+]
+
+DISALLOWED_THEORY_CLAIMS = [
+    ("kích thước trang luôn", "Universal page size assertion forbidden; use architectural convention"),
+    ("luôn được chọn là lũy thừa của 2", "Universal page size assertion forbidden"),
+    ("best fit tối ưu cho kịch bản tĩnh", "Best fit is a local selection heuristic, not proven optimal"),
+    ("trang p vẫn đang nằm trong ram", "TLB Miss definition must not claim page is resident in RAM"),
+    ("(p76 docx)", "Q15 locator must be P70–P75 docx, not P76 docx"),
 ]
 
 REQUIRED_SUBSECTIONS = [
@@ -568,7 +579,13 @@ def validate_ch07_content(theory_override: str | None = None, qbank_override: st
         if f'id="{tp}"' not in theory_text:
             errors.append(f"Missing TransferProblem id='{tp}' in theory markdown")
 
-    # Verify rubric items in RecallCheckpoints
+    # Executable academic guards on theory prose
+    theory_lower = theory_text.lower()
+    for phrase, reason in DISALLOWED_THEORY_CLAIMS:
+        if phrase in theory_lower:
+            errors.append(f"Theory contains disallowed academic claim '{phrase}': {reason}")
+
+    # Verify rubric items in RecallCheckpoints and TransferProblems
     rc_blocks = re.findall(r"> \[!RECALLCHECKPOINT\].*?(?=(?:> \[!|\Z|\n---))", theory_text, re.DOTALL)
     for idx, block in enumerate(rc_blocks, 1):
         rubric_part = block.split("<!-- rubric", 1)[-1] if "<!-- rubric" in block else ""
@@ -581,6 +598,22 @@ def validate_ch07_content(theory_override: str | None = None, qbank_override: st
                 errors.append(f"RecallCheckpoint #{idx} rubric weights sum to {total_w}, expected 1.0")
             if any(w <= 0 for w in weights):
                 errors.append(f"RecallCheckpoint #{idx} has non-positive rubric weight")
+
+    tp_blocks = re.findall(r"> \[!TRANSFERPROBLEM\].*?(?=(?:> \[!|\Z|\n---))", theory_text, re.DOTALL)
+    for idx, block in enumerate(tp_blocks, 1):
+        if "<!-- rubric" in block:
+            rubric_part = block.split("<!-- rubric", 1)[-1]
+            if "<!-- solution" in rubric_part:
+                rubric_part = rubric_part.split("<!-- solution", 1)[0]
+            weights = [float(m.group(1)) for m in re.finditer(r"\[([0-9.]+)\s*điểm\]", rubric_part)]
+            if not weights:
+                errors.append(f"TransferProblem #{idx} has rubric marker but no valid weighted rubric items")
+            else:
+                total_w = sum(weights)
+                if abs(total_w - 1.0) > 0.001:
+                    errors.append(f"TransferProblem #{idx} rubric weights sum to {total_w}, expected 1.0")
+                if any(w <= 0 for w in weights):
+                    errors.append(f"TransferProblem #{idx} has non-positive rubric weight")
 
     # 11. QA-CH7-003: Recompute all canonical calculations
     calc_errs = recompute_all_calculations()

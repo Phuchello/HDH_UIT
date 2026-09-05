@@ -68,7 +68,7 @@ Quản lý bộ nhớ là một trong những nhiệm vụ phức tạp và quan
 ```
 
 ### 20% Kiến thức cốt lõi mở khóa 80% bài toán thực chiến:
-1. **Mô hình ánh xạ địa chỉ phân trang:** Khắc sâu quy tắc chuyển đổi $[p \mid d] \to [f \mid d]$; độ dời $d$ được giữ nguyên tuyệt đối.
+1. **Mô hình ánh xạ địa chỉ phân trang:** Khắc sâu quy tắc chuyển đổi $[p \mid d] \to [f \mid d]$; độ dời $d$ được bảo toàn giữa địa chỉ logic và địa chỉ vật lý nhờ kích thước trang bằng kích thước khung trang.
 2. **Vết thực thi 4 giải thuật Fit:** Hiểu rõ vị trí con trỏ của Next Fit (quét tiếp từ vị trí trước) và tiêu chuẩn tối ưu cục bộ của Best Fit vs Worst Fit.
 3. **Dẫn xuất công thức EAT:** Tách bạch 2 nhánh xác suất Hit và Miss; không học vẹt công thức mà hiểu rõ số lần truy xuất RAM thực tế.
 
@@ -330,7 +330,7 @@ Khi có một danh sách các lỗ trống tự do (Free Hole List), hệ điề
 > **Các lỗi sai kinh điển khi thi giải thuật Fit:**
 > 1. **Quên cập nhật kích thước lỗ trống:** Sau khi cấp phát cho $P_1$, kích thước lỗ $\text{H}_1$ giảm xuống. Nhiều sinh viên vẫn lấy số liệu $600\text{K}$ ban đầu để xét cho các tiến trình sau.
 > 2. **Quên con trỏ Next Fit:** Nhầm Next Fit thành First Fit (quay lại đầu danh sách sau mỗi tiến trình). Cần nhớ: Next Fit chỉ quay đầu khi đã chạm đáy danh sách.
-> 3. **Nhầm tưởng Best Fit luôn tốt nhất:** Best Fit tối ưu cho kịch bản tĩnh, nhưng trong hệ thống động liên tục giải phóng, Best Fit tạo ra vô số mảnh vụn nhỏ không thể dùng được, trong khi Worst Fit để lại mảnh dư lớn hơn.
+> 3. **Nhầm tưởng Best Fit là tối ưu toàn cục:** Best Fit chỉ là một quy tắc lựa chọn cục bộ (chọn phân vùng trống nhỏ nhất vừa đủ kích thước tại thời điểm xét). Nó không đảm bảo tối ưu toàn cục về hiệu quả sử dụng bộ nhớ trong chuỗi cấp phát và giải phóng động lâu dài, bởi nó có xu hướng để lại các mảnh vụn rất nhỏ khó tái sử dụng cho các yêu cầu kế tiếp.
 
 > [!RECALLCHECKPOINT] id="rc-ch07-fit-algorithms" concept_id="ch07-fit-algorithms"
 > **Nhiệm vụ thu hồi kín sách (Closed-book Recall):**
@@ -418,10 +418,10 @@ $$\text{Địa chỉ Logic: } [p \mid d] \xrightarrow{\text{Tra bảng trang } p
 
 > [!NOTE]
 > **Bản chất của việc độ dời $d$ không đổi:**
-> Vì kích thước trang $S$ **hoàn toàn bằng** kích thước khung trang $S$, khoảng cách từ byte dữ liệu tới byte đầu tiên của trang trong không gian logic chính là khoảng cách từ byte đó tới byte đầu tiên của khung trang trong không gian vật lý. Do đó, phần cứng chỉ cần thay thế số trang $p$ bằng số khung $f$, còn trường độ dời $d$ được giữ nguyên vẹn 100%!
+> Vì kích thước trang $S$ **hoàn toàn bằng** kích thước khung trang $S$, khoảng cách từ byte dữ liệu tới byte đầu tiên của trang trong không gian logic chính là khoảng cách từ byte đó tới byte đầu tiên của khung trang trong không gian vật lý. Do đó, phần cứng chỉ cần thay thế số trang $p$ bằng số khung $f$, còn trường độ dời $d$ được bảo toàn hoàn toàn giữa địa chỉ logic và địa chỉ vật lý!
 
 #### Quy tắc phân tách bit nhị phân
-Trong các hệ thống kiến trúc nhị phân, kích thước trang luôn được chọn là **lũy thừa của 2** (ví dụ $4\text{KB} = 2^{12}\text{ bytes}$).
+Các hệ thống đánh địa chỉ theo cơ số nhị phân theo quy ước kiến trúc thường chọn kích thước trang là **lũy thừa của 2** (ví dụ $4\text{KB} = 2^{12}\text{ bytes}$, $2\text{KB} = 2^{11}\text{ bytes}$), cho phép số trang $p$ và độ dời $d$ được trích xuất trực tiếp từ các trường bit của địa chỉ mà không cần tính toán số học.
 - Nếu không gian địa chỉ logic có kích thước $2^m$ bytes và kích thước trang là $2^n$ bytes:
   - $n$ bit thấp nhất biểu diễn độ dời $d$ ($d = n\text{ bit}$).
   - $m - n$ bit cao biểu diễn số trang $p$ ($p = m - n\text{ bit}$).
@@ -443,7 +443,7 @@ Quy trình chuyển đổi toán học tổng quát:
 4. Tính địa chỉ vật lý: $\text{Physical Address} = f \times S + d$.
 
 > [!WORKEDEXAMPLE]
-> **Bài toán mẫu chuẩn đơn trị QBANK-CH07-15 (P76 docx):**
+> **Bài toán mẫu chuẩn đơn trị QBANK-CH07-15 (P70–P75 docx):**
 > Cho kích thước trang $S = 2\text{KB} = 2048\text{ bytes}$. Địa chỉ logic cần chuyển đổi là $L = 3254$. Bảng phân trang của tiến trình có mục: Trang 1 được nạp vào Khung 4.
 > 
 > **Các bước giải chi tiết:**
@@ -525,8 +525,8 @@ $\implies$ Tốc độ truy xuất bộ nhớ của toàn bộ hệ thống bị
 
 > [!WARNING]
 > **Phân biệt bản chất: TLB Miss vs Page Fault [TIER_B_ENRICHMENT]:**
-> - **TLB Miss (Trượt TLB):** Là sự kiện trượt bộ nhớ đệm phần cứng (Hardware Cache Miss). Trang $p$ vẫn đang nằm trong RAM, bảng phân trang có sẵn mục này, chỉ là chưa được lưu trong cache TLB. Thời gian xử lý: nano-giây ($\text{ns}$).
-> - **Page Fault (Lỗi trang — Khảo sát ở Chương 8):** Là sự kiện ngắt hệ thống (Software Trap) xảy ra khi trang $p$ hoàn toàn **CHƯA ĐƯỢC NẠP VÀO RAM** (đang nằm trên đĩa). Hệ điều hành phải can thiệp đọc đĩa I/O. Thời gian xử lý: mili-giây ($\text{ms}$), chậm hơn TLB Miss hàng triệu lần!
+> - **TLB Miss (Trượt TLB):** Là sự kiện trượt bộ nhớ đệm phần cứng (Hardware Cache Miss) khi bản ghi chuyển đổi địa chỉ cho trang $p$ không có sẵn trong TLB. Quá trình tra cứu bảng trang (page-table walk) sau đó trong mô hình phân trang chuẩn sẽ đọc bảng trang trong RAM để lấy số khung $f$ và nạp vào TLB. (Trong hệ thống bộ nhớ ảo, nếu mục bảng trang chỉ ra trang chưa nạp vào RAM, sự kiện Page Fault mới được kích hoạt).
+> - **Page Fault (Lỗi trang — Khảo sát chuyên sâu ở Chương 8):** Là ngoại lệ/bẫy phần cứng (Hardware Exception / Trap) được chuyển giao cho hệ điều hành xử lý khi CPU truy xuất vào một trang hợp lệ nhưng hiện chưa cư trú trong RAM vật lý (bit present/valid = 0). Hệ điều hành phải can thiệp điều khiển I/O để nạp trang từ thiết bị lưu trữ thứ cấp (backing store) vào RAM, có độ trễ lớn hơn đáng kể so với việc tra cứu bộ nhớ thông thường.
 
 ---
 
