@@ -1,7 +1,7 @@
 # HDH_UIT V2 — KIẾN TRÚC HỌC TẬP V1.2 (LEARNING ARCHITECTURE V1.2)
 # BẢN ĐẶC TẢ SƯ PHẠM THỰC CHỨNG & THIẾT KẾ TRẢI NGHIỆM HỌC TẬP IT007
 # MỤC ĐÍCH: TỐI ƯU HÓA HIỆU QUẢ HỌC TẬP, GIẢM TẢI NHẬN THỨC, HỖ TRỢ IN ẤN PDF VÀ WEB TĨNH
-# CHẾ ĐỘ: THIẾT KẾ & ĐẶC TẢ SƯ PHẠM (DESIGN REPAIR & FINAL EVIDENCE RECHECK)
+# CHẾ ĐỘ: THIẾT KẾ & ĐẶC TẢ SƯ PHẠM (FINAL EVIDENCE & PROVENANCE CLOSEOUT)
 
 ---
 
@@ -9,16 +9,23 @@
 
 > [!NOTE]
 > **SCHED-LEARN-001 — MAJOR — RESOLVED: Hiệu chỉnh Toàn diện So sánh FSRS**
-> - *Nguyên nhân:* Bản thảo trước đã mô tả sai FSRS hiện đại (cho rằng FSRS cố định 17 tham số, đòi hỏi chạy gradient descent trong quá trình lập lịch thông thường, cần lịch sử cá nhân lớn mới hoạt động được và tốn bộ nhớ lớn trong `localStorage`).
-> - *Khắc phục:* Phân định rạch ròi giữa **Thời gian chạy Lập lịch (Scheduling Runtime)** (chạy thuần giải tích trong vài micro-giây với bộ tham số mặc định chuẩn, không cần vòng lặp tối ưu, hoạt động ngay từ ngày đầu với dữ liệu trống) và **Tối ưu hóa Tham số (Parameter Optimization / Personalization)** (tùy chọn huấn luyện cá nhân hóa khi đã tích lũy lịch sử đánh giá). Cập nhật phiên bản FSRS (FSRS-4.5 dùng 19 tham số; FSRS-6 dùng 21 tham số). Đánh giá khách quan 3 phương án lập lịch dựa trên 7 tiêu chí kỹ thuật.
+> - Phân định rạch ròi giữa **Thời gian chạy Lập lịch (Scheduling Runtime)** (chạy thuần giải tích trong vài micro-giây với bộ tham số mặc định chuẩn, không cần vòng lặp tối ưu, hoạt động ngay từ ngày đầu với dữ liệu trống) và **Tối ưu hóa Tham số (Parameter Optimization / Personalization)** (tùy chọn huấn luyện cá nhân hóa khi đã tích lũy lịch sử đánh giá).
 >
 > **SCHED-LEARN-002 — MAJOR — RESOLVED: Phân định Rạch ròi Đánh giá HARD vs Lỗi Thu hồi (AGAIN)**
-> - *Nguyên nhân:* Định nghĩa `HARD` là "thu hồi thành công với nỗ lực cao / ngập ngừng", nhưng công thức lập lịch cũ lại gom $q < 3$ (`AGAIN` và `HARD`) làm một, đặt lại $\text{Reps} = 0$ và chu kỳ $I = 1\text{ ngày}$. Điều này mâu thuẫn nội tại khi đối xử một lần thu hồi thành công giống hệt một lần quên hoàn toàn.
-> - *Khắc phục:* Phân tách rõ ràng hành vi toán học của cả 4 mức đánh giá. `AGAIN` là thất bại thu hồi (đặt lại chu kỳ về 1 ngày, tăng biến đếm lapse). `HARD` là thu hồi thành công (tăng số lần thành công, tăng khoảng cách chu kỳ một cách thận trọng, không đặt lại chu kỳ về 1 ngày).
+> - Phân tách rõ ràng hành vi toán học của cả 4 mức đánh giá. `AGAIN` là thất bại thu hồi (đặt lại chu kỳ về 1 ngày, tăng biến đếm lapse). `HARD` là thu hồi thành công có khó khăn (tăng số lần thành công, tăng khoảng cách chu kỳ một cách thận trọng, không đặt lại chu kỳ về 1 ngày).
+>
+> **SCHED-LEARN-003 — MAJOR — RESOLVED: Chuẩn hóa Lịch sử Phiên bản FSRS Có Gắn Nhãn Thời Điểm**
+> - Cập nhật chính xác lịch sử tham số của các phiên bản FSRS upstream: FSRS v4 / v4.5 sử dụng 17 tham số; FSRS-5 sử dụng 19 tham số; FSRS-6 sử dụng 21 tham số.
+> - Ghi nhận bối cảnh nghiên cứu thực nghiệm (thời điểm 2026-09): các biến thể nghiên cứu/benchmark (như FSRS-7 với 35 tham số) đang được thử nghiệm trong các bài đo lường hiệu năng nhưng không mặc định suy diễn rằng phiên bản Anki stable đã chuyển sang FSRS-7.
+> - Đánh giá so sánh được ghi rõ thời điểm (2026-09) và không khẳng định số lượng tham số là bất biến vĩnh viễn.
 >
 > **EVID-LEARN-002 — MAJOR — RESOLVED: Hiện đại hóa Thuật ngữ Khoa học Nhận thức**
-> - *Nguyên nhân:* Bản thảo trước trình bày Tải nhận thức theo mô hình cộng 3 thành phần truyền thống và diễn giải khung ICAP mang tính tuyệt đối hóa ("học sâu chỉ xảy ra ở Constructive trở lên").
-> - *Khắc phục:* Cập nhật theo Lý thuyết Tải nhận thức đương đại (Sweller, van Merriënboer & Paas, 2019): tải nhận thức gồm Tải nội tại (Intrinsic load) và Tải ngoại lai (Extraneous load); Xử lý hữu ích (Germane processing) là nguồn lực nhận thức được người học phân bổ để xử lý tải nội tại và xây dựng lược đồ, không phải là một thành phần tải độc lập thứ ba cộng dồn. Khung ICAP (Chi & Wylie, 2014) được định nghĩa chính xác là một mô hình phân tầng dự báo kết quả học tập ($\text{Interactive} > \text{Constructive} > \text{Active} > \text{Passive}$) phụ thuộc vào điều kiện nhiệm vụ và mức độ chuyên môn của người học.
+> - Cập nhật theo Lý thuyết Tải nhận thức đương đại (Sweller, van Merriënboer & Paas, 2019): tải nhận thức gồm Tải nội tại (Intrinsic load) và Tải ngoại lai (Extraneous load); Xử lý hữu ích (Germane processing) là nguồn lực nhận thức được người học phân bổ để tiếp nhận tải nội tại và xây dựng lược đồ, không phải là một thành phần tải độc lập thứ ba cộng dồn. Khung ICAP (Chi & Wylie, 2014) được định nghĩa chính xác là một mô hình phân tầng dự báo kết quả học tập ($\text{Interactive} > \text{Constructive} > \text{Active} > \text{Passive}$) phụ thuộc vào điều kiện nhiệm vụ và mức độ chuyên môn của người học.
+>
+> **EVID-LEARN-003 — MAJOR — RESOLVED: Loại bỏ Trích dẫn Chưa Xác thực & Phân định Nguồn Nghiên cứu**
+> - Bãi bỏ hoàn toàn trích dẫn không được kiểm chứng "Ye, J., et al. (2024)".
+> - Bổ sung trích dẫn nghiên cứu khoa học phản biện chuẩn mực (Peer-reviewed Research): Ye, Su, & Cao (KDD 2022) về thuật toán đường đi ngẫu nhiên ngắn nhất tối ưu hóa lập lịch giãn cách (dòng nghiên cứu tiền thân MaiMemo/DHP/SSP-MMC).
+> - Phân định rõ ràng mục riêng cho Tài liệu Kỹ thuật Triển khai Mã nguồn mở (Non-peer-reviewed Technical Documentation): Tài liệu thuật toán FSRS của Open-Spaced-Repetition và Anki Manual.
 >
 > **ENG-LEARN-002 — MAJOR — IMPLEMENTATION HANDOFF (Bảo lưu cho Terra)**
 > - Bộ tạo mã `scripts/build_web.py` hiện tại chưa phát sinh các nút bấm `.btn-hint`, `.btn-keypoints`, `.btn-answer` mà `src/web/assets/js/app.js` đang lắng nghe. Vấn đề này được ghi nhận trong hồ sơ bàn giao kỹ thuật cho pha triển khai của Terra; không chỉnh sửa mã nguồn renderer trong lượt thiết kế này.
@@ -72,7 +79,7 @@ Kiến trúc học tập của dự án HDH_UIT V2 được xây dựng dựa tr
 - **Hypercorrection Effect (Butterfield & Metcalfe, 2001, 2006; Metcalfe, 2017):** Hiện tượng người học sửa chữa sai lầm nhanh và sâu sắc hơn khi lỗi sai đó được cam kết với **mức độ tự tin cao** (*High-confidence error*), thay vì các lỗi sai do đoán mò. Điều này đòi hỏi thiết kế phải cho phép người học bộc lộ quan niệm sai lầm trước khi nhận phản hồi.
 
 ### 1.6. Khung Nhận thức ICAP & Tự giải thích (Chi & Wylie, 2014)
-- Khung ICAP phân loại các hành vi học tập thành bốn mức độ: Thụ động (Passive), Chủ động (Active), Kiến tạo (Constructive), và Tương tác (Interactive). Khung lý thuyết dự báo xu hướng kết quả học tập tăng dần theo thứ tự $\text{Interactive} > \text{Constructive} > \text{Active} > \text{Passive}$, với điều kiện nhiệm vụ học tập phù hợp với kiến thức nền tảng của người học (đối với người mới bắt đầu, việc tiếp nhận giàn giáo mẫu chuẩn là tiền đề bắt buộc trước khi thực hiện các hoạt động kiến tạo độc lập).
+- Khung ICAP phân loại các hành vi học tập thành bốn mức độ: Thụ động (Passive), Chủ động (Active), Kiến tạo (Constructive), và Tương tác (Interactive). Khung lý thuyết dự báo xu hướng kết quả học tập $\text{Interactive} > \text{Constructive} > \text{Active} > \text{Passive}$ trong các điều kiện nhiệm vụ cụ thể, có tính đến ranh giới nhận thức của người mới bắt đầu (vốn cần giàn giáo bài mẫu trước khi tự kiến tạo).
 
 ---
 
@@ -242,7 +249,7 @@ Thang đánh giá 4 mức độ dùng để cung cấp tham số cho thuật to�
 
 ### 7.1. Đánh giá Khách quan 3 Lớp Thuật toán Lập lịch Ôn tập
 
-Để đưa ra quyết định kiến trúc đúng đắn, chúng tôi so sánh 3 phương án dựa trên 7 tiêu chuẩn kỹ thuật:
+Để đưa ra quyết định kiến trúc đúng đắn, chúng tôi so sánh 3 phương án dựa trên 7 tiêu chuẩn kỹ thuật (đánh giá ghi nhận tại thời điểm 2026-09):
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────────────────┐
@@ -259,21 +266,23 @@ Thang đánh giá 4 mức độ dùng để cung cấp tham số cho thuật to�
 │   - Nhược điểm: Mô hình kinh nghiệm (heuristic), không tối ưu tham số tự động.   │
 │                                                                                  │
 │   [ Phương án C: FSRS Hiện đại (Free Spaced Repetition Scheduler) ]              │
-│   - Cấu trúc: Mô hình 3 thành phần S (Stability), D (Difficulty), R (Retrievability)│
-│     (FSRS-4.5: 19 tham số; FSRS-6: 21 tham số).                                 │
-│   - Phân định rõ:                                                                │
-│     * Scheduling Runtime: Đánh giá thuần giải tích bằng công thức đóng trong vài  │
-│       micro-giây, dùng bộ tham số mặc định chuẩn, KHÔNG cần gradient descent     │
-│       trong phiên học, hoạt động ngay từ ngày đầu với dữ liệu trống (Cold start).│
-│     * Parameter Optimization: Quá trình tùy chọn huấn luyện cá nhân hóa tham số  │
-│       bằng gradient descent qua log ôn tập lớn (thường thực hiện offline).       │
-│   - Ưu điểm: Mô hình khoa học hiện đại, dự báo xác suất thu hồi chính xác cao.  │
+│   - Cấu trúc: Mô hình 3 thành phần S (Stability), D (Difficulty), R (Retrievability).│
+│     * Lịch sử phiên bản tham số: FSRS v4/v4.5 (17 tham số), FSRS-5 (19 tham số),  │
+│       FSRS-6 (21 tham số). Các biến thể nghiên cứu/benchmark (như FSRS-7 với       │
+│       35 tham số) được thử nghiệm đo lường hiệu năng nhưng chưa là mặc định Anki.│
+│     * Phân định rõ ràng:                                                         │
+│       - Scheduling Runtime: Đánh giá giải tích thuần túy bằng công thức đóng trong│
+│         vài micro-giây, dùng bộ tham số mặc định chuẩn, KHÔNG cần gradient       │
+│         descent trong phiên học, hoạt động ngay từ ngày đầu (Cold start).        │
+│       - Parameter Optimization: Quá trình tùy chọn huấn luyện cá nhân hóa tham   │
+│         số bằng gradient descent qua log ôn tập lớn (thực hiện offline).         │
+│   - Ưu điểm: Mô hình khoa học hiện đại, độ chính xác dự báo thu hồi rất cao.     │
 │   - Nhược điểm: Cần nhiều phương trình phi tuyến, bảo trì phức tạp hơn cho web   │
 │     tĩnh học thuật đơn giản.                                                     │
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-| Tiêu chuẩn Đánh giá | Phương án A: Leitner Đơn giản | Phương án B: SM-2 Project Heuristic | Phương án C: FSRS Hiện đại |
+| Tiêu chuẩn Đánh giá | Phương án A: Leitner Đơn giản | Phương án B: SM-2 Project Heuristic | Phương án C: FSRS Hiện đại (2026-09) |
 | :--- | :--- | :--- | :--- |
 | **Tính Đơn giản (Simplicity)** | Cực cao | Rất cao | Trung bình (Nhiều phương trình toán phi tuyến) |
 | **Độ chuẩn xác Khoa học (Correctness)** | Trung bình | Tốt (Mô hình kinh nghiệm 30 năm) | Rất cao (Mô hình trí nhớ DSR hiện đại) |
@@ -287,7 +296,7 @@ Thang đánh giá 4 mức độ dùng để cung cấp tham số cho thuật to�
 > [!NOTE]
 > **QUYẾT ĐỊNH THIẾT KẾ:**
 > Dự án quyết định áp dụng **SM-2 Project Heuristic** cho nền tảng Web Companion IT007:
-> 1. **Lý do lựa chọn:** Không phải vì FSRS quá nặng (FSRS runtime thực chất hoàn toàn có thể chạy client-side với tham số mặc định), mà vì SM-2 Heuristic mang lại **tính minh bạch thuật toán cao nhất** cho sinh viên ngành Công nghệ Thông tin, mã nguồn tối giản tuyệt đối, hoàn toàn xác định ($100\%$ deterministic), dễ bảo trì và dễ viết bài kiểm thử hồi quy.
+> 1. **Lý do lựa chọn:** Không phải vì FSRS runtime quá nặng (FSRS runtime hoàn toàn có thể chạy client-side với tham số mặc định), mà vì SM-2 Heuristic mang lại **tính minh bạch thuật toán cao nhất** cho sinh viên ngành Công nghệ Thông tin, mã nguồn tối giản tuyệt đối, hoàn toàn xác định ($100\%$ deterministic), dễ bảo trì và dễ viết bài kiểm thử hồi quy.
 > 2. **Định danh trung thực:** Chúng tôi gọi đây là **Project Heuristic (Quy tắc Thực nghiệm Dự án)**, không tuyên bố là mô hình toán tối ưu tuyệt đối.
 
 #### Đặc tả Thuật toán Lập lịch Dự án (Project Heuristic Specification):
@@ -373,6 +382,7 @@ Thang đánh giá 4 mức độ dùng để cung cấp tham số cho thuật to�
 
 ## 10. THƯ MỤC THAM KHẢO RÚT GỌN (COMPACT BIBLIOGRAPHY)
 
+### 10.1. Nghiên cứu Khoa học Đã qua Bình duyệt (Peer-Reviewed Research)
 1. **Atkinson, R. K., Derry, S. J., Renkl, A., & Wortham, D.** (2000). Learning from examples: Instructional principles from the worked examples research. *Review of Educational Research*, 70(2), 181–214.
 2. **Butterfield, B., & Metcalfe, J.** (2001). Errors committed with high confidence are hypercorrected. *Journal of Experimental Psychology: Learning, Memory, and Cognition*, 27(6), 1491–1494.
 3. **Cepeda, N. J., Pashler, H., Vul, E., Wixted, J. T., & Rohrer, D.** (2006). Distributed practice in verbal recall tasks: A review and quantitative synthesis. *Psychological Bulletin*, 132(3), 354–380.
@@ -388,4 +398,8 @@ Thang đánh giá 4 mức độ dùng để cung cấp tham số cho thuật to�
 13. **Rohrer, D., & Taylor, K.** (2007). The shuffling of mathematics problems improves learning. *Instructional Science*, 35(6), 481–498.
 14. **Sweller, J.** (1988). Cognitive load during problem solving: Effects on learning. *Cognitive Science*, 12(2), 257–285.
 15. **Sweller, J., van Merriënboer, J. J. G., & Paas, F.** (2019). Cognitive architecture and instructional design: 20 years later. *Educational Psychology Review*, 31(2), 261–292.
-16. **Ye, J., et al.** (2024). *Free Spaced Repetition Scheduler (FSRS): Theoretical Foundations and Algorithmic Runtime*. Open-source research report.
+16. **Ye, J., Su, J., & Cao, Y.** (2022). A stochastic shortest path algorithm for optimizing spaced repetition scheduling. In *Proceedings of the 28th ACM SIGKDD Conference on Knowledge Discovery and Data Mining (KDD '22)*, 2281–2290. https://doi.org/10.1145/3534678.3539081 *(Nghiên cứu nền tảng về mô hình tối ưu hóa không gian trạng thái DHP/SSP-MMC cho lập lịch giãn cách).*
+
+### 10.2. Tài liệu Kỹ thuật Triển khai Mã nguồn Mở (Technical Implementation Documentation — Non-Peer-Reviewed)
+17. **Open-Spaced-Repetition.** (2024–2026). *The Algorithm of FSRS*. Tài liệu kỹ thuật mã nguồn mở, GitHub: `open-spaced-repetition/fsrs4anki`.
+18. **Anki Development Team.** (2024–2026). *FSRS (Free Spaced Repetition Scheduler)*. Anki Manual. https://docs.ankiweb.net/deck-options.html#fsrs

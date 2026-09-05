@@ -2,19 +2,20 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH4_CH7_LEARNING_ARCHITECTURE_FINAL_RECHECK`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH4_LEARNING_ARCHITECTURE_VERIFIED_READY_FOR_IMPLEMENTATION`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 7 (Chapter 7 Source Mapping):** `VERIFIED`  
+**Kiến trúc học tập (Learning Architecture):** `VERIFIED — V1.2`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 7 (Chapter 7 Authoring):** `NOT_STARTED`  
 **Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASSED` — All 15 foundation gates passing, Ch7 source map integrated.  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5 + CH6`  
 **Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6`  
-**Hành động tiếp theo chính xác (Exact Next Action):** Independent verification of Learning Architecture V1.2, then Terra implementation of learning primitives.  
+**Hành động tiếp theo chính xác (Exact Next Action):** Terra implementation of deterministic learning primitives and Learn/Review/Reference modes before Chapter 7 authoring.  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
-**Thời gian cập nhật:** 2026-09-04
+**Thời gian cập nhật:** 2026-09-05
 
 ---
 

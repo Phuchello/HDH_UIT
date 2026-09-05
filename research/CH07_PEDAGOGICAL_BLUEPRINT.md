@@ -1,7 +1,7 @@
 # HDH_UIT V2 — BẢN THIẾT KẾ SƯ PHẠM CHƯƠNG 7 (CH07 PEDAGOGICAL BLUEPRINT V1.2)
 # TÀI LIỆU THIẾT KẾ NHẬN THỨC & ÁNH XẠ NGUỒN CHÍNH THỨC IT007
 # MỤC ĐÍCH: HƯỚNG DẪN THIẾT KẾ GIẢNG DẠY QUẢN LÝ BỘ NHỚ THEO CHUẨN THỰC CHỨNG
-# CHẾ ĐỘ: ĐẶC TẢ THIẾT KẾ SƯ PHẠM (INSTRUCTIONAL DESIGN ONLY — ZERO TEXTBOOK PROSE)
+# CHẾ ĐỘ: ĐẶC TẢ THIẾT KẾ SƯ PHẠM (FINAL EVIDENCE & PROVENANCE CLOSEOUT — ZERO TEXTBOOK PROSE)
 
 ---
 
@@ -9,24 +9,36 @@
 
 > [!NOTE]
 > **PROV-PED-CH7-001 — MAJOR — RESOLVED: Chuẩn hóa Phân tầng Nguồn gốc Sư phạm (Pedagogical Provenance)**
-> - *Nguyên nhân:* Bản thảo trước chứa một số khái niệm mở rộng (như quy tắc 50%, gắn nhãn ASID, so sánh Page Fault, hành vi swap trên hệ điều hành di động) nhưng chưa phân định rõ ranh giới giữa nội dung chính ngạch UIT và kiến thức bổ trợ kinh điển.
-> - *Khắc phục:* Toàn bộ các mục tiêu học tập, vết thực thi và bài toán trong blueprint được phân loại minh bạch vào 4 tầng nguồn gốc:
+> - Toàn bộ các mục tiêu học tập, vết thực thi và bài toán trong blueprint được phân loại minh bạch vào 4 tầng nguồn gốc:
 >   1. `OFFICIAL_CORE`: Khái niệm/bài tập cốt lõi nằm trực tiếp trong Đề cương môn học, Slide bài giảng chính thức (`UIT-SLIDE-CH07-2024`) hoặc Ngân hàng bài tập UIT (`UIT-QBANK-CH07-2024`).
 >   2. `SOURCE_SUPPORTED_EXTENSION`: Khái niệm nằm trong slide UIT chi tiết vượt ra ngoài đề cương tóm tắt (TLB, EAT, bảng trang 2 cấp, bảng trang nghịch đảo, nạp/liên kết động).
 >   3. `TIER_B_ENRICHMENT`: Kiến thức bổ trợ từ giáo trình chuẩn quốc tế (Silberschatz) nhằm giải thích sâu bản chất kỹ thuật; tuyệt đối không mạo danh là đề thi hay thuật ngữ chính thức của UIT.
 >   4. `SYNTHETIC_TRANSFER`: Tình huống bài tập do nhóm sư phạm tự thiết kế nhằm kiểm tra năng lực chuyển giao M3 và khả năng xử lý trường hợp biên; có kiểm thử số học độc lập.
 >
-> **NUM-CH7-002 — MAJOR — RESOLVED: Thẩm định Ngữ nghĩa Số liệu QBANK-CH07-18**
-> - *Nguyên nhân:* Câu hỏi 9 trong `Bai tap chuong 7 HDH.docx` (P81) có văn bản: *"Biết thời gian truy xuất trong bộ nhớ thường không sử dụng TLBs là 250ns. Thời gian tìm kiếm trong bảng TLBs là 26ns. Hỏi xác suất tìm thấy trong TLBs bằng bao nhiêu nếu thời gian truy xuất trong bộ nhớ chính là 182ns?"*. Bản thảo trước từng nhầm $t_{\text{RAM}} = 250\text{ns}$, dẫn đến thời gian trúng $26 + 250 = 276\text{ns} > 182\text{ns}$ (mâu thuẫn toán học, cho ra $\alpha = 1.376 > 1$).
-> - *Khắc phục bằng chứng vật lý:*
->   - Đã mở trực tiếp tệp gốc `Bai tap chuong 7 HDH.docx` (SHA-256 `5b03f4e0...`).
->   - Đối chiếu với Câu 7 (P78-P79): trong hệ thống phân trang lưu bảng trang ở RAM, một thao tác truy xuất bộ nhớ không có TLB tốn $2 \times t_{\text{RAM}}$.
->   - Do đó cụm từ *"thời gian truy xuất trong bộ nhớ thường không sử dụng TLBs là 250ns"* biểu thị chu kỳ truy xuất phân trang không có TLB: $T_{\text{no-TLB}} = 2 \times t_{\text{RAM}} = 250\text{ns} \implies t_{\text{RAM}} = 125\text{ns}$.
->   - Áp dụng vào phương trình EAT: $182 = 26 + (2 - \alpha) \times 125 \implies 156 = (2 - \alpha) \times 125 \implies 2 - \alpha = 1.248 \implies \alpha = 0.752 = 75.2\%$. Kết quả $\alpha \in [0, 1]$ chuẩn xác, số thập phân chẵn gọn gàng.
->   - Đã ghi nhận cả nguyên văn nguồn và phân tích ngữ nghĩa vào đơn vị học liệu tương ứng.
+> **PROV-PED-CH7-002 — MAJOR — RESOLVED: Khắc phục Tính Đơn trị của Ví dụ Mẫu Chuẩn QBANK-CH07-15**
+> - *Nguyên nhân:* Bản thảo trước từng ghi nhận đồng thời cả ánh xạ khung $f=4$ (chuẩn docx P76) và khung $f=6$ (biến thể) bên trong cùng một mục `[CANONICAL_EXAMPLE]`. Điều này vi phạm tính đơn trị của bài mẫu chuẩn.
+> - *Khắc phục:* Xác nhận độc lập tệp gốc `Bai tap chuong 7 HDH.docx` (P76): câu b ghi rõ *"Địa chỉ 3254 nằm ở trang 1 với độ dời 1206. Trang 1 được nạp vào khung trang 4 => Địa chỉ vật lý là 9398"*. Bài mẫu chuẩn `[CANONICAL_EXAMPLE]` được cố định duy nhất vào kết quả chính thức: $p=1, d=1206, f=4 \implies \text{Địa chỉ Vật lý} = 4 \times 2048 + 1206 = 9398$. Loại bỏ hoàn toàn khả năng $f=6$ khỏi ví dụ chuẩn.
+>
+> **PROV-PED-CH7-003 — MINOR — RESOLVED: Đồng bộ Nhãn Nguồn gốc cho Khái niệm Page Fault**
+> - Khái niệm lỗi trang (Page Fault) thuộc phạm vi Chương 8 (Bộ nhớ ảo). Mọi dòng so sánh đối kháng, cầu nối nhận thức hoặc chẩn đoán quan niệm sai lầm liên quan đến Page Fault trong Chương 7 được định danh nhất quán là `[TIER_B_ENRICHMENT]`, tuyệt đối không gắn nhãn sai lệch thành `[OFFICIAL_CORE]`.
+>
+> **PED-CH7-001 — MINOR — RESOLVED: Bãi bỏ Tuyên bố Tuyệt đối Hóa Kích thước Trang**
+> - Câu hỏi thu hồi kín sách tại Đơn vị 5 được hiệu chỉnh từ mệnh đề tuyệt đối ("Tại sao kích thước trang luôn bắt buộc phải là lũy thừa của 2?") sang câu hỏi nhận thức kiến trúc nhị phân: "Tại sao các hệ thống kiến trúc địa chỉ nhị phân thông thường lựa chọn kích thước trang là lũy thừa của 2, và việc này giúp phần cứng phân tách trường bit số trang ($p$) và độ dời ($d$) mà không tốn chu kỳ chia số học của ALU như thế nào?".
+>
+> **LOC-CH7-001 — MINOR — RESOLVED: Chuẩn hóa Định danh Vị trí Đoạn Văn QBANK-CH07-18**
+> - Đối soát chi tiết cấu trúc XML của tệp canonical `Bai tap chuong 7 HDH.docx` (SHA-256 `5b03f4e0...`):
+>   - Câu hỏi 9 (QBANK-CH07-18) nằm tại chỉ số `body_paragraph_index: 80` (nếu đếm từ 0) hoặc đoạn thứ 81 (nếu đếm từ 1) trong tổng số 88 đoạn văn `w:body/w:p`.
+>   - Trong 84 đoạn văn `w:body/w:p` có nội dung chữ (non-empty), câu hỏi này nằm ở vị trí thứ 80.
+>   - Trong toàn bộ 100 phần tử `<w:p>` XML (bao gồm 12 đoạn trong ô bảng), câu hỏi này là phần tử thứ 93.
+>   - Báo cáo nguồn gốc trước đây ghi `P80` theo chỉ số 0-based của `body_ps` (hoặc 1-based của danh sách non-empty). Vị trí này được chuẩn hóa rõ ràng là `body_paragraph_80 (0-based) / body_paragraph_81 (1-based)` để loại bỏ mâu thuẫn hình thức.
 >
 > **NUM-CH7-001 — MAJOR — RESOLVED: Khôi phục Dữ liệu Cấp phát Phân vùng Động (QBANK-CH07-10)**
-> - Số liệu chính ngạch UIT đã được khôi phục nguyên trạng: 4 phân vùng là $600\text{KB}, 500\text{KB}, 200\text{KB}, 300\text{KB}$ (tổng $1600\text{KB} > 1167\text{KB}$). Đã chạy kiểm thử số học tự động xác nhận toàn bộ 9 bài toán định lượng trong blueprint.
+> - Số liệu chính ngạch UIT: 4 phân vùng $600\text{KB}, 500\text{KB}, 200\text{KB}, 300\text{KB}$ (tổng $1600\text{KB} > 1167\text{KB}$).
+>
+> **NUM-CH7-002 — MAJOR — RESOLVED: Thẩm định Ngữ nghĩa Số liệu QBANK-CH07-18**
+> - Nguyên văn docx: *"Biết thời gian truy xuất trong bộ nhớ thường không sử dụng TLBs là 250ns. Thời gian tìm kiếm trong bảng TLBs là 26ns. Hỏi xác suất tìm thấy trong TLBs bằng bao nhiêu nếu thời gian truy xuất trong bộ nhớ chính là 182ns?"*.
+> - Chu kỳ truy xuất không dùng TLB: $T_{\text{no-TLB}} = 2 \times t_{\text{RAM}} = 250\text{ns} \implies t_{\text{RAM}} = 125\text{ns}$.
+> - Giải phương trình: $\text{EAT} = \epsilon + (2 - \alpha) \times t_{\text{RAM}} \implies 182 = 26 + (2 - \alpha) \times 125 \implies \alpha = 75.2\%$.
 
 ---
 
@@ -108,7 +120,7 @@ Mọi chuyên đề trong bản thiết kế này đều được định vị r
 - **Ý đồ Vết thực thi `[CANONICAL_EXAMPLE]` (Slide 67, Bài 1 & `QBANK-CH07-10`):**
   - *Dữ liệu chính thức UIT:* 4 phân vùng trống: **$600\text{KB}, 500\text{KB}, 200\text{KB}, 300\text{KB}$** (Tổng $1600\text{KB}$).
   - *Chuỗi tiến trình:* **$P_1 (212\text{KB}), P_2 (417\text{KB}), P_3 (112\text{KB}), P_4 (426\text{KB})$** (Tổng $1167\text{KB}$).
-  - Vết thực thi phải thể hiện từng bước duyệt danh sách, vị trí con trỏ của Next Fit, và kích thước lỗ trống còn lại sau mỗi lượt cấp.
+  - Vết thực thi thể hiện từng bước duyệt danh sách, vị trí con trỏ của Next Fit, và kích thước lỗ trống còn lại sau mỗi lượt cấp.
 - **Mục tiêu Câu hỏi Dự đoán `[OFFICIAL_CORE]`:**
   - Liệu Best Fit có luôn luôn nạp được nhiều tiến trình hơn First Fit trong mọi trường hợp không?
 - **Kỹ năng Chuyển giao `[SYNTHETIC_TRANSFER]`:**
@@ -132,7 +144,7 @@ Mọi chuyên đề trong bản thiết kế này đều được định vị r
   - Số bit trang $p = \lceil \log_2(12) \rceil = 4\text{ bit} \implies$ Địa chỉ logic $= 4 + 11 = 15\text{ bit}$.
   - Số bit khung $f = \log_2(32) = 5\text{ bit} \implies$ Địa chỉ vật lý $= 5 + 11 = 16\text{ bit}$.
 - **Mục tiêu Câu hỏi Thu hồi `[OFFICIAL_CORE]`:**
-  - Tại sao kích thước trang luôn bắt buộc phải là lũy thừa của 2? Phân trang có loại bỏ hoàn toàn phân mảnh nội không?
+  - Tại sao các hệ thống kiến trúc địa chỉ nhị phân thông thường lựa chọn kích thước trang là lũy thừa của 2, và việc này giúp phần cứng phân tách trường bit số trang ($p$) và độ dời ($d$) mà không tốn chu kỳ chia số học của ALU như thế nào? Phân trang có loại bỏ hoàn toàn phân mảnh nội không?
 - **Kỹ năng Chuyển giao `[SYNTHETIC_TRANSFER]`:**
   - Cho không gian logic 32-bit và trang 4KB, xác định số trang logic tối đa và kích thước offset.
 - **Quan niệm sai lầm cần sửa `[OFFICIAL_CORE]`:**
@@ -146,11 +158,12 @@ Mọi chuyên đề trong bản thiết kế này đều được định vị r
 - **Mục tiêu học tập (Bloom Level 3):** Chuyển đổi chính xác một địa chỉ logic dạng số nguyên hoặc dạng thập lục phân sang địa chỉ vật lý thông qua bảng phân trang `[OFFICIAL_CORE]`.
 - **Loại khái niệm:** Kỹ năng Tính toán Định lượng (Numerical Skill).
 - **Mô thức đề xuất (Pattern D):** `WorkedExample (A)` $\to$ `FadedExample (B)` $\to$ `TransferProblem (C)` $\to$ `ErrorDiagnosis`.
-- **Ý đồ Vết thực thi `[CANONICAL_EXAMPLE]` (`QBANK-CH07-15`):**
-  - *Dữ liệu chính thức UIT:* Kích thước trang $2\text{KB} = 2048\text{ bytes}$. Địa chỉ logic $L = 3254$. Bảng trang có mục Trang 1 nạp vào Khung 4 (đáp án chính thức docx P76: $4 \times 2048 + 1206 = 9398$) hoặc Khung 6 (trường hợp biến thể: $6 \times 2048 + 1206 = 13494$).
+- **Ý đồ Vết thực thi Đơn trị `[CANONICAL_EXAMPLE]` (`QBANK-CH07-15`):**
+  - *Dữ liệu chính thức UIT (docx P76):* Kích thước trang $2\text{KB} = 2048\text{ bytes}$. Địa chỉ logic $L = 3254$. Bảng trang có mục Trang 1 nạp vào Khung 4.
   - Bước 1: $p = \lfloor 3254 / 2048 \rfloor = 1$, $d = 3254 \pmod{2048} = 1206$.
-  - Bước 2: Tra bảng trang tại mục $p=1 \implies f$.
-  - Bước 3: $\text{Địa chỉ Vật lý} = f \times 2048 + 1206$.
+  - Bước 2: Tra bảng trang tại mục $p=1 \implies f = 4$.
+  - Bước 3: $\text{Địa chỉ Vật lý} = 4 \times 2048 + 1206 = 8192 + 1206 = 9398$.
+  *(Kết quả đơn vị duy nhất, nguồn gốc chuẩn xác $100\%$, không đưa biến thể vào ví dụ chuẩn).*
 - **Kỹ năng Chuyển giao `[SYNTHETIC_TRANSFER]`:**
   - Chuyển đổi địa chỉ Hex trực tiếp (ví dụ: `0x00403A2C` với trang 4KB) bằng phép tách chuỗi hex mà không cần đổi sang hệ thập phân.
 - **Quan niệm sai lầm cần sửa `[OFFICIAL_CORE]`:**
@@ -169,8 +182,8 @@ Mọi chuyên đề trong bản thiết kế này đều được định vị r
 - **Mô thức đề xuất (Pattern B):** `MentalModel` $\to$ `ExecutionTrace` $\to$ `RecallCheckpoint`.
 - **Ý đồ Vết thực thi `[OFFICIAL_CORE]`:**
   - Sơ đồ rẽ nhánh xử lý: CPU phát $(p, d) \to$ Tra TLB song song $\to$ Nếu Hit lấy $f$; nếu Miss đọc Page Table trong RAM và cập nhật lại TLB.
-- **Quan niệm sai lầm cần sửa `[OFFICIAL_CORE]`:**
-  - Đồng nhất TLB Miss với lỗi trang (Page Fault).
+- **Quan niệm sai lầm cần sửa `[TIER_B_ENRICHMENT]`:**
+  - Đồng nhất TLB Miss với lỗi trang (Page Fault). Gắn nhãn bổ trợ Tier-B vì khái niệm Page Fault thuộc phạm vi Chương 8.
 - **Ánh xạ Bài tập Chính thức:** `QBANK-CH07-08` (Cài đặt bảng trang phần cứng và TLB).
 
 ---
@@ -188,6 +201,7 @@ Mọi chuyên đề trong bản thiết kế này đều được định vị r
   - $\text{Hit Time} = 34 + 124 = 158\text{ns}$; $\text{Miss Time} = 34 + 124 + 124 = 282\text{ns}$.
   - $\text{EAT} = 0.95 \times 158 + 0.05 \times 282 = 150.1 + 14.1 = 164.2\text{ns}$.
 - **Bài toán Tính Ngược Thẩm định `[CANONICAL_EXAMPLE]` (`QBANK-CH07-18`):**
+  - *Định vị nguồn gốc:* `QBANK-CH07-18` nằm tại `body_paragraph_80 (0-based) / body_paragraph_81 (1-based)` trong `Bai tap chuong 7 HDH.docx` (đoạn thứ 80 trong các đoạn có nội dung chữ).
   - *Nguyên văn docx UIT:* *"Biết thời gian truy xuất trong bộ nhớ thường không sử dụng TLBs là 250ns. Thời gian tìm kiếm trong bảng TLBs là 26ns. Hỏi xác suất tìm thấy trong TLBs bằng bao nhiêu nếu thời gian truy xuất trong bộ nhớ chính là 182ns?"*
   - *Phân tích ngữ nghĩa:* Chu kỳ truy xuất không dùng TLB $= 2 \times t_{\text{RAM}} = 250\text{ns} \implies t_{\text{RAM}} = 125\text{ns}$.
   - *Giải phương trình:* $\text{EAT} = \epsilon + (2 - \alpha) \times t_{\text{RAM}} \implies 182 = 26 + (2 - \alpha) \times 125 \implies 2 - \alpha = 1.248 \implies \alpha = 0.752 = 75.2\%$.
@@ -255,7 +269,7 @@ Bốn dạng toán định lượng cốt lõi của Chương 7 được chuẩn
 | Dạng Toán Định lượng | Cấp độ A (Worked Trace) - 100% Khung & Lời giải | Cấp độ B (Faded Example) - 50% Khung, Điền khuyết | Cấp độ C (Transfer Problem) - Tự chủ 100% |
 | :--- | :--- | :--- | :--- |
 | **Dạng 1: Cấp phát Phân vùng Động** | `[CANONICAL_EXAMPLE]` (`QBANK-CH07-10`): 4 bảng vết cho 4 thuật toán với các phân vùng $600\text{K}, 500\text{K}, 200\text{K}, 300\text{K}$. | `[CANONICAL_EXAMPLE]`: Cho sẵn kết quả $P_1, P_2$; để trống $P_3, P_4$ và yêu cầu tự xác định con trỏ Next Fit. | `[SYNTHETIC_TRANSFER]`: Đề bài với 5 tiến trình và có 1 tiến trình giải phóng bộ nhớ giữa chừng; tự lập bảng. |
-| **Dạng 2: Dịch Địa chỉ Phân trang** | `[CANONICAL_EXAMPLE]` (`QBANK-CH07-15`): Giải chi tiết từng phép chia tìm $p, d$ cho $L=3254$ và phép ghép địa chỉ vật lý. | `[CANONICAL_EXAMPLE]`: Cho sẵn $p, d$ đã tách; để trống ô tra bảng và công thức tính địa chỉ vật lý cuối cùng. | `[SYNTHETIC_TRANSFER]`: Đề bài cho địa chỉ Hex `0x00A15B20` trên hệ thống trang 4KB; yêu cầu phân tích trực tiếp trên hệ cơ số 16. |
+| **Dạng 2: Dịch Địa chỉ Phân trang** | `[CANONICAL_EXAMPLE]` (`QBANK-CH07-15`): Giải chi tiết từng phép chia tìm $p, d$ cho $L=3254$, tra mục trang 1 vào khung 4 và tính ra địa chỉ vật lý duy nhất là $9398$. | `[CANONICAL_EXAMPLE]`: Cho sẵn $p, d$ đã tách; để trống ô tra bảng và công thức tính địa chỉ vật lý cuối cùng. | `[SYNTHETIC_TRANSFER]`: Đề bài cho địa chỉ Hex `0x00A15B20` trên hệ thống trang 4KB; yêu cầu phân tích trực tiếp trên hệ cơ số 16. |
 | **Dạng 3: Thời gian Hiệu dụng EAT** | `[CANONICAL_EXAMPLE]` (`QBANK-CH07-16`): Trình bày bảng 2 nhánh Hit/Miss có trọng số, giải thích từng số hạng $34\text{ns}$ và $124\text{ns}$. | `[CANONICAL_EXAMPLE]`: Cho sẵn nhánh Hit; để trống nhánh Miss và yêu cầu tự hoàn thành công thức tính EAT. | `[CANONICAL_EXAMPLE]` (`QBANK-CH07-18`): Bài toán tính ngược: cho trước EAT và thời gian tra cứu, tìm tỷ lệ hit-ratio $\alpha=75.2\%$. |
 | **Dạng 4: Bảng trang Đa cấp** | `[CANONICAL_EXAMPLE]` (`QBANK-CH07-13`): Phân tích chi tiết trường bit $p_1=9, p_2=11, d=12$; tính dung lượng trang và số mục. | `[CANONICAL_EXAMPLE]`: Cấu trúc địa chỉ 32-bit với trang 8KB; để trống số bit Cấp 2 và yêu cầu tự suy luận. | `[SYNTHETIC_TRANSFER]`: Hệ thống 3 cấp bảng trang; tính toán tổng dung lượng RAM tiêu tốn cho bảng trang khi tiến trình dùng 64MB. |
 
@@ -280,5 +294,5 @@ Chỉ áp dụng xen kẽ đối kháng giữa các cặp khái niệm có nguy 
 ## 5. KẾT LUẬN & CHUẨN BỊ CHO GIAI ĐOẠN SOẠN THẢO
 
 - Toàn bộ các bài toán định lượng đã qua kiểm thử số học độc lập, giải quyết triệt để các sai lệch `NUM-CH7-001` và `NUM-CH7-002`.
-- Toàn bộ các khái niệm đã được gắn nhãn phân tầng nguồn gốc minh bạch theo `PROV-PED-CH7-001`.
+- Toàn bộ các khái niệm đã được gắn nhãn phân tầng nguồn gốc minh bạch theo `PROV-PED-CH7-001`, `PROV-PED-CH7-002`, và `PROV-PED-CH7-003`.
 - **Kỷ luật kiến trúc:** Nghiêm cấm việc bắt đầu viết văn bản giáo trình Chương 7 cho đến khi bản thiết kế này được nghiệm thu độc lập.
