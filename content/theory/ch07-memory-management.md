@@ -165,7 +165,6 @@ Trong mô hình cấp phát liên tục cơ bản, MMU sử dụng hai thanh ghi
 > - [0.3 điểm] Nêu rõ địa chỉ logic do CPU phát sinh; địa chỉ vật lý là vị trí thực tế trên bus phần cứng RAM.
 > - [0.3 điểm] Chỉ định chính xác MMU (Memory Management Unit) thực hiện chuyển đổi phần cứng trong thời gian thực thi.
 > - [0.4 điểm] Trình bày đúng điều kiện an toàn: Địa chỉ logic < Limit thì Physical = Logical + Base; ngược lại phát sinh ngắt bẫy lỗi (Trap / Segfault).
-> -->
 
 ---
 
@@ -265,7 +264,6 @@ Hệ điều hành không chia trước bộ nhớ. Khi một tiến trình đư
 > <!-- rubric -->
 > - [0.5 điểm] Nêu rõ phân mảnh nội nằm bên trong phân vùng do cấp phát dư; phân mảnh ngoại nằm rải rác ngoài các phân vùng do các lỗ trống không liên tục.
 > - [0.5 điểm] Khẳng định chính xác: Phân vùng cố định sinh ra phân mảnh nội; phân vùng động sinh ra phân mảnh ngoại.
-> -->
 
 ---
 
@@ -341,7 +339,6 @@ Khi có một danh sách các lỗ trống tự do (Free Hole List), hệ điề
 > <!-- rubric -->
 > - [0.5 điểm] First Fit luôn bắt đầu quét từ đầu danh sách lỗ trống; Next Fit quét tiếp từ vị trí con trỏ cấp phát của lượt trước đó.
 > - [0.5 điểm] Best Fit chọn lỗ nhỏ nhất vừa khít nên phần dư thừa để lại có kích thước tối thiểu, tạo thành các mảnh vụn nhỏ li ti khó tái sử dụng.
-> -->
 
 > [!TRANSFERPROBLEM] id="tp-ch07-fit-allocation" concept_id="ch07-fit-algorithms"
 > **Bài toán chuyển giao độc lập (Transfer Challenge):**
@@ -370,7 +367,6 @@ Khi có một danh sách các lỗ trống tự do (Free Hole List), hệ điề
 >   - Danh sách lỗ hiện tại: $[50\text{K}, 700\text{K}, 300\text{K}, 500\text{K}]$.
 > - $P_3(380\text{K})$: Các lỗ đủ lớn gồm $700\text{K}$ và $500\text{K}$. Nhỏ nhất là $\text{H}_4(500\text{K})$.
 >   - **Kết quả Best Fit:** $P_3$ được nạp vào Phân vùng 4 (còn dư $120\text{K}$).
-> -->
 
 ---
 
@@ -466,7 +462,6 @@ Quy trình chuyển đổi toán học tổng quát:
 > <!-- rubric -->
 > - [0.5 điểm] Viết đúng công thức: $p = \lfloor L/S \rfloor$, $d = L \pmod S$, $\text{PA} = f \times S + d$.
 > - [0.5 điểm] Giải thích đúng: loại bỏ phân mảnh ngoại vì trang nạp vào khung bất kỳ; còn phân mảnh nội vì trang cuối không dùng hết.
-> -->
 
 > [!TRANSFERPROBLEM] id="tp-ch07-paging-hex" concept_id="ch07-paging-translation"
 > **Bài toán chuyển giao Hex trực tiếp (Transfer Challenge):**
@@ -483,7 +478,6 @@ Quy trình chuyển đổi toán học tổng quát:
 > - Tra bảng trang với $p = \text{0x0041A} \implies$ Khung $f = \text{0x000F2}$.
 > - Ghép trực tiếp khung $f$ và độ dời $d$:
 >   $$\text{Địa chỉ vật lý} = [f \mid d] = \text{0x000F2} \times 0x1000 + 0x7C8 = \text{0x000F27C8}$$
-> -->
 
 ---
 
@@ -585,7 +579,6 @@ $$\text{EAT} = \epsilon + (2 - \alpha) \times t_{\text{RAM}}$$
 > <!-- rubric -->
 > - [0.5 điểm] Viết đúng công thức: $\text{EAT} = \epsilon + (2 - \alpha) \times t_{\text{RAM}}$ (hoặc triển khai qua hai nhánh Hit/Miss).
 > - [0.5 điểm] Giải thích rõ: 1 lần đọc bảng phân trang trong RAM để lấy frame number, và 1 lần đọc ô nhớ thực sự để lấy dữ liệu.
-> -->
 
 ---
 
@@ -713,7 +706,6 @@ Chi phí thời gian chuyển đổi ngữ cảnh phát sinh do hoán vị chủ
 > <!-- rubric -->
 > - [0.5 điểm] Nêu rõ chuyển tiến trình không hoạt động ra đĩa (Backing Store) và nạp lại khi cần chạy để tăng mức độ đa chương.
 > - [0.5 điểm] Khẳng định thời gian truyền dữ liệu (Transfer time) chiếm tỷ trọng áp đảo (hơn 99%) so với thời gian tìm kiếm (Seek time).
-> -->
 
 ---
 

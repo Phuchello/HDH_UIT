@@ -360,11 +360,17 @@ def render_callout(kind, body, doc_id, routes, current_rel):
             rubric = rubric.split("-->", 1)[-1]
             rows = []
             for line in rubric.splitlines():
-                if line.strip().startswith("-"):
+                stripped = line.strip()
+                if stripped.startswith("-"):
+                    content_after_dash = re.sub(r"^-\s*", "", stripped)
+                    if not content_after_dash or content_after_dash in {"->", "-->", ">"} or content_after_dash.startswith("->") or "-->" in line:
+                        continue
                     weight = re.search(r"\[([0-9.]+)\s*điểm\]", line)
                     w = weight.group(1) if weight else "0.5"
                     clean_line = re.sub(r"^-\s*", "", line.strip())
                     clean_line = re.sub(r"\[[0-9.]+\s*điểm\]", "", clean_line).strip()
+                    if not clean_line or clean_line in {"->", ">"}:
+                        continue
                     rows.append(
                         f'<div class="rubric-item">'
                         f'<label><input type="checkbox" class="rubric-check" data-weight="{w}"> '
@@ -412,6 +418,14 @@ def render_callout(kind, body, doc_id, routes, current_rel):
             if not solution and "<!-- rubric" in body:
                 prompt, solution = body.split("<!-- rubric", 1)
             solution = solution.split("-->", 1)[-1]
+            clean_solution_lines = []
+            for s_line in solution.splitlines():
+                s_stripped = s_line.strip()
+                if s_stripped in {"-->", "->", ">", "<!--", "> -->", "> ->"}:
+                    continue
+                clean_solution_lines.append(s_line)
+            solution = "\n".join(clean_solution_lines).strip()
+            solution = re.sub(r"(?:-->|--&gt;)\s*$", "", solution).strip()
             sol_id = f"{eid}__solution"
             scratchpad_id = f"{eid}__scratchpad"
             feedback_id = f"{eid}__feedback"
@@ -450,9 +464,17 @@ def render_callout(kind, body, doc_id, routes, current_rel):
         rubric = rubric.split("-->", 1)[-1]
         rows = []
         for line in rubric.splitlines():
-            if line.strip().startswith("-"):
+            stripped = line.strip()
+            if stripped.startswith("-"):
+                content_after_dash = re.sub(r"^-\s*", "", stripped)
+                if not content_after_dash or content_after_dash in {"->", "-->", ">"} or content_after_dash.startswith("->") or "-->" in line:
+                    continue
                 weight = re.search(r"\[([0-9.]+)\s*điểm\]", line)
                 w = weight.group(1) if weight else "0.5"
+                clean_line = re.sub(r"^-\s*", "", line.strip())
+                clean_line = re.sub(r"\[[0-9.]+\s*điểm\]", "", clean_line).strip()
+                if not clean_line or clean_line in {"->", ">"}:
+                    continue
                 rows.append(
                     f'<div class="rubric-item">'
                     f'<input type="checkbox" class="rubric-check" data-weight="{w}">'

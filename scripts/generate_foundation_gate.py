@@ -38,6 +38,7 @@ def main():
         run("validate_ch06_source_map", [py, "scripts/validate_ch06_source_map.py"]),
         run("validate_ch06_content", [py, "scripts/validate_ch06_content.py"]),
         run("validate_ch07_source_map", [py, "scripts/validate_ch07_source_map.py"]),
+        run("validate_ch07_content", [py, "scripts/validate_ch07_content.py"]),
         run("verify_research_gates", [py, "scripts/verify_research_gates.py"]),
         run("validate_learning_system", [py, "scripts/validate_learning_system.py"]),
     ]

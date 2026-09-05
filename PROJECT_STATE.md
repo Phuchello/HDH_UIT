@@ -2,7 +2,7 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH4_CH7_AUTHORING_READY_FOR_ENGINEERING_QA`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH4_CH7_READY_FOR_INDEPENDENT_ACADEMIC_REVIEW`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 7 (Chapter 7 Source Mapping):** `VERIFIED`  
@@ -10,11 +10,11 @@
 **Triển khai Hệ thống Học tập (Learning System Implementation):** `VERIFIED — LOCKED`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `CONTENT_VERIFIED`  
-**Soạn thảo nội dung Chương 7 (Chapter 7 Authoring):** `DRAFT_COMPLETE — PENDING ENGINEERING QA`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASSED — All 16 foundation gates passing, deterministic learning system integrated, Playwright browser suite (12/12) passing.`  
+**Soạn thảo nội dung Chương 7 (Chapter 7 Authoring):** `DRAFT_COMPLETE — ENGINEERING_QA_PASS`  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASSED — All 17 foundation gates passing, 13/13 Playwright browser tests passing, C0-clean, zero rubric/marker leaks.`  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5 + CH6`  
-**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6 + LEARNING_SYSTEM_FINAL_QA_CLOSED`  
-**Hành động tiếp theo chính xác (Exact Next Action):** `Terra engineering QA of Chapter 7 rendering, learning primitives, numeric integrity, routes and PDF/web compatibility.`  
+**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6 + LEARNING_SYSTEM_FINAL_QA_CLOSED + CH7_ENGINEERING_QA_PASS`  
+**Hành động tiếp theo chính xác (Exact Next Action):** `Codex Luna Ultra independent academic verification pass for Chapter 7.`  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-09-05
 

@@ -12,9 +12,9 @@ Enforces:
 6. Order-independent candidate discovery for same-named files in Evidence Mode (ENG-CH7-001).
 7. Explicit, reconciled QBank paragraph metrics (SRC-CH7-002: 88 body paragraphs, 1 table, 100 raw XML w:p).
 8. 100% gap-free page coverage across all 72 physical pages (67 CONTENT + 5 NON_CONTENT).
-9. All 19 contiguous semantic ranges MAPPED / NOT_WRITTEN.
-10. Exactly 20 QBank records mapped (QBANK-CH07-01..20), all MAPPED / NOT_WRITTEN.
-11. No Chapter 7 authoring started (content/theory/ch07-memory-management.md and content/questions/subjective/ch07.md must not exist).
+9. All 19 contiguous semantic ranges MAPPED with valid lifecycle status.
+10. Exactly 20 QBank records mapped (QBANK-CH07-01..20) with valid lifecycle status.
+11. Chapter 7 authoring files verified for canonical source references.
 12. Committed locked Chapters 1-6 academic source files remain completely untouched.
 """
 from __future__ import annotations
@@ -582,7 +582,7 @@ def main() -> int:
     print("  [OK] Order-independent multi-candidate discovery and deterministic resolution verified (ENG-CH7-001)")
     print("  [OK] Coverage: 67 CONTENT + 5 NON_CONTENT = 72 pages, gap-free")
     print("  [OK] Visual & structural page inspection completed and recorded")
-    print("  [OK] Zero Chapter 7 authoring files created prematurely")
+    print("  [OK] Chapter 7 authoring files contain required canonical source references")
     print("  [OK] Committed history from locked baseline 1855fd7 contains ZERO changes to Chapters 1-6")
     return 0
 

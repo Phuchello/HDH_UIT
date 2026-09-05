@@ -11,8 +11,8 @@ summary:
   non_content_pages_total: 49
   mapped_content_pages: 664
   unmapped_content_pages: 0
-  drafted_content_pages: 501  # Chapters 1–4 (307) + Ch5 (131) + Ch6 (63) (informational snapshot)
-  not_written_content_pages: 163 # Chapters 7–9 (verifier computes authoritative totals)
+  drafted_content_pages: 568  # Chapters 1–4 (307) + Ch5 (131) + Ch6 (63) + Ch7 (67) (informational snapshot)
+  not_written_content_pages: 96 # Chapters 8–9 (verifier computes authoritative totals)
 
 decks:
   - source_id: "UIT-SLIDE-CH01-2024"

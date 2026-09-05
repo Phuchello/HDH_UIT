@@ -71,6 +71,14 @@ def check_hygiene():
                     if pat in line:
                         leaks.append((rel_posix, line_idx, pat, line.strip()[:100]))
 
+        # C0 control character guard (disallow 0x00-0x08, 0x0B, 0x0C, 0x0E-0x1F, 0x7F)
+        for char_idx, ch in enumerate(content):
+            code = ord(ch)
+            if code < 0x09 or code == 0x0B or code == 0x0C or (0x0E <= code <= 0x1F) or code == 0x7F:
+                line_idx = content[:char_idx].count("\n") + 1
+                leaks.append((rel_posix, line_idx, f"C0_CONTROL_0x{code:02X}", f"Control character U+{code:04X} detected"))
+                break
+
     print(f"Scanned {scanned_count} tracked files.")
     
     if leaks:

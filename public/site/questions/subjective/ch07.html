@@ -256,7 +256,7 @@
 
 <p><strong>2. Thời gian truy xuất hiệu dụng (EAT - Effective Access Time):</strong></p>
 
-<ul><li>Định nghĩa: EAT là thời gian kỳ vọng trung bình để hoàn thành một thao tác truy xuất bộ nhớ, có tính đến xác suất trúng TLB.</li><li>Công thức:<p>$$	ext{EAT} = lpha 	imes T_{	ext{Hit}} + (1 - lpha) 	imes T_{	ext{Miss}}$$<br>Trong đó:</p><ul><li>$lpha$: Tỷ lệ trúng TLB (Hit ratio).</li><li>$\epsilon$: Thời gian tra cứu bảng TLB.</li><li>$t_{	ext{RAM}}$: Thời gian một chu kỳ truy xuất RAM.</li><li>$T_{	ext{Hit}} = \epsilon + t_{	ext{RAM}}$.</li><li>$T_{	ext{Miss}} = \epsilon + 2 	imes t_{	ext{RAM}}$.</li></ul><p>$$\implies 	ext{EAT} = \epsilon + (2 - lpha) 	imes t_{	ext{RAM}}$$</p></li></ul>
+<ul><li>Định nghĩa: EAT là thời gian kỳ vọng trung bình để hoàn thành một thao tác truy xuất bộ nhớ, có tính đến xác suất trúng TLB.</li><li>Công thức:<p>$$	ext{EAT} = \alpha 	imes T_{	ext{Hit}} + (1 - \alpha) 	imes T_{	ext{Miss}}$$<br>Trong đó:</p><ul><li>$\alpha$: Tỷ lệ trúng TLB (Hit ratio).</li><li>$\epsilon$: Thời gian tra cứu bảng TLB.</li><li>$t_{	ext{RAM}}$: Thời gian một chu kỳ truy xuất RAM.</li><li>$T_{	ext{Hit}} = \epsilon + t_{	ext{RAM}}$.</li><li>$T_{	ext{Miss}} = \epsilon + 2 	imes t_{	ext{RAM}}$.</li></ul><p>$$\implies 	ext{EAT} = \epsilon + (2 - \alpha) 	imes t_{	ext{RAM}}$$</p></li></ul>
 
 <h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-8">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
 
@@ -264,7 +264,7 @@
 
 <h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-8">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
 
-<ul><li><em>Lưu ý:</em> Khi đề bài cho "Thời gian tìm trong TLB coi như không đáng kể", công thức rút gọn là $	ext{EAT} = (2 - lpha) 	imes t_{	ext{RAM}}$.</li></ul>
+<ul><li><em>Lưu ý:</em> Khi đề bài cho "Thời gian tìm trong TLB coi như không đáng kể", công thức rút gọn là $	ext{EAT} = (2 - \alpha) 	imes t_{	ext{RAM}}$.</li></ul>
 
 <hr>
 
@@ -390,7 +390,7 @@
 
 <p><strong>b) Thời gian truy xuất hiệu dụng (EAT) khi có TLB:</strong></p>
 
-<ul><li>Tỷ lệ tìm thấy trong TLB: $lpha = 75\% = 0.75$.</li><li>Tỷ lệ trượt TLB: $1 - lpha = 25\% = 0.25$.</li><li>Thời gian khi trúng TLB (1 lần đọc RAM): $T_{	ext{Hit}} = 200	ext{ns}$.</li><li>Thời gian khi trượt TLB (2 lần đọc RAM): $T_{	ext{Miss}} = 400	ext{ns}$.</li><li>Thời gian truy xuất hiệu dụng:<p>$$	ext{EAT} = lpha 	imes T_{	ext{Hit}} + (1 - lpha) 	imes T_{	ext{Miss}}$$<br>$$	ext{EAT} = 0.75 	imes 200 + 0.25 	imes 400 = 150 + 100 = 250	ext{ns}$$</p></li></ul>
+<ul><li>Tỷ lệ tìm thấy trong TLB: $\alpha = 75\% = 0.75$.</li><li>Tỷ lệ trượt TLB: $1 - \alpha = 25\% = 0.25$.</li><li>Thời gian khi trúng TLB (1 lần đọc RAM): $T_{	ext{Hit}} = 200	ext{ns}$.</li><li>Thời gian khi trượt TLB (2 lần đọc RAM): $T_{	ext{Miss}} = 400	ext{ns}$.</li><li>Thời gian truy xuất hiệu dụng:<p>$$	ext{EAT} = \alpha 	imes T_{	ext{Hit}} + (1 - \alpha) 	imes T_{	ext{Miss}}$$<br>$$	ext{EAT} = 0.75 	imes 200 + 0.25 	imes 400 = 150 + 100 = 250	ext{ns}$$</p></li></ul>
 
 <h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-12">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
 
@@ -510,15 +510,15 @@
 
 <p><strong>Thông số đề bài:</strong></p>
 
-<ul><li>Thời gian một chu kỳ RAM: $t_{	ext{RAM}} = 124	ext{ns}$.</li><li>Thời gian tìm trong TLB: $\epsilon = 34	ext{ns}$.</li><li>Tỷ lệ tìm thấy trong TLB: $lpha = 95\% = 0.95$.</li></ul>
+<ul><li>Thời gian một chu kỳ RAM: $t_{	ext{RAM}} = 124	ext{ns}$.</li><li>Thời gian tìm trong TLB: $\epsilon = 34	ext{ns}$.</li><li>Tỷ lệ tìm thấy trong TLB: $\alpha = 95\% = 0.95$.</li></ul>
 
 <p><strong>a) Thời gian truy xuất thông thường (không dùng TLB):</strong><br>Khi không sử dụng TLB, mỗi thao tác cần 2 lần đọc RAM (1 lần đọc bảng trang, 1 lần đọc dữ liệu):<br>$$T_{	ext{normal}} = 2 	imes t_{	ext{RAM}} = 2 	imes 124 = 248	ext{ns}$$</p>
 
 <p><strong>b) Thời gian truy xuất hiệu dụng (EAT):</strong></p>
 
-<ul><li>Khi TLB Hit: Tốn thời gian tra TLB + 1 lần đọc RAM:<p>$$T_{	ext{Hit}} = \epsilon + t_{	ext{RAM}} = 34 + 124 = 158	ext{ns}$$</p></li><li>Khi TLB Miss: Tốn thời gian tra TLB + 2 lần đọc RAM (1 đọc bảng trang + 1 đọc dữ liệu):<p>$$T_{	ext{Miss}} = \epsilon + 2 	imes t_{	ext{RAM}} = 34 + (2 	imes 124) = 34 + 248 = 282	ext{ns}$$</p></li><li>Thời gian hiệu dụng EAT:<p>$$	ext{EAT} = lpha 	imes T_{	ext{Hit}} + (1 - lpha) 	imes T_{	ext{Miss}}$$<br>$$	ext{EAT} = 0.95 	imes 158 + 0.05 	imes 282 = 150.1 + 14.1 = 164.2	ext{ns}$$</p></li></ul>
+<ul><li>Khi TLB Hit: Tốn thời gian tra TLB + 1 lần đọc RAM:<p>$$T_{	ext{Hit}} = \epsilon + t_{	ext{RAM}} = 34 + 124 = 158	ext{ns}$$</p></li><li>Khi TLB Miss: Tốn thời gian tra TLB + 2 lần đọc RAM (1 đọc bảng trang + 1 đọc dữ liệu):<p>$$T_{	ext{Miss}} = \epsilon + 2 	imes t_{	ext{RAM}} = 34 + (2 	imes 124) = 34 + 248 = 282	ext{ns}$$</p></li><li>Thời gian hiệu dụng EAT:<p>$$	ext{EAT} = \alpha 	imes T_{	ext{Hit}} + (1 - \alpha) 	imes T_{	ext{Miss}}$$<br>$$	ext{EAT} = 0.95 	imes 158 + 0.05 	imes 282 = 150.1 + 14.1 = 164.2	ext{ns}$$</p></li></ul>
 
-<p><em>(Hoặc áp dụng trực tiếp công thức rút gọn: $	ext{EAT} = \epsilon + (2 - lpha) 	imes t_{	ext{RAM}} = 34 + (2 - 0.95) 	imes 124 = 34 + 1.05 	imes 124 = 34 + 130.2 = 164.2	ext{ns}$).</em></p>
+<p><em>(Hoặc áp dụng trực tiếp công thức rút gọn: $	ext{EAT} = \epsilon + (2 - \alpha) 	imes t_{	ext{RAM}} = 34 + (2 - 0.95) 	imes 124 = 34 + 1.05 	imes 124 = 34 + 130.2 = 164.2	ext{ns}$).</em></p>
 
 <h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-16">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
 
@@ -542,17 +542,17 @@
 
 <p><strong>Thông số đề bài:</strong></p>
 
-<ul><li>$	ext{EAT} = 175	ext{ns}$.</li><li>$lpha = 87\% = 0.87$.</li><li>$\epsilon = 24	ext{ns}$.</li><li>Cần tìm: Thời gian truy xuất bộ nhớ bình thường.</li></ul>
+<ul><li>$	ext{EAT} = 175	ext{ns}$.</li><li>$\alpha = 87\% = 0.87$.</li><li>$\epsilon = 24	ext{ns}$.</li><li>Cần tìm: Thời gian truy xuất bộ nhớ bình thường.</li></ul>
 
 <p><strong>Các bước giải:</strong></p>
 
-<ol><li>Áp dụng công thức EAT tổng quát:<p>$$	ext{EAT} = \epsilon + (2 - lpha) 	imes t_{	ext{RAM}}$$</p></li><li>Thay các giá trị đã biết vào phương trình:<p>$$175 = 24 + (2 - 0.87) 	imes t_{	ext{RAM}}$$<br>$$175 - 24 = 1.13 	imes t_{	ext{RAM}}$$<br>$$151 = 1.13 	imes t_{	ext{RAM}}$$</p></li><li>Suy ra thời gian một chu kỳ truy xuất RAM:<p>$$t_{	ext{RAM}} = rac{151}{1.13} pprox 133.63	ext{ns}$$</p></li><li>Thời gian truy xuất bộ nhớ chính thông thường khi không dùng TLB (2 lần truy xuất RAM):<p>$$T_{	ext{normal}} = 2 	imes t_{	ext{RAM}} = 2 	imes rac{151}{1.13} = rac{302}{1.13} pprox 267.26	ext{ns}$$</p></li></ol>
+<ol><li>Áp dụng công thức EAT tổng quát:<p>$$	ext{EAT} = \epsilon + (2 - \alpha) 	imes t_{	ext{RAM}}$$</p></li><li>Thay các giá trị đã biết vào phương trình:<p>$$175 = 24 + (2 - 0.87) 	imes t_{	ext{RAM}}$$<br>$$175 - 24 = 1.13 	imes t_{	ext{RAM}}$$<br>$$151 = 1.13 	imes t_{	ext{RAM}}$$</p></li><li>Suy ra thời gian một chu kỳ truy xuất RAM:<p>$$t_{	ext{RAM}} = \frac{151}{1.13} \approx 133.63	ext{ns}$$</p></li><li>Thời gian truy xuất bộ nhớ chính thông thường khi không dùng TLB (2 lần truy xuất RAM):<p>$$T_{	ext{normal}} = 2 	imes t_{	ext{RAM}} = 2 	imes \frac{151}{1.13} = \frac{302}{1.13} \approx 267.26	ext{ns}$$</p></li></ol>
 
 <p><em>(Ghi chú học thuật: Nếu câu hỏi hỏi thời gian của 1 chu kỳ đọc RAM $t_{	ext{RAM}}$ thì kết quả là $133.63	ext{ns}$; nếu hỏi chu trình truy xuất dữ liệu phân trang thông thường $2 	imes t_{	ext{RAM}}$ thì kết quả là $267.26	ext{ns}$. Bài làm nên trình bày cả hai chỉ số để đạt điểm tuyệt đối).</em></p>
 
 <h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-17">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
 
-<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Thiết lập đúng phương trình liên hệ giữa EAT, $\epsilon$, $lpha$ và $t_{	ext{RAM}}$</td><td>Gợi ý: 40%</td></tr><tr><td>Giải đúng $t_{	ext{RAM}} pprox 133.63	ext{ns}$</td><td>Gợi ý: 30%</td></tr><tr><td>Nêu rõ thời gian truy xuất thông thường $2 	imes t_{	ext{RAM}} pprox 267.26	ext{ns}$</td><td>Gợi ý: 30%</td></tr></tbody></table>
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Thiết lập đúng phương trình liên hệ giữa EAT, $\epsilon$, $\alpha$ và $t_{	ext{RAM}}$</td><td>Gợi ý: 40%</td></tr><tr><td>Giải đúng $t_{	ext{RAM}} \approx 133.63	ext{ns}$</td><td>Gợi ý: 30%</td></tr><tr><td>Nêu rõ thời gian truy xuất thông thường $2 	imes t_{	ext{RAM}} \approx 267.26	ext{ns}$</td><td>Gợi ý: 30%</td></tr></tbody></table>
 
 <h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-17">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
 
@@ -576,17 +576,17 @@
 
 <p><strong>Các bước giải chi tiết:</strong></p>
 
-<ol><li>Tính thời gian một lần đọc RAM:<p>$$t_{	ext{RAM}} = rac{250	ext{ns}}{2} = 125	ext{ns}$$</p></li><li>Áp dụng công thức tính EAT:<p>$$	ext{EAT} = \epsilon + (2 - lpha) 	imes t_{	ext{RAM}}$$</p></li><li>Thay số vào phương trình:<p>$$182 = 26 + (2 - lpha) 	imes 125$$<br>$$182 - 26 = (2 - lpha) 	imes 125$$<br>$$156 = (2 - lpha) 	imes 125$$</p></li><li>Giải tìm hệ số $(2 - lpha)$:<p>$$2 - lpha = rac{156}{125} = 1.248$$</p></li><li>Tính tỷ lệ trúng TLB $lpha$:<p>$$lpha = 2 - 1.248 = 0.752$$<br>$$lpha = 75.2\%$$</p></li></ol>
+<ol><li>Tính thời gian một lần đọc RAM:<p>$$t_{	ext{RAM}} = \frac{250	ext{ns}}{2} = 125	ext{ns}$$</p></li><li>Áp dụng công thức tính EAT:<p>$$	ext{EAT} = \epsilon + (2 - \alpha) 	imes t_{	ext{RAM}}$$</p></li><li>Thay số vào phương trình:<p>$$182 = 26 + (2 - \alpha) 	imes 125$$<br>$$182 - 26 = (2 - \alpha) 	imes 125$$<br>$$156 = (2 - \alpha) 	imes 125$$</p></li><li>Giải tìm hệ số $(2 - \alpha)$:<p>$$2 - \alpha = \frac{156}{125} = 1.248$$</p></li><li>Tính tỷ lệ trúng TLB $\alpha$:<p>$$\alpha = 2 - 1.248 = 0.752$$<br>$$\alpha = 75.2\%$$</p></li></ol>
 
 <p><strong>Kết luận:</strong> Xác suất tìm thấy trong TLB (Hit ratio) bằng <strong>$75.2\%$</strong>.</p>
 
 <h4 id="3-rubric-tu-kiem-tra-cua-handbook-self-check-rubric-18">3. Rubric tự kiểm tra của handbook (Self-Check Rubric)</h4>
 
-<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Suy luận đúng $t_{	ext{RAM}} = 250 / 2 = 125	ext{ns}$ từ thời gian không dùng TLB</td><td>Gợi ý: 35%</td></tr><tr><td>Thiết lập đúng phương trình EAT: $182 = 26 + (2 - lpha) 	imes 125$</td><td>Gợi ý: 35%</td></tr><tr><td>Giải chính xác kết quả $lpha = 0.752 = 75.2\%$</td><td>Gợi ý: 30%</td></tr></tbody></table>
+<table><thead><tr><th>Tiêu chí tự đánh giá (Checklist)</th><th>Trọng số gợi ý</th></tr></thead><tbody><tr><td>Suy luận đúng $t_{	ext{RAM}} = 250 / 2 = 125	ext{ns}$ từ thời gian không dùng TLB</td><td>Gợi ý: 35%</td></tr><tr><td>Thiết lập đúng phương trình EAT: $182 = 26 + (2 - \alpha) 	imes 125$</td><td>Gợi ý: 35%</td></tr><tr><td>Giải chính xác kết quả $\alpha = 0.752 = 75.2\%$</td><td>Gợi ý: 30%</td></tr></tbody></table>
 
 <h4 id="4-bay-e-thi-luu-y-thuc-chien-exam-traps-18">4. Bẫy đề thi &amp; Lưu ý thực chiến (Exam Traps)</h4>
 
-<ul><li><em>Bẫy kinh điển (NUM-CH7-002):</em> Rất nhiều sinh viên lấy trực tiếp $250	ext{ns}$ làm $t_{	ext{RAM}}$, dẫn đến phương trình: $182 = 26 + (2 - lpha) 	imes 250 \implies 2 - lpha = 156/250 = 0.624 \implies lpha = 1.376 &gt; 100\%$ (vô lý!). Nhớ rằng $250	ext{ns}$ là tổng 2 lần đọc RAM.</li></ul>
+<ul><li><em>Bẫy kinh điển (NUM-CH7-002):</em> Rất nhiều sinh viên lấy trực tiếp $250	ext{ns}$ làm $t_{	ext{RAM}}$, dẫn đến phương trình: $182 = 26 + (2 - \alpha) 	imes 250 \implies 2 - \alpha = 156/250 = 0.624 \implies \alpha = 1.376 &gt; 100\%$ (vô lý!). Nhớ rằng $250	ext{ns}$ là tổng 2 lần đọc RAM.</li></ul>
 
 <hr>
 

@@ -604,4 +604,127 @@ test.describe('HDH_UIT V2 Deterministic Learning System Browser Suite', () => {
     expect(consoleErrors).toEqual([]);
   });
 
+  // -------------------------------------------------------------------------
+  // Scenario 13: Chapter 7 Real Output Verification (QA-CH7-002)
+  // -------------------------------------------------------------------------
+  test('13. Chapter 7 real output: zero errors, no rubric artifacts, M2/M3 reachability, and study index', async ({ page }) => {
+    const pageErrors = [];
+    const consoleErrors = [];
+    page.on('pageerror', (err) => pageErrors.push(err.message));
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') consoleErrors.push(msg.text());
+    });
+
+    // 1. Page load & layout check
+    await page.goto('/theory/ch07-memory-management.html');
+    await page.waitForLoadState('domcontentloaded');
+    expect(pageErrors).toEqual([]);
+    expect(consoleErrors).toEqual([]);
+
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+    expect(overflow).toBe(false);
+
+    // 2. RecallCheckpoint #rc-ch07-logical-vs-physical rubric correctness
+    const rc = page.locator('#rc-ch07-logical-vs-physical');
+    await expect(rc).toBeVisible();
+    await expect(rc.locator('.card-mastery-badge')).toHaveText('M0');
+
+    // Rubric item count and weighting
+    const rubricItems = rc.locator('.rubric-item');
+    await expect(rubricItems).toHaveCount(3);
+
+    // Check weights and ensure no artifact "->" or comment markers
+    const weights = await rc.locator('.rubric-check').evaluateAll((inputs) =>
+      inputs.map((el) => parseFloat(el.getAttribute('data-weight') || '0'))
+    );
+    expect(weights).toEqual([0.3, 0.3, 0.4]);
+    const sumWeights = weights.reduce((a, b) => a + b, 0);
+    expect(Math.abs(sumWeights - 1.0)).toBeLessThan(0.001);
+
+    const rubricText = await rc.locator('.rubric-items').innerText();
+    expect(rubricText).not.toContain('->');
+    expect(rubricText).not.toContain('-->');
+
+    // Scratchpad persistence input
+    const scratchpad = rc.locator('.checkpoint-scratchpad');
+    await scratchpad.fill('Địa chỉ logic do CPU phát sinh, địa chỉ vật lý nằm trên RAM.');
+    await expect(scratchpad).toHaveValue('Địa chỉ logic do CPU phát sinh, địa chỉ vật lý nằm trên RAM.');
+
+    // Reveal rubric
+    const revealRubricBtn = rc.locator('.btn-reveal-rubric');
+    await revealRubricBtn.click();
+    const rubricContainer = page.locator('#rc-ch07-logical-vs-physical__rubric');
+    await expect(rubricContainer).toBeVisible();
+
+    // Check all checkboxes and submit recall -> M2 promotion
+    const checkboxes = rc.locator('.rubric-check');
+    for (let i = 0; i < 3; i++) {
+      await checkboxes.nth(i).check();
+    }
+    await rc.locator('.btn-submit-recall').click();
+    await expect(rc.locator('.card-mastery-badge')).toHaveText('M2');
+    await expect(rc.locator('.recall-feedback')).toContainText('Đạt M2 thành công');
+
+    // 3. TransferProblem #tp-ch07-fit-allocation
+    const tp = page.locator('#tp-ch07-fit-allocation');
+    await expect(tp).toBeVisible();
+    await expect(tp.locator('.card-mastery-badge')).toHaveText('M0');
+
+    // Reveal solution & ensure clean content without dangling -->
+    const revealSolBtn = tp.locator('.btn-reveal-transfer-solution');
+    await revealSolBtn.click();
+    const solContainer = page.locator('#tp-ch07-fit-allocation__solution');
+    await expect(solContainer).toBeVisible();
+
+    const solContent = await solContainer.locator('.solution-content').innerText();
+    expect(solContent.trim().endsWith('-->')).toBe(false);
+    expect(solContent.trim().endsWith('->')).toBe(false);
+    expect(solContent).not.toContain('--&gt;');
+
+    // Try passing transfer before M2 on concept 'ch07-fit-algorithms' -> gated
+    await tp.locator('.btn-transfer-pass').click();
+    await expect(tp.locator('.transfer-feedback')).toContainText('Bạn phải hoàn thành M2');
+    await expect(tp.locator('.card-mastery-badge')).toHaveText('M0');
+
+    // Complete M2 on concept 'ch07-fit-algorithms' via #rc-ch07-fit-algorithms
+    const rcFit = page.locator('#rc-ch07-fit-algorithms');
+    await rcFit.locator('.btn-reveal-rubric').click();
+    const fitChecks = rcFit.locator('.rubric-check');
+    const fitCount = await fitChecks.count();
+    for (let i = 0; i < fitCount; i++) {
+      await fitChecks.nth(i).check();
+    }
+    await rcFit.locator('.btn-submit-recall').click();
+    await expect(rcFit.locator('.card-mastery-badge')).toHaveText('M2');
+
+    // Now complete transfer on #tp-ch07-fit-allocation -> M3 promotion
+    await tp.locator('.btn-transfer-pass').click();
+    await expect(tp.locator('.card-mastery-badge')).toHaveText('M3');
+    await expect(tp.locator('.transfer-feedback')).toContainText('Đạt chuẩn M3');
+
+    // 4. Verify study_index.json Chapter 7 items
+    const indexRes = await page.request.get('/study_index.json');
+    expect(indexRes.ok()).toBe(true);
+    const studyIndex = await indexRes.json();
+    const ch7Items = studyIndex.filter((item) => String(item.chapter) === '7');
+    expect(ch7Items.length).toBe(8); // 6 recallcheckpoints + 2 transferproblems
+    const ch7RCs = ch7Items.filter((item) => item.type === 'recallcheckpoint');
+    const ch7TPs = ch7Items.filter((item) => item.type === 'transferproblem');
+    expect(ch7RCs.length).toBe(6);
+    expect(ch7TPs.length).toBe(2);
+    for (const item of ch7Items) {
+      expect(item.url).toBe('theory/ch07-memory-management.html');
+      expect(item.anchor).toBeTruthy();
+    }
+
+    // 5. Reference Mode readability
+    const refModeBtn = page.locator('#btn-mode-reference');
+    if (await refModeBtn.isVisible()) {
+      await refModeBtn.click();
+      await expect(page.locator('#rc-ch07-logical-vs-physical__rubric')).toBeVisible();
+      await expect(page.locator('#tp-ch07-fit-allocation__solution')).toBeVisible();
+    }
+  });
+
 });
+
