@@ -717,13 +717,76 @@ test.describe('HDH_UIT V2 Deterministic Learning System Browser Suite', () => {
       expect(item.anchor).toBeTruthy();
     }
 
-    // 5. Reference Mode readability
-    const refModeBtn = page.locator('#btn-mode-reference');
-    if (await refModeBtn.isVisible()) {
-      await refModeBtn.click();
-      await expect(page.locator('#rc-ch07-logical-vs-physical__rubric')).toBeVisible();
-      await expect(page.locator('#tp-ch07-fit-allocation__solution')).toBeVisible();
-    }
+    // 5. Reference Mode readability (QA-CH7-006: Unconditional, no silent skip)
+    const refModeBtn = page.locator('button[data-mode="reference"]');
+    await expect(refModeBtn).toHaveCount(1);
+    await expect(refModeBtn).toBeVisible();
+    await refModeBtn.click();
+    await expect(page.locator('html')).toHaveAttribute('data-ui-mode', 'reference');
+    await expect(page.locator('#rc-ch07-logical-vs-physical__rubric')).toBeVisible();
+    await expect(page.locator('#tp-ch07-fit-allocation__solution')).toBeVisible();
+  });
+
+  // -------------------------------------------------------------------------
+  // Scenario 14: Actual Chapter 7 Mobile Test at 390px (QA-CH7-007)
+  // -------------------------------------------------------------------------
+  test('14. Mobile usability on Chapter 7 at 390px: theory and subjective pages render without overflow, controls operable', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const pageErrors = [];
+    const consoleErrors = [];
+    page.on('pageerror', (err) => pageErrors.push(err.message));
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') consoleErrors.push(msg.text());
+    });
+
+    // A. Chapter 7 Theory page
+    await page.goto('/theory/ch07-memory-management.html');
+    await page.waitForLoadState('domcontentloaded');
+
+    let overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+    expect(overflow).toBe(false);
+
+    // Mode switch usable
+    const modeSwitcher = page.locator('.mode-switcher');
+    await expect(modeSwitcher).toBeVisible();
+    const refBtn = page.locator('button[data-mode="reference"]');
+    await expect(refBtn).toBeVisible();
+    await refBtn.click();
+    await expect(page.locator('html')).toHaveAttribute('data-ui-mode', 'reference');
+
+    // Switch back to learn mode for interactive check
+    const learnBtn = page.locator('button[data-mode="learn"]');
+    await learnBtn.click();
+    await expect(page.locator('html')).toHaveAttribute('data-ui-mode', 'learn');
+
+    // RecallCheckpoint reveal button clickable and rubric remains within viewport
+    const rc = page.locator('#rc-ch07-logical-vs-physical');
+    const revealBtn = rc.locator('.btn-reveal-rubric');
+    await expect(revealBtn).toBeVisible();
+    await revealBtn.click();
+    const rubric = page.locator('#rc-ch07-logical-vs-physical__rubric');
+    await expect(rubric).toBeVisible();
+
+    overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+    expect(overflow).toBe(false);
+
+    // TransferProblem controls usable
+    const tp = page.locator('#tp-ch07-fit-allocation');
+    const revealSolBtn = tp.locator('.btn-reveal-transfer-solution');
+    await expect(revealSolBtn).toBeVisible();
+    await revealSolBtn.click();
+    const sol = page.locator('#tp-ch07-fit-allocation__solution');
+    await expect(sol).toBeVisible();
+
+    // B. Chapter 7 Subjective QBank page
+    await page.goto('/questions/subjective/ch07.html');
+    await page.waitForLoadState('domcontentloaded');
+
+    const qbankOverflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+    expect(qbankOverflow).toBe(false);
+
+    expect(pageErrors).toEqual([]);
+    expect(consoleErrors).toEqual([]);
   });
 
 });

@@ -2,7 +2,7 @@
 
 **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)  
 **Nhánh Git làm việc:** `v2/complete-theory-labs`  
-**Giai đoạn hiện tại (Current Phase):** `V2_BATCH4_CH7_READY_FOR_INDEPENDENT_ACADEMIC_REVIEW`  
+**Giai đoạn hiện tại (Current Phase):** `V2_BATCH4_CH7_READY_FOR_FINAL_INDEPENDENT_ENGINEERING_CHECK`  
 **Bản đồ nguồn Chương 5 (Chapter 5 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 6 (Chapter 6 Source Mapping):** `VERIFIED`  
 **Bản đồ nguồn Chương 7 (Chapter 7 Source Mapping):** `VERIFIED`  
@@ -10,11 +10,11 @@
 **Triển khai Hệ thống Học tập (Learning System Implementation):** `VERIFIED — LOCKED`  
 **Soạn thảo nội dung Chương 5 (Chapter 5 Authoring):** `CONTENT_VERIFIED`  
 **Soạn thảo nội dung Chương 6 (Chapter 6 Authoring):** `CONTENT_VERIFIED`  
-**Soạn thảo nội dung Chương 7 (Chapter 7 Authoring):** `DRAFT_COMPLETE — ENGINEERING_QA_PASS`  
-**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASSED — All 17 foundation gates passing, 13/13 Playwright browser tests passing, C0-clean, zero rubric/marker leaks.`  
+**Soạn thảo nội dung Chương 7 (Chapter 7 Authoring):** `DRAFT_COMPLETE — ENGINEERING_QA_IMPLEMENTED — PENDING FINAL INDEPENDENT CHECK`  
+**Sẵn sàng QA kỹ thuật (Ready for Engineering QA):** `PASS — Numerical validation, content bindings, negative tests, and browser test fidelity closed.`  
 **Xác minh học thuật (Academic Verification):** `PASS — BATCH 1 + CH5 + CH6`  
-**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6 + LEARNING_SYSTEM_FINAL_QA_CLOSED + CH7_ENGINEERING_QA_PASS`  
-**Hành động tiếp theo chính xác (Exact Next Action):** `Codex Luna Ultra independent academic verification pass for Chapter 7.`  
+**Xác minh kỹ thuật (Engineering Verification):** `PASS — CH5 + CH6 + LEARNING_SYSTEM_FINAL_QA_CLOSED; CH7 ENGINEERING QA READY FOR FINAL INDEPENDENT CHECK`  
+**Hành động tiếp theo chính xác (Exact Next Action):** `Final independent engineering verification; if passed, proceed to Chapter 7 academic/source-fidelity review.`  
 **Tác giả / Biên soạn:** Võ Trọng Phúc  
 **Thời gian cập nhật:** 2026-09-05
 
@@ -50,7 +50,7 @@ Một kho dữ liệu nguồn duy nhất (**Single Source of Truth** tại thư 
 | :--- | :--- | :---: |
 | [`research/V2_FOUNDATION_GATE.md`](research/V2_FOUNDATION_GATE.md) | Báo cáo chốt khóa toàn bộ cổng nền tảng sinh tự động bởi script. | `LOCKED` |
 | [`research/RESEARCH_GATE_QA.md`](research/RESEARCH_GATE_QA.md) | Báo cáo kiểm toán nghiên cứu định lượng tự động tính toán 100% từ cấu trúc dữ liệu. | `PASS` |
-| [`research/GATE_NEGATIVE_TESTS.md`](research/GATE_NEGATIVE_TESTS.md) | Báo cáo kiểm thử phủ định 11 kịch bản lỗi cố ý (11/11 phát hiện chính xác). | `PASS` |
+| [`research/GATE_NEGATIVE_TESTS.md`](research/GATE_NEGATIVE_TESTS.md) | Báo cáo kiểm thử phủ định 15 kịch bản lỗi cố ý (15/15 phát hiện chính xác). | `PASS` |
 | [`research/SSOT_BUILD_PROOF.md`](research/SSOT_BUILD_PROOF.md) | Báo cáo thực nghiệm chứng minh cơ chế nguồn đơn nhất tất định. | `PASS` |
 | [`research/data/slide_coverage.yaml`](research/data/slide_coverage.yaml) | Dữ liệu cấu trúc 13 deck hiện được khai báo (719 trang vật lý: 665 content, 54 non-content); Ch4 canonical là 74/59 với map đã xác minh, không còn Ch4 Part 3. | `SOURCE-FIDELITY PASS` |
 | [`research/data/official_review_questions.yaml`](research/data/official_review_questions.yaml) | Dữ liệu 95 records: 60 qbank + 33 concrete Midterm occurrences + 2 external-set references; source families được phân biệt. | `VERIFIED STRUCTURE` |

@@ -3,15 +3,15 @@
 
 - **Dự án:** CẨM NANG HỆ ĐIỀU HÀNH — IT007 UIT (V2 TRIPLE-PRODUCT EXPANSION)
 - **Nhánh Git:** `v2/complete-theory-labs`
-- **Kỹ sư thẩm định:** Terra Medium (Static-site / Validator / Runtime / Numerical QA Engineer)
+- **Vai trò thẩm định:** Engineering QA (Static-site / Validator / Runtime / Numerical QA)
 - **Thời gian thẩm định:** 2026-09-05
-- **Trạng thái thẩm định:** `ENGINEERING_QA_PASS — READY FOR LUNA ACADEMIC PASS`
+- **Trạng thái thẩm định:** `ENGINEERING_QA_PASS — READY FOR INDEPENDENT ACADEMIC/SOURCE-FIDELITY REVIEW`
 
 ---
 
 ## 1. TỔNG QUAN KẾT QUẢ THẨM ĐỊNH (EXECUTIVE SUMMARY)
 
-Đợt thẩm định kỹ thuật độc lập cho Chương 7 (Quản lý Bộ nhớ - Memory Management) đã xử lý dứt điểm toàn bộ các khiếm khuyết hiển thị, mã hoá và tính nhất quán dữ liệu được phát hiện sau giai đoạn soạn thảo sơ bộ (Drafting Pass). Toàn bộ 17 cổng nền tảng (Foundation Gates) và 13/13 kịch bản kiểm thử trình duyệt tự động Playwright đều đạt trạng thái **PASS tuyệt đối**.
+Đợt thẩm định kỹ thuật cho Chương 7 (Quản lý Bộ nhớ - Memory Management) đã xử lý dứt điểm toàn bộ các khiếm khuyết hiển thị, mã hoá, tính nhất quán dữ liệu và hoàn tất phạm vi kiểm thử tất định (coverage closeout). Toàn bộ 17 cổng nền tảng (Foundation Gates), 15/15 ca kiểm thử phủ định (Negative Mutation Tests), và 14/14 kịch bản kiểm thử trình duyệt Playwright đều đạt trạng thái **PASS tuyệt đối**.
 
 | Mã định danh | Phân loại | Trọng yếu | Trạng thái | Mô tả khắc phục |
 |---|---|---|---|---|
@@ -22,6 +22,12 @@
 | **QA-CH7-001** | Validator | MAJOR | **RESOLVED** | Xây dựng công cụ kiểm tra tất định `scripts/validate_ch07_content.py` bao quát cấu trúc, quy tắc rubric và tính toán lại độc lập toàn bộ 13 bài toán định lượng kinh điển. |
 | **QA-CH7-002** | Browser Testing | MAJOR | **RESOLVED** | Bổ sung Scenario 13 trong `tests/learning-system.spec.js` kiểm thử trực tiếp trên trang `/theory/ch07-memory-management.html`: không lỗi console/layout, M2/M3 tương tác thực tế, và study_index.json đủ 8 mục Ch7. |
 | **VAL-CH7-001** | Validator Text | MINOR | **RESOLVED** | Cập nhật docstring và thông điệp đầu ra của `scripts/validate_ch07_source_map.py` phù hợp với vòng đời dự án mà không làm suy yếu kiểm tra định danh nguồn. |
+| **QA-CH7-003** | Numerical Invariants | MAJOR | **RESOLVED** | Hoàn thiện phủ định lượng: Q10 kiểm tra chính xác thứ tự cấp phát và mảng lỗ trống còn lại cho cả 4 thuật toán; Q14 kiểm tra đẳng thức biểu tượng $2^{a+b+c} = 2^{32-d}$; Q20 kiểm tra đồng thời độ rộng trường frame (6 bit) và số mục bảng trang (45 mục). |
+| **QA-CH7-004** | Content Binding | MAJOR | **RESOLVED** | Ràng buộc trực tiếp các tham số nguồn và kết quả tính toán Q10..Q20 vào văn bản Markdown; bổ sung kiểm thử đột biến bắt buộc phát hiện sai lệch số liệu (Q15 9398->9999, Q18 75.2%->57.2%, Q20 45->64). |
+| **QA-CH7-005** | Per-Unit Schema | MAJOR | **RESOLVED** | Phân đoạn QBank theo từng đơn vị câu hỏi `^### QBANK-CH07-XX:`, kiểm tra độc lập cấu trúc 4 phần chuẩn mực cho từng câu hỏi riêng biệt; kiểm thử đột biến loại bỏ phân đoạn bị chặn ngay lập tức. |
+| **QA-CH7-006** | Browser Test Fidelity| MAJOR | **RESOLVED** | Chuyển đổi kiểm thử Chế độ Tra cứu (Reference Mode) trong Scenario 13 sang bộ chọn chuẩn `button[data-mode="reference"]`, kiểm tra không điều kiện và xác nhận hiển thị toàn diện không cần tương tác đánh giá. |
+| **QA-CH7-007** | Mobile Usability | MAJOR | **RESOLVED** | Bổ sung Scenario 14 trong `tests/learning-system.spec.js` kiểm thử thực tế trên viewport di động 390x844 cho cả trang lý thuyết `/theory/ch07-memory-management.html` và bài tập tự luận `/questions/subjective/ch07.html`. |
+| **PUB-CH7-001** | Neutral Reporting | MINOR | **RESOLVED** | Loại bỏ hoàn toàn định danh mô hình/agent khỏi báo cáo và trạng thái dự án, sử dụng chức danh vai trò kỹ thuật chuẩn mực. |
 
 ---
 
@@ -57,61 +63,52 @@
 
 ---
 
-## 3. TÁI TÍNH TOÁN ĐỘC LẬP 13 BÀI TOÁN KINH ĐIỂN CHƯƠNG 7 (QA-CH7-001)
+## 3. TÁI TÍNH TOÁN ĐỘC LẬP & RÀNG BUỘC VĂN BẢN 13 BÀI TOÁN KINH ĐIỂN CHƯƠNG 7 (QA-CH7-001, QA-CH7-003, QA-CH7-004)
 
-Công cụ kiểm tra tự động `scripts/validate_ch07_content.py` đã tái lập và xác nhận kết quả giải thuật / số học cho tất cả 13 bài toán:
+Công cụ kiểm tra tự động `scripts/validate_ch07_content.py` đã xác nhận cả thuật toán độc lập và nội dung Markdown đã xuất bản cho tất cả 13 bài toán:
 
 1. **QBANK-CH07-10 (Chiến lược cấp phát bộ nhớ liên tục):**
    - Lỗ trống ban đầu: `[600, 500, 200, 300]` KB; Tiến trình: `[212, 417, 112, 426]` KB.
-   - *First Fit:* P1 nạp lỗ 600K (còn 388K); P2 nạp lỗ 500K (còn 83K); P3 nạp lỗ 388K (còn 276K); P4(426K) **THẤT BẠI** (lỗ lớn nhất hiện có 300K < 426K).
-   - *Best Fit:* P1 nạp lỗ 300K (dư 88K); P2 nạp lỗ 500K (dư 83K); P3 nạp lỗ 200K (dư 88K); P4 nạp lỗ 600K (dư 174K) -> **THÀNH CÔNG DUY NHẤT**.
-   - *Worst Fit:* P1 nạp 600K; P2 nạp 500K; P3 nạp 388K; P4(426K) **THẤT BẠI**.
-   - *Next Fit:* P1 nạp 600K; P2 nạp 500K; P3 nạp 200K; P4(426K) **THẤT BẠI**.
+   - *First Fit:* Thứ tự cấp phát `[0, 1, 0, None]`, lỗ trống cuối cùng `[276, 83, 200, 300]`. P4 thất bại.
+   - *Best Fit:* Thứ tự cấp phát `[3, 1, 2, 0]`, lỗ trống cuối cùng `[174, 83, 88, 88]`. Thành công 100%.
+   - *Next Fit:* Thứ tự cấp phát `[0, 1, 2, None]`, lỗ trống cuối cùng `[388, 83, 88, 300]`. P4 thất bại.
+   - *Worst Fit:* Thứ tự cấp phát `[0, 1, 0, None]`, lỗ trống cuối cùng `[276, 83, 200, 300]`. P4 thất bại.
 2. **QBANK-CH07-11 (Độ rộng địa chỉ phân trang):**
-   - Kích thước trang $S = 2048 = 2^{11} \implies d = 11\text{ bit}$.
-   - 12 trang logic $\implies p = \lceil \log_2(12) \rceil = 4\text{ bit}$. Không gian logic = $4 + 11 = 15\text{ bit}$.
-   - 32 khung vật lý $\implies f = \log_2(32) = 5\text{ bit}$. Không gian vật lý = $5 + 11 = 16\text{ bit}$.
-3. **QBANK-CH07-12 (Thời gian truy xuất hiệu dụng EAT không tải TLB):**
-   - $t_{\text{RAM}} = 200\text{ns}, \text{normal} = 400\text{ns}, \alpha = 0.75, \epsilon = 0$.
-   - $\text{EAT} = 0.75 \times 200 + 0.25 \times 400 = 150 + 100 = 250\text{ns}$.
+   - $S = 2048 = 2^{11} \implies d = 11\text{ bit}$. 12 trang logic $\implies p = 4\text{ bit} \implies$ Logic $= 15\text{ bit}$.
+   - 32 khung vật lý $\implies f = 5\text{ bit} \implies$ Vật lý $= 16\text{ bit}$.
+3. **QBANK-CH07-12 (EAT không tải TLB):**
+   - $t_{\text{RAM}} = 200\text{ns}, \text{normal} = 400\text{ns}, \alpha = 0.75, \epsilon = 0 \implies \text{EAT} = 250\text{ns}$.
 4. **QBANK-CH07-13 (Phân trang hai cấp):**
-   - Không gian 32-bit: $p_1 = 9\text{ bit}, p_2 = 11\text{ bit} \implies d = 32 - 20 = 12\text{ bit}$.
-   - Kích thước trang $S = 2^{12} = 4096\text{ bytes} = 4\text{KB}$. Số trang logic $= 2^{20}$ trang.
-5. **QBANK-CH07-14 (Công thức số trang):**
-   - Số trang trong kiến trúc 32-bit với offset $d$ là $2^{32-d}$.
+   - 32-bit: $p_1 = 9, p_2 = 11 \implies d = 12\text{ bit}, S = 4096\text{ bytes} = 4\text{KB}$, số trang $= 2^{20}$.
+5. **QBANK-CH07-14 (Công thức số trang biểu tượng):**
+   - Phân rã $a \mid b \mid c \mid d$: số trang $= 2^{a+b+c} = 2^{32-d}$. Đã kiểm tra tính bất biến đại số.
 6. **QBANK-CH07-15 (Chuyển đổi địa chỉ):**
-   - *Phần A:* $\text{PA} = 6568, S = 1024 \implies f = 6568 // 1024 = 6, d = 6568 \pmod{1024} = 424$. Khung 6 chứa trang 3 $\implies \text{LA} = 3 \times 1024 + 424 = 3496$.
-   - *Phần B:* $S = 2048, \text{LA} = 3254 \implies p = 1, d = 1206$. Trang 1 nạp khung 4 $\implies \text{PA} = 4 \times 2048 + 1206 = 9398$.
+   - Phần A: $\text{PA} = 6568, S = 1024 \implies f = 6, d = 424 \implies \text{LA} = 3496$.
+   - Phần B: $S = 2048, \text{LA} = 3254 \implies p = 1, d = 1206 \implies \text{PA} = 9398$.
 7. **QBANK-CH07-16 (EAT có độ trễ tra bảng TLB):**
-   - $t_{\text{RAM}} = 124\text{ns}, \epsilon = 34\text{ns}, \alpha = 0.95$.
-   - $T_{\text{normal}} = 248\text{ns}, T_{\text{Hit}} = 158\text{ns}, T_{\text{Miss}} = 282\text{ns}$.
-   - $\text{EAT} = 0.95 \times 158 + 0.05 \times 282 = 150.1 + 14.1 = 164.2\text{ns}$.
+   - $t_{\text{RAM}} = 124\text{ns}, \epsilon = 34\text{ns}, \alpha = 0.95 \implies T_{\text{normal}} = 248\text{ns}, T_{\text{Hit}} = 158\text{ns}, T_{\text{Miss}} = 282\text{ns}, \text{EAT} = 164.2\text{ns}$.
 8. **QBANK-CH07-17 (Tính ngược $t_{\text{RAM}}$ từ EAT):**
-   - $\text{EAT} = 175\text{ns}, \epsilon = 24\text{ns}, \alpha = 0.87$.
-   - $175 = 24 + (2 - 0.87) \times t_{\text{RAM}} \implies t_{\text{RAM}} = 151 / 1.13 \approx 133.63\text{ns}$. $T_{\text{normal}} \approx 267.26\text{ns}$.
+   - $\text{EAT} = 175\text{ns}, \epsilon = 24\text{ns}, \alpha = 0.87 \implies t_{\text{RAM}} \approx 133.63\text{ns}, T_{\text{normal}} \approx 267.26\text{ns}$.
 9. **QBANK-CH07-18 (Tính ngược tỷ lệ trúng TLB $\alpha$):**
-   - $T_{\text{normal}} = 250\text{ns} \implies t_{\text{RAM}} = 125\text{ns}; \epsilon = 26\text{ns}, \text{EAT} = 182\text{ns}$.
-   - $182 = 26 + (2 - \alpha) \times 125 \implies 2 - \alpha = 156 / 125 = 1.248 \implies \alpha = 0.752 = 75.2\%$.
+   - $T_{\text{normal}} = 250\text{ns} \implies t_{\text{RAM}} = 125\text{ns}; \epsilon = 26\text{ns}, \text{EAT} = 182\text{ns} \implies \alpha = 0.752 = 75.2\%$.
 10. **QBANK-CH07-19 (Dung lượng bảng phân trang):**
-    - 32-bit, trang $8\text{KB} = 2^{13}\text{B} \implies 2^{19}$ mục; 1 byte/mục $\implies$ Dung lượng $= 2^{19}\text{ bytes} = 512\text{ KiB}$.
-11. **QBANK-CH07-20 (Độ rộng mục bảng trang):**
-    - 64 khung $\implies \lceil \log_2(64) \rceil = 6\text{ bit}$ tối thiểu cho trường frame. 45 trang $\implies 45$ mục bảng trang.
+    - 32-bit, trang $8\text{KB} \implies 2^{19}$ mục; 1 byte/mục $\implies$ Dung lượng $= 512\text{ KiB}$ ($524,288\text{ bytes}$).
+11. **QBANK-CH07-20 (Độ rộng mục bảng trang & số lượng mục):**
+    - 64 khung $\implies 6\text{ bit}$ tối thiểu cho trường frame. 45 trang $\implies 45\text{ mục}$ bảng trang.
 12. **Synthetic Transfer 1 (Ánh xạ địa chỉ Hex):**
-    - $\text{LA} = \text{0x0041A7C8}, S = 4\text{KB} = \text{0x1000} \implies p = \text{0x0041A}, d = \text{0x7C8}$.
-    - Khung $f = \text{0x000F2} \implies \text{PA} = [f \mid d] = \text{0x000F27C8}$.
+    - $\text{LA} = \text{0x0041A7C8}, S = 4\text{KB} \implies p = \text{0x0041A}, d = \text{0x7C8}, f = \text{0x000F2} \implies \text{PA} = \text{0x000F27C8}$.
 13. **Synthetic Transfer 2 (Độ trễ Swapping):**
-    - Tiến trình $100\text{MB}$, băng thông $50\text{MB/s} \implies 2\text{s} = 2000\text{ms}$. Latency $= 8\text{ms}$.
-    - Swap-out $= 2008\text{ms}$. Tổng swap in + out $= 2 \times 2008 = 4016\text{ms} = 4.016\text{s}$.
+    - Tiến trình $100\text{MB}$, băng thông $50\text{MB/s}$, latency $8\text{ms} \implies$ Swap-out $= 2008\text{ms}$, Tổng swap in + out $= 4016\text{ms} = 4.016\text{s}$.
 
 ---
 
-## 4. GHI NHẬN CÁC PHÁT HIỆN HỌC THUẬT CHO CODEX LUNA ULTRA (ACADEMIC FINDINGS)
+## 4. GHI NHẬN CÁC PHÁT HIỆN HỌC THUẬT ĐỂ CHUYỂN GIAO (ACADEMIC FINDINGS)
 
-Tuân thủ nghiêm ngặt nguyên tắc khoá học thuật trong pha Engineering QA, Terra ghi nhận 4 phát hiện dưới đây để chuyển giao nguyên trạng cho pha thẩm định học thuật của Codex Luna Ultra:
+Tuân thủ nguyên tắc khoá nội dung học thuật trong pha Engineering QA, các phát hiện dưới đây được ghi nhận chuyển giao nguyên trạng cho pha thẩm định học thuật độc lập tiếp theo:
 
 1. `ACADEMIC-CH7-TLB-MISS`:
    - **Phạm vi:** `QBANK-CH07-16` và lý thuyết phần 7.5.3 (Cơ chế TLB).
-   - **Ghi nhận:** Khi tính thời gian trượt TLB ($T_{\text{Miss}}$), cẩm nang áp dụng mô hình tuần tự chuẩn Silberschatz: tra TLB trước (tốn $\epsilon$), khi trượt mới đọc bảng trang trong RAM và đọc dữ liệu ô nhớ ($2 \times t_{\text{RAM}}$), tổng là $\epsilon + 2 \times t_{\text{RAM}} = 282\text{ns}$. Một số tài liệu cũ hoặc bài tập trắc nghiệm rút gọn có thể bỏ qua $\epsilon$ trong nhánh trượt ($2 \times t_{\text{RAM}}$). Lời giải cẩm nang hiện tại đã bao quát và diễn giải chi tiết cả hai cách hiểu.
+   - **Ghi nhận:** Khi tính thời gian trượt TLB ($T_{\text{Miss}}$), cẩm nang áp dụng mô hình tuần tự chuẩn Silberschatz: tra TLB trước (tốn $\epsilon$), khi trượt mới đọc bảng trang trong RAM và đọc dữ liệu ô nhớ ($2 \times t_{\text{RAM}}$), tổng là $\epsilon + 2 \times t_{\text{RAM}} = 282\text{ns}$. Một số bài tập trắc nghiệm rút gọn có thể bỏ qua $\epsilon$ trong nhánh trượt ($2 \times t_{\text{RAM}}$). Lời giải cẩm nang hiện tại đã bao quát và diễn giải chi tiết cả hai cách hiểu.
 2. `ACADEMIC-CH7-PAGE-SIZE-WORDING`:
    - **Phạm vi:** `QBANK-CH07-13`.
    - **Ghi nhận:** Câu hỏi nguồn hỏi kích thước trang khi trường offset có 12 bit. Cẩm nang ghi nhận đồng thời "$4096\text{ bytes}$" và "$4\text{KB}$" ($2^{12}$ bytes) để sinh viên không bị mất điểm do cách chấm đối chiếu chuỗi của giảng viên.
@@ -127,6 +124,7 @@ Tuân thủ nghiêm ngặt nguyên tắc khoá học thuật trong pha Engineeri
 ## 5. KẾT LUẬN & BÀN GIAO
 
 - Toàn bộ 17 cổng kiểm tra nền tảng (`scripts/generate_foundation_gate.py`) đều đạt **PASS**.
-- Bộ kiểm thử trình duyệt thực tế Chromium Playwright (`tests/learning-system.spec.js`) đạt **13/13 test PASS** (bao gồm Scenario 13 mới cho Chương 7).
-- Bản thảo Chương 7 đã sạch sẽ 100% về mặt markup, encoding, tương thích route và độ chính xác tính toán.
-- Trạng thái sẵn sàng: **BÀN GIAO CHO CODEX LUNA ULTRA TIẾN HÀNH ĐỘC LẬP ACADEMIC VERIFICATION.**
+- Toàn bộ 15 ca kiểm thử phủ định (`scripts/run_negative_tests.py`) đều đạt **PASS**.
+- Bộ kiểm thử trình duyệt thực tế Chromium Playwright (`tests/learning-system.spec.js`) đạt **14/14 test PASS** (bao gồm Scenario 13 Reference Mode và Scenario 14 Mobile 390px cho Chương 7).
+- Bản thảo Chương 7 đã sạch sẽ 100% về mặt markup, encoding, tương thích route, độ chính xác tính toán và độ bền bỉ kiểm thử.
+- Trạng thái sẵn sàng: **BÀN GIAO TIẾN HÀNH ĐỘC LẬP ACADEMIC / SOURCE-FIDELITY REVIEW.**

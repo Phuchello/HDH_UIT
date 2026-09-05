@@ -28,25 +28,54 @@ def run_case(name, mutate, command, expected):
         passed = result.returncode != 0 and expected.lower() in output.lower()
         return {"name": name, "passed": passed, "exit_code": result.returncode, "evidence": safe_evidence(output)}
     finally:
-        for path, original in reversed(changed):
-            if original is None:
+        for path, original_bytes in reversed(changed):
+            if original_bytes is None:
                 path.unlink(missing_ok=True)
             else:
-                path.write_text(original, encoding="utf-8")
+                path.write_bytes(original_bytes)
+
+
+def _normalize_match(text, old, new):
+    if old in text:
+        return old, new
+    crlf_old = old.replace("\r\n", "\n").replace("\n", "\r\n")
+    crlf_new = new.replace("\r\n", "\n").replace("\n", "\r\n")
+    if crlf_old in text:
+        return crlf_old, crlf_new
+    lf_old = old.replace("\r\n", "\n")
+    lf_new = new.replace("\r\n", "\n")
+    if lf_old in text:
+        return lf_old, lf_new
+    return None, None
 
 
 def replace(path, old, new):
-    original = path.read_text(encoding="utf-8")
-    if old not in original:
+    original_bytes = path.read_bytes()
+    text = original_bytes.decode("utf-8")
+    match_old, match_new = _normalize_match(text, old, new)
+    if match_old is None:
         raise RuntimeError(f"mutation anchor not found: {path}")
-    path.write_text(original.replace(old, new, 1), encoding="utf-8")
-    return [(path, original)]
+    mutated_text = text.replace(match_old, match_new, 1)
+    path.write_bytes(mutated_text.encode("utf-8"))
+    return [(path, original_bytes)]
+
+
+def replace_all(path, old, new):
+    original_bytes = path.read_bytes()
+    text = original_bytes.decode("utf-8")
+    match_old, match_new = _normalize_match(text, old, new)
+    if match_old is None:
+        raise RuntimeError(f"mutation anchor not found: {path}")
+    mutated_text = text.replace(match_old, match_new)
+    path.write_bytes(mutated_text.encode("utf-8"))
+    return [(path, original_bytes)]
 
 
 def append_text(path, text):
-    original = path.read_text(encoding="utf-8")
-    path.write_text(original + text, encoding="utf-8")
-    return [(path, original)]
+    original_bytes = path.read_bytes()
+    mutated_bytes = original_bytes + text.encode("utf-8")
+    path.write_bytes(mutated_bytes)
+    return [(path, original_bytes)]
 
 
 def main():
@@ -75,6 +104,12 @@ def main():
     cases.append(run_case("NEG-09 malformed exam classification", lambda: replace(exam, 'classification: "RECONSTRUCTED_PRACTICE"', 'classification: "INVENTED_EXAM"'), [py, "scripts/validate_v2_content.py"], "invalid classification"))
     cases.append(run_case("NEG-10 duplicate slide page", lambda: replace(slides, 'page_range: "4-8"\n        page_count: 5', 'page_range: "1-8"\n        page_count: 8'), [py, "scripts/verify_research_gates.py"], "status: FAIL"))
     cases.append(run_case("NEG-11 missing slide page", lambda: replace(slides, 'page_range: "56-57"\n        page_count: 2', 'page_range: "57"\n        page_count: 1'), [py, "scripts/verify_research_gates.py"], "status: FAIL"))
+
+    ch07_qbank = ROOT / "content/questions/subjective/ch07.md"
+    cases.append(run_case("NEG-12 corrupted Q15 calculation (9398 -> 9999)", lambda: replace_all(ch07_qbank, "9398", "9999"), [py, "scripts/validate_ch07_content.py"], "9398"))
+    cases.append(run_case("NEG-13 corrupted Q18 calculation (75.2% -> 57.2%)", lambda: replace_all(ch07_qbank, "75.2", "57.2"), [py, "scripts/validate_ch07_content.py"], "75.2%"))
+    cases.append(run_case("NEG-14 corrupted Q20 calculation (45 entries -> 64 entries)", lambda: replace_all(ch07_qbank, "45", "64"), [py, "scripts/validate_ch07_content.py"], "45"))
+    cases.append(run_case("NEG-15 missing required subsection in QBank unit", lambda: replace(ch07_qbank, "#### 4. Bẫy đề thi & Lưu ý thực chiến (Exam Traps)", "#### 4. Subsection bị xoá"), [py, "scripts/validate_ch07_content.py"], "must contain exactly one occurrence"))
 
     passed = all(case["passed"] for case in cases)
     rows = "\n".join(f"| {case['name']} | exit {case['exit_code']} | {'PASS' if case['passed'] else 'FAIL'} | {case['evidence']} |" for case in cases)
